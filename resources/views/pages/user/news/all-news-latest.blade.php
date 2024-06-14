@@ -113,7 +113,7 @@
             </div> --}}
                     {{-- <x-paginator :paginator="$newsByDate" /> --}}
 
-                    <ul class="page-nav list-style text-center mt-20">
+                    {{-- <ul class="page-nav list-style text-center mt-20">
                         <li><a href="{{ $news->previousPageUrl() }}"><i class="flaticon-arrow-left"></i></a></li>
 
                         @for ($i = 1; $i <= $news->lastPage(); $i++)
@@ -121,7 +121,7 @@
                             @endfor
 
                             <li><a href="{{ $news->nextPageUrl() }}"><i class="flaticon-arrow-right"></i></a></li>
-                    </ul>
+                    </ul> --}}
 
                 </div>
 
