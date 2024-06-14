@@ -14,4 +14,5 @@ interface NewsLikeInterface extends StoreInterface, UpdateInterface, ShowInterfa
     public function delete($user_id, $ip, $news) : mixed;
     public function get($news_id) : mixed;
     public function where($news_id, $ipAddress) : mixed;
+    public function whereUserLike($user_id, $ipAddress) : mixed;
 }
