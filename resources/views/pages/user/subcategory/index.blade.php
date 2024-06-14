@@ -201,10 +201,10 @@
                                             <img src="{{ asset('storage/' . $trending->image) }}" class="img-popular" alt="Image" />
                                         </div>
                                         <div class="news-card-info">
-                                            <h3><a href="business-details.html">{{$trending->name}}</a></h3>
+                                            <h3><a href="{{ route('news.singlepost', ['news' => $trending->slug]) }}">{{$trending->name}}</a></h3>
                                             <ul class="news-metainfo list-style d-flex">
-                                                <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html" style="font-size: 15px;">{{ \Carbon\Carbon::parse($trending->date)->translatedFormat('d F Y') }}</a></li>
-                                                <li><i class="fi fi-rr-eye"></i><a href="news-by-dateus" style="font-size: 15px;">{{ $trending->news_views_count ? $trending->news_views_count : '0' }}x dilihat</a></li>
+                                                <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)" style="font-size: 14px;">{{ \Carbon\Carbon::parse($trending->date)->translatedFormat('d F Y') }}</a></li>
+                                                <li><i class="fi fi-rr-eye"></i><a href="javscript:void(0)" style="font-size: 14px;">{{ $trending->news_views_count ? $trending->news_views_count : '0' }}x dilihat</a></li>
                                             </ul>
                                         </div>
                                     </div>
