@@ -73,7 +73,9 @@
                       <button type="button" class="btn btn-sm py-1 px-5  not-login text-white" style="background-color: #175A95; border-radius: 8px;">Ikuti</button>
                   </form>
                 @endauth --}}
-                <button type="button" class="btn btn-sm py-1 px-5  not-login text-white" style="background-color: #175A95; border-radius: 8px;">Ikuti</button>
+               <div>
+                   <button type="button" class="border-0 text-white" style="background-color: #175A95; padding: 1px 30px; border-radius: 8px;">Ikuti</button>
+               </div>
 
             </div>
 
