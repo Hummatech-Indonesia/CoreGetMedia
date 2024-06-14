@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\AuthorInterface;
+use App\Contracts\Interfaces\CategoryInterface;
+use App\Contracts\Interfaces\NewsInterface;
+use App\Contracts\Interfaces\PopularInterface;
 use App\Models\Author;
 use App\Http\Requests\StoreAuthorRequest;
 use App\Http\Requests\UpdateAuthorRequest;
@@ -10,11 +13,17 @@ use App\Http\Requests\UpdateAuthorRequest;
 class AuthorController extends Controller
 {
     private AuthorInterface $author;
+    private NewsInterface $news;
+    private CategoryInterface $category;
+    private PopularInterface $popular;
     
 
-    public function __construct(AuthorInterface $author)
+    public function __construct(AuthorInterface $author, NewsInterface $news, CategoryInterface $category, PopularInterface $popular)
     {
         $this->author = $author;
+        $this->news = $news;
+        $this->category = $category;
+        $this->popular = $popular;
     }
 
     /**
@@ -54,7 +63,10 @@ class AuthorController extends Controller
      */
     public function show(Author $author)
     {
-        return view('pages.user.author.detail-author', compact('author'));
+        $newses = $this->news->whereUser($author->user_id);
+        $popularCategories = $this->category->showWithCount();
+        $popularNewses = $this->popular->getpopular();
+        return view('pages.user.author.detail-author', compact('author', 'newses', 'popularCategories', 'popularNewses'));
     }
 
     /**

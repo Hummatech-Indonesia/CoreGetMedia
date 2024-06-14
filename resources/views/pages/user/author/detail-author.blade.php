@@ -186,36 +186,42 @@
                 </div>
             @endforelse --}}
             
-            <div class="news-card-five">
-                <div class="news-card-img">
-                    <img src="{{ asset('assets/img/author/author-thumb-2.webp') }}" class="" width="100%"
-                                            height="150px" style="object-fit: cover" alt="Image">
-                   
+            @forelse ($newses as $news)
+                <div class="news-card-five">
+                    <div class="news-card-img">
+                        <img src="{{ asset('storage/'. $news->image) }}" class="" width="100%" height="150px" style="object-fit: cover" alt="Image">
+                    
+                    </div>
+                    <div class="news-card-info">
+                        <h3>
+                            <a data-toggle="tooltip" data-placement="top" title="{{ $news->name }}"
+                                href="{{ route('news.singlepost', $news->slug) }}">{{ $news->name }}</a>
+                        </h3>
+                        <p>
+                            {!! Str::limit($news->description, 60, '...') !!}
+                        </p>
+                        <ul class="news-metainfo list-style">
+                        <li>
+                            <i class="fi fi-rr-calendar-minus"></i><a href="javascript:view(0)">{{ Carbon\Carbon::parse($news->date)->locale('id_ID')->isoFormat('D MMMM YY') }}</a>
+                        </li>
+                        <li>
+                            <i>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="20" height="20"
+                                viewBox="0 0 24 24">
+                                <path fill="#E93314"
+                                    d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
+                                </svg>
+                            </i><a href="javascript:void(0sing)">{{ $news->newsViews()->count() }}x dilihat</a></li>
+                        </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="news-card-info">
-                    <h3>
-                        <a data-toggle="tooltip" data-placement="top" title="#"
-                            href="#">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</a>
-                    </h3>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quod, veritatis?
-                    </p>
-                    <ul class="news-metainfo list-style">
-                    <li>
-                        <i class="fi fi-rr-calendar-minus"></i><a href="javascript:view(0)">12 Juni 2024</a>
-                    </li>
-                    <li>
-                        <i>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="20" height="20"
-                            viewBox="0 0 24 24">
-                            <path fill="#E93314"
-                                d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
-                            </svg>
-                        </i><a href="javascript:void(0sing)">10x dilihat</a></li>
-                    </li>
-                    </ul>
+            @empty
+                <div class="col-12 col-md-12 text-center">
+                    <img src="{{ asset('assets/img/author/empty.png') }}" width="300px" alt="">
+                    <p>Penulis ini belum menuliskan berita</p>
                 </div>
-            </div>
+            @endforelse
            
           </div>
                 {{-- <ul class="page-nav list-style text-center mt-20">
@@ -231,7 +237,7 @@
         <div class="col-lg-4">
           <div class="sidebar">
             <div class="sidebar-widget">
-                <h3 class="sidebar-widget-title">Kategori</h3>
+                <h3 class="sidebar-widget-title">Kategori Populer</h3>
                 <ul class="category-widget list-style">
                     {{-- @foreach ($totalCategories as $category)
                         <li><a
@@ -242,21 +248,23 @@
                             </a>
                         </li>
                     @endforeach --}}
-                    <li><a
-                                href="#"><img
-                                    src="{{ asset('assets/img/icons/arrow-right.svg') }}"
-                                    alt="Image">Kategori
-                                <span>(10)</span>
+                    @forelse ($popularCategories->take(4) as $popularCategory)
+                        <li>
+                            <a href="{{ route('categories.show.user', $popularCategory->slug) }}">
+                                <img src="{{ asset('assets/img/icons/arrow-right.svg') }}">{{ $popularCategory->name }} <span>({{ $popularCategory->newsCategories()->count() }})</span>
                             </a>
                         </li>
+                    @empty
+                        
+                    @endforelse
                 </ul>
             </div>
 
-            <div class="sidebar mt-5 mb-5">
+            {{-- <div class="sidebar mt-5 mb-5">
                 <div class="sidebar-widget" style="height: 200px">
                     <h3 class="sidebar-widget-title">iklan</h3>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="sidebar-widget">
                 <h3 class="sidebar-widget-title">Berita Popular</h3>
@@ -295,24 +303,28 @@
                         </div>
                     @endforelse --}}
 
+                    @forelse ($popularNewses->take(5) as $popularNews)
                         <div class="news-card-one">
-                            <div class="news-card-img">
-                                <img src="{{ asset('assets/img/news/news-100.webp') }}" width="100%" height="80" style="object-fit: cover;">
+                            <div class="news-card-img rounded rounded-0">
+                                <img src="{{ asset('storage/'. $popularNews->image) }}" width="100%" height="80" style="object-fit: cover; border-radius: 10px">
                             </div>
                             <div class="news-card-info">
-                                <h3><a data-toggle="tooltip" data-placement="top" title="#"
-                                    href="#">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</a>
+                                <h3><a data-toggle="tooltip" data-placement="top" title="{{ $popularNews->name }}"
+                                    href="{{ route('news.singlepost', $popularNews->slug) }}">{{ $popularNews->name }}</a>
                                 </h3>
-                                <ul class="news-metainfo list-style">
+                                <ul class="news-metainfo d-flex list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i>
-                                        <a href="javascript:void(0)">12 Juni 2024
+                                        <a href="javascript:void(0)">{{ Carbon\Carbon::parse($popularNews->date)->locale('id_ID')->isoFormat('D MMMM YY') }}
                                     <li>
                                         <i class="fi fi-rr-eye">
-                                        </i><a href="news-by-dateus">10x dilihat</a>
+                                        </i><a href="news-by-dateus">{{ $popularNews->newsViews()->count() }}x dilihat</a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
+                    @empty
+                        
+                    @endforelse
                 </div>
             </div>
 

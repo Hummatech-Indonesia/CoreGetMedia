@@ -206,4 +206,10 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->get();
     }
     
+    public function whereUser($id)
+    {
+        return $this->model->query()
+        ->where('user_id', $id)
+        ->get();
+    }
 }
