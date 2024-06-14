@@ -106,4 +106,9 @@ class AuthorController extends Controller
         $this->author->update($author->id, ['status' => AuthorEnum::ACCEPTED->value]);
         return redirect()->back()->with(['success' => 'Author Berhasil Dikonfirmasi']);
     }
+    public function reject(Author $author)
+    {
+        $this->author->update($author->id, ['status' => AuthorEnum::REJECT->value]);
+        return redirect()->back()->with(['success' => 'Author Berhasil Tolak']);
+    }
 }
