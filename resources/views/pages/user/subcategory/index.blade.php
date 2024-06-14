@@ -37,8 +37,8 @@
     }
 
     .img-all {
-        width: 400px;
-        height: 250px;
+        width: 213px;
+        height: 150px;
         object-fit: cover;
     }
     </style>
