@@ -1,6 +1,6 @@
 @extends('layouts.user.app')
 @section('title', 'Artikel Populer')
-@endsection
+
 
 @section('style')
 <style>

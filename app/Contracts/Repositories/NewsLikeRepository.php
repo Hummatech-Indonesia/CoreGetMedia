@@ -35,15 +35,6 @@ class NewsLikeRepository extends BaseRepository implements NewsLikeInterface
             ->first();
     }
 
-    public function whereUserLike($user_id, $ipAddress): mixed
-    {
-        return $this->model->query()
-            ->where('user_id', $user_id)
-            ->where('ip_address', $ipAddress)
-            ->withCount('newsViews')
-            ->get();
-    }
-
     /**
      * Handle get the specified data by id from models.
      *
