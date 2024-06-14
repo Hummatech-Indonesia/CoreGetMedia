@@ -44,6 +44,7 @@ class NewsLikeController extends Controller
     public function store(Request $request, News $news)
     {
         $ipAddress = $request->ip();
+
         $user_id = null;
         if (Auth::check()) {
             $user_id = auth()->user()->id;
@@ -86,7 +87,7 @@ class NewsLikeController extends Controller
     public function destroy(Request $request, NewsLike $newsLike, News $news)
     {
         $ipAddress = $request->ip();
-        $user_id = "";
+        $user_id = null;
         if (Auth::check()) {
             $user_id = auth()->user()->id;
         }

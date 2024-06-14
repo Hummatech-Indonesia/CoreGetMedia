@@ -165,8 +165,7 @@ class NewsController extends Controller
         $comments = $this->comments->get($news_id);
         $likes = $this->newsLikes->get($news_id);
 
-        $userLike = $this->newsLikes->where($news_id);
-        $likedByUser = $userLike->contains($ipAddress);
+        $likedByUser = $this->newsLikes->where($news_id, $ipAddress);
 
         $CategoryPopulars = $this->categories->showWithCount();
         $popularTags = $this->tags->showWithCount();

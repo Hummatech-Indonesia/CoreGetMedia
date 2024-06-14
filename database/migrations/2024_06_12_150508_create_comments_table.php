@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignUuid('news_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignUuid('user_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->string('name')->nullable();
+            $table->string('email')->nullable();
             $table->string('ip_address');
             $table->longText('description');
             $table->unsignedBigInteger('parent_id')->nullable();

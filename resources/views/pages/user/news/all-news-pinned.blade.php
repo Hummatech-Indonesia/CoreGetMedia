@@ -20,6 +20,11 @@
         color: #000;
     }
 
+    .img-all{
+        width: 400px;
+        height: 250px;
+        object-fit: cover;
+    }
 </style>
 @endsection
 
@@ -60,7 +65,7 @@
                         <div class="col-md-6">
                             <div class="news-card-six">
                                 <div class="news-card-img">
-                                    <img src="{{ asset('storage/' . $item->image) }}" alt="" width="400px" height="250" style="width: 100%;object-fit:cover;">
+                                    <img src="{{ asset('storage/' . $item->image) }}" alt="" class="img-all">
                                     <a href="{{ route('categories.show.user', ['category' => $item->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $item->newsCategories[0]->category->name }}</a>
                                 </div>
                                 <div class="news-card-info">

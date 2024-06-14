@@ -40,18 +40,18 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCommentRequest $request, News $news)
+    public function store(Request $req , StoreCommentRequest $request, News $news)
     {
         $ipAddress = $request->ip();
-        $data = $this->service->store($request, $news->id, $ipAddress);
+        $data = $this->service->store($request, $news->id, $ipAddress, $req);
         $this->comment->store($data);
         return back()->with('success', 'Berhasil komen');
     }
 
-    public function reply(StoreCommentRequest $request, News $news ,$commentId)
+    public function reply(Request $req, StoreCommentRequest $request, News $news ,$commentId)
     {
         $ipAddress = $request->ip();
-        $data = $this->service->store($request, $news->id, $ipAddress);
+        $data = $this->service->store($request, $news->id, $ipAddress, $req);
         $data['parent_id'] = $commentId;
         $this->comment->store($data);
         return back()->with('success', 'Berhasil membalas komentar');

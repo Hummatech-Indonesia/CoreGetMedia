@@ -372,7 +372,7 @@
                                                             @if ($comment->user != null)
                                                                 <h5>{{ $comment->user->name }}</h5>
                                                             @else
-                                                                <h5>Guest</h5>
+                                                                <h5>{{ $comment->name }}</h5>
                                                             @endif
                                                             <span class="comment-date">{{ $comment->created_at->diffInMinutes() }} Menit yang lalu</span>
                                                         </div>
@@ -420,7 +420,23 @@
                                         <form action="{{ route('reply.create', ['news' => $news->id, 'comment' => $comment->id]) }}" method="post">
                                             @method('post')
                                             @csrf
-                                            <textarea name="description" class="form-control mb-2" cols="100" rows="2" placeholder="Balas Komentar"></textarea>
+                                            <div class="row">
+                                                @auth
+                                                    <div class="col-lg-12 mt-2">
+                                                        <textarea name="description" class="form-control mb-2" cols="100" rows="2" placeholder="Balas Komentar" style="resize: none"></textarea>
+                                                    </div>
+                                                @else
+                                                    <div class="col-md-6">
+                                                        <input type="text" class="form-control" name="name" id="name" required placeholder="Nama">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <input type="email" class="form-control" name="email" id="email" required placeholder="Alamat Email*">
+                                                    </div>
+                                                    <div class="col-lg-12 mt-2">
+                                                        <textarea name="description" class="form-control mb-2" cols="100" rows="2" placeholder="Balas Komentar" style="resize: none"></textarea>
+                                                    </div>
+                                                @endauth
+                                            </div>
                                             <div>
                                                 <button type="submit" class="btn-two w-100 btn" style="background-color: #0F4D8A;padding:10px !important">Kirim Balasan</button>
                                             </div>
@@ -447,9 +463,9 @@
                                                             @if ($reply->user != null)
                                                                 <h5>{{ $reply->user->name }}</h5>
                                                             @else
-                                                                <h5>Guest</h5>
+                                                                <h5>{{ $reply->name }}</h5>
                                                             @endif
-                                                            <span class="comment-date">{{ $reply->created_at->diffInMinutes() }} hari yang lalu</span>
+                                                            <span class="comment-date">{{ $reply->created_at->diffInMinutes() }} Menit yang lalu</span>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3 col-sm-3 col-3 text-md-end order-md-1 order-sm-1 order-1">
@@ -508,20 +524,6 @@
                                                 alt="Image">{{ $category->name }}
                                             <span>({{ $category->news_categories_count }})</span></a></li>
                                 @endforeach
-                                {{-- <li><a href="business.html"><img src="{{asset('assets/img/icons/arrow-right.svg')}}"
-                                            alt="Image">Kategori <span>(6)</span></a></li>
-                                <li><a href="business.html"><img src="{{asset('assets/img/icons/arrow-right.svg')}}"
-                                            alt="Image">Kategori<span>(3)</span></a></li>
-                                <li><a href="business.html"><img src="{{asset('assets/img/icons/arrow-right.svg')}}"
-                                            alt="Image">Kategori<span>(2)</span></a></li>
-                                <li><a href="business.html"><img src="{{asset('assets/img/icons/arrow-right.svg')}}"
-                                            alt="Image">Kategori<span>(8)</span></a></li>
-                                <li><a href="business.html"><img src="{{asset('assets/img/icons/arrow-right.svg')}}"
-                                            alt="Image">Kategori<span>(6)</span></a></li>
-                                <li><a href="business.html"><img src="{{asset('assets/img/icons/arrow-right.svg')}}"
-                                            alt="Image">Kategori<span>(2)</span></a></li>
-                                <li><a href="business.html"><img src="{{asset('assets/img/icons/arrow-right.svg')}}"
-                                            alt="Image">Kategori<span>(4)</span></a></li> --}}
                             </ul>
                         </div>
                         <div class="sidebar-widget bg-transparent shadow-smer">

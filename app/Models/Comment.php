@@ -9,12 +9,14 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     use HasFactory;
-    
+
     protected $guarded = ['id'];
 
     protected $fillable = [
         'news_id',
         'user_id',
+        'name',
+        'email',
         'ip_address',
         'description',
         'parent_id'

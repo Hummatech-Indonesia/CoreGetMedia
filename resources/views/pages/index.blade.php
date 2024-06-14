@@ -88,14 +88,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <div class="mt-3">
-            @php
-                use Carbon\Carbon;
-                Carbon::setLocale('id');
-                $today = Carbon::now()->isoFormat('dddd, D MMMM YYYY');
-            @endphp
-            <p>{{ $today }}</p>
-        </div>
+
 
         @php
             $displayedPopulars = $populars->take(10)->where('news_views_count', '>', 0)->pluck('id');
