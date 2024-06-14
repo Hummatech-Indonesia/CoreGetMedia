@@ -7,22 +7,45 @@
                 <div class="tab-pane fade active show" id="pills-account" role="tabpanel" aria-labelledby="pills-account-tab"
                     tabindex="0">
                     <div class="row">
-                        <div class="col-lg-6 d-flex align-items-stretch">
+                        <div class="col-lg-12 d-flex align-items-stretch">
                             <div class="card w-100 position-relative overflow-hidden">
                                 <div class="card-body p-4">
-                                    <h5 class="card-title fw-semibold">Ganti Profile</h5>
-                                    <p class="card-subtitle mb-4">Ganti Foto Profile Anda Di Sini</p>
-                                    <div class="text-center">
-                                        <img src="{{asset('admin/dist/images/profile/user-8.jpg')}}" alt=""
-                                            class="img-fluid rounded-circle" width="120" height="120">
-                                            <form method="POST" action="#" id="upload-photo" enctype="multipart/form-data">
-                                                {{-- @csrf --}}
-                                                <div class="d-flex align-items-center justify-content-center my-4 gap-3">
-                                                    <input type="file" style="display: none" name="photo" id="photo">
-                                                    <button class="btn btn-primary btn-upload" type="button" id="btn-upload">Upload</button>
-                                                    <button type="submit" style="display: none" id="submit-button">Save</button>
-                                                </div>
-                                            </form>
+
+                                    <h2 class="card-title fw-semibold">Edit Profile</h2>
+                                    <p class="card-subtitle mb-4">Edit foto profile dan biodata disini</p>
+                                    
+                                    <div class="row border-bottom pb-5">
+                                        <div class="col-lg-4">
+                                            <h5 class="mt-5">Foto Profil</h5>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div>
+                                                <img src="{{asset('admin/dist/images/profile/user-8.jpg')}}" alt=""
+                                                    class="img-fluid rounded-circle" width="120" height="120">
+                                                    <form method="POST" action="#" id="upload-photo" enctype="multipart/form-data">
+                                                        {{-- @csrf --}}
+                                                        <div style="margin-top: -20px; margin-left: 85px">
+                                                            <span style="background-color: #D9D9D9; border-radius: 50%;" class="p-2">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#175a95" d="M5 19h1.425L16.2 9.225L14.775 7.8L5 17.575zm-2 2v-4.25L16.2 3.575q.3-.275.663-.425t.762-.15t.775.15t.65.45L20.425 5q.3.275.438.65T21 6.4q0 .4-.137.763t-.438.662L7.25 21zM19 6.4L17.6 5zm-3.525 2.125l-.7-.725L16.2 9.225z"/></svg>
+                                                            </span>
+                                                            {{-- <input type="file" style="display: none" name="photo" id="photo">
+                                                            <button class="btn btn-primary btn-upload" type="button" id="btn-upload">Upload</button>
+                                                            <button type="submit" style="display: none" id="submit-button">Save</button> --}}
+                                                        </div>
+                                                    </form>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row border-bottom pb-5">
+                                        <div class="col-lg-4">
+                                            <h5 class="mt-5">Nama</h5>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <input type="text" class="form-control mt-5">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
