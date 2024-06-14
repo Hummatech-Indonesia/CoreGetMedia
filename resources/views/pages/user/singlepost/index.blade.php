@@ -245,11 +245,10 @@
                             </ul>
                         </div>
                         <div class="news-para text-justify">
-
-                            <p id="news-description">
-                                {!! Illuminate\Support\Str::limit(strip_tags($news->description), 300, '...') !!}
+                            <p>
+                                {!! $news->description!!}
                             </p>
-                            <span id="read-more" class="read-more">Baca Selengkapnya</span>
+                           
                         </div>
                         <p> Tag :
                             @forelse ($tags as $tag)
@@ -600,27 +599,6 @@
 @endsection
 
 @section('script')
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const newsDescription = {!! json_encode($news->description) !!};
-            const initialLimit = 600;
-            const additionalLimit = 3000;
-            let currentLimit = initialLimit;
-
-            const descriptionElement = document.getElementById('news-description');
-            const readMoreElement = document.getElementById('read-more');
-
-            readMoreElement.addEventListener('click', function() {
-                currentLimit += additionalLimit;
-                if (currentLimit >= newsDescription.length) {
-                    descriptionElement.innerHTML = newsDescription;
-                    readMoreElement.style.display = 'none';
-                } else {
-                    descriptionElement.innerHTML = newsDescription.substring(0, currentLimit) + '...';
-                }
-            });
-        });
-    </script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
