@@ -29,6 +29,18 @@
         .breadcrumb-menu li:after {
             color: #000;
         }
+
+        .img-popular {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+    }
+
+    .img-all {
+        width: 213px;
+        height: 150px;
+        object-fit: cover;
+    }
     </style>
 @endsection
 
@@ -102,7 +114,7 @@
                             <div class="news-card-five">
                                 <div class="news-card-img">
                                     <a href="#">
-                                        <img src="{{ asset('storage/' . $data->image) }}" alt="Image" height="150" width="100%" />
+                                        <img src="{{ asset('storage/' . $data->image) }}" alt="Image" class="img-all" />
                                     </a>
                                     <a data-toggle="tooltip" data-placement="top" title="Sports" href="#" class="news-cat">{{ $data->newsCategories[0]->category->name }}</a>
                                 </div>
@@ -160,8 +172,8 @@
                                 @forelse ($trending_news as $trending)
                                 @if ($trending->news_views_count > 0)      
                                     <div class="news-card-three">
-                                        <div class="news-card-img" style="height: 100px; width: 100px">
-                                            <img src="{{ asset('storage/' . $trending->image) }}" alt="Image" />
+                                        <div class="news-card-img">
+                                            <img src="{{ asset('storage/' . $trending->image) }}" class="img-popular" alt="Image" />
                                         </div>
                                         <div class="news-card-info">
                                             <h3><a href="business-details.html">{{$trending->name}}</a></h3>
