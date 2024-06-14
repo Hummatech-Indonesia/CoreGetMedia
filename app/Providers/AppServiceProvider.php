@@ -6,6 +6,7 @@ use App\Contracts\Interfaces\AuthorInterface;
 use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\CommentInterface;
 use App\Contracts\Interfaces\FaqInterface;
+use App\Contracts\Interfaces\FollowerInterface;
 use App\Contracts\Interfaces\NewsCategoryInterface;
 use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\NewsLikeInterface;
@@ -22,6 +23,7 @@ use App\Contracts\Repositories\AuthorRepository;
 use App\Contracts\Repositories\CategoryRepository;
 use App\Contracts\Repositories\CommentRepository;
 use App\Contracts\Repositories\FaqRepository;
+use App\Contracts\Repositories\FollowerRepository;
 use App\Contracts\Repositories\NewsCategoryRepository;
 use App\Contracts\Repositories\NewsLikeRepository;
 use App\Contracts\Repositories\NewsRepository;
@@ -55,7 +57,8 @@ class AppServiceProvider extends ServiceProvider
         PopularInterface::class => PopularRepository::class,
         NewsLikeInterface::class => NewsLikeRepository::class,
         NewsViewInterface::class => NewsViewRepository::class,
-        CommentInterface::class => CommentRepository::class
+        CommentInterface::class => CommentRepository::class,
+        FollowerInterface::class => FollowerRepository::class,
     ];
 
     /**
