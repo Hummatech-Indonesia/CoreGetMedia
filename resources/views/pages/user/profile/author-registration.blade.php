@@ -103,15 +103,3 @@
     feather.replace();
 </script>
 @endsection
-
-
-
-
-
-
-
-
-
-
-
-@endsection
