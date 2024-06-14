@@ -1,11 +1,11 @@
 <style>
-.ads {
-    color: #FFFFFF;
-}
+    .ads {
+        color: #FFFFFF;
+    }
 
-.ads:hover {
-    color: blueviolet;
-}
+    .ads:hover {
+        color: blueviolet;
+    }
 </style>
 
 <div class="p-5" style="background-color: #253645;">
@@ -28,7 +28,7 @@
                         <ul style="list-style-type: none;" class="p-4">
                             <span style="color: #92989F; font-size: 15px;">Pengiklanan</span>
                             <li class="mb-2"><a href="{{route('user.ads.advertising')}}" class="ads">+
-                                    Unggah
+                                    Tentang
                                     Iklan</a>
                             </li>
                         </ul>
