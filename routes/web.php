@@ -12,6 +12,7 @@ use App\Http\Controllers\TagsController;
 use App\Http\Controllers\VoucherrController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\NewsCategoryController;
+use App\Http\Controllers\NewsLikeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -199,9 +200,11 @@ Route::get('history-coin', function () {
     return view('pages.user.coin.history');
 })->name('history-coin.user');
 
-Route::get('news-liked', function () {
-    return view('pages.user.news-liked.index');
-})->name('news-liked.user');
+// Route::get('news-liked', function () {
+//     return view('pages.user.news-liked.index');
+// })->name('news-liked.user');
+
+Route::get('news-liked', [NewsLikeController::class, 'index'])->name('news-liked.user');
 
 Route::get('contact-us', function () {
     return view('pages.user.contact-us.index');

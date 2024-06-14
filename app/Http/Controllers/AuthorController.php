@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\AuthorInterface;
+use App\Contracts\Interfaces\CategoryInterface;
+use App\Contracts\Interfaces\NewsInterface;
+use App\Contracts\Interfaces\PopularInterface;
 use App\Contracts\Interfaces\UserInterface;
 use App\Enums\AuthorEnum;
 use App\Models\Author;
@@ -14,12 +17,19 @@ use Illuminate\Http\Request;
 class AuthorController extends Controller
 {
     private AuthorInterface $author;
+    private NewsInterface $news;
+    private CategoryInterface $category;
+    private PopularInterface $popular;
     private UserInterface $user;
     private AuthorService $service;
+    
 
-    public function __construct(UserInterface $user ,AuthorInterface $author, AuthorService $service)
+    public function __construct(UserInterface $user, AuthorInterface $author, AuthorService $service, NewsInterface $news, CategoryInterface $category, PopularInterface $popular)
     {
         $this->author = $author;
+        $this->news = $news;
+        $this->category = $category;
+        $this->popular = $popular;
         $this->user = $user;
         $this->service = $service;
     }
@@ -67,7 +77,10 @@ class AuthorController extends Controller
      */
     public function show(Author $author)
     {
-        return view('pages.user.author.detail-author', compact('author'));
+        $newses = $this->news->whereUser($author->user_id);
+        $popularCategories = $this->category->showWithCount();
+        $popularNewses = $this->popular->getpopular();
+        return view('pages.user.author.detail-author', compact('author', 'newses', 'popularCategories', 'popularNewses'));
     }
 
     /**
@@ -106,6 +119,7 @@ class AuthorController extends Controller
         $this->author->update($author->id, ['status' => AuthorEnum::ACCEPTED->value]);
         return redirect()->back()->with(['success' => 'Author Berhasil Dikonfirmasi']);
     }
+
     public function reject(Author $author)
     {
         $this->author->update($author->id, ['status' => AuthorEnum::REJECT->value]);

@@ -46,7 +46,7 @@ class PopularRepository extends BaseRepository implements PopularInterface
         return $this->model->query()
             ->where('slug', $slug)
             ->firstOrFail();
-    }
+    }   
 
     public function getpopular(): mixed
     {
