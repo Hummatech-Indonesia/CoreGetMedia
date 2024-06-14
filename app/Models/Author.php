@@ -14,6 +14,8 @@ class Author extends Model
     protected $fillable = [
         'id',
         'cv',
+        'user_id',
+        'description',
         'status'
     ];
 

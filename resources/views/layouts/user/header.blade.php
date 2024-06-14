@@ -14,7 +14,8 @@
                 </button>
 
                 <a href="/" class="toggler" style="color: #000000">
-                    beranda
+                    <button class="btn btn-sm btn-primary text-white">beranda</button>
+                    
                     {{-- <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 36 36"><path fill="currentColor" d="M33 19a1 1 0 0 1-.71-.29L18 4.41L3.71 18.71A1 1 0 0 1 2.3 17.3l15-15a1 1 0 0 1 1.41 0l15 15A1 1 0 0 1 33 19" class="clr-i-solid clr-i-solid-path-1"/><path fill="currentColor" d="M18 7.79L6 19.83V32a2 2 0 0 0 2 2h7V24h6v10h7a2 2 0 0 0 2-2V19.76Z" class="clr-i-solid clr-i-solid-path-2"/><path fill="none" d="M0 0h36v36H0z"/></svg> --}}
                 </a>
             </div>
@@ -90,8 +91,8 @@
                     </li>
                     <li class="nav item">
                         <div class="d-none d-md-flex flex-column align-items-end justify-content-center">
-                            <span class="mt-2 fs-4 lh-1 text-end fw-semibold">Karin</span>
-                            <span class="fs-4 text-end">karin@gmail.com</span>
+                            <span class="mt-2 fs-4 lh-1 text-end fw-semibold">{{ auth()->user()->name }}</span>
+                            <span class="fs-4 text-end">{{ auth()->user()->email }}</span>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -99,7 +100,7 @@
                             aria-expanded="false">
                             <div class="d-flex align-items-center">
                                 <div class="">
-                                    <img src="{{asset('admin/dist/images/profile/user-10.jpg')}}" class="rounded-circle user-profile"
+                                    <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" class="rounded-circle user-profile"
                                         style="object-fit: cover" width="35" height="35" alt="" />
                                 </div>
                             </div>
@@ -111,14 +112,14 @@
                                     <h5 class="mb-0 fs-5 fw-semibold">User Profile</h5>
                                 </div>
                                 <div class="d-flex align-items-center py-9 mx-7 border-bottom">
-                                    <img src="{{asset('admin/dist/images/profile/user-10.jpg')}}" class="rounded-circle user-profile" style="object-fit: cover"
+                                    <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" class="rounded-circle user-profile" style="object-fit: cover"
                                         width="80" height="80" alt="" />
                                     <div class="ms-3">
-                                        <h5 class="mb-1 fs-3 username">Karin</h5>
-                                        <span class="mb-1 d-block text-dark role">Admin</span>
+                                        <h5 class="mb-1 fs-3 username">{{ auth()->user()->name }}</h5>
+                                        <span class="mb-1 d-block text-dark role">User</span>
                                         <p class="mb-0 d-flex text-dark align-items-center gap-2 email">
                                             <i class="ti ti-mail fs-4"></i>
-                                            karin@gmail.com
+                                            {{ auth()->user()->email }}
                                         </p>
                                     </div>
                                 </div>

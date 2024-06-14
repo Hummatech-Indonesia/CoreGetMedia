@@ -39,11 +39,6 @@
     <div class="card-body p-0">
         <img src="{{ asset('assets/img/profile-bg.svg') }}" width="100%" height="150px"
             style="border-radius: 10px 10px 0 0;" alt="" class="img-fluid">
-        <div class="top-right">
-            <button class="btn btn-sm px-3 py-1 mt-2 text-white" type="button" data-bs-toggle="modal"
-                data-bs-target="#exampleModal1" style="background-color: #175A95;">Daftar Jadi Penulis</button>
-        </div>
-
         <div class="align-items-center">
             <div class="d-flex flex-column flex-lg-row justify-content-between">
                 <div

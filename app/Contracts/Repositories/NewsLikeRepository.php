@@ -22,7 +22,6 @@ class NewsLikeRepository extends BaseRepository implements NewsLikeInterface
     public function delete($user_id, $ip, $news): mixed
     {
         return $this->model->query()
-            ->where('user_id', $user_id)
             ->where('ip_address', $ip)
             ->where('news_id', $news)
             ->delete();
@@ -34,6 +33,14 @@ class NewsLikeRepository extends BaseRepository implements NewsLikeInterface
             ->where('news_id', $news_id)
             ->where('ip_address', $ipAddress)
             ->first();
+    }
+
+    public function whereUserLike($user_id, $ipAddress): mixed
+    {
+        return $this->model->query()
+            ->where('user_id', $user_id)
+            ->where('ip_address', $ipAddress)
+            ->get();
     }
 
     /**

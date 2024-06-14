@@ -34,7 +34,17 @@
     .breadcrumb-menu li:after {
         color: #000;
     }
+    .img-popular {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+    }
 
+    .img-all {
+        width: 213px;
+        height: 150px;
+        object-fit: cover;
+    }
 </style>
 @endsection
 
@@ -93,7 +103,7 @@
                     @forelse ($newsTags as $data)
                     <div class="news-card-five">
                         <div class="news-card-img">
-                            <a href="#"><img src="{{asset('storage/' . $data->news->image)}}" alt="Image" height="140" width="100%" /></a>
+                            <a href="#"><img src="{{asset('storage/' . $data->news->image)}}" alt="Image" class="img-all"/></a>
                             <a data-toggle="tooltip" data-placement="top" title="Sports" href="#" class="news-cat">{{ $data->news->newsCategories[0]->category->name }}</a>
                         </div>
                         <div class="news-card-info">
@@ -233,7 +243,7 @@
                 @forelse ($trendings as $trending)
                 <div class="news-card-three">
                     <div class="news-card-img" style="height: 100px; width: 100px">
-                        <img src="{{ asset('storage/' . $trending->image) }}" alt="Image" />
+                        <img src="{{ asset('storage/' . $trending->image) }}" alt="Image" class="img-popular"/>
                     </div>
                     <div class="news-card-info">
                         <h3><a href="{{ route('news.singlepost', ['news' => $trending->slug]) }}">{{$trending->name}}</a></h3>

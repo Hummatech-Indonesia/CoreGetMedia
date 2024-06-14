@@ -30,6 +30,16 @@
         .breadcrumb-menu li:after {
             color: #000;
         }
+        .img-all {
+            width: 213px;
+            height: 150px;
+            object-fit: cover;
+        }
+        .img-popular {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+    }
     </style>
 @endsection
 
@@ -53,7 +63,7 @@
                         @forelse ($news as $item)
                             <div class="news-card-five">
                                 <div class="news-card-img">
-                                    <a href="javascript:void(0)"><img src="{{asset('storage/'. $item->image)}}" alt="Image" height="140" width="100%" /></a>
+                                    <a href="javascript:void(0)"><img src="{{asset('storage/'. $item->image)}}" alt="Image" class="img-all"></a>
                                     <a data-toggle="tooltip" data-placement="top" title="{{ $item->newsCategories[0]->category->name }}"
                                         href="{{ route('categories.show.user', ['category' => $item->slug]) }}" class="news-cat">{{ $item->newsCategories[0]->category->name }}</a>
                                 </div>

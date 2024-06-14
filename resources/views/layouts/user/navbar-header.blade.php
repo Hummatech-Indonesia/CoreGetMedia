@@ -59,8 +59,16 @@
     </div>
     <div class="container-fluid">
         <nav class="navbar navbar-expand-lg">
-            <a class="sidebar-toggler md-none" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+            <a class="sidebar-toggler md-none d-flex" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
                 <img src="{{asset('assets/img/icons/menubar-white.svg')}}" alt="Image" />
+                <div class="ms-4 mt-3">
+                    @php
+                        use Carbon\Carbon;
+                        Carbon::setLocale('id');
+                        $today = Carbon::now()->isoFormat('dddd, D MMMM YYYY');
+                    @endphp
+                    <p class="text-white">{{ $today }}</p>
+                </div>
             </a>
             <a class="navbar-brand d-lg-none" href="/">
                 <img class="logo-light" src="{{asset('assets/img/logo/get-media-light.svg')}}" alt="logo" />
