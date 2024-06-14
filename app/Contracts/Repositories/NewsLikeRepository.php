@@ -40,6 +40,7 @@ class NewsLikeRepository extends BaseRepository implements NewsLikeInterface
         return $this->model->query()
             ->where('user_id', $user_id)
             ->where('ip_address', $ipAddress)
+            ->withCount('newsViews')
             ->get();
     }
 
