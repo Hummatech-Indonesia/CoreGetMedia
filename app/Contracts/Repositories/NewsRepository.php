@@ -113,6 +113,15 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->get();
     }
 
+    public function whereUserLike($user_id, $ipAddress): mixed
+    {
+        return $this->model->query()
+            ->whereRelation('newsLikes', 'user_id', $user_id)
+            ->whereRelation('newsLikes', 'ip_address', $ipAddress)
+            ->withCount('views')
+            ->get();
+    }
+
     public function categoryLatest($category_id) : mixed
     {
         return $this->model->query()

@@ -51,9 +51,9 @@
                 <tbody>
                     @forelse ($authors as $author)
                         <tr>
-                            <td>1</td>
+                            <td>{{ $loop->iteration }}</td>
                             <td>
-                                <img src="{{asset('admin/dist/images/profile/user-7.jpg')}}" class="rounded-circle me-2 user-profile"
+                                <img src="{{asset( $author->user->photo ? 'storage/'.$author->user->photo : "default.png")}}" class="rounded-circle me-2 user-profile"
                                     style="object-fit: cover" width="35" height="35" alt="" />
                                     {{ $author->user->name }}
                             </td>
@@ -126,7 +126,7 @@
                                 </button>
                             </form>
 
-                            <form method="post" id="form-terima">
+                            <form method="post" action="{{ route('author.confirm', ['author' => $author->slug]) }}" id="form-terima">
                                 @csrf
                                 @method('patch')
                                 <button id="terima" type="submit"

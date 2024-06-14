@@ -3,21 +3,21 @@
 @section('style')
 <link rel="stylesheet" href="{{ asset('admin/dist/libs/summernote/dist/summernote-lite.min.css') }}">
 <style>
-    .note-editable ul {
-        list-style: disc !important;
-        list-style-position: inside !important;
-    }
+.note-editable ul {
+    list-style: disc !important;
+    list-style-position: inside !important;
+}
 
-    .note-editable ol {
-        list-style: decimal !important;
-        list-style-position: inside !important;
-    }
+.note-editable ol {
+    list-style: decimal !important;
+    list-style-position: inside !important;
+}
 
-    @media (max-width: 768px) {
-        .bg-mobile {
-            width: 150px;
-        }
+@media (max-width: 768px) {
+    .bg-mobile {
+        width: 150px;
     }
+}
 </style>
 @endsection
 
@@ -97,9 +97,9 @@
                     </div>
 
                     @error('photo')
-                        <span class="invalid-feedback" role="alert" style="color: red;">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                    <span class="invalid-feedback" role="alert" style="color: red;">
+                        <strong>{{ $message }}</strong>
+                    </span>
                     @enderror
 
                 </div>
@@ -113,13 +113,13 @@
                             class="select2 form-control category @error('category') is-invalid @enderror"
                             name="category[]" multiple aria-label="Default select example">
                             @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
                         </select>
                         @error('category')
-                            <span class="invalid-feedback" role="alert" style="color: red">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                        <span class="invalid-feedback" role="alert" style="color: red">
+                            <strong>{{ $message }}</strong>
+                        </span>
                         @enderror
                     </div>
                     <div class="col-lg-12 mb-4">
@@ -130,9 +130,9 @@
                                 name="sub_category[]" multiple="true" aria-label="Default select example">
                             </select>
                             @error('sub_category')
-                                <span class="invalid-feedback" role="alert" style="color: red">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                            <span class="invalid-feedback" role="alert" style="color: red">
+                                <strong>{{ $message }}</strong>
+                            </span>
                             @enderror
                         </div>
                     </div>
@@ -142,9 +142,9 @@
                             value="{{ old('upload_date') }}"
                             class="form-control @error('upload_date') is-invalid @enderror">
                         @error('upload_date')
-                            <span class="invalid-feedback" role="alert" style="color: red">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                        <span class="invalid-feedback" role="alert" style="color: red">
+                            <strong>{{ $message }}</strong>
+                        </span>
                         @enderror
                     </div>
                     <div class="col-lg-12 mb-3">
@@ -152,13 +152,13 @@
                         <select class="form-control @error('tag') is-invalid @enderror select2 tags" name="tag[]"
                             multiple="multiple">
                             @foreach ($tags as $tag)
-                                <option value="{{ $tag->name }}">{{ $tag->name }}</option>
+                            <option value="{{ $tag->name }}">{{ $tag->name }}</option>
                             @endforeach
                         </select>
                         @error('tag')
-                            <span class="invalid-feedback" role="alert" style="color: red;">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                        <span class="invalid-feedback" role="alert" style="color: red;">
+                            <strong>{{ $message }}</strong>
+                        </span>
                         @enderror
                     </div>
                 </div>
@@ -174,9 +174,9 @@
                             <input type="text" id="name" name="name" placeholder="name" value="{{ old('name') }}"
                                 class="form-control @error('name') is-invalid @enderror">
                             @error('name')
-                                <span class="invalid-feedback" role="alert" style="color: red;">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                            <span class="invalid-feedback" role="alert" style="color: red;">
+                                <strong>{{ $message }}</strong>
+                            </span>
                             @enderror
                         </div>
                         <div class="col-lg-12 mb-4" style="height: auto;">
@@ -184,9 +184,9 @@
                             <textarea id="content" name="description" placeholder="content" value="{{ old('content') }}"
                                 class="form  @error('content') is-invalid @enderror">{{ old('content') }}</textarea>
                             @error('content')
-                                <span class="invalid-feedback" role="alert" style="color: red;">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                            <span class="invalid-feedback" role="alert" style="color: red;">
+                                <strong>{{ $message }}</strong>
+                            </span>
                             @enderror
                         </div>
                     </div>
@@ -261,97 +261,97 @@
 <script src="{{ asset('admin/dist/libs/summernote/dist/summernote-lite.min.js') }}"></script>
 
 <script>
-    $(document).ready(function () {
-        var quote = $('<blockquote class="quote">hello<footer>world</footer></blockquote>')[0];
+$(document).ready(function() {
+    var quote = $('<blockquote class="quote">hello<footer>world</footer></blockquote>')[0];
 
-        $('#content').summernote({
-            blockquoteBreakingLevel: 2,
-            height: 520,
-            toolbar: [
-                ['style', ['style']],
-                ['font', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
-                ['fontname', ['fontname']],
-                ['fontsize', ['fontsize']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph', 'height']],
-                ['table', ['table']],
-                ['link', ['link']],
-                ['picture', ['picture']],
-                ['video', ['video']],
-                ['codeview', ['codeview']],
-                ['help', ['help']],
-                ['insert', ['ul', 'blockquote']] // Include Blockquote button in 'insert' dropdown
-            ],
+    $('#content').summernote({
+        blockquoteBreakingLevel: 2,
+        height: 520,
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+            ['fontname', ['fontname']],
+            ['fontsize', ['fontsize']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph', 'height']],
+            ['table', ['table']],
+            ['link', ['link']],
+            ['picture', ['picture']],
+            ['video', ['video']],
+            ['codeview', ['codeview']],
+            ['help', ['help']],
+            ['insert', ['ul', 'blockquote']] // Include Blockquote button in 'insert' dropdown
+        ],
 
-            fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Helvetica', 'Impact',
-                'Lucida Grande', 'Tahoma', 'Times New Roman', 'Verdana'
-            ],
-            fontNamesIgnoreCheck: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Helvetica',
-                'Impact', 'Lucida Grande', 'Tahoma', 'Times New Roman', 'Verdana'
-            ]
+        fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Helvetica', 'Impact',
+            'Lucida Grande', 'Tahoma', 'Times New Roman', 'Verdana'
+        ],
+        fontNamesIgnoreCheck: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Helvetica',
+            'Impact', 'Lucida Grande', 'Tahoma', 'Times New Roman', 'Verdana'
+        ]
 
-        });
     });
+});
 </script>
 
 <script>
-    $('.category').change(function () {
-        // getSubCategory($(this).val())
-        var selectedCategories = $(this).val();
-        getSubCategory(selectedCategories);
-    })
+$('.category').change(function() {
+    // getSubCategory($(this).val())
+    var selectedCategories = $(this).val();
+    getSubCategory(selectedCategories);
+})
 
-    function getSubCategory(ids) {
-        $.ajax({
-            url: "get-sub-category",
-            method: "GET",
-            data: {
-                category_ids: ids
-            },
-            dataType: "JSON",
-            beforeSend: function () {
-                $('.sub-category').html('')
-            },
-            success: function (response) {
-                $.each(response.data, function (index, data) {
-                    $('.sub-category').append('<option value="' + data.id + '">' + data.name +
-                        '</option>');
-                });
-            }
-        })
-    }
-</script>
-
-<script>
-    var today = new Date();
-    var year = today.getFullYear();
-    var month = ('0' + (today.getMonth() + 1)).slice(-2);
-    var day = ('0' + today.getDate()).slice(-2);
-    var hours = ('0' + today.getHours()).slice(-2);
-    var minutes = ('0' + today.getMinutes()).slice(-2);
-
-    var formattedDate = year + '-' + month + '-' + day + 'T' + hours + ':' + minutes;
-    document.getElementById('upload_date').value = formattedDate;
-
-    $(".tags").select2({
-        tags: true,
-        tokenSeparators: [',', ' ']
-    })
-
-    function previewImage(event) {
-        var input = event.target;
-        var previewImg = document.getElementById('preview');
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                previewImg.src = e.target.result;
-                previewImg.classList.remove('hide');
-            }
-            reader.readAsDataURL(input.files[0]);
-        } else {
-            previewImg.src = '';
-            previewImg.classList.add('hide');
+function getSubCategory(ids) {
+    $.ajax({
+        url: "get-sub-category",
+        method: "GET",
+        data: {
+            category_ids: ids
+        },
+        dataType: "JSON",
+        beforeSend: function() {
+            $('.sub-category').html('')
+        },
+        success: function(response) {
+            $.each(response.data, function(index, data) {
+                $('.sub-category').append('<option value="' + data.id + '">' + data.name +
+                    '</option>');
+            });
         }
+    })
+}
+</script>
+
+<script>
+var today = new Date();
+var year = today.getFullYear();
+var month = ('0' + (today.getMonth() + 1)).slice(-2);
+var day = ('0' + today.getDate()).slice(-2);
+var hours = ('0' + today.getHours()).slice(-2);
+var minutes = ('0' + today.getMinutes()).slice(-2);
+
+var formattedDate = year + '-' + month + '-' + day + 'T' + hours + ':' + minutes;
+document.getElementById('upload_date').value = formattedDate;
+
+$(".tags").select2({
+    tags: true,
+    tokenSeparators: [',', ' ']
+})
+
+function previewImage(event) {
+    var input = event.target;
+    var previewImg = document.getElementById('preview');
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            previewImg.src = e.target.result;
+            previewImg.classList.remove('hide');
+        }
+        reader.readAsDataURL(input.files[0]);
+    } else {
+        previewImg.src = '';
+        previewImg.classList.add('hide');
     }
+}
 </script>
 @endsection

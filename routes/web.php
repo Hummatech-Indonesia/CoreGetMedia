@@ -141,6 +141,10 @@ Route::get('about-us', function () {
     return view('pages.user.aboutus.aboutus');
 })->name('about.us');
 
+Route::get('advertising', function () {
+    return view('pages.user.ads.advertising');
+})->name('user.ads.advertising');
+
 Route::get('create-news', function () {
     return view('pages.author.news.create');
 })->name('create.news');
@@ -231,7 +235,7 @@ Route::get('news/popular-news', [NewsController::class, 'popularNews'])->name('p
 
 Route::post('author-create', [AuthorController::class, 'store'])->name('author.create');
 
-Route::get('author-registration', function(){
+Route::get('author-registration', function () {
     return view('pages.user.profile.author-registration');
 })->name('author-registration');
 
