@@ -229,6 +229,8 @@ Route::get('author/{author}', [AuthorController::class, 'show'])->name('author.d
 Route::get('news/latest-news', [NewsController::class, 'latestNews'])->name('latest.news');
 Route::get('news/popular-news', [NewsController::class, 'popularNews'])->name('popular.news');
 
+Route::post('author-create', [AuthorController::class, 'store'])->name('author.create');
+
 Route::get('author-registration', function(){
     return view('pages.user.profile.author-registration');
 })->name('author-registration');
