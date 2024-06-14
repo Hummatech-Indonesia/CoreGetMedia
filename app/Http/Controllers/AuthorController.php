@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\AuthorInterface;
 use App\Contracts\Interfaces\UserInterface;
+use App\Enums\AuthorEnum;
 use App\Models\Author;
 use App\Http\Requests\StoreAuthorRequest;
 use App\Http\Requests\UpdateAuthorRequest;
@@ -98,5 +99,11 @@ class AuthorController extends Controller
     {
         $authors = $this->author->accepted();
         return view('pages.user.author.list-author', compact('authors'));
+    }
+
+    public function confirm(Author $author)
+    {
+        $this->author->update($author->id, ['status' => AuthorEnum::ACCEPTED->value]);
+        return redirect()->back()->with(['success' => 'Author Berhasil Dikonfirmasi']);
     }
 }
