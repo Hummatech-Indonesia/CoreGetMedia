@@ -15,31 +15,33 @@
                     <h5 class="card-title fw-semibold">Pengisian Biodata</h5>
                     <p class="card-subtitle mb-2" style="color: #888888;">Pastikan biodata di isi dengan tepat untuk
                         menjadi penulis</p>
-                    <form action="#" method="POST">
+                    <form action="{{ route('author.create') }}" method="POST" enctype="multipart/form-data">
+                        @method('post')
+                        @csrf
                         <div class="row">
                             <div class="col-lg-12">
                                 <label for="exampleInputPassword1" class="form-label fw-semibold mt-4">Nama
                                     Anda</label>
-                                <input type="text" class="form-control" value="M.Ardian" name="name"
+                                <input type="text" class="form-control" placeholder="Name" value="{{ auth()->user()->name }}" name="name"
                                     id="exampleInputtext">
                             </div>
                             <div class="col-lg-12">
                                 <label for="exampleInputPassword1" class="form-label fw-semibold mt-4">Email</label>
-                                <input type="email" class="form-control" id="exampleInputtext" value="ardian@gmail.com"
-                                    name="email" placeholder="Masukan Email Anda">
+                                <input type="email" class="form-control" id="exampleInputtext" value="{{ auth()->user()->email }}"
+                                    name="email" placeholder="Email">
                             </div>
                             <div class="col-lg-12">
                                 <label for="exampleInputPassword1" class="form-label fw-semibold mt-4">No
-                                    Telephone</label>
-                                <input type="text" class="form-control" id="exampleInputtext" value="#"
+                                    Telephone (opsional)</label>
+                                <input type="text" class="form-control" id="exampleInputtext" placeholder="No Telephone" value="{{ auth()->user()->phone_number }}"
                                     name="phone_number">
                             </div>
                             <div class="col-12">
                                 <div class="">
                                     <label for="exampleInputPassword1"
-                                        class="form-label fw-semibold mt-4">Address</label>
+                                        class="form-label fw-semibold mt-4">Address (opsional)</label>
                                     <textarea type="text" class="form-control" name="address" id="exampleInputtext"
-                                        placeholder="Jl. Indonesia" style="resize: none">Jl. Indonesia Raya</textarea>
+                                        placeholder="Address" value="{{ auth()->user()->address }}" style="resize: none">{{ auth()->user()->address }}</textarea>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -50,9 +52,9 @@
                             </div>
                             <div class="col-lg-12">
                                 <label for="exampleInputPassword1" class="form-label fw-semibold mt-4">Profil
-                                    Singkat (untuk tampil di akun)</label>
+                                    Singkat (untuk tampil di akun) (opsional)</label>
                                 <input type="text" class="form-control" id="exampleInputtext" value=""
-                                    name="profil_singkat">
+                                    name="description">
                             </div>
                             <div class="row">
 
@@ -81,7 +83,7 @@
                             </div>
                             <div class="col-12">
                                 <div class="d-flex align-items-center justify-content-end mt-4 gap-3">
-                                    <button class="btn btn-sm px-4 py-2 text-white" type="button" data-bs-toggle="modal"
+                                    <button class="btn btn-sm px-4 py-2 text-white" type="submit" data-bs-toggle="modal"
                                         data-bs-target="#exampleModal1"
                                         style="background-color: #175A95; font-size: large;">Kirim Pengajuan <i
                                             data-feather="send"></i></button>
@@ -97,6 +99,10 @@
         </div>
     </div>
 </div>
+<script>
+    feather.replace();
+</script>
+@endsection
 
 
 

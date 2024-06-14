@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\NewsLikeInterface;
 use App\Models\NewsLike;
 use App\Http\Requests\UpdateNewsLikeRequest;
@@ -14,20 +15,26 @@ use Illuminate\Support\Facades\Auth;
 class NewsLikeController extends Controller
 {
     private NewsLikeInterface $like;
+    private NewsInterface $news;
     private NewsLikeService $service;
 
-    public function __construct(NewsLikeInterface $like, NewsLikeService $service)
+    public function __construct(NewsLikeInterface $like, NewsLikeService $service, NewsInterface $news)
     {
         $this->like = $like;
         $this->service = $service;
+        $this->news = $news;
     }
 
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $ip_Address = $request->ip();
+        $user_id = auth()->user()->id;
+        $newsLike = $this->news->whereUserLike($user_id, $ip_Address);
+
+        return view('pages.user.news-liked.index', compact('newsLike', 'ip_Address', 'user_id'));
     }
 
     /**

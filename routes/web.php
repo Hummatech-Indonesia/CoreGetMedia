@@ -12,6 +12,7 @@ use App\Http\Controllers\TagsController;
 use App\Http\Controllers\VoucherrController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\NewsCategoryController;
+use App\Http\Controllers\NewsLikeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -141,6 +142,10 @@ Route::get('about-us', function () {
     return view('pages.user.aboutus.aboutus');
 })->name('about.us');
 
+Route::get('advertising', function () {
+    return view('pages.user.ads.advertising');
+})->name('user.ads.advertising');
+
 Route::get('create-news', function () {
     return view('pages.author.news.create');
 })->name('create.news');
@@ -195,9 +200,11 @@ Route::get('history-coin', function () {
     return view('pages.user.coin.history');
 })->name('history-coin.user');
 
-Route::get('news-liked', function () {
-    return view('pages.user.news-liked.index');
-})->name('news-liked.user');
+// Route::get('news-liked', function () {
+//     return view('pages.user.news-liked.index');
+// })->name('news-liked.user');
+
+Route::get('news-liked', [NewsLikeController::class, 'index'])->name('news-liked.user');
 
 Route::get('contact-us', function () {
     return view('pages.user.contact-us.index');
@@ -229,7 +236,9 @@ Route::get('author/{author}', [AuthorController::class, 'show'])->name('author.d
 Route::get('news/latest-news', [NewsController::class, 'latestNews'])->name('latest.news');
 Route::get('news/popular-news', [NewsController::class, 'popularNews'])->name('popular.news');
 
-Route::get('author-registration', function(){
+Route::post('author-create', [AuthorController::class, 'store'])->name('author.create');
+
+Route::get('author-registration', function () {
     return view('pages.user.profile.author-registration');
 })->name('author-registration');
 

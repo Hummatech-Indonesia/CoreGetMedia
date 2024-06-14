@@ -6,9 +6,13 @@ use App\Contracts\Interfaces\AuthorInterface;
 use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\PopularInterface;
+use App\Contracts\Interfaces\UserInterface;
+use App\Enums\AuthorEnum;
 use App\Models\Author;
 use App\Http\Requests\StoreAuthorRequest;
 use App\Http\Requests\UpdateAuthorRequest;
+use App\Services\AuthorService;
+use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {
@@ -16,14 +20,18 @@ class AuthorController extends Controller
     private NewsInterface $news;
     private CategoryInterface $category;
     private PopularInterface $popular;
+    private UserInterface $user;
+    private AuthorService $service;
     
 
-    public function __construct(AuthorInterface $author, NewsInterface $news, CategoryInterface $category, PopularInterface $popular)
+    public function __construct(UserInterface $user, AuthorInterface $author, AuthorService $service, NewsInterface $news, CategoryInterface $category, PopularInterface $popular)
     {
         $this->author = $author;
         $this->news = $news;
         $this->category = $category;
         $this->popular = $popular;
+        $this->user = $user;
+        $this->service = $service;
     }
 
     /**
@@ -52,9 +60,15 @@ class AuthorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreAuthorRequest $request)
+    public function store(Request $req, StoreAuthorRequest $request)
     {
-        $this->author->store($request->validates());
+        $data = $this->service->store($request);
+        $data['description'] = $req->input('description');
+        $this->user->update(auth()->user()->id, [
+            'phone_number' => $req->input('phone_number'),
+            'address' => $req->input('address')
+        ]);
+        $this->author->store($data);
         return back()->with('success', 'Berhasil mendaftarkan diri');
     }
 
@@ -98,5 +112,17 @@ class AuthorController extends Controller
     {
         $authors = $this->author->accepted();
         return view('pages.user.author.list-author', compact('authors'));
+    }
+
+    public function confirm(Author $author)
+    {
+        $this->author->update($author->id, ['status' => AuthorEnum::ACCEPTED->value]);
+        return redirect()->back()->with(['success' => 'Author Berhasil Dikonfirmasi']);
+    }
+
+    public function reject(Author $author)
+    {
+        $this->author->update($author->id, ['status' => AuthorEnum::REJECT->value]);
+        return redirect()->back()->with(['success' => 'Author Berhasil Tolak']);
     }
 }

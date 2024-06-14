@@ -37,8 +37,8 @@
     }
 
     .img-all {
-        width: 400px;
-        height: 250px;
+        width: 213px;
+        height: 150px;
         object-fit: cover;
     }
     </style>
@@ -59,7 +59,7 @@
         <div class="container">
             <div class="row gx-5">
                 <div class="col-lg-8">
-                    @forelse ($newsTop as $item)    
+                    {{-- @forelse ($newsTop as $item)
                         @if ($item->news_views_count > 0)
                             <div class="">
                                 <div class="news-card-four" style="height: 550px;">
@@ -89,6 +89,31 @@
                         @endif
                     @empty
                         <p>No news available.</p>
+                    @endforelse --}}
+
+                    @forelse ($newsTop as $item)
+                    @if ($item->news_views_count > 0)
+
+                        <div class="">
+                            <div class="news-card-four" style="height: 550px;">
+                                <div class="news-card-img">
+                                    <a href="javascript:void(0)"> <img src="{{asset('storage/'. $item->image)}}" alt="Image" width="100%" style="object-fit: cover" height="450" /></a>
+                                </div>
+
+                                <div class="news-card-info">
+                                    <h3><a data-toggle="tooltip" data-placement="top" title="Apex Legends Season 11 Start Date, Time, & What To Expect" href="{{ route('news.singlepost', ['news' => $item->slug]) }}">{!! Illuminate\Support\Str::limit(strip_tags($item->name), 300, '...') !!}
+                                        </a>
+                                    </h3>
+                                    <ul class="news-metainfo list-style">
+                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">{{ \Carbon\Carbon::parse($item->created_at)->translatedFormat('d F Y') }}</a></li>
+                                        <li><i class="fi fi-rr-eye"></i><a href="news-by-dateus">{{ $item->news_views_count ? $item->news_views_count : '0' }}x dilihat</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    @endif
+                    @empty
                     @endforelse
 
                     <div class="mb-5">
@@ -170,16 +195,16 @@
                                 </h3>
 
                                 @forelse ($trending_news as $trending)
-                                @if ($trending->news_views_count > 0)      
+                                @if ($trending->news_views_count > 0)
                                     <div class="news-card-three">
                                         <div class="news-card-img">
                                             <img src="{{ asset('storage/' . $trending->image) }}" class="img-popular" alt="Image" />
                                         </div>
                                         <div class="news-card-info">
-                                            <h3><a href="business-details.html">{{$trending->name}}</a></h3>
+                                            <h3><a href="{{ route('news.singlepost', ['news' => $trending->slug]) }}">{{$trending->name}}</a></h3>
                                             <ul class="news-metainfo list-style d-flex">
-                                                <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html" style="font-size: 15px;">{{ \Carbon\Carbon::parse($trending->date)->translatedFormat('d F Y') }}</a></li>
-                                                <li><i class="fi fi-rr-eye"></i><a href="news-by-dateus" style="font-size: 15px;">{{ $trending->news_views_count ? $trending->news_views_count : '0' }}x dilihat</a></li>
+                                                <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)" style="font-size: 14px;">{{ \Carbon\Carbon::parse($trending->date)->translatedFormat('d F Y') }}</a></li>
+                                                <li><i class="fi fi-rr-eye"></i><a href="javscript:void(0)" style="font-size: 14px;">{{ $trending->news_views_count ? $trending->news_views_count : '0' }}x dilihat</a></li>
                                             </ul>
                                         </div>
                                     </div>

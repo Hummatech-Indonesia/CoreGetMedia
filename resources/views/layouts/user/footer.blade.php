@@ -1,3 +1,13 @@
+<style>
+    .ads {
+        color: #FFFFFF;
+    }
+
+    .ads:hover {
+        color: blueviolet;
+    }
+</style>
+
 <div class="p-5" style="background-color: #253645;">
     <div class="">
         <div class="row text-white">
@@ -8,17 +18,21 @@
                     <li>
                         <p class="copyright-text mt-4">
                             {{-- @if ($firstContact)
-                                {{ $firstContact->slogan }}
-                            @endif ©  --}}
+                            {{ $firstContact->slogan }}
+                            @endif © --}}
                         </p>
-                        <p class="copyright-text mt-4" style="font-size: 20px"><span>Get</span>Media berita terlengkap dengan berita terbaru dan terpopuler.</p>
+                        <p class="copyright-text mt-4" style="font-size: 20px"><span>Get</span>Media berita terlengkap
+                            dengan berita terbaru dan terpopuler.</p>
                     </li>
                     <li>
-                    {{-- <ul style="list-style-type: none;" class="p-4">
-                        <span style="color: #92989F; font-size: 15px;">Pengiklanan</span>
-                        <li class="mb-2"><a href="{{route('iklan.biodata')}}" style="color: #FFFFFF">+ Unggah Iklan</a></li>
-                    </ul> --}}
-                </li>
+                        <ul style="list-style-type: none;" class="p-4">
+                            <span style="color: #92989F; font-size: 15px;">Pengiklanan</span>
+                            <li class="mb-2"><a href="{{route('user.ads.advertising')}}" class="ads">+
+                                    Tentang
+                                    Iklan</a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
 
             </div>
@@ -47,8 +61,10 @@
             <div class="col-lg-4">
                 <ul style="list-style-type: none;" class="p-4">
                     <span style="color: #92989F; font-size: 15px;">Kontak</span>
-                    <li class="mb-2"><p>getmedia@gmail.com</p></li>
-                    <li class="mb-2">+62 *** **** ****  </li>
+                    <li class="mb-2">
+                        <p>getmedia@gmail.com</p>
+                    </li>
+                    <li class="mb-2">+62 *** **** **** </li>
                     {{-- <li class="mb-2"><span style="color: #92989F; font-size: 15px;">Berlangganaan</span></li> --}}
                 </ul>
             </div>
@@ -69,5 +85,5 @@
 </div>
 
 <button type="button" id="backtotop" class="position-fixed text-center border-0 p-0">
-    <i class="ri-arrow-up-line"></i>
+    <i cl ass="ri-arrow-up-line"></i>
 </button>

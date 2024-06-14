@@ -21,4 +21,5 @@ interface NewsInterface extends GetInterface, StoreInterface, UpdateInterface, S
     public function latest() : mixed;
     public function allPin() : mixed;
     public function whereUser($id);
+    public function whereUserLike($user_id, $ipAddress) : mixed;
 }
