@@ -4,6 +4,7 @@ namespace App\Contracts\Repositories;
 
 use App\Contracts\Interfaces\UserInterface;
 use App\Models\User;
+use App\Enums\UserStatusEnum;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
@@ -167,5 +168,12 @@ class UserRepository extends BaseRepository implements UserInterface
             ->orderBy('total', 'desc')
             ->take(6)
             ->get();
+    }
+
+    public function banned()
+    {
+        return $this->model->query()
+        ->where('status', UserStatusEnum::BANNED->value)
+        ->get();
     }
 }
