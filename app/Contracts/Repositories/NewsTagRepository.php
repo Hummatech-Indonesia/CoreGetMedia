@@ -53,8 +53,8 @@ class NewsTagRepository extends BaseRepository implements NewsTagInterface
     public function where($news, $query): mixed
     {
         return $this->model->query()
-            ->where('tag_id', $news)
-            ->whereRelation('status',  NewsEnum::ACCEPTED->value)
+            ->where('tags_id', $news)
+            ->whereRelation('news', 'status',  NewsEnum::ACCEPTED->value)
             ->when($query == 'top', function($q){
                 $q->take(1);
             })

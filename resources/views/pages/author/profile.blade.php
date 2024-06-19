@@ -81,13 +81,13 @@
                                         <div class="d-flex align-items-center justify-content-between m-4">
                                             <div class="text-center">
                                                 <i class="ti ti-file-description fs-6 d-block mb-2"></i>
-                                                <h5 class="mb-0 fw-semibold lh-1">{0</h5>
+                                                <h5 class="mb-0 fw-semibold lh-1">{{ $countAcc }}</h5>
                                                 <p class="mb-0 fs-3">Posts</p>
                                             </div>
                                             <a type="button" data-bs-toggle="modal" data-bs-target="#modal-followers">
                                                 <div class="text-center">
                                                     <i class="ti ti-user-circle fs-6 d-block mb-2"></i>
-                                                    <h5 class="mb-0 fw-semibold lh-1">0</h5>
+                                                    <h5 class="mb-0 fw-semibold lh-1">{{ $countFollower }}</h5>
                                                     <p class="mb-0 fs-3">Pengikut</p>
                                                 </div>
                                             </a>
@@ -95,7 +95,7 @@
                                             <a type="button" data-bs-toggle="modal" data-bs-target="#modal-following">
                                                 <div class="text-center">
                                                     <i class="ti ti-user-check fs-6 d-block mb-2"></i>
-                                                <h5 class="mb-0 fw-semibold lh-1">0</h5>
+                                                <h5 class="mb-0 fw-semibold lh-1">{{ $countFollowing }}</h5>
                                                 <p class="mb-0 fs-3">Mengikuti</p>
                                                 </div>
                                             </a>
@@ -114,9 +114,11 @@
                                                     style="width: 110px; height: 110px;";>
                                                     <div class="border-4 border-white d-flex align-items-center justify-content-center rounded-circle overflow-hidden"
                                                         style="width: 100px; height: 100px;">
-                                                        <img style="object-fit: cover"
-                                                            src="{{ asset('assets/img/profile.svg') }}"
-                                                            alt="" class="w-100 h-100">
+                                                        @if (auth()->user()->image != null && Storage::disk('public')->exists(auth()->user()->image))
+                                                            <img src="{{ asset('storage/' . auth()->user()->image) }}" style="border-radius: 50%;" class="mb-3" style="object-fit: cover" width="85" height="85">
+                                                        @else
+                                                            <img style="object-fit: cover" src="{{ asset('default.png') }}" alt="" class="w-100 h-100">
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -129,34 +131,19 @@
                                     <div class="col-lg-4 order-lg-3 order-3">
                                         <div class="d-flex align-items-center justify-content-between">
                                             <div class="text-center">
-                                                <div class="">
-                                                    <span class="badge bg-light-warning text-warning fs-5 px-2 py-2">
-                                                        0
-                                                    </span>
-                                                </div>
-                                                <div class="">
-                                                    <p class="mb-0 fs-3">Panding</p>
-                                                </div>
+                                                <i class="ti ti-clock fs-6 d-block mb-2"></i>
+                                                <h5 class="mb-0 fw-semibold lh-1">{{ $countPending }}</h5>
+                                                <p class="mb-0 fs-3">Pending</p>
                                             </div>
                                             <div class="text-center">
-                                                <div class="">
-                                                    <span class="badge bg-light-danger text-danger fs-5 px-2 py-2">
-                                                        0
-                                                    </span>
-                                                </div>
-                                                <div class="">
-                                                    <p class="mb-0 fs-3">Ditolak</p>
-                                                </div>
+                                                <i class="ti ti-square-rounded-x fs-6 d-block mb-2"></i>
+                                                <h5 class="mb-0 fw-semibold lh-1">{{ $countRejected }}</h5>
+                                                <p class="mb-0 fs-3">Ditolak</p>
                                             </div>
                                             <div class="text-center">
-                                                <div class="">
-                                                    <span class="badge bg-light-success text-success fs-5 px-2 py-2">
-                                                        0
-                                                    </span>
-                                                </div>
-                                                <div class="">
-                                                    <p class="mb-0 fs-3">Diterima</p>
-                                                </div>
+                                                <i class="ti ti-square-rounded-check fs-6 d-block mb-2"></i>
+                                                <h5 class="mb-0 fw-semibold lh-1">{{ $countAcc }}</h5>
+                                                <p class="mb-0 fs-3">Diterima</p>
                                             </div>
                                         </div>
                                     </div>
@@ -191,41 +178,27 @@
                     </div>
 
                     <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade show active card" id="pills-berita" role="tabpanel"
-                            aria-labelledby="pills-berita-tab" tabindex="0">
-                            <div class="card card-body">
-                                <h4 class="mb-4">Berita</h4>
-                                <div class="d-sm-flex align-items-center justify-content-between mt-3 mb-5">
-                                    <form class="d-flex flex-column flex-sm-row gap-2">
-                                        <div class="me-3">
-                                            <div class="input-group">
-                                                <input type="text" name="search"
-                                                    class="form-control search-chat py-2 px-5 ps-5" placeholder="Search">
-                                                <i
-                                                    class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
-                                                <button type="submit" class="btn btn-outline-primary px-4">Cari</button>
-                                            </div>
-                                        </div>
-                                        <div class="me-3">
-                                            <div class="input-group">
-                                                <select class="form-select" name="filter">
-                                                    <option selected disabled>Pilih Option</option>
-                                                    <option value="terbaru">Terbaru</option>
-                                                    <option value="terlama">Terlama</option>
-                                                    <option value="">Tampilkan Semua</option>
-                                                </select>
-                                                <button class="btn btn-outline-primary">
-                                                    Pilih
-                                                </button>
-                                            </div>
+                        <div class="tab-pane fade show active" id="pills-berita" role="tabpanel" aria-labelledby="pills-berita-tab" tabindex="0">
+                            <div class="row p-2">
+                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                    <h4 class="mb-0">Berita Penulis</h4>
+                                    <form class="text-end">
+                                        <div class="input-group">
+                                            <select class="form-select" name="filter">
+                                                <option value="semua">Semua</option>
+                                                <option value="terbaru">Terbaru</option>
+                                                <option value="terlama">Terlama</option>
+                                            </select>
+                                            <button class="btn btn-outline-primary">
+                                                Pilih
+                                            </button>
                                         </div>
                                     </form>
-
                                 </div>
-
+                                
                                 <!-- Row -->
                                 <div class="row">
-                                    {{-- @forelse ($news as $news)
+                                    @forelse ($newses as $news)
                                         <div class="col-lg-6 col-md-12 mb-5">
                                             <div class="">
                                                 <div class="row">
@@ -283,17 +256,16 @@
                                                 </div>
                                             </div>
                                             <div class="text-center">
-                                                <h5>Tidak ada data</h5>
+                                                <h5>Penulis belum mengupload berita</h5>
                                             </div>
                                         </div>
-                                    @endforelse --}}
+                                    @endforelse
                                 </div>
                                 <!-- End Row -->
                             </div>
                         </div>
 
-                        <div class="tab-pane fade card p-4" id="pills-profile" role="tabpanel"
-                            aria-labelledby="pills-profile-tab" tabindex="0">
+                        <div class="tab-pane fade p-4" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
                             <div class="row p-2">
                                 <h4 class="mb-4">Biodata</h4>
 
