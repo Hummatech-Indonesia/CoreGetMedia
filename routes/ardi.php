@@ -6,7 +6,10 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\NewsCategoryController;
 use App\Http\Controllers\NewsLikeController;
+use App\Http\Controllers\NewsRejectController;
 use App\Http\Controllers\NewsSubCategoryController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 
 Route::get('news/{slug}', [NewsCategoryController::class, 'index'])->name('news.category.user');
 Route::get('news/subcategory/{slug}', [NewsSubCategoryController::class, 'index'])->name('news.subcategory');
@@ -24,3 +27,9 @@ Route::put('unpin-news/{news}', [NewsController::class, 'unpin_news'])->name('un
 
 Route::post('like-news/{news}', [NewsLikeController::class, 'store'])->name('like.news');
 Route::delete('unlike-news/{news}', [NewsLikeController::class, 'destroy'])->name('unlike.news');
+
+Route::post('news-reject/{news}', [NewsRejectController::class, 'store'])->name('reject.news.admin');
+
+Route::post('image-update/{user}', [UserController::class, 'updateImage'])->name('image.update');
+Route::put('update-profile/{user}', [UserController::class, 'update'])->name('update.profile');
+Route::post('update-password/{user}', [UserController::class, 'updatePassword'])->name('update.password');

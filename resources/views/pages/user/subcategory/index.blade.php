@@ -59,38 +59,6 @@
         <div class="container">
             <div class="row gx-5">
                 <div class="col-lg-8">
-                    {{-- @forelse ($newsTop as $item)
-                        @if ($item->news_views_count > 0)
-                            <div class="">
-                                <div class="news-card-four" style="height: 550px;">
-                                    <div class="news-card-img">
-                                        <a href="#"> <img src="{{asset('storage/'. $item->image)}}" alt="Image" width="100%" style="object-fit: cover" height="450" /></a>
-                                </div>
-                            </div>
-                            <div class="news-card-info">
-                                <h3>
-                                    <a data-toggle="tooltip" data-placement="top" title="Apex Legends Season 11 Start Date, Time, & What To Expect"
-                                        href="{{ route('news.singlepost', ['news' => $item->slug]) }}">
-                                        {!! Illuminate\Support\Str::limit(strip_tags($item->name), 300, '...') !!}
-                                    </a>
-                                </h3>
-                                <ul class="news-metainfo list-style">
-                                    <li>
-                                        <i class="fi fi-rr-calendar-minus"></i>
-                                        <a href="news-by-date.html">{{ \Carbon\Carbon::parse($item->date)->translatedFormat('d F Y') }}</a>
-                                    </li>
-                                    <li>
-                                        <i class="fi fi-rr-eye"></i>
-                                        <a href="news-by-dateus">{{ $item->newsViews_count ? $item->newsViews_count : '0' }}x dilihat</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        @endif
-                    @empty
-                        <p>No news available.</p>
-                    @endforelse --}}
-
                     @forelse ($newsTop as $item)
                     @if ($item->news_views_count > 0)
 
@@ -101,7 +69,7 @@
                                 </div>
 
                                 <div class="news-card-info">
-                                    <h3><a data-toggle="tooltip" data-placement="top" title="Apex Legends Season 11 Start Date, Time, & What To Expect" href="{{ route('news.singlepost', ['news' => $item->slug]) }}">{!! Illuminate\Support\Str::limit(strip_tags($item->name), 300, '...') !!}
+                                    <h3><a href="{{ route('news.singlepost', ['news' => $item->slug]) }}" data-toggle="tooltip" data-placement="top" title="Apex Legends Season 11 Start Date, Time, & What To Expect" href="{{ route('news.singlepost', ['news' => $item->slug]) }}">{!! Illuminate\Support\Str::limit(strip_tags($item->name), 300, '...') !!}
                                         </a>
                                     </h3>
                                     <ul class="news-metainfo list-style">
@@ -148,7 +116,7 @@
                         @forelse ($news_down as $data)
                             <div class="news-card-five">
                                 <div class="news-card-img">
-                                    <a href="#">
+                                    <a href="{{ route('news.singlepost', ['news' => $data->slug]) }}">
                                         <img src="{{ asset('storage/' . $data->image) }}" alt="Image" class="img-all" />
                                     </a>
                                     <a data-toggle="tooltip" data-placement="top" title="Sports" href="#" class="news-cat">{{ $data->newsCategories[0]->category->name }}</a>
