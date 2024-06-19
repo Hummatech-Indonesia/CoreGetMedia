@@ -58,7 +58,7 @@
                                         <div class="news-card-img">
                                             <a href="javascript:void(0)">
                                                 <img src="{{asset('storage/' . $data->image)}}" alt="Image"
-                                                    style="width: 800px; height: 200px; object-fit: cover;" />
+                                                    style="width: 850px; height: 170px; object-fit: cover;" />
                                             </a>
                                             <a data-toggle="tooltip" data-placement="top"
                                                 title="{{ $data->newsCategories[0]->category->name }}"
