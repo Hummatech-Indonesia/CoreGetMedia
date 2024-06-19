@@ -77,7 +77,7 @@
                                 <li><i class="fi fi-rr-calendar-minus"></i><a
                                         href="javascript:void(0)">{{ $data->date }}</a></li>
                                 <li><i class="fi fi-rr-eye"></i><a
-                                        href="javascript:void(0)">{{ $data->newsViews_count ? $data->newsViews_count : '0' }}x
+                                        href="javascript:void(0)">{{ $data->news_views_count ? $data->news_views_count : '0' }}x
                                         dilihat</a></li>
                             </ul>
                         </div>
