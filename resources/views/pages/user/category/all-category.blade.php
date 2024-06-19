@@ -75,7 +75,7 @@
                                     <p>{!! Illuminate\Support\Str::limit(strip_tags($item->name), 200, '...') !!}</p>
                                     <ul class="news-metainfo list-style">
                                         <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($item->date)->translatedFormat('d F Y') }}</a></li>
-                                        <li><i class="fi fi-rr-eye"></i><a href="javascript:void(0)">{{ $item->newsViews_count ? $item->newsViews_count : '0' }}x dilihat</a></li>
+                                        <li><i class="fi fi-rr-eye"></i><a href="javascript:void(0)">{{ $item->news_views_count ? $item->news_views_count : '0' }}x dilihat</a></li>
                                     </ul>
                                 </div>
                             </div>
