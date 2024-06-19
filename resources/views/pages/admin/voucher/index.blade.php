@@ -104,7 +104,11 @@
 
                             <div class="text-center">
                                 <div class="progress mb-3 mt-4" style="background-color: #D1D1D1;">
-                                    <div class="progress-bar" style="width: {{ $voucher->voucher_useds_count }}%; height: 6px; border-width: {{ $voucher->quota }}%;" role="progressbar"></div>
+                                    @if ($voucher->quota > 0)
+                                        <div class="progress-bar" style="width:{{ $voucher->voucher_useds_count }}%; height: 6px; border-width: {{ $voucher->quota }}%;" role="progressbar"></div>
+                                    @else
+                                        <div class="progress-bar" style="width: 100%; height: 6px; border-width: 100%;" role="progressbar"></div>
+                                    @endif
                                 </div>
                                 @if ($voucher->quota > 0)
                                     <p>{{ $voucher->voucher_useds_count }} Terpakai dari {{ $voucher->quota }} stok</p>
@@ -163,16 +167,16 @@
                             </div>
                             <div class="col-lg-12">
                                 <label class="form-label mt-2">Jenis Voucher</label>
-                                <select class="form-control" name="status" id="">
+                                <select class="form-control" name="status" id="jenis-voucher">
                                     <option disabled selected>Pilih Jenis</option>
                                     <option value="unlimited">Unlimited</option>
                                     <option value="quota">Quota</option>
                                 </select>
                                 <ul class="error-text"></ul>
                             </div>
-                            <div class="col-lg-12">
+                            <div class="col-lg-12" id="stok-wrapper">
                                 <label class="form-label mt-2">Stok</label>
-                                <input class="form-control" type="text" name="quota">
+                                <input class="form-control" class="stok" type="text" name="quota">
                                 <ul class="error-text"></ul>
                             </div>
                         </div>
@@ -304,5 +308,14 @@
             $('#form-delete').attr('action', '/voucher-delete/' + id);
             $('#modal-delete').modal('show');
         });
+
+        $('#unlimited').click(function(){
+
+        })
+
+        $('#quota').click(function(){
+
+        })
+
     </script>
 @endsection
