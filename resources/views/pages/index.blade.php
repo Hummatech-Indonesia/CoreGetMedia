@@ -360,6 +360,7 @@ $popular_down_id = $popular_down->pluck('id');
                         </ul>
                     </div>
                 </div>
+                
                 @empty
                 <div class="col-12">
                     <div class="d-flex justify-content-center">
