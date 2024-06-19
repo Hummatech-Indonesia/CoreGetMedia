@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignUuid('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('voucherr_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->timestamps();
+            $table->timestamps();   
         });
     }
 
