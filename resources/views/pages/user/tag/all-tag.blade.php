@@ -3,37 +3,37 @@
 
 @section('style')
 <style>
-@media (min-width: 768px) {
-    .icon-eye {
-        margin-top: 12px;
+    @media (min-width: 768px) {
+        .icon-eye {
+            margin-top: 12px;
+        }
     }
-}
 
-.tag-list li a:hover {
-    background-color: #175A95;
-    color: var(--whiteColor);
-}
+    .tag-list li a:hover {
+        background-color: #175A95;
+        color: var(--whiteColor);
+    }
 
-.tag-list li a {
-    color: var(--optionalColor);
-    background-color: var(--whiteColor);
-    border-radius: 5px;
-    padding: 7px 15px 3px 17px;
-    font-size: 14px;
-    line-height: 30px;
-    display: inline-block;
-    border: 1px solid #eee;
-}
+    .tag-list li a {
+        color: var(--optionalColor);
+        background-color: var(--whiteColor);
+        border-radius: 5px;
+        padding: 7px 15px 3px 17px;
+        font-size: 14px;
+        line-height: 30px;
+        display: inline-block;
+        border: 1px solid #eee;
+    }
 
-.theme-dark .tag-list li a:hover {
-    background-color: #175A95;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: var(--whiteColor);
-}
+    .theme-dark .tag-list li a:hover {
+        background-color: #175A95;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: var(--whiteColor);
+    }
 
-.breadcrumb-menu li:after {
-    color: #000;
-}
+    .breadcrumb-menu li:after {
+        color: #000;
+    }
 </style>
 @endsection
 
@@ -54,48 +54,48 @@
             <div class="col-lg-8">
                 <div>
                     @forelse ($newsTags as $item)
-                    <div class="news-card-five">
-                        <div class="news-card-img">
-                            <a href="#"><img src="{{asset('storage/' . $item->image)}}" alt="Image"
-                                    style="width: 850px; height: 170px; object-fit: cover;" /></a>
-                            <a data-toggle="tooltip" data-placement="top"
-                                title="{{ $item->newsCategories[0]->category->name }}" href="#"
-                                class="news-cat">{{ $item->newsCategories[0]->category->name }}</a>
-                        </div>
-                        <div class="news-card-info">
-                            <h3><a data-toggle="tooltip" data-placement="top"
-                                    title="Muga Nemo Aptent Quaerat Explicabo Urna Ni Like Ange"
-                                    href="{{ route('news.singlepost', ['news' => $item->slug]) }}">{!!
-                                    Illuminate\Support\Str::limit(strip_tags($item->name), 200, '...') !!}
-                                </a>
-                            </h3>
-                            <p>{!! Illuminate\Support\Str::limit(strip_tags($item->name), 200, '...') !!}</p>
-                            <ul class="news-metainfo list-style">
-                                <li><i class="fi fi-rr-calendar-minus"></i><a
-                                        href="javascript:void(0)">{{ \Carbon\Carbon::parse($item->date)->translatedFormat('d F Y') }}</a>
-                                </li>
-                                <li><i class="fi fi-rr-eye"></i><a
-                                        href="javascript:void(0)">{{ $item->news_views_count ? $item->news_views_count : '0' }}x
-                                        dilihat</a></li>
-                            </ul>
-                        </div>
-                    </div>
+                                    <div class="news-card-five">
+                                        <div class="news-card-img">
+                                            <a href="#"><img src="{{asset('storage/' . $item->image)}}" alt="Image"
+                                                    style="width: 850px; height: 170px; object-fit: cover;" /></a>
+                                            <a data-toggle="tooltip" data-placement="top"
+                                                title="{{ $item->newsCategories[0]->category->name }}" href="#"
+                                                class="news-cat">{{ $item->newsCategories[0]->category->name }}</a>
+                                        </div>
+                                        <div class="news-card-info">
+                                            <h3><a data-toggle="tooltip" data-placement="top"
+                                                    title="Muga Nemo Aptent Quaerat Explicabo Urna Ni Like Ange"
+                                                    href="{{ route('news.singlepost', ['news' => $item->slug]) }}">{!!
+                        Illuminate\Support\Str::limit(strip_tags($item->name), 200, '...') !!}
+                                                </a>
+                                            </h3>
+                                            <p>{!! Illuminate\Support\Str::limit(strip_tags($item->name), 200, '...') !!}</p>
+                                            <ul class="news-metainfo list-style">
+                                                <li><i class="fi fi-rr-calendar-minus"></i><a
+                                                        href="javascript:void(0)">{{ \Carbon\Carbon::parse($item->date)->translatedFormat('d F Y') }}</a>
+                                                </li>
+                                                <li><i class="fi fi-rr-eye"></i><a
+                                                        href="javascript:void(0)">{{ $item->news_views_count ? $item->news_views_count : '0' }}x
+                                                        dilihat</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
 
                     @empty
-                    <div class="col-12">
-                        <div class="d-flex justify-content-center">
-                            <div>
-                                <img src="{{ asset('assets/img/no-data/empty.png') }}" width="250px" alt="">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-center">
+                                <div>
+                                    <img src="{{ asset('assets/img/no-data/empty.png') }}" width="250px" alt="">
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <h5>Tidak ada data</h5>
                             </div>
                         </div>
-                        <div class="text-center">
-                            <h5>Tidak ada data</h5>
-                        </div>
-                    </div>
                     @endforelse
                 </div>
 
-                <x-paginator :paginator="$newsTags"/>
+                <x-paginator :paginator="$newsTags" />
 
                 {{-- <div class="text-center item-center d-flex justify-content-center"
                     style="background-color:#F6F6F6; width:100%;height:200px;">
@@ -111,11 +111,11 @@
                             <h3 class="sidebar-widget-title">Kategori Populer</h3>
                             <ul class="category-widget list-style">
                                 @foreach ($CategoryPopulars as $category)
-                                <li><a data-toggle="tooltip" data-placement="top" title="{{ $category->name }}"
-                                        href="{{ route('categories.show.user', ['category' => $category->slug]) }}"><img
-                                            src="{{ asset('assets/img/icons/arrow-right.svg') }}"
-                                            alt="Image">{{ $category->name }}
-                                        <span>({{ $category->news_categories_count }})</span></a></li>
+                                    <li><a data-toggle="tooltip" data-placement="top" title="{{ $category->name }}"
+                                            href="{{ route('categories.show.user', ['category' => $category->slug]) }}"><img
+                                                src="{{ asset('assets/img/icons/arrow-right.svg') }}"
+                                                alt="Image">{{ $category->name }}
+                                            <span>({{ $category->news_categories_count }})</span></a></li>
                                 @endforeach
                             </ul>
                         </div>
@@ -124,20 +124,20 @@
                             <h3 class="sidebar-widget-title">Tag Populer</h3>
                             <ul class="tag-list list-style">
                                 @forelse ($popularTags as $popularTag)
-                                <li><a
-                                        href="{{route('news-tag-list.user', ['tag' => $popularTag->slug])}}">{{ $popularTag->name }}</a>
-                                </li>
+                                    <li><a
+                                            href="{{route('news-tag-list.user', ['tag' => $popularTag->slug])}}">{{ $popularTag->name }}</a>
+                                    </li>
                                 @empty
-                                <div class="col-12">
-                                    <div class="d-flex justify-content-center">
-                                        <div>
-                                            <img src="{{ asset('assets/img/no-data/empty.png') }}" width="150px" alt="">
+                                    <div class="col-12">
+                                        <div class="d-flex justify-content-center">
+                                            <div>
+                                                <img src="{{ asset('assets/img/no-data/empty.png') }}" width="150px" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="text-center">
+                                            <h5>Tidak ada data</h5>
                                         </div>
                                     </div>
-                                    <div class="text-center">
-                                        <h5>Tidak ada data</h5>
-                                    </div>
-                                </div>
                                 @endforelse
                             </ul>
                         </div>
