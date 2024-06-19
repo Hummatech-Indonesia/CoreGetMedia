@@ -30,7 +30,6 @@ class AdminService
 
         $data = $request->validated();
 
-        // Check if user exists (for update) or create a new one
         $user = User::updateOrCreate(
             ['email' => $data['email']],
             [

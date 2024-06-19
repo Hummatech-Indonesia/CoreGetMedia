@@ -38,3 +38,7 @@ Route::delete('author-list/{author}', [AuthorController::class, 'destroy'])->nam
 Route::get('admin-account-list', [AdminController::class, 'index'])->name('admin-account.list.admin');
 
 Route::post('admin-account-list', [AdminController::class, 'store'])->name('admin-account.store');
+
+Route::put('admin-account-list/{admin}', [AdminController::class, 'update'])->name('admin-account.update');
+
+Route::delete('admin-account-list/{admin}', [AdminController::class, 'destroy'])->name('admin-account.delete');
