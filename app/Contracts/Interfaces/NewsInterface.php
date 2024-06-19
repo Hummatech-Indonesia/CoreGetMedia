@@ -11,7 +11,7 @@ use App\Contracts\Interfaces\Eloquent\UpdateInterface;
 
 interface NewsInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, ShowWithSlugInterface
 {
-    public function where($data) : mixed;
+    public function where($data, $paginate) : mixed;
     public function whereSubCategory($id, $query) : mixed;
     public function subcategoryLatest($subcategory_id) : mixed;
     public function whereCategory($id, $query) : mixed;

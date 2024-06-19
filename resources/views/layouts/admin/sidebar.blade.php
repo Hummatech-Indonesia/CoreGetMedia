@@ -83,17 +83,10 @@
                         <span class="hide-menu">Kategori</span>
                     </a>
                 </li>
+                
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4 text-white"></i>
                     <span class="hide-menu text-white">Artikel</span>
-                </li>
-
-                <li class="sidebar-item">
-                    <a class="sidebar-link {{ request()->routeIs('create.news' ? 'active' : '') }}"
-                        href="{{ route('create.news') }}" aria-expanded="false">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="currentColor" d="M11 13H5v-2h6V5h2v6h6v2h-6v6h-2z"/></svg>
-                        <span class="hide-menu">Upload Artkel</span>
-                    </a>
                 </li>
 
                 <li class="sidebar-item">
