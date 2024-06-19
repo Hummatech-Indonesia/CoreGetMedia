@@ -110,7 +110,6 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->when($query == 'top', function($q){
                 $q->take(1);
             })
-            ->where('status', NewsEnum::ACCEPTED->value)
             ->latest()
             ->get();
     }
