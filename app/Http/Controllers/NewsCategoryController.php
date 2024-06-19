@@ -31,7 +31,7 @@ class NewsCategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request,$slug)
+    public function index(Request $request, $slug)
     {
         $category = $this->category->showWithSLug($slug);
         $category_id = $category->id;
@@ -42,11 +42,10 @@ class NewsCategoryController extends Controller
         $query = $request->input('search');
         $trendings = $this->news->whereCategory($category_id, $query, 10);
         $newsTop = $this->news->whereCategory($category_id, 'top');
-        // $news = $this->news->whereCategory($category_id, 'notop');
         $latests = $this->news->categoryLatest($category_id);
         $CategoryPopulars = $this->category->showWithCount();
         $popularTags = $this->tags->showWithCount();
-        return view('pages.user.category.index', compact('categories', 'subCategories', 'category', 'trendings','newsTop', 'latests', 'CategoryPopulars', 'popularTags'));
+        return view('pages.user.category.index', compact('categories', 'subCategories', 'category', 'trendings', 'newsTop', 'latests', 'CategoryPopulars', 'popularTags'));
     }
 
     /**
@@ -86,10 +85,10 @@ class NewsCategoryController extends Controller
         $subCategories = $this->subCategories->get();
 
         $query = $request->input('search');
-        $news = $this->news->whereCategory($category_id, $query);
+        $news = $this->news->whereAllCategory($category_id);
         $popularCategory = $this->category->showWithCount();
         $popularTags = $this->tags->showWithCount();
-        return view('pages.user.category.all-category', compact('category', 'news','categories', 'subCategories', 'popularCategory','popularTags'));
+        return view('pages.user.category.all-category', compact('category', 'news', 'categories', 'subCategories', 'popularCategory', 'popularTags'));
     }
 
 

@@ -34,11 +34,11 @@ class NewsTagController extends Controller
         $news = $this->tag->showWithSLug($slug);
 
         $query = $request->input('search');
-        $news_tags = $this->tags->where($news->id, 'top');
-        $newsTags = $this->tags->latest($news->id, $query);
+        $news_tags = $this->news->whereTag($news->id, 'top');
+        $newsTags = $this->news->tagLatest($news->id);
+
         $CategoryPopulars = $this->category->showWithCount();
-        $query = $request->input('search');
-        $trendings = $this->news->whereCategory($news->id, $query);
+        $trendings = $this->news->newsPopular();
         $popularTags = $this->tag->showWithCount();
 
         return view('pages.user.tag.index', compact('news_tags', 'news', 'newsTags', 'CategoryPopulars', 'trendings', 'popularTags'));

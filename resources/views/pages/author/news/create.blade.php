@@ -44,25 +44,25 @@
     </div>
 </div>
 
-<!-- <div class="alert d-flex align-items-center p-3 border border-2">
-        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 84 84" fill="none">
+<div class="alert d-flex align-items-center bg-light-primary p-4 border-primary border-1">
+        <svg class="ms-4" xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 84 84" fill="none">
             <circle cx="42" cy="42" r="40" stroke="#175A95 " stroke-width="4" />
             <circle cx="42.1422" cy="59.5001" r="4.9" fill="#175A95 " />
             <path
                 d="M36.7667 22.6095C36.6449 20.9852 37.93 19.6001 39.5589 19.6001L44.0975 19.6001C45.6988 19.6001 46.974 20.9406 46.894 22.5399L45.774 44.9399C45.6995 46.4301 44.4696 47.6001 42.9775 47.6001H41.2389C39.7737 47.6001 38.5563 46.4706 38.4467 45.0095L36.7667 22.6095Z"
                 fill="#175A95 " />
         </svg>
-        <div class="d-flex flex-column ms-3">
-            <h5 style="font-weight: 600; color: #175A95">Ketentuan dan Persyaratan</h5>
-            <h6 style="font-weight: 600; font-size:18px; color: #175A95">Patikan anda membaca ketentuan dan persyaratan dibawah ini sebelum
-                mengunggah artikel</h6>
+        <div class="d-flex flex-column ms-5">
+            <h5 style="font-weight: 700; color: #175A95">Ketentuan dan Persyaratan</h5>
+            <h6 style="font-weight: 500; font-size:16px; margin-top:3px; color: #175A95">Pastikan anda membaca dibawah ini ketentuan & Persyaratan dibawah ini sebelum mengunggah artikel</h6>
+            <h6 style="font-weight: 500; font-size:16px; margin-top:10px; color: #175A95">Baca selengkapnya dibawah ini:</h6>
             <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
                 class="btn btn-sm text-white d-flex justify-content-start"
-                style="width: 163px;background-color: #175A95;">
+                style="margin-top: 10px; width: 163px;background-color: #175A95;">
                 Ketentuan & Persyaratan
             </button>
         </div>
-    </div> -->
+    </div>
 
 {{-- <div class="ms-1">
     <h5>Baca ketentuan dan persyaratan sembelum mengunggah berita</h5>

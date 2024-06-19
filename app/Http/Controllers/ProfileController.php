@@ -2,12 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Interfaces\AuthorInterface;
+use App\Contracts\Interfaces\UserInterface;
 use App\Models\Profile;
 use App\Http\Requests\StoreProfileRequest;
+use App\Http\Requests\UpdateProfileImageRequest;
 use App\Http\Requests\UpdateProfileRequest;
+use App\Models\User;
+use App\Services\UserService;
 
 class ProfileController extends Controller
 {
+    private UserInterface $user;
+    private AuthorInterface $author;
+
+    private UserService $service;
+
+    public function __construct(UserInterface $user, AuthorInterface $author, UserService $service)
+    {
+        $this->user = $user;
+        $this->author = $author;
+
+        $this->service = $service;
+    }
+
     /**
      * Display a listing of the resource.
      */

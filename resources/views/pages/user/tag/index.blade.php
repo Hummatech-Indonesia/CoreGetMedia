@@ -67,22 +67,31 @@
                     @forelse ($news_tags as $item)
                     <div class="news-card-four" style="height: 550px;">
                         <div class="news-card-img">
-                            <a href="javascript:void(0)"> <img src="{{asset('storage/' . $item->news->image)}}" alt="Image" width="100%" style="object-fit: cover" height="450" /></a>
+                            <a href="javascript:void(0)"> <img src="{{asset('storage/' . $item->image)}}" alt="Image" width="100%" style="object-fit: cover" height="450" /></a>
                         </div>
 
                         <div class="news-card-info">
-                            <h3><a data-toggle="tooltip" data-placement="top" title="Apex Legends Season 11 Start Date, Time, & What To Expect" href="#">{!! Illuminate\Support\Str::limit(strip_tags($item->news->name), 300, '...') !!}
+                            <h3><a data-toggle="tooltip" data-placement="top" title="Apex Legends Season 11 Start Date, Time, & What To Expect" href="#">{!! Illuminate\Support\Str::limit(strip_tags($item->name), 300, '...') !!}
                                 </a>
                             </h3>
                             <ul class="news-metainfo list-style">
-                                <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">{{ \Carbon\Carbon::parse($item->news->date)->translatedFormat('d F Y') }}</a></li>
-                                <li><i class="fi fi-rr-eye"></i><a href="news-by-dateus">{{ $item->news->newsViews_count ? $item->news->newsViews_count : '0' }}x dilihat</a></li>
+                                <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">{{ \Carbon\Carbon::parse($item->date)->translatedFormat('d F Y') }}</a></li>
+                                <li><i class="fi fi-rr-eye"></i><a href="news-by-dateus">{{ $item->news_views_count ? $item->news_views_count : '0' }}x dilihat</a></li>
                             </ul>
                         </div>
                     </div>
 
                     @empty
-
+                    <div class="col-12">
+                        <div class="d-flex justify-content-center">
+                            <div>
+                                <img src="{{ asset('assets/img/no-data/empty.png') }}" width="250px" alt="">
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <h5>Tidak ada data</h5>
+                        </div>
+                    </div>
                     @endforelse
 
                 </div>
@@ -103,130 +112,40 @@
                     @forelse ($newsTags as $data)
                     <div class="news-card-five">
                         <div class="news-card-img">
-                            <a href="#"><img src="{{asset('storage/' . $data->news->image)}}" alt="Image" class="img-all"/></a>
-                            <a data-toggle="tooltip" data-placement="top" title="Sports" href="#" class="news-cat">{{ $data->news->newsCategories[0]->category->name }}</a>
+                            <a href="#"><img src="{{asset('storage/' . $data->image)}}" alt="Image" class="img-all"/></a>
+                            <a data-toggle="tooltip" data-placement="top" title="Sports" href="#" class="news-cat">{{ $data->newsCategories[0]->category->name }}</a>
                         </div>
                         <div class="news-card-info">
-                            <h3><a data-toggle="tooltip" data-placement="top" title="{{ $data->news->name }}" href="{{ route('news.singlepost', ['news' => $data->news->slug]) }}">{!! Illuminate\Support\Str::limit(strip_tags($data->news->name), 200, '...') !!}
+                            <h3><a data-toggle="tooltip" data-placement="top" title="{{ $data->name }}" href="{{ route('news.singlepost', ['news' => $data->slug]) }}">{!! Illuminate\Support\Str::limit(strip_tags($data->name), 200, '...') !!}
                                 </a>
                             </h3>
-                            <p>{!! Illuminate\Support\Str::limit(strip_tags($data->news->description), 200, '...') !!}</p>
+                            <p>{!! Illuminate\Support\Str::limit(strip_tags($data->description), 200, '...') !!}</p>
                             <ul class="news-metainfo list-style">
-                                <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($data->news->created_at)->translatedFormat('d F Y') }}</a></li>
-                                <li><i class="fi fi-rr-eye"></i><a href="javascript:void(0)">{{ $data->news->newsViews_count ? $data->news->newsViews_count : '0' }}x dilihat</a></li>
+                                <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($data->created_at)->translatedFormat('d F Y') }}</a></li>
+                                <li><i class="fi fi-rr-eye"></i><a href="javascript:void(0)">{{ $data->news_views_count ? $data->news_views_count : '0' }}x dilihat</a></li>
                             </ul>
                         </div>
                     </div>
                     @empty
-
-                    @endforelse
-
-                </div>
-
-                {{-- <div class="text-center item-center d-flex justify-content-center" style="background-color:#F6F6F6; width:100%;height:200px;">
-                    <h5 class="mt-5">Iklan</h5>
-                </div> --}}
-
-                {{-- <div class="mb-5 mt-5">
-                        <div class="d-flex justify-content-between mb-3">
-                            <h3>Terbaru</h3>
-                            <a href="#">
-                                <p>Lihat lainnya<i><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
-                                        viewBox="0 0 24 24">
-                                        <path fill="currentColor"
-                                            d="m13.292 12l-4.6-4.6l.708-.708L14.708 12L9.4 17.308l-.708-.708z" />
-                                    </svg></i>
-                                </p>
-                            </a>
+                    <div class="col-12">
+                        <div class="d-flex justify-content-center">
+                            <div>
+                                <img src="{{ asset('assets/img/no-data/empty.png') }}" width="250px" alt="">
+                            </div>
                         </div>
-
-                        <div class="news-card-five">
-                            <div class="news-card-img">
-                                <a href="#"><img src="{{asset('assets/img/news/news-38.webp')}}" alt="Image" height="140" width="100%" /></a>
-                <a data-toggle="tooltip" data-placement="top" title="Sports" href="#" class="news-cat">Sports</a>
-            </div>
-            <div class="news-card-info">
-                <h3><a data-toggle="tooltip" data-placement="top" title="Muga Nemo Aptent Quaerat Explicabo Urna Ni Like Ange" href="#">Muga Nemo Aptent Quaerat Explicabo Urna Ni Like Ange
-                    </a>
-                </h3>
-                <p>Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print, graphic or web desi…</p>
-                <ul class="news-metainfo list-style">
-                    <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 03, 2023</a></li>
-                    <li><i class="fi fi-rr-eye"></i><a href="news-by-dateus">10</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="news-card-five">
-            <div class="news-card-img">
-                <a href="#"><img src="{{asset('assets/img/news/news-38.webp')}}" alt="Image" height="140" width="100%" /></a>
-                <a data-toggle="tooltip" data-placement="top" title="Sports" href="#" class="news-cat">Sports</a>
-            </div>
-            <div class="news-card-info">
-                <h3><a data-toggle="tooltip" data-placement="top" title="Muga Nemo Aptent Quaerat Explicabo Urna Ni Like Ange" href="#">Muga Nemo Aptent Quaerat Explicabo Urna Ni Like Ange
-                    </a>
-                </h3>
-                <p>Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print, graphic or web desi…</p>
-                <ul class="news-metainfo list-style">
-                    <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 03, 2023</a></li>
-                    <li><i class="fi fi-rr-eye"></i><a href="news-by-dateus">10</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="news-card-five">
-            <div class="news-card-img">
-                <a href="#"><img src="{{asset('assets/img/news/news-38.webp')}}" alt="Image" height="140" width="100%" /></a>
-                <a data-toggle="tooltip" data-placement="top" title="Sports" href="#" class="news-cat">Sports</a>
-            </div>
-            <div class="news-card-info">
-                <h3><a data-toggle="tooltip" data-placement="top" title="Muga Nemo Aptent Quaerat Explicabo Urna Ni Like Ange" href="#">Muga Nemo Aptent Quaerat Explicabo Urna Ni Like Ange
-                    </a>
-                </h3>
-                <p>Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print, graphic or web desi…</p>
-                <ul class="news-metainfo list-style">
-                    <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 03, 2023</a></li>
-                    <li><i class="fi fi-rr-eye"></i><a href="news-by-dateus">10</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="news-card-five">
-            <div class="news-card-img">
-                <a href="#"><img src="{{asset('assets/img/news/news-38.webp')}}" alt="Image" height="140" width="100%" /></a>
-                <a data-toggle="tooltip" data-placement="top" title="Sports" href="#" class="news-cat">Sports</a>
-            </div>
-            <div class="news-card-info">
-                <h3><a data-toggle="tooltip" data-placement="top" title="Muga Nemo Aptent Quaerat Explicabo Urna Ni Like Ange" href="#">Muga Nemo Aptent Quaerat Explicabo Urna Ni Like Ange
-                    </a>
-                </h3>
-                <p>Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print, graphic or web desi…</p>
-                <ul class="news-metainfo list-style">
-                    <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 03, 2023</a></li>
-                    <li><i class="fi fi-rr-eye"></i><a href="news-by-dateus">10</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="news-card-five">
-            <div class="news-card-img">
-                <a href="#"><img src="{{asset('assets/img/news/news-38.webp')}}" alt="Image" height="140" width="100%" /></a>
-                <a data-toggle="tooltip" data-placement="top" title="Sports" href="#" class="news-cat">Sports</a>
-            </div>
-            <div class="news-card-info">
-                <h3><a data-toggle="tooltip" data-placement="top" title="Muga Nemo Aptent Quaerat Explicabo Urna Ni Like Ange" href="#">Muga Nemo Aptent Quaerat Explicabo Urna Ni Like Ange
-                    </a>
-                </h3>
-                <p>Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print, graphic or web desi…</p>
-                <ul class="news-metainfo list-style">
-                    <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 03, 2023</a></li>
-                    <li><i class="fi fi-rr-eye"></i><a href="news-by-dateus">10</a></li>
-                </ul>
-            </div>
-        </div>
-    </div> --}}
+                        <div class="text-center">
+                            <h5>Tidak ada data</h5>
+                        </div>
+                    </div>
+                    @endforelse
+                </div>
+        <x-paginator :paginator="$newsTags"/>
 </div>
 
 <div class="col-lg-4">
     <div class="">
         <div class="sidebar">
-            <div class="sidebar-widget">
+            <div class="sidebar-widget" style="width: 450px">
                 <h3 class="sidebar-widget-title">Kategori Populer</h3>
                 <ul class="category-widget list-style">
                     @foreach ($CategoryPopulars as $category)
@@ -236,7 +155,7 @@
                 </ul>
             </div>
 
-            <div class="sidebar-widget" style="width: 400px">
+            <div class="sidebar-widget" style="width: 450px">
                 <h3 class="sidebar-widget-title">
                     Berita Popular
                 </h3>
@@ -254,10 +173,14 @@
                     </div>
                 </div>
                 @empty
-                <div class="d-flex justify-content-center">
-                    <div class="my-auto ">
-                        <img src="{{ asset('assets/img/no-data.svg') }}" width="200" />
-                        <h4 class="text-center">Tidak ada data!!</h4>
+                <div class="col-12">
+                    <div class="d-flex justify-content-center">
+                        <div>
+                            <img src="{{ asset('assets/img/no-data/empty.png') }}" width="150px" alt="">
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <h5>Tidak ada data</h5>
                     </div>
                 </div>
                 @endforelse
@@ -269,7 +192,16 @@
                     @forelse ($popularTags as $popularTag)
                     <li><a href="{{route('news-tag-list.user', ['tag' => $popularTag->slug])}}">{{ $popularTag->name }}</a></li>
                     @empty
-
+                    <div class="col-12">
+                        <div class="d-flex justify-content-center">
+                            <div>
+                                <img src="{{ asset('assets/img/no-data/empty.png') }}" width="150px" alt="">
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <h5>Tidak ada data</h5>
+                        </div>
+                    </div>
                     @endforelse
                 </ul>
             </div>

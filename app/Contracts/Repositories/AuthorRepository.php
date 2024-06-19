@@ -88,6 +88,13 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
             ->update($data);
     }
 
+    public function updateByUser($user, array $data): mixed
+    {
+        return $this->model->query()
+            ->whereRelation('user', 'id', $user)
+            ->update($data);
+    }
+
     public function accepted()
     {
         return $this->model->query()

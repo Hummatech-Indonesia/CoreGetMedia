@@ -85,6 +85,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
     public function whereSubCategory($id, $query): mixed
     {
         return $this->model->query()
+            ->where('status', NewsEnum::ACCEPTED->value)
             ->whereRelation('newsSubCategories', 'sub_category_id', $id)
             ->withCount('newsViews')
             ->orderByDesc('news_views_count')
@@ -99,23 +100,74 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->get();
     }
 
+    public function whereAllSubCategory($id): mixed
+    {
+        return $this->model->query()
+            ->where('status', NewsEnum::ACCEPTED->value)
+            ->whereRelation('newsSubCategories', 'sub_category_id', $id)
+            ->withCount('newsViews')
+            ->orderByDesc('news_views_count')
+            ->latest()
+            ->paginate(10);
+    }
+
     public function whereCategory($id, $query): mixed
     {
         return $this->model->query()
+            ->where('status', NewsEnum::ACCEPTED->value)
             ->whereRelation('newsCategories', 'category_id', $id)
             ->withCount('newsViews')
             ->orderByDesc('news_views_count')
             ->when($query == 'top', function($q){
                 $q->take(1);
             })
-            ->where('status', NewsEnum::ACCEPTED->value)
             ->latest()
+            ->get();
+    }
+
+    public function whereAllCategory($id): mixed
+    {
+        return $this->model->query()
+            ->where('status', NewsEnum::ACCEPTED->value)
+            ->whereRelation('newsCategories', 'category_id', $id)
+            ->withCount('newsViews')
+            ->orderByDesc('news_views_count')
+            ->latest()
+            ->paginate(10);
+    }
+
+    public function whereTag($tags, $query): mixed
+    {
+        return $this->model->query()
+            ->where('status', NewsEnum::ACCEPTED->value)
+            ->whereRelation('newsTags', 'tags_id', $tags)
+            ->withCount('newsViews')
+            ->when($query == 'popular', function($q){
+                $q->orderByDesc('news_views_count');
+            })
+            ->when($query == 'top', function($q){
+                $q->take(1);
+            })
+            ->when($query == 'notop', function($q){
+                $q->latest();
+            })
+            ->get();
+    }
+
+    public function newsPopular(): mixed
+    {
+        return $this->model->query()
+            ->where('status', NewsEnum::ACCEPTED->value)
+            ->withCount('newsViews')
+            ->orderByDesc('news_views_count')
+            ->take(3)
             ->get();
     }
 
     public function whereUserLike($user_id, $ipAddress): mixed
     {
         return $this->model->query()
+            ->where('status', NewsEnum::ACCEPTED->value)
             ->whereRelation('newsLikes', 'user_id', $user_id)
             ->whereRelation('newsLikes', 'ip_address', $ipAddress)
             ->withCount('newsViews')
@@ -125,11 +177,31 @@ class NewsRepository extends BaseRepository implements NewsInterface
     public function categoryLatest($category_id) : mixed
     {
         return $this->model->query()
-        ->whereRelation('newsCategories', 'category_id', $category_id)
-        ->where('status', NewsEnum::ACCEPTED->value)
-        ->withCount('newsViews')
-        ->latest()
-        ->get();
+            ->whereRelation('newsCategories', 'category_id', $category_id)
+            ->where('status', NewsEnum::ACCEPTED->value)
+            ->withCount('newsViews')
+            ->latest()
+            ->paginate(5);
+    }
+
+    public function tagLatest($tag_id) : mixed
+    {
+        return $this->model->query()
+            ->whereRelation('newsTags', 'tags_id', $tag_id)
+            ->where('status', NewsEnum::ACCEPTED->value)
+            ->withCount('newsViews')
+            ->latest()
+            ->paginate(5);
+    }
+
+    public function subcategoryLatest($subcategory_id) : mixed
+    {
+        return $this->model->query()
+            ->whereRelation('newsSubCategories', 'sub_category_id', $subcategory_id)
+            ->where('status', NewsEnum::ACCEPTED->value)
+            ->withCount('newsViews')
+            ->latest()
+            ->paginate(5);
     }
 
     public function latest() : mixed
@@ -214,7 +286,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->latest()
             ->get();
     }
-    
+
     public function whereUser($id)
     {
         return $this->model->query()

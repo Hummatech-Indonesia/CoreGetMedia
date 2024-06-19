@@ -46,6 +46,7 @@ class VoucherRepository extends BaseRepository implements VoucherInterface
     public function get(): mixed
     {
         return $this->model->query()
+            ->withCount('voucherUseds')
             ->get();
     }
 

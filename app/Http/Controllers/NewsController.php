@@ -146,6 +146,7 @@ class NewsController extends Controller
         if (auth()->user()->roles->pluck('name')[0] == "admin") {
             $data['status'] = NewsEnum::ACCEPTED->value;
         }
+
         $newsId = $this->news->store($data)->id;
         $this->service->storeRelation($newsId, $data['category'], $data['sub_category'], $data['tag']);
         return back()->with('success', 'Berhasil menambahkan data');
@@ -208,7 +209,11 @@ class NewsController extends Controller
     public function update(UpdateNewsRequest $request, News $news)
     {
         $data = $this->service->update($request, $news);
-        $data['status'] = NewsEnum::PENDING->value;
+        if (auth()->user()->roles->pluck('name')[0] == "admin") {
+            $data['status'] = NewsEnum::ACCEPTED->value;
+        } else {
+            $data['status'] = NewsEnum::PENDING->value;
+        }
         $this->news->update($news->id, $data);
         $this->service->updateRelation($news->id, $data['category'], $data['sub_category'], $data['tag']);
         return back()->with('success', 'Berhasil update data');

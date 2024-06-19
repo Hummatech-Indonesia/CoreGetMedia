@@ -11,6 +11,7 @@ class NewsReport extends Model
     use HasFactory;
 
     protected $fillable = [
+        'ip_address',
         'user_id',
         'news_id',
         'proof',

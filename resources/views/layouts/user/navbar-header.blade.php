@@ -35,7 +35,7 @@
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-lg-4 col-md-6 col-5">
-                    {{-- <button class="subscribe-btn" data-bs-toggle="modal" data-bs-target="#newsletter-popup">Berlangganan<i class="flaticon-right-arrow"></i></button> --}}
+                    <a class="subscribe-btn" href="/subscribe">Berlangganan<i class="flaticon-right-arrow"></i></a>
                 </div>
                 <div class="col-lg-4 col-md-6 md-none">
                     <a class="navbar-brand" href="index.html">
@@ -92,7 +92,9 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a href="/" class="nav-link" style="{{ request()->routeIs('home') ? 'color: #E93314;' : '' }}">Beranda</a>
+                        {{-- <a href="/" class="nav-link" style="{{ request()->routeIs('home') ? 'color: #E93314;' : '' }}"> Beranda </a> --}}
+                        <a href="{{ route('home') }}" class="nav-link">Home</a>
+
                     </li>
                     @foreach ($categories as $category)
                         @php
@@ -246,3 +248,30 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var currentLocation = window.location.href.split(/[?#]/)[0];
+        var homepageUrl = "{{ route('home') }}".split(/[?#]/)[0];
+
+        console.log("Current Location:", currentLocation);
+        console.log("Homepage URL:", homepageUrl);
+
+        document.querySelectorAll('.nav-link').forEach(function(link) {
+            var url = link.getAttribute('href').split(/[?#]/)[0];
+
+            console.log("Checking link:", url);
+
+            if (currentLocation === homepageUrl && url === homepageUrl) {
+                console.log("Activating homepage link");
+                link.classList.add('active');
+            } else if (currentLocation === url) {
+                console.log("Activating other link");
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    });
+</script>

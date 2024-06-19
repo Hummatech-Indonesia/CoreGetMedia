@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('news_reports', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->string('ip_address');
+            $table->foreignUuid('user_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignUuid('news_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->text('proof');
             $table->text('description');

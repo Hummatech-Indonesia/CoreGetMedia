@@ -109,7 +109,7 @@
 
                             @if ($author->user->status == 'active')
 
-                                <button id="blokir" data-bs-toggle="tooltip" title="Blokir" type="button"  data-id="{{ $author->id }}" class="btn btn-blokir btn-sm btn-danger me-2">
+                                <button id="blokir" data-bs-toggle="tooltip" title="Blokir" type="button"  data-id="{{ $author->user->id }}" class="btn btn-blokir btn-sm btn-danger me-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="23" height="25" viewBox="0 0 512 512">
                                         <circle cx="256" cy="256" r="208" fill="none" stroke="#ffffff" stroke-miterlimit="10" stroke-width="32" />
                                         <path fill="none" stroke="#ffffff" stroke-miterlimit="10" stroke-width="32" d="m108.92 108.92l294.16 294.16" /></svg>
@@ -128,7 +128,7 @@
                             @endif
 
 
-                            <a data-bs-toggle="tooltip" title="delete" data-id="{{ $author->id }}" class="btn btn-delete btn-sm btn-danger">
+                            <a data-bs-toggle="tooltip" title="delete" data-id="{{ $author->user->id }}" class="btn btn-delete btn-sm btn-danger">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24">
                                     <path fill="#ffffff" d="M7 21q-.825 0-1.412-.587T5 19V6q-.425 0-.712-.288T4 5t.288-.712T5 4h4q0-.425.288-.712T10 3h4q.425 0 .713.288T15 4h4q.425 0 .713.288T20 5t-.288.713T19 6v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zm-7 11q.425 0 .713-.288T11 16V9q0-.425-.288-.712T10 8t-.712.288T9 9v7q0 .425.288.713T10 17m4 0q.425 0 .713-.288T15 16V9q0-.425-.288-.712T14 8t-.712.288T13 9v7q0 .425.288.713T14 17M7 6v13z" />
                                 </svg>
@@ -280,12 +280,10 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a id="download-cv" target="_blank" download>
-                        <span class="badge bg-light-primary text-primary me-2 fs-4  px-2 py-2">
+                    <a type="button"id="download-cv" target="_blank" download class="btn btn-light-primary text-primary me-2 fs-4 px-2 py-2">
                             Download CV
-                        </span>
                     </a>
-                    <button type="button" class="btn btn-light-danger mt-3 text-danger" data-bs-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-light-danger text-danger" data-bs-dismiss="modal">Tutup</button>
                 </div>
             </div>
         </div>

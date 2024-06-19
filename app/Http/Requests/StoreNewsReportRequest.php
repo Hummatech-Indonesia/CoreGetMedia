@@ -22,7 +22,8 @@ class StoreNewsReportRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'proof' => 'required',
+            'description' => 'required',
         ];
     }
 }

@@ -9,8 +9,8 @@ use App\Http\Requests\UpdateVoucherrRequest;
 
 class VoucherrController extends Controller
 {
-
     private VoucherInterface $voucher;
+    
     public function __construct(VoucherInterface $voucher)
     {
         $this->voucher = $voucher;

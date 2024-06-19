@@ -1,5 +1,7 @@
 @extends('layouts.user.app')
-@section('title', 'Artikel Populer')
+@section('title')
+    <title>GetMedia</title>
+@endsection
 
 
 @section('style')
@@ -186,6 +188,17 @@ $popular_down_id = $popular_down->pluck('id');
             </div>
             @endif
             @empty
+            <div>
+                <div class="d-flex justify-content-center">
+                    <div>
+                        <img src="{{ asset('assets/img/no-data/empty.png') }}" width="200px" alt="">
+                    </div>
+                </div>
+                <div class="text-center">
+                    <h5>Tidak ada data</h5>
+                </div>
+            </div>
+
             @endforelse
         </div>
 
@@ -219,6 +232,16 @@ $popular_down_id = $popular_down->pluck('id');
             </div>
             @endif
             @empty
+            <div>
+                <div class="d-flex justify-content-center">
+                    <div>
+                        <img src="{{ asset('assets/img/no-data/empty.png') }}" width="300px" alt="">
+                    </div>
+                </div>
+                <div class="text-center">
+                    <h5>Tidak ada data</h5>
+                </div>
+            </div>
             @endforelse
         </div>
 
@@ -264,6 +287,16 @@ $popular_down_id = $popular_down->pluck('id');
             </div>
             @endif
             @empty
+            <div>
+                <div class="d-flex justify-content-center">
+                    <div>
+                        <img src="{{ asset('assets/img/no-data/empty.png') }}" width="200px" alt="">
+                    </div>
+                </div>
+                <div class="text-center">
+                    <h5>Tidak ada data</h5>
+                </div>
+            </div>
             @endforelse
         </div>
     </div>
@@ -328,6 +361,16 @@ $popular_down_id = $popular_down->pluck('id');
                     </div>
                 </div>
                 @empty
+                <div class="col-12">
+                    <div class="d-flex justify-content-center">
+                        <div>
+                            <img src="{{ asset('assets/img/no-data/empty.png') }}" width="200px" alt="">
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <h5>Tidak ada data</h5>
+                    </div>
+                </div>
                 @endforelse
             </div>
 
@@ -379,6 +422,16 @@ $popular_down_id = $popular_down->pluck('id');
                         @else
                         @endif
                         @empty
+                        <div>
+                            <div class="d-flex justify-content-center">
+                                <div>
+                                    <img src="{{ asset('assets/img/no-data/empty.png') }}" width="250px" alt="">
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <h5>Tidak ada data</h5>
+                            </div>
+                        </div>
                         @endforelse
                     </div>
                     <div class="col-xl-5">
@@ -417,7 +470,16 @@ $popular_down_id = $popular_down->pluck('id');
                         </div>
                         @endif
                         @empty
-
+                        <div>
+                            <div class="d-flex justify-content-center">
+                                <div>
+                                    <img src="{{ asset('assets/img/no-data/empty.png') }}" width="200px" alt="">
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <h5>Tidak ada data</h5>
+                            </div>
+                        </div>
                         @endforelse
                     </div>
                 </div>
@@ -435,6 +497,16 @@ $popular_down_id = $popular_down->pluck('id');
                                 <span>({{ $popularCategory->newsCategories()->count() }})</span></a>
                         </li>
                         @empty
+                        <div>
+                            <div class="d-flex justify-content-center">
+                                <div>
+                                    <img src="{{ asset('assets/img/no-data/empty.png') }}" width="150px" alt="">
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <h5>Tidak ada data</h5>
+                            </div>
+                        </div>
                         @endforelse
                     </ul>
                 </div>
@@ -468,6 +540,16 @@ $popular_down_id = $popular_down->pluck('id');
                         @forelse ($tags as $tag)
                         <li><a href="{{route('news-tag-list.user', ['tag' => $tag->slug])}}">{{ $tag->name }}</a></li>
                         @empty
+                        <div>
+                            <div class="d-flex justify-content-center">
+                                <div>
+                                    <img src="{{ asset('assets/img/no-data/empty.png') }}" width="150px" alt="">
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <h5>Tidak ada data</h5>
+                            </div>
+                        </div>
                         @endforelse
                     </ul>
                 </div>
@@ -530,7 +612,16 @@ $popular_down_id = $popular_down->pluck('id');
                             </div>
                         </div>
                         @empty
-
+                        <div>
+                            <div class="d-flex justify-content-center">
+                                <div>
+                                    <img src="{{ asset('assets/img/no-data/empty.png') }}" width="250px" alt="">
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <h5>Tidak ada data</h5>
+                            </div>
+                        </div>
                         @endforelse
                     </div>
                 </div>

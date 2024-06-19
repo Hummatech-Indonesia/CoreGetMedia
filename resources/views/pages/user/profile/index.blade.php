@@ -61,7 +61,7 @@
                                     assets/img/profile.svg")}}" alt="" class="w-100 h-100" style="object-fit: cover">
                             </div> --}}
                             <div class="mt-5 col-md-12 col-lg-5 mt-lg-0 ms-lg-3">
-                                <h5 class="fs-5 mt-2 mb-0 fw-semibold">M. Ardian</h5>
+                                <h5 class="fs-5 mt-2 mb-0 fw-semibold">{{ auth()->user()->name }}</h5>
                                 <p class="mt-2 fs-4">Pengguna</p>
                             </div>
                         </div>
@@ -75,16 +75,6 @@
                             <h5 class="mb-0 fw-semibold lh-1">1232</h5>
                             <p class="mb-0 fs-4">Koin</p>
                         </div>
-
-                        <a class="nav-link notify-badge nav-icon-hover" href="javascript:void(0)"
-                            data-bs-toggle="offcanvas" data-bs-target="#offcanvasfollowing"
-                            aria-controls="offcanvasfollowing">
-                            <div class="text-center">
-                                <i class="ti ti-user-check fs-6 d-block mb-2"></i>
-                                <h5 class="mb-0 fw-semibold lh-1">123</h5>
-                                <p class="mb-0 fs-3">Pengikut</p>
-                            </div>
-                        </a>
 
                         <a type="button" data-bs-toggle="modal" data-bs-target="#modal-following">
                             <div class="text-center">

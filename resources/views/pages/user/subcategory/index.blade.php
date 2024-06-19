@@ -59,38 +59,6 @@
         <div class="container">
             <div class="row gx-5">
                 <div class="col-lg-8">
-                    {{-- @forelse ($newsTop as $item)
-                        @if ($item->news_views_count > 0)
-                            <div class="">
-                                <div class="news-card-four" style="height: 550px;">
-                                    <div class="news-card-img">
-                                        <a href="#"> <img src="{{asset('storage/'. $item->image)}}" alt="Image" width="100%" style="object-fit: cover" height="450" /></a>
-                                </div>
-                            </div>
-                            <div class="news-card-info">
-                                <h3>
-                                    <a data-toggle="tooltip" data-placement="top" title="Apex Legends Season 11 Start Date, Time, & What To Expect"
-                                        href="{{ route('news.singlepost', ['news' => $item->slug]) }}">
-                                        {!! Illuminate\Support\Str::limit(strip_tags($item->name), 300, '...') !!}
-                                    </a>
-                                </h3>
-                                <ul class="news-metainfo list-style">
-                                    <li>
-                                        <i class="fi fi-rr-calendar-minus"></i>
-                                        <a href="news-by-date.html">{{ \Carbon\Carbon::parse($item->date)->translatedFormat('d F Y') }}</a>
-                                    </li>
-                                    <li>
-                                        <i class="fi fi-rr-eye"></i>
-                                        <a href="news-by-dateus">{{ $item->newsViews_count ? $item->newsViews_count : '0' }}x dilihat</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        @endif
-                    @empty
-                        <p>No news available.</p>
-                    @endforelse --}}
-
                     @forelse ($newsTop as $item)
                     @if ($item->news_views_count > 0)
 
@@ -101,7 +69,7 @@
                                 </div>
 
                                 <div class="news-card-info">
-                                    <h3><a data-toggle="tooltip" data-placement="top" title="Apex Legends Season 11 Start Date, Time, & What To Expect" href="{{ route('news.singlepost', ['news' => $item->slug]) }}">{!! Illuminate\Support\Str::limit(strip_tags($item->name), 300, '...') !!}
+                                    <h3><a href="{{ route('news.singlepost', ['news' => $item->slug]) }}" data-toggle="tooltip" data-placement="top" title="Apex Legends Season 11 Start Date, Time, & What To Expect" href="{{ route('news.singlepost', ['news' => $item->slug]) }}">{!! Illuminate\Support\Str::limit(strip_tags($item->name), 300, '...') !!}
                                         </a>
                                     </h3>
                                     <ul class="news-metainfo list-style">
@@ -111,9 +79,19 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                     @endif
                     @empty
+                    <div class="col-12">
+                        <div class="d-flex justify-content-center">
+                            <div>
+                                <img src="{{ asset('assets/img/no-data/empty.png') }}" width="250px" alt="">
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <h5>Tidak ada data</h5>
+                        </div>
+                    </div>
                     @endforelse
 
                     <div class="mb-5">
@@ -138,7 +116,7 @@
                         @forelse ($news_down as $data)
                             <div class="news-card-five">
                                 <div class="news-card-img">
-                                    <a href="#">
+                                    <a href="{{ route('news.singlepost', ['news' => $data->slug]) }}">
                                         <img src="{{ asset('storage/' . $data->image) }}" alt="Image" class="img-all" />
                                     </a>
                                     <a data-toggle="tooltip" data-placement="top" title="Sports" href="#" class="news-cat">{{ $data->newsCategories[0]->category->name }}</a>
@@ -157,14 +135,24 @@
                                 </div>
                             </div>
                         @empty
-                            <p>No news available.</p>
+                        <div class="col-12">
+                            <div class="d-flex justify-content-center">
+                                <div>
+                                    <img src="{{ asset('assets/img/no-data/empty.png') }}" width="250px" alt="">
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <h5>Tidak ada data</h5>
+                            </div>
+                        </div>
                         @endforelse
                     </div>
+                    <x-paginator :paginator="$news"/>
                 </div>
 
                 <div class="col-lg-4">
                     <div class="sidebar">
-                        <div class="sidebar-widget">
+                        <div class="sidebar-widget" style="width: 450px">
                             <h3 class="sidebar-widget-title">Kategori Populer</h3>
                             <ul class="category-widget list-style">
                                 @forelse ($popularCategory as $item)
@@ -178,9 +166,19 @@
                                         </li>
                                     @endif
                                 @empty
-                                    <li>No categories available.</li>
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-center">
+                                        <div>
+                                            <img src="{{ asset('assets/img/no-data/empty.png') }}" width="150px" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <h5>Tidak ada data</h5>
+                                    </div>
+                                </div>
                                 @endforelse
                             </ul>
+
                         </div>
 
 
@@ -189,7 +187,7 @@
                                 $trending_news = $newsPopulars->whereNotIn('id', $subTop);
                             @endphp
 
-                            <div class="sidebar-widget">
+                            <div class="sidebar-widget" style="width: 450px">
                                 <h3 class="sidebar-widget-title">
                                     Berita Populer
                                 </h3>
@@ -210,11 +208,14 @@
                                     </div>
                                 @endif
                                 @empty
-
-                                <div class="d-flex justify-content-center">
-                                    <div class="my-auto">
-                                        <img src="{{ asset('assets/img/no-data.svg') }}" width="200" />
-                                        <h4 class="text-center">Tidak ada data!!</h4>
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-center">
+                                        <div>
+                                            <img src="{{ asset('assets/img/no-data/empty.png') }}" width="150px" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <h5>Tidak ada data</h5>
                                     </div>
                                 </div>
                             @endforelse
@@ -225,6 +226,16 @@
                                     @forelse ($popularTags as $popularTag)
                                     <li><a href="{{route('news-tag-list.user', ['tag' => $popularTag->slug])}}">{{ $popularTag->name }}</a></li>
                                     @empty
+                                    <div class="col-12">
+                                        <div class="d-flex justify-content-center">
+                                            <div>
+                                                <img src="{{ asset('assets/img/no-data/empty.png') }}" width="150px" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="text-center">
+                                            <h5>Tidak ada data</h5>
+                                        </div>
+                                    </div>
                                     @endforelse
                                 </ul>
                             </div>

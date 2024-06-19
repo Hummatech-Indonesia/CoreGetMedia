@@ -243,7 +243,7 @@
         </div>
         <div class="col-lg-4">
           <div class="sidebar">
-            <div class="sidebar-widget">
+            <div class="sidebar-widget" style="width: 450px">
                 <h3 class="sidebar-widget-title">Kategori Populer</h3>
                 <ul class="category-widget list-style">
                     {{-- @foreach ($totalCategories as $category)
@@ -273,7 +273,7 @@
                 </div>
             </div> --}}
 
-            <div class="sidebar-widget">
+            <div class="sidebar-widget" style="width: 450px">
                 <h3 class="sidebar-widget-title">Berita Popular</h3>
                 <div class="pp-post-wrap">
                     {{-- @forelse ($newsPopular as $popular)
