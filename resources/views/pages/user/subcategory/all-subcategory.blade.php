@@ -56,10 +56,10 @@
                     @forelse ($news as $data)
                                     <div class="news-card-five">
                                         <div class="news-card-img">
-                                            <!-- <a href="javascript:void(0)">
-                                                                <img src="{{asset('storage/' . $data->image)}}" alt="Image" height="140px"
-                                                                    width="100%" />
-                                                            </a> -->
+                                            <a href="javascript:void(0)">
+                                                <img src="{{asset('storage/' . $data->image)}}" alt="Image"
+                                                    style="width: 100%; height: 100%; object-fit: cover;" />
+                                            </a>
                                             <a data-toggle="tooltip" data-placement="top"
                                                 title="{{ $data->newsCategories[0]->category->name }}"
                                                 href="{{ route('categories.show.user', ['category' => $data->slug]) }}"
@@ -160,4 +160,5 @@
         </div>
     </div>
 </div>
+
 @endsection
