@@ -101,6 +101,7 @@
                     <h5 class="mt-5">Iklan</h5>
                 </div> --}}
 
+                <x-paginator :paginator="$news"/>
             </div>
 
             <div class="col-lg-4">

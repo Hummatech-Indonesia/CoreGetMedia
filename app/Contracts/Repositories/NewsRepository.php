@@ -100,6 +100,17 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->get();
     }
 
+    public function whereAllSubCategory($id): mixed
+    {
+        return $this->model->query()
+            ->where('status', NewsEnum::ACCEPTED->value)
+            ->whereRelation('newsSubCategories', 'sub_category_id', $id)
+            ->withCount('newsViews')
+            ->orderByDesc('news_views_count')
+            ->latest()
+            ->paginate(10);
+    }
+
     public function whereCategory($id, $query): mixed
     {
         return $this->model->query()
@@ -112,6 +123,17 @@ class NewsRepository extends BaseRepository implements NewsInterface
             })
             ->latest()
             ->get();
+    }
+
+    public function whereAllCategory($id): mixed
+    {
+        return $this->model->query()
+            ->where('status', NewsEnum::ACCEPTED->value)
+            ->whereRelation('newsCategories', 'category_id', $id)
+            ->withCount('newsViews')
+            ->orderByDesc('news_views_count')
+            ->latest()
+            ->paginate(10);
     }
 
     public function whereTag($tags, $query): mixed

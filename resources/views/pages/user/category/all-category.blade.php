@@ -93,6 +93,8 @@
                         </div>
                         @endforelse
                         
+                        <x-paginator :paginator="$news"/>
+
                     </div>
 
                     {{-- <div class="text-center item-center d-flex justify-content-center" style="background-color:#F6F6F6; width:100%;height:200px;">
