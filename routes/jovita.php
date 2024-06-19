@@ -42,3 +42,7 @@ Route::post('admin-account-list', [AdminController::class, 'store'])->name('admi
 Route::put('admin-account-list/{admin}', [AdminController::class, 'update'])->name('admin-account.update');
 
 Route::delete('admin-account-list/{admin}', [AdminController::class, 'destroy'])->name('admin-account.delete');
+
+Route::get('status-advertisement-list', function(){
+    return view('pages.user.advertisement.status-advertisement');   
+})->name('status.advertisement.user');

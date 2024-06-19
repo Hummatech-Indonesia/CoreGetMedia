@@ -1,5 +1,7 @@
 @extends('layouts.user.app')
-@section('title', 'Artikel Populer')
+@section('title')
+    <title>GetMedia</title>
+@endsection
 
 
 @section('style')
