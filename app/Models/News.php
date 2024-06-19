@@ -98,4 +98,14 @@ class News extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    /**
+     * Get all of the newsTags for the News
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function newsTags(): HasMany
+    {
+        return $this->hasMany(NewsTag::class);
+    }
 }
