@@ -81,13 +81,13 @@
                                         <div class="d-flex align-items-center justify-content-between m-4">
                                             <div class="text-center">
                                                 <i class="ti ti-file-description fs-6 d-block mb-2"></i>
-                                                <h5 class="mb-0 fw-semibold lh-1">{{ $countAcc }}</h5>
+                                                <h5 class="mb-0 fw-semibold lh-1">0</h5>
                                                 <p class="mb-0 fs-3">Posts</p>
                                             </div>
                                             <a type="button" data-bs-toggle="modal" data-bs-target="#modal-followers">
                                                 <div class="text-center">
                                                     <i class="ti ti-user-circle fs-6 d-block mb-2"></i>
-                                                    <h5 class="mb-0 fw-semibold lh-1">{{ $countFollower }}</h5>
+                                                    <h5 class="mb-0 fw-semibold lh-1">0</h5>
                                                     <p class="mb-0 fs-3">Pengikut</p>
                                                 </div>
                                             </a>
@@ -95,7 +95,7 @@
                                             <a type="button" data-bs-toggle="modal" data-bs-target="#modal-following">
                                                 <div class="text-center">
                                                     <i class="ti ti-user-check fs-6 d-block mb-2"></i>
-                                                <h5 class="mb-0 fw-semibold lh-1">{{ $countFollowing }}</h5>
+                                                <h5 class="mb-0 fw-semibold lh-1">0</h5>
                                                 <p class="mb-0 fs-3">Mengikuti</p>
                                                 </div>
                                             </a>
@@ -132,17 +132,17 @@
                                         <div class="d-flex align-items-center justify-content-between">
                                             <div class="text-center">
                                                 <i class="ti ti-clock fs-6 d-block mb-2"></i>
-                                                <h5 class="mb-0 fw-semibold lh-1">{{ $countPending }}</h5>
+                                                <h5 class="mb-0 fw-semibold lh-1">0</h5>
                                                 <p class="mb-0 fs-3">Pending</p>
                                             </div>
                                             <div class="text-center">
                                                 <i class="ti ti-square-rounded-x fs-6 d-block mb-2"></i>
-                                                <h5 class="mb-0 fw-semibold lh-1">{{ $countRejected }}</h5>
+                                                <h5 class="mb-0 fw-semibold lh-1">0</h5>
                                                 <p class="mb-0 fs-3">Ditolak</p>
                                             </div>
                                             <div class="text-center">
                                                 <i class="ti ti-square-rounded-check fs-6 d-block mb-2"></i>
-                                                <h5 class="mb-0 fw-semibold lh-1">{{ $countAcc }}</h5>
+                                                <h5 class="mb-0 fw-semibold lh-1">0</h5>
                                                 <p class="mb-0 fs-3">Diterima</p>
                                             </div>
                                         </div>
@@ -280,23 +280,34 @@
                                         </span>
                                     @enderror
                                 </div>
-                                {{-- <div class="col-md-12 col-lg-6 mb-4">
+                                <div class="col-md-12 col-lg-6 mb-4">
                                     <label class="form-label" for="nomor">No Hp</label>
-                                    <input type="text" id="name" name="name" placeholder="name"
+                                    <input type="text" id="phone_number" name="phone_number" placeholder="Nomor teleon"
                                         value="{{ auth()->user()->phone_number }}"
-                                        class="form-control @error('name') is-invalid @enderror" readonly>
-                                    @error('name')
+                                        class="form-control @error('phone_number') is-invalid @enderror" readonly>
+                                    @error('phone_number')
                                         <span class="invalid-feedback" role="alert" style="color: red;">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                                </div> --}}
+                                </div>
                                 <div class="col-md-12 col-lg-6 mb-4">
                                     <label class="form-label" for="email">Email</label>
                                     <input type="text" id="email" name="email" placeholder="email"
                                         value="{{ auth()->user()->email }}"
                                         class="form-control @error('email') is-invalid @enderror" readonly>
                                     @error('email')
+                                        <span class="invalid-feedback" role="alert" style="color: red;">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-12 col-lg-6 mb-4">
+                                    <label class="form-label" for="password">Password</label>
+                                    <input type="password" id="password" name="password" placeholder="password"
+                                        value="{{ auth()->user()->password }}"
+                                        class="form-control @error('password') is-invalid @enderror" readonly>
+                                    @error('password')
                                         <span class="invalid-feedback" role="alert" style="color: red;">
                                             <strong>{{ $message }}</strong>
                                         </span>
