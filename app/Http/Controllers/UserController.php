@@ -80,4 +80,10 @@ class UserController extends Controller
         // dd($data);
         return redirect()->back()->with(['success' => 'User Berhasil Dibanned']);
     }
+    public function active(User $user)
+    {
+        $data = $this->users->update($user->id , ['status' => UserStatusEnum::ACTIVE->value]);
+        // dd($data);
+        return redirect()->back()->with(['success' => 'User Berhasil Active']);
+    }
 }
