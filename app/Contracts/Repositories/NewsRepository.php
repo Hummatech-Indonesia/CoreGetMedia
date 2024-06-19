@@ -138,6 +138,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->where('status', NewsEnum::ACCEPTED->value)
             ->withCount('newsViews')
             ->orderByDesc('news_views_count')
+            ->take(3)
             ->get();
     }
 
