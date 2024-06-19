@@ -232,7 +232,7 @@
 
         <div class="col-lg-4">
             <div class="sidebar">
-                <div class="sidebar-widget">
+                <div class="sidebar-widget" style="width: 450px">
                     <h3 class="sidebar-widget-title">Kategori Populer</h3>
                     <ul class="category-widget list-style">
                         <li>
@@ -270,7 +270,7 @@
                     </ul>
                 </div>
 
-                <div class="sidebar-widget" style="width: 400px">
+                <div class="sidebar-widget" style="width: 450px">
                     <h3 class="sidebar-widget-title">
                         Berita Popular
                     </h3>

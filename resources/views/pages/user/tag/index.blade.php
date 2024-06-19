@@ -82,7 +82,16 @@
                     </div>
 
                     @empty
-
+                    <div class="col-12">
+                        <div class="d-flex justify-content-center">
+                            <div>
+                                <img src="{{ asset('assets/img/no-data/empty.png') }}" width="250px" alt="">
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <h5>Tidak ada data</h5>
+                        </div>
+                    </div>
                     @endforelse
 
                 </div>
@@ -118,7 +127,16 @@
                         </div>
                     </div>
                     @empty
-
+                    <div class="col-12">
+                        <div class="d-flex justify-content-center">
+                            <div>
+                                <img src="{{ asset('assets/img/no-data/empty.png') }}" width="250px" alt="">
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <h5>Tidak ada data</h5>
+                        </div>
+                    </div>
                     @endforelse
 
                 </div>
@@ -226,7 +244,7 @@
 <div class="col-lg-4">
     <div class="">
         <div class="sidebar">
-            <div class="sidebar-widget">
+            <div class="sidebar-widget" style="width: 450px">
                 <h3 class="sidebar-widget-title">Kategori Populer</h3>
                 <ul class="category-widget list-style">
                     @foreach ($CategoryPopulars as $category)
@@ -236,7 +254,7 @@
                 </ul>
             </div>
 
-            <div class="sidebar-widget" style="width: 400px">
+            <div class="sidebar-widget" style="width: 450px">
                 <h3 class="sidebar-widget-title">
                     Berita Popular
                 </h3>
@@ -254,10 +272,14 @@
                     </div>
                 </div>
                 @empty
-                <div class="d-flex justify-content-center">
-                    <div class="my-auto ">
-                        <img src="{{ asset('assets/img/no-data.svg') }}" width="200" />
-                        <h4 class="text-center">Tidak ada data!!</h4>
+                <div class="col-12">
+                    <div class="d-flex justify-content-center">
+                        <div>
+                            <img src="{{ asset('assets/img/no-data/empty.png') }}" width="150px" alt="">
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <h5>Tidak ada data</h5>
                     </div>
                 </div>
                 @endforelse
@@ -269,7 +291,16 @@
                     @forelse ($popularTags as $popularTag)
                     <li><a href="{{route('news-tag-list.user', ['tag' => $popularTag->slug])}}">{{ $popularTag->name }}</a></li>
                     @empty
-
+                    <div class="col-12">
+                        <div class="d-flex justify-content-center">
+                            <div>
+                                <img src="{{ asset('assets/img/no-data/empty.png') }}" width="150px" alt="">
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <h5>Tidak ada data</h5>
+                        </div>
+                    </div>
                     @endforelse
                 </ul>
             </div>
