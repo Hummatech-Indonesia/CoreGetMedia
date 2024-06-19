@@ -280,12 +280,10 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a id="download-cv" target="_blank" download>
-                        <span class="badge bg-light-primary text-primary me-2 fs-4  px-2 py-2">
+                    <a type="button"id="download-cv" target="_blank" download class="btn btn-light-primary text-primary me-2 fs-4 px-2 py-2">
                             Download CV
-                        </span>
                     </a>
-                    <button type="button" class="btn btn-light-danger mt-3 text-danger" data-bs-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-light-danger text-danger" data-bs-dismiss="modal">Tutup</button>
                 </div>
             </div>
         </div>
