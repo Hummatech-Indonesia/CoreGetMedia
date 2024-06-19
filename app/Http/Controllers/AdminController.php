@@ -7,6 +7,7 @@ use App\Contracts\Interfaces\UserInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAdminRequest;
 use App\Models\Admin;
+use App\Models\User;
 use App\Services\AdminService;
 use Illuminate\Http\Request;
 
@@ -73,7 +74,7 @@ class AdminController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Admin $admin)
+    public function update(Request $request, User $admin)
     {
         $data = $this->admin->storeOrUpdate($request);
         $this->admins->update($admin->id, $data);
@@ -83,8 +84,9 @@ class AdminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $admin)
     {
-        //
+        $this->admins->delete($admin->id);
+        return back()->with('success' , 'Data berhasil di hapus');
     }
 }
