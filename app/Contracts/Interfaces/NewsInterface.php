@@ -24,5 +24,6 @@ interface NewsInterface extends GetInterface, StoreInterface, UpdateInterface, S
     public function whereUser($id);
     public function whereUserLike($user_id, $ipAddress) : mixed;
     public function whereTag($tags, $query) : mixed;
+    public function tagLatest($tag_id) : mixed;
     public function newsPopular() : mixed;
 }

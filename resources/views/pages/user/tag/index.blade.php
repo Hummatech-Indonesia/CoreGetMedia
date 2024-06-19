@@ -138,9 +138,8 @@
                         </div>
                     </div>
                     @endforelse
-
                 </div>
-
+        <x-paginator :paginator="$newsTags"/>
 </div>
 
 <div class="col-lg-4">
