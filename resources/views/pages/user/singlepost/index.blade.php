@@ -253,7 +253,7 @@
                         <p> Tag :
                             @forelse ($tags as $tag)
                                 <a data-toggle="tooltip" data-placement="top" title="{{ $tag->tags->name }}"
-                                    href="{{ route('list-tag.user') }}"
+                                    href="{{route('news-tag-list.user', ['tag' => $tag->tags->slug])}}"
                                     class="btn btn-rounded btn-outline-primary">{{ $tag->tags->name }}</a>
                             @empty
                             @endforelse
