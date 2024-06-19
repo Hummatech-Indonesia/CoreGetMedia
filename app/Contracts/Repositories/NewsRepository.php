@@ -120,6 +120,9 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->where('status', NewsEnum::ACCEPTED->value)
             ->whereRelation('newsTags', 'tags_id', $tags)
             ->withCount('newsViews')
+            ->when($query == 'popular', function($q){
+                $q->orderByDesc('news_views_count');
+            })
             ->when($query == 'top', function($q){
                 $q->take(1);
             })
@@ -127,7 +130,16 @@ class NewsRepository extends BaseRepository implements NewsInterface
                 $q->latest();
             })
             ->get();
+    }
 
+    public function newsPopular(): mixed
+    {
+        return $this->model->query()
+            ->where('status', NewsEnum::ACCEPTED->value)
+            ->withCount('newsViews')
+            ->orderByDesc('news_views_count')
+            ->take(3)
+            ->get();
     }
 
     public function whereUserLike($user_id, $ipAddress): mixed
@@ -147,7 +159,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->where('status', NewsEnum::ACCEPTED->value)
             ->withCount('newsViews')
             ->latest()
-            ->get();
+            ->paginate(5);
     }
 
     public function latest() : mixed

@@ -133,13 +133,10 @@
                         </div>
                     </div>
                     @endforelse
-
-
-
                 </div>
-
-
             </div>
+
+            <x-paginator :paginator="$latests"/>
 
             <div class="col-lg-4">
                 <div class="">

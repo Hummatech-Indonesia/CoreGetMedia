@@ -38,7 +38,7 @@ class NewsTagController extends Controller
         $newsTags = $this->news->whereTag($news->id, 'untop');
 
         $CategoryPopulars = $this->category->showWithCount();
-        $trendings = $this->category->showWithCount();
+        $trendings = $this->news->newsPopular();
         $popularTags = $this->tag->showWithCount();
 
         return view('pages.user.tag.index', compact('news_tags', 'news', 'newsTags', 'CategoryPopulars', 'trendings', 'popularTags'));
