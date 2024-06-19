@@ -163,10 +163,10 @@
                 @forelse ($trendings as $trending)
                 <div class="news-card-three">
                     <div class="news-card-img" style="height: 100px; width: 100px">
-                        <img src="{{ asset('storage/' . $trending->image) }}" alt="Image" class="img-popular"/>
+                        <img src="{{ asset('storage/' . $trending->newsCategories->news->image) }}" alt="Image" class="img-popular"/>
                     </div>
                     <div class="news-card-info">
-                        <h3><a href="{{ route('news.singlepost', ['news' => $trending->slug]) }}">{{$trending->name}}</a></h3>
+                        <h3><a href="{{ route('news.singlepost', ['news' => $trending->newsCategories->news->slug]) }}">{{$trending->newsCategories->news->name}}</a></h3>
                         <ul class="news-metainfo list-style d-flex">
                             <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html" style="font-size: 15px;">15 Apr 2023</a></li>
                             <li><i class="fi fi-rr-eye"></i><a href="news-by-dateus" style="font-size: 15px;">10</a></li>
