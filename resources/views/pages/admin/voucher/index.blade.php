@@ -104,11 +104,10 @@
 
                             <div class="text-center">
                                 <div class="progress mb-3 mt-4" style="background-color: #D1D1D1;">
-                                    <div class="progress-bar" style="width: 60%; height: 6px; border-width: 3px;"
-                                        role="progressbar"></div>
+                                    <div class="progress-bar" style="width: {{ $voucher->voucher_useds_count }}%; height: 6px; border-width: {{ $voucher->quota }}%;" role="progressbar"></div>
                                 </div>
                                 @if ($voucher->quota > 0)
-                                    <p>0 Terpakai dari {{ $voucher->quota }} stok</p>
+                                    <p>{{ $voucher->voucher_useds_count }} Terpakai dari {{ $voucher->quota }} stok</p>
                                 @else
                                     <p>Unlimited</p>
                                 @endif
