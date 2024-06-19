@@ -92,7 +92,7 @@
                         <td>{{$user->email}}</td>
                         <td>{{$user->status}}</td>
                         <td>
-                            <div class="d-flex">
+                            <div class="d-flex gap-2">
                                 @if ($user->status === 'active')
                                 <form action="/banned-user/{{ $user->id }}" method="post">
                                     @csrf
