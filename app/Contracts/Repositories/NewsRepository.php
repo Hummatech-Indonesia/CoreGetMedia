@@ -219,6 +219,15 @@ class NewsRepository extends BaseRepository implements NewsInterface
     {
         return $this->model->query()
         ->where('user_id', $id)
+        ->where('status', NewsEnum::ACCEPTED->value)
         ->get();
+    }
+
+    public function countByUserAndStatus($id, $status)
+    {
+        return $this->model->query()
+        ->where('user_id', $id)
+        ->where('status', $status)  
+        ->count();
     }
 }

@@ -94,4 +94,9 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
         ->where('status', AuthorEnum::ACCEPTED->value)
         ->get();
     }
+
+    public function whereUserId($id)
+    {
+        return $this->model->query()->where('user_id', $id)->first();
+    }
 }

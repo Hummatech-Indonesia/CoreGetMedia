@@ -41,7 +41,12 @@
     <div class="container">
       <div class="author-box">
         <div class="author-img">
-            <img src="{{asset('user/dist/images/profile/user-1.jpg')}}" height="150" width="150" style="object-fit: cover;" alt="Image"/>
+            @if ($author->user->image != null && Storage::disk('public')->exists($author->user->image))
+                <img src="{{ asset('storage/' . $author->user->image) }}" style="border-radius: 50%;" class="mb-3" style="object-fit: cover" width="150" height="150">
+            @else
+                <img src="{{ asset('default.png') }}" style="border-radius: 50%;" class="mb-3" style="object-fit: cover" width="150" height="150">
+            @endif
+            {{-- <img src="{{asset('user/dist/images/profile/user-1.jpg')}}" height="150" width="150" style="object-fit: cover;" alt="Image"/> --}}
         </div>
         <div class="author-info">
             <div class="d-flex">
