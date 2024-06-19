@@ -335,7 +335,7 @@ $popular_down_id = $popular_down->pluck('id');
                     <div class="news-card-img">
                         <img src="{{ asset('storage/' . $latest->image) }}" class="w-100" style="height: 150px; object-fit: cover;" alt="{{ $latest->image }}" />
                         <a href="{{ route('categories.show.user', $latest->newsCategories[0]->category->slug) }}" class="news-cat">{{ $latest->newsCategories[0]->category->name }}</a>
-                    </div>B
+                    </div>
                     <div class="news-card-info">
                         <h3><a href="{{ route('news.singlepost', ['news' => $latest->slug]) }}">{{ Str::limit($latest->name, 150, '...') }}</a>
                         </h3>
