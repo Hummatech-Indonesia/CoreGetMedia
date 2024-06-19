@@ -17,6 +17,12 @@
             margin: 3px;
             border-radius: 5px;
         }
+        .icon-background {
+        background-color: #e0e0e0;
+        padding: 5px 5px;
+        border-radius: 5px;
+        color: #888888;
+    }
 </style>
 @endsection
 
@@ -54,6 +60,12 @@
         <button type="button" class="btn btn-danger me-2">Tolak</button>
         <button type="button" class="btn btn-success" style="background-color: #175A95; border: none">Terima</button>
     </div>
+
+    {{-- saat sudah di bayar --}}
+    {{-- <div>
+        <button type="button" class="btn btn-success" style="background-color: #175A95; border: none">Unggah</button>
+    </div> --}}
+
 </div>
 
 
@@ -167,7 +179,61 @@
                 </div>
             </div>
         </div>
+
+        {{-- Saat sudah bayar --}}
+        {{-- <div class="card">
+            <div class="card-body">
+                <h4 class="mb-4">Rincian Pembayaran</h4>
+                <div class="mb-3 d-flex justify-content-between">
+                    <h6>Kode Voucher</h6>
+                    <h6 style="color: #175A95">ABCDE</h6>
+                </div>
+                <hr>
+                <div class="mb-3 d-flex justify-content-between">
+                    <h6>Harga Upload</h6>
+                    <h6 style="color: #175A95">Rp. 100.000</h6>
+                </div>
+                <hr>
+                <div class="mb-3 d-flex justify-content-between">
+                    <h6>Diskon Voucher</h6>
+                    <h6 style="color: #175A95">-Rp. 20.000</h6>
+                </div>
+                <hr>
+                <div class="mb-3 d-flex justify-content-between">
+                    <h6>Totar Pembayaran</h6>
+                    <h6 style="color: #175A95">Rp. 80.000</h6>
+                </div>
+                <hr>
+                <div class="mb-3 d-flex justify-content-between">
+                    <h6>Batas Pembayaran</h6>
+                    <h6 style="color: #175A95">DEV-T26250149620IYONL</h6>
+                </div>
+                <hr>
+                <div class="mb-3 d-flex justify-content-between">
+                    <h6>Kode Transaksi</h6>
+                    <h6 style="color: #175A95">ABCDE</h6>
+                </div>
+                <hr>
+                <div class="mb-3 d-flex justify-content-between">
+                    <h6>Metode Pembayaran</h6>
+                    <h6 style="color: #175A95">BCA</h6>
+                </div>
+                <hr>
+                <div class="mb-3 d-flex justify-content-between">
+                    <h6>Kode Pembayaran</h6>
+                    <h6 style="color: #175A95">473635346744955
+                        <i class="ti ti-copy fs-6 ms-3 icon-background"></i>
+                    </h6>
+                </div>
+                <hr>
+                <div class="mb-3 d-flex justify-content-between">
+                    <h6>Status</h6>
+                    <h6 style="color: #1EBB9E">Sudah Bayar</h6>
+                </div>
+            </div>
+        </div> --}}
     </div>
+
 </div>
 
 
