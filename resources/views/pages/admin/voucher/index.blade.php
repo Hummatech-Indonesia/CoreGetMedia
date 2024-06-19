@@ -176,7 +176,7 @@
                             </div>
                             <div class="col-lg-12" id="stok-wrapper">
                                 <label class="form-label mt-2">Stok</label>
-                                <input class="form-control" class="stok" type="text" name="quota">
+                                <input id="update-quota" class="form-control" class="stok" type="text" name="quota">
                                 <ul class="error-text"></ul>
                             </div>
                         </div>
@@ -309,13 +309,19 @@
             $('#modal-delete').modal('show');
         });
 
-        $('#unlimited').click(function(){
+        $(document).ready(function() {
+        // Menyembunyikan input stok saat halaman pertama kali dimuat
+        $('#stok-wrapper').hide();
 
-        })
-
-        $('#quota').click(function(){
-
-        })
-
+        // Mendengarkan perubahan pada dropdown jenis voucher
+        $('#jenis-voucher').change(function() {
+            var selectedValue = $(this).val();
+                if (selectedValue === 'unlimited') {
+                    $('#stok-wrapper').hide();
+                } else if (selectedValue === 'quota') {
+                    $('#stok-wrapper').show();
+                }
+            });
+        });
     </script>
 @endsection

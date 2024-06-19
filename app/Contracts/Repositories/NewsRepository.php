@@ -85,6 +85,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
     public function whereSubCategory($id, $query): mixed
     {
         return $this->model->query()
+            ->where('status', NewsEnum::ACCEPTED->value)
             ->whereRelation('newsSubCategories', 'sub_category_id', $id)
             ->withCount('newsViews')
             ->orderByDesc('news_views_count')
@@ -102,20 +103,37 @@ class NewsRepository extends BaseRepository implements NewsInterface
     public function whereCategory($id, $query): mixed
     {
         return $this->model->query()
+            ->where('status', NewsEnum::ACCEPTED->value)
             ->whereRelation('newsCategories', 'category_id', $id)
             ->withCount('newsViews')
             ->orderByDesc('news_views_count')
             ->when($query == 'top', function($q){
                 $q->take(1);
             })
-            ->where('status', NewsEnum::ACCEPTED->value)
             ->latest()
             ->get();
+    }
+
+    public function whereTag($tags, $query): mixed
+    {
+        return $this->model->query()
+            ->where('status', NewsEnum::ACCEPTED->value)
+            ->whereRelation('newsTags', 'tags_id', $tags)
+            ->withCount('newsViews')
+            ->when($query == 'top', function($q){
+                $q->take(1);
+            })
+            ->when($query == 'notop', function($q){
+                $q->latest();
+            })
+            ->get();
+
     }
 
     public function whereUserLike($user_id, $ipAddress): mixed
     {
         return $this->model->query()
+            ->where('status', NewsEnum::ACCEPTED->value)
             ->whereRelation('newsLikes', 'user_id', $user_id)
             ->whereRelation('newsLikes', 'ip_address', $ipAddress)
             ->withCount('newsViews')
@@ -214,7 +232,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->latest()
             ->get();
     }
-    
+
     public function whereUser($id)
     {
         return $this->model->query()
