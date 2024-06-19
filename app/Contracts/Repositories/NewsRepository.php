@@ -119,7 +119,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
     {
         return $this->model->query()
             ->where('status', NewsEnum::ACCEPTED->value)
-            ->whereRelation('newsTags', 'tag_id', $tags)
+            ->whereRelation('newsTags', 'tags_id', $tags)
             ->withCount('newsViews')
             ->when($query == 'top', function($q){
                 $q->take(1);
