@@ -251,6 +251,9 @@ Route::get('all-pinned', [NewsController::class, 'showPinned'])->name('all-pinne
 
 Route::put('/blok-user/{user}', [UserController::class, 'banned'])->name('user.banned');
 
+Route::get('status-advertisement-list', function(){
+    return view('pages.user.advertisement.status-advertisement');   
+})->name('status-advertisement.user');
 
 require_once __DIR__ . '/jovita.php';
 require_once __DIR__ . '/ardi.php';
