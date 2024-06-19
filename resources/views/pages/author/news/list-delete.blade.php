@@ -16,7 +16,7 @@
             max-width: 100%;
             max-height: 100%;
             height: auto;
-            border-radius: ;
+            border-radius: 1;
         }
 
         @media (max-width: 767px) {
