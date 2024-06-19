@@ -16,7 +16,7 @@
             max-width: 100%;
             max-height: 100%;
             height: auto;
-            border-radius: ;
+            border-radius: 1;
         }
 
         @media (max-width: 767px) {
@@ -72,7 +72,7 @@
                         <div class="">
                             <div class="order-md-1">
                                 <h4>{{ $data->name }}</h4>
-                                <p>{{ $data->description }}</p>
+                                <p>{!! $data->description !!}</p>
                             </div>
                         </div>
                     </div>
