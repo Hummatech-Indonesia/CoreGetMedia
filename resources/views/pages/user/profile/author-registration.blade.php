@@ -22,26 +22,27 @@
                             <div class="col-lg-12">
                                 <label for="exampleInputPassword1" class="form-label fw-semibold mt-4">Nama
                                     Anda</label>
-                                <input type="text" class="form-control" placeholder="Name" value="{{ auth()->user()->name }}" name="name"
-                                    id="exampleInputtext">
+                                <input type="text" class="form-control" placeholder="Name"
+                                    value="{{ auth()->user()->name }}" name="name" id="exampleInputtext">
                             </div>
                             <div class="col-lg-12">
                                 <label for="exampleInputPassword1" class="form-label fw-semibold mt-4">Email</label>
-                                <input type="email" class="form-control" id="exampleInputtext" value="{{ auth()->user()->email }}"
-                                    name="email" placeholder="Email">
+                                <input type="email" class="form-control" id="exampleInputtext"
+                                    value="{{ auth()->user()->email }}" name="email" placeholder="Email">
                             </div>
                             <div class="col-lg-12">
                                 <label for="exampleInputPassword1" class="form-label fw-semibold mt-4">No
                                     Telephone (opsional)</label>
-                                <input type="text" class="form-control" id="exampleInputtext" placeholder="No Telephone" value="{{ auth()->user()->phone_number }}"
-                                    name="phone_number">
+                                <input type="text" class="form-control" id="exampleInputtext" placeholder="No Telephone"
+                                    value="{{ auth()->user()->phone_number }}" name="phone_number">
                             </div>
                             <div class="col-12">
                                 <div class="">
-                                    <label for="exampleInputPassword1"
-                                        class="form-label fw-semibold mt-4">Address (opsional)</label>
+                                    <label for="exampleInputPassword1" class="form-label fw-semibold mt-4">Address
+                                        (opsional)</label>
                                     <textarea type="text" class="form-control" name="address" id="exampleInputtext"
-                                        placeholder="Address" value="{{ auth()->user()->address }}" style="resize: none">{{ auth()->user()->address }}</textarea>
+                                        placeholder="Address" value="{{ auth()->user()->address }}"
+                                        style="resize: none">{{ auth()->user()->address }}</textarea>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -73,7 +74,7 @@
                             <div class="col-lg-12 mt-4">
                                 <div class="form-check form-switch">
                                     <input class="form-check-input" type="checkbox" role="switch"
-                                        id="flexSwitchCheckChecked" checked>
+                                        id="flexSwitchCheckChecked">
                                     <label class="col-4 form-check-label" for="flexSwitchCheckChecked"
                                         style="color: #888888; font-size: larger;">Ya, saya sudah membaca, memahami dan
                                         setuju
@@ -83,9 +84,9 @@
                             </div>
                             <div class="col-12">
                                 <div class="d-flex align-items-center justify-content-end mt-4 gap-3">
-                                    <button class="btn btn-sm px-4 py-2 text-white" type="submit" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal1"
-                                        style="background-color: #175A95; font-size: large;">Kirim Pengajuan <i
+                                    <button class="button-kirim btn btn-sm px-4 py-2 text-white" type="submit"
+                                        data-bs-toggle="modal" data-bs-target="#exampleModal1"
+                                        style=" font-size: large; background-color: #d9d9d9;">Kirim Pengajuan <i
                                             data-feather="send"></i></button>
                                     <!-- <button type="submit" class="btn btn-primary">Save</button>
                                     <button class="btn btn-light-danger text-danger">Cancel</button> -->
@@ -102,4 +103,17 @@
 <script>
     feather.replace();
 </script>
+<script>
+    const switchInput = document.querySelector('.form-check-input');
+    const buttonKirim = document.querySelector('.button-kirim');
+    switchInput.addEventListener('click', function () {
+        if (switchInput.checked) {
+            buttonKirim.style.backgroundColor = "#175A95"
+        } else {
+            buttonKirim.style.backgroundColor = "#d9d9d9"
+        }
+    })
+</script>
+
+
 @endsection
