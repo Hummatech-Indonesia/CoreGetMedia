@@ -81,7 +81,7 @@
                                         <div class="d-flex align-items-center justify-content-between m-4">
                                             <div class="text-center">
                                                 <i class="ti ti-file-description fs-6 d-block mb-2"></i>
-                                                <h5 class="mb-0 fw-semibold lh-1">0</h5>
+                                                <h5 class="mb-0 fw-semibold lh-1">{{ $newses->count() }}</h5>
                                                 <p class="mb-0 fs-3">Posts</p>
                                             </div>
                                             <a type="button" data-bs-toggle="modal" data-bs-target="#modal-followers">
@@ -102,7 +102,7 @@
 
                                             <div class="text-center">
                                                 <i class="ti ti-thumb-up fs-6 d-block mb-2"></i>
-                                                <h5 class="mb-0 fw-semibold lh-1">0</h5>
+                                                <h5 class="mb-0 fw-semibold lh-1">{{ $newslike }}</h5>
                                                 <p class="mb-0 fs-3">Like</p>
                                             </div>
                                         </div>
@@ -132,17 +132,17 @@
                                         <div class="d-flex align-items-center justify-content-between">
                                             <div class="text-center">
                                                 <i class="ti ti-clock fs-6 d-block mb-2"></i>
-                                                <h5 class="mb-0 fw-semibold lh-1">0</h5>
+                                                <h5 class="mb-0 fw-semibold lh-1">{{ $newsPending }}</h5>
                                                 <p class="mb-0 fs-3">Pending</p>
                                             </div>
                                             <div class="text-center">
                                                 <i class="ti ti-square-rounded-x fs-6 d-block mb-2"></i>
-                                                <h5 class="mb-0 fw-semibold lh-1">0</h5>
+                                                <h5 class="mb-0 fw-semibold lh-1">{{ $newsReject }}</h5>
                                                 <p class="mb-0 fs-3">Ditolak</p>
                                             </div>
                                             <div class="text-center">
                                                 <i class="ti ti-square-rounded-check fs-6 d-block mb-2"></i>
-                                                <h5 class="mb-0 fw-semibold lh-1">0</h5>
+                                                <h5 class="mb-0 fw-semibold lh-1">{{ $newsAccepted }}</h5>
                                                 <p class="mb-0 fs-3">Diterima</p>
                                             </div>
                                         </div>
@@ -204,7 +204,7 @@
                                                 <div class="row">
                                                     <div class="col-md-12 col-lg-5">
                                                         <div>
-                                                            <img src="{{ asset('storage/' . $news->photo) }}"
+                                                            <img src="{{ asset('storage/' . $news->image) }}"
                                                                 style="width: 100%;height:150;object-fiit:cover;"
                                                                 class="img-fluid" height="160px">
                                                         </div>
@@ -235,12 +235,12 @@
                                                                     <path fill="#E93314"
                                                                         d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
                                                                 </svg>
-                                                                <p class="ms-2">{{ $news->newsHasLikes->count() }}</p>
+                                                                <p class="ms-2">{{ $news->news_likes_count }}</p>
                                                             </div>
                                                             <div class="d-flex ms-4">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="21" height="21" viewBox="0 0 24 24">
                                                                     <path fill="#e93314" d="M12 6.5a9.77 9.77 0 0 1 8.82 5.5c-1.65 3.37-5.02 5.5-8.82 5.5S4.83 15.37 3.18 12A9.77 9.77 0 0 1 12 6.5m0-2C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5m0 5a2.5 2.5 0 0 1 0 5a2.5 2.5 0 0 1 0-5m0-2c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5s4.5-2.02 4.5-4.5s-2.02-4.5-4.5-4.5"></path>
-                                                                </svg><span class="ms-2">{{ $news->views_count }}</span>
+                                                                </svg><span class="ms-2">{{ $news->news_views_count }}</span>
                                                             </div>
                                                         </div>
                                                     </div>

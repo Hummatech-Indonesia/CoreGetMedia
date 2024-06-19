@@ -22,7 +22,7 @@
 </div>
 
 <div class="container mt-5 mb-5">
-    <div class="row">
+    <div class="row mx-4">
         <div class="col-md-4 mb-3">
             <div class="card" style="background-image: url({{asset('assets/card-light.png')}}); background-size: cover; background-position: center;">
                 <div class="card-body mx-4">

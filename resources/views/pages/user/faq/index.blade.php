@@ -18,6 +18,11 @@
     
     }
 
+    .breadcrumb-wrap {
+        padding: 80px 0 74px;
+        background-image: url("assets/img/faq/faq-bg.png");
+    }
+
     .theme-dark .button .accordion-button .collapsed::after{
       color: #ffffff;
     }
@@ -33,7 +38,17 @@
 @endsection
 
 @section('content')
-  <div class="d-flex justify-content-center">
+<div class="breadcrumb-wrap">
+    <div class="container">
+        <h2 class="breadcrumb-title text-white">FAQ</h2>
+        <ul class="breadcrumb-menu list-style text-white">
+            <li><a class="text-white" href="/">Beranda</a></li>
+            <li>FAQ</li>
+        </ul>
+    </div>
+</div>
+
+  <div class="d-flex justify-content-center mt-5">
       <img src="{{ asset('assets/img/faq-icon.png') }}"  alt="" class="" srcset="">
   </div>
   <div class="text-center">

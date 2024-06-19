@@ -291,6 +291,8 @@ class NewsRepository extends BaseRepository implements NewsInterface
     {
         return $this->model->query()
         ->where('user_id', $id)
+        ->withCount('newsViews')
+        ->withCount('newsLikes')
         ->where('status', NewsEnum::ACCEPTED->value)
         ->get();
     }
@@ -301,5 +303,13 @@ class NewsRepository extends BaseRepository implements NewsInterface
         ->where('user_id', $id)
         ->where('status', $status)  
         ->count();
+    }
+
+    public function newsStatus($user_id, $status): mixed
+    {
+        return $this->model->query()
+            ->where('user_id', $user_id)
+            ->where('status', $status)
+            ->count();
     }
 }

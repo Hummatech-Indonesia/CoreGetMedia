@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Contracts\Interfaces\AuthorInterface;
 use App\Contracts\Interfaces\FollowerInterface;
 use App\Contracts\Interfaces\NewsInterface;
+use App\Contracts\Interfaces\NewsLikeInterface;
 use App\Enums\NewsEnum;
 use Illuminate\Http\Request;
 
@@ -12,10 +13,13 @@ class HomeAuthorController extends Controller
 {
     private AuthorInterface $author;
     private NewsInterface $news;
+    private NewsLikeInterface $newsLike;
+
     private FollowerInterface $follower;
 
-    public function __construct(AuthorInterface $author, NewsInterface $news, FollowerInterface $follower)
+    public function __construct(AuthorInterface $author, NewsInterface $news, NewsLikeInterface $newsLike ,FollowerInterface $follower)
     {
+        $this->newsLike = $newsLike;
         $this->author = $author;
         $this->news = $news;
         $this->follower = $follower;
@@ -23,8 +27,12 @@ class HomeAuthorController extends Controller
 
     public function index()
     {
+        $newsPending = $this->news->newsStatus(auth()->user()->id, 'pending');
+        $newsAccepted = $this->news->newsStatus(auth()->user()->id, 'accepted');
+        $newsReject = $this->news->newsStatus(auth()->user()->id, 'reject');
+        $newslike = $this->newsLike->count(auth()->user()->id);
         $newses = $this->news->whereUser(auth()->user()->id);
-        return view('pages.author.profile', compact('newses'));
+        return view('pages.author.profile', compact('newses', 'newslike', 'newsPending', 'newsAccepted', 'newsReject'));
     }
 
     public function create()
