@@ -91,10 +91,6 @@ Route::get('user-account-list', [UserController::class, 'index'])->name('user-ac
 //     return view('pages.admin.account.user');
 // })->name('user-account.list.admin');
 
-Route::get('admin-account-list', function () {
-    return view('pages.admin.account.admin');
-})->name('admin-account.list.admin');
-
 Route::get('singlepost/news', function () {
     return view('pages.user.singlepost.index');
 })->name('singlepost.news');
