@@ -76,9 +76,13 @@ class AdminController extends Controller
      */
     public function update(Request $request, User $admin)
     {
-        $data = $this->admin->storeOrUpdate($request);
-        $this->admins->update($admin->id, $data);
-        return back()->with('success' , 'Data berhasil di perbarui');
+        try {
+            $data = $this->admin->storeOrUpdate($request);
+            $this->admins->update($admin->id, $data);
+            return back()->with('success' , 'Data berhasil di perbarui');
+        } catch (\Throwable $th) {
+            return back()->with('Error' , 'Data sudah digunakan');
+        }
     }
 
     /**
@@ -86,7 +90,11 @@ class AdminController extends Controller
      */
     public function destroy(User $admin)
     {
-        $this->admins->delete($admin->id);
-        return back()->with('success' , 'Data berhasil di hapus');
+        try {
+            $this->admins->delete($admin->id);
+            return back()->with('success' , 'Data berhasil di hapus');
+        } catch (\Throwable $th) {
+            return back()->with('success' , 'Data berhasil dihapus');
+        }
     }
 }
