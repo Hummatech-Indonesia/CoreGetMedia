@@ -273,7 +273,7 @@
                             <div class="col">
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item" style="font-weight: bold;">Tanggal Lahir: <span id="detail-birth_date" style="font-weight: normal;"></span></li>
-                                    <li class="list-group-item" style="font-weight: bold;">Alamat: {{ $author->user->address ? $author->user->address : "-"}}<span id="detail-address" style="font-weight: normal;"></span></li>
+                                    <li class="list-group-item" style="font-weight: bold;">Alamat: <span id="detail-address" style="font-weight: normal;"></span></li>
                                 </ul>
                             </div>
                         </div>
