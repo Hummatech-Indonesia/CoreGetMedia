@@ -30,143 +30,48 @@
     {{-- </div> --}}
 
     <div class="row">
-        <div class="col-md-12 col-lg-3 mb-4">
-            <div class="card border hover-img shadow-sm">
-                <div class="card-body">
-                    <div class="dropdown dropstart" style="margin-left: auto;">
-                        <a href="#" class="link" style="float: right;"
-                            id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256">
-                                <path fill="#000000"
-                                    d="M156 128a28 28 0 1 1-28-28a28 28 0 0 1 28 28m-28-52a28 28 0 1 0-28-28a28 28 0 0 0 28 28m0 104a28 28 0 1 0 28 28a28 28 0 0 0-28-28" />
-                            </svg>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <li>
-                                <button class="dropdown-item btn-edit" data-bs-toggle="modal" data-bs-target="#modal-update">Edit</button>
-                            </li>
-                            <li>
-                                <a class="dropdown-item btn-delete" style="color: red">Hapus</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="p-4 text-center">
-                        <div>
-                            <img src="{{asset('admin/dist/images/profile/user-2.jpg')}}" alt="" class="rounded-circle mb-3" style="object-fit: cover" width="120" height="120">
+        @forelse ($admins as $admin)
+            <div class="col-md-12 col-lg-3 mb-4">
+                <div class="card border hover-img shadow-sm">
+                    <div class="card-body">
+                        <div class="dropdown dropstart" style="margin-left: auto;">
+                            <a href="#" class="link" style="float: right;"
+                                id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256">
+                                    <path fill="#000000"
+                                        d="M156 128a28 28 0 1 1-28-28a28 28 0 0 1 28 28m-28-52a28 28 0 1 0-28-28a28 28 0 0 0 28 28m0 104a28 28 0 1 0 28 28a28 28 0 0 0-28-28" />
+                                </svg>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li>
+                                    <button class="dropdown-item btn-edit" data-bs-toggle="modal" data-bs-target="#modal-update">Edit</button>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item btn-delete" style="color: red">Hapus</a>
+                                </li>
+                            </ul>
                         </div>
-                        <div>
-                            <img src="{{asset('admin/dist/images/profile/user-2.jpg')}}" alt="" class="rounded-circle" style="object-fit: cover; margin-top: -4pc;" width="40" height="40">
+                        <div class="p-4 text-center">
+                            <div>
+                                <img src="{{asset($admin->photo ? 'storage/'.$admin->photo : "default.png")}}" alt="" class="rounded-circle mb-3" style="object-fit: cover" width="120" height="120">
+                            </div>
+                            <div>
+                                <img src="{{asset($admin->photo ? 'storage/'.$admin->photo : "default.png")}}" alt="" class="rounded-circle" style="object-fit: cover; margin-top: -4pc;" width="40" height="40">
+                            </div>
+                            <h5>{{ $admin->name }}</h5>
+                            <p class="fs-5">{{ $admin->email }}</p>
                         </div>
-                        <h5>Karin</h5>
-                        <p class="fs-5">karin@gmail.com</p>
                     </div>
-                </div>
-                <div class="card-footer" style="border-top-width: 4px">
-                    <h5 class="text-center">
-                        Admin
-                    </h5>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-12 col-lg-3 mb-4">
-            <div class="card border hover-img shadow-sm">
-                <div class="card-body">
-                    <div class="dropdown dropstart" style="margin-left: auto;">
-                        <a href="#" class="link" style="float: right;"
-                            id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256">
-                                <path fill="#000000"
-                                    d="M156 128a28 28 0 1 1-28-28a28 28 0 0 1 28 28m-28-52a28 28 0 1 0-28-28a28 28 0 0 0 28 28m0 104a28 28 0 1 0 28 28a28 28 0 0 0-28-28" />
-                            </svg>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <li>
-                                <button class="dropdown-item btn-edit" data-bs-toggle="modal" data-bs-target="#modal-update">Edit</button>
-                            </li>
-                            <li>
-                                <a class="dropdown-item btn-delete" style="color: red">Hapus</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="p-4 text-center">
-                        <img src="{{asset('admin/dist/images/profile/user-2.jpg')}}" alt="" class="rounded-circle mb-3"
-                            style="object-fit: cover" width="80" height="80">
-                        <h5>Karin</h5>
-                        <p class="fs-5">karin@gmail.com</p>
-                        <div class="">
-                            <button class="btn btn-light-danger px-4 text-danger">User</button>
-                        </div>
+                    <div class="card-footer" style="border-top-width: 4px">
+                        <h5 class="text-center">
+                            Admin
+                        </h5>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="col-md-12 col-lg-3 mb-4">
-            <div class="card border hover-img shadow-sm">
-                <div class="card-body">
-                    <div class="dropdown dropstart" style="margin-left: auto;">
-                        <a href="#" class="link" style="float: right;"
-                            id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256">
-                                <path fill="#000000"
-                                    d="M156 128a28 28 0 1 1-28-28a28 28 0 0 1 28 28m-28-52a28 28 0 1 0-28-28a28 28 0 0 0 28 28m0 104a28 28 0 1 0 28 28a28 28 0 0 0-28-28" />
-                            </svg>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <li>
-                                <button class="dropdown-item btn-edit" data-bs-toggle="modal" data-bs-target="#modal-update">Edit</button>
-                            </li>
-                            <li>
-                                <a class="dropdown-item btn-delete" style="color: red">Hapus</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="p-4 text-center">
-                        <img src="{{asset('admin/dist/images/profile/user-2.jpg')}}" alt="" class="rounded-circle mb-3"
-                            style="object-fit: cover" width="80" height="80">
-                        <h5>Karin</h5>
-                        <p class="fs-5">karin@gmail.com</p>
-                        <div class="">
-                            <button class="btn btn-light-danger px-4 text-danger">User</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-12 col-lg-3 mb-4">
-            <div class="card border hover-img shadow-sm">
-                <div class="card-body">
-                    <div class="dropdown dropstart" style="margin-left: auto;">
-                        <a href="#" class="link" style="float: right;"
-                            id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256">
-                                <path fill="#000000"
-                                    d="M156 128a28 28 0 1 1-28-28a28 28 0 0 1 28 28m-28-52a28 28 0 1 0-28-28a28 28 0 0 0 28 28m0 104a28 28 0 1 0 28 28a28 28 0 0 0-28-28" />
-                            </svg>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <li>
-                                <button class="dropdown-item btn-edit" data-bs-toggle="modal" data-bs-target="#modal-update">Edit</button>
-                            </li>
-                            <li>
-                                <a class="dropdown-item btn-delete" style="color: red">Hapus</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="p-4 text-center">
-                        <img src="{{asset('admin/dist/images/profile/user-2.jpg')}}" alt="" class="rounded-circle mb-3"
-                            style="object-fit: cover" width="80" height="80">
-                        <h5>Karin</h5>
-                        <p class="fs-5">karin@gmail.com</p>
-                        <div class="">
-                            <button class="btn btn-light-primary px-4 text-primary">Admin</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @empty
+            
+        @endforelse
 
     </div>
 
@@ -178,8 +83,9 @@
                     <h5 class="modal-title" id="tambahdataLabel">Tambah Akun</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="form-create" method="POST">
+                <form action="{{ route('admin-account.store') }}" method="POST">
                     @csrf
+                    @method('post')
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-lg-6 mb-3">

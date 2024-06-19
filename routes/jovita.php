@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NewsCategoryController;
@@ -32,3 +34,7 @@ Route::get('all-tag/{tag}', [NewsTagController::class, 'showAll'])->name('all-ta
 Route::post('registration-author', [AuthorController::class, 'store'])->name('regis-author-list.user');
 
 Route::delete('author-list/{author}', [AuthorController::class, 'destroy'])->name('author.destroy.admin');
+
+Route::get('admin-account-list', [AdminController::class, 'index'])->name('admin-account.list.admin');
+
+Route::post('admin-account-list', [AdminController::class, 'store'])->name('admin-account.store');
