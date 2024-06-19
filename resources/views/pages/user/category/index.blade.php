@@ -136,7 +136,7 @@
                 </div>
             </div>
 
-            <x-paginator :paginator="$latest_news"/>
+            <x-paginator :paginator="$latests"/>
 
             <div class="col-lg-4">
                 <div class="">
