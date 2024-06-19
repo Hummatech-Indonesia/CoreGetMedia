@@ -12,7 +12,7 @@ class NewsTag extends Model
 
     protected $fillable = [
         'news_id',
-        'tags_id',
+        'tags_id', 
     ];
 
     protected $table = 'news_tags';
