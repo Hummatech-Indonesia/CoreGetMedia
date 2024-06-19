@@ -63,11 +63,11 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->get();
     }
 
-    public function where($data): mixed
+    public function where($data, $paginate): mixed
     {
         return $this->model->query()
             ->where('status', $data)
-            ->get();
+            ->paginate($paginate);
     }
 
     public function news_pin() : mixed

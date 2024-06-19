@@ -16,39 +16,44 @@
 
 @section('content')
 <div class="">
-    <div class="d-flex gap-2 mb-3 mt-2">
-        <form class="d-flex gap-2">
-            <div>
-                <div class="position-relative d-flex">
-                    <div class="">
-                        <input type="text" name="search"
-                            class="form-control search-chat py-2 px-5 ps-5" id="search-name" placeholder="Search">
-                        <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+    <div class="row">
+        <div class="col-8 d-flex gap-2 mb-3 mt-2">
+            <form class="d-flex gap-2">
+                <div>
+                    <div class="position-relative d-flex">
+                        <div class="">
+                            <input type="text" name="search"
+                                class="form-control search-chat py-2 px-5 ps-5" id="search-name" placeholder="Search">
+                            <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div>
-                <div class="d-flex gap-2">
-                    <select class="form-select" id="opsi-latest" style="width: 200px">
-                        <option value="">Tampilkan semua</option>
-                        <option value="terbaru">Terbaru</option>
-                        <option value="terlama">Terlama</option>
-                    </select>
+    
+                <div>
+                    <div class="d-flex gap-2">
+                        <select class="form-select" id="opsi-latest" style="width: 200px">
+                            <option value="">Tampilkan semua</option>
+                            <option value="terbaru">Terbaru</option>
+                            <option value="terlama">Terlama</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-
-            <div>
-                <div class="d-flex gap-2">
-                    <select class="form-select" name="perpage" id="opsi-perpage" style="width: 200px">
-                        <option selected value="10">10</option>
-                        <option value="20">20</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                    </select>
+    
+                <div>
+                    <div class="d-flex gap-2">
+                        <select class="form-select" name="perpage" id="opsi-perpage" style="width: 200px">
+                            <option selected value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
+        <div class="col-4 d-flex align-items-center justify-content-end gap-3">
+            <a href="/create-news" class="btn btn-light-primary text-primary">Tambah</a>
+        </div>
     </div>
 </div>
 
@@ -102,6 +107,9 @@
                     @endforelse
                 </tbody>
             </table>
+
+            <x-paginatoradmin :paginator="$news"/>
+
         </div>
 
         {{-- <x-delete-modal-component /> --}}

@@ -35,6 +35,13 @@ class NewsLikeRepository extends BaseRepository implements NewsLikeInterface
             ->first();
     }
 
+    public function count($user_id)
+    {
+        return $this->model->query()
+            ->whereRelation('news', 'user_id', $user_id)
+            ->count();
+    }
+
     /**
      * Handle get the specified data by id from models.
      *
