@@ -93,7 +93,7 @@
                         <td>{{$user->status}}</td>
                         <td>
                             <div class="d-flex">
-                                @if ($userr->status === 'active')
+                                @if ($user->status === 'active')
                                 <form action="/banned-user/{{ $user->id }}" method="post">
                                     @csrf
                                     @method('PATCH')
