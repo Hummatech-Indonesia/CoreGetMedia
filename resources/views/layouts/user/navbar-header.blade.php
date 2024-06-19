@@ -35,7 +35,7 @@
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-lg-4 col-md-6 col-5">
-                    {{-- <button class="subscribe-btn" data-bs-toggle="modal" data-bs-target="#newsletter-popup">Berlangganan<i class="flaticon-right-arrow"></i></button> --}}
+                    <a class="subscribe-btn" href="/subscribe">Berlangganan<i class="flaticon-right-arrow"></i></a>
                 </div>
                 <div class="col-lg-4 col-md-6 md-none">
                     <a class="navbar-brand" href="index.html">
@@ -92,7 +92,9 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a href="/" class="nav-link" style="{{ request()->routeIs('home') ? 'color: #E93314;' : '' }}">Beranda</a>
+                        {{-- <a href="/" class="nav-link" style="{{ request()->routeIs('home') ? 'color: #E93314;' : '' }}"> Beranda </a> --}}
+                        <a href="{{ route('home') }}" class="nav-link">Home</a>
+
                     </li>
                     @foreach ($categories as $category)
                         @php
@@ -168,7 +170,7 @@
                                         <li class="nav-item">
                                             @role('author')
                                             <div class="news-card-img">
-                                                <a href="{{ route('profile.index') }}" class="nav-link">
+                                                <a href="{{ route('profile.author') }}" class="nav-link">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="currentColor" d="M12 12q-1.65 0-2.825-1.175T8 8q0-1.65 1.175-2.825T12 4q1.65 0 2.825 1.175T16 8q0 1.65-1.175 2.825T12 12m-8 8v-2.8q0-.85.438-1.562T5.6 14.55q1.55-.775 3.15-1.162T12 13q1.65 0 3.25.388t3.15 1.162q.725.375 1.163 1.088T20 17.2V20z"/></svg>
                                                     Profile
                                                 </a>
@@ -246,3 +248,30 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var currentLocation = window.location.href.split(/[?#]/)[0];
+        var homepageUrl = "{{ route('home') }}".split(/[?#]/)[0];
+
+        console.log("Current Location:", currentLocation);
+        console.log("Homepage URL:", homepageUrl);
+
+        document.querySelectorAll('.nav-link').forEach(function(link) {
+            var url = link.getAttribute('href').split(/[?#]/)[0];
+
+            console.log("Checking link:", url);
+
+            if (currentLocation === homepageUrl && url === homepageUrl) {
+                console.log("Activating homepage link");
+                link.classList.add('active');
+            } else if (currentLocation === url) {
+                console.log("Activating other link");
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    });
+</script>

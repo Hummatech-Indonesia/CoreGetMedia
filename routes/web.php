@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\HomeAuthorController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HomeFaqController;
 use App\Http\Controllers\NewsController;
@@ -176,9 +177,7 @@ Route::get('list-delete-news', function () {
     return view('pages.author.news.list-delete');
 })->name('news.delete.list.author');
 
-Route::get('profile-author', function () {
-    return view('pages.author.profile');
-})->name('profile.author');
+Route::get('profile-author', [HomeAuthorController::class, 'index'])->name('profile.author');
 
 Route::get('faq', [HomeFaqController::class, 'index'])->name('faq-list.user');
 
@@ -251,6 +250,9 @@ Route::get('all-pinned', [NewsController::class, 'showPinned'])->name('all-pinne
 
 Route::put('/blok-user/{user}', [UserController::class, 'banned'])->name('user.banned');
 
+Route::get('status-advertisement-list', function(){
+    return view('pages.user.advertisement.status-advertisement');   
+})->name('status-advertisement.user');
 
 require_once __DIR__ . '/jovita.php';
 require_once __DIR__ . '/ardi.php';

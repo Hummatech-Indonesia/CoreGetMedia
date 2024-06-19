@@ -79,7 +79,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                     @endif
                     @empty
                     <div class="col-12">
@@ -147,6 +147,7 @@
                         </div>
                         @endforelse
                     </div>
+                    <x-paginator :paginator="$news"/>
                 </div>
 
                 <div class="col-lg-4">
@@ -177,6 +178,7 @@
                                 </div>
                                 @endforelse
                             </ul>
+
                         </div>
 
 

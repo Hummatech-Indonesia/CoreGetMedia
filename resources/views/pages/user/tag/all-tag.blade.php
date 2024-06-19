@@ -56,26 +56,26 @@
                     @forelse ($newsTags as $item)
                                     <div class="news-card-five">
                                         <div class="news-card-img">
-                                            <a href="#"><img src="{{asset('storage/' . $item->news->image)}}" alt="Image"
+                                            <a href="#"><img src="{{asset('storage/' . $item->image)}}" alt="Image"
                                                     style="width: 850px; height: 170px; object-fit: cover;" /></a>
                                             <a data-toggle="tooltip" data-placement="top"
-                                                title="{{ $item->news->newsCategories[0]->category->name }}" href="#"
-                                                class="news-cat">{{ $item->news->newsCategories[0]->category->name }}</a>
+                                                title="{{ $item->newsCategories[0]->category->name }}" href="#"
+                                                class="news-cat">{{ $item->newsCategories[0]->category->name }}</a>
                                         </div>
                                         <div class="news-card-info">
                                             <h3><a data-toggle="tooltip" data-placement="top"
                                                     title="Muga Nemo Aptent Quaerat Explicabo Urna Ni Like Ange"
-                                                    href="{{ route('news.singlepost', ['news' => $item->news->slug]) }}">{!!
-                        Illuminate\Support\Str::limit(strip_tags($item->news->name), 200, '...') !!}
+                                                    href="{{ route('news.singlepost', ['news' => $item->slug]) }}">{!!
+                        Illuminate\Support\Str::limit(strip_tags($item->name), 200, '...') !!}
                                                 </a>
                                             </h3>
-                                            <p>{!! Illuminate\Support\Str::limit(strip_tags($item->news->name), 200, '...') !!}</p>
+                                            <p>{!! Illuminate\Support\Str::limit(strip_tags($item->name), 200, '...') !!}</p>
                                             <ul class="news-metainfo list-style">
                                                 <li><i class="fi fi-rr-calendar-minus"></i><a
                                                         href="javascript:void(0)">{{ \Carbon\Carbon::parse($item->date)->translatedFormat('d F Y') }}</a>
                                                 </li>
                                                 <li><i class="fi fi-rr-eye"></i><a
-                                                        href="javascript:void(0)">{{ $item->news->newsViews_count ? $item->newsViews_count : '0' }}x
+                                                        href="javascript:void(0)">{{ $item->news_views_count ? $item->news_views_count : '0' }}x
                                                         dilihat</a></li>
                                             </ul>
                                         </div>
@@ -93,8 +93,9 @@
                             </div>
                         </div>
                     @endforelse
-
                 </div>
+
+                <x-paginator :paginator="$newsTags" />
 
                 {{-- <div class="text-center item-center d-flex justify-content-center"
                     style="background-color:#F6F6F6; width:100%;height:200px;">
