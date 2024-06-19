@@ -234,14 +234,6 @@
                                         </li>
                                     </div>
                                 </div>
-                                {{-- <li class="author">
-                                    <span class="author-img">
-                                        <img src="{{asset('assets/img/author/author-thumb-4.webp')}}" alt="Image">
-                                    </span>
-                                    <a href="author.html">James William</a>
-                                </li>
-                                <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Mar 03, 2023</a></li>
-                                <li><i class="fi fi-rr-clock-three"></i>15 Min Read</li> --}}
                             </ul>
                         </div>
                         <div class="news-para text-justify">
