@@ -2,12 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Interfaces\NewsReportInterface;
 use App\Models\NewsReport;
 use App\Http\Requests\StoreNewsReportRequest;
 use App\Http\Requests\UpdateNewsReportRequest;
+use App\Models\News;
+use App\Services\NewsReportService;
+use Illuminate\Http\Request;
 
 class NewsReportController extends Controller
 {
+    private NewsReportInterface $newsReport;
+    private NewsReportService $service;
+
+    public function __construct(NewsReportInterface $newsReport, NewsReportService $service)
+    {
+        $this->newsReport = $newsReport;
+        $this->service = $service;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -27,9 +40,12 @@ class NewsReportController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreNewsReportRequest $request)
+    public function store(Request $req, StoreNewsReportRequest $request, News $news)
     {
-        //
+        $ip = $req->ip();
+        $data = $this->service->store($request, $news, $ip);
+        $this->newsReport->store($data);
+        return back()->with('success', 'Berhasil laporkan berita');
     }
 
     /**
@@ -61,6 +77,7 @@ class NewsReportController extends Controller
      */
     public function destroy(NewsReport $newsReport)
     {
-        //
+        $this->newsReport->delete($newsReport->id);
+        return back()->with('success', 'Berhasil hapus data');
     }
 }

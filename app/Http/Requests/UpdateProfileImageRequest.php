@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreNewsReportRequest extends FormRequest
+class UpdateProfileImageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,7 @@ class StoreNewsReportRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'proof' => 'required',
-            'description' => 'required',
+            'image' => 'nullable|image|mimes:jpg,png,jpeg',
         ];
     }
 }

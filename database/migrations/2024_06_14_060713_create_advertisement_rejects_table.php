@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('news_reports', function (Blueprint $table) {
+        Schema::create('advertisement_rejects', function (Blueprint $table) {
             $table->id();
-            $table->string('ip_address');
-            $table->foreignUuid('user_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignUuid('news_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->text('proof');
+            $table->foreignUuid('advertisement_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignUuid('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->text('description');
             $table->timestamps();
         });
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('news_reports');
+        Schema::dropIfExists('advertisement_rejects');
     }
 };

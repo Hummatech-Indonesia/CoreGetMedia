@@ -2,15 +2,14 @@
 
 namespace App\Contracts\Repositories;
 
-use App\Contracts\Interfaces\AuthorInterface;
-use App\Enums\AuthorEnum;
-use App\Models\Author;
+use App\Contracts\Interfaces\CommentReportInterface;
+use App\Models\CommentReport;
 
-class AuthorRepository extends BaseRepository implements AuthorInterface
+class CommentReportRepository extends BaseRepository implements CommentReportInterface
 {
-    public function __construct(Author $author)
+    public function __construct(CommentReport $comment)
     {
-        $this->model = $author;
+        $this->model = $comment;
     }
 
     /**
@@ -44,19 +43,10 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
      *
      * @return mixed
      */
-    public function get(): mixed
+    public function get($news_id): mixed
     {
         return $this->model->query()
-            ->where('status', AuthorEnum::PENDING->value)
-            ->get();
-    }
-
-    public function where($data) : mixed
-    {
-        return $this->model->query()
-            ->when($data == 'accepted', function($query){
-                $query->where('status', AuthorEnum::ACCEPTED->value);
-            })
+            ->where('news_id', $news_id)
             ->get();
     }
 
@@ -86,19 +76,5 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
         return $this->model->query()
             ->findOrFail($id)
             ->update($data);
-    }
-
-    public function updateByUser($user, array $data): mixed
-    {
-        return $this->model->query()
-            ->whereRelation('user', 'id', $user)
-            ->update($data);
-    }
-
-    public function accepted()
-    {
-        return $this->model->query()
-        ->where('status', AuthorEnum::ACCEPTED->value)
-        ->get();
     }
 }

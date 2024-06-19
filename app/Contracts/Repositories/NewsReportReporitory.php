@@ -2,15 +2,14 @@
 
 namespace App\Contracts\Repositories;
 
-use App\Contracts\Interfaces\AuthorInterface;
-use App\Enums\AuthorEnum;
-use App\Models\Author;
+use App\Contracts\Interfaces\NewsReportInterface;
+use App\Models\NewsReport;
 
-class AuthorRepository extends BaseRepository implements AuthorInterface
+class NewsReportReporitory extends BaseRepository implements NewsReportInterface
 {
-    public function __construct(Author $author)
+    public function __construct(NewsReport $newsReport)
     {
-        $this->model = $author;
+        $this->model = $newsReport;
     }
 
     /**
@@ -23,8 +22,8 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
     public function delete(mixed $id): mixed
     {
         return $this->model->query()
-        ->findOrFail($id)
-        ->delete();
+            ->findOrFail($id)
+            ->delete();
     }
 
     /**
@@ -47,16 +46,6 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
     public function get(): mixed
     {
         return $this->model->query()
-            ->where('status', AuthorEnum::PENDING->value)
-            ->get();
-    }
-
-    public function where($data) : mixed
-    {
-        return $this->model->query()
-            ->when($data == 'accepted', function($query){
-                $query->where('status', AuthorEnum::ACCEPTED->value);
-            })
             ->get();
     }
 
@@ -86,19 +75,5 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
         return $this->model->query()
             ->findOrFail($id)
             ->update($data);
-    }
-
-    public function updateByUser($user, array $data): mixed
-    {
-        return $this->model->query()
-            ->whereRelation('user', 'id', $user)
-            ->update($data);
-    }
-
-    public function accepted()
-    {
-        return $this->model->query()
-        ->where('status', AuthorEnum::ACCEPTED->value)
-        ->get();
     }
 }

@@ -8,9 +8,7 @@ use App\Contracts\Interfaces\Eloquent\ShowInterface;
 use App\Contracts\Interfaces\Eloquent\StoreInterface;
 use App\Contracts\Interfaces\Eloquent\UpdateInterface;
 
-interface AuthorInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface
+interface NewsReportInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface
 {
-    public function where($data) :mixed;
-    public function accepted();
-    public function updateByUser($user, array $data) : mixed;
+    //
 }

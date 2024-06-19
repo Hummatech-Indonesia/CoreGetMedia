@@ -6,37 +6,36 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class NewsReport extends Model
+class CommentReport extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'ip_address',
+        'comment_id',
         'user_id',
-        'news_id',
-        'proof',
-        'description',
+        'description'
     ];
 
-    protected $table = 'news_reports';
+    protected $table = 'comment_reports';
 
     /**
-     * Get the news that owns the NewsReport
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function news(): BelongsTo
-    {
-        return $this->belongsTo(News::class);
-    }
-
-    /**
-     * Get the user that owns the NewsReport
+     * Get the user that owns the CommentReport
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the comment that owns the CommentReport
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function comment(): BelongsTo
+    {
+        return $this->belongsTo(Comment::class);
     }
 }
