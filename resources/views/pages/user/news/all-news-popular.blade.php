@@ -66,22 +66,22 @@
 
                             <div class="col-md-6">
                                 <div class="news-card-six">
-                                    <div class="news-card-img">
-                                        <img src="{{ asset('storage/' . $item->image) }}" alt="" class="img-all"
-                                            style="width: 100%; height: auto;">
-                                        {{-- @foreach ($subCategories as $subCategory)
-                                        <p class="tag">
-                                            <a href="{{ route('categories.show.user', ['category' => $item->newsCategories[0]->category->slug]) }}"
-                                                class="news-cat">{{ $item->newsCategories[0]->category->name }}</a>
-                                        </p>
-                                        @endforeach --}}
-                                        @foreach ($subCategories as $subCategory)
+                                    <!-- <div class="news-card-img">
+                                            <img src="{{ asset('storage/' . $item->image) }}" alt="" class="img-all"
+                                                style="width: 100%; height: auto;">
+                                            {{-- @foreach ($subCategories as $subCategory)
                                             <p class="tag">
                                                 <a href="{{ route('categories.show.user', ['category' => $item->newsCategories[0]->category->slug]) }}"
                                                     class="news-cat">{{ $item->newsCategories[0]->category->name }}</a>
                                             </p>
-                                        @endforeach
-                                    </div>
+                                            @endforeach --}}
+                                            @foreach ($subCategories as $subCategory)
+                                                <p class="tag">
+                                                    <a href="{{ route('categories.show.user', ['category' => $item->newsCategories[0]->category->slug]) }}"
+                                                        class="news-cat">{{ $item->newsCategories[0]->category->name }}</a>
+                                                </p>
+                                            @endforeach
+                                        </div> -->
                                     <div class="news-card-info">
 
                                         <h3><a href="{{ route('news.singlepost', $item->slug) }}">{{ $item->name }}</a>
