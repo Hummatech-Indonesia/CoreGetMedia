@@ -69,6 +69,16 @@
                                 </div>
                             </div>
                         @empty
+                        <div class="col-12">
+                            <div class="d-flex justify-content-center">
+                                <div>
+                                    <img src="{{ asset('assets/img/no-data/empty.png') }}" width="250px" alt="">
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <h5>Tidak ada data</h5>
+                            </div>
+                        </div>
                         @endforelse
                     </div>
 
@@ -93,6 +103,16 @@
                                             </a>
                                         </li>
                                     @empty    
+                                    <div class="col-12">
+                                        <div class="d-flex justify-content-center">
+                                            <div>
+                                                <img src="{{ asset('assets/img/no-data/empty.png') }}" width="250px" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="text-center">
+                                            <h5>Tidak ada data</h5>
+                                        </div>
+                                    </div>
                                     @endforelse
                                 </ul>
                             </div>
@@ -100,17 +120,20 @@
                             <div class="sidebar-widget bg-transparent shadow-sm">
                                 <h3 class="sidebar-widget-title">Tag Populer</h3>
                                 <ul class="tag-list list-style">
-                                <li><a href="{{route('list-tag.user')}}">BUSINESS</a></li>
-                                <li><a href="{{route('list-tag.user')}}">FOOD</a></li>
-                                <li><a href="{{route('list-tag.user')}}">SCIENCE</a></li>
-                                <li><a href="{{route('list-tag.user')}}">LIFESTYLE</a></li>
-                                <li><a href="{{route('list-tag.user')}}">SPORTS</a></li>
-                                <li><a href="{{route('list-tag.user')}}">PHOTO</a></li>
-                                <li><a href="{{route('list-tag.user')}}">TECHNOLOGY</a></li>
-                                <li><a href="{{route('list-tag.user')}}">CONTENT</a></li>
-                                <li><a href="{{route('list-tag.user')}}">FEATURED</a></li>
-                                <li><a href="{{route('list-tag.user')}}">AUDIO</a></li>
-                                <li><a href="{{route('list-tag.user')}}">FASHION</a></li>
+                                    @forelse ($popularTags as $popularTag)
+                                    <li><a href="{{route('news-tag-list.user', ['tag' => $popularTag->slug])}}">{{ $popularTag->name }}</a></li>
+                                    @empty
+                                    <div class="col-12">
+                                        <div class="d-flex justify-content-center">
+                                            <div>
+                                                <img src="{{ asset('assets/img/no-data/empty.png') }}" width="150px" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="text-center">
+                                            <h5>Tidak ada data</h5>
+                                        </div>
+                                    </div>
+                                    @endforelse
                                 </ul>
                                 </div>
                         </div>

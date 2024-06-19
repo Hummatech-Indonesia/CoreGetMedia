@@ -104,7 +104,14 @@ class UserController extends Controller
 
     public function banned(User $user)
     {
-        $this->users->update($user->id , ['status' => UserStatusEnum::BANNED->value]);
-        return redirect()->back()->with(['success' => 'Siswa Berhasil Dibanned']);
+        $data = $this->users->update($user->id , ['status' => UserStatusEnum::BANNED->value]);
+        // dd($data);
+        return redirect()->back()->with(['success' => 'User Berhasil Dibanned']);
+    }
+    public function active(User $user)
+    {
+        $data = $this->users->update($user->id , ['status' => UserStatusEnum::ACTIVE->value]);
+        // dd($data);
+        return redirect()->back()->with(['success' => 'User Berhasil Active']);
     }
 }

@@ -82,6 +82,16 @@
                         
                     @endif
                     @empty
+                    <div class="col-12">
+                        <div class="d-flex justify-content-center">
+                            <div>
+                                <img src="{{ asset('assets/img/no-data/empty.png') }}" width="250px" alt="">
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <h5>Tidak ada data</h5>
+                        </div>
+                    </div>
                     @endforelse
 
                     <div class="mb-5">
@@ -125,14 +135,23 @@
                                 </div>
                             </div>
                         @empty
-                            <p>No news available.</p>
+                        <div class="col-12">
+                            <div class="d-flex justify-content-center">
+                                <div>
+                                    <img src="{{ asset('assets/img/no-data/empty.png') }}" width="250px" alt="">
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <h5>Tidak ada data</h5>
+                            </div>
+                        </div>
                         @endforelse
                     </div>
                 </div>
 
                 <div class="col-lg-4">
                     <div class="sidebar">
-                        <div class="sidebar-widget">
+                        <div class="sidebar-widget" style="width: 450px">
                             <h3 class="sidebar-widget-title">Kategori Populer</h3>
                             <ul class="category-widget list-style">
                                 @forelse ($popularCategory as $item)
@@ -146,7 +165,16 @@
                                         </li>
                                     @endif
                                 @empty
-                                    <li>No categories available.</li>
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-center">
+                                        <div>
+                                            <img src="{{ asset('assets/img/no-data/empty.png') }}" width="150px" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <h5>Tidak ada data</h5>
+                                    </div>
+                                </div>
                                 @endforelse
                             </ul>
                         </div>
@@ -157,7 +185,7 @@
                                 $trending_news = $newsPopulars->whereNotIn('id', $subTop);
                             @endphp
 
-                            <div class="sidebar-widget">
+                            <div class="sidebar-widget" style="width: 450px">
                                 <h3 class="sidebar-widget-title">
                                     Berita Populer
                                 </h3>
@@ -178,11 +206,14 @@
                                     </div>
                                 @endif
                                 @empty
-
-                                <div class="d-flex justify-content-center">
-                                    <div class="my-auto">
-                                        <img src="{{ asset('assets/img/no-data.svg') }}" width="200" />
-                                        <h4 class="text-center">Tidak ada data!!</h4>
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-center">
+                                        <div>
+                                            <img src="{{ asset('assets/img/no-data/empty.png') }}" width="150px" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <h5>Tidak ada data</h5>
                                     </div>
                                 </div>
                             @endforelse
@@ -193,6 +224,16 @@
                                     @forelse ($popularTags as $popularTag)
                                     <li><a href="{{route('news-tag-list.user', ['tag' => $popularTag->slug])}}">{{ $popularTag->name }}</a></li>
                                     @empty
+                                    <div class="col-12">
+                                        <div class="d-flex justify-content-center">
+                                            <div>
+                                                <img src="{{ asset('assets/img/no-data/empty.png') }}" width="150px" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="text-center">
+                                            <h5>Tidak ada data</h5>
+                                        </div>
+                                    </div>
                                     @endforelse
                                 </ul>
                             </div>

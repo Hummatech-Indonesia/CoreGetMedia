@@ -59,7 +59,8 @@ class NewsSubCategoryController extends Controller
 
         $news = $this->newsSubCategory->get();
         $popularCategory = $this->category->showWithCount();
-        return view('pages.user.subcategory.all-subcategory', compact('news','categories', 'subCategories', 'popularCategory'));
+        $popularTags = $this->tags->showWithCount();
+        return view('pages.user.subcategory.all-subcategory', compact('news','categories', 'subCategories', 'popularCategory', 'popularTags'));
     }
 
     public function showAll(Request $request, $slug)

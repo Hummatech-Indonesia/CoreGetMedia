@@ -1,9 +1,11 @@
 <?php
+use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NewsCategoryController;
 use App\Http\Controllers\NewsSubCategoryController;
 use App\Http\Controllers\NewsTagController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('news/category', function(){
@@ -29,3 +31,4 @@ Route::get('all-tag/{tag}', [NewsTagController::class, 'showAll'])->name('all-ta
 
 Route::post('registration-author', [AuthorController::class, 'store'])->name('regis-author-list.user');
 
+Route::delete('author-list/{author}', [AuthorController::class, 'destroy'])->name('author.destroy.admin');

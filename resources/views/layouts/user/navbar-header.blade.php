@@ -23,6 +23,11 @@
             width: auto;
         }
     </style>
+    <style>
+        .nav-link.active {
+            color: #E93314;
+        }
+    </style>
 </head>
 
 <div class="navbar-area header-one" id="navbar">
@@ -87,45 +92,62 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a href="/" class="nav-link" style="{{ request()->routeIs('home') ? 'color: #E93314;' : '' }}"> Beranda </a>
+                        <a href="/" class="nav-link" style="{{ request()->routeIs('home') ? 'color: #E93314;' : '' }}">Beranda</a>
                     </li>
                     @foreach ($categories as $category)
-                    <li class="nav-item">
-                        <a href="{{ route('categories.show.user', ['category' => $category->slug]) }}" class="dropdown-toggle nav-link" style="{{ request()->routeIs('categories.show.user', ['category' => $category->slug]) && request()->route('category') == $category->slug || (request()->routeIs('subcategories.show.user') && request()->route('category') == $category->slug) ? 'color: #E93314;' : '' }}">{{ $category->name }}</a>
-                        @if (count($subCategories->where('category_id', $category->id)) > 0)
-                            <ul class="dropdown-menu">
-                                <div class="d-flex">
-                                    <li class="nav-item">
-                                        @forelse ($subCategories->where('category_id', $category->id) as $subCategory)
-                                            <a href="{{ route('news.subcategory', ['slug' => $subCategory->slug]) }}" class="nav-link"  style="{{ request()->routeIs('news.subcategory', ['subcategory' => $subCategory->slug]) && request()->route('category') == $subCategory->category->slug && request()->route('subCategory') == $subCategory->slug  ? 'color: #E93314;' : '' }}">{{ $subCategory->name }}</a>
+                        @php
+                            $isActiveCategory = false;
 
-                                            @if(($loop->iteration % 5) == 0)
-                                            </li>
-                                            <li class="nav-item">
-                                            @endif
+                            if(request()->routeIs('news.subcategory')) {
+                                $subCategory = $subCategories->where('slug', request()->route('slug'))->first();
+                                if($subCategory && $subCategory->category_id === $category->id) {
+                                    $isActiveCategory = true;
+                                }
+                            }
+                        @endphp
 
+                        <li class="nav-item">
+                            <a href="{{ route('categories.show.user', ['category' => $category->slug]) }}" class="dropdown-toggle nav-link" style="{{ $isActiveCategory ? 'color: #E93314;' : '' }}">
+                                {{ $category->name }}
+                            </a>
+                            @if (count($subCategories->where('category_id', $category->id)) > 0)
+                                <ul class="dropdown-menu">
+                                    <div class="d-flex">
+                                        <li class="nav-item">
+                                            @forelse ($subCategories->where('category_id', $category->id) as $subCategory)
+                                                @php
+                                                    $isActive = Route::currentRouteName() == 'news.subcategory' && request()->route('slug') == $subCategory->slug;
+                                                @endphp
+
+                                                <a href="{{ route('news.subcategory', ['slug' => $subCategory->slug]) }}" class="nav-link {{ $isActive ? 'active' : '' }}" style="{{ $isActive ? 'color: #E93314;' : '' }}">
+                                                    {{ Str::limit($subCategory->name, 50) }}
+                                                </a>
+
+                                                @if(($loop->iteration % 5) == 0)
+                                                    </li>
+                                                    <li class="nav-item">
+                                                @endif
                                             @empty
-                                            <div class="nav-link">
-                                                Data Kosong
-                                            </div>
-                                        @endforelse
-                                    </li>
-                                </div>
-                            </ul>
-                        @else
-                            <ul class="dropdown-menu">
-                                <div class="d-flex">
-                                    <div class="nav-item">
-                                        <p class="nav-link">
-                                           Data Kosong
-                                        </p>
+                                                <div class="nav-link">
+                                                    Data Kosong
+                                                </div>
+                                            @endforelse
+                                        </li>
                                     </div>
-                                </div>
-                            </ul>
-                        @endif
-
-                    </li>
-                @endforeach
+                                </ul>
+                            @else
+                                <ul class="dropdown-menu">
+                                    <div class="d-flex">
+                                        <div class="nav-item">
+                                            <p class="nav-link">
+                                                Data Kosong
+                                            </p>
+                                        </div>
+                                    </div>
+                                </ul>
+                            @endif
+                        </li>
+                    @endforeach
                 </ul>
                 <div class="others-option d-flex align-items-center">
                     <div class="option-item">
@@ -137,7 +159,7 @@
                     @auth
                         <div class="option-item">
                             <ul class="navbar-nav">
-                               
+
                                 <li class="nav-item">
                                     <a href="javascript:void(0)" class="nav-link">
                                         <img src="{{ asset( Auth::user()->image ? 'storage/'.Auth::user()->image : "default.png")  }}" class="mb-2" alt="Image" width="40" height="40" style="min-width: 40px;border-radius: 50%;object-fit:cover;min-height: 40px;"/>

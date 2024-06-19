@@ -241,6 +241,9 @@ Route::get('author-registration', function () {
 
 Route::get('all-pinned', [NewsController::class, 'showPinned'])->name('all-pinned-list.user');
 
+Route::put('/blok-user/{user}', [UserController::class, 'banned'])->name('user.banned');
+
+
 require_once __DIR__ . '/jovita.php';
 require_once __DIR__ . '/ardi.php';
 require_once __DIR__ . '/farah.php';
