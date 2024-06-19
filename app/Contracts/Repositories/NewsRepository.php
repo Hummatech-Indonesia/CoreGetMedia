@@ -159,7 +159,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->where('status', NewsEnum::ACCEPTED->value)
             ->withCount('newsViews')
             ->latest()
-            ->get();
+            ->paginate(5);
     }
 
     public function latest() : mixed
