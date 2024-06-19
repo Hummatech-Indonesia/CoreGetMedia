@@ -140,7 +140,7 @@
             <div class="col-lg-4">
                 <div class="">
                     <div class="sidebar">
-                        <div class="sidebar-widget">
+                        <div class="sidebar-widget" style="width: 450px">
                             <h3 class="sidebar-widget-title">Kategori Populer</h3>
                             <ul class="category-widget list-style">
                                 @foreach ($CategoryPopulars as $category)
@@ -155,7 +155,7 @@
                         $trending_news = $trendings->take(4)->whereNotin('id', $news_top_id);
                         @endphp
 
-                        <div class="sidebar-widget" style="width: 400px">
+                        <div class="sidebar-widget" style="width: 450px">
                             <h3 class="sidebar-widget-title">
                                 Berita Populer
                             </h3>

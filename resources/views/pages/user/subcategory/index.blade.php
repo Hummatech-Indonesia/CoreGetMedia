@@ -164,7 +164,7 @@
 
                 <div class="col-lg-4">
                     <div class="sidebar">
-                        <div class="sidebar-widget">
+                        <div class="sidebar-widget" style="width: 450px">
                             <h3 class="sidebar-widget-title">Kategori Populer</h3>
                             <ul class="category-widget list-style">
                                 @forelse ($popularCategory as $item)
@@ -189,7 +189,7 @@
                                 $trending_news = $newsPopulars->whereNotIn('id', $subTop);
                             @endphp
 
-                            <div class="sidebar-widget">
+                            <div class="sidebar-widget" style="width: 450px">
                                 <h3 class="sidebar-widget-title">
                                     Berita Populer
                                 </h3>
