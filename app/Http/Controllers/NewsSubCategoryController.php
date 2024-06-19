@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\NewsCategoryInterface;
 use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\NewsSubCategoryInterface;
-use App\Contracts\Interfaces\NewsTagInterface;
-use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\TagInterface;
+use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Models\NewsSubCategory;
 use App\Http\Requests\StoreNewsSubCategoryRequest;
 use App\Http\Requests\UpdateNewsSubCategoryRequest;
@@ -22,8 +22,14 @@ class NewsSubCategoryController extends Controller
     private SubCategoryInterface $subCategories;
     private TagInterface $tags;
 
-    public function __construct(NewsSubCategoryInterface $newsSubCategory, TagInterface $tags, NewsCategoryInterface $newsCategory, NewsInterface $news, CategoryInterface $category, SubCategoryInterface $subCategories)
-    {
+    public function __construct(
+        NewsSubCategoryInterface $newsSubCategory,
+        TagInterface $tags,
+        NewsCategoryInterface $newsCategory,
+        NewsInterface $news,
+        CategoryInterface $category,
+        SubCategoryInterface $subCategories
+    ) {
         $this->newsSubCategory = $newsSubCategory;
         $this->newsCategory = $newsCategory;
         $this->category = $category;
@@ -37,44 +43,81 @@ class NewsSubCategoryController extends Controller
      */
     public function index($slug)
     {
-        $subcategory = $this->subCategories->showWithSLug($slug);
-        $subcategory_id = $subcategory->id;
+        $subcategory = $this->subCategories->showWithSlug($slug);
+        if (!$subcategory) {
+            return redirect()->back()->withErrors(['Subcategory not found']);
+        }
 
+        $subcategory_id = $subcategory->id;
         $categories = $this->category->get();
         $subCategories = $this->subCategories->get();
-
         $newsTop = $this->news->whereSubCategory($subcategory_id, 'top');
         $news = $this->news->whereSubCategory($subcategory_id, 'notop');
-        $newsPopulars = $this->news->whereSubCategory($subcategory_id, 'notop');
+        $newsPopulars = $this->news->whereSubCategory($subcategory_id, 'popular');
         $popularCategory = $this->category->showWithCount();
-
         $popularTags = $this->tags->showWithCount();
-        return view('pages.user.subcategory.index', compact('categories', 'subCategories', 'news', 'newsTop', 'popularCategory', 'newsPopulars', 'subcategory', 'popularTags'));
+
+        return view(
+            'pages.user.subcategory.index',
+            compact(
+                'categories',
+                'subCategories',
+                'news',
+                'newsTop',
+                'popularCategory',
+                'newsPopulars',
+                'subcategory',
+                'popularTags'
+            )
+        );
     }
 
     public function all_subcategory()
     {
         $categories = $this->category->get();
         $subCategories = $this->subCategories->get();
-
         $news = $this->newsSubCategory->get();
         $popularCategory = $this->category->showWithCount();
         $popularTags = $this->tags->showWithCount();
-        return view('pages.user.subcategory.all-subcategory', compact('news','categories', 'subCategories', 'popularCategory', 'popularTags'));
+
+        return view(
+            'pages.user.subcategory.all-subcategory',
+            compact(
+                'news',
+                'categories',
+                'subCategories',
+                'popularCategory',
+                'popularTags'
+            )
+        );
     }
 
     public function showAll(Request $request, $slug)
     {
-        $subCategory = $this->subCategories->showWithSLug($slug);
-        $subCategory_id = $subCategory->id;
+        $subCategory = $this->subCategories->showWithSlug($slug);
+        if (!$subCategory) {
+            return redirect()->back()->withErrors(['Subcategory not found']);
+        }
 
+        $subCategory_id = $subCategory->id;
         $categories = $this->category->get();
         $subCategories = $this->subCategories->get();
-
         $query = $request->input('search');
         $news = $this->news->whereSubCategory($subCategory_id, $query);
         $popularCategory = $this->category->showWithCount();
-        return view('pages.user.subcategory.all-subcategory', compact('subCategory', 'news','categories', 'subCategories', 'popularCategory'));
+        $popularTags = $this->tags->showWithCount();
+
+        return view(
+            'pages.user.subcategory.all-subcategory',
+            compact(
+                'subCategory',
+                'news',
+                'categories',
+                'subCategories',
+                'popularCategory',
+                'popularTags'
+            )
+        );
     }
 
     /**
@@ -82,7 +125,7 @@ class NewsSubCategoryController extends Controller
      */
     public function create()
     {
-        //
+        // Code for creating a new resource
     }
 
     /**
@@ -90,7 +133,7 @@ class NewsSubCategoryController extends Controller
      */
     public function store(StoreNewsSubCategoryRequest $request)
     {
-        //
+        // Code for storing a new resource
     }
 
     /**
@@ -98,7 +141,7 @@ class NewsSubCategoryController extends Controller
      */
     public function show(NewsSubCategory $newsSubCategory)
     {
-        //
+        // Code for displaying a specific resource
     }
 
     /**
@@ -106,7 +149,7 @@ class NewsSubCategoryController extends Controller
      */
     public function edit(NewsSubCategory $newsSubCategory)
     {
-        //
+        // Code for editing a specific resource
     }
 
     /**
@@ -114,7 +157,7 @@ class NewsSubCategoryController extends Controller
      */
     public function update(UpdateNewsSubCategoryRequest $request, NewsSubCategory $newsSubCategory)
     {
-        //
+        // Code for updating a specific resource
     }
 
     /**
@@ -122,6 +165,6 @@ class NewsSubCategoryController extends Controller
      */
     public function destroy(NewsSubCategory $newsSubCategory)
     {
-        //
+        // Code for deleting a specific resource
     }
 }
