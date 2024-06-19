@@ -23,6 +23,7 @@ class User extends Authenticatable
     protected $fillable = [
         'id',
         'name',
+        'image',
         'phone_number',
         'date_of_birth',
         'address',
@@ -66,6 +67,16 @@ class User extends Authenticatable
     public function author(): HasOne
     {
         return $this->hasOne(Author::class);
+    }
+
+    /**
+     * Get all of the authors for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function authors(): HasMany
+    {
+        return $this->hasMany(Author::class);
     }
 
     /**

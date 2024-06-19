@@ -2,19 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Interfaces\AuthorInterface;
+use App\Models\User;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Enums\UserStatusEnum;
+use App\Services\UserService;
 use App\Http\Controllers\Controller;
 use App\Contracts\Interfaces\UserInterface;
-use App\Enums\UserStatusEnum;
-use App\Models\User;
-use Illuminate\Http\Request;
+use App\Http\Requests\UpdateProfileRequest;
+use App\Http\Requests\UpdateProfileImageRequest;
+use App\Http\Requests\UpdateProfilePasswordRequest;
 
 class UserController extends Controller
 {
     private UserInterface $users;
+    private AuthorInterface $authors;
+    private UserService $service;
 
-    public function __construct(UserInterface $users)
+    public function __construct(UserInterface $users, AuthorInterface $authors, UserService $service)
     {
         $this->users = $users;
+        $this->authors = $authors;
+        $this->service = $service;
     }
 
     /**
@@ -61,9 +71,27 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateProfileRequest $request, User $user)
     {
-        //
+        $data = $request->validated();
+        $data['slug'] = Str::slug($data['name']);
+        $this->authors->updateByUser($user->id, $data['description']);
+        $this->users->update($user->id, $data);
+        return back()->with('success', 'Berhasil memperbarui profile');
+    }
+
+    public function updateImage(UpdateProfileImageRequest $request, User $user)
+    {
+        $data = $this->service->imageUpdate($request, $user);
+        $this->users->update($user->id, $data);
+        return back()->with('success', 'Berhasil update photo profile');
+    }
+
+    public function updatePassword(UpdateProfilePasswordRequest $request, User $user)
+    {
+        $data = $request->validated();
+        $this->users->update($user->id, $data);
+        return back()->with('success', 'Berhasil update password');
     }
 
     /**

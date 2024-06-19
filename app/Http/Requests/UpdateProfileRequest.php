@@ -11,7 +11,7 @@ class UpdateProfileRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,13 @@ class UpdateProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required',
+            'slug' =>  'nullable',
+            'email' => 'required',
+            'phone_number' => 'nullable',
+            'date_of_birth' => 'nullable',
+            'address' => 'nullable',
+            'description' => 'nullable'
         ];
     }
 }
