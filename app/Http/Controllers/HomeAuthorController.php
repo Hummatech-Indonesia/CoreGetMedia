@@ -24,15 +24,7 @@ class HomeAuthorController extends Controller
     public function index()
     {
         $newses = $this->news->whereUser(auth()->user()->id);
-        $countAcc = $this->news->countByUserAndStatus(auth()->user()->id, NewsEnum::ACCEPTED->value);
-        $countRejected = $this->news->countByUserAndStatus(auth()->user()->id, NewsEnum::REJECT->value);
-        $countPending = $this->news->countByUserAndStatus(auth()->user()->id, NewsEnum::PENDING->value);
-
-        // dd(auth()->user()->id);
-        $author= $this->author->whereUserId(auth()->user()->id);
-        $countFollower = $this->follower->countWhere('author_id', $author->id);
-        $countFollowing = $this->follower->countWhere('user_id', auth()->user()->id);
-        return view('pages.author.profile', compact('newses', 'countAcc', 'countRejected', 'countPending', 'countFollower', 'countFollowing'));
+        return view('pages.author.profile', compact('newses'));
     }
 
     public function create()
