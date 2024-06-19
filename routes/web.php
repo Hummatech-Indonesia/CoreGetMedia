@@ -77,9 +77,9 @@ Route::get('news-list', [NewsController::class, 'news_list'])->name('news-list.a
 Route::get('confirm-author-list', [AuthorController::class, 'index'])->name('confirm-author.admin');
 Route::get('author-list', [AuthorController::class, 'list_author'])->name('author-list.admin');
 
-Route::get('admin-account-list', function () {
-    return view('pages.admin.account.admin');
-})->name('admin-account.list.admin');
+// Route::get('admin-account-list', function () {
+//     return view('pages.admin.account.admin');
+// })->name('admin-account.list.admin');
 
 Route::get('author-banned', function () {
     return view('pages.admin.author.author-banned');
@@ -149,6 +149,14 @@ Route::get('advertising', function () {
 Route::get('create-news', function () {
     return view('pages.author.news.create');
 })->name('create.news');
+
+Route::get('list-news', function () {
+    return view('pages.author.news.list-news');
+})->name('news.list.author');
+
+Route::get('subscribe', function () {
+    return view('pages.user.subscribe.index');
+})->name('news.subscribe');
 
 //Author
 Route::get('create-news', [NewsController::class, 'create'])->name('create.news');
