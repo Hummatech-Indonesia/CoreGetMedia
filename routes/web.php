@@ -32,7 +32,7 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('pages.index');
 // });
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 Auth::routes();
 
