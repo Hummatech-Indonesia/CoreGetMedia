@@ -2,45 +2,45 @@
 
 @section('style')
 <style>
-.border-primary {
-    border-left: 2px solid #41739e !important
-}
-
-.border-danger {
-    border-left: 2px solid #e68888 !important
-}
-
-.border-info {
-    border-left: 2px solid #bacff0 !important
-}
-
-.border-warning {
-    border-left: 2px solid #fce287 !important
-}
-
-.border-light-blue {
-    border-left: 2px solid #5D87FF !important
-}
-
-.border-light-red {
-    border-left: 2px solid #EF6E6E !important
-}
-
-.container {
-    width: 80%;
-    margin: 15px auto;
-}
-
-h2 {
-    text-align: center;
-}
-
-@media(max-width: 768px) {
-    .img-responsive {
-        width: 100%;
-        height: 300px;
+    .border-primary {
+        border-left: 2px solid #41739e !important
     }
-}
+
+    .border-danger {
+        border-left: 2px solid #e68888 !important
+    }
+
+    .border-info {
+        border-left: 2px solid #bacff0 !important
+    }
+
+    .border-warning {
+        border-left: 2px solid #fce287 !important
+    }
+
+    .border-light-blue {
+        border-left: 2px solid #5D87FF !important
+    }
+
+    .border-light-red {
+        border-left: 2px solid #EF6E6E !important
+    }
+
+    .container {
+        width: 80%;
+        margin: 15px auto;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    @media(max-width: 768px) {
+        .img-responsive {
+            width: 100%;
+            height: 300px;
+        }
+    }
 </style>
 <link rel="stylesheet" href="{{ 'admin/dist/libs/prismjs/themes/prism-okaidia.min.css' }}">
 <script src="https://unpkg.com/feather-icons"></script>
@@ -244,29 +244,29 @@ h2 {
 </div>
 
 <script>
-var ctx = document.getElementById("barChart").getContext('2d');
-var barChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sst", "Sun"],
-        datasets: [{
-            label: 'data-1',
-            data: [12, 19, 3, 17, 28, 24, 7],
-            backgroundColor: "rgba(23,90,149,1)"
-        }, {
-            label: 'data-2',
-            data: [30, 29, 5, 5, 20, 3, 10],
-            backgroundColor: "rgba(255,174,31,1)"
-        }, {
-            label: 'data-3',
-            data: [30, 29, 5, 5, 20, 3, 10],
-            backgroundColor: "rgba(239,110,110,1)"
-        }]
-    }
-});
+    var ctx = document.getElementById("barChart").getContext('2d');
+    var barChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sst", "Sun"],
+            datasets: [{
+                label: 'data-1',
+                data: [12, 19, 3, 17, 28, 24, 7],
+                backgroundColor: "rgba(23,90,149,1)"
+            }, {
+                label: 'data-2',
+                data: [30, 29, 5, 5, 20, 3, 10],
+                backgroundColor: "rgba(255,174,31,1)"
+            }, {
+                label: 'data-3',
+                data: [30, 29, 5, 5, 20, 3, 10],
+                backgroundColor: "rgba(239,110,110,1)"
+            }]
+        }
+    });
 </script>
 <script>
-feather.replace();
+    feather.replace();
 </script>
 
 @endsection
