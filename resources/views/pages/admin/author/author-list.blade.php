@@ -145,7 +145,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <form method="POST" id="form-create" enctype="multipart/form-data">
+                <form method="POST" id="form-create" action="{{route('create.author.admin')}}" enctype="multipart/form-data">
+                    @method('post')
                     @csrf
                     <div class="modal-body">
                         <div class="row container">
