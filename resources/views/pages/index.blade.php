@@ -310,7 +310,7 @@
                 @if ($loop->first)
                     <div class="news-card-two">
                         <div class="news-card-img">
-                            <img src="{{ asset('storage/' . $categoryPopular->image) }}" class="w-100" style="height: 200px; object-fit: cover;" alt="Image" />
+                            <img src="{{ asset('storage/' . $categoryPopular->image) }}" class="w-100" style="height: 230px; object-fit: cover;" alt="Image" />
                             <a href="{{ route('categories.show.user', $categoryPopular->newsCategories[0]->category->slug) }}" class="news-cat">{{ $categoryPopular->newsCategories[0]->category->name }}</a>
                         </div>
                         <div class="news-card-info">
@@ -393,7 +393,7 @@
                 @if ($loop->first)
                     <div class="news-card-two">
                         <div class="news-card-img">
-                            <img src="{{ asset('storage/' . $category2Popular->image) }}" class="w-100" style="height: 200px; object-fit: cover;" alt="Image" />
+                            <img src="{{ asset('storage/' . $category2Popular->image) }}" class="w-100" style="height: 230px; object-fit: cover;" alt="Image" />
                             <a href="{{ route('categories.show.user', $category2Popular->newsCategories[0]->category->slug) }}" class="news-cat">{{ $category2Popular->newsCategories[0]->category->name }}</a>
                         </div>
                         <div class="news-card-info">
