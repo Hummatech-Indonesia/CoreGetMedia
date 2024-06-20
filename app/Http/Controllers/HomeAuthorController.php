@@ -8,6 +8,7 @@ use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\NewsLikeInterface;
 use App\Enums\NewsEnum;
 use App\Models\Author;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeAuthorController extends Controller

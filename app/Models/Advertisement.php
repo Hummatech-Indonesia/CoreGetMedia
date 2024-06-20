@@ -8,4 +8,22 @@ use Illuminate\Database\Eloquent\Model;
 class Advertisement extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'id',
+        'user_id',
+        'image',
+        'start_date',
+        'end_date',
+        'price',
+        'feed',
+        'status',
+        'description'
+    ];
+
+    protected $primaryKey = 'id';
+    protected $table = 'advertisements';
+
+    public $incrementing = false;
+    public $keyType = 'char';
 }

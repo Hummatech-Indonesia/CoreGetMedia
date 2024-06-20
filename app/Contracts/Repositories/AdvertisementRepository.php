@@ -2,15 +2,14 @@
 
 namespace App\Contracts\Repositories;
 
-use App\Contracts\Interfaces\TagInterface;
-use App\Enums\NewsEnum;
-use App\Models\Tags;
+use App\Contracts\Interfaces\AdvertisementInterface;
+use App\Models\Advertisement;
 
-class TagRepository extends BaseRepository implements TagInterface
+class AdvertisementRepository extends BaseRepository implements AdvertisementInterface
 {
-    public function __construct(Tags $tag)
+    public function __construct(Advertisement $advertisement)
     {
-        $this->model = $tag;
+        $this->model = $advertisement;
     }
 
     /**
@@ -25,22 +24,6 @@ class TagRepository extends BaseRepository implements TagInterface
         return $this->model->query()
         ->findOrFail($id)
         ->delete();
-    }
-
-    public function showWithCount(): mixed
-    {
-        return $this->model->query()
-            ->withCount('newsTags')
-            ->orderByDesc('news_tags_count')
-            ->take(7)
-            ->get();
-    }
-
-    public function showWithSLug(string $slug): mixed
-    {
-        return $this->model->query()
-            ->where('slug', $slug)
-            ->firstOrFail();
     }
 
     /**
@@ -64,18 +47,6 @@ class TagRepository extends BaseRepository implements TagInterface
     {
         return $this->model->query()
             ->get();
-    }
-
-        /**
-     * Handle the Get all data event from models.
-     *
-     * @return mixed
-     */
-    public function paginate(): mixed
-    {
-        return $this->model->query()
-            ->latest()
-            ->paginate(10);
     }
 
     /**
@@ -104,14 +75,5 @@ class TagRepository extends BaseRepository implements TagInterface
         return $this->model->query()
             ->findOrFail($id)
             ->update($data);
-    }
-
-    public function getByPopular(): mixed
-    {
-        return $this->model->query()
-            ->whereRelation('newsTags.news', 'status', NewsEnum::ACCEPTED->value)
-            ->withCount('newsTags')
-            ->take(12)
-            ->get();
     }
 }

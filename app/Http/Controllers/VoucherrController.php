@@ -20,7 +20,7 @@ class VoucherrController extends Controller
      */
     public function index()
     {
-        $vouchers = $this->voucher->get();
+        $vouchers = $this->voucher->paginate();
         return view('pages.admin.voucher.index' , compact('vouchers'));
     }
 
