@@ -462,7 +462,7 @@
         <div class="row align-items-start mb-40">
             <div class="col-md-7">
                 <h2 class="section-title">Artikel Terbaru</h2>
-                <div class="mb-4 col-3" style="border: 1px solid #E93314; width 200px"></div>
+                <div class="mb-4 col-3" style="border: 1px solid #E93314; width: 200px"></div>
             </div>
             <div class="col-md-5 text-md-end">
                 <a href="{{ route('latest.news') }}" class="link-one">Lihat Semua<i

@@ -25,6 +25,10 @@
                         <span class="hide-menu">Beranda</span>
                     </a>
                 </li>
+                <li class="nav-small-cap">
+                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                    <span class="hide-menu text-white">Berita</span>
+                </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
                         <span class="d-flex">
@@ -39,6 +43,54 @@
                                     <i data-feather="thumbs-up"></i>
                                 </div>
                                 <span class="hide-menu">Berita Disukai</span>
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </li>
+
+                <li class="nav-small-cap">
+                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                    <span class="hide-menu text-white">IKLAN</span>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                        <div class="round-16 d-flex align-items-center justify-content-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
+                                <path fill="#ffffff" d="M11 13H5v-2h6V5h2v6h6v2h-6v6h-2z" />
+                            </svg>
+                        </div>
+                        <span class="hide-menu">Iklan</span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse first-level">
+                        <li class="sidebar-item">
+                            <a href="{{ route('biodata-advertisement') }}" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
+                                        <path fill="#ffffff" d="M11 13H5v-2h6V5h2v6h6v2h-6v6h-2z" />
+                                    </svg>
+                                </div>
+                                <span class="hide-menu">Unggah Iklan</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{{ route('status-advertisement.user') }}" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
+                                        <path fill="#ffffff" d="M11 13H5v-2h6V5h2v6h6v2h-6v6h-2z" />
+                                    </svg>
+                                </div>
+                                <span class="hide-menu">Status Iklan</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
+                                        <path fill="#ffffff" d="M11 13H5v-2h6V5h2v6h6v2h-6v6h-2z" />
+                                    </svg>
+                                </div>
+                                <span class="hide-menu">Riwayat Iklan</span>
                             </a>
                         </li>
                     </ul>

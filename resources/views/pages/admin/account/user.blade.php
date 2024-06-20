@@ -135,6 +135,9 @@
                 </tr> --}}
             </tbody>
         </table>
+        <div class="d-flex justify-content-end">
+            <x-paginatoradmin :paginator="$users" />
+        </div>
     </div>
 
 </div>
