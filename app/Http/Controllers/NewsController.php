@@ -172,6 +172,7 @@ class NewsController extends Controller
         $news_id = $news->id;
         $data = $this->viewService->store($news_id, $ipAddress);
         $tags = $this->newstags->where($news_id, 'notop');
+        // dd($tags);
         $comments = $this->comments->get($news_id);
         $likes = $this->newsLikes->get($news_id);
 
@@ -183,8 +184,9 @@ class NewsController extends Controller
         $content = $news->description;
         $processedContent = $this->ImageContent->insertImagesInContent($content);
 
+        $newsTags = $this->newstags->wheretag($news_id);
 
-        return view('pages.user.singlepost.index', compact('likedByUser', 'news', 'news_id', 'CategoryPopulars', 'tags', 'popularTags', 'comments', 'likes', 'processedContent'));
+        return view('pages.user.singlepost.index', compact('likedByUser', 'news', 'news_id', 'CategoryPopulars', 'tags', 'popularTags', 'comments', 'likes', 'processedContent', 'newsTags'));
     }
 
     public function showPinned()
