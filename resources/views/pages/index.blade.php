@@ -305,7 +305,7 @@
 <div class="container-fluid pb-4">
     <div class="row">
         <!-- Kolom Satu -->
-        <div class="col-lg-4 col-md-12 col-sm-12 mb-4">
+        <div class="col-lg-4 col-md-12 col-sm-12 mb-3">
             @forelse ($filteredCategoryPopulars as $key => $categoryPopular)
                 @if ($loop->first)
                     <div class="news-card-two">
@@ -383,7 +383,7 @@
         </div>
 
         <!-- Kolom Tiga -->
-        <div class="col-lg-4 col-md-12 col-sm-12 mb-4">
+        <div class="col-lg-4 col-md-12 col-sm-12 mb-3">
             @php
                 $categoryRight_id = $filteredCategoryPopulars->pluck('id');
                 $includeid = $displayedPopulars->merge($categoryRight_id)->merge($pin_id);
