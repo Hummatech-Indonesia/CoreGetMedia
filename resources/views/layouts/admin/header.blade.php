@@ -41,11 +41,11 @@
                             <img src="{{asset('admin/dist/images/profile/user-10.jpg')}}" class="rounded-circle user-profile" style="object-fit: cover"
                                 width="80" height="80" alt="" />
                             <div class="ms-3">
-                                <h5 class="mb-1 fs-3 username">Karin</h5>
+                                <h5 class="mb-1 fs-3 username">{{ auth()->user()->name }}</h5>
                                 <span class="mb-1 d-block text-dark role">Admin</span>
                                 <p class="mb-0 d-flex text-dark align-items-center gap-2 email">
                                     <i class="ti ti-mail fs-4"></i>
-                                    karin@gmail.com
+                                    {{ auth()->user()->email }}
                                 </p>
                             </div>
                         </div>
@@ -90,8 +90,8 @@
                     </li>
                     <li class="nav item">
                         <div class="d-none d-md-flex flex-column align-items-end justify-content-center">
-                            <span class="mt-2 fs-4 lh-1 text-end fw-semibold">Karin</span>
-                            <span class="fs-4 text-end">karin@gmail.com</span>
+                            <span class="mt-2 fs-4 lh-1 text-end fw-semibold">{{ auth()->user()->name }}</span>
+                            <span class="fs-4 text-end">{{ auth()->user()->email }}</span>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -99,7 +99,7 @@
                             aria-expanded="false">
                             <div class="d-flex align-items-center">
                                 <div class="">
-                                    <img src="{{asset('admin/dist/images/profile/user-10.jpg')}}" class="rounded-circle user-profile"
+                                    <img src="{{ asset( Auth::user()->image ? 'storage/'.Auth::user()->image : "default.png")  }}" class="rounded-circle user-profile"
                                         style="object-fit: cover" width="35" height="35" alt="" />
                                 </div>
                             </div>
@@ -114,11 +114,11 @@
                                     <img src="{{asset('admin/dist/images/profile/user-10.jpg')}}" class="rounded-circle user-profile" style="object-fit: cover"
                                         width="80" height="80" alt="" />
                                     <div class="ms-3">
-                                        <h5 class="mb-1 fs-3 username">Karin</h5>
+                                        <h5 class="mb-1 fs-3 username">{{ auth()->user()->name }}</h5>
                                         <span class="mb-1 d-block text-dark role">Admin</span>
                                         <p class="mb-0 d-flex text-dark align-items-center gap-2 email">
                                             <i class="ti ti-mail fs-4"></i>
-                                            karin@gmail.com
+                                            {{ auth()->user()->email }}
                                         </p>
                                     </div>
                                 </div>
