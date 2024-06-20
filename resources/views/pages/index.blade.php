@@ -202,7 +202,7 @@ $popular_down_id = $popular_down->pluck('id');
                 @endforelse
             </div>
 
-            <div class="news-col-two col-md-6">
+            <div class="news-col-two col-md-4">
                 @forelse ($newsPins->take(3) as $key => $newsPin)
                 @if (++$key == 1)
                 <div class="news-card-four">
