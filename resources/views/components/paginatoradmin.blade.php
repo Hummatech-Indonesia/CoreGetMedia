@@ -1,15 +1,15 @@
 @props(['paginator'])
 
 @if ($paginator->hasPages())
-    <ul class="pagination justify-content-center mt-5">
+    <ul class="pagination justify-content-center mt-3">
         <!-- Previous Page Link -->
         @if ($paginator->onFirstPage())
             <li class="page-item disabled">
-                <span class="page-link"><i class="fas fa-arrow-left"></i></span>
+                <span class="page-link" style="height: 35;"><i class="fas fa-arrow-left mt-1"></i></span>
             </li>
         @else
             <li class="page-item">
-                <a class="page-link" href="{{ $paginator->previousPageUrl() }}" rel="prev"><i class="fas fa-arrow-left"></i></a>
+                <a class="page-link" style="height: 35;" href="{{ $paginator->previousPageUrl() }}" rel="prev"><i class="fas fa-arrow-left mt-1"></i></a>
             </li>
         @endif
 
@@ -33,11 +33,11 @@
         <!-- Next Page Link -->
         @if ($paginator->hasMorePages())
             <li class="page-item">
-                <a class="page-link" href="{{ $paginator->nextPageUrl() }}" rel="next"><i class="fas fa-arrow-right"></i></a>
+                <a class="page-link" style="height: 35;" href="{{ $paginator->nextPageUrl() }}" rel="next"><i class="fas fa-arrow-right mt-1"></i></a>
             </li>
         @else
             <li class="page-item disabled">
-                <span class="page-link"><i class="fas fa-arrow-right"></i></span>
+                <span class="page-link" style="height: 35;"><i class="fas fa-arrow-right mt-1"></i></span>
             </li>
         @endif
     </ul>
