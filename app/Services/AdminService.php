@@ -19,15 +19,6 @@ class AdminService
      */
     public function storeOrUpdate(StoreAdminRequest $request)
     {
-        // $data = $request->validated();
-        // $data->assignRole(RoleEnum::ADMIN->value);
-        // return [
-        //     'name' => $data['name'],
-        //     'slug' => Str::slug($data['name']),
-        //     'email' => $data['email'],
-        //     'password' => $data['password'],
-        // ];
-
         $data = $request->validated();
 
         $user = User::updateOrCreate(
@@ -38,9 +29,9 @@ class AdminService
                 'password' => bcrypt($data['password']),
             ]
         );
-    
+
         $user->assignRole(RoleEnum::ADMIN->value);
-    
+
         return [
             'name' => $user->name,
             'slug' => $user->slug,
@@ -48,6 +39,6 @@ class AdminService
             'password' => $user->password,
         ];
 
-        
+
     }
 }

@@ -25,6 +25,9 @@ class StoreAdvertisementRequest extends FormRequest
             'image' => 'required|mimes:jpg,jpeg,png,mp4,avi,mov,mkv',
             'start_date' => 'required',
             'end_date' => 'required',
+            'type' => 'required',
+            'page' => 'required',
+            'position' => 'required'
         ];
     }
 }

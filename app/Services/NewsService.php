@@ -60,7 +60,7 @@ class NewsService
         }
 
         $slug = Str::slug($data['name']);
-        $compressedImage = $this->compressImage($request->image);
+        $compressedImage = $this->compressImage($slug, $request->image);
         $new_photo = $this->upload(UploadDiskEnum::NEWS->value, $compressedImage);
 
         $domQuestion = new \DOMDocument();
@@ -160,6 +160,7 @@ class NewsService
             $data['tag'] = $newTags;
         }
 
+        $slug = Str::slug($data['name']);
         $old_photo = $news->image;
         $new_photo = "";
 
@@ -169,7 +170,7 @@ class NewsService
                 unlink(public_path($old_photo));
             }
 
-            $compressedImage = $this->compressImage($request->image);
+            $compressedImage = $this->compressImage($slug, $request->image);
             $new_photo = $this->upload(UploadDiskEnum::NEWS->value, $compressedImage);
 
             $news->image = $new_photo;
@@ -187,7 +188,7 @@ class NewsService
         return [
             'user_id' => auth()->user()->id,
             'name' => $data['name'],
-            'slug' => Str::slug($data['name']),
+            'slug' => $slug,
             'image' => $new_photo ? $new_photo : $old_photo,
             'description' => $data['description'],
             'date' => $data['date'],
