@@ -1,4 +1,4 @@
-@extends('layouts.user.sidebar')
+@extends(auth()->user()->hasRole('author') ? 'layouts.author.app' : 'layouts.user.sidebar')
 
 @section('content')
 
@@ -71,10 +71,10 @@
                         </div>
                     </div>
                 </div>
-
             @empty
-                <div>
-                    <img src="{{ asset('Empty-cuate.png') }}" alt="">
+                <div class="text-center">
+                    <img src="{{ asset('assets/Empty-cuate.png') }}" alt="" class="w-25">
+                    <p>Tidak ada data</p>
                 </div>
             @endforelse
         </div>
