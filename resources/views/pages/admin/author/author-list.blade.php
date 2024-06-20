@@ -107,32 +107,26 @@
                             </button>
 
                             @if ($author->user->status == 'active')
+                                <button id="blokir" data-bs-toggle="tooltip" title="Blokir" type="button" data-id="{{ $author->user->id }}" class="btn btn-blokir btn-sm btn-danger me-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="25" viewBox="0 0 512 512">
+                                        <circle cx="256" cy="256" r="208" fill="none" stroke="#ffffff" stroke-miterlimit="10" stroke-width="32" />
+                                        <path fill="none" stroke="#ffffff" stroke-miterlimit="10" stroke-width="32" d="m108.92 108.92l294.16 294.16" />
+                                    </svg>
 
-                            <button id="blokir" data-bs-toggle="tooltip" title="Blokir" type="button" data-id="{{ $author->user->id }}" class="btn btn-blokir btn-sm btn-danger me-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="23" height="25" viewBox="0 0 512 512">
-                                    <circle cx="256" cy="256" r="208" fill="none" stroke="#ffffff" stroke-miterlimit="10" stroke-width="32" />
-                                    <path fill="none" stroke="#ffffff" stroke-miterlimit="10" stroke-width="32" d="m108.92 108.92l294.16 294.16" />
-                                </svg>
-
-                            </button>
+                                </button>
                             @else
-                            {{-- <form method="post" id="form-unblock">
-                                @csrf
-                                @method('put') --}}
-                            <button id="unblock" data-bs-toggle="tooltip" title="Buka Blokir" data-id="{{ $author->user->id }}" type="button" class="btn btn-unblock btn-sm btn-success me-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
-                                    <path fill="#fff" d="M6.615 9H15V7q0-1.25-.875-2.125T12 4q-1.25 0-2.125.875T9 7H8q0-1.671 1.164-2.836T12 3q1.671 0 2.836 1.164T16 7v2h1.385q.666 0 1.14.475q.475.474.475 1.14v8.77q0 .666-.475 1.14q-.474.475-1.14.475H6.615q-.666 0-1.14-.475Q5 20.051 5 19.385v-8.77q0-.666.475-1.14Q5.949 9 6.615 9M12 16.5q.633 0 1.066-.434q.434-.433.434-1.066t-.434-1.066Q12.633 13.5 12 13.5t-1.066.434Q10.5 14.367 10.5 15t.434 1.066q.433.434 1.066.434" />
-                                </svg>
-                            </button>
-                            {{-- </form> --}}
+                                <button id="unblock" data-bs-toggle="tooltip" title="Buka Blokir" data-id="{{ $author->user->id }}" type="button" class="btn btn-unblock btn-sm btn-success me-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
+                                        <path fill="#fff" d="M6.615 9H15V7q0-1.25-.875-2.125T12 4q-1.25 0-2.125.875T9 7H8q0-1.671 1.164-2.836T12 3q1.671 0 2.836 1.164T16 7v2h1.385q.666 0 1.14.475q.475.474.475 1.14v8.77q0 .666-.475 1.14q-.474.475-1.14.475H6.615q-.666 0-1.14-.475Q5 20.051 5 19.385v-8.77q0-.666.475-1.14Q5.949 9 6.615 9M12 16.5q.633 0 1.066-.434q.434-.433.434-1.066t-.434-1.066Q12.633 13.5 12 13.5t-1.066.434Q10.5 14.367 10.5 15t.434 1.066q.433.434 1.066.434" />
+                                    </svg>
+                                </button>
                             @endif
 
-
-                            <a data-bs-toggle="tooltip" title="delete" data-id="{{ $author->user->id }}" class="btn btn-delete btn-sm btn-danger">
+                            {{-- <a data-bs-toggle="tooltip" title="delete" data-id="{{ $author->user->id }}" class="btn btn-delete btn-sm btn-danger">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24">
                                     <path fill="#ffffff" d="M7 21q-.825 0-1.412-.587T5 19V6q-.425 0-.712-.288T4 5t.288-.712T5 4h4q0-.425.288-.712T10 3h4q.425 0 .713.288T15 4h4q.425 0 .713.288T20 5t-.288.713T19 6v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zm-7 11q.425 0 .713-.288T11 16V9q0-.425-.288-.712T10 8t-.712.288T9 9v7q0 .425.288.713T10 17m4 0q.425 0 .713-.288T15 16V9q0-.425-.288-.712T14 8t-.712.288T13 9v7q0 .425.288.713T14 17M7 6v13z" />
                                 </svg>
-                            </a>
+                            </a> --}}
                         </div>
                     </td>
                 </tr>
@@ -295,7 +289,7 @@
     <div class="modal-dialog modal-sm">
         <form id="form-blokir" method="POST" class="modal-content">
             @csrf
-            @method('put')
+            @method('patch')
             <div class="modal-header d-flex align-items-center">
                 <h4 class="modal-title" id="myModalLabel">
                     Blokir Penulis
@@ -359,11 +353,11 @@
         var address = $(this).data('address')
         $('#form-tolak').attr('action', '/confirm-author/' + id);
         $('#form-terima').attr('action', '/confirm-author/' + id);
-        $('#detail-name').val(name);
-        $('#detail-email').val(email);
+        $('#detail-name').text(name);
+        $('#detail-email').text(email);
         $('#detail-image').attr('src', image);
-        $('#detail-birth_date').val(date)
-        $('#detail-address').val(address)
+        $('#detail-birth_date').text(date)
+        $('#detail-address').text(address)
         console.log(id);
         $('#modal-detail').modal('show');
     });
@@ -371,7 +365,7 @@
 
     $('.btn-blokir').on('click', function() {
         var id = $(this).data('id');
-        $('#form-blokir').attr('action', '/blok-user/' + id);
+        $('#form-blokir').attr('action', '/banned-user/' + id);
         console.log(id);
         $('#modal-blokir').modal('show');
     });
@@ -385,7 +379,7 @@
 
     $('.btn-delete').on('click', function() {
         var id = $(this).data('id');
-        $('#form-delete').attr('action', '/author-list/' + id);
+        $('#form-delete').attr('action', '/author-delete/' + id);
         console.log(id);
         $('#modal-delete').modal('show');
     });

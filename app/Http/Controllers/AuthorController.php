@@ -10,10 +10,13 @@ use App\Contracts\Interfaces\NewsViewInterface;
 use App\Contracts\Interfaces\PopularInterface;
 use App\Contracts\Interfaces\UserInterface;
 use App\Enums\AuthorEnum;
+use App\Enums\RoleEnum;
 use App\Models\Author;
 use App\Http\Requests\StoreAuthorRequest;
 use App\Http\Requests\UpdateAuthorRequest;
+use App\Models\User;
 use App\Services\AuthorService;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 
 class AuthorController extends Controller
@@ -26,9 +29,10 @@ class AuthorController extends Controller
     private PopularInterface $popular;
     private UserInterface $user;
     private AuthorService $service;
+    private UserService $userService;
 
 
-    public function __construct(UserInterface $user, AuthorInterface $author, AuthorService $service, NewsInterface $news, CategoryInterface $category, PopularInterface $popular, NewsLikeInterface $newsLike, NewsViewInterface $newsView)
+    public function __construct(UserInterface $user, AuthorInterface $author, AuthorService $service, NewsInterface $news, CategoryInterface $category, PopularInterface $popular, NewsLikeInterface $newsLike, NewsViewInterface $newsView, UserService $userService)
     {
         $this->author = $author;
         $this->news = $news;
@@ -38,6 +42,7 @@ class AuthorController extends Controller
         $this->service = $service;
         $this->newsLike = $newsLike;
         $this->newsView = $newsView;
+        $this->userService = $userService;
     }
 
     /**
@@ -116,9 +121,10 @@ class AuthorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Author $author)
-    {
-        $this->author->delete($author->id);
+    public function destroy(User $user)
+    {   
+        $user->roles()->detach();  
+        $user->delete();
         return back()->wihh('success', 'Berhasil menghapus data');
     }
 
@@ -131,6 +137,8 @@ class AuthorController extends Controller
     public function confirm(Author $author)
     {
         $this->author->update($author->id, ['status' => AuthorEnum::ACCEPTED->value]);
+        $user = $author->user;
+        $user->assignRole(RoleEnum::AUTHOR->value);
         return redirect()->back()->with(['success' => 'Author Berhasil Dikonfirmasi']);
     }
 

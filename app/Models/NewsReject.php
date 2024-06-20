@@ -35,6 +35,6 @@ class NewsReject extends Model
      */
     public function news(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(News::class);
     }
 }
