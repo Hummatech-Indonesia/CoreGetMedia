@@ -18,6 +18,7 @@ use App\Models\News;
 use App\Http\Requests\StoreNewsRequest;
 use App\Http\Requests\UpdateNewsRequest;
 use App\Models\NewsCategory;
+use App\Services\ImageContentService;
 use App\Services\NewsService;
 use App\Services\NewsViewService;
 use Illuminate\Http\Request;
@@ -40,6 +41,7 @@ class NewsController extends Controller
     private NewsService $service;
     private NewsViewService $viewService;
     private PopularInterface $popularNews;
+    private ImageContentService $ImageContent;
 
     public function __construct(
         NewsInterface $news,
@@ -55,6 +57,7 @@ class NewsController extends Controller
         NewsViewService $viewService,
         NewsService $service,
         PopularInterface $popularNews,
+        ImageContentService $ImageContent,
         )
     {
         $this->news = $news;
@@ -73,6 +76,7 @@ class NewsController extends Controller
         $this->service = $service;
 
         $this->popularNews = $popularNews;
+        $this->ImageContent = $ImageContent;
     }
     /**
      * Display a listing of the resource.
@@ -175,7 +179,12 @@ class NewsController extends Controller
 
         $CategoryPopulars = $this->categories->showWithCount();
         $popularTags = $this->tags->showWithCount();
-        return view('pages.user.singlepost.index', compact('likedByUser', 'news', 'news_id', 'CategoryPopulars', 'tags', 'popularTags', 'comments', 'likes'));
+
+        $content = $news->description;
+        $processedContent = $this->ImageContent->insertImagesInContent($content);
+
+
+        return view('pages.user.singlepost.index', compact('likedByUser', 'news', 'news_id', 'CategoryPopulars', 'tags', 'popularTags', 'comments', 'likes', 'processedContent'));
     }
 
     public function showPinned()
@@ -241,32 +250,9 @@ class NewsController extends Controller
         $subCategories = $this->subcategories->get();
         return view('pages.index', compact('categories', 'subCategories'));
     }
-    // public function showCategories($slug, Request $request, NewsCategory $newsCategory)
-    // {
-    //     $request->merge([
-    //         'name' => $newsCategory->id,
-    //     ]);
-
-    //     $category = $this->category->showWithSlug($slug);
-    //     $categoryId = $category->id;
-    //     $subCategory = $this->subCategory->where($categoryId);
-
-    //     $categories = $this->category->get();
-    //     $totalCategories = $this->category->showWhithCount();
-    //     $subCategories = $this->subCategory->get();
-    //     $news = $this->news->showWhithCount();
-
-    //     $query = $request->input('search');
-    //     $newsCategories = $this->newsCategory->search($category->id, $query);
-
-    //     $popular = $this->view->newsCategory($categoryId);
-
-    //     $new_news = $this->news->newsCategorySearch($category->id, $query, 'terbaru', '5');
-    //     $trending = $this->news->newsCategorySearch($category->id, $query, 'trending', '5');
-    //     return view('pages.user.news.category', compact('trending','new_news','popular','news', 'totalCategories','subCategories','categories','category', 'subCategory', 'newsCategories'));
-    // }
 
     public function latestNews(){
+
         $news = $this->news->latest();
         $CategoryPopulars = $this->categories->showWithCount();
         $popularTags = $this->tags->showWithCount();

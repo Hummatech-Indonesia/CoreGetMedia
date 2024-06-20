@@ -207,8 +207,10 @@ class NewsRepository extends BaseRepository implements NewsInterface
     public function latest() : mixed
     {
         return $this->model->query()
-        ->latest()
-        ->get();
+            ->where('status', NewsEnum::ACCEPTED->value)
+            ->withCount('newsViews')
+            ->latest()
+            ->paginate(10);
     }
 
 
@@ -240,21 +242,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->update($data);
     }
 
-    // public function searchAll(Request $request): mixed
-    // {
-    //     return $this->model->query()
-
-    //         ->where(function ($query) use ($request) {
-    //             $query->where('name', 'LIKE', '%' . $request->search . '%')
-    //                 ->orWhere('content', 'LIKE', '%' . $request->search . '%')
-    //                 ->orWhereHas('user', function ($query) use ($request) {
-    //                     $query->where('name', 'LIKE', '%' . $request->search . '%');
-    //                 });
-    //         })
-    //         ->get();
-    // }
-
-     public function news_pin_categories() : mixed
+    public function news_pin_categories() : mixed
     {
         return $this->model->query()
             ->select('categories.name')
@@ -281,10 +269,11 @@ class NewsRepository extends BaseRepository implements NewsInterface
     public function allPin() : mixed
     {
         return $this->model->query()
-            ->where('news.status', NewsEnum::ACCEPTED->value)
-            ->where('news.pin', '1')
+            ->where('status', NewsEnum::ACCEPTED->value)
+            ->where('pin', '1')
+            ->withCount('newsViews')
             ->latest()
-            ->get();
+            ->paginate(10);
     }
 
     public function whereUser($id)
@@ -301,7 +290,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
     {
         return $this->model->query()
         ->where('user_id', $id)
-        ->where('status', $status)  
+        ->where('status', $status)
         ->count();
     }
 
