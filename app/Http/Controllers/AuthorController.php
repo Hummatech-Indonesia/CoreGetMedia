@@ -123,7 +123,7 @@ class AuthorController extends Controller
      */
     public function destroy(User $user)
     {
-        $this->user->delete($user);
+        $user->delete();
         return back()->wihh('success', 'Berhasil menghapus data');
     }
 
