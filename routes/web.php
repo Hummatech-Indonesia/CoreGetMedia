@@ -165,9 +165,7 @@ Route::put('update-news/{news}', [NewsController::class, 'update'])->name('updat
 Route::delete('delete-news/{news}', [NewsController::class, 'destroy'])->name('delete.news');
 
 
-Route::get('news-statistic', function () {
-    return view('pages.author.news.statistic');
-})->name('news.author.statistic');
+Route::get('news-statistic', [AuthorController::class, 'statistic'])->name('news.author.statistic');
 
 Route::get('list-delete-news', function () {
     return view('pages.author.news.list-delete');
@@ -248,7 +246,7 @@ Route::get('all-pinned', [NewsController::class, 'showPinned'])->name('all-pinne
 Route::put('/blok-user/{user}', [UserController::class, 'banned'])->name('user.banned');
 
 Route::get('status-advertisement-list', function(){
-    return view('pages.user.advertisement.status-advertisement');   
+    return view('pages.user.advertisement.status-advertisement');
 })->name('status-advertisement.user');
 
 require_once __DIR__ . '/jovita.php';

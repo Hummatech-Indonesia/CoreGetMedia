@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Contracts\Interfaces\AuthorInterface;
 use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\NewsInterface;
+use App\Contracts\Interfaces\NewsLikeInterface;
+use App\Contracts\Interfaces\NewsViewInterface;
 use App\Contracts\Interfaces\PopularInterface;
 use App\Contracts\Interfaces\UserInterface;
 use App\Enums\AuthorEnum;
@@ -18,13 +20,15 @@ class AuthorController extends Controller
 {
     private AuthorInterface $author;
     private NewsInterface $news;
+    private NewsLikeInterface $newsLike;
+    private NewsViewInterface $newsView;
     private CategoryInterface $category;
     private PopularInterface $popular;
     private UserInterface $user;
     private AuthorService $service;
-    
 
-    public function __construct(UserInterface $user, AuthorInterface $author, AuthorService $service, NewsInterface $news, CategoryInterface $category, PopularInterface $popular)
+
+    public function __construct(UserInterface $user, AuthorInterface $author, AuthorService $service, NewsInterface $news, CategoryInterface $category, PopularInterface $popular, NewsLikeInterface $newsLike, NewsViewInterface $newsView)
     {
         $this->author = $author;
         $this->news = $news;
@@ -32,6 +36,8 @@ class AuthorController extends Controller
         $this->popular = $popular;
         $this->user = $user;
         $this->service = $service;
+        $this->newsLike = $newsLike;
+        $this->newsView = $newsView;
     }
 
     /**
@@ -81,6 +87,14 @@ class AuthorController extends Controller
         $popularCategories = $this->category->showWithCount();
         $popularNewses = $this->popular->getpopular();
         return view('pages.user.author.detail-author', compact('author', 'newses', 'popularCategories', 'popularNewses'));
+    }
+
+    public function statistic()
+    {
+        $newsLike = $this->newsLike->count(auth()->user()->id);
+        $newses = $this->news->whereUser(auth()->user()->id);
+        $newsView = $this->newsView->show(auth()->user()->id);
+        return view('pages.author.news.statistic', compact('newsLike', 'newses', 'newsView'));
     }
 
     /**

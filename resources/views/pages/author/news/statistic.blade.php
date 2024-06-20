@@ -66,7 +66,7 @@
                         <div class="align-items-center justify-content-start text-start">
                             <div>
                                 <h3 style="color: #175A95" class=" mb-2">Berita</h3>
-                                <h3>1</h3>
+                                <h3>{{ $newses->count() }}</h3>
                             </div>
                         </div>
                         <div class="justify-content-between">
@@ -90,7 +90,7 @@
                         <div class="align-items-center justify-content-start text-start">
                             <div>
                                 <h3 style="color: #175A95" class=" mb-2">Like</h3>
-                                <h3>70</h3>
+                                <h3>{{ $newsLike }}</h3>
                             </div>
                         </div>
                         <div class="justify-content-between">
@@ -117,7 +117,7 @@
                         <div class="align-items-center justify-content-start text-start">
                             <div>
                                 <h3 style="color: #175A95" class=" mb-2">Pembaca</h3>
-                                <h3>20</h3>
+                                <h3>{{ $newsView }}</h3>
                             </div>
                         </div>
                         <div class="justify-content-between">
