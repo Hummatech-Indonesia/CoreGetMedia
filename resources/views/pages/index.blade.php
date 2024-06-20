@@ -281,7 +281,7 @@
                     $filteredCategory2Populars = $category2Populars->take(5)->whereNotIn('id', $excludedIds);
                 @endphp
 
-                <div class="news-col-three col-md-3">
+                {{-- <div class="news-col-three col-md-3">
                     @forelse ($filteredCategory2Populars as $key => $category2Popular)
                         @if (++$key == 1)
                             <div class="news-card-two">
@@ -339,7 +339,7 @@
                             </div>
                         </div>
                     @endforelse
-                </div>
+                </div> --}}
 
             </div>
         </div>
