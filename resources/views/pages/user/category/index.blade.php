@@ -189,7 +189,7 @@
                                 </div>
                                 <div class="news-card-info">
                                     <h3><a href="{{ route('news.singlepost', ['news' => $trending->slug]) }}">{!!
-                                            Illuminate\Support\Str::limit($trending->name, $limit = 33, $end = '...')
+                                            Illuminate\Support\Str::limit($trending->name, $limit = 45, $end = '...')
                                             !!}</a></h3>
                                     <ul class="news-metainfo list-style d-flex">
                                         <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)"
