@@ -42,6 +42,7 @@ use App\Contracts\Repositories\SubCategoryRepository;
 use App\Contracts\Repositories\TagRepository;
 use App\Contracts\Repositories\VoucherRepository;
 use App\Contracts\Repositories\UserRepository;
+use App\Services\ImageContentService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -78,6 +79,10 @@ class AppServiceProvider extends ServiceProvider
         foreach ($this->register as $index => $value) {
             $this->app->bind($index, $value);
         }
+
+        $this->app->singleton(ImageContentService::class, function ($app) {
+            return new ImageContentService();
+        });
     }
 
     /**
