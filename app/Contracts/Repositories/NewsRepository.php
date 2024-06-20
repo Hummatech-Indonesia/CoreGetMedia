@@ -302,4 +302,12 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->where('status', $status)
             ->count();
     }
+
+    public function userStatus($user_id, $status): mixed
+    {
+        return $this->model->query()
+            ->where('user_id', $user_id)
+            ->where('status', $status)
+            ->get();
+    }
 }

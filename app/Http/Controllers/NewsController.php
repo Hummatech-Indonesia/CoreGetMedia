@@ -85,7 +85,10 @@ class NewsController extends Controller
     {
         $user_id = auth()->user()->id;
         $news = $this->news->show($user_id);
-        return view('pages.author.news.list-news', compact('news'));
+        $pendings = $this->news->userStatus($user_id, NewsEnum::PENDING->value);
+        $rejecteds = $this->news->userStatus($user_id, NewsEnum::REJECT->value);
+        $accepteds = $this->news->userStatus($user_id, NewsEnum::ACCEPTED->value);
+        return view('pages.author.news.list-news', compact('news', 'pendings', 'rejecteds', 'accepteds'));
     }
 
     public function confirm_news()
@@ -210,7 +213,7 @@ class NewsController extends Controller
         $newsCategory = $this->newscategories->where($news_id);
         $newsSubcategory = $this->newssubcategories->where($news_id);
         $newsTags = $this->newstags->where($news_id, 'notop');
-
+        // dd($newsTags);
         $categories = $this->categories->get();
         $subcategories = $this->subcategories->get();
         $tags = $this->tags->get();
