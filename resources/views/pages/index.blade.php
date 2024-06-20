@@ -156,7 +156,7 @@ $popular_down_id = $popular_down->pluck('id');
     <div class="news-col-wrap">
         <div class="row">
 
-            <div class="news-col-one col-md-4">
+            <div class="news-col-one col-md-3">
                 @forelse ($filteredCategoryPopulars as $key => $categoryPopular)
                 @if (++$key == 1)
                 <div class="news-card-two">
@@ -202,7 +202,7 @@ $popular_down_id = $popular_down->pluck('id');
                 @endforelse
             </div>
 
-            <div class="news-col-two col-md-4">
+            <div class="news-col-two col-md-6">
                 @forelse ($newsPins->take(3) as $key => $newsPin)
                 @if (++$key == 1)
                 <div class="news-card-four">
@@ -255,7 +255,7 @@ $popular_down_id = $popular_down->pluck('id');
             $filteredCategory2Populars = $category2Populars->take(5)->whereNotIn('id', $excludedIds);
             @endphp
 
-            <div class="news-col-three col-md-4">
+            <div class="news-col-three col-md-3">
                 @forelse ($filteredCategory2Populars as $key => $category2Popular)
                 @if (++$key == 1)
                 <div class="news-card-two">
