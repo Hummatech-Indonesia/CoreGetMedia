@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Contracts\Interfaces\AdminInterface;
+use App\Contracts\Interfaces\AdvertisementInterface;
 use App\Contracts\Interfaces\AuthorInterface;
 use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\CommentInterface;
@@ -23,6 +24,7 @@ use App\Contracts\Interfaces\TagInterface;
 use App\Contracts\Interfaces\VoucherInterface;
 use App\Contracts\Interfaces\UserInterface;
 use App\Contracts\Repositories\AdminRepository;
+use App\Contracts\Repositories\AdvertisementRepository;
 use App\Contracts\Repositories\AuthorRepository;
 use App\Contracts\Repositories\CategoryRepository;
 use App\Contracts\Repositories\CommentRepository;
@@ -68,7 +70,8 @@ class AppServiceProvider extends ServiceProvider
         FollowerInterface::class => FollowerRepository::class,
         NewsRejectInterface::class => NewsRejectRepository::class,
         NewsReportInterface::class => NewsReportReporitory::class,
-        AdminInterface::class => AdminRepository::class
+        AdminInterface::class => AdminRepository::class,
+        AdvertisementInterface::class => AdvertisementRepository::class
     ];
 
     /**

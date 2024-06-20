@@ -82,6 +82,14 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
             ->get();
     }
 
+    public function paginate(): mixed
+    {
+        return $this->model->query()
+            ->withCount('newsCategories')
+            ->orderBy('news_categories_count')
+            ->paginate(10);
+    }
+
     /**
      * Handle store data event to models.
      *

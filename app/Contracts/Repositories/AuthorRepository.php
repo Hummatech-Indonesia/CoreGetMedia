@@ -48,7 +48,7 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
     {
         return $this->model->query()
             ->where('status', AuthorEnum::PENDING->value)
-            ->get();
+            ->paginate(10);
     }
 
     public function where($data) : mixed
@@ -57,7 +57,7 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
             ->when($data == 'accepted', function($query){
                 $query->where('status', AuthorEnum::ACCEPTED->value);
             })
-            ->get();
+            ->paginate(10);
     }
 
     /**
