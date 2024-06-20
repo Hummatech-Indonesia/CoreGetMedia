@@ -46,7 +46,7 @@ class PopularRepository extends BaseRepository implements PopularInterface
         return $this->model->query()
             ->where('slug', $slug)
             ->firstOrFail();
-    }   
+    }
 
     public function getpopular(): mixed
     {
@@ -54,7 +54,7 @@ class PopularRepository extends BaseRepository implements PopularInterface
             ->where('status', NewsEnum::ACCEPTED->value)
             ->withCount('newsViews')
             ->orderByDesc('news_views_count')
-            ->get();
+            ->paginate(10);
     }
 
     public function getlatest(): mixed
@@ -67,7 +67,7 @@ class PopularRepository extends BaseRepository implements PopularInterface
     }
 
     public function getbycategory($category_id): mixed
-    {   
+    {
         return $this->model->query()
             ->where('status', NewsEnum::ACCEPTED->value)
             ->whereRelation('newsCategories', 'category_id', $category_id->id)

@@ -109,29 +109,67 @@
             <thead>
                 <tr>
                     <th style="background-color: #D9D9D9;">No</th>
-                    <th style="background-color: #D9D9D9;">Nama</th>
                     <th style="background-color: #D9D9D9;">Jenis Iklan</th>
+                    <th style="background-color: #D9D9D9;">Tanggal Mulai</th>
+                    <th style="background-color: #D9D9D9;">Tanggal Akhir</th>
                     <th style="background-color: #D9D9D9;">Halaman</th>
-                    <th style="background-color: #D9D9D9;">Posisi Iklan</th>
+                    <th style="background-color: #D9D9D9;">Status</th>
                     <th style="background-color: #D9D9D9;">Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>1</td>
-                    <td>Brosur</td>
-                    <td>Foto</td>
-                    <td>Halaman Kategori</td>
-                    <td>di samping</td>
+                    <td>Gambar</td>
+                    <td>1/1/2022</td>
+                    <td>1/2/2022</td>
+                    <td>Detail Berita</td>
+                    <td>
+                        <span class="mb-1 badge rounded-pill font-medium bg-light-danger text-danger w-50">Belum Bayar</span>
+                    </td>
                     <td>
                         <div class="d-flex gap-2">
-                            <button data-bs-toggle="tooltip" title="Detail" class="btn btn-sm btn-primary btn-detail me-2" style="background-color:#5D87FF">
+                            <a href="/detail-advertisement" data-bs-toggle="tooltip" title="Detail" class="btn btn-sm btn-primary btn-detail me-2" style="background-color:#5D87FF">
                                 <i><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="currentColor" d="M12 6.5a9.77 9.77 0 0 1 8.82 5.5c-1.65 3.37-5.02 5.5-8.82 5.5S4.83 15.37 3.18 12A9.77 9.77 0 0 1 12 6.5m0-2C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5m0 5a2.5 2.5 0 0 1 0 5a2.5 2.5 0 0 1 0-5m0-2c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5s4.5-2.02 4.5-4.5s-2.02-4.5-4.5-4.5"/></svg></i>
-                            </button>
+                            </a>
                     </div>
                     </td>
                 </tr>
-                
+                <tr>
+                    <td>2</td>
+                    <td>Vidio</td>
+                    <td>1/1/2022</td>
+                    <td>1/2/2022</td>
+                    <td>Beranda</td>
+                    <td>
+                        <span class="mb-1 badge rounded-pill font-medium bg-light-success text-success w-50">Sudah Bayar</span>
+                    </td>
+                    <td>
+                        <div class="d-flex gap-2">
+                            <a href="/detail-advertisement" data-bs-toggle="tooltip" title="Detail" class="btn btn-sm btn-primary btn-detail me-2" style="background-color:#5D87FF">
+                                <i><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="currentColor" d="M12 6.5a9.77 9.77 0 0 1 8.82 5.5c-1.65 3.37-5.02 5.5-8.82 5.5S4.83 15.37 3.18 12A9.77 9.77 0 0 1 12 6.5m0-2C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5m0 5a2.5 2.5 0 0 1 0 5a2.5 2.5 0 0 1 0-5m0-2c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5s4.5-2.02 4.5-4.5s-2.02-4.5-4.5-4.5"/></svg></i>
+                            </a>
+                    </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Vidio</td>
+                    <td>1/1/2022</td>
+                    <td>1/2/2022</td>
+                    <td>Beranda</td>
+                    <td>
+                        <span class="mb-1 badge rounded-pill font-medium w-50" style="background-color: #D1DEEA; color: #175A95">Aktif</span>
+                    </td>
+                    <td>
+                        <div class="d-flex gap-2">
+                            <a href="/detail-advertisement" data-bs-toggle="tooltip" title="Detail" class="btn btn-sm btn-primary btn-detail me-2" style="background-color:#5D87FF">
+                                <i><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="currentColor" d="M12 6.5a9.77 9.77 0 0 1 8.82 5.5c-1.65 3.37-5.02 5.5-8.82 5.5S4.83 15.37 3.18 12A9.77 9.77 0 0 1 12 6.5m0-2C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5m0 5a2.5 2.5 0 0 1 0 5a2.5 2.5 0 0 1 0-5m0-2c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5s4.5-2.02 4.5-4.5s-2.02-4.5-4.5-4.5"/></svg></i>
+                            </a>
+                    </div>
+                    </td>
+                </tr>
+
             </tbody>
         </table>
     </div>

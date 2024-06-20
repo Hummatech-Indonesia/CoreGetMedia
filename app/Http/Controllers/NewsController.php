@@ -250,32 +250,9 @@ class NewsController extends Controller
         $subCategories = $this->subcategories->get();
         return view('pages.index', compact('categories', 'subCategories'));
     }
-    // public function showCategories($slug, Request $request, NewsCategory $newsCategory)
-    // {
-    //     $request->merge([
-    //         'name' => $newsCategory->id,
-    //     ]);
-
-    //     $category = $this->category->showWithSlug($slug);
-    //     $categoryId = $category->id;
-    //     $subCategory = $this->subCategory->where($categoryId);
-
-    //     $categories = $this->category->get();
-    //     $totalCategories = $this->category->showWhithCount();
-    //     $subCategories = $this->subCategory->get();
-    //     $news = $this->news->showWhithCount();
-
-    //     $query = $request->input('search');
-    //     $newsCategories = $this->newsCategory->search($category->id, $query);
-
-    //     $popular = $this->view->newsCategory($categoryId);
-
-    //     $new_news = $this->news->newsCategorySearch($category->id, $query, 'terbaru', '5');
-    //     $trending = $this->news->newsCategorySearch($category->id, $query, 'trending', '5');
-    //     return view('pages.user.news.category', compact('trending','new_news','popular','news', 'totalCategories','subCategories','categories','category', 'subCategory', 'newsCategories'));
-    // }
 
     public function latestNews(){
+
         $news = $this->news->latest();
         $CategoryPopulars = $this->categories->showWithCount();
         $popularTags = $this->tags->showWithCount();
