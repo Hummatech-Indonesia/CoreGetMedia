@@ -183,11 +183,11 @@
                             @forelse ($trending_news as $trending)
                             @if ($trending->news_views_count > 0)
                             <div class="news-card-three">
-                                <div class="news-card-img" style="margin-bottom: 10px;">
+                                <div class="news-card-img">
                                     <img src="{{ asset('storage/' . $trending->image) }}" class="img-popular"
                                         alt="Image" />
                                 </div>
-                                <div class="news-card-info" style="margin-top: 0;">
+                                <div class="news-card-info">
                                     <h3><a href="{{ route('news.singlepost', ['news' => $trending->slug]) }}">{!!
                                             Illuminate\Support\Str::limit($trending->name, $limit = 45, $end = '...')
                                             !!}</a></h3>
