@@ -1,7 +1,5 @@
 @extends('layouts.user.app')
-@section('title')
-    <title>GetMedia</title>
-@endsection
+@section('title', 'Artikel Populer')
 
 
 @section('style')
@@ -245,8 +243,6 @@ $popular_down_id = $popular_down->pluck('id');
             @endforelse
         </div>
 
-
-</div>
         @php
         $categoryRight_id = $filteredCategoryPopulars->pluck('id');
         $pin_id = $filteredPin->pluck('id');
@@ -256,7 +252,7 @@ $popular_down_id = $popular_down->pluck('id');
 
         $filteredCategory2Populars = $category2Populars->take(5)->whereNotIn('id', $excludedIds);
         @endphp
-        
+
         <div class="news-col-three">
             @forelse ($filteredCategory2Populars as $key => $category2Popular)
             @if (++$key == 1)
@@ -301,6 +297,7 @@ $popular_down_id = $popular_down->pluck('id');
             </div>
             @endforelse
         </div>
+    </div>
 </div>
 
 {{-- <div class="">
@@ -361,7 +358,6 @@ $popular_down_id = $popular_down->pluck('id');
                         </ul>
                     </div>
                 </div>
-
                 @empty
                 <div class="col-12">
                     <div class="d-flex justify-content-center">
