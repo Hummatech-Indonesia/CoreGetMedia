@@ -30,4 +30,5 @@ interface NewsInterface extends GetInterface, StoreInterface, UpdateInterface, S
     public function tagLatest($tag_id, $paginate) : mixed;
     public function newsPopular() : mixed;
     public function newsStatus($user_id, $status) : mixed;
+    public function userStatus($user_id, $status): mixed;
 }

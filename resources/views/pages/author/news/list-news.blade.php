@@ -36,22 +36,22 @@
 <div>
     <ul class="nav nav-underline" id="myTab" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" id="active-tab" data-bs-toggle="tab" href="#active" role="tab" aria-controls="active" aria-expanded="true">
+            <a class="nav-link active" id="all-tab" data-bs-toggle="tab" href="#all" role="tab" aria-controls="all" aria-expanded="true">
                 <span>Semua</span>
             </a>
         </li>
         <li class="nav-item ms-2">
-            <a class="nav-link" id="link1-tab" data-bs-toggle="tab" href="#link1" role="tab" aria-controls="link1">
+            <a class="nav-link" id="pending-tab" data-bs-toggle="tab" href="#pending" role="tab" aria-controls="pending">
                 <span>Pending</span>
             </a>
         </li>
         <li class="nav-item ms-2">
-            <a class="nav-link" id="link2-tab" data-bs-toggle="tab" href="#link2" role="tab" aria-controls="link2">
+            <a class="nav-link" id="rejected-tab" data-bs-toggle="tab" href="#rejected" role="tab" aria-controls="rejected">
                 <span>Ditolak</span>
             </a>
         </li>
         <li class="nav-item ms-2">
-            <a class="nav-link" id="link2-tab" data-bs-toggle="tab" href="#link2" role="tab" aria-controls="link2">
+            <a class="nav-link" id="accepted-tab" data-bs-toggle="tab" href="#accepted" role="tab" aria-controls="accepted">
                 <span>Diterima</span>
             </a>
         </li>
@@ -62,7 +62,7 @@
         <div>
             <div class="position-relative d-flex">
                 <div class="">
-                    <input type="text" name="name" class="form-control search-chat py-2 ps-5" style="width: 200px" id="search-name" placeholder="Search">
+                    <input type="text" name="name" class="form-control search-chat py-0 ps-5" style="width: 200px" id="search-name" placeholder="Search">
                     <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
                 </div>
             </div>
@@ -71,7 +71,7 @@
             <div class="d-flex gap-2">
                 <select class="form-select" id="status" style="width: 200px" name="status">
                     <option value="">Tampilkan semua</option>
-                    <option value="panding">Panding</option>
+                    <option value="panding">Pending</option>
                     <option value="active">Approved</option>
                     <option value="nonactive">Reject</option>
                 </select>
@@ -84,66 +84,424 @@
     </form>
 </div>
 
-<div class="tab-pane">
-    @forelse ($news as $data)
-    <div class="card p-4 mt-4">
-        <div class="row">
-            <div class="col-lg-2">
-                <div class="mb-3">
-                    <img src="{{ asset('storage/'. $data->image) }}" alt="" style="object-fit:cover;" width="100%" height="120">
+<div class="tab-content tabcontent-border p-3" id="myTabContent">
+    <div role="tabpanel" class="tab-pane fade show active" id="all" aria-labelledby="active-tab">
+        @forelse ($news as $data)
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-2">
+                                <div class="mb-2">
+                                    @if ($data->image != null && Storage::disk('public')->exists($data->image))
+                                        <img src="{{ asset('storage/' . $data->image) }}" alt="{{ $data->name }}" width="290px" height="180px" class="w-100" style="width: 100%; object-fit:cover;"/>
+                                    @else
+                                        <img src="{{ asset('assets/blank-img.jpg') }}" alt="{{ $data->name }}" width="290px" height="180px" class="w-100" style="width: 100%; object-fit:cover;"/>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row col-md-12 col-lg-7">
+                                <div class="col-lg-12 mb-3">
+                                    <h4>
+                                        {{ $data->name }}
+                                    </h4>
+                                    <div class="fs-4 mt-2">{!! Str::words(strip_tags($data->description), 25, '...') !!}</div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-3">
+
+                                <div class="d-flex justify-content-end gap-2">
+
+                                    <div class="d-flex justify-content-end">
+                                        <div class="text-md-right">
+                                            @php
+                                                if ($data->status == 'reject') {
+                                                    $color = 'danger';
+                                                    $text = 'Ditolak';
+                                                } elseif ($data->status == 'accepted') {
+                                                    $color = 'success';
+                                                    $text = 'Aktif';
+                                                } else {
+                                                    $color = 'warning';
+                                                    $text = 'Pending';
+                                                }
+                                            @endphp
+                                            <div class="col gap-2">
+                                                @if ($data->status == 'reject')
+                                                    <button type="button" class="btn me-2 btn-reason btn-primary" data-id="{{ $data->id }}">
+                                                        <i class="ti ti-message-dots fs-6"></i>
+                                                    </button>
+                                                @endif
+                                                <span class="badge bg-light-{{ $color }} text-{{ $color }} fs-4 px-3 py-2">
+                                                    {{ $text }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex mt-4 justify-content-end">
+                                    {{ \Carbon\Carbon::parse($data->upload_date)->format('M d, Y') }}
+                                </div>
+
+                                <div class="d-flex justify-content-end">
+                                    <a href="{{ route('news.singlepost', $data->slug) }}" class="btn btn-sm m-1 mt-5" style="background-color: #5D87FF;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512">
+                                            <path fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 0 0-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 0 0 0-17.47C428.89 172.28 347.8 112 255.66 112" />
+                                            <circle cx="256" cy="256" r="80" fill="none" stroke="#ffffff" stroke-miterlimit="10" stroke-width="32" />
+                                        </svg>
+                                    </a>
+                                    <a href="{{ route('edit.news', ['news' => $data->slug]) }}" class="btn btn-sm m-1 mt-5" style="background-color: #FFD643;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="23" viewBox="0 0 512 512">
+                                            <path d="M64 368v80h80l235.727-235.729-79.999-79.998L64 368zm377.602-217.602c8.531-8.531 8.531-21.334 0-29.865l-50.135-50.135c-8.531-8.531-21.334-8.531-29.865 0l-39.468 39.469 79.999 79.998 39.469-39.467z" fill="#ffffff" />
+                                        </svg>
+                                    </a>
+                                    <button type="submit" class="btn btn-sm m-1 mt-5 btn-delete" data-id="{{ $data->id }}" style="background-color: #C94F4F;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="23" viewBox="0 0 512 512">
+                                            <path d="M128 405.429C128 428.846 147.198 448 170.667 448h170.667C364.802 448 384 428.846 384 405.429V160H128v245.429zM416 96h-80l-26.785-32H202.786L176 96H96v32h320V96z" fill="#ffffff" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
                 </div>
             </div>
-            <div class="col-md-12 col-lg-8">
-                <div class="">
-                    <div class="order-md-1">
-                        <h4>{{ $data->name }}</h4>
-                        <p>{!! $data->description !!}</p>
+        @empty
+            <div class="text-center mt-5">
+                <img src="{{ asset('assets/Empty-cuate.png') }}" alt="" width="300px">
+                <p>Tidak ada berita</p>
+            </div>
+        @endforelse
+    </div>
+    <div class="tab-pane fade" id="pending" role="tabpanel" aria-labelledby="pending-tab">
+        @forelse ($pendings as $data)
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-2">
+                                <div class="mb-2">
+                                    @if ($data->image != null && Storage::disk('public')->exists($data->image))
+                                        <img src="{{ asset('storage/' . $data->image) }}" alt="{{ $data->name }}" width="290px" height="180px" class="w-100" style="width: 100%; object-fit:cover;"/>
+                                    @else
+                                        <img src="{{ asset('assets/blank-img.jpg') }}" alt="{{ $data->name }}" width="290px" height="180px" class="w-100" style="width: 100%; object-fit:cover;"/>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row col-md-12 col-lg-7">
+                                <div class="col-lg-12 mb-3">
+                                    <h4>
+                                        {{ $data->name }}
+                                    </h4>
+                                    <div class="fs-4 mt-2">{!! Str::words(strip_tags($data->description), 25, '...') !!}</div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-3">
+
+                                <div class="d-flex justify-content-end gap-2">
+
+                                    <div class="d-flex justify-content-end">
+                                        <div class="text-md-right">
+                                            @php
+                                                if ($data->status == 'reject') {
+                                                    $color = 'danger';
+                                                    $text = 'Ditolak';
+                                                } elseif ($data->status == 'accepted') {
+                                                    $color = 'success';
+                                                    $text = 'Aktif';
+                                                } else {
+                                                    $color = 'warning';
+                                                    $text = 'Pending';
+                                                }
+                                            @endphp
+                                            <span class="badge bg-light-{{ $color }} text-{{ $color }} fs-4 px-3 py-2">
+                                                {{ $text }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex mt-4 justify-content-end">
+                                    {{ \Carbon\Carbon::parse($data->upload_date)->format('M d, Y') }}
+                                </div>
+
+                                <div class="d-flex justify-content-end">
+                                    <a href="{{ route('news.singlepost', $data->slug) }}" class="btn btn-sm m-1 mt-5" style="background-color: #5D87FF;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512">
+                                            <path fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 0 0-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 0 0 0-17.47C428.89 172.28 347.8 112 255.66 112" />
+                                            <circle cx="256" cy="256" r="80" fill="none" stroke="#ffffff" stroke-miterlimit="10" stroke-width="32" />
+                                        </svg>
+                                    </a>
+                                    <a href="{{ route('edit.news', ['news' => $data->slug]) }}" class="btn btn-sm m-1 mt-5" style="background-color: #FFD643;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="23" viewBox="0 0 512 512">
+                                            <path d="M64 368v80h80l235.727-235.729-79.999-79.998L64 368zm377.602-217.602c8.531-8.531 8.531-21.334 0-29.865l-50.135-50.135c-8.531-8.531-21.334-8.531-29.865 0l-39.468 39.469 79.999 79.998 39.469-39.467z" fill="#ffffff" />
+                                        </svg>
+                                    </a>
+                                    <button type="submit" class="btn btn-sm m-1 mt-5 btn-delete" data-id="{{ $data->id }}" style="background-color: #C94F4F;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="23" viewBox="0 0 512 512">
+                                            <path d="M128 405.429C128 428.846 147.198 448 170.667 448h170.667C364.802 448 384 428.846 384 405.429V160H128v245.429zM416 96h-80l-26.785-32H202.786L176 96H96v32h320V96z" fill="#ffffff" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
+
                 </div>
             </div>
+        @empty
+            <div class="text-center mt-5">
+                <img src="{{ asset('assets/Empty-cuate.png') }}" alt="" width="300px">
+                <p>Tidak ada berita</p>
+            </div>
+        @endforelse
+    </div>
+    <div class="tab-pane fade" id="rejected" role="tabpanel" aria-labelledby="rejected-tab">
+        @forelse ($rejecteds as $data)
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-2">
+                                <div class="mb-2">
+                                    @if ($data->image != null && Storage::disk('public')->exists($data->image))
+                                        <img src="{{ asset('storage/' . $data->image) }}" alt="{{ $data->name }}" width="290px" height="180px" class="w-100" style="width: 100%; object-fit:cover;"/>
+                                    @else
+                                        <img src="{{ asset('assets/blank-img.jpg') }}" alt="{{ $data->name }}" width="290px" height="180px" class="w-100" style="width: 100%; object-fit:cover;"/>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row col-md-12 col-lg-7">
+                                <div class="col-lg-12 mb-3">
+                                    <h4>
+                                        {{ $data->name }}
+                                    </h4>
+                                    <div class="fs-4 mt-2">{!! Str::words(strip_tags($data->description), 25, '...') !!}</div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-3">
 
-            <div class="col-md-12 col-lg-2 mt-lg-0 ">
-                <div class="d-flex justify-content-end">
-                    <div class="text-md-right mt-md-0">
-                        <span class="badge fw-bold bg-light-warning fs-2 text-warning fs-5">{{ $data->status }}</span>
+                                <div class="d-flex justify-content-end gap-2">
+
+                                    <div class="d-flex justify-content-end">
+                                        <div class="text-md-right">
+                                            @php
+                                            if ($data->status == 'reject') {
+                                                $color = 'danger';
+                                                $text = 'Ditolak';
+                                            } elseif ($data->status == 'accepted') {
+                                                $color = 'success';
+                                                $text = 'Aktif';
+                                            } else {
+                                                $color = 'warning';
+                                                $text = 'Pending';
+                                            }
+                                        @endphp
+                                        <div class="col gap-2">
+                                            @if ($data->status == 'reject')
+                                                <button type="button" class="btn me-2 btn-reason btn-primary" data-id="{{ $data->id }}" data-reason="{{ $data->description }}">
+                                                    <i class="ti ti-message-dots fs-6"></i>
+                                                </button>
+                                            @endif
+                                            <span class="badge bg-light-{{ $color }} text-{{ $color }} fs-4 px-3 py-2">
+                                                {{ $text }}
+                                            </span>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex mt-4 justify-content-end">
+                                    {{ \Carbon\Carbon::parse($data->upload_date)->format('M d, Y') }}
+                                </div>
+
+                                <div class="d-flex justify-content-end">
+                                    <a href="{{ route('news.singlepost', $data->slug) }}" class="btn btn-sm m-1 mt-5" style="background-color: #5D87FF;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512">
+                                            <path fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 0 0-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 0 0 0-17.47C428.89 172.28 347.8 112 255.66 112" />
+                                            <circle cx="256" cy="256" r="80" fill="none" stroke="#ffffff" stroke-miterlimit="10" stroke-width="32" />
+                                        </svg>
+                                    </a>
+                                    <a href="{{ route('edit.news', ['news' => $data->slug]) }}" class="btn btn-sm m-1 mt-5" style="background-color: #FFD643;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="23" viewBox="0 0 512 512">
+                                            <path d="M64 368v80h80l235.727-235.729-79.999-79.998L64 368zm377.602-217.602c8.531-8.531 8.531-21.334 0-29.865l-50.135-50.135c-8.531-8.531-21.334-8.531-29.865 0l-39.468 39.469 79.999 79.998 39.469-39.467z" fill="#ffffff" />
+                                        </svg>
+                                    </a>
+                                    <button type="submit" class="btn btn-sm m-1 mt-5 btn-delete" data-id="{{ $data->id }}" style="background-color: #C94F4F;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="23" viewBox="0 0 512 512">
+                                            <path d="M128 405.429C128 428.846 147.198 448 170.667 448h170.667C364.802 448 384 428.846 384 405.429V160H128v245.429zM416 96h-80l-26.785-32H202.786L176 96H96v32h320V96z" fill="#ffffff" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
+
                 </div>
+            </div>
+        @empty
+            <div class="text-center mt-5">
+                <img src="{{ asset('assets/Empty-cuate.png') }}" alt="" width="300px">
+                <p>Tidak ada berita</p>
+            </div>
+        @endforelse
+    </div>
+    <div class="tab-pane fade" id="accepted" role="tabpanel" aria-labelledby="accepted-tab">
+        @forelse ($accepteds as $data)
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-2">
+                                <div class="mb-2">
+                                    @if ($data->image != null && Storage::disk('public')->exists($data->image))
+                                        <img src="{{ asset('storage/' . $data->image) }}" alt="{{ $data->name }}" width="290px" height="180px" class="w-100" style="width: 100%; object-fit:cover;"/>
+                                    @else
+                                        <img src="{{ asset('assets/blank-img.jpg') }}" alt="{{ $data->name }}" width="290px" height="180px" class="w-100" style="width: 100%; object-fit:cover;"/>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row col-md-12 col-lg-7">
+                                <div class="col-lg-12 mb-3">
+                                    <h4>
+                                        {{ $data->name }}
+                                    </h4>
+                                    <div class="fs-4 mt-2">{!! Str::words(strip_tags($data->description), 25, '...') !!}</div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-3">
 
-                <div class="mt-3 d-flex justify-content-end">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 512 512">
-                        <path d="M368.005 272h-96v96h96v-96zm-32-208v32h-160V64h-48v32h-24.01c-22.002 0-40 17.998-40 40v272c0 22.002 17.998 40 40 40h304.01c22.002 0 40-17.998 40-40V136c0-22.002-17.998-40-40-40h-24V64h-48zm72 344h-304.01V196h304.01v212z" fill="#0f4d89" />
-                    </svg>
-                    <p class="ms-2 fs-3">18-08-2024</p>
+                                <div class="d-flex justify-content-end gap-2">
+
+                                    <div class="d-flex justify-content-end">
+                                        <div class="text-md-right">
+                                            @php
+                                                if ($data->status == 'reject') {
+                                                    $color = 'danger';
+                                                    $text = 'Ditolak';
+                                                } elseif ($data->status == 'accepted') {
+                                                    $color = 'success';
+                                                    $text = 'Aktif';
+                                                } else {
+                                                    $color = 'warning';
+                                                    $text = 'Pending';
+                                                }
+                                            @endphp
+                                            <span class="badge bg-light-{{ $color }} text-{{ $color }} fs-4 px-3 py-2">
+                                                {{ $text }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex mt-4 justify-content-end">
+                                    {{ \Carbon\Carbon::parse($data->upload_date)->format('M d, Y') }}
+                                </div>
+
+                                <div class="d-flex justify-content-end">
+                                    <a href="{{ route('news.singlepost', $data->slug) }}" class="btn btn-sm m-1 mt-5" style="background-color: #5D87FF;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512">
+                                            <path fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 0 0-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 0 0 0-17.47C428.89 172.28 347.8 112 255.66 112" />
+                                            <circle cx="256" cy="256" r="80" fill="none" stroke="#ffffff" stroke-miterlimit="10" stroke-width="32" />
+                                        </svg>
+                                    </a>
+                                    <a href="{{ route('edit.news', ['news' => $data->slug]) }}" class="btn btn-sm m-1 mt-5" style="background-color: #FFD643;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="23" viewBox="0 0 512 512">
+                                            <path d="M64 368v80h80l235.727-235.729-79.999-79.998L64 368zm377.602-217.602c8.531-8.531 8.531-21.334 0-29.865l-50.135-50.135c-8.531-8.531-21.334-8.531-29.865 0l-39.468 39.469 79.999 79.998 39.469-39.467z" fill="#ffffff" />
+                                        </svg>
+                                    </a>
+                                    <button type="submit" class="btn btn-sm m-1 mt-5 btn-delete" data-id="{{ $data->id }}" style="background-color: #C94F4F;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="23" viewBox="0 0 512 512">
+                                            <path d="M128 405.429C128 428.846 147.198 448 170.667 448h170.667C364.802 448 384 428.846 384 405.429V160H128v245.429zM416 96h-80l-26.785-32H202.786L176 96H96v32h320V96z" fill="#ffffff" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
                 </div>
+            </div>
+        @empty
+            <div class="text-center mt-5">
+                <img src="{{ asset('assets/Empty-cuate.png') }}" alt="" width="300px">
+                <p>Tidak ada berita</p>
+            </div>
+        @endforelse
+    </div>
+</div>
 
-                <div class="d-flex justify-content-end">
-                    <button class="btn btn-sm m-1" style="background-color: #0F4D8A;">
-                        <a href="${detail}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="23" viewBox="0 0 512 512">
-                                <path fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 0 0-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 0 0 0-17.47C428.89 172.28 347.8 112 255.66 112" />
-                                <circle cx="256" cy="256" r="80" fill="none" stroke="#ffffff" stroke-miterlimit="10" stroke-width="32" />
-                            </svg>
-                        </a>
-                    </button>
+<div class="modal fade" id="modal-delete" tabindex="-1" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <form id="form-delete" method="POST" class="modal-content">
+            @csrf
+            @method('DELETE')
+            <div class="modal-header d-flex align-items-center">
+                <h4 class="modal-title" id="myModalLabel">
+                    Hapus data
+                </h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
 
-                    <a href="{{ route('edit.news', ['news' => $data->slug]) }}" class="btn btn-sm m-1" style="background-color: #FFD643;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="23" viewBox="0 0 512 512">
-                            <path d="M64 368v80h80l235.727-235.729-79.999-79.998L64 368zm377.602-217.602c8.531-8.531 8.531-21.334 0-29.865l-50.135-50.135c-8.531-8.531-21.334-8.531-29.865 0l-39.468 39.469 79.999 79.998 39.469-39.467z" fill="#ffffff" />
-                        </svg>
-                    </a>
-                    <form action="{{ route('delete.news', ['news' => $data->id]) }}" method="POST">
-                        @method('DELETE')
-                        @csrf
-                        <button type="submit" class="btn btn-sm m-1 btn-delete" data-id=${data.id} style="background-color: #C94F4F;"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="23" viewBox="0 0 512 512">
-                                <path d="M128 405.429C128 428.846 147.198 448 170.667 448h170.667C364.802 448 384 428.846 384 405.429V160H128v245.429zM416 96h-80l-26.785-32H202.786L176 96H96v32h320V96z" fill="#ffffff" />
-                            </svg></button>
-                    </form>
-                </div>
+                <p>Apakah anda yakin akan menghapus data ini? </p>
 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light-danger text-danger font-medium waves-effect" data-bs-dismiss="modal">
+                    Batal
+                </button>
+                <button type="submit" class="btn btn-light-danger text-secondery font-medium waves-effect" data-bs-dismiss="modal">
+                    Hapus
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{{-- modal reason start --}}
+<div class="modal fade" id="modal-reason" tabindex="-1" aria-labelledby="vertical-center-modal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content p-3">
+            <div class="modal-header d-flex align-items-center">
+                <h4 class="modal-title" id="myModalLabel">
+                    Berita ditolak
+                </h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h5>Alasan: </h5>
+                <p id="reason-show"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light-danger text-danger font-medium waves-effect" data-bs-dismiss="modal">
+                    Tutup
+                </button>
             </div>
         </div>
     </div>
-    @empty
-    @endforelse
 </div>
+{{-- modal reason end --}}
+@endsection
+@section('script')
+    <script>
+        $('.btn-delete').on('click', function() {
+            var id = $(this).data('id');
+            $('#form-delete').attr('action', '/delete-news/' + id);
+            $('#modal-delete').modal('show');
+        });
+
+        $('.btn-reason').on('click', function() {
+            var id = $(this).data('id');
+            var reason = $(this).data('reason');
+            $('#reason-show').text(reason);
+            $('#modal-reason').modal('show');
+        });
+    </script>
 @endsection

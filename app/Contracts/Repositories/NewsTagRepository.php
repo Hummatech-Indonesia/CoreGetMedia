@@ -56,7 +56,7 @@ class NewsTagRepository extends BaseRepository implements NewsTagInterface
             ->where('tags_id', $news)
             ->whereRelation('news', 'status',  NewsEnum::ACCEPTED->value)
             ->when($query == 'top', function($q){
-                $q->take(1);
+                $q->take(1);    
             })
             ->get();
     }
