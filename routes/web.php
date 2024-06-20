@@ -110,6 +110,10 @@ Route::get('detail-advertisement', function () {
     return view('pages.admin.advertisement.detail-advertisement');
 })->name('detail-advertisement.admin');
 
+Route::get('set-price', function () {
+    return view('pages.admin.advertisement.set-price');
+})->name('set-price.admin');
+
 Route::get('about-getmedia', function () {
     return view('pages.admin.about.index');
 })->name('about-getmedia.admin');

@@ -50,7 +50,7 @@
 
             <div class="ms-auto">
                 <div class="d-flex gap-2">
-                    <button type="button" class="btn waves-effect waves-light btn-primary" style="background-color:#0F4D8A; border: none">Atur Harga</button>
+                    <a href="/set-price" type="button" class="btn waves-effect waves-light btn-primary" style="background-color:#0F4D8A; border: none">Atur Harga</a>
                 </div>
             </div>
         </form>
