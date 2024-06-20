@@ -27887,8 +27887,10 @@ fieldset:disabled .btn {
 .nav-underline .nav-link.active,
 .nav-underline .show>.nav-link {
     font-weight: 500;
-    color: var(--bs-nav-underline-link-active-color);
-    border-bottom-color: currentcolor
+    /* color: var(--bs-nav-underline-link-active-color);
+    border-bottom-color: currentcolor */
+    color: #175A95;
+    border-bottom-color: #175A95;
 }
 
 .nav-fill .nav-item,

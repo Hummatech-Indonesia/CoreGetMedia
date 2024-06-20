@@ -238,7 +238,7 @@
                         </div>
                         <div class="news-para text-justify">
                             <p>
-                                {!! $news->description!!}
+                                {!! $processedContent!!}
                             </p>
                            
                         </div>
