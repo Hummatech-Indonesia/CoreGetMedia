@@ -12,4 +12,7 @@ interface NewsTagInterface extends GetInterface, StoreInterface, UpdateInterface
 {
     public function where($news, $query) : mixed;
     public function latest($news, $query) : mixed;
+
+    public function wheretag($news) : mixed;
+
 }

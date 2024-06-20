@@ -279,7 +279,7 @@
 
                         </div>
                         <p> Tag :
-                            @forelse ($tags as $tag)
+                            @forelse ($newsTags as $tag)
                                 <a data-toggle="tooltip" data-placement="top" title="{{ $tag->tags->name }}"
                                     href="{{ route('news-tag-list.user', ['tag' => $tag->tags->slug]) }}"
                                     class="btn btn-rounded btn-outline-primary">{{ $tag->tags->name }}</a>
@@ -384,7 +384,7 @@
                                                             Menit yang lalu</span>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="col-md-3 col-sm-3 col-3 text-md-end order-md-1 order-sm-1 order-1">
                                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                         <li>
@@ -392,7 +392,7 @@
                                                                 data-id="{{ $comment->id }}">
                                                                 Pin
                                                             </button>
-                                                        </li> 
+                                                        </li>
                                                         <li>
                                                             <button class="btn btn-sm edit-btn"
                                                                 onclick="showEditForm({{ $comment->id }})">
