@@ -57,72 +57,42 @@
             <div class="row gx-55 gx-5">
                 <div class="col-lg-8">
                     <div class="row">
-                        {{-- @php
-                    $dateParts = date_parse($item->upload_date);
-                @endphp --}}
                         @forelse ($news as $news)
+                            <div class="col-md-6">
+                                <div class="news-card-six">
+                                    <div class="news-card-img">
+                                        <img src="{{ asset('storage/' . $news->image) }}" alt="" class="img-all">
+                                        @foreach ($subCategories as $subCategory)
+                                        <p class="tag">
+                                            <a href="{{ route('categories.show.user', ['category' => $news->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $news->newsCategories[0]->category->name }}</a>
+                                        </p>
+                                        @endforeach
+                                    </div>
+                                    <div class="news-card-info">
 
-                        <div class="col-md-6">
-                            <div class="news-card-six">
-                                <div class="news-card-img">
-                                    <img src="{{ asset('storage/' . $news->image) }}" alt="" class="img-all">
-                                    @foreach ($subCategories as $subCategory)
-                                    <p class="tag">
-                                        <a href="{{ route('categories.show.user', ['category' => $news->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $news->newsCategories[0]->category->name }}</a>
-                                    </p>
-                                    @endforeach
-                                    {{-- <p class="tag">
-                                            <a href="#" class="news-cat">Kategori</a>
-                                        </p> --}}
-                                </div>
-                                <div class="news-card-info">
-
-                                    <h3><a href="{{ route('news.singlepost', $news->slug) }}">{{$news->name}}</a>
-                                    </h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($news->date)->translatedFormat('d F Y') }}</a>
-                                        </li>
-                                        <li><i class="fi fi-rr-eye"></i>{{$news->newsViews->count()}} x dilihat
-                                        </li>
-                                        {{-- <li>
-                                                <button type="submit" style="background: transparent;border:transparent" class="like">
-                                                    <svg class="last mb-1" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
-                                                        <path fill="#E93314" d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
-                                                    </svg>
-                                                </button>
-                                            </li> --}}
-                                    </ul>
+                                        <h3><a href="{{ route('news.singlepost', $news->slug) }}">{{$news->name}}</a>
+                                        </h3>
+                                        <ul class="news-metainfo list-style">
+                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($news->date)->translatedFormat('d F Y') }}</a>
+                                            </li>
+                                            <li><i class="fi fi-rr-eye"></i>{{$news->news_views_count}} x dilihat
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
                         @empty
-                        <div class="d-flex justify-content-center">
-                            <div>
-                                <img src="{{ asset('assets/img/no-data.svg') }}" alt="">
+                            <div class="d-flex justify-content-center">
+                                <div>
+                                    <img src="{{ asset('assets/img/no-data.svg') }}" alt="">
+                                </div>
                             </div>
-                        </div>
-                        <div class="text-center">
-                            <h4>Tidak ada data</h4>
-                        </div>
+                            <div class="text-center">
+                                <h4>Tidak ada data</h4>
+                            </div>
                         @endforelse
                     </div>
-
-                    {{-- <div class="text-center item-center mt-4 d-flex justify-content-center" style="background-color:#F6F6F6; width:100%;height:200px;">
-                <h5 class="mt-5 text-dark">Iklan</h5>
-            </div> --}}
-                    {{-- <x-paginator :paginator="$newsByDate" /> --}}
-
-                    {{-- <ul class="page-nav list-style text-center mt-20">
-                        <li><a href="{{ $news->previousPageUrl() }}"><i class="flaticon-arrow-left"></i></a></li>
-
-                        @for ($i = 1; $i <= $news->lastPage(); $i++)
-                            <li><a href="{{ $news->url($i) }}" class="btn btn-black {{ $news->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a></li>
-                            @endfor
-
-                            <li><a href="{{ $news->nextPageUrl() }}"><i class="flaticon-arrow-right"></i></a></li>
-                    </ul> --}}
-
+                    <x-paginator :paginator="$news"/>
                 </div>
 
                 <div class="col-lg-4">
