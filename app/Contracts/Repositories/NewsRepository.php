@@ -67,6 +67,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
     {
         return $this->model->query()
             ->where('status', $data)
+            ->orderByDesc('pin', '1')
             ->paginate($paginate);
     }
 

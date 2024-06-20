@@ -279,7 +279,7 @@
 
                         </div>
                         <p> Tag :
-                            @forelse ($tags as $tag)
+                            @forelse ($newsTags as $tag)
                                 <a data-toggle="tooltip" data-placement="top" title="{{ $tag->tags->name }}"
                                     href="{{ route('news-tag-list.user', ['tag' => $tag->tags->slug]) }}"
                                     class="btn btn-rounded btn-outline-primary">{{ $tag->tags->name }}</a>
@@ -384,7 +384,7 @@
                                                             Menit yang lalu</span>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="col-md-3 col-sm-3 col-3 text-md-end order-md-1 order-sm-1 order-1">
                                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                         <li>
@@ -392,7 +392,7 @@
                                                                 data-id="{{ $comment->id }}">
                                                                 Pin
                                                             </button>
-                                                        </li> 
+                                                        </li>
                                                         <li>
                                                             <button class="btn btn-sm edit-btn"
                                                                 onclick="showEditForm({{ $comment->id }})">
@@ -407,7 +407,7 @@
                                                         </li>
                                                     </ul>
 
-                                                    {{-- <a class="" href="javascript:void(0)" role="button"
+                                                    <a class="" href="javascript:void(0)" role="button"
                                                         id="dropdownMenuLink1" data-bs-toggle="dropdown"
                                                         aria-expanded="false">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="19"
@@ -416,21 +416,21 @@
                                                                 stroke-linejoin="round" stroke-width="3"
                                                                 d="M12 12h.01v.01H12zm0-7h.01v.01H12zm0 14h.01v.01H12z" />
                                                         </svg>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                            <li>
+                                                                <button class="btn btn-sm edit-btn"
+                                                                    onclick="showEditForm({{ $comment->id }})">
+                                                                    Edit
+                                                                </button>
+                                                            </li>
+                                                            <li>
+                                                                <button class="btn btn-sm delete"
+                                                                    data-id="{{ $comment->id }}">
+                                                                    Hapus
+                                                                </button>
+                                                            </li>
+                                                        </ul>
                                                     </a>
-                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
-                                                        <li>
-                                                            <button class="btn btn-sm" data-bs-toggle="modal"
-                                                                data-bs-target="#edit-replay">
-                                                                Edit
-                                                            </button>
-                                                        </li>
-                                                        <li>
-                                                            <button class="btn btn-sm" data-bs-toggle="modal"
-                                                                data-bs-target="#report">
-                                                                Laporkan
-                                                            </button>
-                                                        </li>
-                                                    </ul> --}}
                                                 </div>
                                                 <div class="col-md-12 col-sm-12 col-12 order-md-3 order-sm-3 order-3">
                                                     <div class="comment-text">

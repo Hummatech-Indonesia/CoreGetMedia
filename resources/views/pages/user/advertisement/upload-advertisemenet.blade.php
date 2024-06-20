@@ -39,7 +39,8 @@
     </div>
 </div>
 
-<form action="#" method="post" enctype="multipart/form-data">
+<form action="{{ route('create.advertisement') }}" method="post" enctype="multipart/form-data">
+    @method('post')
     @csrf
     <div class="d-flex justify-content-between mb-3">
         <h5>Isi form dibawah ini untuk konten iklan</h5>
@@ -56,9 +57,10 @@
             <div class="col-lg-6 mb-4">
                 <label class="form-label" for="page">Halaman</label>
                 <select name="page" class="form-select" id="">
-                    <option value="dashboard">Dashboard</option>
-                    <option value="news_post">News Post</option>
-                    <option value="sub_category">Sub Kategori</option>
+                    <option value="home">Dashboard</option>
+                    <option value="singlepost">News Post</option>
+                    <option value="category">Kategori</option>
+                    <option value="subcategory">Sub Kategori</option>
                 </select>
             </div>
             <div class="col-lg-6 mb-4">

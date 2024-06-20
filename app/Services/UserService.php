@@ -56,4 +56,9 @@ class UserService
             'image' => $photo,
         ];
     }
+
+    public function deleteRole(User $user)
+    {
+        $user->roles()->detach();
+    }
 }
