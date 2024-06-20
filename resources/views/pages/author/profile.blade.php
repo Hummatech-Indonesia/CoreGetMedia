@@ -273,7 +273,7 @@
                             <div class="col-md-12 col-lg-6 mb-4">
                                 <label class="form-label" for="email">Tanggal Lahir</label>
                                 <input type="text" id="email" name="email" placeholder="Tanggal lahir"
-                                    value="{{ auth()->user()->birth_date }}"
+                                    value="{{ \Carbon\Carbon::parse(auth()->user()->birth_date)->locale('id_ID')->isoFormat('dddd, D MMMM YYYY') }}"
                                     class="form-control @error('email') is-invalid @enderror" readonly>
                                 @error('email')
                                     <span class="invalid-feedback" role="alert" style="color: red;">
