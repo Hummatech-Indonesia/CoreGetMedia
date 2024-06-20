@@ -24,6 +24,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('is_active')->default('0');
+            $table->foreignId('package_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->enum('status' , [UserStatusEnum::ACTIVE->value , UserStatusEnum::BANNED->value])->default(UserStatusEnum::ACTIVE->value);
             $table->rememberToken();
             $table->timestamps();

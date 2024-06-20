@@ -35,7 +35,9 @@ class NewsViewRepository extends BaseRepository implements NewsViewInterface
      */
     public function show(mixed $id): mixed
     {
-        //
+        return $this->model->query()
+            ->whereRelation('news', 'user_id', $id)
+            ->count();
     }
 
     /**

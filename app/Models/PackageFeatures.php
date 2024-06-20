@@ -5,9 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Advertisement extends Model
+class PackageFeatures extends Model
 {
     use HasFactory;
-
-    
 }
