@@ -345,7 +345,7 @@
         </div>
 
         <!-- Kolom Dua -->
-        <div class="col-lg-4 col-md-12 col-sm-12 mb-4">
+        <div class="col-lg-4 col-md-12 col-sm-12 mb-5">
             @forelse ($filteredPin as $key => $newsPin)
                 @if ($loop->first)
                     <div class="news-card-four">
