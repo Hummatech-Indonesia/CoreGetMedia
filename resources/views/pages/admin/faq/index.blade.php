@@ -221,30 +221,5 @@
         console.log(id);
         $('#modal-delete').modal('show');
     });
-
-
-    // $('#form-update').submit(function(e) {
-    //     $('.preloader').show()
-    //     e.preventDefault()
-    //     const id = $(this).data('id')
-    //     $.ajax({
-    //         url: "/faq-list/" + id,
-    //         type: 'PUT',
-    //         data: $(this).serialize(),
-    //         success: function(response) {
-    //             $('.preloader').fadeOut()
-    //             get(1)
-    //             $('#modal-update').modal('hide')
-    //             Swal.fire({
-    //                 title: 'Berhasil!',
-    //                 icon: 'success',
-    //                 text: response.message
-    //             })
-    //         },
-    //         error: function(response) {
-    //             $('.preloader').fadeOut()
-    //         }
-    //     })
-    // })
-</script>
+    </script>
 @endsection

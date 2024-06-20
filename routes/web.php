@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdvertisementController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FaqController;
@@ -77,6 +78,7 @@ Route::get('news-list', [NewsController::class, 'news_list'])->name('news-list.a
 
 Route::get('confirm-author-list', [AuthorController::class, 'index'])->name('confirm-author.admin');
 Route::get('author-list', [AuthorController::class, 'list_author'])->name('author-list.admin');
+Route::delete('author-delete/{user}', [AuthorController::class, 'destroy'])->name('delete.author.admin');
 
 // Route::get('admin-account-list', function () {
 //     return view('pages.admin.account.admin');
@@ -260,6 +262,10 @@ Route::get('advertisement-upload', function(){
 Route::get('detail-advertisemenet', function(){
     return view('pages.user.advertisement.detail-advertisement');
 })->name('detail-advertisement');
+
+Route::post('create-advertisement', [AdvertisementController::class, 'store'])->name('create.advertisement');
+Route::post('update-advertisement/{advertisement}', [AdvertisementController::class, 'update'])->name('update.advertisement');
+Route::post('delete-advertisement/{advertisement}', [AdvertisementController::class, 'destroy'])->name('delete.advertisement');
 
 require_once __DIR__ . '/jovita.php';
 require_once __DIR__ . '/ardi.php';
