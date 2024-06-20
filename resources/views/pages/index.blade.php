@@ -366,7 +366,7 @@
                         </div>
                         <div class="news-card-info">
                             <h3><a href="{{ route('news.singlepost', ['news' => $newsPin->slug]) }}">{{ Illuminate\Support\Str::limit($newsPin->name, 35, '...') }}</a></h3>
-                            <p>{!! Illuminate\Support\Str::limit($newsPin->description, 80, '...') !!}</p>
+                            <p>{!! Illuminate\Support\Str::limit($newsPin->description, 65, '...') !!}</p>
                             <ul class="news-metainfo">
                                 <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($newsPin->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
                                 <li><i class="fi fi-rr-eye"></i>{{ $newsPin->news_views_count }}x dilihat</li>
