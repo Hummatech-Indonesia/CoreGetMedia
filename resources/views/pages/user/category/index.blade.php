@@ -187,11 +187,11 @@
                                     <img src="{{ asset('storage/' . $trending->image) }}" class="img-popular"
                                         alt="Image" />
                                 </div>
-                                <div class="news-card-info">
+                                <div class="news-card-info" style="margin-left: -20px;">
                                     <h3><a href="{{ route('news.singlepost', ['news' => $trending->slug]) }}">{!!
                                             Illuminate\Support\Str::limit($trending->name, $limit = 45, $end = '...')
                                             !!}</a></h3>
-                                    <ul class="news-metainfo list-style d-flex" style="margin-left: -20px;">
+                                    <ul class="news-metainfo list-style d-flex">
                                         <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)"
                                                 style="font-size: 14px;">{{ \Carbon\Carbon::parse($trending->date)->translatedFormat('d F Y') }}</a>
                                         </li>
