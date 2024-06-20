@@ -40,7 +40,9 @@ class AdvertisementController extends Controller
      */
     public function store(StoreAdvertisementRequest $request)
     {
-        //
+        $data = $this->service->store($request);
+        $this->advertisement->store($data);
+        return back()->with('success', 'Berhasil mengupload iklan');
     }
 
     /**
@@ -64,7 +66,9 @@ class AdvertisementController extends Controller
      */
     public function update(UpdateAdvertisementRequest $request, Advertisement $advertisement)
     {
-        //
+        $data = $this->service->update($request, $advertisement);
+        $this->advertisement->update($advertisement->id, $data);
+        return back()->with('success', 'Berhasil mengupdate iklan');
     }
 
     /**
@@ -72,6 +76,7 @@ class AdvertisementController extends Controller
      */
     public function destroy(Advertisement $advertisement)
     {
-        //
+        $this->advertisement->delete($advertisement->id);
+        return back()->with('success', 'Berhasil menghapus iklan');
     }
 }

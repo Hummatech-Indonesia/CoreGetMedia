@@ -7,6 +7,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\NewsCategoryController;
 use App\Http\Controllers\NewsLikeController;
 use App\Http\Controllers\NewsRejectController;
+use App\Http\Controllers\NewsReportController;
 use App\Http\Controllers\NewsSubCategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -27,6 +28,8 @@ Route::put('unpin-news/{news}', [NewsController::class, 'unpin_news'])->name('un
 
 Route::post('like-news/{news}', [NewsLikeController::class, 'store'])->name('like.news');
 Route::delete('unlike-news/{news}', [NewsLikeController::class, 'destroy'])->name('unlike.news');
+
+Route::post('news-report/{news}', [NewsReportController::class, 'store'])->name('report.news');
 
 Route::post('news-reject/{news}', [NewsRejectController::class, 'store'])->name('reject.news.admin');
 

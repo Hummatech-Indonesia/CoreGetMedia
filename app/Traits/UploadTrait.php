@@ -97,7 +97,7 @@ trait UploadTrait
       * @see https://image.intervention.io/v3/introduction/index
       * @see https://image.intervention.io/v3/modifying/resizing
       */
-    public function compressImage($file): mixed
+    public function compressImage($fileName, $file): mixed
     {
         $imageInfo = getimagesize($file);
         $imageType = $imageInfo[2];
@@ -118,8 +118,6 @@ trait UploadTrait
         imagedestroy($sourceImage);
 
         return new UploadedFile($compressedImagePath, basename($compressedImagePath), 'image/webp', null, true);
-        // $storedImage = CompressingImage::process($fileName, $imagePath, $storePath, $options);
-        // return $storedImage['files'];
     }
 
 }

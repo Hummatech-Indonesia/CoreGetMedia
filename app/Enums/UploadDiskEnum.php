@@ -4,9 +4,16 @@ namespace App\Enums;
 
 enum UploadDiskEnum: string
 {
-    case NEWS = "news";
-    case DESCRIPTION = "description";
+    //berita
+    case NEWS = 'news';
+    case DESCRIPTION = 'description';
+
+    //cv untuk author
     case CV = 'cv';
 
+    //avatar
     case IMAGE_USER = 'image';
+
+    //iklan
+    case ADVERTISEMENT = 'advertisement';
 }
