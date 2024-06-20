@@ -251,6 +251,18 @@ Route::get('status-advertisement-list', function(){
     return view('pages.user.advertisement.status-advertisement');   
 })->name('status-advertisement.user');
 
+Route::get('advertisement-biodata', function(){
+    return view('pages.user.advertisement.biodata-advertisement');
+})->name('biodata-advertisement');
+
+Route::get('advertisement-upload', function(){
+    return view('pages.user.advertisement.upload-advertisemenet');
+})->name('upload-advertisement');
+
+Route::get('detail-advertisemenet', function(){
+    return view('pages.user.advertisement.detail-advertisement');
+})->name('detail-advertisement');
+
 require_once __DIR__ . '/jovita.php';
 require_once __DIR__ . '/ardi.php';
 require_once __DIR__ . '/farah.php';
