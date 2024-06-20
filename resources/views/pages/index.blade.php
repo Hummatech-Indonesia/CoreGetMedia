@@ -361,7 +361,7 @@
                 @else
                     <div class="news-card-five mb-4">
                         <div class="news-card-img">
-                            <img src="{{ asset('storage/' . $newsPin->image) }}" class="w-100" style="height: 150px; object-fit: cover;" alt="Image" />
+                            <img src="{{ asset('storage/' . $newsPin->image) }}" class="w-100" style="height: 200px; object-fit: cover;" alt="Image" />
                             <a href="{{ route('categories.show.user', $newsPin->newsCategories[0]->category->slug) }}" class="news-cat">{{ $newsPin->newsCategories[0]->category->name }}</a>
                         </div>
                         <div class="news-card-info">
