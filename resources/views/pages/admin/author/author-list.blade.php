@@ -353,11 +353,11 @@
         var address = $(this).data('address')
         $('#form-tolak').attr('action', '/confirm-author/' + id);
         $('#form-terima').attr('action', '/confirm-author/' + id);
-        $('#detail-name').val(name);
-        $('#detail-email').val(email);
+        $('#detail-name').text(name);
+        $('#detail-email').text(email);
         $('#detail-image').attr('src', image);
-        $('#detail-birth_date').val(date)
-        $('#detail-address').val(address)
+        $('#detail-birth_date').text(date)
+        $('#detail-address').text(address)
         console.log(id);
         $('#modal-detail').modal('show');
     });
