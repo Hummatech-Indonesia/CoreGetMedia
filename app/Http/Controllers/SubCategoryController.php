@@ -26,7 +26,7 @@ class SubCategoryController extends Controller
      */
     public function index($category)
     {
-        $subCategories = $this->subCategories->where($category);
+        $subCategories = $this->subCategories->paginate($category);
         return view('pages.admin.categories.subcategories.index', compact('subCategories', 'category'));
     }
 

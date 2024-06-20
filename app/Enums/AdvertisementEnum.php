@@ -14,6 +14,8 @@ enum AdvertisementEnum : string
     //page
     case HOME = 'home';
     case SINGLEPOST = 'singlepost';
+    case CATEGORY = 'category';
+    case SUBCATEGORY = 'subcategory';
 
     //type
     case PHOTO = 'photo';

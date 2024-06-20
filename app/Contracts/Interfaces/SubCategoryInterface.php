@@ -10,7 +10,8 @@ use App\Contracts\Interfaces\Eloquent\ShowWithSlugInterface;
 use App\Contracts\Interfaces\Eloquent\StoreInterface;
 use App\Contracts\Interfaces\Eloquent\UpdateInterface;
 
-interface SubCategoryInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, ShowWithSlugInterface, PaginateInterface
+interface SubCategoryInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, ShowWithSlugInterface
 {
     public function where($category) : mixed;
+    public function paginate($category) : mixed;
 }
