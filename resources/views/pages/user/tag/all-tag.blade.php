@@ -120,6 +120,45 @@
                             </ul>
                         </div>
 
+                        <div class="sidebar-widget" style="width: 450px">
+                            <h3 class="sidebar-widget-title">
+                                Berita Popular
+                            </h3>
+                            @forelse ($trendings as $trending)
+                                <div class="news-card-three">
+                                    <div class="news-card-img" style="height: 100px; width: 100px">
+                                        <img src="{{ asset('storage/' . $trending->image) }}" alt="Image"
+                                            class="img-popular" />
+                                    </div>
+                                    <div class="news-card-info">
+                                        <h3>
+                                            <a href="{{ route('news.singlepost', ['news' => $trending->slug]) }}">
+                                                {{ Illuminate\Support\Str::limit($trending->name, 45, '...') }}
+                                            </a>
+                                        </h3>
+
+                                        <ul class="news-metainfo list-style d-flex">
+                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html"
+                                                    style="font-size: 15px;">15 Apr 2023</a></li>
+                                            <li><i class="fi fi-rr-eye"></i><a href="news-by-dateus"
+                                                    style="font-size: 15px;">10</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            @empty
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-center">
+                                        <div>
+                                            <img src="{{ asset('assets/img/no-data/empty.png') }}" width="150px" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <h5>Tidak ada data</h5>
+                                    </div>
+                                </div>
+                            @endforelse
+                        </div>
+
                         <div class="sidebar-widget bg-transparent shadow-sm">
                             <h3 class="sidebar-widget-title">Tag Populer</h3>
                             <ul class="tag-list list-style">
