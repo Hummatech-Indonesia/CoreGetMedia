@@ -50,6 +50,14 @@ class VoucherRepository extends BaseRepository implements VoucherInterface
             ->get();
     }
 
+    public function paginate(): mixed
+    {
+        return $this->model->query()
+            ->withCount('voucherUseds')
+            ->orderby('voucher_useds_count')
+            ->paginate(10);
+    }
+
     /**
      * Handle store data event to models.
      *

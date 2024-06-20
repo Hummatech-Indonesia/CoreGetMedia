@@ -49,6 +49,13 @@ class FaqRepository extends BaseRepository implements FaqInterface
             ->get();
     }
 
+    public function paginate() : mixed
+    {
+        return $this->model->query()
+            ->latest()
+            ->paginate(10);
+    }
+
     /**
      * Handle store data event to models.
      *

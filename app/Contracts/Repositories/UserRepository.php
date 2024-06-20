@@ -76,8 +76,8 @@ class UserRepository extends BaseRepository implements UserInterface
     public function AccountUser()
     {
         return $this->model->query()
-        ->whereRelation('roles', 'name', 'user')
-        ->get();
+            ->whereRelation('roles', 'name', 'user')
+            ->paginate(10);
     }
 
     /**

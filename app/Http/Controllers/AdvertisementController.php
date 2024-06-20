@@ -2,12 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Interfaces\AdvertisementInterface;
 use App\Models\Advertisement;
 use App\Http\Requests\StoreAdvertisementRequest;
 use App\Http\Requests\UpdateAdvertisementRequest;
+use App\Services\AdvertisementService;
 
 class AdvertisementController extends Controller
 {
+    private AdvertisementInterface $advertisement;
+    private AdvertisementService $service;
+
+    public function __construct(AdvertisementInterface $advertisement, AdvertisementService $service)
+    {
+        $this->advertisement = $advertisement;
+        $this->service = $service;
+    }
+
     /**
      * Display a listing of the resource.
      */
