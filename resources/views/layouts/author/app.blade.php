@@ -119,8 +119,7 @@
     <script src="{{ asset('admin/dist/libs/bootstrap-switch/dist/js/bootstrap-switch.min.js') }}"></script>
     <script src="{{ asset('admin/dist/js/forms/bootstrap-switch.js') }}"></script>
     <script src="{{ asset('admin/dist/libs/bootstrap-duallistbox/dist/jquery.bootstrap-duallistbox.min.js') }}"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
+    <script>    
         const authToken = localStorage.getItem('token')
         $.ajaxSetup({
             headers: {
