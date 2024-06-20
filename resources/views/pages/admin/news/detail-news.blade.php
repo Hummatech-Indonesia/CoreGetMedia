@@ -82,7 +82,8 @@
                     <button id="btn-reject-{{ $news->id }}" data-id="{{ $news->id }}" type="button" class="btn btn-danger btn-sm btn-reject btn-lg px-3">Tolak</button>
                 </div>
                 <div class="">
-                    <button id="btn-approved-{{ $news->id }}" data-id="{{ $news->id }}" type="button" class="btn btn-success btn-sm btn-approved btn-lg px-3">Terima</button>
+                    <button id="btn-approved-{{ $news->id }}" data-id="{{ $news->id }}" type="button" class="btn btn-success btn-sm btn-approved btn-lg px-3
+                        ">Terima</button>
                 </div>
             @elseif ($news->pin != '1')
                 <div class="">
