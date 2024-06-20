@@ -66,8 +66,8 @@
             <div class="col-lg-6 mb-4">
                 <label class="form-label" for="type">Jenis Iklan</label>
                 <select name="type" class="form-select" id="">
-                    <option value="foto">Foto</option>
-                    <option value="vidio">Vidio</option>
+                    <option value="photo">Foto</option>
+                    <option value="video">Video</option>
                 </select>
             </div>
 
@@ -75,21 +75,35 @@
                 <label for="position" class="form-label">Posisi Iklan</label>
                 <div class="">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="full_horizontal">
+                        <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="top">
+                        <label class="form-check-label" for="inlineRadio1">
+                            <p class="ms-2">Posisi Atas Full (1770 x 166)</p>
+                            <img src="{{asset('assets/img/news/news-11.webp')}}" width="300" height="200" alt="">
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="under">
+                        <label class="form-check-label" for="inlineRadio1">
+                            <p class="ms-2">Posisi Bawah Full (1770 x 166)</p>
+                            <img src="{{asset('assets/img/news/news-11.webp')}}" width="300" height="200" alt="">
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="mid">
                         <label class="form-check-label" for="inlineRadio1">
                             <p class="ms-2">Posisi Tengah Full (1770 x 166)</p>
                             <img src="{{asset('assets/img/news/news-11.webp')}}" width="300" height="200" alt="">
                         </label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="position" id="inlineRadio2" value="horizontal">
+                        <input class="form-check-input" type="radio" name="position" id="inlineRadio2" value="right">
                         <label class="form-check-label" for="inlineRadio2">
                             <p class="ms-2">Posisi Kanan (456 x 654)</p>
                             <img src="{{asset('assets/img/news/news-12.webp')}}" width="300" height="200" alt="">
                         </label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="position" id="inlineRadio3" value="vertikal">
+                        <input class="form-check-input" type="radio" name="position" id="inlineRadio3" value="left">
                         <label class="form-check-label" for="inlineRadio3">
                             <p class="ms-2">Posisi Kiri (1245 x 295)</p>
                             <img src="{{asset('assets/img/news/news-13.webp')}}" width="300" height="200" alt="">
@@ -130,7 +144,7 @@
             </div>
             <div class="col-lg-12 mb-4">
                 <label class="form-label" for="photo">Kontent</label>
-                <input type="file" id="photo" name="photo" onchange="previewImage(event)" placeholder="" value="{{ old('photo') }}" class="form-control @error('photo') is-invalid @enderror">
+                <input type="file" id="photo" name="image" onchange="previewImage(event)" placeholder="" value="{{ old('photo') }}" class="form-control @error('photo') is-invalid @enderror">
                 @error('photo')
                 <span class="invalid-feedback" role="alert" style="color: red;">
                     <strong>{{ $message }}</strong>

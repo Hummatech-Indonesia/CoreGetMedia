@@ -16,12 +16,13 @@ class Advertisement extends Model
         'start_date',
         'end_date',
         'type',
-        'page', 
+        'page',
         'position',
         'price',
         'feed',
         'status',
-        'description'
+        'description',
+        'url'
     ];
 
     protected $primaryKey = 'id';

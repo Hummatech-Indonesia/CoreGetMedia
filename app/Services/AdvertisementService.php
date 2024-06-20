@@ -56,7 +56,8 @@ class AdvertisementService
             'end_date' => $data['end_date'],
             'type' => $data['type'],
             'page' => $data['page'],
-            'position' => $data['position']
+            'position' => $data['position'],
+            'url' => $data['url']
         ];
     }
 
