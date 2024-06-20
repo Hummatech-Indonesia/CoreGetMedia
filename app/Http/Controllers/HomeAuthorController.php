@@ -7,6 +7,7 @@ use App\Contracts\Interfaces\FollowerInterface;
 use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\NewsLikeInterface;
 use App\Enums\NewsEnum;
+use App\Models\Author;
 use Illuminate\Http\Request;
 
 class HomeAuthorController extends Controller
@@ -32,7 +33,8 @@ class HomeAuthorController extends Controller
         $newsReject = $this->news->newsStatus(auth()->user()->id, 'reject');
         $newslike = $this->newsLike->count(auth()->user()->id);
         $newses = $this->news->whereUser(auth()->user()->id);
-        return view('pages.author.profile', compact('newses', 'newslike', 'newsPending', 'newsAccepted', 'newsReject'));
+        $author = $this->author->whereUserId();
+        return view('pages.author.profile', compact('newses', 'newslike', 'newsPending', 'newsAccepted', 'newsReject', 'author'));
     }
 
     public function create()
@@ -50,9 +52,9 @@ class HomeAuthorController extends Controller
         //
     }
 
-    public function edit(string $id)
+    public function edit(Author $author)
     {
-        //
+        return view('pages.user.profile.update', compact('author'));
     }
 
     public function update(Request $request, string $id)

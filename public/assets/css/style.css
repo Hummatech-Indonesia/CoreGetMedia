@@ -6356,4 +6356,11 @@ article {
   font-size: 17px;
 }
 
+.btn-primary-author {
+  background-color: #175A95;
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 5px;
+}
+
 /*# sourceMappingURL=style.css.map */

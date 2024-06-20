@@ -23,12 +23,12 @@ class LoginService
         if (auth()->attempt(['email' => $request->email, 'password' => $request->password])) {
         $user = auth()->user();
 
-        if (!$user->email_verified_at) {
+        if ($user->status == 'banned') {
             auth()->logout();
-            return back();
+            return redirect()->back()->with('error', 'Akun anda telah di banned')->withInput();
         }
 
-            $role = auth()->user()->roles->pluck('name')[0];
+        $role = auth()->user()->roles->pluck('name')[0];
             switch ($role) {
                 case "user":
                     return redirect('profile-user');

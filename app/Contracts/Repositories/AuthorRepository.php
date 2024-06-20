@@ -91,7 +91,7 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
     public function updateByUser($user, array $data): mixed
     {
         return $this->model->query()
-            ->whereRelation('user', 'id', $user)
+            ->where('user_id', $user)
             ->update($data);
     }
 
@@ -100,5 +100,11 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
         return $this->model->query()
         ->where('status', AuthorEnum::ACCEPTED->value)
         ->get();
+    }
+
+    public function whereUserId()
+    {
+        return $this->model->query()
+        ->where('user_id', auth()->user()->id)->first();
     }
 }
