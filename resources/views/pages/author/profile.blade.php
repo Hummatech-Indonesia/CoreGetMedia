@@ -221,7 +221,7 @@
                                             </div>
                                         </div>
                                         <div class="text-center">
-                                            <h5>Penulis belum mengupload berita</h5>
+                                            <h5>Tidak ada berita yg diposting</h5>
                                         </div>
                                     </div>
                                 @endforelse
