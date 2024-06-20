@@ -186,9 +186,12 @@
                                         class="img-popular" />
                                 </div>
                                 <div class="news-card-info">
-                                    <h3><a
-                                            href="{{ route('news.singlepost', ['news' => $trending->slug]) }}">{{$trending->name}}</a>
+                                    <h3>
+                                        <a href="{{ route('news.singlepost', ['news' => $trending->slug]) }}">
+                                            {{ Illuminate\Support\Str::limit($trending->name, 45, '...') }}
+                                        </a>
                                     </h3>
+
                                     <ul class="news-metainfo list-style d-flex">
                                         <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html"
                                                 style="font-size: 15px;">15 Apr 2023</a></li>
