@@ -188,7 +188,7 @@
                                 <div class="news-card-info">
                                     <h3>
                                         <a href="{{ route('news.singlepost', ['news' => $trending->slug]) }}">
-                                            {{ Illuminate\Support\Str::limit($trending->name, 35, '...') }}
+                                            {{ Illuminate\Support\Str::limit($trending->name, 45, '...') }}
                                         </a>
                                     </h3>
 
