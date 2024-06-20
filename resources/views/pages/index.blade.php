@@ -310,7 +310,7 @@
                 @if ($loop->first)
                     <div class="news-card-two">
                         <div class="news-card-img">
-                            <img src="{{ asset('storage/' . $categoryPopular->image) }}" class="w-100" style="height: 250px; object-fit: cover;" alt="Image" />
+                            <img src="{{ asset('storage/' . $categoryPopular->image) }}" class="w-100" style="height: 200px; object-fit: cover;" alt="Image" />
                             <a href="{{ route('categories.show.user', $categoryPopular->newsCategories[0]->category->slug) }}" class="news-cat">{{ $categoryPopular->newsCategories[0]->category->name }}</a>
                         </div>
                         <div class="news-card-info">
@@ -349,7 +349,7 @@
             @forelse ($filteredPin as $key => $newsPin)
                 @if ($loop->first)
                     <div class="news-card-four">
-                        <img src="{{ asset('storage/' . $newsPin->image) }}" class="w-100" style="height: 300px; object-fit: cover;" alt="Image" />
+                        <img src="{{ asset('storage/' . $newsPin->image) }}" class="w-100" style="height: 400px; object-fit: cover;" alt="Image" />
                         <div class="news-card-info">
                             <h3><a href="{{ route('news.singlepost', ['news' => $newsPin->slug]) }}">{{ $newsPin->name }}</a></h3>
                             <ul class="news-metainfo">
@@ -365,8 +365,8 @@
                             <a href="{{ route('categories.show.user', $newsPin->newsCategories[0]->category->slug) }}" class="news-cat">{{ $newsPin->newsCategories[0]->category->name }}</a>
                         </div>
                         <div class="news-card-info">
-                            <h3><a href="{{ route('news.singlepost', ['news' => $newsPin->slug]) }}">{{ Illuminate\Support\Str::limit($newsPin->name, 60, '...') }}</a></h3>
-                            <p>{!! Illuminate\Support\Str::limit($newsPin->description, 100, '...') !!}</p>
+                            <h3><a href="{{ route('news.singlepost', ['news' => $newsPin->slug]) }}">{{ Illuminate\Support\Str::limit($newsPin->name, 50, '...') }}</a></h3>
+                            <p>{!! Illuminate\Support\Str::limit($newsPin->description, 80, '...') !!}</p>
                             <ul class="news-metainfo">
                                 <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($newsPin->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
                                 <li><i class="fi fi-rr-eye"></i>{{ $newsPin->news_views_count }}x dilihat</li>
@@ -393,7 +393,7 @@
                 @if ($loop->first)
                     <div class="news-card-two">
                         <div class="news-card-img">
-                            <img src="{{ asset('storage/' . $category2Popular->image) }}" class="w-100" style="height: 250px; object-fit: cover;" alt="Image" />
+                            <img src="{{ asset('storage/' . $category2Popular->image) }}" class="w-100" style="height: 200px; object-fit: cover;" alt="Image" />
                             <a href="{{ route('categories.show.user', $category2Popular->newsCategories[0]->category->slug) }}" class="news-cat">{{ $category2Popular->newsCategories[0]->category->name }}</a>
                         </div>
                         <div class="news-card-info">
