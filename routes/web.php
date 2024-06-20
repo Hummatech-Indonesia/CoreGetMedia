@@ -78,6 +78,7 @@ Route::get('news-list', [NewsController::class, 'news_list'])->name('news-list.a
 
 Route::get('confirm-author-list', [AuthorController::class, 'index'])->name('confirm-author.admin');
 Route::get('author-list', [AuthorController::class, 'list_author'])->name('author-list.admin');
+Route::post('create-author-admin', [AuthorController::class, 'storeByAdmin'])->name('create.author.admin');
 Route::delete('author-delete/{user}', [AuthorController::class, 'destroy'])->name('delete.author.admin');
 
 // Route::get('admin-account-list', function () {
