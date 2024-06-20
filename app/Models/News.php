@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class News extends Model
 {
@@ -107,5 +108,15 @@ class News extends Model
     public function newsTags(): HasMany
     {
         return $this->hasMany(NewsTag::class);
+    }
+    
+    /**
+     * Get the newsRejected associated with the News
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function newsRejected(): HasOne
+    {
+        return $this->hasOne(NewsReject::class);
     }
 }
