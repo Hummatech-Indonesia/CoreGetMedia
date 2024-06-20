@@ -174,6 +174,7 @@ Route::get('list-delete-news', function () {
 })->name('news.delete.list.author');
 
 Route::get('profile-author', [HomeAuthorController::class, 'index'])->name('profile.author');
+Route::get('profile-author/{author}/edit', [HomeAuthorController::class, 'edit'])->name('profile-author.edit');
 
 Route::get('faq', [HomeFaqController::class, 'index'])->name('faq-list.user');
 
