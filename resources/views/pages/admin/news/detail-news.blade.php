@@ -47,7 +47,7 @@
 
             <div>
                 <div class="d-flex gap-2 mb-3">
-                    <a href="/news-list" class="btn btn-lg px-3 text-white" style="background-color: #5D87FF;">Kembali</a>
+                    <a href="/news-list" class="btn btn-lg px-3 text-white btn-sm" style="background-color: #5D87FF;">Kembali</a>
                 </div>
             </div>
 
@@ -79,18 +79,18 @@
         <div class="d-flex gap-2">
             @if ($news->status != 'accepted')
                 <div class="">
-                    <button id="btn-reject-{{ $news->id }}" data-id="{{ $news->id }}" type="button" class="btn btn-danger btn-reject btn-lg px-3">Tolak</button>
+                    <button id="btn-reject-{{ $news->id }}" data-id="{{ $news->id }}" type="button" class="btn btn-danger btn-sm btn-reject btn-lg px-3">Tolak</button>
                 </div>
                 <div class="">
-                    <button id="btn-approved-{{ $news->id }}" data-id="{{ $news->id }}" type="button" class="btn btn-success btn-approved btn-lg px-3">Terima</button>
+                    <button id="btn-approved-{{ $news->id }}" data-id="{{ $news->id }}" type="button" class="btn btn-success btn-sm btn-approved btn-lg px-3">Terima</button>
                 </div>
             @elseif ($news->pin != '1')
                 <div class="">
-                    <button id="btn-pin-{{ $news->id }}" data-id="{{ $news->id }}" type="button" class="btn btn-primary btn-pin btn-lg px-3">Pin Berita</button>
+                    <button id="btn-pin-{{ $news->id }}" data-id="{{ $news->id }}" type="button" class="btn btn-primary btn-sm btn-pin btn-lg px-3">Pin Berita</button>
                 </div>
             @elseif ($news->pin == '1')
                 <div class="">
-                    <button id="btn-unpin-{{ $news->id }}" data-id="{{ $news->id }}" type="button" class="btn btn-primary btn-unpin btn-lg px-3">Unpin Berita</button>
+                    <button id="btn-unpin-{{ $news->id }}" data-id="{{ $news->id }}" type="button" class="btn btn-primary btn-sm btn-unpin btn-lg px-3">Unpin Berita</button>
                 </div>
             @else
             @endif
