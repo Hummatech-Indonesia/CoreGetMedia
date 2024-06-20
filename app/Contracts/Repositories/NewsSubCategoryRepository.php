@@ -53,9 +53,7 @@ class NewsSubCategoryRepository extends BaseRepository implements NewsSubCategor
     {
         return $this->model->query()
             ->where('news_id', $news)
-            ->withCount('newsSubCategories')
-            ->orderBy('news_sub_categories_count')
-            ->paginate(10);
+            ->get();
     }
 
 

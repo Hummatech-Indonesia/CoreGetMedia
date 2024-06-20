@@ -35,7 +35,9 @@ class SubCategoryRepository extends BaseRepository implements SubCategoryInterfa
             ->when(!is_array($category), function($query) use ($category){
                 $query->where('category_id', $category);
             })
-            ->get();
+            ->withCount('newsSubCategories')
+            ->orderBy('news_sub_categories_count')
+            ->paginate(10);
     }
 
     public function showWithSLug(string $slug): mixed
