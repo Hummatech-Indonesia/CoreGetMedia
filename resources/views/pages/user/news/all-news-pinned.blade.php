@@ -76,7 +76,7 @@
                                         <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($item->created_at)->translatedFormat('d F Y') }}</a>
                                         </li>
                                         <li><i class="fi fi-rr-eye"></i>
-                                            {{ $item->newsViews_count ? $item->newsViews_count : '0' }}x dilihat
+                                            {{ $item->news_views_count }}x dilihat
                                         </li>
                                         <li>
                                             <button type="submit" style="background: transparent;border:transparent" class="like">
@@ -102,11 +102,8 @@
                         @endforelse
 
             </div>
+            <x-paginator :paginator="$newsPin"/>
 
-            {{-- <div class="text-center item-center mt-4 d-flex justify-content-center" style="background-color:#F6F6F6; width:100%;height:200px;">
-                <h5 class="mt-5 text-dark">Iklan</h5>
-            </div> --}}
-            {{-- <x-paginator :paginator="$newsByDate" /> --}}
         </div>
 
         <div class="col-lg-4">
