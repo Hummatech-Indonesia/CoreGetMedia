@@ -36,11 +36,11 @@ Route::post('registration-author', [AuthorController::class, 'store'])->name('re
 
 Route::delete('author-list/{author}', [AuthorController::class, 'destroy'])->name('author.destroy.admin');
 
-Route::get('admin-account-list', [AdminController::class, 'index'])->name('admin-account.list.admin');
+// Route::get('admin-account-list', [AdminController::class, 'index'])->name('admin-account.list.admin');
 
-Route::post('admin-account-list', [AdminController::class, 'store'])->name('admin-account.store');
+// Route::post('admin-account-list', [AdminController::class, 'store'])->name('admin-account.store');
 
-Route::put('admin-account-list/{admin}', [AdminController::class, 'update'])->name('admin-account.update');
+// Route::put('admin-account-list/{admin}', [AdminController::class, 'update'])->name('admin-account.update');
 
-Route::delete('admin-account-list/{admin}', [AdminController::class, 'destroy'])->name('admin-account.delete');
+// Route::delete('admin-account-list/{admin}', [AdminController::class, 'destroy'])->name('admin-account.delete');
 
