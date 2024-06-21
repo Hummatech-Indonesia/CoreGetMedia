@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Advertisement extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'id',
@@ -16,12 +17,13 @@ class Advertisement extends Model
         'start_date',
         'end_date',
         'type',
-        'page', 
+        'page',
         'position',
         'price',
         'feed',
         'status',
-        'description'
+        'description',
+        'url'
     ];
 
     protected $primaryKey = 'id';

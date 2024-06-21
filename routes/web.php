@@ -78,6 +78,7 @@ Route::get('news-list', [NewsController::class, 'news_list'])->name('news-list.a
 
 Route::get('confirm-author-list', [AuthorController::class, 'index'])->name('confirm-author.admin');
 Route::get('author-list', [AuthorController::class, 'list_author'])->name('author-list.admin');
+Route::post('create-author-admin', [AuthorController::class, 'storeByAdmin'])->name('create.author.admin');
 Route::delete('author-delete/{user}', [AuthorController::class, 'destroy'])->name('delete.author.admin');
 
 // Route::get('admin-account-list', function () {
@@ -108,6 +109,10 @@ Route::get('confirm-advertisement', function () {
 Route::get('detail-advertisement', function () {
     return view('pages.admin.advertisement.detail-advertisement');
 })->name('detail-advertisement.admin');
+
+Route::get('set-price', function () {
+    return view('pages.admin.advertisement.set-price');
+})->name('set-price.admin');
 
 Route::get('about-getmedia', function () {
     return view('pages.admin.about.index');
@@ -247,9 +252,7 @@ Route::get('all-pinned', [NewsController::class, 'showPinned'])->name('all-pinne
 
 Route::put('/blok-user/{user}', [UserController::class, 'banned'])->name('user.banned');
 
-Route::get('status-advertisement-list', function(){
-    return view('pages.user.advertisement.status-advertisement');
-})->name('status-advertisement.user');
+Route::get('status-advertisement-list', [AdvertisementController::class, 'index'] )->name('status-advertisement.user');
 
 Route::get('advertisement-biodata', function(){
     return view('pages.user.advertisement.biodata-advertisement');

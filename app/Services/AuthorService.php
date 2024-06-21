@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\AuthorEnum;
 use App\Enums\UploadDiskEnum;
 use App\Http\Requests\StoreAuthorRequest;
 use App\Http\Requests\StoreCategoryRequest;
@@ -36,14 +37,37 @@ class AuthorService
      *
      * @return array|bool
      */
-    public function store(StoreAuthorRequest $request)
+    public function store(StoreAuthorRequest $request, $user_id)
     {
         $data = $request->validated();
         $cv = $this->upload(UploadDiskEnum::CV->value, $request->cv);
 
+        $user = "";
+        $status = "";
+        if (auth()->user()->roles->pluck('name')[0] == "admin") {
+            $user = $user_id;
+            $status = AuthorEnum::ACCEPTED->value;
+        } else {
+            $user = auth()->user()->id;
+            $status = AuthorEnum::PENDING->value;
+        }
+
         return [
-            'user_id' => auth()->user()->id,
+            'user_id' => $user,
             'cv' => $cv,
+            'status' => $status
+        ];
+    }
+
+    public function storeUser(Request $request)
+    {
+        $password = bcrypt($request->input('password'));
+
+        return [
+            'name' => $request->input('name'),
+            'slug' => Str::slug($request->input('name')),
+            'email' => $request->input('email'),
+            'password' => $password,
         ];
     }
 }

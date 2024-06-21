@@ -73,7 +73,7 @@ class AuthorController extends Controller
      */
     public function store(Request $req, StoreAuthorRequest $request)
     {
-        $data = $this->service->store($request);
+        $data = $this->service->store($request, '');
         $data['description'] = $req->input('description');
         $this->user->update(auth()->user()->id, [
             'phone_number' => $req->input('phone_number'),
@@ -83,6 +83,15 @@ class AuthorController extends Controller
         return back()->with('success', 'Berhasil mendaftarkan diri');
     }
 
+    public function storeByAdmin(Request $req, StoreAuthorRequest $request)
+    {
+        $user = $this->service->storeUser($req);
+        $user = $this->user->store($user);
+        $user_id = $user->assignRole(RoleEnum::AUTHOR->value)->id;
+        $data = $this->service->store($request, $user_id);
+        $this->author->store($data);
+        return back()->with('success', 'Berhasil membuat akun author');
+    }
     /**
      * Display the specified resource.
      */
@@ -122,8 +131,8 @@ class AuthorController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(User $user)
-    {
-        $this->user->delete($user);
+    {    
+        $user->delete();
         return back()->wihh('success', 'Berhasil menghapus data');
     }
 

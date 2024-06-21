@@ -2,11 +2,13 @@
 
 namespace App\Providers;
 
+use App\Contracts\Interfaces\AboutGetInterface;
 use App\Contracts\Interfaces\AdminInterface;
 use App\Contracts\Interfaces\AdvertisementInterface;
 use App\Contracts\Interfaces\AuthorInterface;
 use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\CommentInterface;
+use App\Contracts\Interfaces\CommentReportInterface;
 use App\Contracts\Interfaces\FaqInterface;
 use App\Contracts\Interfaces\FollowerInterface;
 use App\Contracts\Interfaces\NewsCategoryInterface;
@@ -23,10 +25,12 @@ use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\TagInterface;
 use App\Contracts\Interfaces\VoucherInterface;
 use App\Contracts\Interfaces\UserInterface;
+use App\Contracts\Repositories\AboutGetRepository;
 use App\Contracts\Repositories\AdminRepository;
 use App\Contracts\Repositories\AdvertisementRepository;
 use App\Contracts\Repositories\AuthorRepository;
 use App\Contracts\Repositories\CategoryRepository;
+use App\Contracts\Repositories\CommentReportRepository;
 use App\Contracts\Repositories\CommentRepository;
 use App\Contracts\Repositories\FaqRepository;
 use App\Contracts\Repositories\FollowerRepository;
@@ -67,11 +71,13 @@ class AppServiceProvider extends ServiceProvider
         NewsLikeInterface::class => NewsLikeRepository::class,
         NewsViewInterface::class => NewsViewRepository::class,
         CommentInterface::class => CommentRepository::class,
+        CommentReportInterface::class => CommentReportRepository::class,
         FollowerInterface::class => FollowerRepository::class,
         NewsRejectInterface::class => NewsRejectRepository::class,
         NewsReportInterface::class => NewsReportReporitory::class,
         AdminInterface::class => AdminRepository::class,
-        AdvertisementInterface::class => AdvertisementRepository::class
+        AdvertisementInterface::class => AdvertisementRepository::class,
+        AboutGetInterface::class => AboutGetRepository::class
     ];
 
     /**
