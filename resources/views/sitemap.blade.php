@@ -9,7 +9,7 @@
 
     @foreach ($newsData as $news)
         <url>
-            <loc>{{ url("/berita/{$news->slug}") }}</loc>
+            <loc>{{ url("/news/{$news->slug}") }}</loc>
             <lastmod>{{ $news->updated_at->tz('UTC')->toAtomString() }}</lastmod>
             <changefreq>monthly</changefreq>
             <priority>0.6</priority>
