@@ -174,7 +174,7 @@
                         <div>
                             <h1>{{ $news->name }}</h1>
                             <p class="d-flex gap-1">Share :
-                                <a id="wa" class="logo" data-name="{{ $news->name }}" data-slug="{{ $news->slug }}"
+                                {{-- <a id="wa" class="logo" data-name="{{ $news->name }}" data-slug="{{ $news->slug }}"
                                     href="https://wa.me/NOMOR_TELEPON_ANDA?text=PESAN_ANDA">
                                      <svg height="19" width="19" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                                           xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 58 58" xml:space="preserve" fill="#000000">
@@ -191,15 +191,19 @@
                                              </g>
                                          </g>
                                      </svg>
-                                 </a>
+                                 </a> --}}
 
-                                <a id="fb">
+                                 {{-- <button class="wpbtn" title="Share to WhatsApp" onclick="shareToWhatsApp()">
+                                    <img class="wp" src="https://www.sharethis.com/wp-content/uploads/2017/05/WhatsApp.png" alt="WhatsApp">
+                                </button> --}}
+
+                                {{-- <a id="fb">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 263 263">
                                         <path fill="#1877F2" d="M256 128C256 57.308 198.692 0 128 0C57.308 0 0 57.308 0 128c0 63.888 46.808 116.843 108 126.445V165H75.5v-37H108V99.8c0-32.08 19.11-49.8 48.348-49.8C170.352 50 185 52.5 185 52.5V84h-16.14C152.959 84 148 93.867 148 103.99V128h35.5l-5.675 37H148v89.445c61.192-9.602 108-62.556 108-126.445" />
                                         <path fill="#FFF" d="m177.825 165l5.675-37H148v-24.01C148 93.866 152.959 84 168.86 84H185V52.5S170.352 50 156.347 50C127.11 50 108 67.72 108 99.8V128H75.5v37H108v89.445A128.959 128.959 0 0 0 128 256a128.9 128.9 0 0 0 20-1.555V165z" />
                                     </svg>
-                                </a>
-                                <a id="tw" class="logo" style="margin-top: 7px;">
+                                </a> --}}
+                                {{-- <a id="tw" class="logo" style="margin-top: 7px;">
                                     <svg class="logo-dark" style="margin-top: 1px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         viewBox="0 0 14 14">
                                         <g fill="none">
@@ -226,8 +230,8 @@
                                             </defs>
                                         </g>
                                     </svg>
-                                </a>
-                                <a id="tele">
+                                </a> --}}
+                                {{-- <a id="tele">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 263 263">
                                         <defs>
                                             <linearGradient id="logosTelegram0" x1="50%" x2="50%" y1="0%" y2="100%">
@@ -238,7 +242,7 @@
                                         <path fill="url(#logosTelegram0)" d="M128 0C94.06 0 61.48 13.494 37.5 37.49A128.038 128.038 0 0 0 0 128c0 33.934 13.5 66.514 37.5 90.51C61.48 242.506 94.06 256 128 256s66.52-13.494 90.5-37.49c24-23.996 37.5-56.576 37.5-90.51c0-33.934-13.5-66.514-37.5-90.51C194.52 13.494 161.94 0 128 0" />
                                         <path fill="#FFF" d="M57.94 126.648c37.32-16.256 62.2-26.974 74.64-32.152c35.56-14.786 42.94-17.354 47.76-17.441c1.06-.017 3.42.245 4.96 1.49c1.28 1.05 1.64 2.47 1.82 3.467c.16.996.38 3.266.2 5.038c-1.92 20.24-10.26 69.356-14.5 92.026c-1.78 9.592-5.32 12.808-8.74 13.122c-7.44.684-13.08-4.912-20.28-9.63c-11.26-7.386-17.62-11.982-28.56-19.188c-12.64-8.328-4.44-12.906 2.76-20.386c1.88-1.958 34.64-31.748 35.26-34.45c.08-.338.16-1.598-.6-2.262c-.74-.666-1.84-.438-2.64-.258c-1.14.256-19.12 12.152-54 35.686c-5.1 3.508-9.72 5.218-13.88 5.128c-4.56-.098-13.36-2.584-19.9-4.708c-8-2.606-14.38-3.984-13.82-8.41c.28-2.304 3.46-4.662 9.52-7.072" />
                                     </svg>
-                                </a>
+                                </a> --}}
                                 <a id="copylink" tooltip="Salin Link" style="margin-top: 6px; position: relative;">
                                     <span style="border-radius: 50%; background-color: #cccccc" class="d-flex justify-content-center p-1 copyLink"
                                         onclick="copyToClipboard()" id="copy">
@@ -877,4 +881,15 @@
             });
         }
     </script>
+
+    <script>
+    function shareToWhatsApp() {
+        // Ganti 'Paste Your Message or link here' dengan pesan atau link yang ingin Anda bagikan
+        var message = 'Paste Your Message or link here';
+        var whatsappUrl = 'whatsapp://send?text=' + encodeURIComponent(message);
+
+        // Buka aplikasi WhatsApp atau tampilkan pesan jika WhatsApp tidak terpasang
+        window.location.href = whatsappUrl;
+    }
+</script>
 @endsection
