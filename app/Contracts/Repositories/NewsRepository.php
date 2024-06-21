@@ -310,4 +310,30 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->where('status', $status)
             ->get();
     }
+
+    public function Chart(mixed $year, mixed $month): mixed
+    {
+        return $this->model
+            ->where('user_id', auth()->id())
+            ->where('status', NewsEnum::ACCEPTED->value)
+            ->whereYear('date', $year)
+            ->whereMonth('date', $month)
+            ->withCount('newsViews')
+            ->orderBy('news_views_count', 'desc')
+            ->take(3)
+            ->get();
+    }
+
+    public function monthlyViews($news, int $year): array
+    {
+        $monthlyViews = [];
+        for ($month = 1; $month <= 12; $month++) {
+            $viewsCount = $news->newsViews()
+                ->whereYear('created_at', $year)
+                ->whereMonth('created_at', $month)
+                ->count();
+            $monthlyViews[] = $viewsCount;
+        }
+        return $monthlyViews;
+    }
 }
