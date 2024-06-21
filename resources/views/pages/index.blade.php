@@ -348,7 +348,7 @@ $popular_down_id = $popular_down->pluck('id');
             @forelse ($filteredPin as $key => $newsPin)
             @if ($loop->first)
             <div class="news-card-four">
-                <img src="{{ asset('storage/' . $newsPin->image) }}" class="w-100" style="height: 500px; object-fit: cover;" alt="Image" />
+                <img src="{{ asset('storage/' . $newsPin->image) }}" class="w-100" style="height: 450px; object-fit: cover;" alt="Image" />
                 <div class="news-card-info">
                     <h3><a href="{{ route('news.singlepost', ['news' => $newsPin->slug]) }}">{{ $newsPin->name }}</a></h3>
                     <ul class="news-metainfo">
