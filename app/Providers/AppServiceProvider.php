@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Contracts\Interfaces\AboutGetInterface;
 use App\Contracts\Interfaces\AdminInterface;
 use App\Contracts\Interfaces\AdvertisementInterface;
 use App\Contracts\Interfaces\AuthorInterface;
@@ -24,6 +25,7 @@ use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\TagInterface;
 use App\Contracts\Interfaces\VoucherInterface;
 use App\Contracts\Interfaces\UserInterface;
+use App\Contracts\Repositories\AboutGetRepository;
 use App\Contracts\Repositories\AdminRepository;
 use App\Contracts\Repositories\AdvertisementRepository;
 use App\Contracts\Repositories\AuthorRepository;
@@ -74,7 +76,8 @@ class AppServiceProvider extends ServiceProvider
         NewsRejectInterface::class => NewsRejectRepository::class,
         NewsReportInterface::class => NewsReportReporitory::class,
         AdminInterface::class => AdminRepository::class,
-        AdvertisementInterface::class => AdvertisementRepository::class
+        AdvertisementInterface::class => AdvertisementRepository::class,
+        AboutGetInterface::class => AboutGetRepository::class
     ];
 
     /**
