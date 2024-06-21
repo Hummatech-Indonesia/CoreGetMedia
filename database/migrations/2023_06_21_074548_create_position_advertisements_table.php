@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\AdvertisementEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('image');
             $table->string('price');
+            $table->enum('page', [AdvertisementEnum::HOME->value, AdvertisementEnum::SINGLEPOST->value, AdvertisementEnum::CATEGORY->value, AdvertisementEnum::SUBCATEGORY->value]);
             $table->timestamps();
         });
     }
