@@ -200,9 +200,9 @@
                                     </svg>
                                 </a>
 
-                                {{-- <a id="tw" class="logo" style="margin-top: 7px;">
+                                <a id="tw" class="logo" style="margin-top: 7px;" title="Share to Twitter" onclick="shareToTwitter()">
                                     <svg class="logo-dark" style="margin-top: 1px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        viewBox="0 0 14 14">
+                                         viewBox="0 0 14 14">
                                         <g fill="none">
                                             <g clip-path="url(#primeTwitter0)">
                                                 <path fill="#ffffff" d="M11.025.656h2.147L8.482 6.03L14 13.344H9.68L6.294 8.909l-3.87 4.435H.275l5.016-5.75L0 .657h4.43L7.486 4.71zm-.755 11.4h1.19L3.78 1.877H2.504z" />
@@ -215,7 +215,7 @@
                                         </g>
                                     </svg>
                                     <svg class="logo-light" style="margin-top: 1px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        viewBox="0 0 14 14">
+                                         viewBox="0 0 14 14">
                                         <g fill="none">
                                             <g clip-path="url(#primeTwitter0)">
                                                 <path fill="#000000" d="M11.025.656h2.147L8.482 6.03L14 13.344H9.68L6.294 8.909l-3.87 4.435H.275l5.016-5.75L0 .657h4.43L7.486 4.71zm-.755 11.4h1.19L3.78 1.877H2.504z" />
@@ -227,7 +227,9 @@
                                             </defs>
                                         </g>
                                     </svg>
-                                </a> --}}
+                                </a>
+
+
                                 <a id="tele" title="Share to Telegram" onclick="shareToTelegram()">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 263 263">
                                         <defs>
@@ -868,7 +870,7 @@
             navigator.clipboard.writeText(url).then(function () {
                 const tooltip = document.getElementById('copy-tooltip');
                 tooltip.style.display = 'block';
-                tooltip.style.top = '-0px';
+                tooltip.style.top = '20px';
                 tooltip.style.left = '50%';
                 tooltip.style.transform = 'translateX(-50%)';
                 setTimeout(function () {
@@ -909,9 +911,20 @@
 
             var windowOptions = 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=600, height=400, top=' + (screen.height/2 - 200) + ', left=' + (screen.width/2 - 300);
 
-            window.open(facebookUrl, '_blank', windowOptions); 
+            window.open(facebookUrl, '_blank', windowOptions);
         }
 
+        function shareToTwitter() {
+            var currentUrl = window.location.href;
+            var name = document.querySelector('h1').innerText;
+
+            var message = '*' + name + '*' + '\n\nKlik untuk baca:\n' + currentUrl;
+            var twitterUrl = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(currentUrl) + '&text=' + encodeURIComponent(message);
+
+            var windowOptions = 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=600, height=400, top=' + (screen.height/2 - 200) + ', left=' + (screen.width/2 - 300);
+
+            window.open(twitterUrl, '_blank', windowOptions);
+        }
     </script>
 
 
