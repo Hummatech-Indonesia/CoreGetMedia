@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutGetController;
 use App\Http\Controllers\AdvertisementController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
@@ -113,10 +114,6 @@ Route::get('detail-advertisement', function () {
 Route::get('set-price', function () {
     return view('pages.admin.advertisement.set-price');
 })->name('set-price.admin');
-
-Route::get('about-getmedia', function () {
-    return view('pages.admin.about.index');
-})->name('about-getmedia.admin');
 
 Route::get('inbox-admin', function () {
     return view('pages.admin.inbox.index');
@@ -273,6 +270,13 @@ Route::get('detail-payment-advertisement', function(){
 Route::post('create-advertisement', [AdvertisementController::class, 'store'])->name('create.advertisement');
 Route::post('update-advertisement/{advertisement}', [AdvertisementController::class, 'update'])->name('update.advertisement');
 Route::post('delete-advertisement/{advertisement}', [AdvertisementController::class, 'destroy'])->name('delete.advertisement');
+
+Route::get('about-getmedia', [AboutGetController::class, 'index'])->name('about-getmedia.admin');
+
+Route::post('about-getmedia', [AboutGetController::class, 'store'])->name('about-getmedia.store');
+
+Route::put('about-getmedia/{about}', [AboutGetController::class, 'update'])->name('about-getmedia.update');
+
 
 require_once __DIR__ . '/jovita.php';
 require_once __DIR__ . '/ardi.php';

@@ -33,9 +33,9 @@
             @method('post')
         @endif
             @csrf --}}
-            <form action="#" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('about-getmedia.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
                 @method('post')
-
             <div class="gambar-iklan mb-4 d-flex justify-content-start mt-4">
                 <img id="preview" src="{{ asset('assets/img/logo/get-media-light.svg') }}" 
                 {{-- @endif
@@ -52,9 +52,9 @@
             <div class="row mt-5 mb-5">
                 <div class="col-md-12 col-lg-6 mb-4">
                     <label class="form-label" for="nomor">Logo</label>
-                    <input type="file" id="logo" name="logo" placeholder="" onchange="previewImage(event)"
-                            class="form-control @error('logo') is-invalid @enderror">
-                    @error('logo')
+                    <input type="file" id="image" name="image" placeholder="" onchange="previewImage(event)"
+                            class="form-control @error('image') is-invalid @enderror">
+                    @error('image')
                         <span class="invalid-feedback" role="alert" style="color: red;">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -94,7 +94,7 @@
 
                 <div class="col-md-12 col-lg-6 mb-4">
                     <label class="form-label" for="nomor">Nomor Telepon</label>
-                    <input type="text" id="phoone_number" name="phone_number" placeholder=""
+                    <input type="text" id="phone_number" name="phone_number" placeholder=""
                         {{-- @if ($data)
                             value="{{ $data->phone_number }}"
                         @endif --}}
@@ -120,15 +120,26 @@
                         </span>
                     @enderror
                 </div>
+
+                <div class="col-md-12 col-lg-6 mb-4">
+                    <label class="form-label" for="header">Header</label>
+                    <input type="text" id="header" name="header" placeholder=""
+                        class="form-control @error('header') is-invalid @enderror">
+                    @error('header')
+                        <span class="invalid-feedback" role="alert" style="color: red;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
             </div>
 
             <h4><span class="me-2" style="color: #175A95; font-size: 20px">|</span>Tentang GetMedia</h4>
             <div class="row mt-4 mb-5">
                 <div class="col-lg-12 mb-4">
-                    <label class="form-label" for="content">Isi Berita</label>
-                        <textarea id="content" name="content" placeholder="content" value="{{ old('content') }}"
-                            class="form  @error('content') is-invalid @enderror">{{ old('content') }}</textarea>
-                        @error('content')
+                    <label class="form-label" for="description">Isi Berita</label>
+                        <textarea id="content" name="description" placeholder="description" value="{{ old('description') }}"
+                            class="form  @error('description') is-invalid @enderror">{{ old('description') }}</textarea>
+                        @error('description')
                             <span class="invalid-feedback" role="alert" style="color: red;">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -140,7 +151,7 @@
 
             <div class="row mt-5">
                 <div class="col-md-12 col-lg-6 mb-4">
-                    <label class="form-label" for="nomor">Url Facebook</label>
+                    <label class="form-label" for="url_facebook">Url Facebook</label>
                     <input type="text" id="url_facebook" name="url_facebook" placeholder=""
                         {{-- @if ($data)
                             value="{{ $data->url_facebook }}"
@@ -182,7 +193,7 @@
                 </div>
 
                 <div class="col-md-12 col-lg-6 mb-4">
-                    <label class="form-label" for="nomor">Url Linkedin</label>
+                    <label class="form-label" for="url_linkedin">Url Linkedin</label>
                     <input type="text" id="url_linkedin" name="url_linkedin" placeholder=""
                         {{-- @if ($data)
                             value="{{ $data->url_linkedin }}"

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutGetController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
