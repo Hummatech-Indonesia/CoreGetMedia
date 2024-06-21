@@ -119,7 +119,7 @@
                             <a href="javascript:void(0)"><img src="{{ asset('storage/' . $new->image) }}" alt="Image"
                                     class="img-all" /></a>
                             <a data-toggle="tooltip" data-placement="top" title="Sports"
-                                href="{{ route('categories.show.user', ['category' => $new->slug]) }}"
+                                href="/{{ $new->newsCategories[0]->category->name }}"
                                 class="news-cat">{{ $new->newsCategories[0]->category->name }}</a>
                         </div>
                         <div class="news-card-info">
