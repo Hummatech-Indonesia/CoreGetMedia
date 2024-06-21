@@ -193,12 +193,13 @@
                                      </svg>
                                 </button>
 
-                                {{-- <a id="fb">
+                                <a id="fb" title="Share to Facebook" onclick="shareToFacebook()">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 263 263">
                                         <path fill="#1877F2" d="M256 128C256 57.308 198.692 0 128 0C57.308 0 0 57.308 0 128c0 63.888 46.808 116.843 108 126.445V165H75.5v-37H108V99.8c0-32.08 19.11-49.8 48.348-49.8C170.352 50 185 52.5 185 52.5V84h-16.14C152.959 84 148 93.867 148 103.99V128h35.5l-5.675 37H148v89.445c61.192-9.602 108-62.556 108-126.445" />
                                         <path fill="#FFF" d="m177.825 165l5.675-37H148v-24.01C148 93.866 152.959 84 168.86 84H185V52.5S170.352 50 156.347 50C127.11 50 108 67.72 108 99.8V128H75.5v37H108v89.445A128.959 128.959 0 0 0 128 256a128.9 128.9 0 0 0 20-1.555V165z" />
                                     </svg>
-                                </a> --}}
+                                </a>
+
                                 {{-- <a id="tw" class="logo" style="margin-top: 7px;">
                                     <svg class="logo-dark" style="margin-top: 1px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         viewBox="0 0 14 14">
@@ -899,6 +900,18 @@
 
             window.open(telegramUrl, '_blank', windowOptions);
         }
+
+        function shareToFacebook() {
+            var currentUrl = window.location.href;
+            var name = document.querySelector('h1').innerText;
+
+            var facebookUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(currentUrl) + '&quote=' + encodeURIComponent(name);
+
+            var windowOptions = 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=600, height=400, top=' + (screen.height/2 - 200) + ', left=' + (screen.width/2 - 300);
+
+            window.open(facebookUrl, '_blank', windowOptions); 
+        }
+
     </script>
 
 
