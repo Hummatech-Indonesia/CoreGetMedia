@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>{{ url('/') }}</loc>
-        <lastmod>2024-03-08T00:00:00+00:00</lastmod>
+        <lastmod>{{ now()->toAtomString() }}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
@@ -13,7 +13,7 @@
             <lastmod>{{ $news->updated_at->tz('UTC')->toAtomString() }}</lastmod>
             <changefreq>monthly</changefreq>
             <priority>
-                {{ $post->updated_at->diffInDays(now()) <= 14 ? 1.0 : ($post->updated_at->diffInDays(now()) <= 30 ? 0.8 : 0.6) }}
+                {{ $news->updated_at->diffInDays(now()) <= 14 ? 1.0 : ($news->updated_at->diffInDays(now()) <= 30 ? 0.8 : 0.6) }}
             </priority>
         </url>
     @endforeach
