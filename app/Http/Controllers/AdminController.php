@@ -88,13 +88,17 @@ class AdminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $admin)
+    public function destroy(User $user)
     {
-        try {
-            $this->admins->delete($admin->id);
-            return back()->with('success' , 'Data berhasil di hapus');
-        } catch (\Throwable $th) {
-            return back()->with('success' , 'Data berhasil dihapus');
-        }
+        $user->roles()->detach();
+        $user->permissions()->detach();
+        $user->delete();
+        return back()->with('success' , 'Data berhasil di hapus');
+
+        // try {
+        //     $this->users->delete($user->id);
+        // } catch (\Throwable $th) {
+        //     return back()->with('success' , 'Data berhasil dihapus');
+        // }
     }
 }

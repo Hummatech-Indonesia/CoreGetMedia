@@ -32,8 +32,8 @@ class AdminRepository extends BaseRepository implements AdminInterface
     public function AccountAdmin()
     {
         return $this->model->query()
-        ->whereRelation('roles', 'name', 'admin')
-        ->get();
+            ->whereRelation('roles', 'name', 'admin')
+            ->get();
     }
 
     /**

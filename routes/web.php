@@ -271,12 +271,10 @@ Route::put('about-getmedia/{about}', [AboutGetController::class, 'update'])->nam
 
 
 Route::get('admin-account-list', [AdminController::class, 'index'])->name('admin-account.list.admin');
-
 Route::post('admin-account-list', [AdminController::class, 'store'])->name('admin-account.store');
 
 Route::put('admin-account-list/{admin}', [AdminController::class, 'update'])->name('admin-account.update');
-
-Route::delete('admin-account-list/{admin}', [AdminController::class, 'destroy'])->name('admin-account.delete');
+Route::delete('admin-account-list/{user}', [AdminController::class, 'destroy'])->name('admin-account.delete');
 
 
 require_once __DIR__ . '/jovita.php';

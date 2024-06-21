@@ -138,7 +138,7 @@ class AuthorController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(User $user)
-    {    
+    {
         $user->delete();
         return back()->wihh('success', 'Berhasil menghapus data');
     }
