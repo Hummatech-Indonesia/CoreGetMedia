@@ -38,3 +38,5 @@ Route::post('news-reject/{news}', [NewsRejectController::class, 'store'])->name(
 Route::post('image-update/{user}', [UserController::class, 'updateImage'])->name('image.update');
 Route::put('update-profile/{user}', [UserController::class, 'update'])->name('update.profile');
 Route::post('update-password/{user}', [UserController::class, 'updatePassword'])->name('update.password');
+
+Route::get('show-edit-advertisement/{advertisement}', [AdvertisementController::class, 'edit'])->name('show.edit.advertisement');

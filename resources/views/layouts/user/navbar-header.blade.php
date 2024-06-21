@@ -92,24 +92,24 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        {{-- <a href="/" class="nav-link" style="{{ request()->routeIs('home') ? 'color: #E93314;' : '' }}"> Beranda </a> --}}
-                        <a href="{{ route('home') }}" class="nav-link">Home</a>
+                        <a href="/" class="nav-link" style="{{ request()->routeIs('home.index') ? 'color: #E93314;' : '' }}"> Beranda </a>
 
+                        {{-- <a href="{{ route('home.index') }}" class="nav-link {{ request()->routeIs('home.index') ? 'active' : '' }}">Home</a> --}}
                     </li>
                     @foreach ($categories as $category)
                         @php
-                            $isActiveCategory = false;
+                            $isActiveCategory = request()->routeIs('categories.show.user') && request()->route('category') == $category->slug;
 
-                            if(request()->routeIs('news.subcategory')) {
+                            if (request()->routeIs('news.subcategory')) {
                                 $subCategory = $subCategories->where('slug', request()->route('slug'))->first();
-                                if($subCategory && $subCategory->category_id === $category->id) {
+                                if ($subCategory && $subCategory->category_id === $category->id) {
                                     $isActiveCategory = true;
                                 }
                             }
                         @endphp
 
                         <li class="nav-item">
-                            <a href="{{ route('categories.show.user', ['category' => $category->slug]) }}" class="dropdown-toggle nav-link" style="{{ $isActiveCategory ? 'color: #E93314;' : '' }}">
+                            <a href="{{ route('categories.show.user', ['category' => $category->slug]) }}" class="dropdown-toggle nav-link {{ $isActiveCategory ? 'active' : '' }}" style="{{ $isActiveCategory ? 'color: #E93314;' : '' }}">
                                 {{ $category->name }}
                             </a>
                             @if (count($subCategories->where('category_id', $category->id)) > 0)
@@ -125,7 +125,7 @@
                                                     {{ Str::limit($subCategory->name, 50) }}
                                                 </a>
 
-                                                @if(($loop->iteration % 5) == 0)
+                                                @if (($loop->iteration % 5) == 0)
                                                     </li>
                                                     <li class="nav-item">
                                                 @endif
@@ -151,6 +151,8 @@
                         </li>
                     @endforeach
                 </ul>
+
+
                 <div class="others-option d-flex align-items-center">
                     <div class="option-item">
                         <button type="button" class="search-btn" data-bs-toggle="modal" data-bs-target="#searchModal">
@@ -170,7 +172,7 @@
                                         <li class="nav-item">
                                             @role('author')
                                             <div class="news-card-img">
-                                                <a href="{{ route('profile.author') }}" class="nav-link">
+                                                <a href="{{ route('profile.index') }}" class="nav-link">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="currentColor" d="M12 12q-1.65 0-2.825-1.175T8 8q0-1.65 1.175-2.825T12 4q1.65 0 2.825 1.175T16 8q0 1.65-1.175 2.825T12 12m-8 8v-2.8q0-.85.438-1.562T5.6 14.55q1.55-.775 3.15-1.162T12 13q1.65 0 3.25.388t3.15 1.162q.725.375 1.163 1.088T20 17.2V20z"/></svg>
                                                     Profile
                                                 </a>
@@ -250,10 +252,10 @@
 </div>
 
 
-<script>
+{{-- <script>
     document.addEventListener('DOMContentLoaded', function() {
         var currentLocation = window.location.href.split(/[?#]/)[0];
-        var homepageUrl = "{{ route('home') }}".split(/[?#]/)[0];
+        var homepageUrl = "{{ route('home.index') }}".split(/[?#]/)[0];
 
         console.log("Current Location:", currentLocation);
         console.log("Homepage URL:", homepageUrl);
@@ -274,4 +276,24 @@
             }
         });
     });
+</script> --}}
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var currentLocation = window.location.href.split(/[?#]/)[0];
+    var homepageUrl = "{{ route('home.index') }}".split(/[?#]/)[0];
+
+    document.querySelectorAll('.nav-link').forEach(function(link) {
+        var url = link.getAttribute('href').split(/[?#]/)[0];
+
+        if (currentLocation === homepageUrl && url === homepageUrl) {
+            link.classList.add('active');
+        } else if (currentLocation === url) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
+});
+
 </script>

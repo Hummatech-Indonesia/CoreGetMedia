@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutGetController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdvertisementController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
@@ -39,7 +40,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 Auth::routes();
 Route::get('/sitemap.xml', SitemapController::class);
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('navbar-user', [NewsController::class, 'navbar'])->name('navbar');
 
 // ----- ADMIN -----
@@ -83,10 +84,6 @@ Route::get('author-list', [AuthorController::class, 'list_author'])->name('autho
 Route::post('create-author-admin', [AuthorController::class, 'storeByAdmin'])->name('create.author.admin');
 Route::delete('author-delete/{user}', [AuthorController::class, 'destroy'])->name('delete.author.admin');
 
-// Route::get('admin-account-list', function () {
-//     return view('pages.admin.account.admin');
-// })->name('admin-account.list.admin');
-
 Route::get('author-banned', function () {
     return view('pages.admin.author.author-banned');
 })->name('author-banned.admin');
@@ -104,13 +101,8 @@ Route::get('advertisement-list', function () {
     return view('pages.admin.advertisement.advertisement-list');
 })->name(('advertisement-list.admin'));
 
-Route::get('confirm-advertisement', function () {
-    return view('pages.admin.advertisement.confirm-advertisement');
-})->name('confirm-advertisement.admin');
-
-Route::get('detail-advertisement', function () {
-    return view('pages.admin.advertisement.detail-advertisement');
-})->name('detail-advertisement.admin');
+Route::get('confirm-advertisement', [AdvertisementController::class, 'list_confirm'])->name('confirm-advertisement.admin');
+Route::get('detail-advertisement/{advertisement}', [AdvertisementController::class, 'detail_admin'])->name('detail-advertisement.admin');
 
 Route::get('set-price', function () {
     return view('pages.admin.advertisement.set-price');
@@ -269,14 +261,24 @@ Route::get('detail-payment-advertisement', function(){
 })->name('detail-payment-advertisement');
 
 Route::post('create-advertisement', [AdvertisementController::class, 'store'])->name('create.advertisement');
-Route::post('update-advertisement/{advertisement}', [AdvertisementController::class, 'update'])->name('update.advertisement');
-Route::post('delete-advertisement/{advertisement}', [AdvertisementController::class, 'destroy'])->name('delete.advertisement');
+Route::put('update-advertisement/{advertisement}', [AdvertisementController::class, 'update'])->name('update.advertisement');
+Route::delete('delete-advertisement/{advertisement}', [AdvertisementController::class, 'destroy'])->name('delete.advertisement');
+Route::put('cencel-advertisement/{advertisement}', [AdvertisementController::class, 'cancel'])->name('cancel.advertisement');
 
 Route::get('about-getmedia', [AboutGetController::class, 'index'])->name('about-getmedia.admin');
 
 Route::post('about-getmedia', [AboutGetController::class, 'store'])->name('about-getmedia.store');
 
 Route::put('about-getmedia/{about}', [AboutGetController::class, 'update'])->name('about-getmedia.update');
+
+
+Route::get('admin-account-list', [AdminController::class, 'index'])->name('admin-account.list.admin');
+
+Route::post('admin-account-list', [AdminController::class, 'store'])->name('admin-account.store');
+
+Route::put('admin-account-list/{admin}', [AdminController::class, 'update'])->name('admin-account.update');
+
+Route::delete('admin-account-list/{admin}', [AdminController::class, 'destroy'])->name('admin-account.delete');
 
 
 require_once __DIR__ . '/jovita.php';

@@ -24,6 +24,10 @@
             width: 100%;
         }
     }
+
+    .src-input input{
+        height: 39px;
+    }
 </style>
 @endsection
 
@@ -58,28 +62,29 @@
     </ul>
 </div>
 <div class="mt-4">
-    <form class="d-flex gap-2">
-        <div>
-            <div class="position-relative d-flex">
-                <div class="">
-                    <input type="text" name="name" class="form-control search-chat py-0 ps-5" style="width: 200px" id="search-name" placeholder="Search">
-                    <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
-                </div>
+    <form class="d-flex justify-content-between">
+        <div class="d-flex">
+            <div class="input-group src-input">
+                <input type="text" name="search"
+                    class="form-control search-chat py-2 px-3 ps-5" placeholder="Search">
+                <i
+                    class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+                <button type="submit" class="btn btn-outline-primary px-4">Cari</button>
             </div>
-        </div>
-        <div>
-            <div class="d-flex gap-2">
+
+            <div class="d-flex gap-2 ms-2">
                 <select class="form-select" id="status" style="width: 200px" name="status">
                     <option value="">Tampilkan semua</option>
                     <option value="panding">Pending</option>
                     <option value="active">Approved</option>
                     <option value="nonactive">Reject</option>
                 </select>
-
-                <div class="justify-content-end">
-                    <a href="{{ route('create.news') }}" class="btn btn-primary">Tambah</a>
-                </div>
             </div>
+        </div>
+
+        
+        <div class="justify-content-end">
+            <a href="{{ route('create.news') }}" class="btn btn-primary">Tambah</a>
         </div>
     </form>
 </div>
