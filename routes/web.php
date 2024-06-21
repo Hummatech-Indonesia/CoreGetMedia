@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutGetController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdvertisementController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\NewsCategoryController;
 use App\Http\Controllers\NewsLikeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -37,7 +39,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 Auth::routes();
-
+Route::get('/sitemap.xml', SitemapController::class);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('navbar-user', [NewsController::class, 'navbar'])->name('navbar');
 
@@ -81,10 +83,6 @@ Route::get('confirm-author-list', [AuthorController::class, 'index'])->name('con
 Route::get('author-list', [AuthorController::class, 'list_author'])->name('author-list.admin');
 Route::post('create-author-admin', [AuthorController::class, 'storeByAdmin'])->name('create.author.admin');
 Route::delete('author-delete/{user}', [AuthorController::class, 'destroy'])->name('delete.author.admin');
-
-// Route::get('admin-account-list', function () {
-//     return view('pages.admin.account.admin');
-// })->name('admin-account.list.admin');
 
 Route::get('author-banned', function () {
     return view('pages.admin.author.author-banned');
@@ -276,6 +274,15 @@ Route::get('about-getmedia', [AboutGetController::class, 'index'])->name('about-
 Route::post('about-getmedia', [AboutGetController::class, 'store'])->name('about-getmedia.store');
 
 Route::put('about-getmedia/{about}', [AboutGetController::class, 'update'])->name('about-getmedia.update');
+
+
+Route::get('admin-account-list', [AdminController::class, 'index'])->name('admin-account.list.admin');
+
+Route::post('admin-account-list', [AdminController::class, 'store'])->name('admin-account.store');
+
+Route::put('admin-account-list/{admin}', [AdminController::class, 'update'])->name('admin-account.update');
+
+Route::delete('admin-account-list/{admin}', [AdminController::class, 'destroy'])->name('admin-account.delete');
 
 
 require_once __DIR__ . '/jovita.php';
