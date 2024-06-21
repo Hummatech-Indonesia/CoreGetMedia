@@ -133,13 +133,13 @@
                                 <a href="{{ route('news.singlepost', ['news' => $data->slug]) }}">
                                     <img src="{{ asset('storage/' . $data->image) }}" alt="Image" class="img-all" />
                                 </a>
-                                <a data-toggle="tooltip" data-placement="top" title="Sports" href="#"
+                                <a data-toggle="tooltip" data-placement="top" title="Sports" href="/{{ $data->newsCategories[0]->category->name }}"
                                     class="news-cat">{{ $data->newsCategories[0]->category->name }}</a>
                             </div>
                             <div class="news-card-info">
                                 <h3>
                                     <a data-toggle="tooltip" data-placement="top"
-                                        title="Muga Nemo Aptent Quaerat Explicabo Urna Ni Like Ange" href="#">
+                                        title="Muga Nemo Aptent Quaerat Explicabo Urna Ni Like Ange" href="{{ route('news.singlepost', ['news' => $data->slug]) }}">
                                         {!! Illuminate\Support\Str::limit(strip_tags($data->name), 200, '...') !!}
                                     </a>
                                 </h3>
