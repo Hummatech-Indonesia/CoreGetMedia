@@ -175,25 +175,6 @@
                         <div>
                             <h1>{{ $news->name }}</h1>
                             <p class="d-flex gap-1">Share :
-                                {{-- <a id="wa" class="logo " data-name="{{ $news->name }}" data-slug="{{ $news->slug }}"
-                                    href="https://wa.me/NOMOR_TELEPON_ANDA?text=PESAN_ANDA">
-                                     <svg height="19" width="19" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
-                                          xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 58 58" xml:space="preserve" fill="#000000">
-                                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                         <g id="SVGRepo_iconCarrier">
-                                             <g>
-                                                 <path style="fill:#2CB742;"
-                                                       d="M0,58l4.988-14.963C2.457,38.78,1,33.812,1,28.5C1,12.76,13.76,0,29.5,0S58,12.76,58,28.5 S45.24,57,29.5,57c-4.789,0-9.299-1.187-13.26-3.273L0,58z">
-                                                 </path>
-                                                 <path style="fill:#FFFFFF;"
-                                                       d="M47.683,37.985c-1.316-2.487-6.169-5.331-6.169-5.331c-1.098-0.626-2.423-0.696-3.049,0.42 c0,0-1.577,1.891-1.978,2.163c-1.832,1.241-3.529,1.193-5.242-0.52l-3.981-3.981l-3.981-3.981c-1.713-1.713-1.761-3.41-0.52-5.242 c0.272-0.401,2.163-1.978,2.163-1.978c1.116-0.627,1.046-1.951,0.42-3.049c0,0-2.844-4.853-5.331-6.169 c-1.058-0.56-2.357-0.364-3.203,0.482l-1.758,1.758c-5.577,5.577-2.831,11.873,2.746,17.45l5.097,5.097l5.097,5.097 c5.577,5.577,11.873,8.323,17.45,2.746l1.758-1.758C48.048,40.341,48.243,39.042,47.683,37.985z">
-                                                 </path>
-                                             </g>
-                                         </g>
-                                     </svg>
-                                 </a> --}}
-
                                  <button class="wpbtn" style="background-color: transparent; border: none" title="Share to WhatsApp" onclick="shareToWhatsApp()">
                                     <svg height="19" width="19" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                                           xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 58 58" xml:space="preserve" fill="#000000">
@@ -246,7 +227,7 @@
                                         </g>
                                     </svg>
                                 </a> --}}
-                                {{-- <a id="tele">
+                                <a id="tele" title="Share to Telegram" onclick="shareToTelegram()">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 263 263">
                                         <defs>
                                             <linearGradient id="logosTelegram0" x1="50%" x2="50%" y1="0%" y2="100%">
@@ -257,7 +238,8 @@
                                         <path fill="url(#logosTelegram0)" d="M128 0C94.06 0 61.48 13.494 37.5 37.49A128.038 128.038 0 0 0 0 128c0 33.934 13.5 66.514 37.5 90.51C61.48 242.506 94.06 256 128 256s66.52-13.494 90.5-37.49c24-23.996 37.5-56.576 37.5-90.51c0-33.934-13.5-66.514-37.5-90.51C194.52 13.494 161.94 0 128 0" />
                                         <path fill="#FFF" d="M57.94 126.648c37.32-16.256 62.2-26.974 74.64-32.152c35.56-14.786 42.94-17.354 47.76-17.441c1.06-.017 3.42.245 4.96 1.49c1.28 1.05 1.64 2.47 1.82 3.467c.16.996.38 3.266.2 5.038c-1.92 20.24-10.26 69.356-14.5 92.026c-1.78 9.592-5.32 12.808-8.74 13.122c-7.44.684-13.08-4.912-20.28-9.63c-11.26-7.386-17.62-11.982-28.56-19.188c-12.64-8.328-4.44-12.906 2.76-20.386c1.88-1.958 34.64-31.748 35.26-34.45c.08-.338.16-1.598-.6-2.262c-.74-.666-1.84-.438-2.64-.258c-1.14.256-19.12 12.152-54 35.686c-5.1 3.508-9.72 5.218-13.88 5.128c-4.56-.098-13.36-2.584-19.9-4.708c-8-2.606-14.38-3.984-13.82-8.41c.28-2.304 3.46-4.662 9.52-7.072" />
                                     </svg>
-                                </a> --}}
+                                </a>
+
                                 <a id="copylink" tooltip="Salin Link" style="margin-top: 6px; position: relative;">
                                     <span style="border-radius: 50%; background-color: #cccccc" class="d-flex justify-content-center p-1 copyLink"
                                         onclick="copyToClipboard()" id="copy">
@@ -895,18 +877,29 @@
                 console.error('Failed to copy: ', err);
             });
         }
+
+        function shareToWhatsApp() {
+            var currentUrl = window.location.href;
+            var name = document.querySelector('h1').innerText;
+
+            var message = '*' + name + '*' + '\n\nKlik untuk baca:\n' + currentUrl;
+            var whatsappUrl = 'whatsapp://send?text=' + encodeURIComponent(message);
+
+            window.location.href = whatsappUrl;
+        }
+
+        function shareToTelegram() {
+            var currentUrl = window.location.href;
+            var name = document.querySelector('h1').innerText;
+
+            var message = '*' + name + '*' + '\n\nKlik untuk baca:\n' + currentUrl;
+            var telegramUrl = 'https://t.me/share/url?url=' + encodeURIComponent(currentUrl) + '&text=' + encodeURIComponent(message);
+
+            var windowOptions = 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, width=600, height=400, top=' + (screen.height/2 - 200) + ', left=' + (screen.width/2 - 300);
+
+            window.open(telegramUrl, '_blank', windowOptions);
+        }
     </script>
 
-<script>
-    function shareToWhatsApp() {
-        var currentUrl = window.location.href;
-        var name = document.querySelector('h1').innerText;
-
-        var message = '*' + name + '*' + '\n\nKlik untuk baca:\n' + currentUrl;
-        var whatsappUrl = 'whatsapp://send?text=' + encodeURIComponent(message);
-
-        window.location.href = whatsappUrl;
-    }
-</script>
 
 @endsection
