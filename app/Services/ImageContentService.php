@@ -8,7 +8,7 @@ class ImageContentService
 
     public function __construct()
     {
-        $this->imageTag = '<img src="' . asset('assets/img/news/news-1.webp') . '" alt="Image" style="display:block; margin:20px auto;">';
+        $this->imageTag = '<img src="' . asset('CONTOHIKLAN.png') . '" alt="Image" style="display:block; margin:40px auto;">';
     }
 
     public function insertImagesInContent(string $content, int $wordInterval = 100): string
