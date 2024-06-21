@@ -41,9 +41,14 @@ class AdvertisementController extends Controller
     public function store(StoreAdvertisementRequest $request)
     {
         $data = $this->service->store($request);
-        $this->advertisement->store($data);
+        $advertisement = $this->advertisement->store($data);
+        // $advertisement->delete();
+        // $advertisement->restore();
         return back()->with('success', 'Berhasil mengupload iklan');
     }
+
+    // $advertisements = Advertisement::whereNull('deleted_at')->get();
+    // $drafts = Advertisement::onlyTrashed()->get();
 
     /**
      * Display the specified resource.
