@@ -304,7 +304,7 @@ $popular_down_id = $popular_down->pluck('id');
 <div class="container-fluid pb-4">
     <div class="row">
         <!-- Kolom Satu -->
-        <div class="col-lg-4 col-md-12 col-sm-12 mb-3">
+        <div class="col-lg-3 col-md-12 col-sm-12 mb-3">
             @forelse ($filteredCategoryPopulars as $key => $categoryPopular)
             @if ($loop->first)
             <div class="news-card-two">
@@ -344,7 +344,7 @@ $popular_down_id = $popular_down->pluck('id');
         </div>
 
         <!-- Kolom Dua -->
-        <div class="col-lg-4 col-md-12 col-sm-12 mb-6">
+        <div class="col-lg-6 col-md-12 col-sm-12 mb-6">
             @forelse ($filteredPin as $key => $newsPin)
             @if ($loop->first)
             <div class="news-card-four">
@@ -360,11 +360,11 @@ $popular_down_id = $popular_down->pluck('id');
             @else
             <div class="news-card-five mb-6">
                 <div class="news-card-img">
-                    <img src="{{ asset('storage/' . $newsPin->image) }}" class="w-100" style="height: 200px; object-fit: cover;" alt="Image" />
+                    <img src="{{ asset('storage/' . $newsPin->image) }}" class="w-100" style="height: 150px; object-fit: cover;" alt="Image" />
                     <a href="{{ route('categories.show.user', $newsPin->newsCategories[0]->category->slug) }}" class="news-cat">{{ $newsPin->newsCategories[0]->category->name }}</a>
                 </div>
                 <div class="news-card-info text-start">
-                    <h3><a href="{{ route('news.singlepost', ['news' => $newsPin->slug]) }}">{{ Illuminate\Support\Str::limit($newsPin->name, 35, '...') }}</a></h3>
+                    <h3><a href="{{ route('news.singlepost', ['news' => $newsPin->slug]) }}">{{ Illuminate\Support\Str::limit($newsPin->name, 50, '...') }}</a></h3>
                     <p>{!! Illuminate\Support\Str::limit($newsPin->description, 65, '...') !!}</p>
                     <ul class="news-metainfo">
                         <li><i class="fi fi-rr-calendar-minus text-start"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($newsPin->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
@@ -382,7 +382,7 @@ $popular_down_id = $popular_down->pluck('id');
         </div>
 
         <!-- Kolom Tiga -->
-        <div class="col-lg-4 col-md-12 col-sm-12 mb-3">
+        <div class="col-lg-3 col-md-12 col-sm-12 mb-3">
             @php
             $categoryRight_id = $filteredCategoryPopulars->pluck('id');
             $includeid = $displayedPopulars->merge($categoryRight_id)->merge($pin_id);
@@ -458,7 +458,7 @@ $popular_down_id = $popular_down->pluck('id');
         </div>
     </div>
     @endif
-    
+
     <div class="row gx-45">
         <div class="col-xl-9">
             @if($latests_news->isNotEmpty())
