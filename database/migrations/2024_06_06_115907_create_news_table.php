@@ -22,6 +22,7 @@ return new class extends Migration
             $table->date('date');
             $table->boolean('pin')->default('0');
             $table->enum('status', [NewsEnum::ACCEPTED->value, NewsEnum::REJECT->value, NewsEnum::PENDING->value])->default(NewsEnum::PENDING->value);
+            $table->text('description')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
