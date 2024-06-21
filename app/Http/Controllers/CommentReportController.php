@@ -12,12 +12,12 @@ use Illuminate\Http\Request;
 
 class CommentReportController extends Controller
 {
-    private CommentReportInterface $commentReport;
+    private CommentReportInterface $commentinterface;
     private CommentReportService $service;
 
-    public function __construct(CommentReport $commentReport, CommentReportService $service)
+    public function __construct(CommentReportInterface $commentinterface, CommentReportService $service)
     {
-        $this->commentReport = $commentReport;
+        $this->commentinterface = $commentinterface;
         $this->service = $service;
     }
 
@@ -44,7 +44,7 @@ class CommentReportController extends Controller
     {
         $ipAddress = $req->ip();
         $data = $this->service->store($request, $comment, $ipAddress);
-        $this->commentReport->store($data);
+        $this->commentinterface->store($data);
         return back()->with('success', 'Berhasil laporkan komentar');
     }
 
@@ -77,7 +77,7 @@ class CommentReportController extends Controller
      */
     public function destroy(CommentReport $commentReport)
     {
-        $this->commentReport->delete($commentReport->id);
-        return back()->with('success','Berhasil menghapus data');   
+        $this->commentinterface->delete($commentReport->id);
+        return back()->with('success','Berhasil menghapus data');
     }
 }

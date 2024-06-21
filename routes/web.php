@@ -110,6 +110,10 @@ Route::get('detail-advertisement', function () {
     return view('pages.admin.advertisement.detail-advertisement');
 })->name('detail-advertisement.admin');
 
+Route::get('set-price', function () {
+    return view('pages.admin.advertisement.set-price');
+})->name('set-price.admin');
+
 Route::get('about-getmedia', function () {
     return view('pages.admin.about.index');
 })->name('about-getmedia.admin');
@@ -248,9 +252,7 @@ Route::get('all-pinned', [NewsController::class, 'showPinned'])->name('all-pinne
 
 Route::put('/blok-user/{user}', [UserController::class, 'banned'])->name('user.banned');
 
-Route::get('status-advertisement-list', function(){
-    return view('pages.user.advertisement.status-advertisement');
-})->name('status-advertisement.user');
+Route::get('status-advertisement-list', [AdvertisementController::class, 'index'] )->name('status-advertisement.user');
 
 Route::get('advertisement-biodata', function(){
     return view('pages.user.advertisement.biodata-advertisement');

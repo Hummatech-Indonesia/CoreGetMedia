@@ -7,9 +7,9 @@ use App\Models\CommentReport;
 
 class CommentReportRepository extends BaseRepository implements CommentReportInterface
 {
-    public function __construct(CommentReport $comment)
+    public function __construct(CommentReport $commentReport)
     {
-        $this->model = $comment;
+        $this->model = $commentReport;
     }
 
     /**

@@ -94,6 +94,66 @@
         </div>
     </div>
 
+    <div class="modal fade" id="modal-comment-report" tabindex="-1" aria-labelledby="tambahdataLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal content -->
+                <div class="modal-header">
+                    <h3 class="modal-title">Laporkan Komentar</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <!-- Modal body -->
+                <form id="form-comment-report" method="post">
+                    @method('post')
+                    @csrf
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Deskripsi laporan:</label>
+                            <textarea name="description" style="height: 150px; resize: none" class="form-control @error('description') is-invalid @enderror" placeholder="Deskripsi laporan"></textarea>
+                            @error('description')
+                                <span class="invalid-feedback" role="alert" style="color: red;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-rounded btn-light-danger text-danger"
+                            data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-rounded btn-light-warning text-warning">Laporkan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-delete-comment" tabindex="-1" aria-labelledby="tambahdataLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal content -->
+                <div class="modal-header">
+                    <h3 class="modal-title">Hapus Komentar</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <!-- Modal body -->
+                <form id="form-delete-comment" method="post">
+                    @method('DELETE')
+                    @csrf
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label">Hapus komentar Anda secara permanen?</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-rounded btn-light-primary text-primary"
+                            data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-rounded btn-light-danger text-danger">Hapus</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <div class="news-details-wrap ptb-100">
         <div class="container">
             <div class="row gx-55 gx-5">
@@ -386,27 +446,6 @@
                                                 </div>
 
                                                 <div class="col-md-3 col-sm-3 col-3 text-md-end order-md-1 order-sm-1 order-1">
-                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                        <li>
-                                                            <button class="btn btn-sm pin"
-                                                                data-id="{{ $comment->id }}">
-                                                                Pin
-                                                            </button>
-                                                        </li>
-                                                        <li>
-                                                            <button class="btn btn-sm edit-btn"
-                                                                onclick="showEditForm({{ $comment->id }})">
-                                                                Edit
-                                                            </button>
-                                                        </li>
-                                                        <li>
-                                                            <button class="btn btn-sm delete"
-                                                                data-id="{{ $comment->id }}">
-                                                                Hapus
-                                                            </button>
-                                                        </li>
-                                                    </ul>
-
                                                     <a class="" href="javascript:void(0)" role="button"
                                                         id="dropdownMenuLink1" data-bs-toggle="dropdown"
                                                         aria-expanded="false">
@@ -417,18 +456,28 @@
                                                                 d="M12 12h.01v.01H12zm0-7h.01v.01H12zm0 14h.01v.01H12z" />
                                                         </svg>
                                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                            <li>
-                                                                <button class="btn btn-sm edit-btn"
-                                                                    onclick="showEditForm({{ $comment->id }})">
-                                                                    Edit
-                                                                </button>
-                                                            </li>
-                                                            <li>
-                                                                <button class="btn btn-sm delete"
-                                                                    data-id="{{ $comment->id }}">
-                                                                    Hapus
-                                                                </button>
-                                                            </li>
+                                                            @php
+                                                                $ip = request()->ip();
+                                                            @endphp
+                                                            @if (Auth::check() && $comment->user_id == auth()->user()->id || $comment->ip_address == $ip )
+                                                                <li>
+                                                                    <button class="btn btn-sm btn-edit-comment" data-id="{{ $comment->id }}" data-description="{{ $comment->description }}">
+                                                                        Edit
+                                                                    </button>
+                                                                </li>
+                                                                <li>
+                                                                    <button class="btn btn-sm btn-comment-delete" data-id="{{ $comment->id }}">
+                                                                        Hapus
+                                                                    </button>
+                                                                </li>
+                                                            @endif
+                                                            @if (Auth::check() && $comment->user_id != auth()->user()->id || $comment->ip_address != $ip )
+                                                                <li>
+                                                                    <button class="btn btn-sm btn-comment-report" data-id="{{ $comment->id }}">
+                                                                        Laporkan
+                                                                    </button>
+                                                                </li>
+                                                            @endif
                                                         </ul>
                                                     </a>
                                                 </div>
@@ -446,6 +495,23 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div id="edit-form-{{ $comment->id }}" class="reply-form mt-3 mb-3" style="display: none;">
+                                    <form id="form-edit-{{ $comment->id }}" method="post">
+                                        @method('put')
+                                        @csrf
+                                        <div class="row">
+                                            <div class="col-lg-12 mt-2">
+                                                <textarea name="description" id="update-description-{{ $comment->id }}" class="form-control mb-2" cols="100" rows="2" placeholder="Balas Komentar" style="resize: none"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex gap-2">
+                                            <button type="button" class="btn-two w-40 btn-cancel-edit" data-id="{{ $comment->id }}" style="background-color: #0F4D8A;padding:10px !important">Batal</button>
+                                            <button type="submit" class="btn-two w-100 btn" style="background-color: #0F4D8A;padding:10px !important">Edit Komentar</button>
+                                        </div>
+                                    </form>
+                                </div>
+
                                 <div id="reply-form-{{ $comment->id }}" class="reply-form mt-3" style="display: none;">
                                     <form
                                         action="{{ route('reply.create', ['news' => $news->id, 'comment' => $comment->id]) }}"
@@ -507,10 +573,9 @@
                                                             Menit yang lalu</span>
                                                     </div>
                                                 </div>
-                                                <div
-                                                    class="col-md-3 col-sm-3 col-3 text-md-end order-md-1 order-sm-1 order-1">
+                                                <div class="col-md-3 col-sm-3 col-3 text-md-end order-md-1 order-sm-1 order-1">
                                                     <a class="" href="javascript:void(0)" role="button"
-                                                        id="dropdownMenuLink2" data-bs-toggle="dropdown"
+                                                        id="dropdownMenuLink1" data-bs-toggle="dropdown"
                                                         aria-expanded="false">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="19"
                                                             height="19" viewBox="0 0 24 24">
@@ -518,22 +583,28 @@
                                                                 stroke-linejoin="round" stroke-width="3"
                                                                 d="M12 12h.01v.01H12zm0-7h.01v.01H12zm0 14h.01v.01H12z" />
                                                         </svg>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                            @if (Auth::check() && $reply->user_id == auth()->user()->id || $reply->ip_address == $ip )
+                                                                <li>
+                                                                    <button class="btn btn-sm btn-edit-reply" data-id="{{ $reply->id }}" data-description="{{ $reply->description }}">
+                                                                        Edit
+                                                                    </button>
+                                                                </li>
+                                                                <li>
+                                                                    <button class="btn btn-sm btn-comment-delete" data-id="{{ $reply->id }}">
+                                                                        Hapus
+                                                                    </button>
+                                                                </li>
+                                                            @endif
+                                                            @if (Auth::check() && $reply->user_id != auth()->user()->id || $reply->ip_address != $ip )
+                                                                <li>
+                                                                    <button class="btn btn-sm btn-comment-report" data-id="{{ $reply->id }}">
+                                                                        Laporkan
+                                                                    </button>
+                                                                </li>
+                                                            @endif
+                                                        </ul>
                                                     </a>
-                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
-                                                        <li>
-                                                            <button class="btn btn-sm" data-bs-toggle="modal"
-                                                                data-bs-target="#edit-replay">
-                                                                Edit
-                                                            </button>
-                                                        </li>
-                                                        <li>
-                                                            <button class="btn btn-sm" data-bs-toggle="modal"
-                                                                data-bs-target="#report">
-                                                                Laporkan
-                                                            </button>
-                                                        </li>
-                                                    </ul>
-
                                                 </div>
                                                 <div class="col-md-12 col-sm-12 col-12 order-md-3 order-sm-3 order-3">
                                                     <div class="comment-text">
@@ -543,6 +614,21 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                                <div id="edit-reply-{{ $reply->id }}" class="reply-form mt-3 mb-3" style="display: none;">
+                                    <form id="reply-edit-{{ $reply->id }}" method="post">
+                                        @method('put')
+                                        @csrf
+                                        <div class="row">
+                                            <div class="col-lg-12 mt-2">
+                                                <textarea name="description" id="update-reply-description-{{ $reply->id }}" class="form-control mb-2" cols="100" rows="2" placeholder="Balas Komentar" style="resize: none"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex gap-2">
+                                            <button type="button" class="btn-two w-40 btn-cancel-reply-edit" data-id="{{ $reply->id }}" style="background-color: #0F4D8A;padding:10px !important">Batal</button>
+                                            <button type="submit" class="btn-two w-100 btn" style="background-color: #0F4D8A;padding:10px !important">Edit Komentar</button>
+                                        </div>
+                                    </form>
                                 </div>
                             @endforeach
                         @empty
@@ -638,6 +724,44 @@
             var id = $(this).data('id');
             $('#form-news-report').attr('action', '/news-report/' + id);
             $('#modal-news-report').modal('show');
+        });
+
+        $('.btn-comment-report').on('click', function() {
+            var id = $(this).data('id');
+            $('#form-comment-report').attr('action', '/comment-report/' + id);
+            $('#modal-comment-report').modal('show');
+        });
+
+        $('.btn-comment-delete').on('click', function() {
+            var id = $(this).data('id');
+            $('#form-delete-comment').attr('action', '/delete-comment/' + id);
+            $('#modal-delete-comment').modal('show');
+        });
+
+        $('.btn-edit-comment').on('click', function() {
+            var id = $(this).data('id');
+            var description = $(this).data('description');
+            $('#form-edit-' + id).attr('action', '/update-comment/' + id);
+            $('#update-description-' + id).val(description);
+            $('#edit-form-' + id).show();
+        });
+
+        $('.btn-cancel-edit').on('click', function() {
+            var id = $(this).data('id');
+            $('#edit-form-' + id).hide();
+        });
+
+        $('.btn-edit-reply').on('click', function() {
+            var id = $(this).data('id');
+            var description = $(this).data('description');
+            $('#reply-edit-' + id).attr('action', '/update-comment/' + id);
+            $('#update-reply-description-' + id).val(description);
+            $('#edit-reply-' + id).show();
+        });
+
+        $('.btn-cancel-reply-edit').on('click', function() {
+            var id = $(this).data('id');
+            $('#edit-reply-' + id).hide();
         });
     </script>
 
