@@ -15,6 +15,7 @@ use App\Models\Author;
 use App\Http\Requests\StoreAuthorRequest;
 use App\Http\Requests\UpdateAuthorRequest;
 use App\Models\User;
+use App\Services\AuthorChartService;
 use App\Services\AuthorService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
@@ -30,9 +31,10 @@ class AuthorController extends Controller
     private UserInterface $user;
     private AuthorService $service;
     private UserService $userService;
+    private AuthorChartService $authorChart;
 
 
-    public function __construct(UserInterface $user, AuthorInterface $author, AuthorService $service, NewsInterface $news, CategoryInterface $category, PopularInterface $popular, NewsLikeInterface $newsLike, NewsViewInterface $newsView, UserService $userService)
+    public function __construct(UserInterface $user, AuthorInterface $author, AuthorService $service, NewsInterface $news, CategoryInterface $category, PopularInterface $popular, NewsLikeInterface $newsLike, NewsViewInterface $newsView, UserService $userService, AuthorChartService $authorChart)
     {
         $this->author = $author;
         $this->news = $news;
@@ -43,6 +45,7 @@ class AuthorController extends Controller
         $this->newsLike = $newsLike;
         $this->newsView = $newsView;
         $this->userService = $userService;
+        $this->authorChart = $authorChart;
     }
 
     /**
@@ -109,7 +112,10 @@ class AuthorController extends Controller
         $newses = $this->news->whereUser(auth()->user()->id);
         $newsView = $this->newsView->show(auth()->user()->id);
         $newsPopulers = $this->news->whereUser(auth()->user()->id);
-        return view('pages.author.news.statistic', compact('newsLike', 'newses', 'newsView', 'newsPopulers'));
+        $news = $this->news;
+        $chartData = $this->authorChart->chart($news);
+        // dd($chartData);
+        return view('pages.author.news.statistic', compact('newsLike', 'newses', 'newsView', 'newsPopulers', 'chartData'));
     }
 
     /**
