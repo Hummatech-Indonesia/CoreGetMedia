@@ -12,7 +12,9 @@
             <loc>{{ url("/news/{$news->slug}") }}</loc>
             <lastmod>{{ $news->updated_at->tz('UTC')->toAtomString() }}</lastmod>
             <changefreq>monthly</changefreq>
-            <priority>0.6</priority>
+            <priority>
+                {{ $post->updated_at->diffInDays(now()) <= 14 ? 1.0 : ($post->updated_at->diffInDays(now()) <= 30 ? 0.8 : 0.6) }}
+            </priority>
         </url>
     @endforeach
 
