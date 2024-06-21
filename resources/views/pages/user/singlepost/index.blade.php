@@ -900,11 +900,13 @@
 <script>
     function shareToWhatsApp() {
         var currentUrl = window.location.href;
+        var name = document.querySelector('h1').innerText;
 
-        var message = 'Check out this page: ' + currentUrl;
+        var message = '*' + name + '*' + '\n\nKlik untuk baca:\n' + currentUrl;
         var whatsappUrl = 'whatsapp://send?text=' + encodeURIComponent(message);
 
         window.location.href = whatsappUrl;
     }
 </script>
+
 @endsection
