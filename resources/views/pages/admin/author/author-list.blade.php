@@ -145,7 +145,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <form method="POST" id="form-create" enctype="multipart/form-data">
+                <form method="POST" id="form-create" action="{{route('create.author.admin')}}" enctype="multipart/form-data">
+                    @method('post')
                     @csrf
                     <div class="modal-body">
                         <div class="row container">
@@ -353,11 +354,11 @@
         var address = $(this).data('address')
         $('#form-tolak').attr('action', '/confirm-author/' + id);
         $('#form-terima').attr('action', '/confirm-author/' + id);
-        $('#detail-name').val(name);
-        $('#detail-email').val(email);
+        $('#detail-name').text(name);
+        $('#detail-email').text(email);
         $('#detail-image').attr('src', image);
-        $('#detail-birth_date').val(date)
-        $('#detail-address').val(address)
+        $('#detail-birth_date').text(date)
+        $('#detail-address').text(address)
         console.log(id);
         $('#modal-detail').modal('show');
     });

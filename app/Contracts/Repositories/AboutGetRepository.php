@@ -2,14 +2,16 @@
 
 namespace App\Contracts\Repositories;
 
-use App\Contracts\Interfaces\CommentReportInterface;
-use App\Models\CommentReport;
+use App\Contracts\Interfaces\AboutGetInterface;
+use App\Contracts\Interfaces\AdvertisementInterface;
+use App\Models\AboutGet;
+use App\Models\Advertisement;
 
-class CommentReportRepository extends BaseRepository implements CommentReportInterface
+class AboutGetRepository extends BaseRepository implements AboutGetInterface
 {
-    public function __construct(CommentReport $commentReport)
+    public function __construct(AboutGet $aboutGet)
     {
-        $this->model = $commentReport;
+        $this->model = $aboutGet;
     }
 
     /**
@@ -43,10 +45,9 @@ class CommentReportRepository extends BaseRepository implements CommentReportInt
      *
      * @return mixed
      */
-    public function get($news_id): mixed
+    public function get(): mixed
     {
         return $this->model->query()
-            ->where('news_id', $news_id)
             ->get();
     }
 

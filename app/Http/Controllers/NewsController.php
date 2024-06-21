@@ -17,6 +17,7 @@ use App\Enums\NewsEnum;
 use App\Models\News;
 use App\Http\Requests\StoreNewsRequest;
 use App\Http\Requests\UpdateNewsRequest;
+use App\Models\Advertisement;
 use App\Models\NewsCategory;
 use App\Services\ImageContentService;
 use App\Services\NewsService;
@@ -123,7 +124,7 @@ class NewsController extends Controller
         $news_id = $news->id;
         $newsCategory = $this->newscategories->where($news_id);
         $newsSubcategory = $this->newssubcategories->where($news_id);
-        $newsTags = $this->newstags->where($news_id, 'notop');
+        $newsTags = $this->newstags->wheretag($news_id);
         return view('pages.admin.news.detail-news', compact('news', 'newsCategory', 'newsSubcategory', 'newsTags'));
     }
 
@@ -212,7 +213,7 @@ class NewsController extends Controller
 
         $newsCategory = $this->newscategories->where($news_id);
         $newsSubcategory = $this->newssubcategories->where($news_id);
-        $newsTags = $this->newstags->where($news_id, 'notop');
+        $newsTags = $this->newstags->wheretag($news_id);
         // dd($newsTags);
         $categories = $this->categories->get();
         $subcategories = $this->subcategories->get();

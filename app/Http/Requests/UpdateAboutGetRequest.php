@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreAdvertisementRequest extends FormRequest
+class UpdateAboutGetRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,13 +22,7 @@ class StoreAdvertisementRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'image' => 'required|mimes:jpg,jpeg,png,mp4,avi,mov,mkv',
-            'start_date' => 'required',
-            'end_date' => 'required',
-            'type' => 'required',
-            'page' => 'required',
-            'position' => 'required',
-            'url' => 'required'
+            //
         ];
     }
 }

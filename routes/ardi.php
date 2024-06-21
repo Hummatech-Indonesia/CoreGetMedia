@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\CommentReportController;
 use App\Http\Controllers\NewsCategoryController;
 use App\Http\Controllers\NewsLikeController;
 use App\Http\Controllers\NewsRejectController;
@@ -23,6 +24,7 @@ Route::post('reply-comment-create/{news}/{comment}', [CommentController::class, 
 
 Route::put('update-comment/{comment}', [CommentController::class, 'update'])->name('update.comment');
 Route::delete('delete-comment/{comment}', [CommentController::class, 'destroy'])->name('delete.comment');
+Route::post('comment-report/{comment}', [CommentReportController::class, 'store'])->name('report.comment');
 
 Route::put('pin-news/{news}', [NewsController::class, 'pin_news'])->name('pin.news.admin');
 Route::put('unpin-news/{news}', [NewsController::class, 'unpin_news'])->name('unpin.news.admin');
@@ -31,7 +33,6 @@ Route::post('like-news/{news}', [NewsLikeController::class, 'store'])->name('lik
 Route::delete('unlike-news/{news}', [NewsLikeController::class, 'destroy'])->name('unlike.news');
 
 Route::post('news-report/{news}', [NewsReportController::class, 'store'])->name('report.news');
-
 Route::post('news-reject/{news}', [NewsRejectController::class, 'store'])->name('reject.news.admin');
 
 Route::post('image-update/{user}', [UserController::class, 'updateImage'])->name('image.update');

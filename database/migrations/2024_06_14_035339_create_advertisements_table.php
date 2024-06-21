@@ -27,6 +27,7 @@ return new class extends Migration
             $table->enum('feed', [StatusEnum::PENDING->value, StatusEnum::NOTPAID->value, StatusEnum::PAID->value])->default(StatusEnum::PENDING->value);
             $table->enum('status', [StatusEnum::PENDING->value, StatusEnum::REJECT->value, StatusEnum::ACCEPTED->value, StatusEnum::PUBLISHED->value])->default(StatusEnum::PENDING->value);
             $table->text('description')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
