@@ -130,10 +130,10 @@
                     @forelse ($news_down as $data)
                         <div class="news-card-five">
                             <div class="news-card-img">
-                                <a href=""{{ route('categories.show.user', ['category' => $data->slug]) }}">
+                                <a href="{{ route('news.singlepost', ['news' => $data->slug]) }}">
                                     <img src="{{ asset('storage/' . $data->image) }}" alt="Image" class="img-all" />
                                 </a>
-                                <a data-toggle="tooltip" data-placement="top" title="Sports" href="{{ route('news.singlepost', ['news' => $data->slug]) }}"
+                                <a data-toggle="tooltip" data-placement="top" title="Sports" href="{{ $data->newsCategories[0]->category->name }}"
                                     class="news-cat">{{ $data->newsCategories[0]->category->name }}</a>
                             </div>
                             <div class="news-card-info">
