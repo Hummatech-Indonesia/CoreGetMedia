@@ -133,7 +133,7 @@
                                 <a href="{{ route('news.singlepost', ['news' => $data->slug]) }}">
                                     <img src="{{ asset('storage/' . $data->image) }}" alt="Image" class="img-all" />
                                 </a>
-                                <a data-toggle="tooltip" data-placement="top" title="Sports" href="{{ $data->newsCategories[0]->category->name }}"
+                                <a data-toggle="tooltip" data-placement="top" title="Sports" href="/{{ $data->newsCategories[0]->category->name }}"
                                     class="news-cat">{{ $data->newsCategories[0]->category->name }}</a>
                             </div>
                             <div class="news-card-info">
