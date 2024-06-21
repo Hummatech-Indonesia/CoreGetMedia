@@ -43,7 +43,7 @@
         <div class="row">
             @forelse ($newsLike as $newsLike)
 
-                <div class="col-md-12 col-lg-6 mb-3">
+                <div class="col-md-12 col-lg-10 mb-3">
                     <div class="mb-2">
                         <div class="row g-2">
                             <div class="col-lg-4 col-md-4">
