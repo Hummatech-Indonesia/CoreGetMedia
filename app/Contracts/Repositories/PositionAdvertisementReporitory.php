@@ -2,14 +2,14 @@
 
 namespace App\Contracts\Repositories;
 
-use App\Contracts\Interfaces\AdvertisementInterface;
-use App\Models\Advertisement;
+use App\Contracts\Interfaces\PositionAdvertisementInterface;
+use App\Models\PositionAdvertisement;
 
-class AdvertisementRepository extends BaseRepository implements AdvertisementInterface
+class PositionAdvertisementReporitory extends BaseRepository implements PositionAdvertisementInterface
 {
-    public function __construct(Advertisement $advertisement)
+    public function __construct(PositionAdvertisement $positionAdvertisement)
     {
-        $this->model = $advertisement;
+        $this->model = $positionAdvertisement;
     }
 
     /**
@@ -22,8 +22,8 @@ class AdvertisementRepository extends BaseRepository implements AdvertisementInt
     public function delete(mixed $id): mixed
     {
         return $this->model->query()
-        ->findOrFail($id)
-        ->delete();
+            ->findOrFail($id)
+            ->delete();
     }
 
     /**
@@ -36,9 +36,8 @@ class AdvertisementRepository extends BaseRepository implements AdvertisementInt
     public function show(mixed $id): mixed
     {
         return $this->model->query()
-            ->where('id', $id)
-            ->get()
-            ->first();
+            ->where('user_id', $id)
+            ->get();
     }
 
     /**
@@ -49,16 +48,6 @@ class AdvertisementRepository extends BaseRepository implements AdvertisementInt
     public function get(): mixed
     {
         return $this->model->query()
-            ->get();
-    }
-
-    public function where($user_id, $status): mixed
-    {
-        return $this->model->query()
-            ->where('status', $status)
-            ->when($user_id != null, function($q) use ($user_id) {
-                $q->where('user_id', $user_id);
-            })
             ->get();
     }
 

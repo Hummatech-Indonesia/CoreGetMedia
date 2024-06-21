@@ -26,7 +26,7 @@
         <div class="card-body px-4 py-4">
             <div class="row justify-content-between">
                 <div class="col-8 text-white">
-                    <h4 class="fw-semibold mb-3 mt-2 text-white">Pengisian Iklan</h4>
+                    <h4 class="fw-semibold mb-3 mt-2 text-white">Update Iklan</h4>
                     <p>Layanan pengiklanan di getmedia.id</p>
                 </div>
                 <div class="col-3">
@@ -38,8 +38,8 @@
         </div>
     </div>
 
-    <form action="{{ route('create.advertisement') }}" method="post" enctype="multipart/form-data">
-        @method('post')
+    <form action="{{ route('update.advertisement', ['advertisement' => $data->id]) }}" method="post" enctype="multipart/form-data">
+        @method('put')
         @csrf
         <div class="d-flex justify-content-between mb-3">
             <h5>Isi form dibawah ini untuk konten iklan</h5>
@@ -48,7 +48,7 @@
                     Simpan Draf
                 </button>
                 <button type="submit" class="btn btn-md text-white" style="background-color: #175A95;">
-                    Unggah
+                    Update
                 </button>
             </div>
         </div>
@@ -58,17 +58,17 @@
                 <div class="col-lg-6 mb-4">
                     <label class="form-label" for="page">Halaman</label>
                     <select name="page" class="form-select" id="">
-                        <option value="home">Dashboard</option>
-                        <option value="singlepost">News Post</option>
-                        <option value="category">Kategori</option>
-                        <option value="subcategory">Sub Kategori</option>
+                        <option value="home" {{ $data->page == 'home' ? 'selected' : '' }}>Dashboard</option>
+                        <option value="singlepost" {{ $data->page == 'singlepost' ? 'selected' : '' }}>News Post</option>
+                        <option value="category" {{ $data->page == 'category' ? 'selected' : '' }}>Kategori</option>
+                        <option value="subcategory" {{ $data->page == 'subcategory' ? 'selected' : '' }}>Sub Kategori</option>
                     </select>
                 </div>
                 <div class="col-lg-6 mb-4">
                     <label class="form-label" for="type">Jenis Iklan</label>
                     <select name="type" class="form-select" id="">
-                        <option value="photo">Foto</option>
-                        <option value="video">Video</option>
+                        <option value="photo" {{ $data->type == 'photo' ? 'selected' : '' }}>Foto</option>
+                        <option value="video" {{ $data->type == 'video' ? 'selected' : '' }}>Video</option>
                     </select>
                 </div>
 
@@ -76,21 +76,21 @@
                     <label for="position" class="form-label">Posisi Iklan</label>
                     <div class="">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="under">
+                            <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="under" {{ $data->position == 'under' ? 'checked' : '' }}>
                             <label class="form-check-label" for="inlineRadio1">
                                 <p class="ms-2">Posisi Bawah Full (1770 x 166)</p>
                                 <img src="{{asset('assets/img/news/news-11.webp')}}" width="300" height="200" alt="">
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="mid">
+                            <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="mid" {{ $data->position == 'mid' ? 'checked' : '' }}>
                             <label class="form-check-label" for="inlineRadio1">
                                 <p class="ms-2">Posisi Tengah Full (1770 x 166)</p>
                                 <img src="{{asset('assets/img/news/news-11.webp')}}" width="300" height="200" alt="">
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="top">
+                            <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="top" {{ $data->position == 'top' ? 'checked' : '' }}>
                             <label class="form-check-label" for="inlineRadio1">
                                 <p class="ms-2">Posisi Atas Full (1770 x 166)</p>
                                 <img src="{{ asset('assets/img/news/news-11.webp') }}" width="300" height="200"
@@ -98,7 +98,7 @@
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="position" id="inlineRadio2" value="right">
+                            <input class="form-check-input" type="radio" name="position" id="inlineRadio2" value="right" {{ $data->position == 'right' ? 'checked' : '' }}>
                             <label class="form-check-label" for="inlineRadio2">
                                 <p class="ms-2">Posisi Kanan (456 x 654)</p>
                                 <img src="{{ asset('assets/img/news/news-12.webp') }}" width="300" height="200"
@@ -106,7 +106,7 @@
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="position" id="inlineRadio3" value="left">
+                            <input class="form-check-input" type="radio" name="position" id="inlineRadio3" value="left" {{ $data->position == 'left' ? 'checked' : '' }}>
                             <label class="form-check-label" for="inlineRadio3">
                                 <p class="ms-2">Posisi Kiri (1245 x 295)</p>
                                 <img src="{{ asset('assets/img/news/news-13.webp') }}" width="300" height="200"
@@ -119,7 +119,7 @@
 
                 <div class="col-lg-6 mb-4">
                     <label class="form-label" for="start_date">Tanggal Awal</label>
-                    <input type="date" id="start_date" name="start_date" placeholder="" value="{{ old('start_date') }}"
+                    <input type="date" id="start_date" name="start_date" placeholder="" value="{{ $data->start_date }}"
                         class="form-control @error('start_date') is-invalid @enderror">
                     @error('start_date')
                         <span class="invalid-feedback" role="alert" style="color: red;">
@@ -129,7 +129,7 @@
                 </div>
                 <div class="col-lg-6 mb-4">
                     <label class="form-label" for="end_date">Tanggal Akhir</label>
-                    <input type="date" id="end_date" name="end_date" placeholder="" value="{{ old('end_date') }}"
+                    <input type="date" id="end_date" name="end_date" placeholder="" value="{{ $data->end_date }}"
                         class="form-control @error('end_date') is-invalid @enderror">
                     @error('end_date')
                         <span class="invalid-feedback" role="alert" style="color: red;">
@@ -140,7 +140,7 @@
                 <div class="col-lg-12 mb-4">
                     <label class="form-label" for="url">URL</label>
                     <input type="text" id="url" name="url" placeholder="masukan url"
-                        value="{{ old('url') }}" class="form-control @error('url') is-invalid @enderror">
+                        value="{{ $data->url }}" class="form-control @error('url') is-invalid @enderror">
                     @error('url')
                         <span class="invalid-feedback" role="alert" style="color: red;">
                             <strong>{{ $message }}</strong>
@@ -149,9 +149,8 @@
                 </div>
                 <div class="col-lg-12 mb-4">
                     <label class="form-label" for="photo">Kontent</label>
-                    <input type="file" id="photo" name="image" onchange="previewImage(event)" placeholder=""
-                        value="{{ old('photo') }}" class="form-control @error('photo') is-invalid @enderror">
-                    @error('photo')
+                    <input type="file" id="photo" name="image" onchange="previewImage(event)" placeholder="" class="form-control @error('photo') is-invalid @enderror">
+                    @error('image')
                         <span class="invalid-feedback" role="alert" style="color: red;">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -160,7 +159,7 @@
                 <div class="gambar-iklan">
                     <label class="form-label" for="preview">Preview</label>
                     <div class="">
-                        <img id="preview" style="object-fit: cover;" width="240" height="160" alt="">
+                        <img id="preview" src="{{ asset('storage/'. $data->image) }}" style="object-fit: cover;" width="240" height="160" alt="">
                     </div>
                 </div>
             </div>
