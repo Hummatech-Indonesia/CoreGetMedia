@@ -138,52 +138,56 @@
  <div class="col-md-12 col-lg-5">
     <form action="#" method="post" enctype="multipart/form-data">
         @csrf
-        <div class="card p-4 shadow-sm">
-            <h4>Pembayaran</h4>
-            <div class="row">
-                <input type="hidden" id="advertisement_id" name="advertisement_id" value="">
-                <div class="col-12 mb-4 mt-4">
-                    <label class="form-label" for="nomor">Metode Pembayaran</label>
-                    <div class="input-group">
-                        {{-- <input type="hidden" id="payment_method_input" name="payment_method" value=""> --}}
-                        <input type="text" style="color:#5D87FF;" id="payment_method_input" name="payment_method"  onchange="previewPayment(event)" placeholder="pilih metode pembayaran" value="Pilih Metode Pembayaran" class="preview form-control @error('payment_method') is-invalid @enderror" readonly>
-                        <button type="button" data-bs-toggle="modal" data-bs-target="#modal-create" class="btn btn-sm text-white px-4" style="background-color: #5D87FF;">Pilih</button>
+        <div class="card shadow-sm">
+            <div class="card-header d-flex justify-content-center py-2" style="background-color: #175A95">
+                <h4 class="text-white">Pembayaran</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <input type="hidden" id="advertisement_id" name="advertisement_id" value="">
+                    <div class="col-12 mb-4 mt-4">
+                        <label class="form-label" for="nomor">Metode Pembayaran</label>
+                        <div class="input-group">
+                            {{-- <input type="hidden" id="payment_method_input" name="payment_method" value=""> --}}
+                            <input type="text" style="color:#5D87FF;" id="payment_method_input" name="payment_method"  onchange="previewPayment(event)" placeholder="pilih metode pembayaran" value="Pilih Metode Pembayaran" class="preview form-control @error('payment_method') is-invalid @enderror" readonly>
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#modal-create" class="btn btn-sm text-white px-4" style="background-color: #5D87FF;">Pilih</button>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            {{-- <div class="form-check">
+                                <input class="form-check-input" type="radio" name="payment_method" id="bri" value="BRI" onclick="selectPayment(this)">
+                                <label class="form-check-label" for="bri">
+                                    BRI Virtual Account
+                                </label>
+                            </div> --}}
+                        </div>
+                        @error('payment_method')
+                        <span class="invalid-feedback" role="alert" style="color: red;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
-                    <div class="d-flex align-items-center">
-                        {{-- <div class="form-check">
-                            <input class="form-check-input" type="radio" name="payment_method" id="bri" value="BRI" onclick="selectPayment(this)">
-                            <label class="form-check-label" for="bri">
-                                BRI Virtual Account
-                            </label>
-                        </div> --}}
+    
+                    <div class="col-12 mb-4">
+                        <label class="form-label" for="nomor">Kode Voucher (opsional)</label>
+                        <input type="text" id="voucher" name="voucher" placeholder="kode voucher" value="{{ old('voucher') }}" class="form-control @error('voucher') is-invalid @enderror">
+                        @error('voucher')
+                        <span class="invalid-feedback" role="alert" style="color: red;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
-                    @error('payment_method')
-                    <span class="invalid-feedback" role="alert" style="color: red;">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                </div>
-
-                <div class="col-12 mb-4">
-                    <label class="form-label" for="nomor">Kode Voucher (opsional)</label>
-                    <input type="text" id="voucher" name="voucher" placeholder="kode voucher" value="{{ old('voucher') }}" class="form-control @error('voucher') is-invalid @enderror">
-                    @error('voucher')
-                    <span class="invalid-feedback" role="alert" style="color: red;">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                </div>
-
-                <div class="d-flex mt-5 justify-content-between">
-                    <h5>Harga Upload</h5>
-
-                    <h5>Rp. 100.000</h5>
-                </div>
-
-                <div class="mt-4">
-                    <button type="submit" class="btn btn-md text-white w-100" style="background-color: #175A95">
-                        Berikutnya
-                    </button>
+    
+                    <div class="d-flex mt-5 justify-content-between">
+                        <h5>Harga Upload</h5>
+    
+                        <h5>Rp. 100.000</h5>
+                    </div>
+    
+                    <div class="mt-4">
+                        <a href="{{ route('detail-payment-advertisement') }}" class="btn btn-md text-white w-100" style="background-color: #175A95">
+                            Berikutnya
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

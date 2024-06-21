@@ -266,6 +266,10 @@ Route::get('detail-advertisemenet', function(){
     return view('pages.user.advertisement.detail-advertisement');
 })->name('detail-advertisement');
 
+Route::get('detail-payment-advertisement', function(){
+    return view('pages.user.advertisement.detail-payment');
+})->name('detail-payment-advertisement');
+
 Route::post('create-advertisement', [AdvertisementController::class, 'store'])->name('create.advertisement');
 Route::post('update-advertisement/{advertisement}', [AdvertisementController::class, 'update'])->name('update.advertisement');
 Route::post('delete-advertisement/{advertisement}', [AdvertisementController::class, 'destroy'])->name('delete.advertisement');
