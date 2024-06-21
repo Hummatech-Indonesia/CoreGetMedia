@@ -67,12 +67,11 @@
                             <h4 class="mb-4">Rp. 100.000</h4>
 
                             <div class="d-flex justify-content-between">
-                                <button type="button"
-                                    class="btn mb-1 waves-effect waves-light btn-warning w-100"
-                                    style="background-color: #FFD643; border: none">
+                                <button type="button" class="btn mb-1 waves-effect waves-light btn-warning w-100" style="background-color: #FFD643; border: none" data-toggle="modal" data-target="#editModal">
                                     Edit
                                     <i class="ti ti-edit"></i>
                                 </button>
+
                                 <button type="button"
                                     class="btn mb-1 waves-effect waves-light btn-danger w-100 ms-4">
                                     Hapus
@@ -84,10 +83,58 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <!-- Card 2 -->
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="mb-3">Keterangan posisi iklan & ukuran</h6>
+                            <h4 class="mb-3">Posisi Kanan (1000 x 1000)</h4>
+                            <h6>Preview posisi</h6>
+                            <img src="{{ asset('assets/iklan.png') }}" alt="Nama Gambar" class="img-fluid mt-2 mb-4"
+                                style="max-width: 250px; border: none;">
+                            <h6 class="mb-2">Harga :</h6>
+                            <h4 class="mb-4">Rp. 100.000</h4>
+
+                            <div class="d-flex justify-content-between">
+                                <button type="button" class="btn mb-1 waves-effect waves-light btn-warning w-100" style="background-color: #FFD643; border: none" data-toggle="modal" data-target="#editModal">
+                                    Edit
+                                    <i class="ti ti-edit"></i>
+                                </button>
+
+                                <button type="button"
+                                    class="btn mb-1 waves-effect waves-light btn-danger w-100 ms-4">
+                                    Hapus
+                                    <i class="ti ti-trash"></i>
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-4">
-                    <!-- Card 3 -->
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="mb-3">Keterangan posisi iklan & ukuran</h6>
+                            <h4 class="mb-3">Posisi Kanan (1000 x 1000)</h4>
+                            <h6>Preview posisi</h6>
+                            <img src="{{ asset('assets/iklan.png') }}" alt="Nama Gambar" class="img-fluid mt-2 mb-4"
+                                style="max-width: 250px; border: none;">
+                            <h6 class="mb-2">Harga :</h6>
+                            <h4 class="mb-4">Rp. 100.000</h4>
+
+                            <div class="d-flex justify-content-between">
+                                <button type="button" class="btn mb-1 waves-effect waves-light btn-warning w-100" style="background-color: #FFD643; border: none" data-toggle="modal" data-target="#editModal">
+                                    Edit
+                                    <i class="ti ti-edit"></i>
+                                </button>
+
+                                <button type="button"
+                                    class="btn mb-1 waves-effect waves-light btn-danger w-100 ms-4">
+                                    Hapus
+                                    <i class="ti ti-trash"></i>
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -108,12 +155,11 @@
                             <h4 class="mb-4">Rp. 100.000</h4>
 
                             <div class="d-flex justify-content-between">
-                                <button type="button"
-                                    class="btn mb-1 waves-effect waves-light btn-warning w-100"
-                                    style="background-color: #FFD643; border: none">
+                                <button type="button" class="btn mb-1 waves-effect waves-light btn-warning w-100" style="background-color: #FFD643; border: none" data-toggle="modal" data-target="#editModal">
                                     Edit
                                     <i class="ti ti-edit"></i>
                                 </button>
+
                                 <button type="button"
                                     class="btn mb-1 waves-effect waves-light btn-danger w-100 ms-4">
                                     Hapus
@@ -149,12 +195,11 @@
                             <h4 class="mb-4">Rp. 100.000</h4>
 
                             <div class="d-flex justify-content-between">
-                                <button type="button"
-                                    class="btn mb-1 waves-effect waves-light btn-warning w-100"
-                                    style="background-color: #FFD643; border: none">
+                                <button type="button" class="btn mb-1 waves-effect waves-light btn-warning w-100" style="background-color: #FFD643; border: none" data-toggle="modal" data-target="#editModal">
                                     Edit
                                     <i class="ti ti-edit"></i>
                                 </button>
+
                                 <button type="button"
                                     class="btn mb-1 waves-effect waves-light btn-danger w-100 ms-4">
                                     Hapus
@@ -190,12 +235,11 @@
                             <h4 class="mb-4">Rp. 100.000</h4>
 
                             <div class="d-flex justify-content-between">
-                                <button type="button"
-                                    class="btn mb-1 waves-effect waves-light btn-warning w-100"
-                                    style="background-color: #FFD643; border: none">
+                                <button type="button" class="btn mb-1 waves-effect waves-light btn-warning w-100" style="background-color: #FFD643; border: none" data-toggle="modal" data-target="#editModal">
                                     Edit
                                     <i class="ti ti-edit"></i>
                                 </button>
+
                                 <button type="button"
                                     class="btn mb-1 waves-effect waves-light btn-danger w-100 ms-4">
                                     Hapus
@@ -215,5 +259,45 @@
             </div>
         </div>
     </div>
+
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Keterangan Iklan</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="inputText1" class="mb-2">Keterangan posisi & Ukuran</label>
+                            <input type="text" class="form-control mb-3" id="inputText1" placeholder="Masukkan keterangan">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputFile" class="mb-2">Detail Posisi</label>
+                            <input class="form-control mb-3" type="file" id="formFile">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputText2" class="mb-2">Harga</label>
+                            <input type="number" class="form-control" id="inputText2" placeholder="Masukkan harga">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@endsection
+
+@section('script')
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 @endsection
