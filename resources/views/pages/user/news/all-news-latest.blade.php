@@ -57,25 +57,25 @@
             <div class="row gx-55 gx-5">
                 <div class="col-lg-8">
                     <div class="row">
-                        @forelse ($news as $news)
+                        @forelse ($news as $item)
                             <div class="col-md-6">
                                 <div class="news-card-six">
                                     <div class="news-card-img">
-                                        <img src="{{ asset('storage/' . $news->image) }}" alt="" class="img-all">
+                                        <img src="{{ asset('storage/' . $item->image) }}" alt="" class="img-all">
                                         @foreach ($subCategories as $subCategory)
                                         <p class="tag">
-                                            <a href="{{ route('categories.show.user', ['category' => $news->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $news->newsCategories[0]->category->name }}</a>
+                                            <a href="{{ route('categories.show.user', ['category' => $item->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $item->newsCategories[0]->category->name }}</a>
                                         </p>
                                         @endforeach
                                     </div>
                                     <div class="news-card-info">
 
-                                        <h3><a href="{{ route('news.singlepost', $news->slug) }}">{{$news->name}}</a>
+                                        <h3><a href="{{ route('news.singlepost', $item->slug) }}">{{$item->name}}</a>
                                         </h3>
                                         <ul class="news-metainfo list-style">
-                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($news->date)->translatedFormat('d F Y') }}</a>
+                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($item->date)->translatedFormat('d F Y') }}</a>
                                             </li>
-                                            <li><i class="fi fi-rr-eye"></i>{{$news->news_views_count}} x dilihat
+                                            <li><i class="fi fi-rr-eye"></i>{{$item->news_views_count}} x dilihat
                                             </li>
                                         </ul>
                                     </div>

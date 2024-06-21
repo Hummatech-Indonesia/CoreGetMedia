@@ -45,7 +45,7 @@
                                 <span class="hide-menu">Berita Disukai</span>
                             </a>
                         </li>
-                        
+
                     </ul>
                 </li>
 
@@ -63,7 +63,7 @@
                         <span class="hide-menu">Iklan</span>
                     </a>
                     <ul aria-expanded="false" class="collapse first-level">
-                        <li class="sidebar-item">
+                        {{-- <li class="sidebar-item">
                             <a href="{{ route('biodata-advertisement') }}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
@@ -72,7 +72,7 @@
                                 </div>
                                 <span class="hide-menu">Unggah Iklan</span>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="sidebar-item">
                             <a href="{{ route('status-advertisement.user') }}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">

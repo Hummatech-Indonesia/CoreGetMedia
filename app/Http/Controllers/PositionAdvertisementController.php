@@ -6,14 +6,17 @@ use App\Models\PositionAdvertisement;
 use App\Http\Requests\StorePositionAdvertisementRequest;
 use App\Http\Requests\UpdatePositionAdvertisementRequest;
 use App\Contracts\Interfaces\PositionAdvertisementInterface;
+use App\Services\AdvertisementService;
 
 class PositionAdvertisementController extends Controller
 {
     private PositionAdvertisementInterface $positionAdvertisement;
+    private AdvertisementService $service;
 
-    public function __construct(PositionAdvertisementInterface $positionAdvertisement)
+    public function __construct(PositionAdvertisementInterface $positionAdvertisement, AdvertisementService $service)
     {
         $this->positionAdvertisement = $positionAdvertisement;
+        $this->service = $service;
     }
     /**
      * Display a listing of the resource.
@@ -36,7 +39,9 @@ class PositionAdvertisementController extends Controller
      */
     public function store(StorePositionAdvertisementRequest $request)
     {
-        //
+        $data = $this->service->positionCreate($request);
+        $this->positionAdvertisement->store($data);
+        return back()->with('success', 'Berhasil menambahkan posisi iklan');
     }
 
     /**
@@ -58,9 +63,11 @@ class PositionAdvertisementController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePositionAdvertisementRequest $request, PositionAdvertisement $positionAdvertisement)
+    public function update(StorePositionAdvertisementRequest $request, PositionAdvertisement $positionAdvertisement)
     {
-        //
+        $data = $this->service->positionUpdate($request, $positionAdvertisement);
+        $this->positionAdvertisement->update($positionAdvertisement->id, $data);
+        return back()->with('success', 'Berhasil update posisi iklan');
     }
 
     /**
@@ -68,6 +75,7 @@ class PositionAdvertisementController extends Controller
      */
     public function destroy(PositionAdvertisement $positionAdvertisement)
     {
-        //
+        $this->positionAdvertisement->delete($positionAdvertisement->id);
+        return back()->with('success', 'Berhasil menghapus posisi iklan');
     }
 }

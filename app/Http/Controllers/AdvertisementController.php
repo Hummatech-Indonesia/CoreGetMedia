@@ -3,21 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\AdvertisementInterface;
+use App\Contracts\Interfaces\PositionAdvertisementInterface;
 use App\Enums\StatusEnum;
 use App\Models\Advertisement;
 use App\Http\Requests\StoreAdvertisementRequest;
 use App\Http\Requests\UpdateAdvertisementRequest;
+use App\Models\PositionAdvertisement;
 use App\Services\AdvertisementService;
 use Illuminate\Http\Request;
 
 class AdvertisementController extends Controller
 {
     private AdvertisementInterface $advertisement;
+    private PositionAdvertisementInterface $position;
     private AdvertisementService $service;
 
-    public function __construct(AdvertisementInterface $advertisement, AdvertisementService $service)
+    public function __construct(AdvertisementInterface $advertisement, PositionAdvertisementInterface $position, AdvertisementService $service)
     {
         $this->advertisement = $advertisement;
+        $this->position = $position;
         $this->service = $service;
     }
 
@@ -43,8 +47,9 @@ class AdvertisementController extends Controller
 
     public function detail_admin(Advertisement $advertisement)
     {
+        $posisi = $this->position->get();
         $data = $this->advertisement->show($advertisement->id);
-        return view('pages.admin.advertisement.detail-advertisement', compact('data'));
+        return view('pages.admin.advertisement.detail-advertisement', compact('data', 'posisi'));
     }
 
     /**
@@ -52,7 +57,8 @@ class AdvertisementController extends Controller
      */
     public function create()
     {
-        //
+        $posisi = $this->position->get();
+        return view('pages.user.advertisement.upload-advertisemenet', compact('posisi'));
     }
 
     /**
@@ -91,8 +97,9 @@ class AdvertisementController extends Controller
      */
     public function edit(Advertisement $advertisement)
     {
+        $posisi = $this->position->get();
         $data = $this->advertisement->show($advertisement->id);
-        return view('pages.user.advertisement.update-advertisemenet', compact('data'));
+        return view('pages.user.advertisement.update-advertisemenet', compact('data', 'posisi'));
     }
 
     /**
@@ -109,11 +116,12 @@ class AdvertisementController extends Controller
     {
         $this->advertisement->update($advertisement->id, [
             'status' => StatusEnum::ACCEPTED->value,
-            'feed' => StatusEnum::NOTPAID->value,
-            'price' => $request->input('prize')
+            'feed' => StatusEnum::NOTPAID->value
         ]);
         return back()->with('success', 'Berhasil menerima iklan');
     }
+
+
 
     /**
      * Remove the specified resource from storage.

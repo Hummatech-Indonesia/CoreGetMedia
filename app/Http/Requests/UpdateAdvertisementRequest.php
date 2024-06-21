@@ -27,7 +27,7 @@ class UpdateAdvertisementRequest extends FormRequest
             'end_date' => 'required',
             'type' => 'required',
             'page' => 'required',
-            'position' => 'required',
+            'position_advertisement_id' => 'required',
             'url' => 'required'
         ];
     }

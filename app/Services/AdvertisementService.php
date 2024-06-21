@@ -16,6 +16,7 @@ use App\Models\Advertisement;
 use App\Models\NewsCategory;
 use App\Models\NewsSubCategory;
 use App\Models\NewsTag;
+use App\Models\PositionAdvertisement;
 use App\Models\Tags;
 
 class AdvertisementService
@@ -57,7 +58,7 @@ class AdvertisementService
             'end_date' => $data['end_date'],
             'type' => $data['type'],
             'page' => $data['page'],
-            'position' => $data['position'],
+            'position_advertisement_id' => $data['position_advertisement_id'],
             'url' => $data['url']
         ];
     }
@@ -95,7 +96,7 @@ class AdvertisementService
             'end_date' => $data['end_date'],
             'type' => $data['type'],
             'page' => $data['page'],
-            'position' => $data['position'],
+            'position_advertisement_id' => $data['position_advertisement_id'],
             'url' => $data['url']
         ];
     }
@@ -106,8 +107,34 @@ class AdvertisementService
         $new_photo = $this->upload(UploadDiskEnum::POSITION->value, $request->image);
 
         return [
-            //
+            'name' => $data['name'],
+            'image' => $new_photo,
+            'price' => $data['price']
         ];
+    }
 
+    public function positionUpdate(StorePositionAdvertisementRequest $request, PositionAdvertisement $positionAdvertisement)
+    {
+        $data = $request->validated();
+
+        $old_photo = $positionAdvertisement->image;
+        $new_photo = "";
+
+        if ($request->hasFile('image')) {
+
+            if (file_exists(public_path($old_photo))) {
+                unlink(public_path($old_photo));
+            }
+
+            $new_photo = $this->upload(UploadDiskEnum::POSITION->value, $request->image);
+
+            $positionAdvertisement->image = $new_photo;
+        }
+
+        return [
+            'name' => $data['name'],
+            'image' => $new_photo ? $new_photo : $old_photo,
+            'price' => $data['price']
+        ];
     }
 }

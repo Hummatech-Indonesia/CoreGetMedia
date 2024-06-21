@@ -19,8 +19,6 @@ class Advertisement extends Model
         'end_date',
         'type',
         'page',
-        // 'position',
-        // 'price',
         'position_advertisement_id',
         'feed',
         'status',

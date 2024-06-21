@@ -248,9 +248,7 @@ Route::get('advertisement-biodata', function(){
     return view('pages.user.advertisement.biodata-advertisement');
 })->name('biodata-advertisement');
 
-Route::get('advertisement-upload', function(){
-    return view('pages.user.advertisement.upload-advertisemenet');
-})->name('upload-advertisement');
+Route::get('advertisement-upload', [AdvertisementController::class, 'create'])->name('upload-advertisement');
 
 Route::get('detail-advertisemenet', function(){
     return view('pages.user.advertisement.detail-advertisement');

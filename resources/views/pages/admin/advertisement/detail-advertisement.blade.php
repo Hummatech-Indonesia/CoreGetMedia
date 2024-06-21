@@ -97,7 +97,18 @@
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-12 mb-3">
-                                    <div class="form-check form-check-inline">
+                                    @forelse ($posisi as $item)
+                                    <div class="form-check form-check-inline mt-2">
+                                        <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="{{ $item->id }}" {{ $data->position_advertisement_id == $item->id ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="inlineRadio1">
+                                            <p class="ms-2">{{ $item->name }}</p>
+                                            <img src="{{asset('storage/'. $item->image)}}" width="300" height="200" alt="">
+                                        </label>
+                                    </div>
+                                    @empty
+                                    @endforelse
+
+                                    {{-- <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" disabled name="position" id="inlineRadio1" value="under" {{ $data->position == 'under' ? 'checked' : '' }}>
                                         <label class="form-check-label" for="inlineRadio1">
                                             <p class="ms-2">Posisi Bawah Full (1770 x 166)</p>
@@ -132,7 +143,7 @@
                                             <p class="ms-2">Posisi Kiri (1245 x 295)</p>
                                             <img src="{{ asset('assets/img/news/news-13.webp') }}" alt="Nama Gambar" class="img-fluid mt-2" style="max-width: 250px;">
                                         </label>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
