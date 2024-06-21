@@ -102,13 +102,8 @@ Route::get('advertisement-list', function () {
     return view('pages.admin.advertisement.advertisement-list');
 })->name(('advertisement-list.admin'));
 
-Route::get('confirm-advertisement', function () {
-    return view('pages.admin.advertisement.confirm-advertisement');
-})->name('confirm-advertisement.admin');
-
-Route::get('detail-advertisement', function () {
-    return view('pages.admin.advertisement.detail-advertisement');
-})->name('detail-advertisement.admin');
+Route::get('confirm-advertisement', [AdvertisementController::class, 'list_confirm'])->name('confirm-advertisement.admin');
+Route::get('detail-advertisement/{advertisement}', [AdvertisementController::class, 'detail_admin'])->name('detail-advertisement.admin');
 
 Route::get('set-price', function () {
     return view('pages.admin.advertisement.set-price');
@@ -271,8 +266,9 @@ Route::get('detail-payment-advertisement', function(){
 })->name('detail-payment-advertisement');
 
 Route::post('create-advertisement', [AdvertisementController::class, 'store'])->name('create.advertisement');
-Route::post('update-advertisement/{advertisement}', [AdvertisementController::class, 'update'])->name('update.advertisement');
-Route::post('delete-advertisement/{advertisement}', [AdvertisementController::class, 'destroy'])->name('delete.advertisement');
+Route::put('update-advertisement/{advertisement}', [AdvertisementController::class, 'update'])->name('update.advertisement');
+Route::delete('delete-advertisement/{advertisement}', [AdvertisementController::class, 'destroy'])->name('delete.advertisement');
+Route::put('cencel-advertisement/{advertisement}', [AdvertisementController::class, 'cancel'])->name('cancel.advertisement');
 
 require_once __DIR__ . '/jovita.php';
 require_once __DIR__ . '/ardi.php';

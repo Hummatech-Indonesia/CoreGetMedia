@@ -9,6 +9,7 @@ use App\Enums\UploadDiskEnum;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Dashboard\Article\UpdateRequest;
 use App\Http\Requests\StoreAdvertisementRequest;
+use App\Http\Requests\StorePositionAdvertisementRequest;
 use App\Http\Requests\UpdateAdvertisementRequest;
 use App\Http\Requests\UpdateNewsRequest;
 use App\Models\Advertisement;
@@ -94,7 +95,19 @@ class AdvertisementService
             'end_date' => $data['end_date'],
             'type' => $data['type'],
             'page' => $data['page'],
-            'position' => $data['position']
+            'position' => $data['position'],
+            'url' => $data['url']
         ];
+    }
+
+    public function positionCreate(StorePositionAdvertisementRequest $request)
+    {
+        $data = $request->validated();
+        $new_photo = $this->upload(UploadDiskEnum::POSITION->value, $request->image);
+
+        return [
+            //
+        ];
+
     }
 }

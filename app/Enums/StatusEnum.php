@@ -8,6 +8,7 @@ enum StatusEnum : string
     case ACCEPTED = 'accepted';
     case PENDING = 'pending';
     case PUBLISHED = 'published';
+    case CANCELED = 'canceled';
 
     case PAID = 'paid';
     case NOTPAID = 'notpaid';

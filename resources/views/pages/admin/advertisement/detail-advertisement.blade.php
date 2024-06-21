@@ -76,17 +76,17 @@
                 <h4>Detail Iklan</h4>
                 <div class="pt-3">
                     <h6 class="card-text">Gambar</h6>
-                    <img src="{{asset('assets/milo.png')}}" alt="Nama Gambar" style="max-width: 200px;" />
+                    <img src="{{asset('storage/' . $data->image)}}" alt="Nama Gambar" style="max-width: 200px;" />
                 </div>
                 <div class="pt-4">
                     <h6>Halaman</h6>
                     <form>
                         <div class="form-group mb-4">
                             <select class="form-select mr-sm-2" id="inlineFormCustomSelect">
-                                <option selected></option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                <option value="home" disabled {{ $data->page == 'home' ? 'selected' : '' }}>Dashboard</option>
+                                <option value="singlepost" disabled {{ $data->page == 'singlepost' ? 'selected' : '' }}>News Post</option>
+                                <option value="category" disabled {{ $data->page == 'category' ? 'selected' : '' }}>Kategori</option>
+                                <option value="subcategory" disabled {{ $data->page == 'subcategory' ? 'selected' : '' }}>Sub Kategori</option>
                             </select>
                         </div>
                     </form>
@@ -94,35 +94,46 @@
                 <div class="pt-2">
                     <h6>Posisi Iklan</h6>
                     <div class="row py-2">
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <div class="row">
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-12 mb-3">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input success" type="radio" name="radio-solid-success1" id="success1-radio" value="option1">
-                                        <label class="form-check-label d-flex flex-column align-items-center" for="success1-radio">
-                                            <span>Posisi Kanan (456 x 654)</span>
-                                            <img src="{{asset('assets/iklan.png')}}" alt="Nama Gambar" class="img-fluid mt-2" style="max-width: 250px;">
+                                        <input class="form-check-input" type="radio" disabled name="position" id="inlineRadio1" value="under" {{ $data->position == 'under' ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="inlineRadio1">
+                                            <p class="ms-2">Posisi Bawah Full (1770 x 166)</p>
+                                            <img src="{{asset('assets/img/news/news-11.webp')}}" alt="Nama Gambar" class="img-fluid mt-2" style="max-width: 250px;">
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" disabled name="position" id="inlineRadio1" value="mid" {{ $data->position == 'mid' ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="inlineRadio1">
+                                            <p class="ms-2">Posisi Tengah Full (1770 x 166)</p>
+                                            <img src="{{asset('assets/img/news/news-11.webp')}}" alt="Nama Gambar" class="img-fluid mt-2" style="max-width: 250px;">
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" disabled name="position" id="inlineRadio1" value="top" {{ $data->position == 'top' ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="inlineRadio1">
+                                            <p class="ms-2">Posisi Atas Full (1770 x 166)</p>
+                                            <img src="{{ asset('assets/img/news/news-11.webp') }}" alt="Nama Gambar" class="img-fluid mt-2" style="max-width: 250px;">
+                                        </label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline mt-2">
+                                        <input class="form-check-input" type="radio" disabled name="position" id="inlineRadio2" value="right" {{ $data->position == 'right' ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="inlineRadio2">
+                                            <p class="ms-2">Posisi Kanan (456 x 654)</p>
+                                            <img src="{{ asset('assets/img/news/news-12.webp') }}" alt="Nama Gambar" class="img-fluid mt-2" style="max-width: 250px;">
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline mt-2">
+                                        <input class="form-check-input" type="radio" disabled name="position" id="inlineRadio3" value="left" {{ $data->position == 'left' ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="inlineRadio3">
+                                            <p class="ms-2">Posisi Kiri (1245 x 295)</p>
+                                            <img src="{{ asset('assets/img/news/news-13.webp') }}" alt="Nama Gambar" class="img-fluid mt-2" style="max-width: 250px;">
                                         </label>
                                     </div>
                                 </div>
-                                {{-- <div class="col-md-6 mb-3">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input success" type="radio" name="radio-solid-success2" id="success2-radio" value="option2">
-                                        <label class="form-check-label d-flex flex-column align-items-center" for="success2-radio">
-                                            <span>Posisi Kanan (456 x 654)</span>
-                                            <img src="{{asset('assets/iklan.png')}}" alt="Nama Gambar" class="img-fluid mt-2" style="max-width: 250px;">
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input success" type="radio" name="radio-solid-success2" id="success2-radio" value="option2">
-                                        <label class="form-check-label d-flex flex-column align-items-center" for="success2-radio">
-                                            <span>Posisi Kanan (456 x 654)</span>
-                                            <img src="{{asset('assets/iklan.png')}}" alt="Nama Gambar" class="img-fluid mt-2" style="max-width: 250px;">
-                                        </label>
-                                    </div>
-                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -132,10 +143,8 @@
                     <form>
                         <div class="form-group mb-4">
                             <select class="form-select mr-sm-2" id="inlineFormCustomSelect">
-                                <option selected></option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                <option value="photo" disabled {{ $data->type == 'photo' ? 'selected' : '' }}>Foto</option>
+                                <option value="video" disabled {{ $data->type == 'video' ? 'selected' : '' }}>Video</option>
                             </select>
                         </div>
                     </form>
@@ -144,17 +153,17 @@
                     <div class="d-flex pt-4">
                         <div class="me-4 w-100">
                             <h6>Tanggal Mulai</h6>
-                            <input type="date" class="form-control w-100">
+                            <input type="date" value="{{ $data->start_date }}" readonly class="form-control w-100">
                         </div>
                         <div class="w-100">
                             <h6>Tanggal Akhir</h6>
-                            <input type="date" class="form-control w-100">
+                            <input type="date" value="{{ $data->end_date }}" readonly class="form-control w-100">
                         </div>
                     </div>
                 </div>
                 <div class="pt-4">
                     <h6>URL</h6>
-                    <input type="text" class="form-control">
+                    <input type="text" value="{{ $data->url }}" class="form-control">
                 </div>
             </div>
         </div>
@@ -167,15 +176,15 @@
                 <h4 class="mb-4">Biodata Pengiklan</h4>
                 <div class="mb-3">
                     <label class="font-weight-medium fs-3 mb-1">Nama</label>
-                    <input type="text" class="form-control date-inputmask" id="date-mask" placeholder="">
+                    <input type="text" value="{{ $data->user->name }}" readonly class="form-control date-inputmask" id="date-mask" placeholder="">
                 </div>
                 <div class="mb-3">
                     <label class="font-weight-medium fs-3 mb-1">Email</label>
-                    <input type="email" class="form-control date-inputmask" id="date-mask" placeholder="">
+                    <input type="email" value="{{ $data->user->email }}" readonly class="form-control date-inputmask" id="date-mask" placeholder="">
                 </div>
                 <div class="mb-3">
                     <label class="font-weight-medium fs-3 mb-1">Nomor Telepon</label>
-                    <input type="number" class="form-control date-inputmask" id="date-mask" placeholder="">
+                    <input type="number" value="{{ $data->user->phone_number }}" readonly class="form-control date-inputmask" id="date-mask" placeholder="">
                 </div>
             </div>
         </div>

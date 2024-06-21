@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\AdvertisementInterface;
+use App\Enums\StatusEnum;
 use App\Models\Advertisement;
 use App\Http\Requests\StoreAdvertisementRequest;
 use App\Http\Requests\UpdateAdvertisementRequest;
 use App\Services\AdvertisementService;
+use Illuminate\Http\Request;
 
 class AdvertisementController extends Controller
 {
@@ -24,7 +26,25 @@ class AdvertisementController extends Controller
      */
     public function index()
     {
-        return view('pages.user.advertisement.status-advertisement');
+        $all_advertisements = $this->advertisement->get();
+        $pending_advertisements = $this->advertisement->where(auth()->user()->id, 'pending');
+        $accepted_advertisements = $this->advertisement->where(auth()->user()->id, 'accepted');
+        $reject_advertisements = $this->advertisement->where(auth()->user()->id, 'reject');
+        $published_advertisements = $this->advertisement->where(auth()->user()->id, 'published');
+
+        return view('pages.user.advertisement.status-advertisement', compact('all_advertisements', 'pending_advertisements', 'accepted_advertisements', 'reject_advertisements', 'published_advertisements'));
+    }
+
+    public function list_confirm()
+    {
+        $data = $this->advertisement->where(null, 'pending');
+        return view('pages.admin.advertisement.confirm-advertisement', compact('data'));
+    }
+
+    public function detail_admin(Advertisement $advertisement)
+    {
+        $data = $this->advertisement->show($advertisement->id);
+        return view('pages.admin.advertisement.detail-advertisement', compact('data'));
     }
 
     /**
@@ -71,7 +91,8 @@ class AdvertisementController extends Controller
      */
     public function edit(Advertisement $advertisement)
     {
-        //
+        $data = $this->advertisement->show($advertisement->id);
+        return view('pages.user.advertisement.update-advertisemenet', compact('data'));
     }
 
     /**
@@ -84,6 +105,16 @@ class AdvertisementController extends Controller
         return back()->with('success', 'Berhasil mengupdate iklan');
     }
 
+    public function accepted(Request $request, Advertisement $advertisement)
+    {
+        $this->advertisement->update($advertisement->id, [
+            'status' => StatusEnum::ACCEPTED->value,
+            'feed' => StatusEnum::NOTPAID->value,
+            'price' => $request->input('prize')
+        ]);
+        return back()->with('success', 'Berhasil menerima iklan');
+    }
+
     /**
      * Remove the specified resource from storage.
      */
@@ -91,5 +122,13 @@ class AdvertisementController extends Controller
     {
         $this->advertisement->delete($advertisement->id);
         return back()->with('success', 'Berhasil menghapus iklan');
+    }
+
+    public function cancel(Advertisement $advertisement)
+    {
+        $data['status'] = StatusEnum::CANCELED->value;
+        $data['feed'] = StatusEnum::CANCELED->value;
+        $this->advertisement->update($advertisement->id, $data);
+        return back()->with('success', 'Berhasil membatalkan pengiklanan');
     }
 }
