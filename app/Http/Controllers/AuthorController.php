@@ -108,7 +108,8 @@ class AuthorController extends Controller
         $newsLike = $this->newsLike->count(auth()->user()->id);
         $newses = $this->news->whereUser(auth()->user()->id);
         $newsView = $this->newsView->show(auth()->user()->id);
-        return view('pages.author.news.statistic', compact('newsLike', 'newses', 'newsView'));
+        $newsPopulers = $this->news->whereUser(auth()->user()->id);
+        return view('pages.author.news.statistic', compact('newsLike', 'newses', 'newsView', 'newsPopulers'));
     }
 
     /**
