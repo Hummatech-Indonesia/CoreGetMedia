@@ -130,7 +130,7 @@
                     @forelse ($news_down as $data)
                         <div class="news-card-five">
                             <div class="news-card-img">
-                                <a href="{{ route('news.singlepost', ['news' => $data->slug]) }}">
+                                <a href=""{{ route('categories.show.user', ['category' => $item->slug]) }}">
                                     <img src="{{ asset('storage/' . $data->image) }}" alt="Image" class="img-all" />
                                 </a>
                                 <a data-toggle="tooltip" data-placement="top" title="Sports" href="{{ route('news.singlepost', ['news' => $item->slug]) }}"
@@ -139,7 +139,7 @@
                             <div class="news-card-info">
                                 <h3>
                                     <a data-toggle="tooltip" data-placement="top"
-                                        title="Muga Nemo Aptent Quaerat Explicabo Urna Ni Like Ange" href="#">
+                                        title="Muga Nemo Aptent Quaerat Explicabo Urna Ni Like Ange" href="{{ route('news.singlepost', ['news' => $item->slug]) }}">
                                         {!! Illuminate\Support\Str::limit(strip_tags($data->name), 200, '...') !!}
                                     </a>
                                 </h3>
