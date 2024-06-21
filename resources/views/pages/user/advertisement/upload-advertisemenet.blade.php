@@ -39,17 +39,20 @@
     </div>
 </div>
 
-<form action="{{ route('create.advertisement') }}" method="post" enctype="multipart/form-data">
-    @method('post')
+<form action="" method="post" enctype="multipart/form-data">
+    {{-- @method('post') --}}
     @csrf
     <div class="d-flex justify-content-between mb-3">
         <h5>Isi form dibawah ini untuk konten iklan</h5>
-        <button type="submit" class="btn btn-md text-white" style="background-color: #1EBB9E;">
-            Simpan Draf
-        </button>
-        <button type="submit" class="btn btn-md text-white" style="background-color: #175A95;">
-            Unggah
-        </button>
+
+        <div>            
+            <button type="submit" class="btn btn-md text-white me-2" style="background-color: #1EBB9E;">
+                Simpan Draf
+            </button>
+            <a href="{{ route('status-advertisement.user') }}" class="btn btn-md text-white" style="background-color: #175A95;">
+                Unggah
+            </a>
+        </div>
     </div>
 
     <div class="card p-4 pb-5 shadow-sm">
@@ -78,20 +81,6 @@
                         <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="top">
                         <label class="form-check-label" for="inlineRadio1">
                             <p class="ms-2">Posisi Atas Full (1770 x 166)</p>
-                            <img src="{{asset('assets/img/news/news-11.webp')}}" width="300" height="200" alt="">
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="under">
-                        <label class="form-check-label" for="inlineRadio1">
-                            <p class="ms-2">Posisi Bawah Full (1770 x 166)</p>
-                            <img src="{{asset('assets/img/news/news-11.webp')}}" width="300" height="200" alt="">
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="mid">
-                        <label class="form-check-label" for="inlineRadio1">
-                            <p class="ms-2">Posisi Tengah Full (1770 x 166)</p>
                             <img src="{{asset('assets/img/news/news-11.webp')}}" width="300" height="200" alt="">
                         </label>
                     </div>

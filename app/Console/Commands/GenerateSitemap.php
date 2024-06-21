@@ -15,14 +15,15 @@ class GenerateSitemap extends Command
 
     public function handle()
     {
+        //
         // Manually create sitemap
-        $sitemap = Sitemap::create();
-        // Dynamic pages
-        $users = News::all();
-        foreach ($users as $user) {
-            $sitemap->add("/news/{$user->slug}");
-        }
+        // $sitemap = Sitemap::create();
+        // // Dynamic pages
+        // $users = News::all();
+        // foreach ($users as $user) {
+        //     $sitemap->add("/news/{$user->slug}");
+        // }
 
-        $sitemap->writeToFile(public_path('sitemap.xml'));
+        // $sitemap->writeToFile(public_path('sitemap.xml'));
     }
 }

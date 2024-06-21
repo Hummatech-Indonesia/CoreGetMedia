@@ -117,67 +117,82 @@
             </div>
         </div>
         <div class="col-md-12 col-lg-5">
-            <div class="card p-4">
-                <h4>Rincian pembayaran</h4>
-
-                <div class="d-flex mt-5 justify-content-between">
-                    <p class="fw-semibold">Kode Voucher</p>
-
-                    <p class="fs-3" style="color: #175A95;">ABCDE</p>
+            <div class="card">
+                <div class="card-header py-2 d-flex justify-content-center" style="background-color: #175A95">
+                    <h4 class="text-white">Rincian pembayaran</h4>
                 </div>
-
-                <div class="d-flex mt-4 justify-content-between">
-                    <p class="fw-semibold">Harga Upload</p>
-
-                    <div class="d-flex">
-                        {{-- <del><p class="fs-3 me-3" style="color: #175A95;">Rp. 100.000</p></del> --}}
-                        <p class="fs-3" style="color: #175A95;">Rp. 10.000</p>
+                <div class="card-body shadow-sm">
+    
+                    <div class="d-flex mt-5 justify-content-between">
+                        <p class="fw-semibold">Kode Voucher</p>
+    
+                        <p class="fs-3" style="color: #175A95;">ABCDE</p>
                     </div>
-                </div>
-
-                <div class="d-flex mt-4 justify-content-between">
-                    <p class="fw-semibold">Diskon Voucher</p>
-
-                    <div class="d-flex">
-                        <p class="fs-3" style="color: #175A95;"><span>-</span>Rp. 20.000</p>
-                    </div>
-                </div>
-
-                <div class="d-flex mt-4 justify-content-between">
-                    <p class="fw-semibold">Total Pembayaran</p>
-
-                    <div class="d-flex">
-                        <p class="fs-3" style="color: #175A95;">Rp. 80.000</p>
-                    </div>
-                </div>
-
-                <div class="d-flex mt-4 justify-content-between">
-                    <p class="fw-semibold">Bayar Sebelum Tanggal</p>
-                    <p class="fs-3" style="color: #175A95;">12/12/2020</p>
-                </div>
-
-                <div class="d-flex mt-4 justify-content-between">
-                    <p class="fw-semibold">Kode Transaksi</p>
-                    <p class="fs-3" style="color: #175A95;">DEV-T26250149620IYONL</p>
-                </div>
-
-                <div class="d-flex mt-4 justify-content-between">
-                    <p class="fw-semibold">Metode Pembayaran</p>
-                    <img src="{{asset('assets/img/bca.svg')}}" width="80px" alt="">
-                    {{-- <button type="button" class="btn btn-outline-light text-primary" data-bs-toggle="modal" data-bs-target="#modal-create">Pilih metode pembayaran</button> --}}
-                </div>
-
-                <div class="d-flex mt-4 justify-content-between">
-                        <p class="fw-semibold">Kode Pembayaran</p>
-
+    
+                    <div class="d-flex mt-4 justify-content-between">
+                        <p class="fw-semibold">Harga Upload</p>
+    
                         <div class="d-flex">
-                            <p class="fs-3" style="color: #175A95;">473635346744955</p>
-                            <button class="btn btn-sm text-white ms-2 px-3" style="background-color: #175A95;">
-                                Salin
-                            </button>
+                            {{-- <del><p class="fs-3 me-3" style="color: #175A95;">Rp. 100.000</p></del> --}}
+                            <p class="fs-3" style="color: #175A95;">Rp. 10.000</p>
                         </div>
-                </div>
+                    </div>
+    
+                    <div class="d-flex mt-4 justify-content-between">
+                        <p class="fw-semibold">Diskon Voucher</p>
+    
+                        <div class="d-flex">
+                            <p class="fs-3" style="color: #175A95;"><span>-</span>Rp. 20.000</p>
+                        </div>
+                    </div>
+    
+                    <div class="d-flex mt-4 justify-content-between">
+                        <p class="fw-semibold">Total Pembayaran</p>
+    
+                        <div class="d-flex">
+                            <p class="fs-3" style="color: #175A95;">Rp. 80.000</p>
+                        </div>
+                    </div>
+    
+                    <div class="d-flex mt-4 justify-content-between">
+                        <p class="fw-semibold">Bayar Sebelum Tanggal</p>
+                        <p class="fs-3" style="color: #175A95;">12/12/2020</p>
+                    </div>
+    
+                    <div class="d-flex mt-4 justify-content-between">
+                        <p class="fw-semibold">Kode Transaksi</p>
+                        <p class="fs-3" style="color: #175A95;">DEV-T26250149620IYONL</p>
+                    </div>
+    
+                    <div class="d-flex mt-4 justify-content-between">
+                        <p class="fw-semibold">Metode Pembayaran</p>
+                        <img src="{{asset('assets/img/bca.svg')}}" width="80px" alt="">
+                        {{-- <button type="button" class="btn btn-outline-light text-primary" data-bs-toggle="modal" data-bs-target="#modal-create">Pilih metode pembayaran</button> --}}
+                    </div>
+    
+                    <div class="d-flex mt-4 justify-content-between">
+                            <p class="fw-semibold">Kode Pembayaran</p>
+    
+                            <div class="d-flex">
+                                <p class="fs-3" style="color: #175A95;">473635346744955</p>
+                                <div>
+                                    <button class="btn btn-sm text-white ms-2 px-3" style="background-color: #175A95;">
+                                        Salin
+                                    </button>
+                                </div>
+                            </div>
+                    </div>
 
+                    <div class="d-flex mt-4 justify-content-between">
+                        <p class="fw-semibold">Status</p>
+                        <div>
+                            <span class="badge ms-2 px-3 bg-light-success text-success">
+                                Sudah Bayar
+                            </span>
+                        </div>
+                    </div>
+    
+                </div>
             </div>
         </div>
     </div>

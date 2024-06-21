@@ -6,14 +6,17 @@ use App\Contracts\Interfaces\AboutGetInterface;
 use App\Models\AboutGet;
 use App\Http\Requests\StoreAboutGetRequest;
 use App\Http\Requests\UpdateAboutGetRequest;
+use App\Services\AdminService;
 
 class AboutGetController extends Controller
 {
     private AboutGetInterface $aboutGet;
+    private AdminService $service;
 
-    public function __construct(AboutGetInterface $aboutGet)
+    public function __construct(AboutGetInterface $aboutGet, AdminService $service)
     {
         $this->aboutGet = $aboutGet;
+        $this->service = $service;
     }
 
     /**
@@ -21,7 +24,7 @@ class AboutGetController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.admin.about.index');
     }
 
     /**
@@ -37,7 +40,9 @@ class AboutGetController extends Controller
      */
     public function store(StoreAboutGetRequest $request)
     {
-        //
+        $data = $this->service->storeAbout($request);
+        $this->aboutGet->store($data);
+        return back()->with('success', 'Berhasil membuat about us');
     }
 
     /**
@@ -61,7 +66,9 @@ class AboutGetController extends Controller
      */
     public function update(UpdateAboutGetRequest $request, AboutGet $aboutGet)
     {
-        //
+        $data = $this->service->updateAbout($request, $aboutGet);
+        $this->aboutGet->update($aboutGet->id,$data);
+        return back()->with('success', 'Berhasil update about us');
     }
 
     /**

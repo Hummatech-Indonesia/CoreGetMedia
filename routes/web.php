@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutGetController;
 use App\Http\Controllers\AdvertisementController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\NewsCategoryController;
 use App\Http\Controllers\NewsLikeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -36,7 +38,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 Auth::routes();
-
+Route::get('/sitemap.xml', SitemapController::class);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('navbar-user', [NewsController::class, 'navbar'])->name('navbar');
 
@@ -113,10 +115,6 @@ Route::get('detail-advertisement', function () {
 Route::get('set-price', function () {
     return view('pages.admin.advertisement.set-price');
 })->name('set-price.admin');
-
-Route::get('about-getmedia', function () {
-    return view('pages.admin.about.index');
-})->name('about-getmedia.admin');
 
 Route::get('inbox-admin', function () {
     return view('pages.admin.inbox.index');
@@ -266,9 +264,20 @@ Route::get('detail-advertisemenet', function(){
     return view('pages.user.advertisement.detail-advertisement');
 })->name('detail-advertisement');
 
+Route::get('detail-payment-advertisement', function(){
+    return view('pages.user.advertisement.detail-payment');
+})->name('detail-payment-advertisement');
+
 Route::post('create-advertisement', [AdvertisementController::class, 'store'])->name('create.advertisement');
 Route::post('update-advertisement/{advertisement}', [AdvertisementController::class, 'update'])->name('update.advertisement');
 Route::post('delete-advertisement/{advertisement}', [AdvertisementController::class, 'destroy'])->name('delete.advertisement');
+
+Route::get('about-getmedia', [AboutGetController::class, 'index'])->name('about-getmedia.admin');
+
+Route::post('about-getmedia', [AboutGetController::class, 'store'])->name('about-getmedia.store');
+
+Route::put('about-getmedia/{about}', [AboutGetController::class, 'update'])->name('about-getmedia.update');
+
 
 require_once __DIR__ . '/jovita.php';
 require_once __DIR__ . '/ardi.php';
