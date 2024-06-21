@@ -203,7 +203,11 @@
                         </div>
                         <div class="news-card-three">
                             <div class="news-card-img">
-                                <img src="assets/img/news/news-3.webp" alt="Image">
+                                @if ($news->image != null && Storage::disk('public')->exists($news->image))
+                                    <img src="{{ asset('storage/' . $news->image) }}" alt="{{ $news->name }}" width="290px" height="100px" class="w-100" style="width: 100%; object-fit:cover;">
+                                @else
+                                    <img src="{{ asset('assets/blank-img.jpg') }}" alt="{{ $news->name }}" width="290px" height="100px" class="w-100" style="width: 100%; object-fit:cover;"/>
+                                @endif
                             </div>
                             <div class="news-card-info">
                                 <a href="{{ route('categories.show.user', $news->newsCategories[0]->category->slug) }}" class="news-cat">{{ $news->newsCategories[0]->category->name }}</a>
@@ -236,25 +240,36 @@
 
 @section('script')
 <script>
-    var ctx = document.getElementById("barChart").getContext('2d');
-    var barChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Des"],
-            datasets: [{
-                label: 'data-1',
-                data: [12, 19, 3, 17, 28, 24, 7, 12, 19, 3, 17, 28],
-                backgroundColor: "rgba(23,90,149,1)"
-            }, {
-                label: 'data-2',
-                data: [30, 12, 19, 3, 17, 28, 24, 7, 12, 19, 3, 17],
-                backgroundColor: "rgba(255,174,31,1)"
-            }, {
-                label: 'data-3',
-                data: [12, 19, 3, 17, 28, 24, 7, 12, 19,    20, 3, 10],
-                backgroundColor: "rgba(239,110,110,1)"
-            }]
-        }
+    document.addEventListener('DOMContentLoaded', function () {
+        var ctx = document.getElementById('barChart').getContext('2d');
+        
+        var chartData = @json($chartData);
+
+        var labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        var datasets = chartData.map(function (data, index) {
+            var colors = ["rgba(23,90,149,1)", "rgba(255,174,31,1)", "rgba(239,110,110,1)"];
+            return {
+                label: data.title,
+                data: data.views,
+                backgroundColor: colors[index % colors.length]
+            };
+        });
+
+        var barChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: datasets
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
     });
 </script>
 <script>

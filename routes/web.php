@@ -40,7 +40,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 Auth::routes();
 Route::get('/sitemap.xml', SitemapController::class);
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('navbar-user', [NewsController::class, 'navbar'])->name('navbar');
 
 // ----- ADMIN -----
