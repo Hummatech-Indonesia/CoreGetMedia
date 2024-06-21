@@ -36,19 +36,13 @@
             <form action="{{ route('about-getmedia.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('post')
-            <div class="gambar-iklan mb-4 d-flex justify-content-start mt-4">
-                <img id="preview" src="{{ asset('assets/img/logo/get-media-light.svg') }}" 
-                {{-- @endif
-                @if ($data)
-                    class=""
-                @else
-                    class="hide"
-                @endif
-                style="object-fit: cover; border: transparent;"
-                    width="290" height="140" alt="" --}}
-                    >
-            </div>
-
+                <div class="gambar-iklan mt-4">
+                    <label class="form-label" for="preview">Preview</label>
+                    <div class="">
+                        <img id="preview" style="object-fit: cover;" width="240" height="160" alt="">
+                    </div>
+                </div>
+         
             <div class="row mt-5 mb-5">
                 <div class="col-md-12 col-lg-6 mb-4">
                     <label class="form-label" for="nomor">Logo</label>
