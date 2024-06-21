@@ -10,12 +10,7 @@ use Spatie\Sitemap\Sitemap;
 
 class GenerateSitemap extends Command
 {
-    private NewsInterface $news ;
 
-    public function __construct(NewsInterface $news)
-    {
-        $this->news = $news;
-    }
     protected $signature = 'sitemap:generate';
 
     protected $description = 'Generate sitemap';
@@ -24,7 +19,7 @@ class GenerateSitemap extends Command
     {
         // Manually create sitemap
         $sitemap = Sitemap::create();
-        $newss = $this->news->get();
+        $newss = News::all();
         foreach ($newss as $news) {
             $sitemap->add("/news/{$news->slug}");
         }
