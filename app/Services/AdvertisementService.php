@@ -109,7 +109,8 @@ class AdvertisementService
         return [
             'name' => $data['name'],
             'image' => $new_photo,
-            'price' => $data['price']
+            'price' => $data['price'],
+            'page' => $data['page']
         ];
     }
 
@@ -134,7 +135,8 @@ class AdvertisementService
         return [
             'name' => $data['name'],
             'image' => $new_photo ? $new_photo : $old_photo,
-            'price' => $data['price']
+            'price' => $data['price'],
+            'page' => $data['page']
         ];
     }
 }

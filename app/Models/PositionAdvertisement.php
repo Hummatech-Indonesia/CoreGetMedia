@@ -13,11 +13,12 @@ class PositionAdvertisement extends Model
     protected $fillable = [
         'name',
         'image',
-        'price'
+        'price',
+        'page'
     ];
 
     protected $table = 'position_advertisements';
-    
+
     /**
      * Get all of the comments for the PositionAdvertisement
      *

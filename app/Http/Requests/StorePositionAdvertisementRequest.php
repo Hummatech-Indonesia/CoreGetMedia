@@ -24,7 +24,8 @@ class StorePositionAdvertisementRequest extends FormRequest
         return [
             'name' => 'required',
             'image' => 'required',
-            'price' => 'required'
+            'price' => 'required',
+            'page' => 'required'
         ];
     }
 }
