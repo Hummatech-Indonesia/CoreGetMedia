@@ -16,4 +16,7 @@ enum UploadDiskEnum: string
 
     //iklan
     case ADVERTISEMENT = 'advertisement';
+
+    //logo
+    case LOGO = 'logo';
 }
