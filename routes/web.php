@@ -252,9 +252,7 @@ Route::get('all-pinned', [NewsController::class, 'showPinned'])->name('all-pinne
 
 Route::put('/blok-user/{user}', [UserController::class, 'banned'])->name('user.banned');
 
-Route::get('status-advertisement-list', function(){
-    return view('pages.user.advertisement.status-advertisement');
-})->name('status-advertisement.user');
+Route::get('status-advertisement-list', [AdvertisementController::class, 'index'] )->name('status-advertisement.user');
 
 Route::get('advertisement-biodata', function(){
     return view('pages.user.advertisement.biodata-advertisement');

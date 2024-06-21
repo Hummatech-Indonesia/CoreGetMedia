@@ -24,7 +24,7 @@ class AdvertisementController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.user.advertisement.status-advertisement');
     }
 
     /**
@@ -45,6 +45,14 @@ class AdvertisementController extends Controller
         // $advertisement->delete();
         // $advertisement->restore();
         return back()->with('success', 'Berhasil mengupload iklan');
+    }
+
+    public function draft(StoreAdvertisementRequest $request)
+    {
+        $data = $this->service->store($request);
+        $advertisement = $this->advertisement->store($data);
+        $advertisement->delete();
+        return back()->with('success', 'Berhasil menyimpan data iklan');
     }
 
     // $advertisements = Advertisement::whereNull('deleted_at')->get();
