@@ -71,7 +71,8 @@ class AdvertisementRepository extends BaseRepository implements AdvertisementInt
         })
         ->when($query == 'left', function($q){
             $q
-            ->latest()
+            ->where('position', AdvertisementEnum::LEFT->value)
+            ->where('feed', AdvertisementEnum::PAID)
             ->inRandomOrder()
             ->take(1);
         })
