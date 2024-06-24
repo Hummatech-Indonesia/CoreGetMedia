@@ -69,8 +69,8 @@ class AdvertisementController extends Controller
     public function create(StoreBiodataAdvertisementRequest $request, User $user)
     {
         $this->user->update(auth()->user()->id, $request->validated());
-        $posisi = $this->position->get();
-        return view('pages.user.advertisement.upload-advertisemenet', compact('posisi'));
+        $positions = $this->position->get();
+        return view('pages.user.advertisement.upload-advertisemenet', compact('positions'));
     }
 
     /**
