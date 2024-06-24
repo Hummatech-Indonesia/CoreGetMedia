@@ -9,14 +9,15 @@
 <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
 
 <style>
-     .tmbl {
-            display: inline-block;
-            background-color: #183249;
-            color: white;
-            padding: 5px 10px;
-            margin: 3px;
-            border-radius: 5px;
-        }
+    .tmbl {
+        display: inline-block;
+        background-color: #183249;
+        color: white;
+        padding: 5px 10px;
+        margin: 3px;
+        border-radius: 5px;
+    }
+
 </style>
 @endsection
 
@@ -78,21 +79,21 @@
 
         <div class="d-flex gap-2">
             @if ($news->status != 'accepted')
-                <div class="">
-                    <button id="btn-reject-{{ $news->id }}" data-id="{{ $news->id }}" type="button" class="btn btn-danger btn-sm btn-reject btn-lg px-3">Tolak</button>
-                </div>
-                <div class="">
-                    <button id="btn-approved-{{ $news->id }}" data-id="{{ $news->id }}" type="button" class="btn btn-success btn-sm btn-approved btn-lg px-3
+            <div class="">
+                <button id="btn-reject-{{ $news->id }}" data-id="{{ $news->id }}" type="button" class="btn btn-danger btn-sm btn-reject btn-lg px-3">Tolak</button>
+            </div>
+            <div class="">
+                <button id="btn-approved-{{ $news->id }}" data-id="{{ $news->id }}" type="button" class="btn btn-success btn-sm btn-approved btn-lg px-3
                         ">Terima</button>
-                </div>
+            </div>
             @elseif ($news->pin != '1')
-                <div class="">
-                    <button id="btn-pin-{{ $news->id }}" data-id="{{ $news->id }}" type="button" class="btn btn-primary btn-sm btn-pin btn-lg px-3">Pin Berita</button>
-                </div>
+            <div class="">
+                <button id="btn-pin-{{ $news->id }}" data-id="{{ $news->id }}" type="button" class="btn btn-primary btn-sm btn-pin btn-lg px-3">Pin Berita</button>
+            </div>
             @elseif ($news->pin == '1')
-                <div class="">
-                    <button id="btn-unpin-{{ $news->id }}" data-id="{{ $news->id }}" type="button" class="btn btn-primary btn-sm btn-unpin btn-lg px-3">Unpin Berita</button>
-                </div>
+            <div class="">
+                <button id="btn-unpin-{{ $news->id }}" data-id="{{ $news->id }}" type="button" class="btn btn-primary btn-sm btn-unpin btn-lg px-3">Unpin Berita</button>
+            </div>
             @else
             @endif
         </div>
@@ -163,7 +164,7 @@
                         </div>
                         <div class="col-lg-12 mb-4">
                             <label class="form-label" for="password_confirmation">Tanggal Upload</label>
-                            <input type="datetime-local" id="upload_date" name="upload_date" placeholder="{{ $news->date }}" value="{{ $news->date }}" class="form-control @error('upload_date') is-invalid @enderror">
+                            <input type="datetime-local" id="upload_date" name="upload_date" value="{{ \Carbon\Carbon::parse($news->date)->format('Y-m-d\TH:i'); }}" class="form-control @error('upload_date') is-invalid @enderror">
                             @error('upload_date')
                             <span class="invalid-feedback" role="alert" style="color: red">
                                 <strong>{{ $message }}</strong>
@@ -204,12 +205,12 @@
                             </div>
                             <div class="col-lg-12 mb-4" style="height: auto;">
                                 <label class="form-label" for="content">Isi Berita</label>
-                                <textarea" name="content" placeholder="content" value="{!! $news->description !!}" style="resize: none; height: 400;" class="form-control @error('content') is-invalid @enderror">{!! $news->description !!}</textarea>
-                                @error('content')
-                                <span class="invalid-feedback" role="alert" style="color: red;">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                                <textarea" name="content" placeholder="content" style="resize: none; height: 400;" class="form-control @error('content') is-invalid @enderror">{!! $news->description !!}</textarea>
+                                    @error('content')
+                                    <span class="invalid-feedback" role="alert" style="color: red;">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                             </div>
                         </div>
                     </div>
@@ -237,12 +238,10 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-light-warning text-warning font-medium waves-effect"
-                    data-bs-dismiss="modal">
+                <button type="button" class="btn btn-light-warning text-warning font-medium waves-effect" data-bs-dismiss="modal">
                     Batal
                 </button>
-                <button type="submit" class="btn btn-light-success text-success font-medium waves-effect"
-                    data-bs-dismiss="modal">
+                <button type="submit" class="btn btn-light-success text-success font-medium waves-effect" data-bs-dismiss="modal">
                     Terima
                 </button>
             </div>
@@ -267,12 +266,10 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-light-warning text-warning font-medium waves-effect"
-                    data-bs-dismiss="modal">
+                <button type="button" class="btn btn-light-warning text-warning font-medium waves-effect" data-bs-dismiss="modal">
                     Tidak
                 </button>
-                <button type="submit" class="btn btn-light-success text-success font-medium waves-effect"
-                    data-bs-dismiss="modal">
+                <button type="submit" class="btn btn-light-success text-success font-medium waves-effect" data-bs-dismiss="modal">
                     Ya
                 </button>
             </div>
@@ -297,12 +294,10 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-light-warning text-warning font-medium waves-effect"
-                    data-bs-dismiss="modal">
+                <button type="button" class="btn btn-light-warning text-warning font-medium waves-effect" data-bs-dismiss="modal">
                     Tidak
                 </button>
-                <button type="submit" class="btn btn-light-success text-success font-medium waves-effect"
-                    data-bs-dismiss="modal">
+                <button type="submit" class="btn btn-light-success text-success font-medium waves-effect" data-bs-dismiss="modal">
                     Ya
                 </button>
             </div>
@@ -374,5 +369,6 @@
         $('#form-approved').attr('action', '/approved-news/' + id);
         $('#modal-approved').modal('show');
     })
+
 </script>
 @endsection
