@@ -79,9 +79,23 @@
                   </form>
                 @endauth --}}
                <div>
-                   <button type="button" class="border-0 text-white" style="background-color: #175A95; padding: 1px 30px; border-radius: 8px;">Ikuti</button>
+                    @php
+                        $already = App\Models\Follower::where('author_id', $author->id)->where('user_id', auth()->user()->id)->exists()
+                    @endphp 
+                    @if ($already)
+                        <form action="{{ route('unfollow.author', $author->id) }}" method="POST">
+                            @method('DELETE')
+                            @csrf
+                            <button type="submit" class="border-0 text-white" style="background-color: #175A95; padding: 1px 30px; border-radius: 8px;">Batal Ikuti</button>
+                        </form>
+                    @else
+                        <form action="{{ route('follow.author', $author->id) }}" method="POST">
+                            @method('post')
+                            @csrf
+                            <button type="submit" class="border-0 text-white" style="background-color: #175A95; padding: 1px 30px; border-radius: 8px;">Ikuti</button>
+                        </form>
+                    @endif
                </div>
-
             </div>
 
           <p>
