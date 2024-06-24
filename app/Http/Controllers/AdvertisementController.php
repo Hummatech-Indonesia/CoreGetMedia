@@ -67,9 +67,7 @@ class AdvertisementController extends Controller
     public function store(StoreAdvertisementRequest $request)
     {
         $data = $this->service->store($request);
-        $advertisement = $this->advertisement->store($data);
-        // $advertisement->delete();
-        // $advertisement->restore();
+        $this->advertisement->store($data);
         return back()->with('success', 'Berhasil mengupload iklan');
     }
 

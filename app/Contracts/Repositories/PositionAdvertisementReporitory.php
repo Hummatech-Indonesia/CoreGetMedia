@@ -58,10 +58,14 @@ class PositionAdvertisementReporitory extends BaseRepository implements Position
      *
      * @return mixed
      */
-    public function store(array $data): mixed
+    public function updateOrCreate($page, $position, $price): mixed
     {
         return $this->model->query()
-            ->create($data);
+            ->updateOrCreate(
+                ['page' => $page,
+                'position' => $position],
+                ['price' => $price]
+            );
     }
 
     /**

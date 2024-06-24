@@ -16,6 +16,7 @@ enum AdvertisementEnum : string
     case SINGLEPOST = 'singlepost';
     case CATEGORY = 'category';
     case SUBCATEGORY = 'subcategory';
+    case ALLNEWS = 'allnews';
 
     //type
     case PHOTO = 'photo';

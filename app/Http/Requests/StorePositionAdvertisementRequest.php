@@ -22,10 +22,9 @@ class StorePositionAdvertisementRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'image' => 'required',
             'price' => 'required',
-            'page' => 'required'
+            'page' => 'required',
+            'position' => 'required'
         ];
     }
 }

@@ -51,6 +51,10 @@ class AdvertisementService
 
         $new_photo = $this->upload(UploadDiskEnum::ADVERTISEMENT->value, $request->image);
 
+        $priceData = PositionAdvertisement::where('page', $data['page'])
+            ->where('position', $data['position'])
+            ->first();
+
         return [
             'user_id' => auth()->user()->id,
             'image' => $new_photo,
@@ -58,8 +62,9 @@ class AdvertisementService
             'end_date' => $data['end_date'],
             'type' => $data['type'],
             'page' => $data['page'],
-            'position_advertisement_id' => $data['position_advertisement_id'],
-            'url' => $data['url']
+            'position' => $data['position'],
+            'url' => $data['url'],
+            'price' => $priceData->price
         ];
     }
 
@@ -89,6 +94,10 @@ class AdvertisementService
             $advertisement->image = $new_photo;
         }
 
+        $priceData = PositionAdvertisement::where('page', $data['page'])
+            ->where('position', $data['position'])
+            ->first();
+
         return [
             'user_id' => auth()->user()->id,
             'image' => $new_photo ? $new_photo : $old_photo,
@@ -96,47 +105,9 @@ class AdvertisementService
             'end_date' => $data['end_date'],
             'type' => $data['type'],
             'page' => $data['page'],
-            'position_advertisement_id' => $data['position_advertisement_id'],
-            'url' => $data['url']
-        ];
-    }
-
-    public function positionCreate(StorePositionAdvertisementRequest $request)
-    {
-        $data = $request->validated();
-        $new_photo = $this->upload(UploadDiskEnum::POSITION->value, $request->image);
-
-        return [
-            'name' => $data['name'],
-            'image' => $new_photo,
-            'price' => $data['price'],
-            'page' => $data['page']
-        ];
-    }
-
-    public function positionUpdate(StorePositionAdvertisementRequest $request, PositionAdvertisement $positionAdvertisement)
-    {
-        $data = $request->validated();
-
-        $old_photo = $positionAdvertisement->image;
-        $new_photo = "";
-
-        if ($request->hasFile('image')) {
-
-            if (file_exists(public_path($old_photo))) {
-                unlink(public_path($old_photo));
-            }
-
-            $new_photo = $this->upload(UploadDiskEnum::POSITION->value, $request->image);
-
-            $positionAdvertisement->image = $new_photo;
-        }
-
-        return [
-            'name' => $data['name'],
-            'image' => $new_photo ? $new_photo : $old_photo,
-            'price' => $data['price'],
-            'page' => $data['page']
+            'position' => $data['position'],
+            'url' => $data['url'],
+            'price' => $priceData->price
         ];
     }
 }

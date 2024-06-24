@@ -8,7 +8,7 @@ use App\Contracts\Interfaces\Eloquent\ShowInterface;
 use App\Contracts\Interfaces\Eloquent\StoreInterface;
 use App\Contracts\Interfaces\Eloquent\UpdateInterface;
 
-interface PositionAdvertisementInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface
+interface PositionAdvertisementInterface extends GetInterface, UpdateInterface, ShowInterface, DeleteInterface
 {
-    //
+    public function updateOrCreate($page, $position, $price) : mixed;
 }

@@ -15,6 +15,7 @@ class Advertisement extends Model
         'id',
         'user_id',
         'image',
+        'url',
         'start_date',
         'end_date',
         'type',
@@ -23,8 +24,7 @@ class Advertisement extends Model
         'price',
         'feed',
         'status',
-        'description',
-        'url'
+        'description'
     ];
 
     protected $primaryKey = 'id';

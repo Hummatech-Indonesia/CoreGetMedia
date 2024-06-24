@@ -21,6 +21,7 @@ class News extends Model
         'description',
         'date',
         'status',
+        'reject_description',
         'pin'
     ];
 
@@ -109,7 +110,7 @@ class News extends Model
     {
         return $this->hasMany(NewsTag::class);
     }
-    
+
     /**
      * Get the newsRejected associated with the News
      *
