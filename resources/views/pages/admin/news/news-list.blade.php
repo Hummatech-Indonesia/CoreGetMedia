@@ -251,21 +251,14 @@
         };
     }
 
-    // $('.btn-delete').on('click', function() {
-    //     var id = $(this).data('id');
-    //     $('#form-delete').attr('action', '/delete-news/' + id);
-    //     console.log(id);
-    //     $('#modal-delete').modal('show');
-    // });
+</script>
 
-    $(document).ready(function() {
-    $('.btn-delete').on('click', function() {
+<script>
+        $('.btn-delete').on('click', function() {
         var id = $(this).data('id');
         $('#form-delete').attr('action', '/delete-news/' + id);
         console.log(id);
         $('#modal-delete').modal('show');
     });
-});
-
 </script>
 @endsection
