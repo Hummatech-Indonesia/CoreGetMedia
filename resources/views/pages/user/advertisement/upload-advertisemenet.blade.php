@@ -1,4 +1,4 @@
-@extends('layouts.user.sidebar')
+@extends(auth()->user()->hasRole('author') ? 'layouts.author.app' : 'layouts.user.sidebar')
 
 @section('style')
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -140,7 +140,7 @@
                     @enderror
                 </div>
                 <div class="col-lg-12 mb-4">
-                    <label class="form-label" for="photo">Kontent</label>
+                    <label class="form-label" for="photo">Konten</label>
                     <input type="file" id="photo" name="image" onchange="previewImage(event)" placeholder=""
                         value="{{ old('photo') }}" class="form-control @error('photo') is-invalid @enderror">
                     @error('photo')
