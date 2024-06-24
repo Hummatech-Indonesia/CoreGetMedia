@@ -21,7 +21,7 @@
     <div class="card-body px-4 py-4">
       <div class="row justify-content-between">
         <div class="col-8 text-white">
-          <h4 class="fw-semibold mb-3 mt-2 text-white">Pengisian Iklan</h4>
+          <h4 class="fw-semibold mb-3 mt-2 text-white">Pembayaran Iklan</h4>
             <p>Layanan pengiklanan di getmedia.id</p>
         </div>
         <div class="col-3">
@@ -46,16 +46,22 @@
                         <div class="col-lg-12">
                             <label class="form-label" for="content">Gambar</label>
                             <div class="">
-                                <img src="{{ asset('assets/img/news/news-17.webp') }}" width="250" alt="">
+                                <img src="{{ asset('storage/'. $data->image) }}" width="250" alt="">
                             </div>
                         </div>
                         <div class="col-lg-12 mb-4">
                             <label class="form-label" for="page">Halaman</label>
-                            <select name="page" class="form-select" id="" readonly>
+                            {{-- <select name="page" class="form-select" id="" readonly>
                                 <option value="" selected readonly></option>
                                 <option value="dashboard"></option>
                                 <option value="news_post">News Post</option>
                                 <option value="sub_category">Sub Kategori</option>
+                            </select> --}}
+                            <select class="form-select">
+                                <option value="home" disabled {{ $data->page == 'home' ? 'selected' : '' }}>Dashboard</option>
+                                <option value="singlepost" disabled {{ $data->page == 'singlepost' ? 'selected' : '' }}>News Post</option>
+                                <option value="category" disabled {{ $data->page == 'category' ? 'selected' : '' }}>Kategori</option>
+                                <option value="subcategory" disabled {{ $data->page == 'subcategory' ? 'selected' : '' }}>Sub Kategori</option>
                             </select>
                         </div>
                         <div class="col-lg-12 mb-4">
@@ -63,55 +69,35 @@
                             <div class="">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="full_horizontal" checked>
-                                    <label class="form-check-label" for="inlineRadio1"> 
+                                    <label class="form-check-label" for="inlineRadio1">
                                         <img src="{{asset('assets/img/news/news-18.webp')}}" width="200" height="120" alt="">
-                                        {{-- @if ($position == 'full_horizontal')
-                                        <img src="{{asset('assets/img/iklan-dash.svg')}}" width="200" height="120" alt="">
-                                        @elseif ($position == 'horizontal')
-                                        <img src="{{asset('assets/img/iklan-horizontal.svg')}}" width="200" height="120" alt="">
-                                        @else 
-                                        <img src="{{asset('assets/img/iklan-vertikal
-                                        .svg')}}" width="200" height="120" alt="">
-                                        @endif --}}
                                     </label>
                                 </div>
-                                {{-- <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="position" id="inlineRadio2" value="horizontal">
-                                    <label class="form-check-label" for="inlineRadio2">
-                                        <img src="{{asset('assets/img/iklan-vertikal.svg')}}" width="200" height="120" alt="">
-                                    </label>
-                                </div>
-                                    <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="position" id="inlineRadio3" value="vertikal">
-                                    <label class="form-check-label" for="inlineRadio3">
-                                        <img src="{{asset('assets/img/iklan-horizontal.svg')}}" width="200" height="120" alt="">
-                                    </label>
-                                </div> --}}
                             </div>
                         </div>
                         <div class="col-lg-12 mb-4">
                             <label class="form-label" for="type">Jenis Iklan</label>
-                            <select name="type" class="form-select" id="" readonly>
-                                <option value=""></option>
-                                {{-- <option value="vidio">Vidio</option> --}}
+                            <select class="form-select">
+                                <option value="photo" disabled {{ $data->type == 'photo' ? 'selected' : '' }}>Foto</option>
+                                <option value="video" disabled {{ $data->type == 'video' ? 'selected' : '' }}>Video</option>
                             </select>
                         </div>
-                        
+
                         <div class="col-lg-6 mb-4">
                             <label class="form-label" for="start_date">Tanggal Awal</label>
                             <input type="date" id="start_date" name="start_date" placeholder=""
-                                value="01/01/21" class="form-control @error('start_date') is-invalid @enderror" readonly>
+                                value="{{ $data->start_date }}" class="form-control @error('start_date') is-invalid @enderror" disabled>
                             @error('start_date')
                                 <span class="invalid-feedback" role="alert" style="color: red;">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
-                        
+
                         <div class="col-lg-6 mb-4">
                             <label class="form-label" for="end_date">Tanggal Akhir</label>
                             <input type="date" id="end_date" name="end_date" placeholder=""
-                                value="01/01/23" class="form-control @error('end_date') is-invalid @enderror" readonly>
+                                value="{{  $data->end_date}}" class="form-control @error('end_date') is-invalid @enderror" disabled>
                             @error('end_date')
                                 <span class="invalid-feedback" role="alert" style="color: red;">
                                     <strong>{{ $message }}</strong>
@@ -122,7 +108,7 @@
                         <div class="col-lg-12 mb-4">
                             <label class="form-label" for="url">URL</label>
                             <input type="text" id="url" name="url" placeholder=""
-                                value="http//djsgj" class="form-control @error('url') is-invalid @enderror" readonly>
+                                value="{{ $data->url }}" class="form-control @error('url') is-invalid @enderror" readonly>
                             @error('url')
                                 <span class="invalid-feedback" role="alert" style="color: red;">
                                     <strong>{{ $message }}</strong>
@@ -131,7 +117,6 @@
                         </div>
                     </div>
                 </div>
-        {{-- </form>           --}}
     </div>
 
 
@@ -166,7 +151,7 @@
                         </span>
                         @enderror
                     </div>
-    
+
                     <div class="col-12 mb-4">
                         <label class="form-label" for="nomor">Kode Voucher (opsional)</label>
                         <input type="text" id="voucher" name="voucher" placeholder="kode voucher" value="{{ old('voucher') }}" class="form-control @error('voucher') is-invalid @enderror">
@@ -176,13 +161,13 @@
                         </span>
                         @enderror
                     </div>
-    
+
                     <div class="d-flex mt-5 justify-content-between">
                         <h5>Harga Upload</h5>
-    
-                        <h5>Rp. 100.000</h5>
+
+                        <h5>Rp. {{ $data->price }}</h5>
                     </div>
-    
+
                     <div class="mt-4">
                         <a href="{{ route('detail-payment-advertisement') }}" class="btn btn-md text-white w-100" style="background-color: #175A95">
                             Berikutnya
@@ -202,7 +187,7 @@
                     <form id="form-create" method="post">
                         <div class="modal-body">
                             <span class="fw-semibold text-dark fs-4">Bank</span>
-        
+
                             <div class="row">
                                 <div class="col-lg-6 mt-2">
                                     <div class="card p-3 border" onclick="selectCard(this)">
@@ -218,7 +203,7 @@
                                             </label>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                                 <div class="col-lg-6 mt-2">
                                     <div class="card p-3 border" onclick="selectCard(this)">
@@ -234,7 +219,7 @@
                                             </label>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="card p-3 border" onclick="selectCard(this)">
@@ -281,10 +266,10 @@
                                         </div>
                                     </div>
                                 </div>
-                            
-        
+
+
                             <span class="fw-semibold text-dark fs-4">E-Wallet</span>
-        
+
                             <div class="col-lg-6 mt-2">
                                 <div class="card p-3 border" onclick="selectCard(this)">
                                     <div class="d-flex align-items-center">
@@ -300,7 +285,7 @@
                                     </div>
                                 </div>
                             </div>
-        
+
                             <div class="col-lg-6 mt-2">
                                 <div class="card p-3 border" onclick="selectCard(this)">
                                     <div class="d-flex align-items-center">
@@ -316,7 +301,7 @@
                                     </div>
                                 </div>
                             </div>
-        
+
                             <div class="col-lg-6">
                                 <div class="card p-3 border" onclick="selectCard(this)">
                                     <div class="d-flex align-items-center">
@@ -332,7 +317,7 @@
                                     </div>
                                 </div>
                             </div>
-        
+
                             <div class="col-lg-6">
                                 <div class="card p-3 border" onclick="selectCard(this)">
                                     <div class="d-flex align-items-center">
@@ -348,7 +333,7 @@
                                     </div>
                                 </div>
                             </div>
-        
+
                             <div class="col-lg-6">
                                 <div class="card p-3 border" onclick="selectCard(this)">
                                     <div class="d-flex align-items-center">
@@ -364,9 +349,9 @@
                                     </div>
                                 </div>
                             </div>
-        
-                        </div> 
-                            
+
+                        </div>
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-rounded btn-light-danger text-danger"
@@ -377,15 +362,15 @@
                 </div>
             </div>
         </div>
-        
+
     </form>
-</div> 
+</div>
 </div>
 
 @endsection
 
 @section('script')
-    
+
 <script src="{{ asset('assets/dist/imageuploadify.min.js') }}"></script>
 
 <script>

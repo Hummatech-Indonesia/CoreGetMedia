@@ -33,6 +33,70 @@
 
 @section('content')
 
+<div class="modal fade" id="modal-accepted" tabindex="-1" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <form id="form-accepted" method="POST" class="modal-content">
+            @method('put')
+            @csrf
+            <div class="modal-header d-flex align-items-center">
+                <h4 class="modal-title" id="myModalLabel">
+                    Teima Iklan
+                </h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Apakah anda yakin akan menerima iklan ini?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light-warning text-warning font-medium waves-effect"
+                    data-bs-dismiss="modal">
+                    Batal
+                </button>
+                <button type="submit" class="btn btn-light-success text-success font-medium waves-effect"
+                    data-bs-dismiss="modal">
+                    Terima
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-reject" tabindex="-1" aria-labelledby="modal-reject Label">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal content -->
+            <div class="modal-header">
+                <h3 class="modal-title ms-2 mt-2">Tolak Iklan Ini?</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form id="form-reject" method="POST">
+                    @csrf
+                    @method('put')
+                    <div class="container">
+                        <div class="mb-3">
+                            <div>
+                                <h5 class="mb-3">Berikan Alasan</h5>
+                            </div>
+                            <div>
+                                <textarea class="form-control" name="description" id="" cols="30" rows="10" placeholder="Alasan tolak iklan" style="resize: none;"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-lg-12">
+                            <div class="d-flex justify-content-end gap-2">
+                                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
+                                <button data-bs-toggle="tooltip" type="submit" title="Tolak" class="btn btn-danger me-2">Tolak</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="card shadow-sm position-relative overflow-hidden" style="background-color: #175A95;">
     <div class="card-body px-4 py-4">
         <div class="row justify-content-between">
@@ -50,22 +114,15 @@
 </div>
 
 <div class="d-flex justify-content-between mt-4 mb-4">
-
     <button type="button" class="btn btn-secondary" style="background-color: #CCCCCC; border: none; color: 5A5A5A">
         <i class="ti ti-arrow-left"></i>
         Kembali
     </button>
 
     <div>
-        <button type="button" class="btn btn-danger me-2">Tolak</button>
-        <button type="button" class="btn btn-success" style="background-color: #175A95; border: none">Terima</button>
+        <button type="button" class="btn btn-danger btn-reject me-2" data-id="{{$data->id}}">Tolak</button>
+        <button type="button" class="btn btn-success btn-accepted" data-id="{{$data->id}}" style="background-color: #175A95; border: none">Terima</button>
     </div>
-
-    {{-- saat sudah di bayar --}}
-    {{-- <div>
-        <button type="button" class="btn btn-success" style="background-color: #175A95; border: none">Unggah</button>
-    </div> --}}
-
 </div>
 
 
@@ -97,53 +154,44 @@
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-12 mb-3">
-                                    @forelse ($posisi as $item)
-                                    <div class="form-check form-check-inline mt-2">
-                                        <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="{{ $item->id }}" {{ $data->position_advertisement_id == $item->id ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="inlineRadio1">
-                                            <p class="ms-2">{{ $item->name }}</p>
-                                            <img src="{{asset('storage/'. $item->image)}}" width="300" height="200" alt="">
-                                        </label>
-                                    </div>
-                                    @empty
-                                    @endforelse
-
-                                    {{-- <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" disabled name="position" id="inlineRadio1" value="under" {{ $data->position == 'under' ? 'checked' : '' }}>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="under" {{ $data->position == 'under' ? 'checked' : '' }}>
                                         <label class="form-check-label" for="inlineRadio1">
                                             <p class="ms-2">Posisi Bawah Full (1770 x 166)</p>
-                                            <img src="{{asset('assets/img/news/news-11.webp')}}" alt="Nama Gambar" class="img-fluid mt-2" style="max-width: 250px;">
+                                            <img src="{{asset('assets/img/news/news-11.webp')}}" width="300" height="200" alt="">
                                         </label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" disabled name="position" id="inlineRadio1" value="mid" {{ $data->position == 'mid' ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="mid" {{ $data->position == 'mid' ? 'checked' : '' }}>
                                         <label class="form-check-label" for="inlineRadio1">
                                             <p class="ms-2">Posisi Tengah Full (1770 x 166)</p>
-                                            <img src="{{asset('assets/img/news/news-11.webp')}}" alt="Nama Gambar" class="img-fluid mt-2" style="max-width: 250px;">
+                                            <img src="{{asset('assets/img/news/news-11.webp')}}" width="300" height="200" alt="">
                                         </label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" disabled name="position" id="inlineRadio1" value="top" {{ $data->position == 'top' ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="top" {{ $data->position == 'top' ? 'checked' : '' }}>
                                         <label class="form-check-label" for="inlineRadio1">
                                             <p class="ms-2">Posisi Atas Full (1770 x 166)</p>
-                                            <img src="{{ asset('assets/img/news/news-11.webp') }}" alt="Nama Gambar" class="img-fluid mt-2" style="max-width: 250px;">
+                                            <img src="{{ asset('assets/img/news/news-11.webp') }}" width="300" height="200"
+                                                alt="">
                                         </label>
                                     </div>
-
-                                    <div class="form-check form-check-inline mt-2">
-                                        <input class="form-check-input" type="radio" disabled name="position" id="inlineRadio2" value="right" {{ $data->position == 'right' ? 'checked' : '' }}>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="position" id="inlineRadio2" value="right" {{ $data->position == 'right' ? 'checked' : '' }}>
                                         <label class="form-check-label" for="inlineRadio2">
                                             <p class="ms-2">Posisi Kanan (456 x 654)</p>
-                                            <img src="{{ asset('assets/img/news/news-12.webp') }}" alt="Nama Gambar" class="img-fluid mt-2" style="max-width: 250px;">
+                                            <img src="{{ asset('assets/img/news/news-12.webp') }}" width="300" height="200"
+                                                alt="">
                                         </label>
                                     </div>
-                                    <div class="form-check form-check-inline mt-2">
-                                        <input class="form-check-input" type="radio" disabled name="position" id="inlineRadio3" value="left" {{ $data->position == 'left' ? 'checked' : '' }}>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="position" id="inlineRadio3" value="left" {{ $data->position == 'left' ? 'checked' : '' }}>
                                         <label class="form-check-label" for="inlineRadio3">
                                             <p class="ms-2">Posisi Kiri (1245 x 295)</p>
-                                            <img src="{{ asset('assets/img/news/news-13.webp') }}" alt="Nama Gambar" class="img-fluid mt-2" style="max-width: 250px;">
+                                            <img src="{{ asset('assets/img/news/news-13.webp') }}" width="300" height="200"
+                                                alt="">
                                         </label>
-                                    </div> --}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -164,17 +212,17 @@
                     <div class="d-flex pt-4">
                         <div class="me-4 w-100">
                             <h6>Tanggal Mulai</h6>
-                            <input type="date" value="{{ $data->start_date }}" readonly class="form-control w-100">
+                            <input type="date" value="{{ $data->start_date }}" disabled class="form-control w-100">
                         </div>
                         <div class="w-100">
                             <h6>Tanggal Akhir</h6>
-                            <input type="date" value="{{ $data->end_date }}" readonly class="form-control w-100">
+                            <input type="date" value="{{ $data->end_date }}" disabled class="form-control w-100">
                         </div>
                     </div>
                 </div>
                 <div class="pt-4">
                     <h6>URL</h6>
-                    <input type="text" value="{{ $data->url }}" class="form-control">
+                    <input type="text" readonly value="{{ $data->url }}" class="form-control">
                 </div>
             </div>
         </div>
@@ -261,5 +309,18 @@
 
 @section('script')
 
+<script>
+     $('.btn-accepted').click(function() {
+        var id = $(this).data('id');
+        $('#form-accepted').attr('action', '/accepted-advertisement/' + id);
+        $('#modal-accepted').modal('show');
+    })
+
+    $('.btn-reject').click(function() {
+        var id = $(this).data('id');
+        $('#form-reject').attr('action', '/reject-advertisement/' + id);
+        $('#modal-reject').modal('show');
+    })
+</script>
 
 @endsection

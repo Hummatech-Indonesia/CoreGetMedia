@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\StatusEnum;
 use App\Models\News;
 use App\Traits\UploadTrait;
 use Illuminate\Support\Str;
@@ -18,6 +19,7 @@ use App\Models\NewsSubCategory;
 use App\Models\NewsTag;
 use App\Models\PositionAdvertisement;
 use App\Models\Tags;
+use Illuminate\Http\Request;
 
 class AdvertisementService
 {
@@ -108,6 +110,19 @@ class AdvertisementService
             'position' => $data['position'],
             'url' => $data['url'],
             'price' => $priceData->price
+        ];
+    }
+
+    public function reject(Request $request)
+    {
+        $validatedData = $request->validate([
+            'description' => 'required',
+        ]);
+
+        return [
+            'status' => StatusEnum::REJECT->value,
+            'feed' => StatusEnum::NOTPAID->value,
+            'description' => $validatedData['description']
         ];
     }
 }

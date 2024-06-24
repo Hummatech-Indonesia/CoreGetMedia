@@ -68,7 +68,7 @@ class AdvertisementController extends Controller
     {
         $data = $this->service->store($request);
         $this->advertisement->store($data);
-        return back()->with('success', 'Berhasil mengupload iklan');
+        return redirect('/')->with('success', 'Berhasil mengupload iklan');
     }
 
     public function draft(StoreAdvertisementRequest $request)
@@ -106,6 +106,9 @@ class AdvertisementController extends Controller
     public function update(UpdateAdvertisementRequest $request, Advertisement $advertisement)
     {
         $data = $this->service->update($request, $advertisement);
+        $data['status'] = StatusEnum::PENDING->value;
+        $data['feed'] = StatusEnum::PENDING->value;
+        $data['description'] = null;
         $this->advertisement->update($advertisement->id, $data);
         return back()->with('success', 'Berhasil mengupdate iklan');
     }
@@ -119,7 +122,18 @@ class AdvertisementController extends Controller
         return back()->with('success', 'Berhasil menerima iklan');
     }
 
+    public function rejected(Request $request, Advertisement $advertisement)
+    {
+        $data = $this->service->reject($request);
+        $this->advertisement->update($advertisement->id, $data);
+        return back()->with('success', 'Berhasil menolak iklan');
+    }
 
+    public function payment_advertisement(Advertisement $advertisement)
+    {
+        $data = $this->advertisement->show($advertisement->id);
+        return view('pages.user.advertisement.detail-advertisement', compact('data'));
+    }
 
     /**
      * Remove the specified resource from storage.

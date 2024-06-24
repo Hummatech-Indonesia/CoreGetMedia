@@ -22,4 +22,17 @@ enum AdvertisementEnum : string
     case PHOTO = 'photo';
     case VIDEO = 'video';
 
+
+    public function label(): string
+    {
+        return match ($this) {
+            self::RIGHT => 'Kanan',
+            self::LEFT => 'Kiri',
+            self::TOP => 'Atas',
+            self::UNDER => 'Bawah',
+            self::MID => 'Tengah',
+        };
+    }
+
+
 }

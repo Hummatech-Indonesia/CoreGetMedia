@@ -17,6 +17,7 @@ use App\Http\Controllers\VoucherrController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\NewsCategoryController;
 use App\Http\Controllers\NewsLikeController;
+use App\Http\Controllers\PositionAdvertisementController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Auth;
@@ -104,9 +105,13 @@ Route::get('advertisement-list', function () {
 Route::get('confirm-advertisement', [AdvertisementController::class, 'list_confirm'])->name('confirm-advertisement.admin');
 Route::get('detail-advertisement/{advertisement}', [AdvertisementController::class, 'detail_admin'])->name('detail-advertisement.admin');
 
-Route::get('set-price', function () {
-    return view('pages.admin.advertisement.set-price');
-})->name('set-price.admin');
+// Route::get('set-price', function () {
+//     return view('pages.admin.advertisement.set-price');
+// })->name('set-price.admin');
+
+Route::get('set-price', [PositionAdvertisementController::class, 'index'])->name('set-price.admin');
+Route::delete('set-price/delete/{positionAdvertisement}', [PositionAdvertisementController::class, 'destroy'])->name('set-price.destroy');
+
 
 Route::get('inbox-admin', function () {
     return view('pages.admin.inbox.index');
@@ -250,13 +255,11 @@ Route::get('advertisement-biodata', function(){
 
 Route::get('advertisement-upload', [AdvertisementController::class, 'create'])->name('upload-advertisement');
 
-Route::get('detail-advertisemenet', function(){
-    return view('pages.user.advertisement.detail-advertisement');
-})->name('detail-advertisement');
+Route::get('detail-payment-advertisemenet/{advertisement}', [AdvertisementController::class, 'payment_advertisement'])->name('detail-payment-advertisement');
 
-Route::get('detail-payment-advertisement', function(){
+Route::get('detail-advertisement', function(){
     return view('pages.user.advertisement.detail-payment');
-})->name('detail-payment-advertisement');
+})->name('detail-advertisement');
 
 Route::post('create-advertisement', [AdvertisementController::class, 'store'])->name('create.advertisement');
 Route::put('update-advertisement/{advertisement}', [AdvertisementController::class, 'update'])->name('update.advertisement');
@@ -264,11 +267,8 @@ Route::delete('delete-advertisement/{advertisement}', [AdvertisementController::
 Route::put('cencel-advertisement/{advertisement}', [AdvertisementController::class, 'cancel'])->name('cancel.advertisement');
 
 Route::get('about-getmedia', [AboutGetController::class, 'index'])->name('about-getmedia.admin');
-
 Route::post('about-getmedia', [AboutGetController::class, 'store'])->name('about-getmedia.store');
-
 Route::put('about-getmedia/{about}', [AboutGetController::class, 'update'])->name('about-getmedia.update');
-
 
 Route::get('admin-account-list', [AdminController::class, 'index'])->name('admin-account.list.admin');
 Route::post('admin-account-list', [AdminController::class, 'store'])->name('admin-account.store');
