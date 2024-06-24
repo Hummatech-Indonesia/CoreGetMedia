@@ -114,11 +114,11 @@
                         <p>CV tidak tersedia</p>
                         @endif --}}
                         
-                        <a href="#" type="button" class="btn btn-light-primary text-primary me-2 fs-4 px-2 py-2 btn-download" data-id="{{$author->id}}" data-task="{{ file_exists(public_path('storage/' . $author->cv)) ? asset('storage/' . $author->cv) : asset('no data.png') }}" data-name="{{$author->user->name}}">
+                        {{-- <a href="#" type="button" class="btn btn-light-primary text-primary me-2 fs-4 px-2 py-2 btn-download" data-id="{{$author->id}}" data-task="{{ file_exists(public_path('storage/' . $author->cv)) ? asset('storage/' . $author->cv) : asset('no data.png') }}" data-name="{{$author->user->name}}">
                             <div class="mx-1">
                                 Download CV
                             </div>
-                        </a>
+                        </a> --}}
                         <form method="post" id="form-tolak">
                             @csrf
                             @method('put')
@@ -180,7 +180,7 @@
         var image = $(this).data('image');
         var date = $(this).data('data_of_birth')
         var address = $(this).data('address')
-        $('#form-tolak').attr('action', '/confirm-author/' + id);
+        $('#form-tolak').attr('action', '/reject-author/' + id);
         $('#form-terima').attr('action', '/confirm-author/' + id);
         $('#detail-name').val(name);
         $('#detail-email').val(email);

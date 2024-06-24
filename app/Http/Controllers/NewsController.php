@@ -245,7 +245,7 @@ class NewsController extends Controller
         }
         $this->news->update($news->id, $data);
         $this->service->updateRelation($news->id, $data['category'], $data['sub_category'], $data['tag']);
-        return back()->with('success', 'Berhasil update data');
+        return redirect('/news-list')->with('success', 'Berhasil update data');
     }
 
     /**
