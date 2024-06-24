@@ -51,38 +51,13 @@
         <div class="author-info">
             <div class="d-flex">
                 <h4 class="me-3">{{ $author->user->name }}</h4>
-                {{-- @auth
-                    @if (auth()->user()->id != $author->user_id)
-                        @php
-                            $user_id = auth()->user()->id;
-                            $author_id = $author->id;
-                            $isFollowing = DB::table('followers')->where('user_id', $user_id)->where('author_id', $author_id)->exists();
-                        @endphp
-
-                        @if ($isFollowing)
-                            <form action="{{ route('unfollow.author', ['author' => $author->id]) }}" method="POST">
-                                @method('delete')
-                                @csrf
-                                <button class="btn btn-sm btn-outline-secondary py-1 px-4" style="border-radius: 8px;">Mengikuti</button>
-                            </form>
-                        @else
-                            <form action="{{ route('follow.author', ['author' => $author->id]) }}" method="POST">
-                                @method('post')
-                                @csrf
-                                <button class="btn btn-sm py-1 px-5 text-white" style="background-color: #175A95; border-radius: 8px;">Ikuti</button>
-                            </form>
-                        @endif
-                    @endif
-                    @else
-                    <form>
-                      <button type="button" class="btn btn-sm py-1 px-5  not-login text-white" style="background-color: #175A95; border-radius: 8px;">Ikuti</button>
-                  </form>
-                @endauth --}}
                <div>
-                    @php
-                        $already = App\Models\Follower::where('author_id', $author->id)->where('user_id', auth()->user()->id)->exists()
-                    @endphp 
-                    @if ($already)
+                    @auth
+                        @php
+                            $already = App\Models\Follower::where('author_id', $author->id)->where('user_id', auth()->user()->id)->exists()
+                        @endphp 
+                    @endauth
+                    @if (Auth::check() && $already)
                         <form action="{{ route('unfollow.author', $author->id) }}" method="POST">
                             @method('DELETE')
                             @csrf
