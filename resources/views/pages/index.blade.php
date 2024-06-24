@@ -508,116 +508,116 @@ $popular_down_id = $popular_down->pluck('id');
 
             <div class="left-content mt-5 pt-5">
                 @if($popular_down->isNotEmpty())
-                    <div class="row align-items-end mb-40">
-                        <div class="col-md-7">
-                            <h2 class="section-title">Artikel Paling Populer</h2>
-                        </div>
-                        <div class="col-md-5 text-md-end">
-                            <a href="{{ route('popular.news') }}" class="link-one">Lihat Semua<i class="flaticon-right-arrow"></i></a>
-                        </div>
+                <div class="row align-items-end mb-40">
+                    <div class="col-md-7">
+                        <h2 class="section-title">Artikel Paling Populer</h2>
                     </div>
+                    <div class="col-md-5 text-md-end">
+                        <a href="{{ route('popular.news') }}" class="link-one">Lihat Semua<i class="flaticon-right-arrow"></i></a>
+                    </div>
+                </div>
 
-                    <div class="row gx-45">
-                        <div class="col-xl-7">
-                            @forelse ($popular_down as $key => $popular)
-                            @if ($key == 11)
-                            <div class="news-card-four">
-                                <img src="{{ asset('storage/' . $popular->image) }}" class="w-100" style="height: 500px; object-fit: cover;" alt="Image" />
-                                <div class="news-card-info">
-                                    <h3><a href="{{ route('news.singlepost', $popular->slug) }}">{{ Str::limit($popular->name, 50, '...') }}</a>
-                                    </h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a>
-                                        </li>
-                                        <li><i class="fi fi-rr-eye"></i>{{ $popular->newsViews()->count() }}x
-                                            dilihat</li>
-                                    </ul>
-                                </div>
+                <div class="row gx-45">
+                    <div class="col-xl-7">
+                        @forelse ($popular_down as $key => $popular)
+                        @if ($key == 11)
+                        <div class="news-card-four">
+                            <img src="{{ asset('storage/' . $popular->image) }}" class="w-100" style="height: 500px; object-fit: cover;" alt="Image" />
+                            <div class="news-card-info">
+                                <h3><a href="{{ route('news.singlepost', $popular->slug) }}">{{ Str::limit($popular->name, 50, '...') }}</a>
+                                </h3>
+                                <ul class="news-metainfo list-style">
+                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a>
+                                    </li>
+                                    <li><i class="fi fi-rr-eye"></i>{{ $popular->newsViews()->count() }}x
+                                        dilihat</li>
+                                </ul>
                             </div>
-                            @elseif ($key >= 13)
-                            <div class="news-card-five">
-                                <div class="news-card-img">
-                                    <img src="{{ asset('storage/' . $popular->image) }}" class="w-100" style="height: 150px; object-fit: cover;" alt="Image" />
-                                    <a href="{{ route('categories.show.user', $popular->newsCategories[0]->category->slug) }}" class="news-cat">{{ $popular->newsCategories[0]->category->name }}</a>
-                                </div>
-                                <div class="news-card-info">
-                                    <h3><a href="{{ route('news.singlepost', $popular->slug) }}">{{ Str::limit($popular->name, 50, '...') }}</a>
-                                    </h3>
-                                    <p>{{ Str::limit($popular->name, 120, '...') }}</p>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a>
-                                        </li>
-                                        <li><i class="fi fi-rr-eye"></i>{{ $popular->newsViews()->count() }}x
-                                            dilihat</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            @else
-                            @endif
-                            @empty
-                            <div>
-                                <div class="d-flex justify-content-center">
-                                    <div>
-                                        <img src="{{ asset('assets/img/no-data/empty.png') }}" width="250px" alt="">
-                                    </div>
-                                </div>
-                                <div class="text-center">
-                                    <h5>Tidak ada data</h5>
-                                </div>
-                            </div>
-                            @endforelse
                         </div>
-                        <div class="col-xl-5">
-                            @forelse ($populars->take(18) as $key => $popular)
-                            @if ($key == 12)
-                            <div class="news-card-two">
-                                <div class="news-card-img">
-                                    <img src="{{ asset('storage/' . $popular->image) }}" class="w-100" style="height: 300px; object-fit: cover;" alt="Image" />
-                                    <a href="{{ route('categories.show.user', $popular->newsCategories[0]->category->slug) }}" class="news-cat">{{ $popular->newsCategories[0]->category->name }}</a>
-                                </div>
-                                <div class="news-card-info">
-                                    <h3><a href="{{ route('news.singlepost', $popular->slug) }}">{{ Str::limit($popular->name, 50, '...') }}</a>
-                                    </h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a>
-                                        </li>
-                                        <li><i class="fi fi-rr-eye"></i>{{ $popular->newsViews()->count() }}x
-                                            dilihat</li>
-                                    </ul>
-                                </div>
+                        @elseif ($key >= 13)
+                        <div class="news-card-five">
+                            <div class="news-card-img">
+                                <img src="{{ asset('storage/' . $popular->image) }}" class="w-100" style="height: 150px; object-fit: cover;" alt="Image" />
+                                <a href="{{ route('categories.show.user', $popular->newsCategories[0]->category->slug) }}" class="news-cat">{{ $popular->newsCategories[0]->category->name }}</a>
                             </div>
-                            @elseif ($key >= 15)
-                            <div class="news-card-three">
-                                <div class="news-card-img">
-                                    <img src="{{ asset('storage/' . $popular->image) }}" class="w-100" style="height: 100px; object-fit: cover;" alt="Image" />
-                                </div>
-                                <div class="news-card-info">
-                                    <a href="{{ route('categories.show.user', $popular->newsCategories[0]->category->slug) }}" class="news-cat">{{ $popular->newsCategories[0]->category->name }}</a>
-                                    <h3><a href="{{ route('news.singlepost', $popular->slug) }}">{{ Str::limit($popular->name, 50, '...') }}</a>
-                                    </h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a>
-                                        </li>
-                                        <li><i class="fi fi-rr-eye"></i>{{ $popular->newsViews()->count() }}x
-                                            dilihat</li>
-                                    </ul>
-                                </div>
+                            <div class="news-card-info">
+                                <h3><a href="{{ route('news.singlepost', $popular->slug) }}">{{ Str::limit($popular->name, 50, '...') }}</a>
+                                </h3>
+                                <p>{{ Str::limit($popular->name, 120, '...') }}</p>
+                                <ul class="news-metainfo list-style">
+                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a>
+                                    </li>
+                                    <li><i class="fi fi-rr-eye"></i>{{ $popular->newsViews()->count() }}x
+                                        dilihat</li>
+                                </ul>
                             </div>
-                            @endif
-                            @empty
-                            <div>
-                                <div class="d-flex justify-content-center">
-                                    <div>
-                                        <img src="{{ asset('assets/img/no-data/empty.png') }}" width="200px" alt="">
-                                    </div>
-                                </div>
-                                <div class="text-center">
-                                    <h5>Tidak ada data</h5>
-                                </div>
-                            </div>
-                            @endforelse
                         </div>
+                        @else
+                        @endif
+                        @empty
+                        <div>
+                            <div class="d-flex justify-content-center">
+                                <div>
+                                    <img src="{{ asset('assets/img/no-data/empty.png') }}" width="250px" alt="">
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <h5>Tidak ada data</h5>
+                            </div>
+                        </div>
+                        @endforelse
                     </div>
+                    <div class="col-xl-5">
+                        @forelse ($populars->take(18) as $key => $popular)
+                        @if ($key == 12)
+                        <div class="news-card-two">
+                            <div class="news-card-img">
+                                <img src="{{ asset('storage/' . $popular->image) }}" class="w-100" style="height: 300px; object-fit: cover;" alt="Image" />
+                                <a href="{{ route('categories.show.user', $popular->newsCategories[0]->category->slug) }}" class="news-cat">{{ $popular->newsCategories[0]->category->name }}</a>
+                            </div>
+                            <div class="news-card-info">
+                                <h3><a href="{{ route('news.singlepost', $popular->slug) }}">{{ Str::limit($popular->name, 50, '...') }}</a>
+                                </h3>
+                                <ul class="news-metainfo list-style">
+                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a>
+                                    </li>
+                                    <li><i class="fi fi-rr-eye"></i>{{ $popular->newsViews()->count() }}x
+                                        dilihat</li>
+                                </ul>
+                            </div>
+                        </div>
+                        @elseif ($key >= 15)
+                        <div class="news-card-three">
+                            <div class="news-card-img">
+                                <img src="{{ asset('storage/' . $popular->image) }}" class="w-100" style="height: 100px; object-fit: cover;" alt="Image" />
+                            </div>
+                            <div class="news-card-info">
+                                <a href="{{ route('categories.show.user', $popular->newsCategories[0]->category->slug) }}" class="news-cat">{{ $popular->newsCategories[0]->category->name }}</a>
+                                <h3><a href="{{ route('news.singlepost', $popular->slug) }}">{{ Str::limit($popular->name, 50, '...') }}</a>
+                                </h3>
+                                <ul class="news-metainfo list-style">
+                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a>
+                                    </li>
+                                    <li><i class="fi fi-rr-eye"></i>{{ $popular->newsViews()->count() }}x
+                                        dilihat</li>
+                                </ul>
+                            </div>
+                        </div>
+                        @endif
+                        @empty
+                        <div>
+                            <div class="d-flex justify-content-center">
+                                <div>
+                                    <img src="{{ asset('assets/img/no-data/empty.png') }}" width="200px" alt="">
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <h5>Tidak ada data</h5>
+                            </div>
+                        </div>
+                        @endforelse
+                    </div>
+                </div>
 
                 @endif
             </div>
@@ -696,12 +696,12 @@ $popular_down_id = $popular_down->pluck('id');
                 </div>
                 @endif
 
-                <div class="sidebar">    
-                    {{-- @foreach ($advertisement_rights as $advertisement_right) --}}
+                @if ($advertisement_rights)
+                <div class="sidebar">
                     <img src="{{asset($advertisement_rights && $advertisement_rights->image != null ? 'storage/'.$advertisement_rights->image : "default.png")}}" alt="">
-                    {{-- @endforeach --}}
                 </div>
-          
+                @endif
+
 
             </div>
         </div>
