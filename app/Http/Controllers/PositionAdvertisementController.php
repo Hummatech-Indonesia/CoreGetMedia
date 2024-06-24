@@ -31,7 +31,7 @@ class PositionAdvertisementController extends Controller
      */
     public function create()
     {
-        //
+        //  
     }
 
     /**
@@ -39,9 +39,9 @@ class PositionAdvertisementController extends Controller
      */
     public function store(StorePositionAdvertisementRequest $request)
     {
-        $data = $this->service->positionCreate($request);
-        $this->positionAdvertisement->store($data);
-        return back()->with('success', 'Berhasil menambahkan posisi iklan');
+        $data = $request->validated();
+        $this->positionAdvertisement->updateOrCreate($data['page'], $data['position'], $data['price']);
+        return back()->with('success', 'Berhasil menambahkan harga posisi iklan');
     }
 
     /**
@@ -65,9 +65,7 @@ class PositionAdvertisementController extends Controller
      */
     public function update(StorePositionAdvertisementRequest $request, PositionAdvertisement $positionAdvertisement)
     {
-        $data = $this->service->positionUpdate($request, $positionAdvertisement);
-        $this->positionAdvertisement->update($positionAdvertisement->id, $data);
-        return back()->with('success', 'Berhasil update posisi iklan');
+        //
     }
 
     /**

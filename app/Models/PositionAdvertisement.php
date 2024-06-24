@@ -11,21 +11,10 @@ class PositionAdvertisement extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'image',
-        'price',
-        'page'
+        'page',
+        'position',
+        'price'
     ];
 
     protected $table = 'position_advertisements';
-
-    /**
-     * Get all of the comments for the PositionAdvertisement
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function advertisements(): HasMany
-    {
-        return $this->hasMany(Advertisement::class);
-    }
 }

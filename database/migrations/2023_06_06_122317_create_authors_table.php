@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignUuid('user_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->text('cv');
             $table->longText('description')->nullable();
+            $table->longText('reject_description')->nullable();
             $table->enum('status', [AuthorEnum::PENDING->value, AuthorEnum::ACCEPTED->value, AuthorEnum::REJECT->value])->default(AuthorEnum::PENDING->value);
             $table->timestamps();
         });

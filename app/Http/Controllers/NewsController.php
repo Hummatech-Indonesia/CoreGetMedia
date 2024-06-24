@@ -128,11 +128,20 @@ class NewsController extends Controller
         return view('pages.admin.news.detail-news', compact('news', 'newsCategory', 'newsSubcategory', 'newsTags'));
     }
 
-    public function approved_news($news)
+    public function approved_news(News $news)
     {
         $data['status'] = NewsEnum::ACCEPTED->value;
-        $this->news->update($news, $data);
-        return back()->with('success', 'Berhasil menerima berita');
+        $this->news->update($news->id, $data);
+        return redirect('/confirm-author-list')->with('success', 'Berhasil menerima berita');
+    }
+
+    public function reject_news(Request $request, News $news)
+    {
+        $this->news->update($news->id, [
+            'status' => NewsEnum::ACCEPTED->value,
+            'reject_description' => $request->input('reject_description'),
+        ]);
+        return redirect('/confirm-author-list')->with('success', 'Berhasil menolak berita');
     }
 
     /**

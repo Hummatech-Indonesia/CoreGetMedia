@@ -11,6 +11,7 @@ use App\Http\Controllers\NewsLikeController;
 use App\Http\Controllers\NewsRejectController;
 use App\Http\Controllers\NewsReportController;
 use App\Http\Controllers\NewsSubCategoryController;
+use App\Http\Controllers\PositionAdvertisementController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 
@@ -40,3 +41,5 @@ Route::put('update-profile/{user}', [UserController::class, 'update'])->name('up
 Route::post('update-password/{user}', [UserController::class, 'updatePassword'])->name('update.password');
 
 Route::get('show-edit-advertisement/{advertisement}', [AdvertisementController::class, 'edit'])->name('show.edit.advertisement');
+
+Route::post('position-price', [PositionAdvertisementController::class, 'store'])->name('edit.position.price');

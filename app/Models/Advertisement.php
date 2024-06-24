@@ -15,15 +15,16 @@ class Advertisement extends Model
         'id',
         'user_id',
         'image',
+        'url',
         'start_date',
         'end_date',
         'type',
         'page',
-        'position_advertisement_id',
+        'position',
+        'price',
         'feed',
         'status',
-        'description',
-        'url'
+        'description'
     ];
 
     protected $primaryKey = 'id';
@@ -40,15 +41,5 @@ class Advertisement extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
-    }
-
-    /**
-     * Get the user that owns the Advertisement
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function positionAdvertisement(): BelongsTo
-    {
-        return $this->belongsTo(PositionAdvertisement::class);
     }
 }
