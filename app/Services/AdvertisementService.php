@@ -13,6 +13,7 @@ use App\Http\Requests\StoreAdvertisementRequest;
 use App\Http\Requests\StorePositionAdvertisementRequest;
 use App\Http\Requests\UpdateAdvertisementRequest;
 use App\Http\Requests\UpdateNewsRequest;
+use App\Http\Requests\UpdatePositionAdvertisementRequest;
 use App\Models\Advertisement;
 use App\Models\NewsCategory;
 use App\Models\NewsSubCategory;
@@ -103,7 +104,6 @@ class AdvertisementService
         ];
     }
 
-    
     public function reject(Request $request)
     {
         $validatedData = $request->validate([
@@ -115,5 +115,10 @@ class AdvertisementService
             'feed' => StatusEnum::NOTPAID->value,
             'description' => $validatedData['description']
         ];
+    }
+
+    public function positionUpdate(UpdatePositionAdvertisementRequest $request)
+    {
+        
     }
 }
