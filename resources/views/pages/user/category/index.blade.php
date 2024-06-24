@@ -63,7 +63,7 @@
 
 <div class="sports-wrap ptb-100">
     <div class="container">
-        <div class="row gx-55 gx-5">
+        <div class="row gx-5">
             <div class="col-lg-8">
                 @forelse ($newsTop as $item)
                 <div class="">
