@@ -89,9 +89,13 @@
                 @empty
                 @endforelse
 
-
-
                 <div class="mb-5">
+                    @php
+                    $trending_id = $trendings->take(4)->where('news_views_count', '>', 0)->pluck('id');
+                    $latest_news = $latests->whereNotIn('id', $trending_id);
+                    @endphp
+
+                    @if($latest_news->isNotEmpty())
                     <div class="d-flex justify-content-between mb-3 mt-3">
                         <h3>Terbaru</h3>
                         <a href="{{ route('all-category-list.user', ['category' => $category->slug])}}">
@@ -102,11 +106,8 @@
                             </p>
                         </a>
                     </div>
+                    @endif
 
-                    @php
-                    $trending_id = $trendings->take(4)->where('news_views_count', '>', 0)->pluck('id');
-                    $latest_news = $latests->whereNotIn('id', $trending_id);
-                    @endphp
 
                     @forelse ($latest_news as $new)
                     <div class="news-card-five">
