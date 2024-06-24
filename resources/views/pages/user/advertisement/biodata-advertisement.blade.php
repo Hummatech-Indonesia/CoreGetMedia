@@ -18,8 +18,8 @@
 </div>
 
 <form action="{{ route('upload-advertisement', auth()->user()->id) }}" method="post">
+    @method('put')
     @csrf
-    @method('PUT')
     <div class="d-flex justify-content-between mb-3">
         <div class="">
             <h4 class="">Pengsian data diri</h4>

@@ -18,7 +18,7 @@
                     <span class="hide-menu text-white">BERANDA</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="#" aria-expanded="false">
+                    <a class="sidebar-link" href="/profile-user" aria-expanded="false">
                         <span>
                             <i data-feather="home"></i>
                         </span>

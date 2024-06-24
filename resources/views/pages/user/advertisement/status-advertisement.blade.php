@@ -291,6 +291,12 @@
                                                         <path fill="#ffffff" d="m13.292 12l-4.6-4.6l.708-.708L14.708 12L9.4 17.308l-.708-.708z" /></svg>
                                                 </a>
                                             </div>
+                                        @elseif ($all_advertisement->status == 'accepted' && $all_advertisement->feed == 'paid')
+                                            <div class="d-flex justify-content-end">
+                                                <p class="btn m-1 mt-5 text-white" style="background-color: #5D87FF;">
+                                                    Belum di publish
+                                                </p>
+                                            </div>
                                         @elseif ($all_advertisement->status == 'pending' || $all_advertisement->status == 'reject')
                                             <div class="d-flex justify-content-end">
                                                 <a href="{{ route('detail-advertisement', [$all_advertisement->id]) }}" class="btn btn-sm m-1 mt-5" style="background-color: #5D87FF;">
