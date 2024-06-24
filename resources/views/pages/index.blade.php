@@ -638,6 +638,7 @@ $popular_down_id = $popular_down->pluck('id');
         </div>
         <div class="col-xl-3">
             <div class="sidebar">
+                @if($popularCategories->isNotEmpty())
                 <div class="sidebar-widget">
                     <h3 class="sidebar-widget-title">Kategori Populer</h3>
                     <ul class="category-widget list-style">
@@ -660,6 +661,7 @@ $popular_down_id = $popular_down->pluck('id');
                         @endforelse
                     </ul>
                 </div>
+                @endif
                 <div class="sidebar-widget-two">
                     <div class="contact-widget">
                         <img src="assets/img/contact-bg.svg" alt="Image" class="contact-shape" />
@@ -684,7 +686,8 @@ $popular_down_id = $popular_down->pluck('id');
                         </ul>
                     </div>
                 </div>
-                <div class="sidebar-widget bg-transparent shadow-smer">
+                @if($tags->isNotEmpty())
+                <div class="sidebar-widget">
                     <h3 class="sidebar-widget-title">Tag Populer</h3>
                     <ul class="tag-list list-style">
                         @forelse ($tags as $tag)
@@ -704,6 +707,7 @@ $popular_down_id = $popular_down->pluck('id');
                         @endforelse
                     </ul>
                 </div>
+                @endif
             </div>
         </div>
     </div>
