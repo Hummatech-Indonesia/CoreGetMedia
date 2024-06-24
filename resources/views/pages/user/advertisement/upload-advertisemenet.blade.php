@@ -76,13 +76,6 @@
                     <label for="position" class="form-label">Posisi Iklan</label>
                     <div class="">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="under">
-                            <label class="form-check-label" for="inlineRadio1">
-                                <p class="ms-2">Posisi Bawah Full (1770 x 166)</p>
-                                <img src="{{asset('assets/img/news/news-11.webp')}}" width="300" height="200" alt="">
-                            </label>
-                        </div>
-                        <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="mid">
                             <label class="form-check-label" for="inlineRadio1">
                                 <p class="ms-2">Posisi Tengah Full (1770 x 166)</p>
@@ -114,7 +107,6 @@
                             </label>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="col-lg-6 mb-4">

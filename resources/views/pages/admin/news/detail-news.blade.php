@@ -315,16 +315,16 @@
             </div>
             <!-- Modal body -->
             <div class="modal-body">
-                <form action="#" method="POST">
-                    {{-- @csrf
-                    @method('patch') --}}
+                <form id="form-reject" method="POST">
+                    @csrf
+                    @method('put')
                     <div class="container">
                         <div class="mb-3">
                             <div>
                                 <h5 class="mb-3">Berikan Alasan</h5>
                             </div>
                             <div>
-                                <textarea class="form-control" name="massage" id="" cols="30" rows="10" placeholder="Berita yang ditulis ada unsur penghinaan pihak tertentu" style="resize: none;"></textarea>
+                                <textarea class="form-control" name="reject_description" id="" cols="30" rows="10" placeholder="Berita yang ditulis ada unsur penghinaan pihak tertentu" style="resize: none;"></textarea>
                             </div>
                         </div>
 
@@ -366,8 +366,8 @@
 
     $('.btn-reject').click(function() {
         var id = $(this).data('id');
-        $('#form-approved').attr('action', '/approved-news/' + id);
-        $('#modal-approved').modal('show');
+        $('#form-reject').attr('action', '/reject-news/' + id);
+        $('#modal-reject').modal('show');
     })
 
 </script>
