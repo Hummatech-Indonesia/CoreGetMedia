@@ -1,4 +1,4 @@
-@extends('layouts.user.sidebar')
+@extends(auth()->user()->hasRole('author') ? 'layouts.author.app' : 'layouts.user.sidebar')
 
 @section('style')
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -76,13 +76,6 @@
                     <label for="position" class="form-label">Posisi Iklan</label>
                     <div class="">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="under">
-                            <label class="form-check-label" for="inlineRadio1">
-                                <p class="ms-2">Posisi Bawah Full (1770 x 166)</p>
-                                <img src="{{asset('assets/img/news/news-11.webp')}}" width="300" height="200" alt="">
-                            </label>
-                        </div>
-                        <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="mid">
                             <label class="form-check-label" for="inlineRadio1">
                                 <p class="ms-2">Posisi Tengah Full (1770 x 166)</p>
@@ -114,7 +107,6 @@
                             </label>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="col-lg-6 mb-4">
@@ -148,7 +140,7 @@
                     @enderror
                 </div>
                 <div class="col-lg-12 mb-4">
-                    <label class="form-label" for="photo">Kontent</label>
+                    <label class="form-label" for="photo">Konten</label>
                     <input type="file" id="photo" name="image" onchange="previewImage(event)" placeholder=""
                         value="{{ old('photo') }}" class="form-control @error('photo') is-invalid @enderror">
                     @error('photo')

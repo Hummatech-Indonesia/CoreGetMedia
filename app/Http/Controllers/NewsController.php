@@ -132,16 +132,16 @@ class NewsController extends Controller
     {
         $data['status'] = NewsEnum::ACCEPTED->value;
         $this->news->update($news->id, $data);
-        return redirect('/confirm-author-list')->with('success', 'Berhasil menerima berita');
+        return redirect('/news-list')->with('success', 'Berhasil menerima berita');
     }
 
     public function reject_news(Request $request, News $news)
     {
         $this->news->update($news->id, [
-            'status' => NewsEnum::ACCEPTED->value,
-            'reject_description' => $request->input('reject_description'),
+            'status' => NewsEnum::REJECT->value,
+            'reject_description' => $request->reject_description,
         ]);
-        return redirect('/confirm-author-list')->with('success', 'Berhasil menolak berita');
+        return redirect('/news-list')->with('success', 'Berhasil menolak berita');
     }
 
     /**
@@ -170,10 +170,24 @@ class NewsController extends Controller
         if (auth()->user()->roles->pluck('name')[0] == "admin") {
             return redirect('/news-list')->with('success', 'Berhasil menambahkan data');
         } else {
-            return back()->with('success', 'Berhasil menambahkan data');
+            return redirect('/list-news')->with('success', 'Berhasil menambahkan data');
         }
     }
 
+    public function draft(StoreNewsRequest $request)
+    {
+        $data = $this->service->store($request);
+
+        $newsId = $this->news->store($data)->id;
+        $this->service->storeRelation($newsId, $data['category'], $data['sub_category'], $data['tag']);
+        $newsId->delete();
+
+        if (auth()->user()->roles->pluck('name')[0] == "admin") {
+            return redirect('/news-list')->with('success', 'Berhasil mendarft data');
+        } else {
+            return redirect('/list-news')->with('success', 'Berhasil mendraft data');
+        }
+    }
     /**
      * Display the specified resource.
      */
@@ -185,7 +199,6 @@ class NewsController extends Controller
         $news_id = $news->id;
         $data = $this->viewService->store($news_id, $ipAddress);
         $tags = $this->newstags->where($news_id, 'notop');
-        // dd($tags);
         $comments = $this->comments->get($news_id);
         $likes = $this->newsLikes->get($news_id);
 
@@ -223,12 +236,10 @@ class NewsController extends Controller
         $newsCategory = $this->newscategories->where($news_id);
         $newsSubcategory = $this->newssubcategories->where($news_id);
         $newsTags = $this->newstags->wheretag($news_id);
-        // dd($newsTags);
         $categories = $this->categories->get();
         $subcategories = $this->subcategories->get();
         $tags = $this->tags->get();
 
-        // dd($news->image);
         return view('pages.author.news.update', compact('news','categories', 'subcategories','tags', 'newsCategory', 'newsSubcategory', 'newsTags'));
     }
 

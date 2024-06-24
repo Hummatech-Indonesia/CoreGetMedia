@@ -35,7 +35,7 @@ Route::post('like-news/{news}', [NewsLikeController::class, 'store'])->name('lik
 Route::delete('unlike-news/{news}', [NewsLikeController::class, 'destroy'])->name('unlike.news');
 
 Route::post('news-report/{news}', [NewsReportController::class, 'store'])->name('report.news');
-Route::post('news-reject/{news}', [NewsRejectController::class, 'store'])->name('reject.news.admin');
+Route::put('reject-news/{news}', [NewsController::class, 'reject_news'])->name('reject.news.admin');
 
 Route::post('image-update/{user}', [UserController::class, 'updateImage'])->name('image.update');
 Route::put('update-profile/{user}', [UserController::class, 'update'])->name('update.profile');

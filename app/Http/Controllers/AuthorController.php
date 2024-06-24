@@ -155,6 +155,8 @@ class AuthorController extends Controller
     {
         $this->author->update($author->id, ['status' => AuthorEnum::ACCEPTED->value]);
         $user = $author->user;
+        $user->roles()->detach();
+        $user->permissions()->detach();
         $user->assignRole(RoleEnum::AUTHOR->value);
         return redirect()->back()->with(['success' => 'Author Berhasil Dikonfirmasi']);
     }
