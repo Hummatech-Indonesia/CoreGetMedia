@@ -180,7 +180,7 @@
         var image = $(this).data('image');
         var date = $(this).data('data_of_birth')
         var address = $(this).data('address')
-        $('#form-tolak').attr('action', '/confirm-author/' + id);
+        $('#form-tolak').attr('action', '/reject-author/' + id);
         $('#form-terima').attr('action', '/confirm-author/' + id);
         $('#detail-name').val(name);
         $('#detail-email').val(email);
