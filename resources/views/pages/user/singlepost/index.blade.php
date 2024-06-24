@@ -50,7 +50,7 @@
     </style>
         <style>
             .tooltip-custom {
-                position: absolute;
+                position: fixed;
                 background-color: #333;
                 color: #fff;
                 padding: 5px 10px;
@@ -174,9 +174,8 @@
                         <div>
                             <h1>{{ $news->name }}</h1>
                             <p class="d-flex gap-1">Share :
-                                <a id="wa" class="logo" data-name="{{ $news->name }}" data-slug="{{ $news->slug }}"
-                                    href="https://wa.me/NOMOR_TELEPON_ANDA?text=PESAN_ANDA">
-                                     <svg height="19" width="19" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                                <button class="wpbtn" style="background-color: transparent; border: none" title="Share to WhatsApp" onclick="shareToWhatsApp()">
+                                    <svg height="19" width="19" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                                           xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 58 58" xml:space="preserve" fill="#000000">
                                          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -191,15 +190,15 @@
                                              </g>
                                          </g>
                                      </svg>
-                                 </a>
+                                </button>
 
-                                <a id="fb">
+                                <a id="fb" title="Share to Facebook" onclick="shareToFacebook()">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 263 263">
                                         <path fill="#1877F2" d="M256 128C256 57.308 198.692 0 128 0C57.308 0 0 57.308 0 128c0 63.888 46.808 116.843 108 126.445V165H75.5v-37H108V99.8c0-32.08 19.11-49.8 48.348-49.8C170.352 50 185 52.5 185 52.5V84h-16.14C152.959 84 148 93.867 148 103.99V128h35.5l-5.675 37H148v89.445c61.192-9.602 108-62.556 108-126.445" />
                                         <path fill="#FFF" d="m177.825 165l5.675-37H148v-24.01C148 93.866 152.959 84 168.86 84H185V52.5S170.352 50 156.347 50C127.11 50 108 67.72 108 99.8V128H75.5v37H108v89.445A128.959 128.959 0 0 0 128 256a128.9 128.9 0 0 0 20-1.555V165z" />
                                     </svg>
                                 </a>
-                                <a id="tw" class="logo" style="margin-top: 7px;">
+                                <a id="tw" class="logo" style="margin-top: 7px;" title="Share to Twitter" onclick="shareToTwitter()">
                                     <svg class="logo-dark" style="margin-top: 1px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         viewBox="0 0 14 14">
                                         <g fill="none">
@@ -227,7 +226,7 @@
                                         </g>
                                     </svg>
                                 </a>
-                                <a id="tele">
+                                <a id="tele" title="Share to Telegram" onclick="shareToTelegram()">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 263 263">
                                         <defs>
                                             <linearGradient id="logosTelegram0" x1="50%" x2="50%" y1="0%" y2="100%">
@@ -875,6 +874,52 @@
             }, function (err) {
                 console.error('Failed to copy: ', err);
             });
+        }
+
+        function shareToWhatsApp() {
+            var currentUrl = window.location.href;
+            var name = document.querySelector('h1').innerText;
+
+
+            var message = '*' + name + '*' + '\n\nKlik untuk baca:\n' + currentUrl;
+            var whatsappUrl = 'whatsapp://send?text=' + encodeURIComponent(message);
+
+            window.location.href = whatsappUrl;
+        }
+
+        function shareToTelegram() {
+            var currentUrl = window.location.href;
+            var name = document.querySelector('h1').innerText;
+
+            var message = '*' + name + '*' + '\n\nKlik untuk baca:\n' + currentUrl;
+            var telegramUrl = 'https://t.me/share/url?url=' + encodeURIComponent(currentUrl) + '&text=' + encodeURIComponent(message);
+
+            var windowOptions = 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, width=600, height=400, top=' + (screen.height/2 - 200) + ', left=' + (screen.width/2 - 300);
+
+            window.open(telegramUrl, '_blank', windowOptions);
+        }
+
+        function shareToFacebook() {
+            var currentUrl = window.location.href;
+            var name = document.querySelector('h1').innerText;
+
+            var facebookUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(currentUrl) + '&quote=' + encodeURIComponent(name);
+
+            var windowOptions = 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=600, height=400, top=' + (screen.height/2 - 200) + ', left=' + (screen.width/2 - 300);
+
+            window.open(facebookUrl, '_blank', windowOptions);
+        }
+
+        function shareToTwitter() {
+            var currentUrl = window.location.href;
+            var name = document.querySelector('h1').innerText;
+
+            var message = '*' + name + '*' + '\n\nKlik untuk baca:\n' + currentUrl;
+            var twitterUrl = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(currentUrl) + '&text=' + encodeURIComponent(message);
+
+            var windowOptions = 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=600, height=400, top=' + (screen.height/2 - 200) + ', left=' + (screen.width/2 - 300);
+
+            window.open(twitterUrl, '_blank', windowOptions);
         }
     </script>
 @endsection
