@@ -76,17 +76,7 @@
                         <span class="hide-menu">Berita Disukai</span>
                     </a>
                 </li>
-
-                <li class="sidebar-item">
-                    <a class="sidebar-link {{ request()->routeIs('news.delete.list.author' ? 'active' : '') }} ps-3"
-                        href="{{ route('news.delete.list.author') }}" aria-expanded="false">
-                        <svg width="14" height="19" viewBox="0 0 12 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill="currentColor" d="M0.857143 13.3333C0.857143 13.7754 1.03775 14.1993 1.35925 14.5118C1.68074 14.8244 2.11677 15 2.57143 15H9.42857C9.88323 15 10.3193 14.8244 10.6408 14.5118C10.9622 14.1993 11.1429 13.7754 11.1429 13.3333V3.33333H0.857143V13.3333ZM2.57143 5H9.42857V13.3333H2.57143V5ZM9 0.833333L8.14286 0H3.85714L3 0.833333H0V2.5H12V0.833333H9Z" fill="white"/>
-                        </svg>    
-                        <span class="hide-menu" style="margin-left: 4px">Berita Dihapus</span>
-                    </a>
-                </li>
-
+                
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu text-white">BERLANGGANAN</span>
