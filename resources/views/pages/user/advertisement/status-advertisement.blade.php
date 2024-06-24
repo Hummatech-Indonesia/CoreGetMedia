@@ -194,6 +194,14 @@
                                                 </div>
                                                 <div class="fs-4 mt-2">{{ $all_advertisement->url }}</div>
                                             </div>
+                                            @if ($all_advertisement->price != null)
+                                            <div class="col-lg-12 mt-5">
+                                                <div class="fs-4 text-black">
+                                                    Harga :
+                                                </div>
+                                                <div class="fs-4 mt-2">{{ $all_advertisement->price }}</div>
+                                            </div>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-md-12 col-lg-4">
