@@ -59,7 +59,7 @@ class AdvertisementRepository extends BaseRepository implements AdvertisementInt
     public function wherePosition($advertisement,$query): mixed
     {
         return $this->model->query()
-        ->where('status', AdvertisementEnum::ACCEPTED->value)
+        ->where('status', AdvertisementEnum::PUBLISHED->value)
         ->where('feed', AdvertisementEnum::PAID)
         ->whereDate('start_date', '<=', now())
         ->whereDate('end_date', '>=', now())
