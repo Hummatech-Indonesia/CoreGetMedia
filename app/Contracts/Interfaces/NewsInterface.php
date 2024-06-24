@@ -4,13 +4,14 @@ namespace App\Contracts\Interfaces;
 
 use App\Contracts\Interfaces\Eloquent\ChartInterface;
 use App\Contracts\Interfaces\Eloquent\DeleteInterface;
+use App\Contracts\Interfaces\Eloquent\DraftInterface;
 use App\Contracts\Interfaces\Eloquent\GetInterface;
 use App\Contracts\Interfaces\Eloquent\ShowInterface;
 use App\Contracts\Interfaces\Eloquent\ShowWithSlugInterface;
 use App\Contracts\Interfaces\Eloquent\StoreInterface;
 use App\Contracts\Interfaces\Eloquent\UpdateInterface;
 
-interface NewsInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, ShowWithSlugInterface, ChartInterface
+interface NewsInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, ShowWithSlugInterface, ChartInterface, DraftInterface
 {
     public function where($data, $paginate) : mixed;
     public function whereSubCategory($id, $query) : mixed;

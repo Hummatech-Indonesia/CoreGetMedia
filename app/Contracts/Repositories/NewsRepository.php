@@ -336,4 +336,9 @@ class NewsRepository extends BaseRepository implements NewsInterface
         }
         return $monthlyViews;
     }
+
+    public function draft()
+    {
+        return $this->model->query()->onlyTrashed()->where('user_id', auth()->user()->id)->get();
+    }
 }
