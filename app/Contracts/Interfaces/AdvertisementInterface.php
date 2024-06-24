@@ -11,4 +11,6 @@ use App\Contracts\Interfaces\Eloquent\UpdateInterface;
 interface AdvertisementInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface
 {
     public function where($user_id, $status) : mixed;
+    public function whereAccepted() : mixed;
+    public function wherePosition($advertisement,$query): mixed;
 }

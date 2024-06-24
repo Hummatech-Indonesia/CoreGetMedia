@@ -16,9 +16,12 @@ class ImageContentService
         $words = explode(' ', strip_tags($content));
         $wordCount = count($words);
 
-        for ($i = $wordInterval; $i < $wordCount; $i += $wordInterval) {
-            array_splice($words, $i, 0, $this->imageTag);
+        if ($wordCount == 0) {
+            return $content;
         }
+
+        $middleIndex = floor($wordCount / 2);
+        array_splice($words, $middleIndex, 0, $this->imageTag);
 
         return implode(' ', $words);
     }

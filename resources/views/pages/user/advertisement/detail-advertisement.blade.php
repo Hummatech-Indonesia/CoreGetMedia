@@ -169,7 +169,7 @@
                     </div>
 
                     <div class="mt-4">
-                        <a href="{{ route('detail-advertisement') }}" class="btn btn-md text-white w-100" style="background-color: #175A95">
+                        <a href="{{ route('detail-advertisement', [$data->id]) }}" class="btn btn-md text-white w-100" style="background-color: #175A95">
                             Berikutnya
                         </a>
                     </div>
