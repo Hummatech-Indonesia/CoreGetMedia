@@ -100,7 +100,6 @@
     @php
     $displayedPopulars = $populars->take(10)->where('news_views_count', '>', 0)->pluck('id');
     @endphp
-    {{-- <p>Senin, 10 Juni 2024</p> --}}
     <div class="trending-news-box">
         <div class="row gx-5">
             <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 d-flex justify-content-center">
@@ -464,18 +463,6 @@ $popular_down_id = $popular_down->pluck('id');
             @if($latests_news->isNotEmpty())
             <div class="news-col-wrap">
 
-                {{-- @php
-                        $categoryRight_id = $filteredCategoryPopulars->pluck('id');
-                        $pin_id = $filteredPin->pluck('id');
-                        $categoryLeft_id = $filteredCategory2Populars->pluck('id');
-
-                        $includeid = $displayedPopulars->merge($categoryRight_id);
-                        $excludedIds = $includeid->merge($pin_id);
-                        $latestid = $excludedIds->merge($categoryLeft_id);
-
-                        $latests_news = $latests->whereNotIn('id', $latestid);
-                    @endphp --}}
-
                 @forelse ($latests_news as $latest)
                 <div class="news-card-five pb-3">
                     <div class="news-card-img">
@@ -708,6 +695,13 @@ $popular_down_id = $popular_down->pluck('id');
                     </ul>
                 </div>
                 @endif
+
+                <div class="sidebar">    
+                    <img src="{{asset($advertisement_rights->image ? 'storage/'.$advertisement_rights->image : "default.png")}}" alt="">
+                    {{-- <h3 class="sidebar-widget-title">Iklan</h3> --}}
+                </div>
+
+
             </div>
         </div>
     </div>
@@ -796,51 +790,6 @@ $popular_down_id = $popular_down->pluck('id');
 </div>
 
 @endif
-
-
-{{-- <div class="container-fluid pb-75 pt-100">
-        <div>
-            <h2 class="section-title">Artikel Premium</h2>
-        </div>
-        <div class="row gx-5 mt-5">
-            <div class="col-xl-4">
-                <div class="news-card-four">
-                    <img src="{{asset('assets/img/news/news-32.webp')}}" alt="Image" />
-<div class="news-card-info">
-    <h3><a href="{{route('singlepost.news')}}">Best VR Headsets For PC And Gaming This Year</a></h3>
-    <ul class="news-metainfo list-style">
-        <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">Apr 08, 2023</a></li>
-        <li><i class="fi fi-rr-eye"></i>14x dilihat</li>
-    </ul>
-</div>
-</div>
-</div>
-<div class="col-xl-4">
-    <div class="news-card-four">
-        <img src="{{asset('assets/img/news/news-32.webp')}}" alt="Image" />
-        <div class="news-card-info">
-            <h3><a href="{{route('singlepost.news')}}">Best VR Headsets For PC And Gaming This Year</a></h3>
-            <ul class="news-metainfo list-style">
-                <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">Apr 08, 2023</a></li>
-                <li><i class="fi fi-rr-eye"></i>14x dilihat</li>
-            </ul>
-        </div>
-    </div>
-</div>
-<div class="col-xl-4">
-    <div class="news-card-four">
-        <img src="{{asset('assets/img/news/news-32.webp')}}" alt="Image" />
-        <div class="news-card-info">
-            <h3><a href="{{route('singlepost.news')}}">Best VR Headsets For PC And Gaming This Year</a></h3>
-            <ul class="news-metainfo list-style">
-                <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">Apr 08, 2023</a></li>
-                <li><i class="fi fi-rr-eye"></i>14x dilihat</li>
-            </ul>
-        </div>
-    </div>
-</div>
-</div>
-</div> --}}
 
 <button type="button" id="backtotop" class="position-fixed text-center border-0 p-0">
     <i class="ri-arrow-up-line"></i>

@@ -22,6 +22,16 @@ enum AdvertisementEnum : string
     case PHOTO = 'photo';
     case VIDEO = 'video';
 
+    // status
+    case REJECT = 'reject';
+    case ACCEPTED = 'accepted';
+    case PENDING = 'pending';
+    case PUBLISHED = 'published';
+    case CANCELED = 'canceled';
+
+    // feed
+    case PAID = 'paid';
+    case NOTPAID = 'notpaid';
 
     public function label(): string
     {
