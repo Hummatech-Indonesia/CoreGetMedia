@@ -63,12 +63,14 @@
                                 class="news-cat">{{ $item->newsCategories[0]->category->name }}</a>
                         </div>
                         <div class="news-card-info">
-                            <h3><a data-toggle="tooltip" data-placement="top"
-                                    title="Muga Nemo Aptent Quaerat Explicabo Urna Ni Like Ange"
-                                    href="{{ route('news.singlepost', ['news' => $item->slug]) }}" {!! !!}
-                                    Illuminate\Support\Str::limit(strip_tags($item->name), 200, '...') !!}
+                            <h3>
+                                <a data-toggle="tooltip" data-placement="top"
+                                   title="Muga Nemo Aptent Quaerat Explicabo Urna Ni Like Ange"
+                                   href="{{ route('news.singlepost', ['news' => $item->slug]) }}">
+                                   {!! Illuminate\Support\Str::limit(strip_tags($item->name), 200, '...') !!}
                                 </a>
                             </h3>
+
                             <p>{!! Illuminate\Support\Str::limit(strip_tags($item->name), 200, '...') !!}</p>
                             <ul class="news-metainfo list-style">
                                 <li><i class="fi fi-rr-calendar-minus"></i><a
@@ -111,7 +113,7 @@
                         <div class="sidebar-widget" style="width: 450px">
                             <h3 class="sidebar-widget-title">Kategori Populer</h3>
                             <ul class="category-widget list-style">
-                                @foreach ($CategoryPopulars as $category)
+                                @forelse ($CategoryPopulars as $category)
                                 <li><a data-toggle="tooltip" data-placement="top" title="{{ $category->name }}"
                                         href="{{ route('categories.show.user', ['category' => $category->slug]) }}"><img
                                             src="{{ asset('assets/img/icons/arrow-right.svg') }}"
@@ -128,7 +130,7 @@
                                         <h5>Tidak ada data</h5>
                                     </div>
                                 </div>
-                                @endforeach
+                                @endforelse
                             </ul>
                         </div>
                         @endif
