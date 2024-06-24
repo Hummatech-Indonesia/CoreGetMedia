@@ -58,7 +58,7 @@
                     </td>
                     <td>{{ $author->user->email }}</td>
                     <td>
-                        <button data-bs-toggle="tooltip" title="Detail" data-id="{{ $author->id }}" data-name="{{ $author->user->name }}" data-image="{{ $author->user->image ? 'storage/'.$author->user->image : "default.png" }}" data-email="{{ $author->user->email }}" class="btn btn-sm btn-primary btn-detail me-2" style="background-color:#5D87FF">
+                        <button data-bs-toggle="tooltip" title="Detail" data-id="{{ $author->id }}" data-name="{{ $author->user->name }}" data-image="{{ $author->user->image ? 'storage/'.$author->user->image : "default.png" }}" data-email="{{ $author->user->email }}" data-birth="{{ $author->user->date_of_birth ? $author->user->date_of_birth : "-" }}" data-address="{{ $author->user->address ? $author->user->address : "-" }}" class="btn btn-sm btn-primary btn-detail me-2" style="background-color:#5D87FF">
                             <i><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
                                     <path fill="currentColor" d="M12 6.5a9.77 9.77 0 0 1 8.82 5.5c-1.65 3.37-5.02 5.5-8.82 5.5S4.83 15.37 3.18 12A9.77 9.77 0 0 1 12 6.5m0-2C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5m0 5a2.5 2.5 0 0 1 0 5a2.5 2.5 0 0 1 0-5m0-2c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5s4.5-2.02 4.5-4.5s-2.02-4.5-4.5-4.5" /></svg></i>
                         </button>
@@ -92,14 +92,14 @@
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item mb-3" style="font-weight: bold;">Nama : <span id="detail-name" style="font-weight: normal;"></span>
                                     </li>
-                                    <li class="list-group-item mb-3" style="font-weight: bold;">Nomor Telepon: <span id="detail-phone_number" style="font-weight: normal;"></span></li>
-                                </ul>
+                                    <li class="list-group-item mb-3" style="font-weight: bold;">Email: <span id="detail-email" style="font-weight: normal;"></span>
+                                    </ul>
                             </div>
                             <div class="col-md-6">
                                 <ul class="list-group list-group-flush">
 
-                                    <li class="list-group-item mb-3" style="font-weight: bold;">Email: <span id="detail-email" style="font-weight: normal;"></span>
-                                    </li>
+                                    <li class="list-group-item" style="font-weight: bold;">Tanggal Lahir: <span id="detail-birth_date" style="font-weight: normal;"></span></li>
+
                                     <li class="list-group-item" style="font-weight: bold;">Alamat: <span id="detail-address" style="font-weight: normal;"></span></li>
                                 </ul>
                             </div>
@@ -108,10 +108,16 @@
                 </div>
                 <div class="modal-footer">
                     <div class="d-flex justify-content-end">
-                        <a id="download-cv" target="_blank" download>
-                            <span class="badge bg-light-primary text-primary me-2 fs-4 px-2 py-2">
+                        {{-- @if (file_exists(public_path('storage/' . $author->cv)))
+                        <a href="{{ asset('storage/' . $author->cv) }}" target="_blank" class="btn btn-light-primary text-primary me-2 fs-4 px-2 py-2">Lihat CV</a>
+                        @else
+                        <p>CV tidak tersedia</p>
+                        @endif --}}
+                        
+                        <a href="#" type="button" class="btn btn-light-primary text-primary me-2 fs-4 px-2 py-2 btn-download" data-id="{{$author->id}}" data-task="{{ file_exists(public_path('storage/' . $author->cv)) ? asset('storage/' . $author->cv) : asset('no data.png') }}" data-name="{{$author->user->name}}">
+                            <div class="mx-1">
                                 Download CV
-                            </span>
+                            </div>
                         </a>
                         <form method="post" id="form-tolak">
                             @csrf
@@ -172,13 +178,32 @@
         var name = $(this).data('name');
         var email = $(this).data('email');
         var image = $(this).data('image');
+        var date = $(this).data('data_of_birth')
+        var address = $(this).data('address')
         $('#form-tolak').attr('action', '/confirm-author/' + id);
         $('#form-terima').attr('action', '/confirm-author/' + id);
         $('#detail-name').val(name);
         $('#detail-email').val(email);
         $('#detail-photo').attr('src', image);
+        $('#detail-birth_date').text(date)
+        $('#detail-address').text(address)
         console.log(id);
         $('#modal-detail').modal('show');
+    });
+
+
+    $(document).ready(function() {
+        let cvPath = $('.btn-download').data('task');
+        $('#open-cv').attr('href', cvPath);
+
+        $('.btn-download').click(function(e) {
+            e.preventDefault();
+            let file = $(this).data('task');
+            let fileName = $(this).data('name') + '.pdf';
+            $('.download-file').attr('href', file);
+            $('.download-file').attr('download', fileName);
+            $('.download-file')[0].click();
+        });
     });
 
 </script>
