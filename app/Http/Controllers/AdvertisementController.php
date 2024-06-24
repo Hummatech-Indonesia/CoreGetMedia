@@ -45,6 +45,13 @@ class AdvertisementController extends Controller
         return view('pages.admin.advertisement.confirm-advertisement', compact('data'));
     }
 
+    public function list_advertisement()
+    {
+        $data = $this->advertisement->where(null, 'accepted');
+        $data2 = $this->advertisement->where(null, 'published');
+        return view('pages.admin.advertisement.advertisement-list', compact('data', 'data2'));
+    }
+
     public function detail_admin(Advertisement $advertisement)
     {
         $posisi = $this->position->get();
