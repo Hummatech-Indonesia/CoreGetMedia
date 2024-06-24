@@ -15,7 +15,6 @@ class PositionAdvertisement extends Model
         'page',
         'image',
         'position',
-        'price'
     ];
 
     protected $casts = [
