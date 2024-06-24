@@ -262,14 +262,6 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            {{-- @elseif ($all_advertisement->deleted_at != 'null')
-                                            <div class="d-flex justify-content-end">
-                                                <div class="text-md-right">
-                                                    <span class="badge bg-light-primary text-primary fs-4 px-4 py-2">
-                                                        Draft
-                                                    </span>
-                                                </div>
-                                            </div> --}}
                                             @endif
                                         </div>
 
@@ -513,7 +505,7 @@
                         </div>
 
                         <div class="d-flex justify-content-end">
-                            <a href="{{ route('detail-advertisement', [$all_advertisement->id]) }}" class="btn btn-sm m-1 mt-5"
+                            <a href="{{ route('detail-advertisement', [$pending_advertisement->id]) }}" class="btn btn-sm m-1 mt-5"
                                 style="background-color: #5D87FF;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512">
                                     <path fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round"
@@ -524,7 +516,7 @@
                                 </svg>
                             </a>
 
-                            <a href="{{ route('show.edit.advertisement', ['advertisement' => $all_advertisement->id]) }}"
+                            <a href="{{ route('show.edit.advertisement', ['advertisement' => $pending_advertisement->id]) }}"
                                 class="btn btn-sm m-1 mt-5" style="background-color: #FFD643;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24">
                                     <path fill="#ffffff"
@@ -532,7 +524,7 @@
                                 </svg>
                             </a>
 
-                            <button type="button" id="btn-delete" data-id="{{ $all_advertisement->id }}"
+                            <button type="button" id="btn-delete" data-id="{{ $pending_advertisement->id }}"
                                 class="btn btn-sm m-1 mt-5 btn-delete" style="background-color: #C94F4F;"><svg
                                     xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512">
                                     <path
@@ -631,7 +623,7 @@
                         </div>
 
                         <div class="d-flex justify-content-end">
-                            <a href="{{ route('detail-advertisement', ['advertisement' => $all_advertisement->id]) }}" class="btn btn-sm m-1 mt-5"
+                            <a href="{{ route('detail-advertisement', ['advertisement' => $reject_advertisement->id]) }}" class="btn btn-sm m-1 mt-5"
                                 style="background-color: #5D87FF;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512">
                                     <path fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round"
@@ -642,7 +634,7 @@
                                 </svg>
                             </a>
 
-                            <a href="{{ route('show.edit.advertisement', ['advertisement' => $all_advertisement->id]) }}"
+                            <a href="{{ route('show.edit.advertisement', ['advertisement' => $reject_advertisement->id]) }}"
                                 class="btn btn-sm m-1 mt-5" style="background-color: #FFD643;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24">
                                     <path fill="#ffffff"
@@ -650,7 +642,7 @@
                                 </svg>
                             </a>
 
-                            <button type="button" id="btn-delete" data-id="{{ $all_advertisement->id }}"
+                            <button type="button" id="btn-delete" data-id="{{ $reject_advertisement->id }}"
                                 class="btn btn-sm m-1 mt-5 btn-delete" style="background-color: #C94F4F;"><svg
                                     xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512">
                                     <path
@@ -724,16 +716,6 @@
                     <div class="col-md-12 col-lg-4">
                         <div class="d-flex justify-content-end gap-2">
                             <div class="d-flex justify-content-end">
-                                <!-- <div class="text-md-right">
-                                    <span class="badge bg-light-danger text-danger fs-4 me-2 px-3 py-2">
-                                        Belum Dibayar
-                                    </span>
-                                </div> -->
-                                <!-- <div class="text-md-right">
-                                    <span class="badge bg-light-success text-success fs-4 me-2 px-3 py-2">
-                                        Sudah Dibayar
-                                    </span>
-                                </div> -->
                                 <div class="text-md-right">
                                     <span class="badge bg-light-success text-success fs-4 px-3 py-2">
                                         Draft
