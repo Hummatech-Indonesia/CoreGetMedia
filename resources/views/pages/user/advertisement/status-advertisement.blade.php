@@ -309,11 +309,15 @@
                     </div>
                 </div>
             @empty
+            <div class="text-center mt-5 pt-5">
+                <img src="{{ asset('assets/Empty-cuate.png') }}" alt="" width="300px">
+                <p>Tidak ada iklan</p>
+            </div>
             @endforelse
         </div>
 
-@forelse ($accepted_advertisements as $accepted_advertisement)
 <div class="tab-pane fade" id="link1" role="tabpanel" aria-labelledby="link1-tab">
+    @forelse ($accepted_advertisements as $accepted_advertisement)
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
@@ -418,12 +422,16 @@
             </div>
         </div>
     </div>
+    @empty
+    <div class="text-center mt-5 pt-5">
+        <img src="{{ asset('assets/Empty-cuate.png') }}" alt="" width="300px">
+        <p>Tidak ada iklan yang diterima</p>
+    </div>
+    @endforelse
 </div>
-@empty
-@endforelse
 
-@forelse ($pending_advertisements as $pending_advertisement)
 <div class="tab-pane fade" id="link2" role="tabpanel" aria-labelledby="link2-tab">
+    @forelse ($pending_advertisements as $pending_advertisement)
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
@@ -525,12 +533,16 @@
 
         </div>
     </div>
+    @empty
+    <div class="text-center mt-5 pt-5">
+        <img src="{{ asset('assets/Empty-cuate.png') }}" alt="" width="300px">
+        <p>Tidak ada data</p>
+    </div>
+    @endforelse
 </div>
-@empty
-@endforelse
 
-@forelse ($reject_advertisements as $reject_advertisement)
 <div class="tab-pane fade" id="link3" role="tabpanel" aria-labelledby="link3-tab">
+    @forelse ($reject_advertisements as $reject_advertisement)
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
@@ -631,9 +643,13 @@
             </div>
         </div>
     </div>
+    @empty
+    <div class="text-center mt-5 pt-5">
+        <img src="{{ asset('assets/Empty-cuate.png') }}" alt="" width="300px">
+        <p>Tidak ada iklan yang ditolak</p>
+    </div>
+    @endforelse
 </div>
-@empty
-@endforelse
 
 
 <div class="tab-pane fade" id="link4" role="tabpanel" aria-labelledby="link4-tab">
