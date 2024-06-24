@@ -6,6 +6,7 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CommentReportController;
+use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\NewsCategoryController;
 use App\Http\Controllers\NewsLikeController;
 use App\Http\Controllers\NewsRejectController;
@@ -43,3 +44,9 @@ Route::post('update-password/{user}', [UserController::class, 'updatePassword'])
 Route::get('show-edit-advertisement/{advertisement}', [AdvertisementController::class, 'edit'])->name('show.edit.advertisement');
 
 Route::post('position-price', [PositionAdvertisementController::class, 'store'])->name('edit.position.price');
+
+Route::put('reject-advertisement/{advertisement}', [AdvertisementController::class, 'rejected'])->name('reject.advertisement.admin');
+Route::put('accepted-advertisement/{advertisement}', [AdvertisementController::class, 'accepted'])->name('accepted.advertisement.admin');
+
+Route::post('follow-author/{author}', [FollowerController::class, 'store'])->name('follow.author');
+Route::delete('unfollow-author/{author}', [FollowerController::class, 'destroy'])->name('unfollow.author');

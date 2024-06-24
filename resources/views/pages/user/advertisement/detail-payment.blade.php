@@ -80,7 +80,7 @@
                             <option value="vidio">Vidio</option>
                         </select>
                     </div>
-                    
+
                     <div class="col-lg-6 mb-4">
                         <label class="form-label" for="start_date">Tanggal Awal</label>
                         <input type="date" id="start_date" name="start_date" placeholder=""
@@ -91,7 +91,7 @@
                             </span>
                         @enderror
                     </div>
-                    
+
                     <div class="col-lg-6 mb-4">
                         <label class="form-label" for="end_date">Tanggal Akhir</label>
                         <input type="date" id="end_date" name="end_date" placeholder=""
@@ -122,57 +122,57 @@
                     <h4 class="text-white">Rincian pembayaran</h4>
                 </div>
                 <div class="card-body shadow-sm">
-    
+
                     <div class="d-flex mt-5 justify-content-between">
                         <p class="fw-semibold">Kode Voucher</p>
-    
+
                         <p class="fs-3" style="color: #175A95;">ABCDE</p>
                     </div>
-    
+
                     <div class="d-flex mt-4 justify-content-between">
                         <p class="fw-semibold">Harga Upload</p>
-    
+
                         <div class="d-flex">
                             {{-- <del><p class="fs-3 me-3" style="color: #175A95;">Rp. 100.000</p></del> --}}
                             <p class="fs-3" style="color: #175A95;">Rp. 10.000</p>
                         </div>
                     </div>
-    
+
                     <div class="d-flex mt-4 justify-content-between">
                         <p class="fw-semibold">Diskon Voucher</p>
-    
+
                         <div class="d-flex">
                             <p class="fs-3" style="color: #175A95;"><span>-</span>Rp. 20.000</p>
                         </div>
                     </div>
-    
+
                     <div class="d-flex mt-4 justify-content-between">
                         <p class="fw-semibold">Total Pembayaran</p>
-    
+
                         <div class="d-flex">
                             <p class="fs-3" style="color: #175A95;">Rp. 80.000</p>
                         </div>
                     </div>
-    
+
                     <div class="d-flex mt-4 justify-content-between">
                         <p class="fw-semibold">Bayar Sebelum Tanggal</p>
                         <p class="fs-3" style="color: #175A95;">12/12/2020</p>
                     </div>
-    
+
                     <div class="d-flex mt-4 justify-content-between">
                         <p class="fw-semibold">Kode Transaksi</p>
                         <p class="fs-3" style="color: #175A95;">DEV-T26250149620IYONL</p>
                     </div>
-    
+
                     <div class="d-flex mt-4 justify-content-between">
                         <p class="fw-semibold">Metode Pembayaran</p>
                         <img src="{{asset('assets/img/bca.svg')}}" width="80px" alt="">
                         {{-- <button type="button" class="btn btn-outline-light text-primary" data-bs-toggle="modal" data-bs-target="#modal-create">Pilih metode pembayaran</button> --}}
                     </div>
-    
+
                     <div class="d-flex mt-4 justify-content-between">
                             <p class="fw-semibold">Kode Pembayaran</p>
-    
+
                             <div class="d-flex">
                                 <p class="fs-3" style="color: #175A95;">473635346744955</p>
                                 <div>
@@ -191,7 +191,7 @@
                             </span>
                         </div>
                     </div>
-    
+
                 </div>
             </div>
         </div>
@@ -213,13 +213,6 @@
                         <div class="col-lg-6 mt-2">
                             <div class="card card-act shadow-sm card p-3" onclick="selectCard(this)">
                                 <div class="d-flex align-items-center">
-                                    {{-- <input type="radio" name="payment" id="bri_va" value="bri" class="me-2" style="accent-color: #0056b3;">
-                                    <label for="bri_va" class="mb-0 d-flex">
-                                        <img src="{{ asset('assets/img/bank-bri.svg') }}" width="100px" alt="BRI Virtual Account">
-                                        <div class="ms-4 mt-3">
-                                            <p class="text-dark">BRI Virtual Account</p>
-                                        </div>
-                                    </label> --}}
                                     <div class="d-flex">
                                         <img src="{{asset('assets/img/bank-bri.svg')}}" width="100px" alt="">
                                         <div class="ms-4 mt-3">
@@ -269,7 +262,7 @@
                                 </div>
                             </div>
                         </div>
-                    
+
 
                     <span class="fw-semibold text-dark fs-4">E-Wallet</span>
 
@@ -328,8 +321,8 @@
                         </div>
                     </div>
 
-                </div> 
-                    
+                </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-rounded btn-light-danger text-danger"
@@ -343,7 +336,7 @@
 @endsection
 
 @section('script')
-    
+
 <script src="{{ asset('assets/dist/imageuploadify.min.js') }}"></script>
 
 <script>
@@ -353,7 +346,7 @@
 
     function selectCard(selectedCard) {
         var cards = document.querySelectorAll('.card-act');
-        
+
         cards.forEach(function(card) {
             card.classList.remove('active');
         });

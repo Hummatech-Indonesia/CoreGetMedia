@@ -250,13 +250,11 @@ Route::get('advertisement-biodata', function(){
 
 Route::get('advertisement-upload', [AdvertisementController::class, 'create'])->name('upload-advertisement');
 
-Route::get('detail-advertisemenet', function(){
-    return view('pages.user.advertisement.detail-advertisement');
-})->name('detail-advertisement');
+Route::get('detail-payment-advertisemenet/{advertisement}', [AdvertisementController::class, 'payment_advertisement'])->name('detail-payment-advertisement');
 
-Route::get('detail-payment-advertisement', function(){
+Route::get('detail-advertisement', function(){
     return view('pages.user.advertisement.detail-payment');
-})->name('detail-payment-advertisement');
+})->name('detail-advertisement');
 
 Route::post('create-advertisement', [AdvertisementController::class, 'store'])->name('create.advertisement');
 Route::put('update-advertisement/{advertisement}', [AdvertisementController::class, 'update'])->name('update.advertisement');
@@ -264,11 +262,8 @@ Route::delete('delete-advertisement/{advertisement}', [AdvertisementController::
 Route::put('cencel-advertisement/{advertisement}', [AdvertisementController::class, 'cancel'])->name('cancel.advertisement');
 
 Route::get('about-getmedia', [AboutGetController::class, 'index'])->name('about-getmedia.admin');
-
 Route::post('about-getmedia', [AboutGetController::class, 'store'])->name('about-getmedia.store');
-
 Route::put('about-getmedia/{about}', [AboutGetController::class, 'update'])->name('about-getmedia.update');
-
 
 Route::get('admin-account-list', [AdminController::class, 'index'])->name('admin-account.list.admin');
 Route::post('admin-account-list', [AdminController::class, 'store'])->name('admin-account.store');

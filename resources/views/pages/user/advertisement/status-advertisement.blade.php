@@ -71,6 +71,37 @@
     </div>
 </div>
 
+<div class="modal fade" id="modal-description" tabindex="-1" aria-labelledby="modal-reject Label">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal content -->
+            <div class="modal-header">
+                <h3 class="modal-title ms-2 mt-2">Detail penolakan</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="container">
+                    <div class="mb-3">
+                        <div>
+                            <h5 class="mb-3">Alasan Berita Anda Kami Tolak</h5>
+                        </div>
+                        <div class="d-flex">
+                            <p id="detail-description" cols="30" rows="10"></p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 col-lg-12">
+                        <div class="d-flex justify-content-end gap-2">
+                            <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Tutup</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="">
     <div class="d-flex justify-content-between">
         <ul class="nav nav-underline" id="myTab" role="tablist">
@@ -95,13 +126,10 @@
                 </a>
             </li>
         </ul>
-
         <a href="/advertisement-biodata" class="btn btn-primary justify-content-end">
             Unggah Iklan
         </a>
-
         <div>
-
         </div>
     </div>
     <div class="tab-content tabcontent-border p-3" id="myTabContent">
@@ -167,9 +195,15 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            @elseif ($all_advertisement->status == 'reject')
+                                            @elseif ($all_advertisement->status == 'reject' && $all_advertisement->feed == 'notpaid')
                                             <div class="d-flex justify-content-end">
                                                 <div class="text-md-right">
+                                                    <button data-description="{{ $all_advertisement->description }}" class="btn btn-sm btn-description m-1" style="background-color: #5D87FF;">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="20" viewBox="0 0 512 512">
+                                                            <path fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 0 0-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 0 0 0-17.47C428.89 172.28 347.8 112 255.66 112" />
+                                                            <circle cx="256" cy="256" r="80" fill="none" stroke="#ffffff" stroke-miterlimit="10" stroke-width="32" />
+                                                        </svg>
+                                                    </button>
                                                     <span class="badge bg-light-danger text-danger fs-4 px-3 py-2">
                                                         Ditolak
                                                     </span>
@@ -209,14 +243,14 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            @elseif ($all_advertisement->deleted_at != 'null')
+                                            {{-- @elseif ($all_advertisement->deleted_at != 'null')
                                             <div class="d-flex justify-content-end">
                                                 <div class="text-md-right">
                                                     <span class="badge bg-light-primary text-primary fs-4 px-4 py-2">
                                                         Draft
                                                     </span>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                             @endif
                                         </div>
 
@@ -232,7 +266,7 @@
                                                         <path fill="#ffffff" d="m12 12.708l-5.246 5.246q-.14.14-.344.15t-.364-.15t-.16-.354t.16-.354L11.292 12L6.046 6.754q-.14-.14-.15-.344t.15-.364t.354-.16t.354.16L12 11.292l5.246-5.246q.14-.14.345-.15q.203-.01.363.15t.16.354t-.16.354L12.708 12l5.246 5.246q.14.14.15.345q.01.203-.15.363t-.354.16t-.354-.16z" /></svg>
                                                 </button>
 
-                                                <a href="#" class="btn m-1 mt-5 text-white" style="background-color: #5D87FF;">
+                                                <a href="{{ route('detail-payment-advertisement', ['advertisement' => $all_advertisement->id]) }}" class="btn m-1 mt-5 text-white" style="background-color: #5D87FF;">
                                                     Lanjut Pembayaran
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
                                                         <path fill="#ffffff" d="m13.292 12l-4.6-4.6l.708-.708L14.708 12L9.4 17.308l-.708-.708z" /></svg>
@@ -838,5 +872,11 @@
             $('#form-cencel').attr('action', '/cencel-advertisement/' + id);
             $('#modal-cencel').modal('show');
         });
+
+        $('.btn-description').click(function() {
+            var description = $(this).data('description');
+            $('#modal-description').modal('show');
+            $('#detail-description').text(description);
+        })
     </script>
 @endsection

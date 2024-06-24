@@ -22,9 +22,12 @@ class FollowerRepository extends BaseRepository implements FollowerInterface
         return $this->model->query()->create($data);
     }
 
-    public function delete(mixed $id): mixed
+    public function delete($user_id, $author_id): mixed
     {
-        return $this->model->query()->findOrFail($id)->delete($id);
+        return $this->model->query()
+            ->where('user_id', $user_id)
+            ->where('author_id', $author_id)
+            ->delete();
     }
     public function update(mixed $id, array $data): mixed
     {

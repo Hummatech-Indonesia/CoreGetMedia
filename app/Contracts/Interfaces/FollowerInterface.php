@@ -6,9 +6,10 @@ use App\Contracts\Interfaces\Eloquent\GetInterface;
 use App\Contracts\Interfaces\Eloquent\StoreInterface;
 use App\Contracts\Interfaces\Eloquent\UpdateInterface;
 
-interface FollowerInterface extends GetInterface , StoreInterface , DeleteInterface , UpdateInterface
+interface FollowerInterface extends GetInterface , StoreInterface , UpdateInterface
 {
     public function where($column, $value);
     public function countWhere($column, $value);
+    public function delete($user_id, $author_id);
 }
 
