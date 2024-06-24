@@ -163,7 +163,7 @@
                 <div class="gambar-iklan">
                     <label class="form-label" for="preview">Preview</label>
                     <div class="">
-                        <img id="preview" style="object-fit: cover;" width="240" height="160" alt="">
+                        <img id="preview" style="object-fit: cover;" width="100%" height="160" alt="">
                     </div>
                 </div>
             </div>
