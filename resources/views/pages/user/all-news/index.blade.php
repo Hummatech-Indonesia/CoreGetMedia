@@ -324,7 +324,7 @@
                     </div>
                 </div>
 
-                <div class="sidebar-widget bg-transparent shadow-sm">
+                <div class="sidebar-widget" style="width: 450px">
                     <h3 class="sidebar-widget-title">Tag Populer</h3>
                     <ul class="tag-list list-style">
                     <li><a href="{{route('list-tag.user')}}">BUSINESS</a></li>
