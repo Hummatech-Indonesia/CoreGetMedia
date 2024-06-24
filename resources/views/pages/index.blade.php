@@ -135,6 +135,11 @@
     </div>
 </div>
 
+@if ($advertisement_tops)
+<div class="container-fluid mt-5 mb-5">
+    <img src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/'.$advertisement_tops->image : "CONTOHIKLAN.png") }}" width="100%" height="166px" style="object-fit: cover" alt="">
+</div>
+@endif
 
 @php
 $filteredPin = $newsPins->take(3);
@@ -151,153 +156,6 @@ $includeid = $displayedPopulars->merge($pin_id);
 $popular_down = $populars->whereNotIn('id', $includeid)->take(15);
 $popular_down_id = $popular_down->pluck('id');
 @endphp
-
-{{-- <div class="container-fluid pb-75">
-    <div class="news-col-wrap">
-        <div class="row">
-
-            <!-- Kolom Satu -->
-            <div class="news-col-one">
-                @forelse ($filteredCategoryPopulars as $key => $categoryPopular)
-                    @if ($loop->first)
-                        <div class="news-card-two">
-                            <div class="news-card-img">
-                                <img src="{{ asset('storage/' . $categoryPopular->image) }}" class="w-100" style="height: 250px; object-fit: cover;" alt="Image" />
-<a href="{{ route('categories.show.user', $categoryPopular->newsCategories[0]->category->slug) }}" class="news-cat">{{ $categoryPopular->newsCategories[0]->category->name }}</a>
-</div>
-<div class="news-card-info">
-    <h3><a href="{{ route('news.singlepost', ['news' => $categoryPopular->slug]) }}">{{ $categoryPopular->name }}</a></h3>
-    <ul class="news-metainfo list-style">
-        <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($categoryPopular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
-        <li><i class="fi fi-rr-eye"></i>{{ $categoryPopular->news_views_count }}x dilihat</li>
-    </ul>
-</div>
-</div>
-@else
-<div class="news-card-three">
-    <div class="news-card-img">
-        <img src="{{ asset('storage/' . $categoryPopular->image) }}" class="w-100" style="height: 120px; object-fit: cover;" alt="Image" />
-    </div>
-    <div class="news-card-info">
-        <a href="{{ route('categories.show.user', $categoryPopular->newsCategories[0]->category->slug) }}" class="news-cat">{{ $categoryPopular->newsCategories[0]->category->name }}</a>
-        <h3><a href="{{ route('news.singlepost', ['news' => $categoryPopular->slug]) }}">{{ $categoryPopular->name }}</a></h3>
-        <ul class="news-metainfo list-style">
-            <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($categoryPopular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
-            <li><i class="fi fi-rr-eye"></i>{{ $categoryPopular->news_views_count }}x dilihat</li>
-        </ul>
-    </div>
-</div>
-@endif
-@empty
-<div>
-    <div class="d-flex justify-content-center">
-        <div>
-            <img src="{{ asset('assets/img/no-data/empty.png') }}" width="200px" alt="">
-        </div>
-    </div>
-    <div class="text-center">
-        <h5>Tidak ada data</h5>
-    </div>
-</div>
-@endforelse
-</div>
-
-<!-- Kolom Dua -->
-<div class="news-col-two">
-    @forelse ($filteredPin as $key => $newsPin)
-    @if ($loop->first)
-    <div class="news-card-four">
-        <img src="{{ asset('storage/' . $newsPin->image) }}" class="w-100" style="height: 600px; object-fit: cover;" alt="Image" />
-        <div class="news-card-info">
-            <h3><a href="{{ route('news.singlepost', ['news' => $newsPin->slug]) }}">{{ $newsPin->name }}</a></h3>
-            <ul class="news-metainfo">
-                <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($newsPin->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
-                <li><i class="fi fi-rr-eye"></i>{{ $newsPin->news_views_count }}x dilihat</li>
-            </ul>
-        </div>
-    </div>
-    @else
-    <div class="news-card-five">
-        <div class="news-card-img">
-            <img src="{{ asset('storage/' . $newsPin->image) }}" class="w-100" style="height: 200px; object-fit: cover;" alt="Image" />
-            <a href="{{ route('categories.show.user', $newsPin->newsCategories[0]->category->slug) }}" class="news-cat">{{ $newsPin->newsCategories[0]->category->name }}</a>
-        </div>
-        <div class="news-card-info">
-            <h3><a href="{{ route('news.singlepost', ['news' => $newsPin->slug]) }}">{{ Illuminate\Support\Str::limit($newsPin->name, 60, '...') }}</a></h3>
-            <p>{!! Illuminate\Support\Str::limit($newsPin->description, 60, '...') !!}</p>
-            <ul class="news-metainfo">
-                <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($newsPin->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
-                <li><i class="fi fi-rr-eye"></i>{{ $newsPin->news_views_count }}x dilihat</li>
-            </ul>
-        </div>
-    </div>
-    @endif
-    @empty
-    <div>
-        <div class="d-flex justify-content-center">
-            <div>
-                <img src="{{ asset('assets/img/no-data/empty.png') }}" width="300px" alt="">
-            </div>
-        </div>
-        <div class="text-center">
-            <h5>Tidak ada data</h5>
-        </div>
-        @endforelse
-    </div>
-</div>
-<!-- Kolom Tiga -->
-<div class="news-col-three">
-    @php
-    $categoryRight_id = $filteredCategoryPopulars->pluck('id');
-    $includeid = $displayedPopulars->merge($categoryRight_id)->merge($pin_id);
-    $filteredCategory2Populars = $category2Populars->whereNotIn('id', $includeid)->take(5);
-    @endphp
-
-    @forelse ($filteredCategory2Populars as $key => $category2Popular)
-    @if ($loop->first)
-    <div class="news-card-two">
-        <div class="news-card-img">
-            <img src="{{ asset('storage/' . $category2Popular->image) }}" class="w-100" style="height: 250px; object-fit: cover;" alt="Image" />
-            <a href="{{ route('categories.show.user', $category2Popular->newsCategories[0]->category->slug) }}" class="news-cat">{{ $category2Popular->newsCategories[0]->category->name }}</a>
-        </div>
-        <div class="news-card-info">
-            <h3><a href="{{ route('news.singlepost', ['news' => $category2Popular->slug]) }}">{{ $category2Popular->name }}</a></h3>
-            <ul class="news-metainfo list-style">
-                <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($category2Popular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
-                <li><i class="fi fi-rr-eye"></i>{{ $category2Popular->news_views_count }}x dilihat</li>
-            </ul>
-        </div>
-    </div>
-    @else
-    <div class="news-card-three">
-        <div class="news-card-img">
-            <img src="{{ asset('storage/' . $category2Popular->image) }}" class="w-100" style="height: 120px; object-fit: cover;" alt="Image" />
-        </div>
-        <div class="news-card-info">
-            <a href="{{ route('categories.show.user', $category2Popular->newsCategories[0]->category->slug) }}" class="news-cat">{{ $category2Popular->newsCategories[0]->category->name }}</a>
-            <h3><a href="{{ route('news.singlepost', ['news' => $category2Popular->slug]) }}">{{ $category2Popular->name }}</a></h3>
-            <ul class="news-metainfo list-style">
-                <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($category2Popular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
-                <li><i class="fi fi-rr-eye"></i>{{ $category2Popular->news_views_count }}x dilihat</li>
-            </ul>
-        </div>
-    </div>
-    @endif
-    @empty
-    <div>
-        <div class="d-flex justify-content-center">
-            <div>
-                <img src="{{ asset('assets/img/no-data/empty.png') }}" width="200px" alt="">
-            </div>
-        </div>
-        <div class="text-center">
-            <h5>Tidak ada data</h5>
-        </div>
-    </div>
-    @endforelse
-</div>
-</div>
-</div> --}}
 
 
 <div class="container-fluid pb-4">
@@ -426,11 +284,6 @@ $popular_down_id = $popular_down->pluck('id');
         </div>
     </div>
 </div>
-
-
-{{-- <div class="">
-        iklan
-    </div> --}}
 
 <div class="container-fluid pb-75">
     @php
@@ -698,7 +551,7 @@ $popular_down_id = $popular_down->pluck('id');
 
                 @if ($advertisement_rights)
                 <div class="sidebar">
-                    <img src="{{asset($advertisement_rights && $advertisement_rights->image != null ? 'storage/'.$advertisement_rights->image : "default.png")}}" alt="">
+                    <img src="{{asset($advertisement_rights && $advertisement_rights->image != null ? 'storage/'.$advertisement_rights->image : "CONTOHIKLAN.png")}}" width="100%" height="473px" style="object-fit: cover" alt="">
                 </div>
                 @endif
 
@@ -795,6 +648,12 @@ $popular_down_id = $popular_down->pluck('id');
 <button type="button" id="backtotop" class="position-fixed text-center border-0 p-0">
     <i class="ri-arrow-up-line"></i>
 </button>
+
+@if ($advertisement_unders)
+<div class="container-fluid mt-5 mb-5">
+    <img src="{{ asset($advertisement_unders && $advertisement_unders->image != null ? 'storage/'.$advertisement_unders->image : "CONTOHIKLAN.png") }}" width="100%" height="295px" style="object-fit: cover" alt="">
+</div>
+@endif
 {{--
     <div class="modal fade" id="newsletter-popup" tabindex="-1" aria-labelledby="newsletter-popup" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl">

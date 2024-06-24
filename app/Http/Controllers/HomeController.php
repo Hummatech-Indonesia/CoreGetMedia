@@ -57,8 +57,12 @@ class HomeController extends Controller
         $advertisement_id = $advertisement->pluck('id');
 
         $advertisement_rights = $this->advertisements->wherePosition($advertisement_id, 'right');
+        $advertisement_lefts = $this->advertisements->wherePosition($advertisement_id, 'left');
+        $advertisement_tops = $this->advertisements->wherePosition($advertisement_id, 'top');
+        $advertisement_unders = $this->advertisements->wherePosition($advertisement_id, 'under');
+        $advertisement_mids = $this->advertisements->wherePosition($advertisement_id, 'mid');
 
-        return view('pages.index', compact('populars', 'categoryPopulars' ,'latests', 'category2Populars', 'tags', 'newsPins', 'popularCategories', 'categoriesPin', 'newsByCategory','advertisement_rights'));
+        return view('pages.index', compact('populars', 'categoryPopulars' ,'latests', 'category2Populars', 'tags', 'newsPins', 'popularCategories', 'categoriesPin', 'newsByCategory','advertisement_rights', 'advertisement_lefts', 'advertisement_tops', 'advertisement_unders', 'advertisement_mids'));
     }
 
     public function navbar(Request $request){

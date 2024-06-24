@@ -60,19 +60,36 @@ class AdvertisementRepository extends BaseRepository implements AdvertisementInt
     {
         return $this->model->query()
         ->where('status', AdvertisementEnum::ACCEPTED->value)
+        ->where('feed', AdvertisementEnum::PAID)
         ->whereDate('start_date', '<=', now())
         ->whereDate('end_date', '>=', now())
         ->when($query == 'right', function($q){
             $q
             ->where('position', AdvertisementEnum::RIGHT->value)
-            ->where('feed', AdvertisementEnum::PAID)
             ->inRandomOrder()
             ->take(1);
         })
         ->when($query == 'left', function($q){
             $q
             ->where('position', AdvertisementEnum::LEFT->value)
-            ->where('feed', AdvertisementEnum::PAID)
+            ->inRandomOrder()
+            ->take(1);
+        })
+        ->when($query == 'top', function($q){
+            $q
+            ->where('position', AdvertisementEnum::TOP->value)
+            ->inRandomOrder()
+            ->take(1);
+        })
+        ->when($query == 'under', function($q){
+            $q
+            ->where('position', AdvertisementEnum::UNDER->value)
+            ->inRandomOrder()
+            ->take(1);
+        })
+        ->when($query == 'mid', function($q){
+            $q
+            ->where('position', AdvertisementEnum::MID->value)
             ->inRandomOrder()
             ->take(1);
         })
