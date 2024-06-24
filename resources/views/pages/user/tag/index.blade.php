@@ -64,16 +64,19 @@
     <div class="container">
         <div class="row gx-55 gx-5">
             <div class="col-lg-8">
+                @if ($news_tags->isNotEmpty())
                 <div class="">
                     @forelse ($news_tags as $item)
                     <div class="news-card-four" style="height: 550px;">
                         <div class="news-card-img">
-                            <a href="{{ route('news.singlepost', ['news' => $item->slug]) }}"> <img src="{{asset('storage/' . $item->image)}}" alt="Image"
-                                    width="100%" style="object-fit: cover" height="450" /></a>
+                            <a href="{{ route('news.singlepost', ['news' => $item->slug]) }}"> <img
+                                    src="{{asset('storage/' . $item->image)}}" alt="Image" width="100%"
+                                    style="object-fit: cover" height="450" /></a>
                         </div>
 
                         <div class="news-card-info">
-                            <h3><a href="{{ route('news.singlepost', ['news' => $item->slug]) }}" data-toggle="tooltip" data-placement="top"
+                            <h3><a href="{{ route('news.singlepost', ['news' => $item->slug]) }}" data-toggle="tooltip"
+                                    data-placement="top"
                                     title="Apex Legends Season 11 Start Date, Time, & What To Expect" href="#">{!!
                                     Illuminate\Support\Str::limit(strip_tags($item->name), 300, '...') !!}
                                 </a>
@@ -101,10 +104,11 @@
                         </div>
                     </div>
                     @endforelse
-
                 </div>
+                @endif
 
 
+                @if ($newsTags->isNotEmpty())
                 <div class="mb-5">
                     <div class="d-flex justify-content-between mb-3 mt-3">
                         <h3>Terbaru</h3>
@@ -121,8 +125,8 @@
                     @forelse ($newsTags as $data)
                     <div class="news-card-five">
                         <div class="news-card-img">
-                            <a href="{{ route('news.singlepost', ['news' => $data->slug]) }}"><img src="{{asset('storage/' . $data->image)}}" alt="Image"
-                                    class="img-all" /></a>
+                            <a href="{{ route('news.singlepost', ['news' => $data->slug]) }}"><img
+                                    src="{{asset('storage/' . $data->image)}}" alt="Image" class="img-all" /></a>
                             <a data-toggle="tooltip" data-placement="top" title="Sports" href="#"
                                 class="news-cat">{{ $data->newsCategories[0]->category->name }}</a>
                         </div>
@@ -156,12 +160,14 @@
                     </div>
                     @endforelse
                 </div>
+                @endif
                 <x-paginator :paginator="$newsTags" />
             </div>
 
             <div class="col-lg-4">
                 <div class="">
                     <div class="sidebar">
+                        @if ($CategoryPopulars->isNotEmpty())
                         <div class="sidebar-widget" style="width: 450px">
                             <h3 class="sidebar-widget-title">Kategori Populer</h3>
                             <ul class="category-widget list-style">
@@ -171,35 +177,73 @@
                                             src="{{ asset('assets/img/icons/arrow-right.svg') }}"
                                             alt="Image">{{ $category->name }}
                                         <span>({{ $category->news_categories_count }})</span></a></li>
+                                @empty
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-center">
+                                        <div>
+                                            <img src="{{ asset('assets/img/no-data/empty.png') }}" width="150px" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <h5>Tidak ada data</h5>
+                                    </div>
+                                </div>
                                 @endforeach
                             </ul>
                         </div>
+                        @endif
+                    </div>
 
-                        <div class="sidebar-widget" style="width: 450px">
-                            <h3 class="sidebar-widget-title">
-                                Berita Popular
-                            </h3>
-                            @forelse ($trendings as $trending)
-                            <div class="news-card-three">
-                                <div class="news-card-img" style="height: 100px; width: 100px">
-                                    <img src="{{ asset('storage/' . $trending->image) }}" alt="Image"
-                                        class="img-popular" />
-                                </div>
-                                <div class="news-card-info">
-                                    <h3>
-                                        <a href="{{ route('news.singlepost', ['news' => $trending->slug]) }}">
-                                            {{ Illuminate\Support\Str::limit($trending->name, 45, '...') }}
-                                        </a>
-                                    </h3>
 
-                                    <ul class="news-metainfo list-style d-flex">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html"
-                                                style="font-size: 15px;">15 Apr 2023</a></li>
-                                        <li><i class="fi fi-rr-eye"></i><a href="news-by-dateus"
-                                                style="font-size: 15px;">10</a></li>
-                                    </ul>
+                    @if ($trendings->isNotEmpty())
+                    <div class="sidebar-widget" style="width: 450px">
+                        <h3 class="sidebar-widget-title">
+                            Berita Popular
+                        </h3>
+                        @forelse ($trendings as $trending)
+                        <div class="news-card-three">
+                            <div class="news-card-img" style="height: 100px; width: 100px">
+                                <img src="{{ asset('storage/' . $trending->image) }}" alt="Image" class="img-popular" />
+                            </div>
+                            <div class="news-card-info">
+                                <h3>
+                                    <a href="{{ route('news.singlepost', ['news' => $trending->slug]) }}">
+                                        {{ Illuminate\Support\Str::limit($trending->name, 45, '...') }}
+                                    </a>
+                                </h3>
+
+                                <ul class="news-metainfo list-style d-flex">
+                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html"
+                                            style="font-size: 15px;">15 Apr 2023</a></li>
+                                    <li><i class="fi fi-rr-eye"></i><a href="news-by-dateus"
+                                            style="font-size: 15px;">10</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        @empty
+                        <div class="col-12">
+                            <div class="d-flex justify-content-center">
+                                <div>
+                                    <img src="{{ asset('assets/img/no-data/empty.png') }}" width="150px" alt="">
                                 </div>
                             </div>
+                            <div class="text-center">
+                                <h5>Tidak ada data</h5>
+                            </div>
+                        </div>
+                        @endforelse
+                    </div>
+                    @endif
+
+
+                    @if ($popularTags->isNotEmpty())
+                    <div class="sidebar-widget" style="width: 450px">
+                        <h3 class="sidebar-widget-title">Tag Populer</h3>
+                        <ul class="tag-list list-style">
+                            @forelse ($popularTags as $popularTag)
+                            <li><a
+                                    href="{{route('news-tag-list.user', ['tag' => $popularTag->slug])}}">{{ $popularTag->name }}</a>
+                            </li>
                             @empty
                             <div class="col-12">
                                 <div class="d-flex justify-content-center">
@@ -212,33 +256,13 @@
                                 </div>
                             </div>
                             @endforelse
-                        </div>
-
-                        <div class="sidebar-widget" style="width: 450px">
-                            <h3 class="sidebar-widget-title">Tag Populer</h3>
-                            <ul class="tag-list list-style">
-                                @forelse ($popularTags as $popularTag)
-                                <li><a
-                                        href="{{route('news-tag-list.user', ['tag' => $popularTag->slug])}}">{{ $popularTag->name }}</a>
-                                </li>
-                                @empty
-                                <div class="col-12">
-                                    <div class="d-flex justify-content-center">
-                                        <div>
-                                            <img src="{{ asset('assets/img/no-data/empty.png') }}" width="150px" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="text-center">
-                                        <h5>Tidak ada data</h5>
-                                    </div>
-                                </div>
-                                @endforelse
-                            </ul>
-                        </div>
+                        </ul>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 @endsection
