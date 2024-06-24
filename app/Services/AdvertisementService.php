@@ -103,6 +103,7 @@ class AdvertisementService
         ];
     }
 
+    
     public function reject(Request $request)
     {
         $validatedData = $request->validate([
