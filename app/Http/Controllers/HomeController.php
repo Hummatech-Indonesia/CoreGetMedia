@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Interfaces\AdvertisementInterface;
 use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\FaqInterface;
 use App\Contracts\Interfaces\NewsInterface;
@@ -18,8 +19,9 @@ class HomeController extends Controller
     private SubCategoryInterface $subCategories;
     private PopularInterface $populars;
     private TagInterface $tags;
+    private AdvertisementInterface $advertisements;
 
-    public function __construct(NewsInterface $news, FaqInterface $faqs, CategoryInterface $categories, SubCategoryInterface $subCategories, PopularInterface $populars, TagInterface $tags)
+    public function __construct(NewsInterface $news, FaqInterface $faqs, CategoryInterface $categories, SubCategoryInterface $subCategories, PopularInterface $populars, TagInterface $tags, AdvertisementInterface $advertisements)
     {
         $this->faqs = $faqs;
         $this->categories = $categories;
@@ -27,6 +29,7 @@ class HomeController extends Controller
         $this->populars = $populars;
         $this->news = $news;
         $this->tags = $tags;
+        $this->advertisements = $advertisements;
     }
 
     public function index(){
@@ -50,7 +53,12 @@ class HomeController extends Controller
             $newsByCategory[$category->name] = $this->news->news_by_category($category->name);
         }
 
-        return view('pages.index', compact('populars', 'categoryPopulars' ,'latests', 'category2Populars', 'tags', 'newsPins', 'popularCategories', 'categoriesPin', 'newsByCategory'));
+        $advertisement = $this->advertisements->get();
+        $advertisement_id = $advertisement->pluck('id');
+
+        $advertisement_rights = $this->advertisements->wherePosition($advertisement_id, 'right');
+
+        return view('pages.index', compact('populars', 'categoryPopulars' ,'latests', 'category2Populars', 'tags', 'newsPins', 'popularCategories', 'categoriesPin', 'newsByCategory','advertisement_rights'));
     }
 
     public function navbar(Request $request){

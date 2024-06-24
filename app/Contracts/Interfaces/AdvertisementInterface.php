@@ -12,4 +12,5 @@ interface AdvertisementInterface extends GetInterface, StoreInterface, UpdateInt
 {
     public function where($user_id, $status) : mixed;
     public function whereAccepted() : mixed;
+    public function wherePosition($advertisement,$query): mixed;
 }
