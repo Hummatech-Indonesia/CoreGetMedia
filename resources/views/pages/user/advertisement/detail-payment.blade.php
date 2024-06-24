@@ -116,6 +116,7 @@
                 </div>
             </div>
         </div>
+
         <div class="col-md-12 col-lg-5">
             <div class="card">
                 <div class="card-header py-2 d-flex justify-content-center" style="background-color: #175A95">
@@ -186,9 +187,15 @@
                     <div class="d-flex mt-4 justify-content-between">
                         <p class="fw-semibold">Status</p>
                         <div>
-                            <span class="badge ms-2 px-3 bg-light-success text-success">
-                                Sudah Bayar
-                            </span>
+                            @if ($data->feed == 'paid')            
+                                <span class="badge ms-2 px-3 bg-light-success text-success">
+                                    Sudah Bayar
+                                </span>
+                            @elseif ($data->feed == 'notpaid')
+                                <span class="badge ms-2 px-3 bg-light-danger text-danger">
+                                    Belum Bayar
+                                </span>
+                            @endif
                         </div>
                     </div>
 

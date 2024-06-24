@@ -48,8 +48,7 @@ class AdvertisementController extends Controller
     public function list_advertisement()
     {
         $data = $this->advertisement->where(null, 'accepted');
-        $data2 = $this->advertisement->where(null, 'published');
-        return view('pages.admin.advertisement.advertisement-list', compact('data', 'data2'));
+        return view('pages.admin.advertisement.advertisement-list', compact('data'));
     }
 
     public function detail_admin(Advertisement $advertisement)
@@ -75,7 +74,7 @@ class AdvertisementController extends Controller
     {
         $data = $this->service->store($request);
         $this->advertisement->store($data);
-        return back()->with('success', 'Berhasil mengupload iklan');
+        return redirect('/status-advertisement-list')->with('success', 'Berhasil mengupload iklan');
     }
 
     public function draft(StoreAdvertisementRequest $request)
@@ -117,7 +116,7 @@ class AdvertisementController extends Controller
         $data['feed'] = StatusEnum::PENDING->value;
         $data['description'] = null;
         $this->advertisement->update($advertisement->id, $data);
-        return back()->with('success', 'Berhasil mengupdate iklan');
+        return redirect('/status-advertisement-list')->with('success', 'Berhasil mengupdate iklan');
     }
 
     public function accepted(Request $request, Advertisement $advertisement)
@@ -127,14 +126,22 @@ class AdvertisementController extends Controller
             'feed' => StatusEnum::NOTPAID->value,
             'price' => $request->price,
         ]);
-        return back()->with('success', 'Berhasil menerima iklan');
+        return redirect('/confirm-advertisement')->with('success', 'Berhasil menerima iklan');
     }
+    
+    public function detail_accepted(Advertisement $advertisement)
+    {
+        $data = $this->advertisement->show($advertisement->id);
+        return view('pages.user.advertisement.detail-payment', compact('data'));
+    }
+
+
 
     public function rejected(Request $request, Advertisement $advertisement)
     {
         $data = $this->service->reject($request);
         $this->advertisement->update($advertisement->id, $data);
-        return back()->with('success', 'Berhasil menolak iklan');
+        return redirect('/confirm-advertisement')->with('success', 'Berhasil menolak iklan');
     }
 
     public function payment_advertisement(Advertisement $advertisement)
