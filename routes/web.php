@@ -98,9 +98,7 @@ Route::get('singlepost/news', function () {
     return view('pages.user.singlepost.index');
 })->name('singlepost.news');
 
-Route::get('advertisement-list', function () {
-    return view('pages.admin.advertisement.advertisement-list');
-})->name(('advertisement-list.admin'));
+Route::get('advertisement-list', [AdvertisementController::class, 'list_advertisement'])->name(('advertisement-list.admin'));
 
 Route::get('confirm-advertisement', [AdvertisementController::class, 'list_confirm'])->name('confirm-advertisement.admin');
 Route::get('detail-advertisement/{advertisement}', [AdvertisementController::class, 'detail_admin'])->name('detail-advertisement.admin');

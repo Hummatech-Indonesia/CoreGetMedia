@@ -24,7 +24,7 @@ return new class extends Migration
             $table->enum('page', [AdvertisementEnum::HOME->value, AdvertisementEnum::SINGLEPOST->value, AdvertisementEnum::CATEGORY->value, AdvertisementEnum::SUBCATEGORY->value, AdvertisementEnum::ALLNEWS->value]);
             $table->enum('position', [AdvertisementEnum::TOP->value, AdvertisementEnum::UNDER->value, AdvertisementEnum::MID->value, AdvertisementEnum::RIGHT->value, AdvertisementEnum::LEFT->value]);
             $table->string('price')->nullable();
-            $table->enum('feed', [StatusEnum::PENDING->value, StatusEnum::NOTPAID->value, StatusEnum::PAID->value, StatusEnum::CANCELED->value])->default(StatusEnum::PENDING->value);
+            $table->enum('feed', [StatusEnum::PENDING->value, StatusEnum::NOTPAID->value, StatusEnum::PAID->value, StatusEnum::CANCELED->value, StatusEnum::PUBLISHED->value])->default(StatusEnum::PENDING->value);
             $table->enum('status', [StatusEnum::PENDING->value, StatusEnum::REJECT->value, StatusEnum::ACCEPTED->value, StatusEnum::PUBLISHED->value, StatusEnum::CANCELED->value])->default(StatusEnum::PENDING->value);
             $table->text('description')->nullable();
             $table->softDeletes();
