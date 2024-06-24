@@ -15,7 +15,6 @@ class ProfileController extends Controller
 {
     private UserInterface $user;
     private AuthorInterface $author;
-
     private UserService $service;
 
     public function __construct(UserInterface $user, AuthorInterface $author, UserService $service)

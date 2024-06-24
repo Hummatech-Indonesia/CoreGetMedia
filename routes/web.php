@@ -251,7 +251,7 @@ Route::get('advertisement-biodata', function(){
     return view('pages.user.advertisement.biodata-advertisement');
 })->name('biodata-advertisement');
 
-Route::get('advertisement-upload', [AdvertisementController::class, 'create'])->name('upload-advertisement');
+Route::put('advertisement-upload/{user}', [AdvertisementController::class, 'create'])->name('upload-advertisement');
 
 Route::get('detail-payment-advertisemenet/{advertisement}', [AdvertisementController::class, 'payment_advertisement'])->name('detail-payment-advertisement');
 

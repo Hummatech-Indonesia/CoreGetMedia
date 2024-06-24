@@ -10,59 +10,59 @@
                 </svg>
             </div>
             <div class="col-lg-7 col-8">
-                <h4 class="fw-semibold mb-3 mb-lg-0" style="color: #175A95;">Pengajuan Berita</h4>
-                <p class="mb-0" style="color: #175A95;">proses pengunggahan berita ada biaya yang dikenakan untuk memuat konten tersebut. Harap dipertimbangkan dan disiapkan sebelum melanjutkan</p>
+                <h4 class="fw-semibold mb-3 mb-lg-0" style="color: #175A95;">Pengajuan Iklan</h4>
+                <p class="mb-0" style="color: #175A95;">Proses pengunggahan iklan ada biaya yang dikenakan untuk memuat konten tersebut. Harap dipertimbangkan dan disiapkan sebelum melanjutkan</p>
             </div>
         </div>
     </div>
 </div>
 
-<div class="d-flex justify-content-between mb-3">
-    <div class="">
-        <h4 class="">Biodata</h4>
-    </div>
-    
-
-    <div class="">
-        <a href="{{ route('upload-advertisement') }}" class="btn btn-md px-3 text-white" style="background-color: #175A95">
-            Selanjutnya
-        </a>
-    </div>
-</div>
-
-<div class="card p-4 pb-5">
-    <h5 class="mt-2 text-black">Pastikan biodata di isi dengan tepat</h5>
-
-    <div class="row mt-4">
-        <div class="col-md-12 col-lg-6 mb-5">
-            <label class="form-label" for="nomor">Nama Lengkap</label>
-            <input type="text" id="name" name="name" placeholder="nama" value="{{ auth()->user()->name }}" class="form-control @error('name') is-invalid @enderror" readonly>
-            @error('name')
-            <span class="invalid-feedback" role="alert" style="color: red;">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
+<form action="{{ route('upload-advertisement', auth()->user()->id) }}" method="post">
+    @csrf
+    @method('PUT')
+    <div class="d-flex justify-content-between mb-3">
+        <div class="">
+            <h4 class="">Pengsian data diri</h4>
         </div>
-        <div class="col-md-12 col-lg-6 mb-5">
-            <label class="form-label" for="nomor">Email</label>
-            <input type="text" id="name" name="name" placeholder="email" value="{{ auth()->user()->email }}" class="form-control @error('name') is-invalid @enderror" readonly>
-            @error('name')
-            <span class="invalid-feedback" role="alert" style="color: red;">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
-        </div>
-        <div class="col-md-12 col-lg-6 mb-5">
-            <label class="form-label" for="nomor">Nomor Telepon</label>
-            <input type="text" id="name" name="name" placeholder="nomor telepon" value="{{ auth()->user()->phone_number }}" class="form-control @error('name') is-invalid @enderror" readonly>
-            @error('name')
-            <span class="invalid-feedback" role="alert" style="color: red;">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
+
+        <div class="">
+            <button type="submit" class="btn btn-md px-3 text-white" style="background-color: #175A95">Selanjutnya</button>
         </div>
     </div>
 
-</div>
+    <div class="card p-4 pb-5">
+        <h3 style="font-size: 25px; color: #000;" class="mb-0 pb-0 text-black">Biodata</h3>
+        <h5 class="mt-2 text-black">Pastikan biodata terisi dengan benar</h5>
+        <div class="row mt-4">
+            <div class="col-md-12 col-lg-6 mb-5">
+                <label class="form-label" for="nomor">Nama Lengkap</label>
+                <input type="text" id="name" name="name" placeholder="nama" value="{{ auth()->user()->name }}" class="form-control @error('name') is-invalid @enderror" {{ auth()->user()->name ? 'readonly' : '' }}>
+                @error('name')
+                <span class="invalid-feedback" role="alert" style="color: red;">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+            <div class="col-md-12 col-lg-6 mb-5">
+                <label class="form-label" for="nomor">Email</label>
+                <input type="text" id="email" name="email" placeholder="email" value="{{ auth()->user()->email }}" class="form-control @error('email') is-invalid @enderror" {{ auth()->user()->email ? 'readonly' : '' }}>
+                @error('email')
+                <span class="invalid-feedback" role="alert" style="color: red;">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+            <div class="col-md-12 col-lg-6 mb-5">
+                <label class="form-label" for="nomor">Nomor Telepon</label>
+                <input type="text" id="phone_number" name="phone_number" placeholder="nomor telepon" value="{{ auth()->user()->phone_number }}" class="form-control @error('phone_number') is-invalid @enderror" {{ auth()->user()->phone_number ? 'readonly' : '' }}>
+                @error('phone_number')
+                <span class="invalid-feedback" role="alert" style="color: red;">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+        </div>
 
+    </div>
+</form>
 @endsection

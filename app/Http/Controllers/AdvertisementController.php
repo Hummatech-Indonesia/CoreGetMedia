@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\AdvertisementInterface;
 use App\Contracts\Interfaces\PositionAdvertisementInterface;
+use App\Contracts\Interfaces\UserInterface;
 use App\Enums\StatusEnum;
 use App\Models\Advertisement;
 use App\Http\Requests\StoreAdvertisementRequest;
+use App\Http\Requests\StoreBiodataAdvertisementRequest;
 use App\Http\Requests\UpdateAdvertisementRequest;
 use App\Models\PositionAdvertisement;
+use App\Models\User;
 use App\Services\AdvertisementService;
 use Illuminate\Http\Request;
 
@@ -17,12 +20,14 @@ class AdvertisementController extends Controller
     private AdvertisementInterface $advertisement;
     private PositionAdvertisementInterface $position;
     private AdvertisementService $service;
+    private UserInterface $user;
 
-    public function __construct(AdvertisementInterface $advertisement, PositionAdvertisementInterface $position, AdvertisementService $service)
+    public function __construct(UserInterface $user, AdvertisementInterface $advertisement, PositionAdvertisementInterface $position, AdvertisementService $service)
     {
         $this->advertisement = $advertisement;
         $this->position = $position;
         $this->service = $service;
+        $this->user = $user;
     }
 
     /**
@@ -62,8 +67,9 @@ class AdvertisementController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(StoreBiodataAdvertisementRequest $request, User $user)
     {
+        $this->user->update(auth()->user()->id, $request->validated());
         $posisi = $this->position->get();
         return view('pages.user.advertisement.upload-advertisemenet', compact('posisi'));
     }
