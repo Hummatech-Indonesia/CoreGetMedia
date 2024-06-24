@@ -1,4 +1,4 @@
-@extends('layouts.user.sidebar')
+@extends(auth()->user()->hasRole('author') ? 'layouts.author.app' : 'layouts.user.sidebar')
 
 @section('style')
 <style>
