@@ -276,9 +276,6 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    {{-- <a type="button" id="open-cv" target="_blank" download class="btn btn-light-primary text-primary me-2 fs-4 px-2 py-2">
-                        Lihat CV
-                    </a> --}}
                     @if (file_exists(public_path('storage/' . $author->cv)))
                     <a href="{{ asset('storage/' . $author->cv) }}" target="_blank" class="btn btn-light-primary text-primary me-2 fs-4 px-2 py-2">Lihat CV</a>
                     @else
@@ -401,19 +398,6 @@
 </script>
 
 <script>
-    // document.getElementById('open-cv').addEventListener('click', function() {
-    //     window.open('path/to/your_cv.pdf', '_blank');
-    // });
-
-    // document.getElementById('download-cv').addEventListener('click', function() {
-    //     const link = document.createElement('a');
-    //     link.href = '{{ asset("storage/" . $author->cv) }}';
-    //     link.download = '{{ $author->cv }}';
-    //     document.body.appendChild(link);
-    //     link.click();
-    //     document.body.removeChild(link);
-    // });
-
     $(document).ready(function() {
         let cvPath = $('.btn-download').data('task');
         $('#open-cv').attr('href', cvPath);
