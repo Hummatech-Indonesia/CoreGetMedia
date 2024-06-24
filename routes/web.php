@@ -20,6 +20,7 @@ use App\Http\Controllers\NewsLikeController;
 use App\Http\Controllers\PositionAdvertisementController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SitemapController;
+use App\Models\Advertisement;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -255,9 +256,7 @@ Route::put('advertisement-upload/{user}', [AdvertisementController::class, 'crea
 
 Route::get('detail-payment-advertisemenet/{advertisement}', [AdvertisementController::class, 'payment_advertisement'])->name('detail-payment-advertisement');
 
-Route::get('detail-advertisement', function(){
-    return view('pages.user.advertisement.detail-payment');
-})->name('detail-advertisement');
+Route::get('detail-advertisement-accepted/{advertisement}', [AdvertisementController::class, 'detail_accepted'])->name('detail-advertisement');
 
 Route::post('create-advertisement', [AdvertisementController::class, 'store'])->name('create.advertisement');
 Route::put('update-advertisement/{advertisement}', [AdvertisementController::class, 'update'])->name('update.advertisement');

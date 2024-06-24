@@ -285,7 +285,7 @@
                                             </div>
                                         @elseif ($all_advertisement->status == 'pending' || $all_advertisement->status == 'reject')
                                             <div class="d-flex justify-content-end">
-                                                <a href="{{ route('detail-advertisement') }}" class="btn btn-sm m-1 mt-5" style="background-color: #5D87FF;">
+                                                <a href="{{ route('detail-advertisement', [$all_advertisement->id]) }}" class="btn btn-sm m-1 mt-5" style="background-color: #5D87FF;">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512">
                                                         <path fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 0 0-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 0 0 0-17.47C428.89 172.28 347.8 112 255.66 112" />
                                                         <circle cx="256" cy="256" r="80" fill="none" stroke="#ffffff" stroke-miterlimit="10" stroke-width="32" />
@@ -499,7 +499,7 @@
                         </div>
 
                         <div class="d-flex justify-content-end">
-                            <a href="{{ route('detail-advertisement') }}" class="btn btn-sm m-1 mt-5"
+                            <a href="{{ route('detail-advertisement', [$all_advertisement->id]) }}" class="btn btn-sm m-1 mt-5"
                                 style="background-color: #5D87FF;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512">
                                     <path fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round"
@@ -599,6 +599,12 @@
                         <div class="d-flex justify-content-end gap-2">
                             <div class="d-flex justify-content-end">
                                 <div class="text-md-right">
+                                    <button data-description="{{ $reject_advertisement->description }}" class="btn btn-sm btn-description m-1" style="background-color: #5D87FF;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="20" viewBox="0 0 512 512">
+                                            <path fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 0 0-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 0 0 0-17.47C428.89 172.28 347.8 112 255.66 112" />
+                                            <circle cx="256" cy="256" r="80" fill="none" stroke="#ffffff" stroke-miterlimit="10" stroke-width="32" />
+                                        </svg>
+                                    </button>
                                     <span class="badge bg-light-danger text-danger fs-4 px-3 py-2">
                                         Ditolak
                                     </span>
@@ -611,7 +617,7 @@
                         </div>
 
                         <div class="d-flex justify-content-end">
-                            <a href="{{ route('detail-advertisement') }}" class="btn btn-sm m-1 mt-5"
+                            <a href="{{ route('detail-advertisement', ['advertisement' => $all_advertisement->id]) }}" class="btn btn-sm m-1 mt-5"
                                 style="background-color: #5D87FF;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512">
                                     <path fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round"
@@ -766,6 +772,12 @@ $('.btn-cencel').on('click', function() {
     var id = $(this).data('id');
     $('#form-cencel').attr('action', '/cencel-advertisement/' + id);
     $('#modal-cencel').modal('show');
+});
+
+$('.btn-description').on('click', function() {
+    var description = $(this).data('description');
+    $('#modal-description').modal('show');
+    $('#detail-description').text(description);
 });
 </script>
 @endsection
