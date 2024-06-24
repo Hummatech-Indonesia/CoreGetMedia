@@ -53,10 +53,6 @@ class AdvertisementService
 
         $new_photo = $this->upload(UploadDiskEnum::ADVERTISEMENT->value, $request->image);
 
-        $priceData = PositionAdvertisement::where('page', $data['page'])
-            ->where('position', $data['position'])
-            ->first();
-
         return [
             'user_id' => auth()->user()->id,
             'image' => $new_photo,
@@ -65,8 +61,7 @@ class AdvertisementService
             'type' => $data['type'],
             'page' => $data['page'],
             'position' => $data['position'],
-            'url' => $data['url'],
-            'price' => $priceData->price
+            'url' => $data['url']
         ];
     }
 
@@ -96,10 +91,6 @@ class AdvertisementService
             $advertisement->image = $new_photo;
         }
 
-        $priceData = PositionAdvertisement::where('page', $data['page'])
-            ->where('position', $data['position'])
-            ->first();
-
         return [
             'user_id' => auth()->user()->id,
             'image' => $new_photo ? $new_photo : $old_photo,
@@ -109,7 +100,6 @@ class AdvertisementService
             'page' => $data['page'],
             'position' => $data['position'],
             'url' => $data['url'],
-            'price' => $priceData->price
         ];
     }
 

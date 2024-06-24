@@ -75,7 +75,7 @@ class AdvertisementController extends Controller
     {
         $data = $this->service->store($request);
         $this->advertisement->store($data);
-        return redirect('/')->with('success', 'Berhasil mengupload iklan');
+        return back()->with('success', 'Berhasil mengupload iklan');
     }
 
     public function draft(StoreAdvertisementRequest $request)
@@ -124,7 +124,8 @@ class AdvertisementController extends Controller
     {
         $this->advertisement->update($advertisement->id, [
             'status' => StatusEnum::ACCEPTED->value,
-            'feed' => StatusEnum::NOTPAID->value
+            'feed' => StatusEnum::NOTPAID->value,
+            'price' => $request->price,
         ]);
         return back()->with('success', 'Berhasil menerima iklan');
     }
