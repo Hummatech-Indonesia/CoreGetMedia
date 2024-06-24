@@ -82,4 +82,11 @@ class PositionAdvertisementReporitory extends BaseRepository implements Position
             ->findOrFail($id)
             ->update($data);
     }
+
+    public function getByPage (mixed $page)
+    {
+        return $this->model->query()
+        ->where('page', $page)
+        ->get();
+    }
 }

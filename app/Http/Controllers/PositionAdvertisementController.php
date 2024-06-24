@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\AdvertisementEnum;
 use App\Models\PositionAdvertisement;
 use App\Http\Requests\StorePositionAdvertisementRequest;
 use App\Http\Requests\UpdatePositionAdvertisementRequest;
@@ -23,7 +24,17 @@ class PositionAdvertisementController extends Controller
      */
     public function index()
     {
-        //
+        $home = $this->positionAdvertisement->getByPage(AdvertisementEnum::HOME->value);
+        $singlepost = $this->positionAdvertisement->getByPage(AdvertisementEnum::SINGLEPOST->value);
+        $categories = $this->positionAdvertisement->getByPage(AdvertisementEnum::CATEGORY->value);
+        $subcategories = $this->positionAdvertisement->getByPage(AdvertisementEnum::SUBCATEGORY->value);
+        $allnews = $this->positionAdvertisement->getByPage(AdvertisementEnum::ALLNEWS->value);
+
+
+
+
+        return view('pages.admin.advertisement.set-price', compact('home', 'singlepost', 'categories', 'subcategories','allnews'));
+
     }
 
     /**
@@ -31,7 +42,7 @@ class PositionAdvertisementController extends Controller
      */
     public function create()
     {
-        //  
+        //
     }
 
     /**
