@@ -68,7 +68,7 @@
     <h5>Baca ketentuan dan persyaratan sembelum mengunggah berita</h5>
 </div> --}}
 
-<form action="{{ route('store.news') }}" method="post" enctype="multipart/form-data">
+<form id="myForm" action="{{ route('store.news') }}" method="post" enctype="multipart/form-data">
     @method('post')
     @csrf
     <div class="ms-1 mt-5 mb-2 d-flex justify-content-between">
@@ -201,6 +201,9 @@
         <button type="submit" class="btn btn-primary m-2" id="submitButton1">
             Upload
         </button>
+        <button type="submit" class="btn btn-primary m-2" id="submitButton2">
+            Draft
+        </button>
     </div>
     </div>
 </form>
@@ -332,6 +335,18 @@ var minutes = ('0' + today.getMinutes()).slice(-2);
 
 var formattedDate = year + '-' + month + '-' + day + 'T' + hours + ':' + minutes;
 document.getElementById('upload_date').value = formattedDate;
+
+var form = document.getElementById('myForm');
+var submitButton1 = document.getElementById('submitButton1');
+var submitButton2 = document.getElementById('submitButton2');
+
+submitButton1.addEventListener('click', function() {
+    form.action = "{{ route('store.news') }}";
+});
+
+submitButton2.addEventListener('click', function() {
+    form.action = "{{ route('news.draft') }}";
+});
 
 $(".tags").select2({
     tags: true,

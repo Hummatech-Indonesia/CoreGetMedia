@@ -2,7 +2,85 @@
 
 @section('style')
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     <link rel="stylesheet" href="{{ asset('assets/dist/imageuploadify.min.css') }}">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        $(document).ready(function() {
+        // Function to preview the uploaded image
+        function previewImage(event) {
+            var input = event.target;
+            if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#image-preview').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // Function to validate the image dimensions
+        function validateImageDimensions() {
+            var imageInput = $('#photo');
+            var selectedPosition = $('input[name="position"]:checked').val();
+            var image = imageInput[0].files[0];
+
+            if (image) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var img = new Image();
+                img.src = e.target.result;
+                img.onload = function () {
+                var width = this.width;
+                var height = this.height;
+
+                switch (selectedPosition) {
+                    case 'mid':
+                    if (width !== 1770 || height !== 166) {
+                        toastr.error('The image dimensions must be 1770 x 166 pixels.');
+                        imageInput.val('');
+                        $('#image-preview').attr('src', '');
+                    }
+                    break;
+                    case 'top':
+                    if (width !== 1770 || height !== 166) {
+                        toastr.error('The image dimensions must be 1770 x 166 pixels.');
+                        imageInput.val('');
+                        $('#image-preview').attr('src', '');
+                    }
+                    break;
+                    case 'right':
+                    if (width !== 456 || height !== 654) {
+                        toastr.error('The image dimensions must be 456 x 654 pixels.');
+                        imageInput.val('');
+                        $('#image-preview').attr('src', '');
+                    }
+                    break;
+                    case 'left':
+                    if (width !== 1245 || height !== 295) {
+                        toastr.error('The image dimensions must be 1245 x 295 pixels.');
+                        imageInput.val('');
+                        $('#image-preview').attr('src', '');
+                    }
+                    break;
+                    default:
+                    toastr.error('The image dimensions are invalid.');
+                    imageInput.val('');
+                    $('#image-preview').attr('src', '');
+                    break;
+                }
+                };
+            };
+            reader.readAsDataURL(image);
+            }
+        }
+
+        // Attach the validateImageDimensions function to the image input's change event
+        $('#photo').on('change', validateImageDimensions);
+        });
+    </script>
+
     <style>
         .card.active {
             border: 1px solid #175A95;
@@ -57,8 +135,8 @@
             <div class="row">
                 <div class="col-lg-6 mb-4">
                     <label class="form-label" for="page">Halaman</label>
-                    <select name="page" class="form-select" id="">
-                        <option value="home">Dashboard</option>
+                    <select name="page" class="form-select" id="page-select">
+                        <option value="home">Dashboard</a</option>
                         <option value="singlepost">News Post</option>
                         <option value="category">Kategori</option>
                         <option value="subcategory">Sub Kategori</option>
@@ -75,6 +153,26 @@
                 <div class="col-lg-12 mb-4">
                     <label for="position" class="form-label">Posisi Iklan</label>
                     <div class="">
+                        {{-- @forelse ($positions as $position)
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="position" id="inlineRadio1-{{ $position->page }}" value="{{ $position->position }}">
+                                    <label class="form-check-label" for="inlineRadio1">
+                                        @if ($position->position == 'mid')
+                                            <p class="ms-2">Posisi Tengah Full</p>
+                                        @elseif ($position->position == 'under')
+                                            <p class="ms-2">Posisi Bawah Full</p>
+                                        @elseif ($position->position == 'top')
+                                            <p class="ms-2">Posisi Atas Full</p>
+                                        @elseif ($position->position == 'left')
+                                            <p class="ms-2">Posisi Kiri Full</p>
+                                        @elseif ($position->position == 'right')
+                                            <p class="ms-2">Posisi Kanan Full</p>
+                                        @endif
+                                        <img src="{{asset($position->image)}}" width="300" height="200" alt="">
+                                    </label>
+                                </div>
+                        @empty
+                        @endforelse --}}
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="mid">
                             <label class="form-check-label" for="inlineRadio1">
@@ -162,6 +260,82 @@
 
 @section('script')
     <script src="{{ asset('assets/dist/imageuploadify.min.js') }}"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{-- <script>
+    $(document).ready(function() {
+        // Function to preview the uploaded image
+        function previewImage(event) {
+        var input = event.target;
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+            $('#image-preview').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+        }
+
+        // Function to validate the image dimensions
+        function validateImageDimensions() {
+        var imageInput = $('#photo');
+        var selectedPosition = $('input[name="position"]:checked').val();
+        var image = imageInput[0].files[0];
+
+        if (image) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+            var img = new Image();
+            img.src = e.target.result;
+            img.onload = function () {
+                var width = this.width;
+                var height = this.height;
+
+                switch (selectedPosition) {
+                case 'mid':
+                    if (width !== 1770 || height !== 166) {
+                    toastr.alert('The image dimensions must be 1770 x 166 pixels.');
+                    imageInput.val('');
+                    $('#image-preview').attr('src', '');
+                    }
+                    break;
+                case 'top':
+                    if (width !== 1770 || height !== 166) {
+                    toastr.alert('The image dimensions must be 1770 x 166 pixels.');
+                    imageInput.val('');
+                    $('#image-preview').attr('src', '');
+                    }
+                    break;
+                case 'right':
+                    if (width !== 456 || height !== 654) {
+                    toastr.alert('The image dimensions must be 456 x 654 pixels.');
+                    imageInput.val('');
+                    $('#image-preview').attr('src', '');
+                    }
+                    break;
+                case 'left':
+                    if (width !== 700 || height !== 393) {
+                    toastr.alert('The image dimensions must be 1245 x 295 pixels.');
+                    imageInput.val('');
+                    $('#image-preview').attr('src', '');
+                    }
+                    break;
+                default:
+                    toastr.alert('The image dimensions are invalid.');
+                    imageInput.val('');
+                    $('#image-preview').attr('src', '');
+                    break;
+                }
+            };
+            };
+            reader.readAsDataURL(image);
+        }
+        }
+
+        // Attach the validateImageDimensions function to the image input's change event
+        $('#photo').on('change', validateImageDimensions);
+    });
+    </script> --}}
 
     <script>
         $(document).ready(function() {
