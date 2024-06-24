@@ -89,7 +89,8 @@ class NewsController extends Controller
         $pendings = $this->news->userStatus($user_id, NewsEnum::PENDING->value);
         $rejecteds = $this->news->userStatus($user_id, NewsEnum::REJECT->value);
         $accepteds = $this->news->userStatus($user_id, NewsEnum::ACCEPTED->value);
-        return view('pages.author.news.list-news', compact('news', 'pendings', 'rejecteds', 'accepteds'));
+        $drafts = $this->news->draft();
+        return view('pages.author.news.list-news', compact('news', 'pendings', 'rejecteds', 'accepteds', 'drafts'));
     }
 
     public function confirm_news()
@@ -183,7 +184,7 @@ class NewsController extends Controller
         $newsId->delete();
 
         if (auth()->user()->roles->pluck('name')[0] == "admin") {
-            return redirect('/news-list')->with('success', 'Berhasil mendarft data');
+            return redirect('/news-list')->with('success', 'Berhasil mendraft data');
         } else {
             return redirect('/list-news')->with('success', 'Berhasil mendraft data');
         }

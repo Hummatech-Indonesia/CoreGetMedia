@@ -148,10 +148,6 @@ Route::get('create-news', function () {
     return view('pages.author.news.create');
 })->name('create.news');
 
-Route::get('list-news', function () {
-    return view('pages.author.news.list-news');
-})->name('news.list.author');
-
 Route::get('subscribe', function () {
     return view('pages.user.subscribe.index');
 })->name('news.subscribe');

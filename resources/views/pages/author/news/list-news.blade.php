@@ -514,80 +514,87 @@
     </div>
 
     <div class="tab-pane fade" id="draft" role="tabpanel" aria-labelledby="draft-tab">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-12 col-lg-2">
-                            <div class="mb-2">
-                                <img src="" alt="" width="290px" height="180px" class="w-100"
-                                    style="width: 100%; object-fit:cover;" />
-                            </div>
-                        </div>
-                        <div class="row col-md-12 col-lg-7">
-                            <div class="col-lg-12 mb-3">
-                                <h4>
-                                    Draft data
-                                </h4>
-                                <div class="fs-4 mt-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum
-                                    voluptate natus fugit dolores a pariatur in deleniti repudiandae doloremque soluta
-                                    optio officiis, nihil aliquid eligendi.
+        @forelse ($drafts as $draft)
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-2">
+                                <div class="mb-2">
+                                    <img src="" alt="" width="290px" height="180px" class="w-100"
+                                        style="width: 100%; object-fit:cover;" />
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-12 col-lg-3">
-
-                            <div class="d-flex justify-content-end gap-2">
-
-                                <div class="d-flex justify-content-end">
-                                    <div class="text-md-right">
-                                        <span class="badge bg-light-warning text-warning fs-4 px-3 py-2">
-                                            Draft
-                                        </span>
+                            <div class="row col-md-12 col-lg-7">
+                                <div class="col-lg-12 mb-3">
+                                    <h4>
+                                        Draft data
+                                    </h4>
+                                    <div class="fs-4 mt-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum
+                                        voluptate natus fugit dolores a pariatur in deleniti repudiandae doloremque soluta
+                                        optio officiis, nihil aliquid eligendi.
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-12 col-lg-3">
 
-                            <div class="d-flex mt-4 justify-content-end">
-                                24 Juli 2024
+                                <div class="d-flex justify-content-end gap-2">
+
+                                    <div class="d-flex justify-content-end">
+                                        <div class="text-md-right">
+                                            <span class="badge bg-light-warning text-warning fs-4 px-3 py-2">
+                                                Draft
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex mt-4 justify-content-end">
+                                    24 Juli 2024
+                                </div>
+
+                                <div class="d-flex justify-content-end">
+                                    <a href="#" class="btn btn-sm m-1 mt-5" style="background-color: #5D87FF;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="30"
+                                            viewBox="0 0 512 512">
+                                            <path fill="none" stroke="#ffffff" stroke-linecap="round"
+                                                stroke-linejoin="round" stroke-width="32"
+                                                d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 0 0-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 0 0 0-17.47C428.89 172.28 347.8 112 255.66 112" />
+                                            <circle cx="256" cy="256" r="80" fill="none" stroke="#ffffff"
+                                                stroke-miterlimit="10" stroke-width="32" />
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="btn btn-sm m-1 mt-5" style="background-color: #FFD643;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="23"
+                                            viewBox="0 0 512 512">
+                                            <path
+                                                d="M64 368v80h80l235.727-235.729-79.999-79.998L64 368zm377.602-217.602c8.531-8.531 8.531-21.334 0-29.865l-50.135-50.135c-8.531-8.531-21.334-8.531-29.865 0l-39.468 39.469 79.999 79.998 39.469-39.467z"
+                                                fill="#ffffff" />
+                                        </svg>
+                                    </a>
+                                    <button type="submit" class="btn btn-sm m-1 mt-5 btn-delete" data-id=""
+                                        style="background-color: #C94F4F;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="23"
+                                            viewBox="0 0 512 512">
+                                            <path
+                                                d="M128 405.429C128 428.846 147.198 448 170.667 448h170.667C364.802 448 384 428.846 384 405.429V160H128v245.429zM416 96h-80l-26.785-32H202.786L176 96H96v32h320V96z"
+                                                fill="#ffffff" />
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
 
-                            <div class="d-flex justify-content-end">
-                                <a href="#" class="btn btn-sm m-1 mt-5" style="background-color: #5D87FF;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="30"
-                                        viewBox="0 0 512 512">
-                                        <path fill="none" stroke="#ffffff" stroke-linecap="round"
-                                            stroke-linejoin="round" stroke-width="32"
-                                            d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 0 0-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 0 0 0-17.47C428.89 172.28 347.8 112 255.66 112" />
-                                        <circle cx="256" cy="256" r="80" fill="none" stroke="#ffffff"
-                                            stroke-miterlimit="10" stroke-width="32" />
-                                    </svg>
-                                </a>
-                                <a href="#" class="btn btn-sm m-1 mt-5" style="background-color: #FFD643;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="23"
-                                        viewBox="0 0 512 512">
-                                        <path
-                                            d="M64 368v80h80l235.727-235.729-79.999-79.998L64 368zm377.602-217.602c8.531-8.531 8.531-21.334 0-29.865l-50.135-50.135c-8.531-8.531-21.334-8.531-29.865 0l-39.468 39.469 79.999 79.998 39.469-39.467z"
-                                            fill="#ffffff" />
-                                    </svg>
-                                </a>
-                                <button type="submit" class="btn btn-sm m-1 mt-5 btn-delete" data-id=""
-                                    style="background-color: #C94F4F;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="23"
-                                        viewBox="0 0 512 512">
-                                        <path
-                                            d="M128 405.429C128 428.846 147.198 448 170.667 448h170.667C364.802 448 384 428.846 384 405.429V160H128v245.429zM416 96h-80l-26.785-32H202.786L176 96H96v32h320V96z"
-                                            fill="#ffffff" />
-                                    </svg>
-                                </button>
-                            </div>
                         </div>
-
                     </div>
-                </div>
 
+                </div>
             </div>
+        @empty
+        <div class="text-center mt-5">
+            <img src="{{ asset('assets/Empty-cuate.png') }}" alt="" width="300px">
+            <p>Draft anda kosong</p>
         </div>
+        @endforelse
     </div>
 </div>
 
