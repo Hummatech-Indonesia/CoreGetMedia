@@ -11,4 +11,6 @@ use App\Contracts\Interfaces\Eloquent\UpdateInterface;
 interface PositionAdvertisementInterface extends GetInterface, UpdateInterface, ShowInterface, DeleteInterface
 {
     public function updateOrCreate($page, $position, $price) : mixed;
+    public function getByPage (mixed $page);
+
 }

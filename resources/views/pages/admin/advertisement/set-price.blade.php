@@ -60,256 +60,155 @@
         <div id="navpill-111" class="tab-pane fade show active" role="tabpanel">
             <h3 class="mb-3">Keterangan Iklan di Beranda</h3>
             <div class="row">
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h6 class="mb-3">Keterangan posisi iklan & ukuran</h6>
-                            <h4 class="mb-3">Posisi Atas</h4>
-                            {{-- (1000 x 1000) --}}
-                            <h6>Preview posisi</h6>
-                            <img src="{{ asset('assets/iklan.png') }}" alt="Nama Gambar" class="img-fluid mt-2 mb-4"
-                                style="max-width: 250px; border: none;">
-                            <h6 class="mb-2">Harga :</h6>
-                            <h4 class="mb-4">Rp. 100.000</h4>
+                @forelse ($home as $home)
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="mb-3">Keterangan posisi iklan & ukuran</h6>
+                                <h4 class="mb-3">Posisi {{ $home->position->label() }}</h4>
+                                <h6>Preview posisi</h6>
+                                <img src="{{ asset('assets/iklan.png') }}" alt="Nama Gambar" class="img-fluid mt-2 mb-4"
+                                    style="max-width: 250px; border: none;">
+                                <h6 class="mb-2">Harga :</h6>
+                                <h4 class="mb-4">Rp. {{ number_format($home->price, 0, ',', '.') }}</h4>
 
-                            <div class="d-flex justify-content-between">
-                                <button type="button" data-page="home" data-position="top" class="btn mb-1 waves-effect waves-light btn-warning w-100" style="background-color: #FFD643; border: none">
-                                    Edit
-                                    <i class="ti ti-edit"></i>
-                                </button>
+                                <div class="d-flex justify-content-between">
+                                    <button type="button" data-page="{{$home->page}}" data-position="{{$home->position}}" data-price="{{ $home->price }}" class="btn mb-1 waves-effect waves-light btn-warning w-100" style="background-color: #FFD643; border: none">
+                                        Edit
+                                        <i class="ti ti-edit"></i>
+                                    </button>
 
-                                <button type="button" data-page="home" data-position="top"
-                                    class="btn mb-1 waves-effect waves-light btn-danger w-100 ms-4">
-                                    Hapus
-                                    <i class="ti ti-trash"></i>
-                                </button>
+                                    <button type="button" data-page="home" data-position="top"
+                                        class="btn mb-1 waves-effect waves-light btn-danger w-100 ms-4 btn-delete"
+                                        id="btn-delete-{{ $home->id }}" data-id="{{ $home->id }}">
+                                        Hapus
+                                        <i class="ti ti-trash"></i>
+                                    </button>
 
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h6 class="mb-3">Keterangan posisi iklan & ukuran</h6>
-                            <h4 class="mb-3">Posisi Kanan</h4>
-                            <h6>Preview posisi</h6>
-                            <img src="{{ asset('assets/iklan.png') }}" alt="Nama Gambar" class="img-fluid mt-2 mb-4"
-                                style="max-width: 250px; border: none;">
-                            <h6 class="mb-2">Harga :</h6>
-                            <h4 class="mb-4">Rp. 100.000</h4>
+                @empty
 
-                            <div class="d-flex justify-content-between">
-                                <button type="button" data-page="home" data-position="right" class="btn mb-1 waves-effect waves-light btn-warning w-100" style="background-color: #FFD643; border: none">
-                                    Edit
-                                    <i class="ti ti-edit"></i>
-                                </button>
-
-                                <button type="button" data-page="home" data-position="right"
-                                    class="btn mb-1 waves-effect waves-light btn-danger w-100 ms-4">
-                                    Hapus
-                                    <i class="ti ti-trash"></i>
-                                </button>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h6 class="mb-3">Keterangan posisi iklan & ukuran</h6>
-                            <h4 class="mb-3">Posisi Bawah</h4>
-                            <h6>Preview posisi</h6>
-                            <img src="{{ asset('assets/iklan.png') }}" alt="Nama Gambar" class="img-fluid mt-2 mb-4"
-                                style="max-width: 250px; border: none;">
-                            <h6 class="mb-2">Harga :</h6>
-                            <h4 class="mb-4">Rp. 100.000</h4>
-
-                            <div class="d-flex justify-content-between">
-                                <button type="button" data-page="home" data-position="under" class="btn mb-1 waves-effect waves-light btn-warning w-100" style="background-color: #FFD643; border: none">
-                                    Edit
-                                    <i class="ti ti-edit"></i>
-                                </button>
-
-                                <button type="button" data-page="home" data-position="under"
-                                    class="btn mb-1 waves-effect waves-light btn-danger w-100 ms-4">
-                                    Hapus
-                                    <i class="ti ti-trash"></i>
-                                </button>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforelse
             </div>
         </div>
 
-        <!-- Tab Diterima -->
+        <!-- Tab Singlepost -->
         <div id="navpill-222" class="tab-pane fade" role="tabpanel">
             <h3 class="mb-3">Keterangan Iklan di Singlepost</h3>
             <div class="row">
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h6 class="mb-3">Keterangan posisi iklan & ukuran</h6>
-                            <h4 class="mb-3">Posisi Kanan</h4>
-                            <h6>Preview posisi</h6>
-                            <img src="{{ asset('assets/iklan.png') }}" alt="Nama Gambar" class="img-fluid mt-2 mb-4"
-                                style="max-width: 250px; border: none;">
-                            <h6 class="mb-2">Harga :</h6>
-                            <h4 class="mb-4">Rp. 100.000</h4>
+                @forelse ($singlepost as $singlepost)
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="mb-3">Keterangan posisi iklan & ukuran</h6>
+                                <h4 class="mb-3">Posisi {{ $singlepost->position->label() }}</h4>
+                                <h6>Preview posisi</h6>
+                                <img src="{{ asset('assets/iklan.png') }}" alt="Nama Gambar" class="img-fluid mt-2 mb-4"
+                                    style="max-width: 250px; border: none;">
+                                <h6 class="mb-2">Harga :</h6>
+                                <h4 class="mb-4">Rp. {{ number_format($singlepost->price, 0, ',', '.') }}</h4>
 
-                            <div class="d-flex justify-content-between">
-                                <button type="button" data-page="singlepost" data-position="right" class="btn mb-1 waves-effect waves-light btn-warning w-100" style="background-color: #FFD643; border: none">
-                                    Edit
-                                    <i class="ti ti-edit"></i>
-                                </button>
+                                <div class="d-flex justify-content-between">
+                                    <button type="button" data-page="{{$singlepost->page}}" data-position="{{$singlepost->position}}" data-price="{{ $singlepost->price }}" class="btn mb-1 waves-effect waves-light btn-warning w-100" style="background-color: #FFD643; border: none">
+                                        Edit
+                                        <i class="ti ti-edit"></i>
+                                    </button>
 
-                                <button type="button" data-page="singlepost" data-position="right"
-                                    class="btn mb-1 waves-effect waves-light btn-danger w-100 ms-4">
-                                    Hapus
-                                    <i class="ti ti-trash"></i>
-                                </button>
+                                    <button type="button" data-page="home" data-position="top"
+                                        class="btn mb-1 waves-effect waves-light btn-danger w-100 ms-4 btn-delete"
+                                        id="btn-delete-{{ $singlepost->id }}" data-id="{{ $singlepost->id }}">
+                                        Hapus
+                                        <i class="ti ti-trash"></i>
+                                    </button>
 
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <!-- Card 2 -->
-                </div>
-                <div class="col-md-4">
-                    <!-- Card 3 -->
-                </div>
+                @empty
+
+                @endforelse
             </div>
         </div>
 
-        <!-- Tab Pending -->
+        <!-- Tab Semua Berita -->
         <div id="navpill-333" class="tab-pane fade" role="tabpanel">
             <h3 class="mb-3">Keterangan Iklan di Semua Berita</h3>
             <div class="row">
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h6 class="mb-3">Keterangan posisi iklan & ukuran</h6>
-                            <h4 class="mb-3">Posisi Kanan</h4>
-                            <h6>Preview posisi</h6>
-                            <img src="{{ asset('assets/iklan.png') }}" alt="Nama Gambar" class="img-fluid mt-2 mb-4"
-                                style="max-width: 250px; border: none;">
-                            <h6 class="mb-2">Harga :</h6>
-                            <h4 class="mb-4">Rp. 100.000</h4>
+                @forelse ($allnews as $allnews)
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="mb-3">Keterangan posisi iklan & ukuran</h6>
+                                <h4 class="mb-3">Posisi {{ $allnews->position->label() }}</h4>
+                                <h6>Preview posisi</h6>
+                                <img src="{{ asset('assets/iklan.png') }}" alt="Nama Gambar" class="img-fluid mt-2 mb-4"
+                                    style="max-width: 250px; border: none;">
+                                <h6 class="mb-2">Harga :</h6>
+                                <h4 class="mb-4">Rp. {{ number_format($allnews->price, 0, ',', '.') }}</h4>
 
-                            <div class="d-flex justify-content-between">
-                                <button type="button" data-page="allnews" data-position="right" class="btn mb-1 waves-effect waves-light btn-warning w-100" style="background-color: #FFD643; border: none">
-                                    Edit
-                                    <i class="ti ti-edit"></i>
-                                </button>
+                                <div class="d-flex justify-content-between">
+                                    <button type="button" data-page="{{$allnews->page}}" data-position="{{$allnews->position}}" data-price="{{ $allnews->price }}" class="btn mb-1 waves-effect waves-light btn-warning w-100" style="background-color: #FFD643; border: none">
+                                        Edit
+                                        <i class="ti ti-edit"></i>
+                                    </button>
 
-                                <button type="button" data-page="allnews" data-position="right"
-                                    class="btn mb-1 waves-effect waves-light btn-danger w-100 ms-4">
-                                    Hapus
-                                    <i class="ti ti-trash"></i>
-                                </button>
+                                    <button type="button" data-page="home" data-position="top"
+                                        class="btn mb-1 waves-effect waves-light btn-danger w-100 ms-4 btn-delete"
+                                        id="btn-delete-{{ $allnews->id }}" data-id="{{ $allnews->id }}">
+                                        Hapus
+                                        <i class="ti ti-trash"></i>
+                                    </button>
 
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h6 class="mb-3">Keterangan posisi iklan & ukuran</h6>
-                            <h4 class="mb-3">Posisi Bawah</h4>
-                            <h6>Preview posisi</h6>
-                            <img src="{{ asset('assets/iklan.png') }}" alt="Nama Gambar" class="img-fluid mt-2 mb-4"
-                                style="max-width: 250px; border: none;">
-                            <h6 class="mb-2">Harga :</h6>
-                            <h4 class="mb-4">Rp. 100.000</h4>
+                @empty
 
-                            <div class="d-flex justify-content-between">
-                                <button type="button" data-page="allnews" data-position="under" class="btn mb-1 waves-effect waves-light btn-warning w-100" style="background-color: #FFD643; border: none">
-                                    Edit
-                                    <i class="ti ti-edit"></i>
-                                </button>
-
-                                <button type="button" data-page="allnews" data-position="under"
-                                    class="btn mb-1 waves-effect waves-light btn-danger w-100 ms-4">
-                                    Hapus
-                                    <i class="ti ti-trash"></i>
-                                </button>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <!-- Card 3 -->
-                </div>
+                @endforelse
             </div>
         </div>
 
-        <!-- Tab Ditolak -->
+        <!-- Tab Kategori -->
         <div id="navpill-444" class="tab-pane fade" role="tabpanel">
             <h3 class="mb-3">Keterangan Iklan di Kategori</h3>
             <div class="row">
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h6 class="mb-3">Keterangan posisi iklan & ukuran</h6>
-                            <h4 class="mb-3">Posisi Kanan</h4>
-                            <h6>Preview posisi</h6>
-                            <img src="{{ asset('assets/iklan.png') }}" alt="Nama Gambar" class="img-fluid mt-2 mb-4"
-                                style="max-width: 250px; border: none;">
-                            <h6 class="mb-2">Harga :</h6>
-                            <h4 class="mb-4">Rp. 100.000</h4>
+                @forelse ($categories as $category)
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="mb-3">Keterangan posisi iklan & ukuran</h6>
+                                <h4 class="mb-3">Posisi {{ $category->position->label() }}</h4>
+                                <h6>Preview posisi</h6>
+                                <img src="{{ asset('assets/iklan.png') }}" alt="Nama Gambar" class="img-fluid mt-2 mb-4"
+                                    style="max-width: 250px; border: none;">
+                                <h6 class="mb-2">Harga :</h6>
+                                <h4 class="mb-4">Rp. {{ number_format($category->price, 0, ',', '.') }}</h4>
 
-                            <div class="d-flex justify-content-between">
-                                <button type="button" data-page="category" data-position="right" class="btn mb-1 waves-effect waves-light btn-warning w-100" style="background-color: #FFD643; border: none">
-                                    Edit
-                                    <i class="ti ti-edit"></i>
-                                </button>
+                                <div class="d-flex justify-content-between">
+                                    <button type="button" data-page="{{$category->page}}" data-position="{{$category->position}}" data-price="{{ $category->price }}" class="btn mb-1 waves-effect waves-light btn-warning w-100" style="background-color: #FFD643; border: none">
+                                        Edit
+                                        <i class="ti ti-edit"></i>
+                                    </button>
 
-                                <button type="button" data-page="category" data-position="right"
-                                    class="btn mb-1 waves-effect waves-light btn-danger w-100 ms-4">
-                                    Hapus
-                                    <i class="ti ti-trash"></i>
-                                </button>
+                                    <button type="button" data-page="home" data-position="top"
+                                        class="btn mb-1 waves-effect waves-light btn-danger w-100 ms-4 btn-delete"
+                                        id="btn-delete-{{ $category->id }}" data-id="{{ $category->id }}">
+                                        Hapus
+                                        <i class="ti ti-trash"></i>
+                                    </button>
 
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h6 class="mb-3">Keterangan posisi iklan & ukuran</h6>
-                            <h4 class="mb-3">Posisi Bawah</h4>
-                            <h6>Preview posisi</h6>
-                            <img src="{{ asset('assets/iklan.png') }}" alt="Nama Gambar" class="img-fluid mt-2 mb-4"
-                                style="max-width: 250px; border: none;">
-                            <h6 class="mb-2">Harga :</h6>
-                            <h4 class="mb-4">Rp. 100.000</h4>
+                @empty
 
-                            <div class="d-flex justify-content-between">
-                                <button type="button" data-page="category" data-position="under" class="btn mb-1 waves-effect waves-light btn-warning w-100" style="background-color: #FFD643; border: none">
-                                    Edit
-                                    <i class="ti ti-edit"></i>
-                                </button>
-
-                                <button type="button" data-page="category" data-position="under"
-                                    class="btn mb-1 waves-effect waves-light btn-danger w-100 ms-4">
-                                    Hapus
-                                    <i class="ti ti-trash"></i>
-                                </button>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <!-- Card 3 -->
-                </div>
+                @endforelse
             </div>
         </div>
 
@@ -317,63 +216,38 @@
         <div id="navpill-555" class="tab-pane fade" role="tabpanel">
             <h3 class="mb-3">Keterangan Iklan di Sub Kategori</h3>
             <div class="row">
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h6 class="mb-3">Keterangan posisi iklan & ukuran</h6>
-                            <h4 class="mb-3">Posisi Kanan</h4>
-                            <h6>Preview posisi</h6>
-                            <img src="{{ asset('assets/iklan.png') }}" alt="Nama Gambar" class="img-fluid mt-2 mb-4"
-                                style="max-width: 250px; border: none;">
-                            <h6 class="mb-2">Harga :</h6>
-                            <h4 class="mb-4">Rp. 100.000</h4>
+                @forelse ($subcategories as $subcategory)
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="mb-3">Keterangan posisi iklan & ukuran</h6>
+                                <h4 class="mb-3">Posisi {{ $subcategory->position->label() }}</h4>
+                                <h6>Preview posisi</h6>
+                                <img src="{{ asset('assets/iklan.png') }}" alt="Nama Gambar" class="img-fluid mt-2 mb-4"
+                                    style="max-width: 250px; border: none;">
+                                <h6 class="mb-2">Harga :</h6>
+                                <h4 class="mb-4">Rp. {{ number_format($subcategory->price, 0, ',', '.') }}</h4>
 
-                            <div class="d-flex justify-content-between">
-                                <button type="button" data-page="subcategory" data-position="right" class="btn mb-1 waves-effect waves-light btn-warning w-100" style="background-color: #FFD643; border: none">
-                                    Edit
-                                    <i class="ti ti-edit"></i>
-                                </button>
+                                <div class="d-flex justify-content-between">
+                                    <button type="button" data-page="{{$subcategory->page}}" data-position="{{$subcategory->position}}" data-price="{{ $subcategory->price }}" class="btn mb-1 waves-effect waves-light btn-warning w-100" style="background-color: #FFD643; border: none">
+                                        Edit
+                                        <i class="ti ti-edit"></i>
+                                    </button>
 
-                                <button type="button" data-page="subcategory" data-position="right"
-                                    class="btn mb-1 waves-effect waves-light btn-danger w-100 ms-4">
-                                    Hapus
-                                    <i class="ti ti-trash"></i>
-                                </button>
+                                    <button type="button" data-page="home" data-position="top"
+                                        class="btn mb-1 waves-effect waves-light btn-danger w-100 ms-4 btn-delete"
+                                        id="btn-delete-{{ $subcategory->id }}" data-id="{{ $subcategory->id }}">
+                                        Hapus
+                                        <i class="ti ti-trash"></i>
+                                    </button>
 
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h6 class="mb-3">Keterangan posisi iklan & ukuran</h6>
-                            <h4 class="mb-3">Posisi Bawah</h4>
-                            <h6>Preview posisi</h6>
-                            <img src="{{ asset('assets/iklan.png') }}" alt="Nama Gambar" class="img-fluid mt-2 mb-4"
-                                style="max-width: 250px; border: none;">
-                            <h6 class="mb-2">Harga :</h6>
-                            <h4 class="mb-4">Rp. 100.000</h4>
+                @empty
 
-                            <div class="d-flex justify-content-between">
-                                <button type="button" data-page="subcategory" data-position="under" class="btn mb-1 waves-effect waves-light btn-warning w-100" style="background-color: #FFD643; border: none">
-                                    Edit
-                                    <i class="ti ti-edit"></i>
-                                </button>
-
-                                <button type="button" data-page="subcategory" data-position="under"
-                                    class="btn mb-1 waves-effect waves-light btn-danger w-100 ms-4">
-                                    Hapus
-                                    <i class="ti ti-trash"></i>
-                                </button>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <!-- Card 3 -->
-                </div>
+                @endforelse
             </div>
         </div>
     </div>
@@ -384,13 +258,12 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Edit Keterangan Iklan</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal">
-                    </button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form id="form-edit" method="POST">
-                @method('post')
-                @csrf
-                <div class="modal-body">
+                    @method('post')
+                    @csrf
+                    <div class="modal-body">
                         <div class="form-group">
                             <label for="inputText1" class="mb-2">Keterangan posisi & Ukuran</label>
                             <input type="text" name="page" class="form-control mb-3" id="show-page" placeholder="Masukkan keterangan">
@@ -401,15 +274,44 @@
                         </div>
                         <div class="form-group">
                             <label for="inputText2" class="mb-2">Harga</label>
-                            <input type="number" name="price" class="form-control" id="inputText2" placeholder="Masukkan harga">
+                            <input type="number" name="price" class="form-control" id="show-price" placeholder="Masukkan harga">
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Save changes</button>
                     </div>
                 </form>
             </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="modal-delete" tabindex="-1" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <form id="form-delete" method="POST" class="modal-content">
+                @csrf
+                @method('DELETE')
+                <div class="modal-header d-flex align-items-center">
+                    <h4 class="modal-title" id="myModalLabel">
+                        Hapus data
+                    </h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <p>Apakah anda yakin akan menghapus data ini? </p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light-danger text-danger font-medium waves-effect" data-bs-dismiss="modal">
+                        Batal
+                    </button>
+                    <button type="submit" class="btn btn-light-danger text-secondery font-medium waves-effect" data-bs-dismiss="modal">
+                        Hapus
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -424,11 +326,20 @@
     $('.btn-warning').on('click', function() {
         var page = $(this).data('page');
         var position = $(this).data('position');
+        var price = $(this).data('price');
+
         $('#form-edit').attr('action', '/position-price');
         $('#show-page').val(page);
         $('#show-position').val(position);
+        $('#show-price').val(price);
         $('#modal-update').modal('show');
     });
+
+    $('.btn-delete').click(function() {
+        var id = $(this).data('id');
+        $('#form-delete').attr('action', '/set-price/delete/' + id);
+        $('#modal-delete').modal('show');
+    })
 </script>
 
 @endsection
