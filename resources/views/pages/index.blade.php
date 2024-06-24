@@ -684,7 +684,7 @@ $popular_down_id = $popular_down->pluck('id');
                         </ul>
                     </div>
                 </div>
-                <div class="sidebar-widget bg-transparent shadow-smer">
+                <div class="sidebar-widget" style="width: 450px">
                     <h3 class="sidebar-widget-title">Tag Populer</h3>
                     <ul class="tag-list list-style">
                         @forelse ($tags as $tag)
