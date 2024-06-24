@@ -34,7 +34,7 @@
 @section('content')
 
 <div class="modal fade" id="modal-accepted" tabindex="-1" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog modal-lg">
         <form id="form-accepted" method="POST" class="modal-content">
             @method('put')
             @csrf
@@ -46,6 +46,8 @@
             </div>
             <div class="modal-body">
                 <p>Apakah anda yakin akan menerima iklan ini?</p>
+                <p>Tentukan Harganya : </p>
+                <input type="text" name="price" class="form-control" placeholder="1000">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light-warning text-warning font-medium waves-effect"
