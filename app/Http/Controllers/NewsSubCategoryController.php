@@ -72,26 +72,6 @@ class NewsSubCategoryController extends Controller
         );
     }
 
-    public function all_subcategory()
-    {
-        $categories = $this->category->get();
-        $subCategories = $this->subCategories->get();
-        $news = $this->newsSubCategory->get();
-        $popularCategory = $this->category->showWithCount();
-        $popularTags = $this->tags->showWithCount();
-
-        return view(
-            'pages.user.subcategory.all-subcategory',
-            compact(
-                'news',
-                'categories',
-                'subCategories',
-                'popularCategory',
-                'popularTags'
-            )
-        );
-    }
-
     public function showAll(Request $request, $slug)
     {
         $subCategory = $this->subCategories->showWithSlug($slug);
@@ -106,6 +86,8 @@ class NewsSubCategoryController extends Controller
         $news = $this->news->whereAllSubCategory($subCategory_id);
         $popularCategory = $this->category->showWithCount();
         $popularTags = $this->tags->showWithCount();
+        $newsPopulars = $this->news->whereSubCategory($subCategory_id, 'popular');
+        $newsTop = $this->news->whereSubCategory($subCategory_id, 'top');
 
         return view(
             'pages.user.subcategory.all-subcategory',
@@ -115,7 +97,9 @@ class NewsSubCategoryController extends Controller
                 'categories',
                 'subCategories',
                 'popularCategory',
-                'popularTags'
+                'popularTags',
+                'newsPopulars',
+                'newsTop'
             )
         );
     }
