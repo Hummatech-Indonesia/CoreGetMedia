@@ -103,6 +103,7 @@
 
                 <div class="col-lg-4">
                     <div class="sidebar">
+                        @if($CategoryPopulars->isNotEmpty())
                         <div class="sidebar-widget" style="width: 450px">
                             <h3 class="sidebar-widget-title">Kategori Populer</h3>
                             <ul class="category-widget list-style">
@@ -115,6 +116,7 @@
                                 @endforeach
                             </ul>
                         </div>
+                        @endif
 
                         <div class="sidebar-widget" style="width: 450px">
                             <h3 class="sidebar-widget-title">Tag Populer</h3>
