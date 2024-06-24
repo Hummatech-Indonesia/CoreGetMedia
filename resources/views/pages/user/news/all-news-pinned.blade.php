@@ -108,15 +108,17 @@
 
         <div class="col-lg-4">
             <div class="sidebar">
-                <div class="sidebar-widget" style="width: 450px">
-                    <h3 class="sidebar-widget-title">Kategori Populer</h3>
-                    <ul class="category-widget list-style">
-                        @foreach ($CategoryPopulars as $category)
-                        <li><a data-toggle="tooltip" data-placement="top" title="{{ $category->name }}" href="{{ route('categories.show.user', ['category' => $category->slug]) }}"><img src="{{ asset('assets/img/icons/arrow-right.svg') }}" alt="Image">{{ $category->name }}
-                                <span>({{ $category->news_categories_count }})</span></a></li>
-                        @endforeach
-                    </ul>
-                </div>
+                @if ($CategoryPopulars->isNotEmpty())
+                    <div class="sidebar-widget" style="width: 450px">
+                        <h3 class="sidebar-widget-title">Kategori Populer</h3>
+                        <ul class="category-widget list-style">
+                            @foreach ($CategoryPopulars as $category)
+                            <li><a data-toggle="tooltip" data-placement="top" title="{{ $category->name }}" href="{{ route('categories.show.user', ['category' => $category->slug]) }}"><img src="{{ asset('assets/img/icons/arrow-right.svg') }}" alt="Image">{{ $category->name }}
+                                    <span>({{ $category->news_categories_count }})</span></a></li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
                 <div class="sidebar-widget" style="width: 450px">
                     <h3 class="sidebar-widget-title">Tag Populer</h3>
