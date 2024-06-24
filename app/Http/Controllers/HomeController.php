@@ -9,6 +9,7 @@ use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\PopularInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\TagInterface;
+use App\Enums\AdvertisementEnum;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -56,11 +57,11 @@ class HomeController extends Controller
         $advertisement = $this->advertisements->get();
         $advertisement_id = $advertisement->pluck('id');
 
-        $advertisement_rights = $this->advertisements->wherePosition($advertisement_id, 'right');
-        $advertisement_lefts = $this->advertisements->wherePosition($advertisement_id, 'left');
-        $advertisement_tops = $this->advertisements->wherePosition($advertisement_id, 'top');
-        $advertisement_unders = $this->advertisements->wherePosition($advertisement_id, 'under');
-        $advertisement_mids = $this->advertisements->wherePosition($advertisement_id, 'mid');
+        $advertisement_rights = $this->advertisements->wherePosition(AdvertisementEnum::HOME, 'right');
+        $advertisement_lefts = $this->advertisements->wherePosition(AdvertisementEnum::HOME, 'left');
+        $advertisement_tops = $this->advertisements->wherePosition(AdvertisementEnum::HOME, 'top');
+        $advertisement_unders = $this->advertisements->wherePosition(AdvertisementEnum::HOME, 'under');
+        $advertisement_mids = $this->advertisements->wherePosition(AdvertisementEnum::HOME, 'mid');
 
         return view('pages.index', compact('populars', 'categoryPopulars' ,'latests', 'category2Populars', 'tags', 'newsPins', 'popularCategories', 'categoriesPin', 'newsByCategory','advertisement_rights', 'advertisement_lefts', 'advertisement_tops', 'advertisement_unders', 'advertisement_mids'));
     }

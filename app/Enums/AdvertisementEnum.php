@@ -18,6 +18,12 @@ enum AdvertisementEnum : string
     case SUBCATEGORY = 'subcategory';
     case ALLNEWS = 'allnews';
 
+    // enumnya belum ditambah
+    case ALLNEWS_PINNED = 'allnews_pinned';
+    case ALLNEWS_POPULAR = 'allnews_popular';
+    case TAG = 'tag'; 
+    case DETAIL_AUTHOR = 'detail_author';
+
     //type
     case PHOTO = 'photo';
     case VIDEO = 'video';

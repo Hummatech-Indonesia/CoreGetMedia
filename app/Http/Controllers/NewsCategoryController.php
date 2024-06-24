@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Interfaces\AdvertisementInterface;
 use Illuminate\Http\Request;
 use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\NewsCategoryInterface;
 use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\TagInterface;
+use App\Enums\AdvertisementEnum;
 use App\Models\NewsCategory;
 use App\Http\Requests\StoreNewsCategoryRequest;
 use App\Http\Requests\UpdateNewsCategoryRequest;
@@ -19,14 +21,16 @@ class NewsCategoryController extends Controller
     private CategoryInterface $category;
     private SubCategoryInterface $subCategories;
     private TagInterface $tags;
+    private AdvertisementInterface $advertisements;
 
-    public function __construct(NewsCategoryInterface $newsCategory, NewsInterface $news, CategoryInterface $category, SubCategoryInterface $subCategories, TagInterface $tags)
+    public function __construct(NewsCategoryInterface $newsCategory, NewsInterface $news, CategoryInterface $category, SubCategoryInterface $subCategories, TagInterface $tags, AdvertisementInterface $advertisements)
     {
         $this->newsCategory = $newsCategory;
         $this->category = $category;
         $this->subCategories = $subCategories;
         $this->news = $news;
         $this->tags = $tags;
+        $this->advertisements = $advertisements;
     }
     /**
      * Display a listing of the resource.
@@ -45,7 +49,16 @@ class NewsCategoryController extends Controller
         $latests = $this->news->categoryLatest($category_id);
         $CategoryPopulars = $this->category->showWithCount();
         $popularTags = $this->tags->showWithCount();
-        return view('pages.user.category.index', compact('categories', 'subCategories', 'category', 'trendings', 'newsTop', 'latests', 'CategoryPopulars', 'popularTags'));
+
+        $advertisement = $this->advertisements->get();
+        $advertisement_id = $advertisement->pluck('id');
+
+        $advertisement_rights = $this->advertisements->wherePosition(AdvertisementEnum::CATEGORY, 'right');
+        $advertisement_lefts = $this->advertisements->wherePosition(AdvertisementEnum::CATEGORY, 'left');
+        $advertisement_tops = $this->advertisements->wherePosition(AdvertisementEnum::CATEGORY, 'top');
+        $advertisement_unders = $this->advertisements->wherePosition(AdvertisementEnum::CATEGORY, 'under');
+        $advertisement_mids = $this->advertisements->wherePosition(AdvertisementEnum::CATEGORY, 'mid');
+        return view('pages.user.category.index', compact('categories', 'subCategories', 'category', 'trendings', 'newsTop', 'latests', 'CategoryPopulars', 'popularTags', 'advertisement_rights', 'advertisement_lefts', 'advertisement_tops', 'advertisement_unders', 'advertisement_mids'));
     }
 
     /**
