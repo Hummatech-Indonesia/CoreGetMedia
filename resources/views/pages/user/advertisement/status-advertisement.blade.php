@@ -194,6 +194,14 @@
                                                 </div>
                                                 <div class="fs-4 mt-2">{{ $all_advertisement->url }}</div>
                                             </div>
+                                            @if ($all_advertisement->price != null)
+                                            <div class="col-lg-12 mt-5">
+                                                <div class="fs-4 text-black">
+                                                    Harga :
+                                                </div>
+                                                <div class="fs-4 mt-2">{{ $all_advertisement->price }}</div>
+                                            </div>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-md-12 col-lg-4">
@@ -285,7 +293,7 @@
                                             </div>
                                         @elseif ($all_advertisement->status == 'pending' || $all_advertisement->status == 'reject')
                                             <div class="d-flex justify-content-end">
-                                                <a href="{{ route('detail-advertisement') }}" class="btn btn-sm m-1 mt-5" style="background-color: #5D87FF;">
+                                                <a href="{{ route('detail-advertisement', [$all_advertisement->id]) }}" class="btn btn-sm m-1 mt-5" style="background-color: #5D87FF;">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512">
                                                         <path fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 0 0-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 0 0 0-17.47C428.89 172.28 347.8 112 255.66 112" />
                                                         <circle cx="256" cy="256" r="80" fill="none" stroke="#ffffff" stroke-miterlimit="10" stroke-width="32" />
@@ -309,11 +317,15 @@
                     </div>
                 </div>
             @empty
+            <div class="text-center mt-5 pt-5">
+                <img src="{{ asset('assets/Empty-cuate.png') }}" alt="" width="300px">
+                <p>Tidak ada iklan</p>
+            </div>
             @endforelse
         </div>
 
-@forelse ($accepted_advertisements as $accepted_advertisement)
 <div class="tab-pane fade" id="link1" role="tabpanel" aria-labelledby="link1-tab">
+    @forelse ($accepted_advertisements as $accepted_advertisement)
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
@@ -418,12 +430,16 @@
             </div>
         </div>
     </div>
+    @empty
+    <div class="text-center mt-5 pt-5">
+        <img src="{{ asset('assets/Empty-cuate.png') }}" alt="" width="300px">
+        <p>Tidak ada iklan yang diterima</p>
+    </div>
+    @endforelse
 </div>
-@empty
-@endforelse
 
-@forelse ($pending_advertisements as $pending_advertisement)
 <div class="tab-pane fade" id="link2" role="tabpanel" aria-labelledby="link2-tab">
+    @forelse ($pending_advertisements as $pending_advertisement)
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
@@ -491,7 +507,7 @@
                         </div>
 
                         <div class="d-flex justify-content-end">
-                            <a href="{{ route('detail-advertisement') }}" class="btn btn-sm m-1 mt-5"
+                            <a href="{{ route('detail-advertisement', [$all_advertisement->id]) }}" class="btn btn-sm m-1 mt-5"
                                 style="background-color: #5D87FF;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512">
                                     <path fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round"
@@ -525,12 +541,16 @@
 
         </div>
     </div>
+    @empty
+    <div class="text-center mt-5 pt-5">
+        <img src="{{ asset('assets/Empty-cuate.png') }}" alt="" width="300px">
+        <p>Tidak ada data</p>
+    </div>
+    @endforelse
 </div>
-@empty
-@endforelse
 
-@forelse ($reject_advertisements as $reject_advertisement)
 <div class="tab-pane fade" id="link3" role="tabpanel" aria-labelledby="link3-tab">
+    @forelse ($reject_advertisements as $reject_advertisement)
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
@@ -587,6 +607,12 @@
                         <div class="d-flex justify-content-end gap-2">
                             <div class="d-flex justify-content-end">
                                 <div class="text-md-right">
+                                    <button data-description="{{ $reject_advertisement->description }}" class="btn btn-sm btn-description m-1" style="background-color: #5D87FF;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="20" viewBox="0 0 512 512">
+                                            <path fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 0 0-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 0 0 0-17.47C428.89 172.28 347.8 112 255.66 112" />
+                                            <circle cx="256" cy="256" r="80" fill="none" stroke="#ffffff" stroke-miterlimit="10" stroke-width="32" />
+                                        </svg>
+                                    </button>
                                     <span class="badge bg-light-danger text-danger fs-4 px-3 py-2">
                                         Ditolak
                                     </span>
@@ -599,7 +625,7 @@
                         </div>
 
                         <div class="d-flex justify-content-end">
-                            <a href="{{ route('detail-advertisement') }}" class="btn btn-sm m-1 mt-5"
+                            <a href="{{ route('detail-advertisement', ['advertisement' => $all_advertisement->id]) }}" class="btn btn-sm m-1 mt-5"
                                 style="background-color: #5D87FF;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512">
                                     <path fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round"
@@ -631,9 +657,13 @@
             </div>
         </div>
     </div>
+    @empty
+    <div class="text-center mt-5 pt-5">
+        <img src="{{ asset('assets/Empty-cuate.png') }}" alt="" width="300px">
+        <p>Tidak ada iklan yang ditolak</p>
+    </div>
+    @endforelse
 </div>
-@empty
-@endforelse
 
 
 <div class="tab-pane fade" id="link4" role="tabpanel" aria-labelledby="link4-tab">
@@ -750,6 +780,12 @@ $('.btn-cencel').on('click', function() {
     var id = $(this).data('id');
     $('#form-cencel').attr('action', '/cencel-advertisement/' + id);
     $('#modal-cencel').modal('show');
+});
+
+$('.btn-description').on('click', function() {
+    var description = $(this).data('description');
+    $('#modal-description').modal('show');
+    $('#detail-description').text(description);
 });
 </script>
 @endsection

@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\AdvertisementInterface;
 use App\Contracts\Interfaces\PositionAdvertisementInterface;
+use App\Contracts\Interfaces\UserInterface;
 use App\Enums\StatusEnum;
 use App\Models\Advertisement;
 use App\Http\Requests\StoreAdvertisementRequest;
+use App\Http\Requests\StoreBiodataAdvertisementRequest;
 use App\Http\Requests\UpdateAdvertisementRequest;
 use App\Models\PositionAdvertisement;
+use App\Models\User;
 use App\Services\AdvertisementService;
 use Illuminate\Http\Request;
 
@@ -17,12 +20,14 @@ class AdvertisementController extends Controller
     private AdvertisementInterface $advertisement;
     private PositionAdvertisementInterface $position;
     private AdvertisementService $service;
+    private UserInterface $user;
 
-    public function __construct(AdvertisementInterface $advertisement, PositionAdvertisementInterface $position, AdvertisementService $service)
+    public function __construct(UserInterface $user, AdvertisementInterface $advertisement, PositionAdvertisementInterface $position, AdvertisementService $service)
     {
         $this->advertisement = $advertisement;
         $this->position = $position;
         $this->service = $service;
+        $this->user = $user;
     }
 
     /**
@@ -48,8 +53,7 @@ class AdvertisementController extends Controller
     public function list_advertisement()
     {
         $data = $this->advertisement->where(null, 'accepted');
-        $data2 = $this->advertisement->where(null, 'published');
-        return view('pages.admin.advertisement.advertisement-list', compact('data', 'data2'));
+        return view('pages.admin.advertisement.advertisement-list', compact('data'));
     }
 
     public function detail_admin(Advertisement $advertisement)
@@ -62,8 +66,9 @@ class AdvertisementController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(StoreBiodataAdvertisementRequest $request, User $user)
     {
+        $this->user->update(auth()->user()->id, $request->validated());
         $posisi = $this->position->get();
         return view('pages.user.advertisement.upload-advertisemenet', compact('posisi'));
     }
@@ -75,7 +80,7 @@ class AdvertisementController extends Controller
     {
         $data = $this->service->store($request);
         $this->advertisement->store($data);
-        return redirect('/')->with('success', 'Berhasil mengupload iklan');
+        return redirect('/status-advertisement-list')->with('success', 'Berhasil mengupload iklan');
     }
 
     public function draft(StoreAdvertisementRequest $request)
@@ -117,23 +122,32 @@ class AdvertisementController extends Controller
         $data['feed'] = StatusEnum::PENDING->value;
         $data['description'] = null;
         $this->advertisement->update($advertisement->id, $data);
-        return back()->with('success', 'Berhasil mengupdate iklan');
+        return redirect('/status-advertisement-list')->with('success', 'Berhasil mengupdate iklan');
     }
 
     public function accepted(Request $request, Advertisement $advertisement)
     {
         $this->advertisement->update($advertisement->id, [
             'status' => StatusEnum::ACCEPTED->value,
-            'feed' => StatusEnum::NOTPAID->value
+            'feed' => StatusEnum::NOTPAID->value,
+            'price' => $request->price,
         ]);
-        return back()->with('success', 'Berhasil menerima iklan');
+        return redirect('/confirm-advertisement')->with('success', 'Berhasil menerima iklan');
     }
+    
+    public function detail_accepted(Advertisement $advertisement)
+    {
+        $data = $this->advertisement->show($advertisement->id);
+        return view('pages.user.advertisement.detail-payment', compact('data'));
+    }
+
+
 
     public function rejected(Request $request, Advertisement $advertisement)
     {
         $data = $this->service->reject($request);
         $this->advertisement->update($advertisement->id, $data);
-        return back()->with('success', 'Berhasil menolak iklan');
+        return redirect('/confirm-advertisement')->with('success', 'Berhasil menolak iklan');
     }
 
     public function payment_advertisement(Advertisement $advertisement)

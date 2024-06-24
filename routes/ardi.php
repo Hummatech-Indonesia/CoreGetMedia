@@ -48,5 +48,7 @@ Route::post('position-price', [PositionAdvertisementController::class, 'store'])
 Route::put('reject-advertisement/{advertisement}', [AdvertisementController::class, 'rejected'])->name('reject.advertisement.admin');
 Route::put('accepted-advertisement/{advertisement}', [AdvertisementController::class, 'accepted'])->name('accepted.advertisement.admin');
 
-Route::post('follow-author/{author}', [FollowerController::class, 'store'])->name('follow.author');
-Route::delete('unfollow-author/{author}', [FollowerController::class, 'destroy'])->name('unfollow.author');
+Route::middleware('auth')->group(function () {
+    Route::post('follow-author/{author}', [FollowerController::class, 'store'])->name('follow.author');
+    Route::delete('unfollow-author/{author}', [FollowerController::class, 'destroy'])->name('unfollow.author');
+});

@@ -17,33 +17,30 @@ class PositionAdvertisementSeeder extends Seeder
      */
     public function run(): void
     {
-
         PositionAdvertisement::create([
             'id' => 1,
             'image' => 'assets/iklan.png',
             'position' => AdvertisementEnum::TOP->value,
-            'price' => '100000',
             'page' => AdvertisementEnum::HOME->value,
         ]);
+
         PositionAdvertisement::create([
             'id' => 2,
             'image' => 'assets/iklan.png',
             'position' => AdvertisementEnum::RIGHT->value,
-            'price' => '100000',
             'page' => AdvertisementEnum::HOME->value,
         ]);
+
         PositionAdvertisement::create([
             'id' => 3,
             'image' => 'assets/iklan.png',
             'position' => AdvertisementEnum::UNDER->value,
-            'price' => '100000',
             'page' => AdvertisementEnum::HOME->value,
         ]);
         PositionAdvertisement::create([
             'id' => 4,
             'image' => 'assets/iklan.png',
             'position' => AdvertisementEnum::LEFT->value,
-            'price' => '100000',
             'page' => AdvertisementEnum::HOME->value,
         ]);
 
@@ -52,14 +49,12 @@ class PositionAdvertisementSeeder extends Seeder
             'id' => 5,
             'image' => 'assets/iklan.png',
             'position' => AdvertisementEnum::TOP->value,
-            'price' => '100000',
             'page' => AdvertisementEnum::SINGLEPOST->value,
         ]);
         PositionAdvertisement::create([
             'id' => 6,
             'image' => 'assets/iklan.png',
             'position' => AdvertisementEnum::RIGHT->value,
-            'price' => '100000',
             'page' => AdvertisementEnum::SINGLEPOST->value,
         ]);
         PositionAdvertisement::create([
@@ -67,14 +62,12 @@ class PositionAdvertisementSeeder extends Seeder
             'image' => 'assets/iklan.png',
 
             'position' => AdvertisementEnum::UNDER->value,
-            'price' => '100000',
             'page' => AdvertisementEnum::SINGLEPOST->value,
         ]);
         PositionAdvertisement::create([
             'id' => 8,
             'image' => 'assets/iklan.png',
             'position' => AdvertisementEnum::LEFT->value,
-            'price' => '100000',
             'page' => AdvertisementEnum::SINGLEPOST->value,
         ]);
 
@@ -84,7 +77,6 @@ class PositionAdvertisementSeeder extends Seeder
             'image' => 'assets/iklan.png',
 
             'position' => AdvertisementEnum::TOP->value,
-            'price' => '100000',
             'page' => AdvertisementEnum::CATEGORY->value,
         ]);
         PositionAdvertisement::create([
@@ -92,7 +84,6 @@ class PositionAdvertisementSeeder extends Seeder
             'image' => 'assets/iklan.png',
 
             'position' => AdvertisementEnum::RIGHT->value,
-            'price' => '100000',
             'page' => AdvertisementEnum::CATEGORY->value,
         ]);
         PositionAdvertisement::create([
@@ -100,7 +91,6 @@ class PositionAdvertisementSeeder extends Seeder
             'image' => 'assets/iklan.png',
 
             'position' => AdvertisementEnum::UNDER->value,
-            'price' => '100000',
             'page' => AdvertisementEnum::CATEGORY->value,
         ]);
         PositionAdvertisement::create([
@@ -108,7 +98,6 @@ class PositionAdvertisementSeeder extends Seeder
             'image' => 'assets/iklan.png',
 
             'position' => AdvertisementEnum::LEFT->value,
-            'price' => '100000',
             'page' => AdvertisementEnum::CATEGORY->value,
         ]);
 
@@ -118,7 +107,6 @@ class PositionAdvertisementSeeder extends Seeder
             'image' => 'assets/iklan.png',
 
             'position' => AdvertisementEnum::TOP->value,
-            'price' => '100000',
             'page' => AdvertisementEnum::SUBCATEGORY->value,
         ]);
         PositionAdvertisement::create([
@@ -126,7 +114,6 @@ class PositionAdvertisementSeeder extends Seeder
             'image' => 'assets/iklan.png',
 
             'position' => AdvertisementEnum::RIGHT->value,
-            'price' => '100000',
             'page' => AdvertisementEnum::SUBCATEGORY->value,
         ]);
         PositionAdvertisement::create([
@@ -134,7 +121,6 @@ class PositionAdvertisementSeeder extends Seeder
             'image' => 'assets/iklan.png',
 
             'position' => AdvertisementEnum::UNDER->value,
-            'price' => '100000',
             'page' => AdvertisementEnum::SUBCATEGORY->value,
         ]);
         PositionAdvertisement::create([
@@ -142,7 +128,6 @@ class PositionAdvertisementSeeder extends Seeder
             'image' => 'assets/iklan.png',
 
             'position' => AdvertisementEnum::LEFT->value,
-            'price' => '100000',
             'page' => AdvertisementEnum::SUBCATEGORY->value,
         ]);
     }

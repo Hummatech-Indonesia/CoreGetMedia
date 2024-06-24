@@ -30,9 +30,6 @@ class PositionAdvertisementController extends Controller
         $subcategories = $this->positionAdvertisement->getByPage(AdvertisementEnum::SUBCATEGORY->value);
         $allnews = $this->positionAdvertisement->getByPage(AdvertisementEnum::ALLNEWS->value);
 
-
-
-
         return view('pages.admin.advertisement.set-price', compact('home', 'singlepost', 'categories', 'subcategories','allnews'));
 
     }

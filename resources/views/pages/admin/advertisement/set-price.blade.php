@@ -73,7 +73,7 @@
                                 <h4 class="mb-4">Rp. {{ number_format($home->price, 0, ',', '.') }}</h4>
 
                                 <div class="d-flex justify-content-between">
-                                    <button type="button" data-page="{{$home->page}}" data-position="{{$home->position}}" data-price="{{ $home->price }}" class="btn mb-1 waves-effect waves-light btn-warning w-100" style="background-color: #FFD643; border: none">
+                                    <button type="button" data-page="{{$home->page}}" data-image="{{ $home->image }}" data-position="{{$home->position}}" data-price="{{ $home->price }}" class="btn mb-1 waves-effect waves-light btn-warning w-100" style="background-color: #FFD643; border: none">
                                         Edit
                                         <i class="ti ti-edit"></i>
                                     </button>
@@ -112,7 +112,7 @@
                                 <h4 class="mb-4">Rp. {{ number_format($singlepost->price, 0, ',', '.') }}</h4>
 
                                 <div class="d-flex justify-content-between">
-                                    <button type="button" data-page="{{$singlepost->page}}" data-position="{{$singlepost->position}}" data-price="{{ $singlepost->price }}" class="btn mb-1 waves-effect waves-light btn-warning w-100" style="background-color: #FFD643; border: none">
+                                    <button type="button" data-image="{{ $singlepost->image }}" data-page="{{$singlepost->page}}" data-position="{{$singlepost->position}}" data-price="{{ $singlepost->price }}" class="btn mb-1 waves-effect waves-light btn-warning w-100" style="background-color: #FFD643; border: none">
                                         Edit
                                         <i class="ti ti-edit"></i>
                                     </button>
@@ -151,7 +151,7 @@
                                 <h4 class="mb-4">Rp. {{ number_format($allnews->price, 0, ',', '.') }}</h4>
 
                                 <div class="d-flex justify-content-between">
-                                    <button type="button" data-page="{{$allnews->page}}" data-position="{{$allnews->position}}" data-price="{{ $allnews->price }}" class="btn mb-1 waves-effect waves-light btn-warning w-100" style="background-color: #FFD643; border: none">
+                                    <button type="button" data-image="{{ $category->image }}" data-page="{{$allnews->page}}" data-position="{{$allnews->position}}" data-price="{{ $allnews->price }}" class="btn mb-1 waves-effect waves-light btn-warning w-100" style="background-color: #FFD643; border: none">
                                         Edit
                                         <i class="ti ti-edit"></i>
                                     </button>
@@ -190,7 +190,7 @@
                                 <h4 class="mb-4">Rp. {{ number_format($category->price, 0, ',', '.') }}</h4>
 
                                 <div class="d-flex justify-content-between">
-                                    <button type="button" data-page="{{$category->page}}" data-position="{{$category->position}}" data-price="{{ $category->price }}" class="btn mb-1 waves-effect waves-light btn-warning w-100" style="background-color: #FFD643; border: none">
+                                    <button type="button" data-image="{{ $category->image }}" data-page="{{$category->page}}" data-position="{{$category->position}}" data-price="{{ $category->price }}" class="btn mb-1 waves-effect waves-light btn-warning w-100" style="background-color: #FFD643; border: none">
                                         Edit
                                         <i class="ti ti-edit"></i>
                                     </button>
@@ -229,7 +229,7 @@
                                 <h4 class="mb-4">Rp. {{ number_format($subcategory->price, 0, ',', '.') }}</h4>
 
                                 <div class="d-flex justify-content-between">
-                                    <button type="button" data-page="{{$subcategory->page}}" data-position="{{$subcategory->position}}" data-price="{{ $subcategory->price }}" class="btn mb-1 waves-effect waves-light btn-warning w-100" style="background-color: #FFD643; border: none">
+                                    <button type="button" data-page="{{$subcategory->page}}" data-image="{{ $subcategory->image }}" data-position="{{$subcategory->position}}" data-price="{{ $subcategory->price }}" class="btn mb-1 waves-effect waves-light btn-warning w-100" style="background-color: #FFD643; border: none">
                                         Edit
                                         <i class="ti ti-edit"></i>
                                     </button>
@@ -246,7 +246,6 @@
                         </div>
                     </div>
                 @empty
-
                 @endforelse
             </div>
         </div>
@@ -264,13 +263,20 @@
                     @method('post')
                     @csrf
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label for="inputText1" class="mb-2">Keterangan posisi & Ukuran</label>
-                            <input type="text" name="page" class="form-control mb-3" id="show-page" placeholder="Masukkan keterangan">
+                        {{-- <div class="form-group"> --}}
+                            {{-- <label for="inputText1" class="mb-2">Keterangan posisi & Ukuran</label> --}}
+                            <input hidden type="text" name="page" class="form-control mb-3" id="show-page" placeholder="Masukkan keterangan">
+                        {{-- </div> --}}
+                        <img src="" id="position-image" alt="">
+
+                        <div class="form-group mt-2">
+                            <label for="inputFile" class="mb-2">Preview</label>
+                            <input class="form-control mb-3" name="image" id="" type="file">
                         </div>
+
                         <div class="form-group">
-                            <label for="inputFile" class="mb-2">Detail Posisi</label>
-                            <input class="form-control mb-3" name="position" id="show-position" type="text">
+                            <label for="inputFile" class="mb-2">Posisi</label>
+                            <input class="form-select mb-3" readonly name="position" id="show-position" type="text">
                         </div>
                         <div class="form-group">
                             <label for="inputText2" class="mb-2">Harga</label>
@@ -327,11 +333,13 @@
         var page = $(this).data('page');
         var position = $(this).data('position');
         var price = $(this).data('price');
+        var image = $(this).data('image');
 
         $('#form-edit').attr('action', '/position-price');
         $('#show-page').val(page);
         $('#show-position').val(position);
         $('#show-price').val(price);
+        $('#position-image').attr('src' , image);
         $('#modal-update').modal('show');
     });
 
