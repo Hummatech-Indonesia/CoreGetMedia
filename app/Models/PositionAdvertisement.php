@@ -13,6 +13,7 @@ class PositionAdvertisement extends Model
 
     protected $fillable = [
         'page',
+        'image',
         'position',
         'price'
     ];
