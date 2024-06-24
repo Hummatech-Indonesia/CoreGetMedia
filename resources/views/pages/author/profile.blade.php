@@ -52,7 +52,7 @@
                                         <a type="button" data-bs-toggle="modal" data-bs-target="#modal-followers">
                                             <div class="text-center">
                                                 <i class="ti ti-user-circle fs-6 d-block mb-2"></i>
-                                                <h5 class="mb-0 fw-semibold lh-1">0</h5>
+                                                <h5 class="mb-0 fw-semibold lh-1">{{ $followers->count() }}</h5>
                                                 <p class="mb-0 fs-3">Pengikut</p>
                                             </div>
                                         </a>
@@ -60,7 +60,7 @@
                                         <a type="button" data-bs-toggle="modal" data-bs-target="#modal-following">
                                             <div class="text-center">
                                                 <i class="ti ti-user-check fs-6 d-block mb-2"></i>
-                                            <h5 class="mb-0 fw-semibold lh-1">0</h5>
+                                            <h5 class="mb-0 fw-semibold lh-1">{{ $followings->count() }}</h5>
                                             <p class="mb-0 fs-3">Mengikuti</p>
                                             </div>
                                         </a>
@@ -297,73 +297,167 @@
         </div>
 
         {{-- followers --}}
-        <div class="modal fade" id="modal-followers" tabindex="-1" aria-labelledby="tambahdataLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="tambahdataLabel">Pengikut
-                            <span class="mb-1 badge rounded-pill font-medium bg-light-primary text-primary ms-2">0</span>
-                        </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <form class="col-lg-12 col-md-12 col-sm-12 mb-3">
-                                {{-- < class="d-flex"> --}}
-                                    <div class="position-relative d-flex">
-                                        <div class="">
-                                            <input type="text" name="search" id="search-name" class="form-control search-chat py-2 px-5 ps-5"
-                                            value="{{ request('search') }}" style="width: 470px" placeholder="Cari..">
-                                            <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
-                                        </div>
-                                    </div>
-                                {{-- </> --}}
-                            </form>
-
-                                <div class="col-lg-2 col-md-2">
-                                    <div class="">
-                                        <ul class="navbar-nav mx-auto">
-                                            <div class="news-card-img mb-2 ms-2" style="padding-right: 0px;">
-                                                <a>
-                                                    <img src="{{ asset("default.png")  }}" alt="Image" width="45px" height="45px" style="border-radius: 50%; object-fit:cover;"/>
-                                                </a>
-                                            </div>
-
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-10 col-md-10">
-                                    <div class=""><p style="line-height: 0px;" class="mt-2"><b>Ardian</b></p></div>
-                                    <div class=""><p class="d-inline-block text-truncate" style="font-size: 14px;max-width: 150px;">
-                                            User
-                                    </p></div>
-                                </div>
-
-                                    <div class="col-lg-2 col-md-2">
-                                        <div class="d-flex justify-content-end">
-                                                <form action="#" method="POST">
-                                                    @method('post')
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-sm text-white px-4" style="background-color: #175A95">
-                                                        Ikuti
-                                                    </button>
-                                                </form>
-                                        </div>
-                                    </div>
+        <div class="modal fade" id="modal-followers" tabindex="-1" aria-labelledby="exampleModalLabel1">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header d-flex align-items-center">
+                    <h5 class="modal-title" id="tambahdataLabel">Pengikut
+                        <span class="mb-1 badge rounded-pill font-medium bg-light-primary text-primary ms-2">{{ $followers->count() }}</span>
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="col-lg-12 col-md-12 col-sm-12 mb-3">
+                        <div class="position-relative d-flex">
+                            <div class="">
+                                <input type="text" name="search" id="search-name" class="form-control search-chat px-5 ps-5"
+                                value="{{ request('search') }}" style="width: 470px" placeholder="Cari..">
+                                <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+                            </div>
                         </div>
+                    </form>
+                    <div class="row pt-3">
+                    @forelse ($followers as $follower)
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2">
+                                <div class="">
+                                    <ul class="navbar-nav mx-auto">
+                                        <div class="news-card-img mb-2 ms-2" style="padding-right: 0px;">
+                                            <a>
+                                                @if ($follower->user->image != null && Storage::disk('public')->exists($follower->user->image))
+                                                    <img src="{{ asset('storage/' . $follower->user->image) }}" style="border-radius: 50%; object-fit: cover;" class="mb-3" width="45px" height="45px">
+                                                @else
+                                                    <img style="border-radius: 50%; object-fit: cover" src="{{ asset('default.png') }}" width="45px" height="45px" alt="" class="w-100 h-100">
+                                                @endif
+                                            </a>
+                                        </div>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class=""><p style="line-height: 0px;" class="mt-2"><b>{{ $follower->user->name }}</b></p></div>
+                                <div class=""><p class="d-inline-block text-truncate" style="font-size: 14px;max-width: 150px;">{{ $follower->user->hasRole('author') ? 'Penulis' : 'Pengguna' }}</p></div>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <div class="d-flex justify-content-end">
+                                    @if ($follower->user->hasRole('author'))
+                                        @php
+                                            $already = App\Models\Follower::where('author_id', $author->id)->where('user_id', $follower->user_id)->first();
+                                            $userAuthor = App\Models\Author::where('user_id', $follower->user->id)->first();
+                                        @endphp 
+                                        @if ($already)
+                                            <form action="{{ route('unfollow.author', $userAuthor->id) }}" method="POST">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button type="submit" class="btn btn-sm text-white px-4" style="background-color: #175A95">
+                                                    Batal Ikuti
+                                                </button>
+                                            </form>
+                                        @else
+                                            <form action="{{ route('follow.author', $userAuthor->id) }}" method="POST">
+                                                @method('post')
+                                                @csrf
+                                                <button type="submit" class="btn btn-sm text-white px-4" style="background-color: #175A95">
+                                                    Ikuti
+                                                </button>
+                                            </form>
+                                        @endif
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    @empty
+                        <p class="text-center">Anda belum memiliki pengikut</p>
+                    @endforelse
                     </div>
                 </div>
             </div>
+            </div>
         </div>
+        {{-- followers --}}
 
         {{-- Following --}}
+        <div class="modal fade" id="modal-following" tabindex="-1" aria-labelledby="exampleModalLabel1">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header d-flex align-items-center">
+                    <h5 class="modal-title" id="tambahdataLabel">Mengikuti
+                        <span class="mb-1 badge rounded-pill font-medium bg-light-primary text-primary ms-2">{{ $followings->count() }}</span>
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="col-lg-12 col-md-12 col-sm-12 mb-3">
+                        <div class="position-relative d-flex">
+                            <div class="">
+                                <input type="text" name="search" id="search-name" class="form-control search-chat px-5 ps-5"
+                                value="{{ request('search') }}" style="width: 470px" placeholder="Cari..">
+                                <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="row pt-3">
+                    @forelse ($followings as $following)
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2">
+                                <div class="">
+                                    <ul class="navbar-nav mx-auto">
+                                        <div class="news-card-img mb-2 ms-2" style="padding-right: 0px;">
+                                            <a>
+                                                @if ($following->author->user->image != null && Storage::disk('public')->exists($following->author->user->image))
+                                                    <img src="{{ asset('storage/' . $following->author->user->image) }}" style="border-radius: 50%; object-fit: cover;" class="mb-3" width="45px" height="45px">
+                                                @else
+                                                    <img style="border-radius: 50%; object-fit: cover" src="{{ asset('default.png') }}" width="45px" height="45px" alt="" class="w-100 h-100">
+                                                @endif
+                                            </a>
+                                        </div>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class=""><p style="line-height: 0px;" class="mt-2"><b>{{ $following->author->user->name }}</b></p></div>
+                                <div class=""><p class="d-inline-block text-truncate" style="font-size: 14px;max-width: 150px;">{{ $following->author->user->hasRole('author') ? 'Penulis' : 'Pengguna' }}</p></div>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <div class="d-flex justify-content-end">
+                                    @php
+                                        $already = App\Models\Follower::where('author_id', $following->author_id)->where('user_id', auth()->user()->id)->first()
+                                    @endphp 
+                                    @if ($already)
+                                        <form action="{{ route('unfollow.author', $already->author_id) }}" method="POST">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button type="submit" class="btn btn-sm text-white px-4" style="background-color: #175A95">
+                                                Batal Ikuti
+                                            </button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('follow.author', $already->author_id) }}" method="POST">
+                                            @method('post')
+                                            @csrf
+                                            <button type="submit" class="btn btn-sm text-white px-4" style="background-color: #175A95">
+                                                Ikuti
+                                            </button>
+                                        </form>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    @empty
+                        <p class="text-center">Anda belum mengikuti siapapun</p>
+                    @endforelse
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+
         <div class="modal fade" id="modal-following" tabindex="-1" aria-labelledby="tambahdataLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 clasclass="modal-title" id="tambahdataLabel">Mengikuti
-                            <span class="mb-1 badge rounded-pill font-medium bg-light-primary text-primary ms-2">#</span>
+                            <span class="mb-1 badge rounded-pill font-medium bg-light-primary text-primary ms-2">{{ $followings->count() }}</span>
                         </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>

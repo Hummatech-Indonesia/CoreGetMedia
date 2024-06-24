@@ -171,7 +171,7 @@
                         <div class="sidebar-widget" style="width: 450px">
                             <h3 class="sidebar-widget-title">Kategori Populer</h3>
                             <ul class="category-widget list-style">
-                                @foreach ($CategoryPopulars as $category)
+                                @forelse ($CategoryPopulars as $category)
                                 <li><a data-toggle="tooltip" data-placement="top" title="{{ $category->name }}"
                                         href="{{ route('categories.show.user', ['category' => $category->slug]) }}"><img
                                             src="{{ asset('assets/img/icons/arrow-right.svg') }}"
@@ -188,7 +188,7 @@
                                         <h5>Tidak ada data</h5>
                                     </div>
                                 </div>
-                                @endforeach
+                                @endforelse
                             </ul>
                         </div>
                         @endif
@@ -197,13 +197,14 @@
 
                     @if ($trendings->isNotEmpty())
                     <div class="sidebar-widget" style="width: 450px">
-                        <h3 class="sidebar-widget-title">
+                        <h3 class="sidebar-widget-title mt-4">
                             Berita Popular
                         </h3>
                         @forelse ($trendings as $trending)
                         <div class="news-card-three">
                             <div class="news-card-img" style="height: 100px; width: 100px">
-                                <img src="{{ asset('storage/' . $trending->image) }}" alt="Image" class="img-popular" />
+                                <img src="{{ asset('storage/' . $trending->image) }}" alt="Image"
+                                    class="img-popular" />
                             </div>
                             <div class="news-card-info">
                                 <h3>

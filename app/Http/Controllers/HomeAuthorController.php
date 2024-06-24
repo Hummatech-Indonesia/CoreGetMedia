@@ -35,12 +35,14 @@ class HomeAuthorController extends Controller
         $newslike = $this->newsLike->count(auth()->user()->id);
         $newses = $this->news->whereUser(auth()->user()->id);
         $author = $this->author->whereUserId();
-        return view('pages.author.profile', compact('newses', 'newslike', 'newsPending', 'newsAccepted', 'newsReject', 'author'));
+        $followers = $this->follower->where('author_id', $author->id);
+        $followings = $this->follower->where('user_id', auth()->user()->id);
+        return view('pages.author.profile', compact('newses', 'newslike', 'newsPending', 'newsAccepted', 'newsReject', 'author', 'followers', 'followings'));
     }
 
     public function create()
     {
-        //
+        //  
     }
 
     public function store(Request $request)

@@ -153,7 +153,24 @@
                         @endif
                         <div class="">
                             <a href="{{ route('author.detail', $author->id) }}" class="btn btn-sm mt-3 mb-1 py-1 px-4 w-100 text-primary bg-light-primary" style="background-color: #CEE4F2; border-radius: 8px;">Detail</a>
-                            <button class="btn btn-sm mt-1 py-1 px-4 w-100 text-white" style="background-color: #175A95; border-radius: 8px;">Ikuti</button>
+                            @auth
+                                @php
+                                    $already = App\Models\Follower::where('author_id', $author->id)->where('user_id', auth()->user()->id)->first()
+                                @endphp 
+                            @endauth
+                            @if (Auth::check() && $already)
+                                <form action="{{ route('unfollow.author', $author->id) }}" method="POST">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button type="submit" class="btn btn-sm mt-1 py-1 px-4 w-100 text-white" style="background-color: #175A95; border-radius: 8px;">Batal Ikuti</button>
+                                </form>
+                            @else
+                                <form action="{{ route('follow.author', $author->id) }}" method="POST">
+                                    @method('post')
+                                    @csrf
+                                    <button type="submit" class="btn btn-sm mt-1 py-1 px-4 w-100 text-white" style="background-color: #175A95; border-radius: 8px;">Ikuti</button>
+                                </form>
+                            @endif
                         </div>
                     </div>
                     <div class="col-lg-9">
