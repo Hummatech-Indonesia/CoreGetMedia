@@ -311,7 +311,6 @@
             @empty
             @endforelse
         </div>
-    </div>
 
 @forelse ($accepted_advertisements as $accepted_advertisement)
 <div class="tab-pane fade" id="link1" role="tabpanel" aria-labelledby="link1-tab">
@@ -736,9 +735,8 @@
     </div>
 </div>
 
-
-
 </div>
+
 @endsection
 @section('script')
 <script>
