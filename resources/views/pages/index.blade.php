@@ -696,10 +696,12 @@ $popular_down_id = $popular_down->pluck('id');
                 </div>
                 @endif
 
+                @if($advertisement_rights->isNotEmpty())
                 <div class="sidebar">    
                     <img src="{{asset($advertisement_rights->image ? 'storage/'.$advertisement_rights->image : "default.png")}}" alt="">
                     {{-- <h3 class="sidebar-widget-title">Iklan</h3> --}}
                 </div>
+                @endif
 
 
             </div>
