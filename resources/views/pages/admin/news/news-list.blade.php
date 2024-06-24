@@ -7,6 +7,7 @@
         border-radius: 5px;
         /* padding: 25px; */
     }
+
 </style>
 @endsection
 
@@ -86,9 +87,9 @@
                         </i>
                     </a>
                     @endif
-                    <button data-bs-toggle="tooltip" title="Tolak" type="submit" style="background-color: #EF6E6E" class="btn btn-sm btn-delete text-white">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
-                            <path fill="#ffffff" d="M7 21q-.825 0-1.412-.587T5 19V6q-.425 0-.712-.288T4 5q0-.425.288-.712T5 4h4q0-.425.288-.712T10 3h4q.425 0 .713.288T15 4h4q.425 0 .713.288T20 5q0 .425-.288.713T19 6v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zm-7 11q.425 0 .713-.288T11 16V9q0-.425-.288-.712T10 8q-.425 0-.712.288T9 9v7q0 .425.288.713T10 17m4 0q.425 0 .713-.288T15 16V9q0-.425-.288-.712T14 8q-.425 0-.712.288T13 9v7q0 .425.288.713T14 17M7 6v13z" />
+                    <button type="button" style="background-color: #EF6E6E" class="btn btn-sm text-white btn-delete" data-id="{{$item->id}}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24">
+                            <path fill="#ffffff" d="M7 21q-.825 0-1.412-.587T5 19V6q-.425 0-.712-.288T4 5t.288-.712T5 4h4q0-.425.288-.712T10 3h4q.425 0 .713.288T15 4h4q.425 0 .713.288T20 5t-.288.713T19 6v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zm-7 11q.425 0 .713-.288T11 16V9q0-.425-.288-.712T10 8t-.712.288T9 9v7q0 .425.288.713T10 17m4 0q.425 0 .713-.288T15 16V9q0-.425-.288-.712T14 8t-.712.288T13 9v7q0 .425.288.713T14 17M7 6v13z"/>
                         </svg>
                     </button>
                     <a href="{{route('detail-news.admin', ['news' => $item->slug])}}" data-bs-toggle="tooltip" title="Detail" class="btn btn-sm btn-primary btn-detail" style="background-color: #0F4D8A;">
@@ -115,11 +116,11 @@
 </div>
 
 {{-- <x-delete-modal-component /> --}}
-<div class="modal fade" id="modal-delete" tabindex="-1" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+{{-- <div class="modal fade" id="modal-delete" tabindex="-1" aria-labelledby="mySmallModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <form id="form-delete" method="POST" class="modal-content">
-            {{-- @csrf
-                    @method('post') --}}
+            @csrf
+            @method('delete')
             <div class="modal-header d-flex align-items-center">
                 <h4 class="modal-title" id="myModalLabel">
                     Tolak Artikel
@@ -137,12 +138,39 @@
                     Batal
                 </button>
                 <button type="submit" class="btn btn-light-danger text-secondery font-medium waves-effect" data-bs-dismiss="modal">
-                    Tolak
+                    Hapus
+                </button>
+            </div>
+        </form>
+    </div>
+</div> --}}
+
+<div class="modal fade" id="modal-delete" tabindex="-1" aria-labelledby="tambahdataLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <form id="form-delete" class="modal-content" method="post">
+            @csrf
+            @method('delete')
+            <div class="modal-header d-flex align-items-center">
+                <h4 class="modal-title" id="myModalLabel">
+                    Hapus data
+                </h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Apakah anda yakin akan menghapus data ini?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light-danger text-danger font-medium waves-effect" data-bs-dismiss="modal">
+                    Batal
+                </button>
+                <button type="submit" class="btn btn-light-danger text-secondery font-medium waves-effect">
+                    Hapus
                 </button>
             </div>
         </form>
     </div>
 </div>
+
 
 @endsection
 
@@ -155,13 +183,13 @@
     $(document).ready(function() {
         $('#synopsis').summernote({
             toolbar: [
-                ['style', ['style']],
-                ['font', ['bold', 'underline', 'clear']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['table', ['table']],
-                ['insert', ['link', 'picture', 'video']],
-                ['view', ['fullscreen', 'codeview', 'help']]
+                ['style', ['style']]
+                , ['font', ['bold', 'underline', 'clear']]
+                , ['color', ['color']]
+                , ['para', ['ul', 'ol', 'paragraph']]
+                , ['table', ['table']]
+                , ['insert', ['link', 'picture', 'video']]
+                , ['view', ['fullscreen', 'codeview', 'help']]
             ]
         });
     });
@@ -196,18 +224,18 @@
 
     function splitDate(dateString) {
         const months = {
-            "Januari": 1,
-            "Februari": 2,
-            "Maret": 3,
-            "April": 4,
-            "Mei": 5,
-            "Juni": 6,
-            "Juli": 7,
-            "Agustus": 8,
-            "September": 9,
-            "Oktober": 10,
-            "November": 11,
-            "Desember": 12
+            "Januari": 1
+            , "Februari": 2
+            , "Maret": 3
+            , "April": 4
+            , "Mei": 5
+            , "Juni": 6
+            , "Juli": 7
+            , "Agustus": 8
+            , "September": 9
+            , "Oktober": 10
+            , "November": 11
+            , "Desember": 12
         };
 
         const dateParts = dateString.split(' ');
@@ -217,10 +245,27 @@
         const year = parseInt(dateParts[2]);
 
         return {
-            day,
-            month,
-            year
+            day
+            , month
+            , year
         };
     }
+
+    // $('.btn-delete').on('click', function() {
+    //     var id = $(this).data('id');
+    //     $('#form-delete').attr('action', '/delete-news/' + id);
+    //     console.log(id);
+    //     $('#modal-delete').modal('show');
+    // });
+
+    $(document).ready(function() {
+    $('.btn-delete').on('click', function() {
+        var id = $(this).data('id');
+        $('#form-delete').attr('action', '/delete-news/' + id);
+        console.log(id);
+        $('#modal-delete').modal('show');
+    });
+});
+
 </script>
 @endsection
