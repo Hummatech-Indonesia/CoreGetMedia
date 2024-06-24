@@ -3,6 +3,7 @@
 namespace App\Contracts\Repositories;
 
 use App\Contracts\Interfaces\AdvertisementInterface;
+use App\Enums\StatusEnum;
 use App\Models\Advertisement;
 
 class AdvertisementRepository extends BaseRepository implements AdvertisementInterface
@@ -59,6 +60,13 @@ class AdvertisementRepository extends BaseRepository implements AdvertisementInt
             ->when($user_id != null, function($q) use ($user_id) {
                 $q->where('user_id', $user_id);
             })
+            ->get();
+    }
+
+    public function whereAccepted(): mixed
+    {
+        return $this->model->query()
+            ->whereNotIn('status', [StatusEnum::CANCELED->value, StatusEnum::PENDING->value, StatusEnum::REJECT->value])
             ->get();
     }
 

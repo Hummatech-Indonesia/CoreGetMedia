@@ -52,7 +52,7 @@ class AdvertisementController extends Controller
 
     public function list_advertisement()
     {
-        $data = $this->advertisement->where(null, 'accepted');
+        $data = $this->advertisement->whereAccepted();
         return view('pages.admin.advertisement.advertisement-list', compact('data'));
     }
 
@@ -125,6 +125,15 @@ class AdvertisementController extends Controller
         return redirect('/status-advertisement-list')->with('success', 'Berhasil mengupdate iklan');
     }
 
+    public function published(Advertisement $advertisement)
+    {
+        $this->advertisement->update($advertisement->id, [
+            'status' => StatusEnum::PUBLISHED->value,
+            'feed' => StatusEnum::PUBLISHED->value
+        ]);
+        return redirect('/confirm-advertisement')->with('success', 'Berhasil menerima iklan');
+    }
+
     public function accepted(Request $request, Advertisement $advertisement)
     {
         $this->advertisement->update($advertisement->id, [
@@ -134,14 +143,12 @@ class AdvertisementController extends Controller
         ]);
         return redirect('/confirm-advertisement')->with('success', 'Berhasil menerima iklan');
     }
-    
+
     public function detail_accepted(Advertisement $advertisement)
     {
         $data = $this->advertisement->show($advertisement->id);
         return view('pages.user.advertisement.detail-payment', compact('data'));
     }
-
-
 
     public function rejected(Request $request, Advertisement $advertisement)
     {
