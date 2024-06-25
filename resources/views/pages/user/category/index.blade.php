@@ -152,7 +152,9 @@
                     </div>
                     @endforelse
                 </div>
-                <x-paginator :paginator="$latests" />
+                <div>
+                    <x-paginator :paginator="$latests" />
+                </div>
             </div>
 
             <div class="col-lg-4">
