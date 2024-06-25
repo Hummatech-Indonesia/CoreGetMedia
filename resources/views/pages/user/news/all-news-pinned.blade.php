@@ -31,7 +31,7 @@
 @section('content')
 <div class="col-lg-12">
     <div class="breadcrumb-wrap">
-        <h2 class="breadcrumb-title">Semua Berita Pinned - Terbaru</h2>
+        <h2 class="breadcrumb-title">Semua Berita Pin - Terbaru</h2>
         <ul class="breadcrumb-menu list-style">
             <li><a href="/">Beranda</a></li>
             <li>Semua Berita</li>

@@ -66,28 +66,32 @@
         <div class="row gx-5">
             <div class="col-lg-8">
                 @forelse ($newsTop as $item)
-                <div class="">
-                    <div class="news-card-four" style="height: 550px;">
-                        <div class="news-card-img">
-                            <a href="javascript:void(0)"> <img src="{{asset('storage/' . $item->image)}}" alt="Image" width="100%" style="object-fit: cover" height="450" /></a>
-                        </div>
+                <div class="news-card-four" style="height: 550px;">
+                    <div class="news-card-img">
+                        <a href="javascript:void(0)"> <img src="{{asset('storage/' . $item->image)}}" alt="Image" width="100%" style="object-fit: cover" height="450" /></a>
+                    </div>
 
-                        <div class="news-card-info">
-                            <h3><a data-toggle="tooltip" data-placement="top" title="Apex Legends Season 11 Start Date, Time, & What To Expect" href="{{ route('news.singlepost', ['news' => $item->slug]) }}">{!!
-                                    Illuminate\Support\Str::limit(strip_tags($item->name), 300, '...') !!}
-                                </a>
-                            </h3>
-                            <ul class="news-metainfo list-style">
-                                <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">{{ \Carbon\Carbon::parse($item->created_at)->translatedFormat('d F Y') }}</a>
-                                </li>
-                                <li><i class="fi fi-rr-eye"></i><a href="news-by-dateus">{{ $item->news_views_count ? $item->news_views_count : '0' }}x
-                                        dilihat</a></li>
-                            </ul>
-                        </div>
+                    <div class="news-card-info">
+                        <h3><a data-toggle="tooltip" data-placement="top" title="{{ $item->name }}" href="{{ route('news.singlepost', ['news' => $item->slug]) }}">{!!
+                                Illuminate\Support\Str::limit(strip_tags($item->name), 300, '...') !!}
+                            </a>
+                        </h3>
+                        <ul class="news-metainfo list-style">
+                            <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($item->created_at)->translatedFormat('d F Y') }}</a>
+                            </li>
+                            <li><i class="fi fi-rr-eye"></i><a href="javascript:void(0)">{{ $item->news_views_count ? $item->news_views_count : '0' }}x
+                                    dilihat</a></li>
+                        </ul>
                     </div>
                 </div>
                 @empty
                 @endforelse
+
+                @if ($advertisement_mids)
+                <div class="mt-4 mb-4">
+                    <img src="{{asset($advertisement_mids && $advertisement_mids->image != null ? 'storage/'.$advertisement_mids->image : "CONTOHIKLAN.png")}}" width="100%" height="181px" style="object-fit: cover" alt="">
+                </div>
+                @endif
 
                 <div class="mb-5">
                     @php
@@ -204,7 +208,13 @@
                         </div>
                         @endif
 
-                        @if($popularTags)
+                        @if ($advertisement_rights)
+                        <div class="sidebar mt-3 mb-4" style="width: 450px">
+                            <img src="{{asset($advertisement_rights && $advertisement_rights->image != null ? 'storage/'.$advertisement_rights->image : "CONTOHIKLAN.png")}}" width="100%" height="603px" style="object-fit: cover" alt="">
+                        </div>
+                        @endif
+
+                        @if($popularTags->isNotEmpty())
                         <div class="sidebar-widget" style="width: 450px">
                             <h3 class="sidebar-widget-title">Tag Populer</h3>
                             <ul class="tag-list list-style">

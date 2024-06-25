@@ -69,9 +69,6 @@
                                 <h6>Preview posisi</h6>
                                 <img src="{{ asset('assets/iklan.png') }}" alt="Nama Gambar" class="img-fluid mt-2 mb-4"
                                     style="max-width: 250px; border: none;">
-                                <h6 class="mb-2">Harga :</h6>
-                                <h4 class="mb-4">Rp. {{ number_format($home->price, 0, ',', '.') }}</h4>
-
                                 <div class="d-flex justify-content-between">
                                     <button type="button" data-page="{{$home->page}}" data-image="{{ $home->image }}" data-position="{{$home->position}}" data-price="{{ $home->price }}" class="btn mb-1 waves-effect waves-light btn-warning w-100" style="background-color: #FFD643; border: none">
                                         Edit
@@ -108,9 +105,6 @@
                                 <h6>Preview posisi</h6>
                                 <img src="{{ asset('assets/iklan.png') }}" alt="Nama Gambar" class="img-fluid mt-2 mb-4"
                                     style="max-width: 250px; border: none;">
-                                <h6 class="mb-2">Harga :</h6>
-                                <h4 class="mb-4">Rp. {{ number_format($singlepost->price, 0, ',', '.') }}</h4>
-
                                 <div class="d-flex justify-content-between">
                                     <button type="button" data-image="{{ $singlepost->image }}" data-page="{{$singlepost->page}}" data-position="{{$singlepost->position}}" data-price="{{ $singlepost->price }}" class="btn mb-1 waves-effect waves-light btn-warning w-100" style="background-color: #FFD643; border: none">
                                         Edit
@@ -147,9 +141,6 @@
                                 <h6>Preview posisi</h6>
                                 <img src="{{ asset('assets/iklan.png') }}" alt="Nama Gambar" class="img-fluid mt-2 mb-4"
                                     style="max-width: 250px; border: none;">
-                                <h6 class="mb-2">Harga :</h6>
-                                <h4 class="mb-4">Rp. {{ number_format($allnews->price, 0, ',', '.') }}</h4>
-
                                 <div class="d-flex justify-content-between">
                                     <button type="button" data-image="{{ $category->image }}" data-page="{{$allnews->page}}" data-position="{{$allnews->position}}" data-price="{{ $allnews->price }}" class="btn mb-1 waves-effect waves-light btn-warning w-100" style="background-color: #FFD643; border: none">
                                         Edit
@@ -186,9 +177,6 @@
                                 <h6>Preview posisi</h6>
                                 <img src="{{ asset('assets/iklan.png') }}" alt="Nama Gambar" class="img-fluid mt-2 mb-4"
                                     style="max-width: 250px; border: none;">
-                                <h6 class="mb-2">Harga :</h6>
-                                <h4 class="mb-4">Rp. {{ number_format($category->price, 0, ',', '.') }}</h4>
-
                                 <div class="d-flex justify-content-between">
                                     <button type="button" data-image="{{ $category->image }}" data-page="{{$category->page}}" data-position="{{$category->position}}" data-price="{{ $category->price }}" class="btn mb-1 waves-effect waves-light btn-warning w-100" style="background-color: #FFD643; border: none">
                                         Edit
@@ -225,9 +213,6 @@
                                 <h6>Preview posisi</h6>
                                 <img src="{{ asset('assets/iklan.png') }}" alt="Nama Gambar" class="img-fluid mt-2 mb-4"
                                     style="max-width: 250px; border: none;">
-                                <h6 class="mb-2">Harga :</h6>
-                                <h4 class="mb-4">Rp. {{ number_format($subcategory->price, 0, ',', '.') }}</h4>
-
                                 <div class="d-flex justify-content-between">
                                     <button type="button" data-page="{{$subcategory->page}}" data-image="{{ $subcategory->image }}" data-position="{{$subcategory->position}}" data-price="{{ $subcategory->price }}" class="btn mb-1 waves-effect waves-light btn-warning w-100" style="background-color: #FFD643; border: none">
                                         Edit
@@ -263,10 +248,7 @@
                     @method('post')
                     @csrf
                     <div class="modal-body">
-                        {{-- <div class="form-group"> --}}
-                            {{-- <label for="inputText1" class="mb-2">Keterangan posisi & Ukuran</label> --}}
-                            <input hidden type="text" name="page" class="form-control mb-3" id="show-page" placeholder="Masukkan keterangan">
-                        {{-- </div> --}}
+                        <input hidden type="text" name="page" class="form-control mb-3" id="show-page" placeholder="Masukkan keterangan">
                         <img src="" id="position-image" alt="">
 
                         <div class="form-group mt-2">
@@ -277,10 +259,6 @@
                         <div class="form-group">
                             <label for="inputFile" class="mb-2">Posisi</label>
                             <input class="form-select mb-3" readonly name="position" id="show-position" type="text">
-                        </div>
-                        <div class="form-group">
-                            <label for="inputText2" class="mb-2">Harga</label>
-                            <input type="number" name="price" class="form-control" id="show-price" placeholder="Masukkan harga">
                         </div>
                     </div>
                     <div class="modal-footer">

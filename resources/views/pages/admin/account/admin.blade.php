@@ -26,7 +26,6 @@
         </div>
     </div>
 </div>
-{{-- </div> --}}
 
 <div class="row">
     @forelse ($admins as $admin)
@@ -134,7 +133,7 @@
                     <div class="row">
                         <div class="col-lg-6 mb-3">
                             <label for="name" class="form-label">Nama:</label>
-                            <input type="text" id="name" name="name" placeholder="name" value="{{ old('name') }}" id="name-update" class="form-control @error('name') is-invalid @enderror">
+                            <input type="text" name="name" placeholder="name" value="{{ old('name') }}" id="name-update" class="form-control @error('name') is-invalid @enderror">
                             @error('name')
                             <span class="invalid-feedback" role="alert" style="color: red;">
                                 <strong>{{ $message }}</strong>
@@ -143,17 +142,8 @@
                         </div>
                         <div class="col-lg-6 mb-3">
                             <label for="email" class="form-label">Email:</label>
-                            <input type="text" id="email" name="email" placeholder="email" value="{{ old('email') }}" id="email-update" class="form-control @error('email') is-invalid @enderror">
+                            <input type="text" name="email" placeholder="email" value="{{ old('email') }}" id="email-update" class="form-control @error('email') is-invalid @enderror">
                             @error('email')
-                            <span class="invalid-feedback" role="alert" style="color: red;">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                        <div class="col-lg-6 mb-3">
-                            <label for="password" class="form-label">Password:</label>
-                            <input type="password" id="password" name="password" placeholder="password" id="password-update" class="form-control @error('password') is-invalid @enderror">
-                            @error('password')
                             <span class="invalid-feedback" role="alert" style="color: red;">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -182,9 +172,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-
                 <p>Apakah anda yakin akan menghapus data ini? </p>
-
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light-danger text-danger font-medium waves-effect"
@@ -209,7 +197,7 @@
         var name = $(this).data('name');
         var email = $(this).data('email');
         var password = $(this).data('password');
-        $('#form-update').attr('action', '/admin-account-list/' + id);
+        $('#form-update').attr('action', '/admin-account-update/' + id);
         $('#name-update').val(name);
         $('#email-update').val(email);
         $('#password-update').val(password);

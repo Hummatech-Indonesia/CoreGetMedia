@@ -51,45 +51,55 @@ class AdvertisementRepository extends BaseRepository implements AdvertisementInt
     public function get(): mixed
     {
         return $this->model->query()
-        ->where('status', AdvertisementEnum::ACCEPTED->value)
-        ->where('feed', AdvertisementEnum::PAID)
+            ->where('status', AdvertisementEnum::ACCEPTED->value)
+            ->where('feed', AdvertisementEnum::PAID)
             ->get();
     }
 
-    public function wherePosition($advertisement,$query): mixed
+    public function getall(): mixed
+    {
+        return $this->model->query()
+            ->get();
+    }
+
+    public function wherePosition($page,$query): mixed
     {
         return $this->model->query()
         ->where('status', AdvertisementEnum::PUBLISHED->value)
         ->where('feed', AdvertisementEnum::PAID)
         ->whereDate('start_date', '<=', now())
         ->whereDate('end_date', '>=', now())
-        ->when($query == 'right', function($q){
+        ->when($query == 'right', function($q) use ($page) {
             $q
             ->where('position', AdvertisementEnum::RIGHT->value)
+            ->where('page', $page)
             ->inRandomOrder()
             ->take(1);
         })
-        ->when($query == 'left', function($q){
+        ->when($query == 'left', function($q) use ($page) {
             $q
             ->where('position', AdvertisementEnum::LEFT->value)
             ->inRandomOrder()
             ->take(1);
         })
-        ->when($query == 'top', function($q){
+        ->when($query == 'top', function($q) use ($page) {
             $q
             ->where('position', AdvertisementEnum::TOP->value)
+            ->where('page', $page)
             ->inRandomOrder()
             ->take(1);
         })
-        ->when($query == 'under', function($q){
+        ->when($query == 'under', function($q) use ($page) {
             $q
             ->where('position', AdvertisementEnum::UNDER->value)
+            ->where('page', $page)
             ->inRandomOrder()
             ->take(1);
         })
-        ->when($query == 'mid', function($q){
+        ->when($query == 'mid', function($q) use ($page) {
             $q
             ->where('position', AdvertisementEnum::MID->value)
+            ->where('page', $page)
             ->inRandomOrder()
             ->take(1);
         })
@@ -139,5 +149,10 @@ class AdvertisementRepository extends BaseRepository implements AdvertisementInt
         return $this->model->query()
             ->findOrFail($id)
             ->update($data);
+    }
+
+    public function withtrash($id): mixed
+    {
+        return $this->model->query()->withTrashed()->FindOrFail($id);
     }
 }

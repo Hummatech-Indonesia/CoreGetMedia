@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Interfaces\AdvertisementInterface;
 use Illuminate\Http\Request;
 use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\NewsCategoryInterface;
@@ -9,6 +10,7 @@ use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\NewsSubCategoryInterface;
 use App\Contracts\Interfaces\TagInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
+use App\Enums\AdvertisementEnum;
 use App\Models\NewsSubCategory;
 use App\Http\Requests\StoreNewsSubCategoryRequest;
 use App\Http\Requests\UpdateNewsSubCategoryRequest;
@@ -21,6 +23,7 @@ class NewsSubCategoryController extends Controller
     private CategoryInterface $category;
     private SubCategoryInterface $subCategories;
     private TagInterface $tags;
+    private AdvertisementInterface $advertisements;
 
     public function __construct(
         NewsSubCategoryInterface $newsSubCategory,
@@ -28,7 +31,8 @@ class NewsSubCategoryController extends Controller
         NewsCategoryInterface $newsCategory,
         NewsInterface $news,
         CategoryInterface $category,
-        SubCategoryInterface $subCategories
+        SubCategoryInterface $subCategories,
+        AdvertisementInterface $advertisements
     ) {
         $this->newsSubCategory = $newsSubCategory;
         $this->newsCategory = $newsCategory;
@@ -36,6 +40,7 @@ class NewsSubCategoryController extends Controller
         $this->subCategories = $subCategories;
         $this->news = $news;
         $this->tags = $tags;
+        $this->advertisements = $advertisements;
     }
 
     /**
@@ -57,6 +62,12 @@ class NewsSubCategoryController extends Controller
         $popularCategory = $this->category->showWithCount();
         $popularTags = $this->tags->showWithCount();
 
+        $advertisement_rights = $this->advertisements->wherePosition(AdvertisementEnum::SUBCATEGORY, 'right');
+        $advertisement_lefts = $this->advertisements->wherePosition(AdvertisementEnum::SUBCATEGORY, 'left');
+        $advertisement_tops = $this->advertisements->wherePosition(AdvertisementEnum::SUBCATEGORY, 'top');
+        $advertisement_unders = $this->advertisements->wherePosition(AdvertisementEnum::SUBCATEGORY, 'under');
+        $advertisement_mids = $this->advertisements->wherePosition(AdvertisementEnum::SUBCATEGORY, 'mid');
+
         return view(
             'pages.user.subcategory.index',
             compact(
@@ -67,7 +78,12 @@ class NewsSubCategoryController extends Controller
                 'popularCategory',
                 'newsPopulars',
                 'subcategory',
-                'popularTags'
+                'popularTags',
+                'advertisement_rights',
+                'advertisement_lefts',
+                'advertisement_tops',
+                'advertisement_unders',
+                'advertisement_mids'
             )
         );
     }
@@ -89,6 +105,11 @@ class NewsSubCategoryController extends Controller
         $newsPopulars = $this->news->whereSubCategory($subCategory_id, 'popular');
         $newsTop = $this->news->whereSubCategory($subCategory_id, 'top');
 
+        $advertisement_rights = $this->advertisements->wherePosition(AdvertisementEnum::SUBCATEGORY, 'right');
+        $advertisement_lefts = $this->advertisements->wherePosition(AdvertisementEnum::SUBCATEGORY, 'left');
+        $advertisement_tops = $this->advertisements->wherePosition(AdvertisementEnum::SUBCATEGORY, 'top');
+        $advertisement_unders = $this->advertisements->wherePosition(AdvertisementEnum::SUBCATEGORY, 'under');
+        $advertisement_mids = $this->advertisements->wherePosition(AdvertisementEnum::SUBCATEGORY, 'mid');
         return view(
             'pages.user.subcategory.all-subcategory',
             compact(
@@ -99,7 +120,12 @@ class NewsSubCategoryController extends Controller
                 'popularCategory',
                 'popularTags',
                 'newsPopulars',
-                'newsTop'
+                'newsTop',
+                'advertisement_rights',
+                'advertisement_lefts',
+                'advertisement_tops',
+                'advertisement_unders',
+                'advertisement_mids'
             )
         );
     }

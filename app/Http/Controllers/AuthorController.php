@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Interfaces\AdvertisementInterface;
 use App\Contracts\Interfaces\AuthorInterface;
 use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\NewsInterface;
@@ -9,6 +10,7 @@ use App\Contracts\Interfaces\NewsLikeInterface;
 use App\Contracts\Interfaces\NewsViewInterface;
 use App\Contracts\Interfaces\PopularInterface;
 use App\Contracts\Interfaces\UserInterface;
+use App\Enums\AdvertisementEnum;
 use App\Enums\AuthorEnum;
 use App\Enums\RoleEnum;
 use App\Models\Author;
@@ -32,9 +34,9 @@ class AuthorController extends Controller
     private AuthorService $service;
     private UserService $userService;
     private AuthorChartService $authorChart;
+    private AdvertisementInterface $advertisements;
 
-
-    public function __construct(UserInterface $user, AuthorInterface $author, AuthorService $service, NewsInterface $news, CategoryInterface $category, PopularInterface $popular, NewsLikeInterface $newsLike, NewsViewInterface $newsView, UserService $userService, AuthorChartService $authorChart)
+    public function __construct(UserInterface $user, AuthorInterface $author, AuthorService $service, NewsInterface $news, CategoryInterface $category, PopularInterface $popular, NewsLikeInterface $newsLike, NewsViewInterface $newsView, UserService $userService, AuthorChartService $authorChart, AdvertisementInterface $advertisements)
     {
         $this->author = $author;
         $this->news = $news;
@@ -46,6 +48,7 @@ class AuthorController extends Controller
         $this->newsView = $newsView;
         $this->userService = $userService;
         $this->authorChart = $authorChart;
+        $this->advertisements = $advertisements;
     }
 
     /**
@@ -103,7 +106,14 @@ class AuthorController extends Controller
         $newses = $this->news->whereUser($author->user_id);
         $popularCategories = $this->category->showWithCount();
         $popularNewses = $this->popular->getpopular();
-        return view('pages.user.author.detail-author', compact('author', 'newses', 'popularCategories', 'popularNewses'));
+
+        $advertisement_rights = $this->advertisements->wherePosition(AdvertisementEnum::DETAIL_AUTHOR, 'right');
+        $advertisement_lefts = $this->advertisements->wherePosition(AdvertisementEnum::DETAIL_AUTHOR, 'left');
+        $advertisement_tops = $this->advertisements->wherePosition(AdvertisementEnum::DETAIL_AUTHOR, 'top');
+        $advertisement_unders = $this->advertisements->wherePosition(AdvertisementEnum::DETAIL_AUTHOR, 'under');
+        $advertisement_mids = $this->advertisements->wherePosition(AdvertisementEnum::DETAIL_AUTHOR, 'mid');
+        
+        return view('pages.user.author.detail-author', compact('author', 'newses', 'popularCategories', 'popularNewses', 'advertisement_rights', 'advertisement_lefts', 'advertisement_tops', 'advertisement_unders', 'advertisement_mids'));
     }
 
     public function statistic()
@@ -158,12 +168,15 @@ class AuthorController extends Controller
         $user->roles()->detach();
         $user->permissions()->detach();
         $user->assignRole(RoleEnum::AUTHOR->value);
-        return redirect()->back()->with(['success' => 'Author Berhasil Dikonfirmasi']);
+        return back()->with(['success' => 'Author Berhasil Dikonfirmasi']);
     }
 
-    public function reject(Author $author)
+    public function reject(Request $request, Author $author)
     {
-        $this->author->update($author->id, ['status' => AuthorEnum::REJECT->value]);
+        $this->author->update($author->id, [
+            'status' => AuthorEnum::REJECT->value,
+            'reject_description' => $request->reject_description,
+        ]);
         return redirect()->back()->with(['success' => 'Author Berhasil Tolak']);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Interfaces\AdvertisementInterface;
 use App\Models\NewsTag;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreNewsTagRequest;
@@ -10,6 +11,7 @@ use App\Contracts\Interfaces\NewsTagInterface;
 use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\TagInterface;
 use App\Contracts\Interfaces\CategoryInterface;
+use App\Enums\AdvertisementEnum;
 
 class NewsTagController extends Controller
 {
@@ -17,13 +19,15 @@ class NewsTagController extends Controller
     private TagInterface $tag;
     private NewsTagInterface $tags;
     private CategoryInterface $category;
+    private AdvertisementInterface $advertisements;
 
-    public function __construct(NewsInterface $news, TagInterface $tag, NewsTagInterface $tags, CategoryInterface $category)
+    public function __construct(NewsInterface $news, TagInterface $tag, NewsTagInterface $tags, CategoryInterface $category, AdvertisementInterface $advertisements)
     {
         $this->news = $news;
         $this->tag = $tag;
         $this->tags = $tags;
         $this->category = $category;
+        $this->advertisements = $advertisements;
     }
 
     /**
@@ -40,6 +44,12 @@ class NewsTagController extends Controller
         $CategoryPopulars = $this->category->showWithCount();
         $trendings = $this->news->newsPopular();
         $popularTags = $this->tag->showWithCount();
+
+        $advertisement_rights = $this->advertisements->wherePosition(AdvertisementEnum::TAG, 'right');
+        $advertisement_lefts = $this->advertisements->wherePosition(AdvertisementEnum::TAG, 'left');
+        $advertisement_tops = $this->advertisements->wherePosition(AdvertisementEnum::TAG, 'top');
+        $advertisement_unders = $this->advertisements->wherePosition(AdvertisementEnum::TAG, 'under');
+        $advertisement_mids = $this->advertisements->wherePosition(AdvertisementEnum::TAG, 'mid');
 
         return view('pages.user.tag.index', compact('news_tags', 'news', 'newsTags', 'CategoryPopulars', 'trendings', 'popularTags'));
     }
@@ -82,6 +92,11 @@ class NewsTagController extends Controller
         $trendings = $this->news->whereCategory($news->id, $query);
         $popularTags = $this->tag->showWithCount();
 
+        $advertisement_rights = $this->advertisements->wherePosition(AdvertisementEnum::TAG, 'right');
+        $advertisement_lefts = $this->advertisements->wherePosition(AdvertisementEnum::TAG, 'left');
+        $advertisement_tops = $this->advertisements->wherePosition(AdvertisementEnum::TAG, 'top');
+        $advertisement_unders = $this->advertisements->wherePosition(AdvertisementEnum::TAG, 'under');
+        $advertisement_mids = $this->advertisements->wherePosition(AdvertisementEnum::TAG, 'mid');
         return view('pages.user.tag.all-tag', compact('news', 'newsTags', 'CategoryPopulars', 'trendings', 'popularTags'));
     }
 

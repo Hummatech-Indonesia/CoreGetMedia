@@ -16,7 +16,8 @@ class Author extends Model
         'cv',
         'user_id',
         'description',
-        'status'
+        'status',
+        'reject_description'
     ];
 
     protected $primaryKey = 'id';

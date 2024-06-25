@@ -35,13 +35,14 @@ class AdvertisementController extends Controller
      */
     public function index()
     {
-        $all_advertisements = $this->advertisement->get();
+        $all_advertisements = $this->advertisement->getall();
         $pending_advertisements = $this->advertisement->where(auth()->user()->id, 'pending');
         $accepted_advertisements = $this->advertisement->where(auth()->user()->id, 'accepted');
         $reject_advertisements = $this->advertisement->where(auth()->user()->id, 'reject');
         $published_advertisements = $this->advertisement->where(auth()->user()->id, 'published');
+        $drafts = Advertisement::onlyTrashed()->get();
 
-        return view('pages.user.advertisement.status-advertisement', compact('all_advertisements', 'pending_advertisements', 'accepted_advertisements', 'reject_advertisements', 'published_advertisements'));
+        return view('pages.user.advertisement.status-advertisement', compact('all_advertisements', 'pending_advertisements', 'accepted_advertisements', 'reject_advertisements', 'published_advertisements', 'drafts'));
     }
 
     public function list_confirm()
@@ -88,7 +89,7 @@ class AdvertisementController extends Controller
         $data = $this->service->store($request);
         $advertisement = $this->advertisement->store($data);
         $advertisement->delete();
-        return back()->with('success', 'Berhasil menyimpan data iklan');
+        return redirect('/status-advertisement-list')->with('success', 'Berhasil menyimpan data iklan');
     }
 
     // $advertisements = Advertisement::whereNull('deleted_at')->get();
@@ -105,11 +106,11 @@ class AdvertisementController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Advertisement $advertisement)
+    public function edit($id)
     {
-        $posisi = $this->position->get();
-        $data = $this->advertisement->show($advertisement->id);
-        return view('pages.user.advertisement.update-advertisemenet', compact('data', 'posisi'));
+        $positions = $this->position->get();
+        $data = $this->advertisement->withtrash($id);
+        return view('pages.user.advertisement.update-advertisemenet', compact('data', 'positions'));
     }
 
     /**

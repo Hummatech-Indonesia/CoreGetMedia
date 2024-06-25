@@ -255,6 +255,10 @@ Route::get('detail-payment-advertisemenet/{advertisement}', [AdvertisementContro
 Route::get('detail-advertisement-accepted/{advertisement}', [AdvertisementController::class, 'detail_accepted'])->name('detail-advertisement');
 
 Route::post('create-advertisement', [AdvertisementController::class, 'store'])->name('create.advertisement');
+Route::post('draft-advertisement', [AdvertisementController::class, 'draft'])->name('draft.advertisement');
+
+Route::get('show-edit-advertisement/{id}', [AdvertisementController::class, 'edit'])->name('show.edit.advertisement');
+
 Route::put('update-advertisement/{advertisement}', [AdvertisementController::class, 'update'])->name('update.advertisement');
 Route::delete('delete-advertisement/{advertisement}', [AdvertisementController::class, 'destroy'])->name('delete.advertisement');
 Route::put('cencel-advertisement/{advertisement}', [AdvertisementController::class, 'cancel'])->name('cancel.advertisement');
@@ -264,9 +268,9 @@ Route::post('about-getmedia', [AboutGetController::class, 'store'])->name('about
 Route::put('about-getmedia/{about}', [AboutGetController::class, 'update'])->name('about-getmedia.update');
 
 Route::get('admin-account-list', [AdminController::class, 'index'])->name('admin-account.list.admin');
-Route::post('admin-account-list', [AdminController::class, 'store'])->name('admin-account.store');
+Route::post('admin-account-store', [AdminController::class, 'store'])->name('admin-account.store');
 
-Route::put('admin-account-list/{admin}', [AdminController::class, 'update'])->name('admin-account.update');
+Route::put('admin-account-update/{admin}', [AdminController::class, 'update'])->name('admin-account.update');
 Route::delete('admin-account-list/{user}', [AdminController::class, 'destroy'])->name('admin-account.delete');
 
 

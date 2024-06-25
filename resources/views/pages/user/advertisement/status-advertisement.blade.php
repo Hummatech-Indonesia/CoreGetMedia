@@ -648,7 +648,8 @@
                                     <path
                                         d="M128 405.429C128 428.846 147.198 448 170.667 448h170.667C364.802 448 384 428.846 384 405.429V160H128v245.429zM416 96h-80l-26.785-32H202.786L176 96H96v32h320V96z"
                                         fill="#ffffff" />
-                                </svg></button>
+                                </svg>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -665,92 +666,106 @@
 
 
 <div class="tab-pane fade" id="link4" role="tabpanel" aria-labelledby="link4-tab">
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-12 col-lg-2">
-                        <div class="mb-2">
-                            <img src="" alt="" width="290px" height="180px" class="w-100"
-                                style="width: 100%; object-fit:cover;">
-                        </div>
-                    </div>
-                    <div class="row col-md-12 col-lg-6">
-                        <div class="row col-lg-6">
-                            <div class="col-lg-6 mb-3">
-                                <div class="fs-4 text-black">
-                                    Jenis Iklan:
-                                </div>
-                                <div class="fs-4 mt-2">Gambar</div>
-                                <!-- <div class="fs-4 mt-2">Video</div> -->
-                            </div>
-                            <div class="col-lg-6 mb-3">
-                                <div class="fs-4 text-black">
-                                    Tanggal Awal:
-                                </div>
-                                <div class="fs-4 mt-2">24 Juni 2024</div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="fs-4 text-black">
-                                    Halaman:
-                                </div>
-                                <div class="fs-4 mt-2">Beranda</div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="fs-4 text-black">
-                                    Tanggal Akhir:
-                                </div>
-                                <div class="fs-4 mt-2">25 Juni 2024</div>
+    @forelse ($drafts as $draft)
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-2">
+                            <div class="mb-2">
+                                <img src="{{ asset('storage/' . $draft->image) }}" alt="" width="290px"
+                                    height="180px" class="w-100" style="width: 100%; object-fit:cover;">
                             </div>
                         </div>
+                        <div class="row col-md-12 col-lg-6">
+                            <div class="row col-lg-6">
+                                <div class="col-lg-6 mb-3">
+                                    <div class="fs-4 text-black">
+                                        Jenis Iklan:
+                                    </div>
+                                    @if ($draft->type == 'photo')
+                                    <div class="fs-4 mt-2">Gambar</div>
+                                    @elseif ($draft->type == 'video')
+                                    <div class="fs-4 mt-2">Video</div>
+                                    @endif
+                                </div>
+                                <div class="col-lg-6 mb-3">
+                                    <div class="fs-4 text-black">
+                                        Tanggal Awal:
+                                    </div>
+                                    <div class="fs-4 mt-2">{{ $draft->start_date }}</div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="fs-4 text-black">
+                                        Halaman:
+                                    </div>
+                                    <div class="fs-4 mt-2">{{ $draft->page }}</div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="fs-4 text-black">
+                                        Tanggal Akhir:
+                                    </div>
+                                    <div class="fs-4 mt-2">{{ $draft->end_date }}</div>
+                                </div>
+                            </div>
 
-                        <div class="col-lg-6">
-                            <div class="col-lg-12">
-                                <div class="fs-4 text-black">
-                                    URL:
+                            <div class="col-lg-6">
+                                <div class="col-lg-12">
+                                    <div class="fs-4 text-black">
+                                        URL:
+                                    </div>
+                                    <div class="fs-4 mt-2">{{ $draft->url }}</div>
                                 </div>
-                                <div class="fs-4 mt-2">contoh-url.com</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-12 col-lg-4">
-                        <div class="d-flex justify-content-end gap-2">
+                        <div class="col-md-12 col-lg-4">
+                            <div class="d-flex justify-content-end gap-2">
+                                <div class="d-flex justify-content-end">
+                                    <div class="text-md-right">
+                                        <span class="badge bg-light-success text-success fs-4 px-3 py-2">
+                                            Draft
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex mt-4 justify-content-end">
+                                Apr 25, 2024
+                            </div>
+
                             <div class="d-flex justify-content-end">
-                                <div class="text-md-right">
-                                    <span class="badge bg-light-success text-success fs-4 px-3 py-2">
-                                        Draft
-                                    </span>
-                                </div>
+                                <button type="button" id="btn-delete" data-id="{{ $draft->id }}"
+                                    class="btn m-1 mt-5 btn-delete text-white px-4 py-1" style="background-color: #C94F4F;">
+                                    Hapus
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24">
+                                        <path fill="#ffffff"
+                                            d="m12 12.708l-5.246 5.246q-.14.14-.344.15t-.364-.15t-.16-.354t.16-.354L11.292 12L6.046 6.754q-.14-.14-.15-.344t.15-.364t.354-.16t.354.16L12 11.292l5.246-5.246q.14-.14.345-.15q.203-.01.363.15t.16.354t-.16.354L12.708 12l5.246 5.246q.14.14.15.345q.01.203-.15.363t-.354.16t-.354-.16z" />
+                                    </svg>
+                                </button>
+
+                                <a href="{{ route('show.edit.advertisement', ['id' => $draft->id]) }}"
+                                    class="btn btn-sm m-1 mt-5" style="background-color: #FFD643;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24">
+                                        <path fill="#ffffff"
+                                            d="M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h8.925l-2 2H5v14h14v-6.95l2-2V19q0 .825-.587 1.413T19 21zm4-6v-4.25l9.175-9.175q.3-.3.675-.45t.75-.15q.4 0 .763.15t.662.45L22.425 3q.275.3.425.663T23 4.4q0 .375-.137.738t-.438.662L13.25 15zM21.025 4.4l-1.4-1.4zM11 13h1.4l5.8-5.8l-.7-.7l-.725-.7L11 11.575zm6.5-6.5l-.725-.7zl.7.7z" />
+                                    </svg>
+                                </a>
+
+                                <a href="{{ route('show.edit.advertisement', ['id' => $draft->id]) }}" class="btn m-1 mt-5 text-white" style="background-color: #175A95;">
+                                    Lanjut Mengedit
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
+                                        <path fill="#ffffff"
+                                            d="m13.292 12l-4.6-4.6l.708-.708L14.708 12L9.4 17.308l-.708-.708z" />
+                                    </svg>
+                                </a>
                             </div>
-                        </div>
-
-                        <div class="d-flex mt-4 justify-content-end">
-                            Apr 25, 2024
-                        </div>
-
-                        <div class="d-flex justify-content-end">
-                            <button type="button" id="btn-cencel" data-id=""
-                                class="btn m-1 mt-5 btn-cencel text-white px-4 py-1" style="background-color: #C94F4F;">
-                                Hapus
-                                <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24">
-                                    <path fill="#ffffff"
-                                        d="m12 12.708l-5.246 5.246q-.14.14-.344.15t-.364-.15t-.16-.354t.16-.354L11.292 12L6.046 6.754q-.14-.14-.15-.344t.15-.364t.354-.16t.354.16L12 11.292l5.246-5.246q.14-.14.345-.15q.203-.01.363.15t.16.354t-.16.354L12.708 12l5.246 5.246q.14.14.15.345q.01.203-.15.363t-.354.16t-.354-.16z" />
-                                </svg>
-                            </button>
-
-                            <a href="#" class="btn m-1 mt-5 text-white" style="background-color: #175A95;">
-                                Lanjut Mengedit
-                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
-                                    <path fill="#ffffff"
-                                        d="m13.292 12l-4.6-4.6l.708-.708L14.708 12L9.4 17.308l-.708-.708z" />
-                                </svg>
-                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    @empty
+    @endforelse
 </div>
 
 </div>

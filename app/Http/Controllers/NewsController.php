@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Interfaces\AdvertisementInterface;
 use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\CommentInterface;
 use App\Contracts\Interfaces\NewsCategoryInterface;
@@ -13,6 +14,7 @@ use App\Contracts\Interfaces\NewsViewInterface;
 use App\Contracts\Interfaces\PopularInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\TagInterface;
+use App\Enums\AdvertisementEnum;
 use App\Enums\NewsEnum;
 use App\Models\News;
 use App\Http\Requests\StoreNewsRequest;
@@ -43,6 +45,7 @@ class NewsController extends Controller
     private NewsViewService $viewService;
     private PopularInterface $popularNews;
     private ImageContentService $ImageContent;
+    private AdvertisementInterface $advertisements;
 
     public function __construct(
         NewsInterface $news,
@@ -59,8 +62,8 @@ class NewsController extends Controller
         NewsService $service,
         PopularInterface $popularNews,
         ImageContentService $ImageContent,
-        )
-    {
+        AdvertisementInterface $advertisements
+    ) {
         $this->news = $news;
         $this->categories = $categories;
         $this->subcategories = $subcategories;
@@ -78,6 +81,7 @@ class NewsController extends Controller
 
         $this->popularNews = $popularNews;
         $this->ImageContent = $ImageContent;
+        $this->advertisements = $advertisements;
     }
     /**
      * Display a listing of the resource.
@@ -223,7 +227,13 @@ class NewsController extends Controller
 
         $CategoryPopulars = $this->categories->showWithCount();
         $popularTags = $this->tags->showWithCount();
-        return view('pages.user.news.all-news-pinned', compact('newsPin', 'subCategories', 'CategoryPopulars', 'popularTags'));
+
+        $advertisement_rights = $this->advertisements->wherePosition(AdvertisementEnum::ALLNEWS_PINNED, 'right');
+        $advertisement_lefts = $this->advertisements->wherePosition(AdvertisementEnum::ALLNEWS_PINNED, 'left');
+        $advertisement_tops = $this->advertisements->wherePosition(AdvertisementEnum::ALLNEWS_PINNED, 'top');
+        $advertisement_unders = $this->advertisements->wherePosition(AdvertisementEnum::ALLNEWS_PINNED, 'under');
+        $advertisement_mids = $this->advertisements->wherePosition(AdvertisementEnum::ALLNEWS_PINNED, 'mid');
+        return view('pages.user.news.all-news-pinned', compact('newsPin', 'subCategories', 'CategoryPopulars', 'popularTags', 'advertisement_rights', 'advertisement_lefts', 'advertisement_tops', 'advertisement_unders', 'advertisement_mids'));
     }
 
     /**
@@ -241,7 +251,7 @@ class NewsController extends Controller
         $subcategories = $this->subcategories->get();
         $tags = $this->tags->get();
 
-        return view('pages.author.news.update', compact('news','categories', 'subcategories','tags', 'newsCategory', 'newsSubcategory', 'newsTags'));
+        return view('pages.author.news.update', compact('news', 'categories', 'subcategories', 'tags', 'newsCategory', 'newsSubcategory', 'newsTags'));
     }
 
     /**
@@ -298,20 +308,27 @@ class NewsController extends Controller
         }
     }
 
-    public function home(){
+    public function home()
+    {
         $categories = $this->categories->get();
         $subCategories = $this->subcategories->get();
         return view('pages.index', compact('categories', 'subCategories'));
     }
 
-    public function latestNews(){
+    public function latestNews()
+    {
 
         $news = $this->news->latest();
         $CategoryPopulars = $this->categories->showWithCount();
         $popularTags = $this->tags->showWithCount();
         $subCategories = $this->subcategories->get();
 
-        return view('pages.user.news.all-news-latest', compact('news', 'CategoryPopulars', 'popularTags', 'subCategories'));
+        $advertisement_rights = $this->advertisements->wherePosition(AdvertisementEnum::ALLNEWS, 'right');
+        $advertisement_lefts = $this->advertisements->wherePosition(AdvertisementEnum::ALLNEWS, 'left');
+        $advertisement_tops = $this->advertisements->wherePosition(AdvertisementEnum::ALLNEWS, 'top');
+        $advertisement_unders = $this->advertisements->wherePosition(AdvertisementEnum::ALLNEWS, 'under');
+        $advertisement_mids = $this->advertisements->wherePosition(AdvertisementEnum::ALLNEWS, 'mid');
+        return view('pages.user.news.all-news-latest', compact('news', 'CategoryPopulars', 'popularTags', 'subCategories', 'advertisement_rights', 'advertisement_lefts', 'advertisement_tops', 'advertisement_unders', 'advertisement_mids'));
     }
 
     public function popularNews()
@@ -321,6 +338,12 @@ class NewsController extends Controller
         $popularTags = $this->tags->showWithCount();
         $subCategories = $this->subcategories->get();
 
-        return view('pages.user.news.all-news-popular', compact('popular','CategoryPopulars', 'popularTags', 'subCategories'));
+        $advertisement_rights = $this->advertisements->wherePosition(AdvertisementEnum::ALLNEWS_POPULAR, 'right');
+        $advertisement_lefts = $this->advertisements->wherePosition(AdvertisementEnum::ALLNEWS_POPULAR, 'left');
+        $advertisement_tops = $this->advertisements->wherePosition(AdvertisementEnum::ALLNEWS_POPULAR, 'top');
+        $advertisement_unders = $this->advertisements->wherePosition(AdvertisementEnum::ALLNEWS_POPULAR, 'under');
+        $advertisement_mids = $this->advertisements->wherePosition(AdvertisementEnum::ALLNEWS_POPULAR, 'mid');
+
+        return view('pages.user.news.all-news-popular', compact('popular', 'CategoryPopulars', 'popularTags', 'subCategories', 'advertisement_rights', 'advertisement_lefts', 'advertisement_tops', 'advertisement_unders', 'advertisement_mids'));
     }
 }
