@@ -257,7 +257,7 @@ Route::get('detail-advertisement-accepted/{advertisement}', [AdvertisementContro
 Route::post('create-advertisement', [AdvertisementController::class, 'store'])->name('create.advertisement');
 Route::post('draft-advertisement', [AdvertisementController::class, 'draft'])->name('draft.advertisement');
 
-Route::get('show-edit-advertisement/{advertisement}', [AdvertisementController::class, 'edit'])->name('show.edit.advertisement');
+Route::get('show-edit-advertisement/{id}', [AdvertisementController::class, 'edit'])->name('show.edit.advertisement');
 
 Route::put('update-advertisement/{advertisement}', [AdvertisementController::class, 'update'])->name('update.advertisement');
 Route::delete('delete-advertisement/{advertisement}', [AdvertisementController::class, 'destroy'])->name('delete.advertisement');

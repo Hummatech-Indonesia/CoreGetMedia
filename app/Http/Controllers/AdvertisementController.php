@@ -106,10 +106,10 @@ class AdvertisementController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Advertisement $advertisement)
+    public function edit($id)
     {
         $positions = $this->position->get();
-        $data = $this->advertisement->show($advertisement->id);
+        $data = $this->advertisement->withtrash($id);
         return view('pages.user.advertisement.update-advertisemenet', compact('data', 'positions'));
     }
 

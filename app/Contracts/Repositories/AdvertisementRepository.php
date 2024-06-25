@@ -150,4 +150,9 @@ class AdvertisementRepository extends BaseRepository implements AdvertisementInt
             ->findOrFail($id)
             ->update($data);
     }
+
+    public function withtrash($id): mixed
+    {
+        return $this->model->query()->withTrashed()->FindOrFail($id);
+    }
 }

@@ -743,7 +743,7 @@
                                     </svg>
                                 </button>
 
-                                <a href="{{ route('show.edit.advertisement', ['advertisement' => $draft->id]) }}"
+                                <a href="{{ route('show.edit.advertisement', ['id' => $draft->id]) }}"
                                     class="btn btn-sm m-1 mt-5" style="background-color: #FFD643;">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24">
                                         <path fill="#ffffff"
@@ -751,7 +751,7 @@
                                     </svg>
                                 </a>
 
-                                <a href="{{ route('show.edit.advertisement', ['advertisement' => $draft->id]) }}" class="btn m-1 mt-5 text-white" style="background-color: #175A95;">
+                                <a href="{{ route('show.edit.advertisement', ['id' => $draft->id]) }}" class="btn m-1 mt-5 text-white" style="background-color: #175A95;">
                                     Lanjut Mengedit
                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
                                         <path fill="#ffffff"
