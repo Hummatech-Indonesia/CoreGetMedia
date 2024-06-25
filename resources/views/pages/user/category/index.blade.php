@@ -87,9 +87,21 @@
                 @empty
                 @endforelse
 
-                @if ($advertisement_mids)
+                {{-- @if ($advertisement_mids)
                 <div class="mt-4 mb-4">
                     <img src="{{asset($advertisement_mids && $advertisement_mids->image != null ? 'storage/'.$advertisement_mids->image : "CONTOHIKLAN.png")}}" width="100%" height="181px" style="object-fit: cover" alt="">
+                </div>
+                @endif --}}
+
+                @if ($advertisement_mids)
+                <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        @foreach ($advertisement_mids as $advertisement_mid)
+                        <div class="carousel-item active" data-bs-interval="2000">
+                            <img src="{{asset($advertisement_mid && $advertisement_mid->image != null ? 'storage/'.$advertisement_mid->image : "CONTOHIKLAN.png")}}" width="100%" height="181px" style="object-fit: cover" alt="" class="d-block w-100" alt="...">
+                        </div>
+                        @endforeach
+                    </div>
                 </div>
                 @endif
 
@@ -208,39 +220,64 @@
                         </div>
                         @endif
 
-                        @if ($advertisement_rights)
+                        {{-- @if ($advertisement_rights)
                         <div class="sidebar mt-3 mb-4" style="width: 450px">
-                            <img src="{{asset($advertisement_rights && $advertisement_rights->image != null ? 'storage/'.$advertisement_rights->image : "CONTOHIKLAN.png")}}" width="100%" height="603px" style="object-fit: cover" alt="">
-                        </div>
-                        @endif
-
-                        @if($popularTags->isNotEmpty())
-                        <div class="sidebar-widget" style="width: 450px">
-                            <h3 class="sidebar-widget-title">Tag Populer</h3>
-                            <ul class="tag-list list-style">
-                                @forelse ($popularTags as $popularTag)
-                                <li><a href="{{route('news-tag-list.user', ['tag' => $popularTag->slug])}}">{{ $popularTag->name }}</a>
-                                </li>
-                                @empty
-                                <div class="col-12">
-                                    <div class="d-flex justify-content-center">
-                                        <div>
-                                            <img src="{{ asset('assets/img/no-data/empty.png') }}" width="150px" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="text-center">
-                                        <h5>Tidak ada data</h5>
-                                    </div>
-                                </div>
-                                @endforelse
-                            </ul>
-
-                        </div>
-                        @endif
+                            <div class="swiper-container">
+                                <div class="swiper-wrapper">
+                                    @foreach($advertisement_rights as $advertisement)
+                                    <div class="swiper-slide">
+                                        <img src="{{ asset($advertisement->image ? 'storage/'.$advertisement->image : 'CONTOHIKLAN.png') }}" width="100%" height="603px" style="object-fit: cover" alt="">
                     </div>
+                    @endforeach
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+        @endif --}}
+
+        @if ($advertisement_rights)
+        <div class="sidebar" style="width: 450px;">
+            <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    @foreach ($advertisement_rights as $advertisement_right)
+                    <div class="carousel-item active" data-bs-interval="3000">
+                        <img src="{{ asset($advertisement_right->image ? 'storage/'.$advertisement_right->image : 'CONTOHIKLAN.png') }}" class="d-block" width="450px" height="603px" style="object-fit: cover" alt="...">
+                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
+        @endif
+
+
+        @if($popularTags->isNotEmpty())
+        <div class="sidebar-widget" style="width: 450px">
+            <h3 class="sidebar-widget-title">Tag Populer</h3>
+            <ul class="tag-list list-style">
+                @forelse ($popularTags as $popularTag)
+                <li><a href="{{route('news-tag-list.user', ['tag' => $popularTag->slug])}}">{{ $popularTag->name }}</a>
+                </li>
+                @empty
+                <div class="col-12">
+                    <div class="d-flex justify-content-center">
+                        <div>
+                            <img src="{{ asset('assets/img/no-data/empty.png') }}" width="150px" alt="">
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <h5>Tidak ada data</h5>
+                    </div>
+                </div>
+                @endforelse
+            </ul>
+
+        </div>
+        @endif
     </div>
+</div>
+</div>
+</div>
+</div>
 </div>
 @endsection
