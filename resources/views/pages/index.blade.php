@@ -92,14 +92,13 @@
 </style>
 @endsection
 
+
+@section('content')
 <div>
     @include('layouts.user.notification')
 </div>
 
-@section('content')
 <div class="container-fluid">
-
-
     @php
     $displayedPopulars = $populars->take(10)->where('news_views_count', '>', 0)->pluck('id');
     @endphp
