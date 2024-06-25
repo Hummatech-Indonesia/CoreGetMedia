@@ -41,8 +41,6 @@ Route::post('image-update/{user}', [UserController::class, 'updateImage'])->name
 Route::put('update-profile/{user}', [UserController::class, 'update'])->name('update.profile');
 Route::post('update-password/{user}', [UserController::class, 'updatePassword'])->name('update.password');
 
-Route::get('show-edit-advertisement/{advertisement}', [AdvertisementController::class, 'edit'])->name('show.edit.advertisement');
-
 Route::post('position-price', [PositionAdvertisementController::class, 'store'])->name('edit.position.price');
 
 Route::put('reject-advertisement/{advertisement}', [AdvertisementController::class, 'rejected'])->name('reject.advertisement.admin');

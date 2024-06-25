@@ -71,7 +71,6 @@ class AdvertisementController extends Controller
     {
         $this->user->update(auth()->user()->id, $request->validated());
         $positions = $this->position->get();
-        // dd($positions);
         return view('pages.user.advertisement.upload-advertisemenet', compact('positions'));
     }
 
@@ -90,7 +89,7 @@ class AdvertisementController extends Controller
         $data = $this->service->store($request);
         $advertisement = $this->advertisement->store($data);
         $advertisement->delete();
-        return back()->with('success', 'Berhasil menyimpan data iklan');
+        return redirect('/status-advertisement-list')->with('success', 'Berhasil menyimpan data iklan');
     }
 
     // $advertisements = Advertisement::whereNull('deleted_at')->get();

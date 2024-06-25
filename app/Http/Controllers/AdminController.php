@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\AdminInterface;
 use App\Contracts\Interfaces\UserInterface;
+use App\Enums\RoleEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAdminRequest;
+use App\Http\Requests\UpdateAdminReqeust;
 use App\Models\Admin;
 use App\Models\User;
 use App\Services\AdminService;
@@ -48,7 +50,8 @@ class AdminController extends Controller
     {
         try {
             $data = $this->admin->storeOrUpdate($request);
-            $this->admins->store($data);
+            $user = $this->admins->store($data);
+            $user->assignRole(RoleEnum::ADMIN->value);
             return redirect()->back()->with('success' , 'Data berhasil ditambahkan');
         } catch (\Throwable $th) {
             return redirect()->back()->with('Error' , 'Data sudah digunakan');
@@ -74,10 +77,10 @@ class AdminController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $admin)
+    public function update(UpdateAdminReqeust $request, User $admin)
     {
         try {
-            $data = $this->admin->storeOrUpdate($request);
+            $data = $this->admin->updateAdmin($request);
             $this->admins->update($admin->id, $data);
             return back()->with('success' , 'Data berhasil di perbarui');
         } catch (\Throwable $th) {

@@ -7,6 +7,7 @@ use App\Enums\UploadDiskEnum;
 use App\Http\Requests\StoreAboutGetRequest;
 use App\Http\Requests\StoreAdminRequest;
 use App\Http\Requests\UpdateAboutGetRequest;
+use App\Http\Requests\UpdateAdminReqeust;
 use App\Models\AboutGet;
 use App\Models\User;
 use App\Traits\UploadTrait;
@@ -27,22 +28,33 @@ class AdminService
     {
         $data = $request->validated();
 
-        $user = User::updateOrCreate(
-            ['email' => $data['email']],
-            [
-                'name' => $data['name'],
-                'slug' => Str::slug($data['name']),
-                'password' => bcrypt($data['password']),
-            ]
-        );
+        // $user = User::updateOrCreate(
+        //     ['email' => $data['email']],
+        //     [
+        //         'name' => $data['name'],
+        //         'slug' => Str::slug($data['name']),
+        //         'password' => bcrypt($data['password']),
+        //     ]
+        // );
 
-        $user->assignRole(RoleEnum::ADMIN->value);
+        // $user->assignRole(RoleEnum::ADMIN->value);
 
         return [
-            'name' => $user->name,
-            'slug' => $user->slug,
-            'email' => $user->email,
-            'password' => $user->password,
+            'email' => $data['email'],
+            'name' => $data['name'],
+            'slug' => Str::slug($data['name']),
+            'password' => bcrypt($data['password']),
+        ];
+    }
+
+    public function updateAdmin(UpdateAdminReqeust $request)
+    {
+        $data = $request->validated();
+
+        return [
+            'email' => $data['email'],
+            'name' => $data['name'],
+            'slug' => Str::slug($data['name']),
         ];
     }
 

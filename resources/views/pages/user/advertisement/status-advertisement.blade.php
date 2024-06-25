@@ -648,7 +648,8 @@
                                     <path
                                         d="M128 405.429C128 428.846 147.198 448 170.667 448h170.667C364.802 448 384 428.846 384 405.429V160H128v245.429zM416 96h-80l-26.785-32H202.786L176 96H96v32h320V96z"
                                         fill="#ffffff" />
-                                </svg></button>
+                                </svg>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -672,8 +673,8 @@
                     <div class="row">
                         <div class="col-md-12 col-lg-2">
                             <div class="mb-2">
-                                <img src="" alt="" width="290px" height="180px" class="w-100"
-                                    style="width: 100%; object-fit:cover;">
+                                <img src="{{ asset('storage/' . $draft->image) }}" alt="" width="290px"
+                                    height="180px" class="w-100" style="width: 100%; object-fit:cover;">
                             </div>
                         </div>
                         <div class="row col-md-12 col-lg-6">
@@ -733,8 +734,8 @@
                             </div>
 
                             <div class="d-flex justify-content-end">
-                                <button type="button" id="btn-cencel" data-id=""
-                                    class="btn m-1 mt-5 btn-cencel text-white px-4 py-1" style="background-color: #C94F4F;">
+                                <button type="button" id="btn-delete" data-id="{{ $draft->id }}"
+                                    class="btn m-1 mt-5 btn-delete text-white px-4 py-1" style="background-color: #C94F4F;">
                                     Hapus
                                     <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24">
                                         <path fill="#ffffff"
@@ -742,7 +743,15 @@
                                     </svg>
                                 </button>
 
-                                <a href="#" class="btn m-1 mt-5 text-white" style="background-color: #175A95;">
+                                <a href="{{ route('show.edit.advertisement', ['advertisement' => $draft->id]) }}"
+                                    class="btn btn-sm m-1 mt-5" style="background-color: #FFD643;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24">
+                                        <path fill="#ffffff"
+                                            d="M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h8.925l-2 2H5v14h14v-6.95l2-2V19q0 .825-.587 1.413T19 21zm4-6v-4.25l9.175-9.175q.3-.3.675-.45t.75-.15q.4 0 .763.15t.662.45L22.425 3q.275.3.425.663T23 4.4q0 .375-.137.738t-.438.662L13.25 15zM21.025 4.4l-1.4-1.4zM11 13h1.4l5.8-5.8l-.7-.7l-.725-.7L11 11.575zm6.5-6.5l-.725-.7zl.7.7z" />
+                                    </svg>
+                                </a>
+
+                                <a href="{{ route('show.edit.advertisement', ['advertisement' => $draft->id]) }}" class="btn m-1 mt-5 text-white" style="background-color: #175A95;">
                                     Lanjut Mengedit
                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
                                         <path fill="#ffffff"

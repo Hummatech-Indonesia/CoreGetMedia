@@ -116,16 +116,16 @@
         </div>
     </div>
 
-    <form action="{{ route('create.advertisement') }}" method="post" enctype="multipart/form-data">
+    <form id="myForm" action="{{ route('create.advertisement') }}" method="post" enctype="multipart/form-data">
         @method('post')
         @csrf
         <div class="d-flex justify-content-between mb-3">
             <h5>Isi form dibawah ini untuk konten iklan</h5>
             <div>
-                <button class="btn btn-md text-white me-2" style="background-color: #1EBB9E;">
+                <button class="btn btn-md text-white me-2" style="background-color: #1EBB9E;" id="submitButton2">
                     Simpan Draf
                 </button>
-                <button type="submit" class="btn btn-md text-white" style="background-color: #175A95;">
+                <button type="submit" class="btn btn-md text-white" style="background-color: #175A95;" id="submitButton1">
                     Unggah
                 </button>
             </div>
@@ -220,6 +220,20 @@
 @section('script')
     <script src="{{ asset('assets/dist/imageuploadify.min.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        var form = document.getElementById('myForm');
+        var submitButton1 = document.getElementById('submitButton1');
+        var submitButton2 = document.getElementById('submitButton2');
+
+        submitButton1.addEventListener('click', function() {
+            form.action = "{{ route('create.advertisement') }}";
+        });
+
+        submitButton2.addEventListener('click', function() {
+            form.action = "{{ route('draft.advertisement') }}";
+        });
+    </script>
 
     <script>
         $(document).ready(function() {
