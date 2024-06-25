@@ -38,10 +38,16 @@
                     <a class="subscribe-btn" href="/subscribe">Berlangganan<i class="flaticon-right-arrow"></i></a>
                 </div>
                 <div class="col-lg-4 col-md-6 md-none">
-                    <a class="navbar-brand" href="index.html">
-                        <img class="logo-light" src="{{asset('assets/img/logo/get-media-light.svg')}}" alt="logo" />
-                        <img class="logo-dark" src="{{asset('assets/img/logo/get-media-light.svg')}}" alt="logo" />
-                    </a>
+                    @if (isset($about_get))
+                        <a class="navbar-brand" href="index.html">
+                            <img class="logo-light" src="{{asset($about_get->image)}}" alt="logo" />
+                            <img class="logo-dark" src="{{asset($about_get->image)}}" alt="logo" />
+                        </a>
+                        @else
+                        <div class="navbar-brand ms-5">
+                            <h4 style="color: #FFFFFF" class="ms-5">Gambar tidak tersedia</h4>
+                        </div>
+                        @endif
                 </div>
                 <div class="col-lg-4 col-md-6 col-7">
                     <ul class="social-profile list-style">

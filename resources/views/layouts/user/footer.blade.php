@@ -13,7 +13,11 @@
         <div class="row text-white">
             <div class="col-lg-4">
                 <ul style="list-style-type: none;" class="p-4">
-                    <img src="{{asset('assets/img/logo/get-media-light.svg')}}" width="200px" alt="Image" />
+                    @if (isset($about_get))
+                        <img src="{{asset($about_get->image)}}" width="200px" alt="Image" />
+                    @else
+                        <h4 style="color: #FFFFFF">Gambar tidak tersedia</h4>
+                    @endif
                     <li></li>
                     <li>
                         <p class="copyright-text mt-4">
