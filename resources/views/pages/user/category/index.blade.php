@@ -66,11 +66,12 @@
         <div class="row gx-5">
             <div class="col-lg-8">
                 @forelse ($newsTop as $item)
-                <div class="news-card-four" style="height: 550px;">
+                <div class="news-card-four mb-4" style="height: 550px;">
                     <div class="news-card-img">
-                        <a href="javascript:void(0)"> <img src="{{asset('storage/' . $item->image)}}" alt="Image" width="100%" style="object-fit: cover" height="450" /></a>
+                        <a href="javascript:void(0)">
+                            <img src="{{asset('storage/' . $item->image)}}" alt="Image" width="100%" style="object-fit: cover" height="450" />
+                        </a>
                     </div>
-
                     <div class="news-card-info">
                         <h3>
                             <a data-toggle="tooltip" data-placement="top" title="{{ $item->name }}" href="{{ route('news.singlepost', ['news' => $item->slug]) }}">
@@ -109,7 +110,7 @@
                     @endif
 
                     @forelse ($latest_news as $new)
-                    <div class="news-card-five">
+                    <div class="news-card-five mb-4">
                         <div class="news-card-img">
                             <a href="javascript:void(0)"><img src="{{ asset('storage/' . $new->image) }}" alt="Image" class="img-all" /></a>
                             <a data-toggle="tooltip" data-placement="top" title="Sports" href="/{{ $new->newsCategories[0]->category->name }}" class="news-cat">{{ $new->newsCategories[0]->category->name }}</a>
@@ -173,7 +174,7 @@
                         <h3 class="sidebar-widget-title">Berita Populer</h3>
                         @forelse ($trending_news as $trending)
                         @if ($trending->news_views_count > 0)
-                        <div class="news-card-three">
+                        <div class="news-card-three mb-4">
                             <div class="news-card-img">
                                 <img src="{{ asset('storage/' . $trending->image) }}" class="img-popular" alt="Image" />
                             </div>
