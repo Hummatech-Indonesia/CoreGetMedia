@@ -52,8 +52,9 @@ class AdminController extends Controller
         $newsPopulars = $this->news->newsPopularAdmin();
         $categoryPopulars = $this->category->showWithCount()->take(4);
         $newsChart = $this->adminChart->Chart($this->news);
+        $visitorChart = $this->adminChart->ChartVisitor($this->visitor);
         $authors = $this->user->countAuthor();
-        return view('pages.admin.home.index', compact('visitors', 'countAuthor', 'countUser', 'countNews', 'newsPopulars', 'categoryPopulars', 'newsChart', 'authors'));
+        return view('pages.admin.home.index', compact('visitors', 'countAuthor', 'countUser', 'countNews', 'newsPopulars', 'categoryPopulars', 'newsChart', 'authors', 'visitorChart'));
     }
 
     /**
