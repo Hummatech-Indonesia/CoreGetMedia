@@ -62,8 +62,6 @@ class AuthorController extends Controller
 
     public function list_author()
     {
-        $data = $this->user->countAuthor();
-        dd($data);
         $authors = $this->author->where('accepted');
         return view('pages.admin.author.author-list', compact('authors'));
     }
