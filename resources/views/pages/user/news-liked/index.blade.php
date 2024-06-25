@@ -51,7 +51,7 @@
                             </div>
                             <div class="col-md-8 col-md-8">
                                 <div class="card-body p-2">
-                                    <a href="{{ route('news.singlepost', $newsLike->slug) }}">
+                                    <a href="{{ route('news.singlepost', $newsLike->slug) }}" target="_blank">
                                         <h3 class="card-text">
                                             {{ Str::limit($newsLike->name, 50) }}
                                         </h3>
