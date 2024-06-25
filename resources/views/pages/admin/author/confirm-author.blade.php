@@ -167,19 +167,23 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <div class="d-flex justify-content-end">
-                        {{-- <button id="btn-cv" data-cv="lihatcv" type="button" class="btn btn-light-primary text-primary me-2 fs-4 px-2 py-2 btn-lihat-cv">
-                            <div class="mx-1">
-                                Lihat Cv
-                            </div>
-                        </button> --}}
-                        <button type="button" data-id="button-tolak" id="btn-tolak" class="btn btn-sm btn-reject btn-light-danger text-danger fs-4 me-2 px-2">
-                            Tolak
-                        </button>
-                        <button data-id="button-terima" id="btn-terima" type="button" class="btn btn-sm btn-accepted btn-light-success text-success fs-4 px-2"> Terima </button>
-                    </div>
+                <div class="modal-footer d-flex justify-content-end">
+                    @if (isset($author) && file_exists(public_path('storage/' . $author->cv)))
+                        <a href="{{ asset('storage/' . $author->cv) }}" target="_blank" class="btn btn-light-primary text-primary me-2 fs-4 px-2 py-2">Lihat CV</a>
+                        <a href="#" type="button" class="btn btn-light-primary text-primary me-2 fs-4 px-2 py-2 btn-download" data-id="{{ $author->id }}" data-task="{{ asset('storage/' . $author->cv) }}" data-name="{{ optional($author->user)->name }}">
+                            <div class="mx-1">Download CV</div>
+                        </a>
+                    @else
+                        <p class="mb-0 me-2">CV tidak tersedia</p>
+                    @endif
+
+                    <a class="download-file" style="display: none;"></a>
+                    <button type="button" data-id="button-tolak" id="btn-tolak" class="btn btn-sm btn-reject btn-light-danger text-danger fs-4 me-2 px-2">Tolak</button>
+                    <button data-id="button-terima" id="btn-terima" type="button" class="btn btn-sm btn-accepted btn-light-success text-success fs-4 px-2">Terima</button>
                 </div>
+
+
+
             </div>
         </div>
     </div>
@@ -289,6 +293,23 @@
         $('#modal-approved').modal('show');
     });
 
+    $(document).ready(function() {
+        let cvPath = $('.btn-download').data('task');
+        $('#open-cv').attr('href', cvPath);
+
+        $('.btn-download').click(function(e) {
+            e.preventDefault();
+            let file = $(this).data('task');
+            let fileName = $(this).data('name') + '.pdf';
+            $('.download-file').attr('href', file);
+            $('.download-file').attr('download', fileName);
+            $('.download-file')[0].click();
+        });
+    });
+
+</script>
+
+<script>
     $(document).ready(function() {
         let cvPath = $('.btn-download').data('task');
         $('#open-cv').attr('href', cvPath);
