@@ -12,4 +12,5 @@ interface UserInterface extends GetInterface, StoreInterface, UpdateInterface, S
 {
     public function AccountUser();
     public function banned();
+    public function countAuthor() : mixed;
 }
