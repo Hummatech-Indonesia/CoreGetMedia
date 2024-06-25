@@ -23,4 +23,11 @@ class VisitorRepository extends BaseRepository implements VisitorInterface
             ->get();
     }
 
+    public function Chart(mixed $year, mixed $month): mixed
+    {
+        return $this->model
+            ->whereYear('created_at', $year)
+            ->whereMonth('created_at', $month)
+            ->count();
+    }
 }
