@@ -214,7 +214,7 @@
             <button type="submit" class="btn btn-primary m-2" id="submitButton1">
                 Update
             </button>
-            <button type="submit" class="btn btn-primary m-2" id="submitButton2">
+            <button type="submit" class="btn btn-success m-2" id="submitButton2">
                 Upload
             </button>
         </div>
