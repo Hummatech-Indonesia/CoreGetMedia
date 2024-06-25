@@ -176,4 +176,14 @@ class UserRepository extends BaseRepository implements UserInterface
         ->where('status', UserStatusEnum::BANNED->value)
         ->get();
     }
+
+    public function countAuthor(): mixed
+    {
+        return $this->model->query()
+            ->whereRelation('roles', 'name', 'author')
+            ->withCount('newses')
+            ->orderBy('newses_count')
+            ->take(5)
+            ->get();
+    }
 }

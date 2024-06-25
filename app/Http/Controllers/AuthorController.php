@@ -112,7 +112,7 @@ class AuthorController extends Controller
         $advertisement_tops = $this->advertisements->wherePosition(AdvertisementEnum::DETAIL_AUTHOR, 'top');
         $advertisement_unders = $this->advertisements->wherePosition(AdvertisementEnum::DETAIL_AUTHOR, 'under');
         $advertisement_mids = $this->advertisements->wherePosition(AdvertisementEnum::DETAIL_AUTHOR, 'mid');
-        
+
         return view('pages.user.author.detail-author', compact('author', 'newses', 'popularCategories', 'popularNewses', 'advertisement_rights', 'advertisement_lefts', 'advertisement_tops', 'advertisement_unders', 'advertisement_mids'));
     }
 

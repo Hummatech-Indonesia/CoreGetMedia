@@ -229,4 +229,11 @@ class NewsService
             }
         }
     }
+
+    public function delete(News $news)
+    {
+        $this->remove($news->image);
+    }
+
+    
 }

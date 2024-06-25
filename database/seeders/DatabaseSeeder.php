@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             SubCategorySeeder::class,
             PositionAdvertisementSeeder::class,
+            AboutGetSeeder::class
         ]);
     }
 }
