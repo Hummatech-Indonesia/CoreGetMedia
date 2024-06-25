@@ -52,7 +52,7 @@
             <div class="card-body">
                 <div class="d-flex align-items-center">
                     <div>
-                        <h2 class="fs-7">12</h2>
+                        <h2 class="fs-7">{{ $visitors }}</h2>
                         <h5 class="fw-medium mb-0" style="color: #41739e;">Jumlah Pengunjung</h5>
                     </div>
                     <div class="ms-auto">
@@ -68,7 +68,7 @@
             <div class="card-body">
                 <div class="d-flex align-items-center">
                     <div>
-                        <h2 class="fs-7">18</h2>
+                        <h2 class="fs-7">{{ $countAuthor }}</h2>
                         <h5 class="fw-medium mb-0" style="color: #e68888;">Jumlah Penulis</h5>
                     </div>
                     <div class="ms-auto">
@@ -86,7 +86,7 @@
             <div class="card-body">
                 <div class="d-flex align-items-center">
                     <div>
-                        <h2 class="fs-7">204</h2>
+                        <h2 class="fs-7">{{ $countUser }}</h2>
                         <h5 class="fw-medium mb-0" style="color: #bacff0;">Jumlah Pengguna</h5>
                     </div>
                     <div class="ms-auto">
@@ -102,7 +102,7 @@
             <div class="card-body">
                 <div class="d-flex align-items-center">
                     <div>
-                        <h2 class="fs-7">40</h2>
+                        <h2 class="fs-7">{{ $countNews }}</h2>
                         <h5 class="fw-medium mb-0" style="color: #fce287;">Jumlah Artikel</h5>
                     </div>
                     <div class="ms-auto">
@@ -121,35 +121,44 @@
                 <div class="col-md-12 col-lg-12">
                     <h4 class="mb-5">Artikel Trending</h4>
                     <div class="row">
-
-                        <div class="col-md-12 col-lg-6 mb-3">
-                            <div class="mb-2" style="max-width: 540px;">
-                                <div class="row g-2">
-                                    <div class="col-md-4">
-                                        <img src="{{asset('assets/img/news/news-10.webp')}}" class="img-responsive" height="100" style="width: 100%; object-fit:cover;" alt="">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body p-2">
-                                            <h5 class="card-text">
-                                                Lorem ipsum dolor, sit amet consectetur adipisicing elit...
-                                            </h5>
-                                            <div class="d-flex gap-3 align-items-center ms-0 mt-4">
-                                                <p class="card-text m-0"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 2048 2048">
-                                                        <path fill="#DD1818" d="M1536 171h341v1877H0V171h341V0h171v171h853V0h171zm171 1706V683H171v1194zm0-1365V341H171v171z" />
-                                                    </svg><small class="ms-1">
-                                                        7 juni 2024
-                                                    </small>
-                                                </p>
-                                                <p class="card-text"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
-                                                        <path fill="#DD1818" d="M12 9a3 3 0 0 1 3 3a3 3 0 0 1-3 3a3 3 0 0 1-3-3a3 3 0 0 1 3-3m0-4.5c5 0 9.27 3.11 11 7.5c-1.73 4.39-6 7.5-11 7.5S2.73 16.39 1 12c1.73-4.39 6-7.5 11-7.5M3.18 12a9.821 9.821 0 0 0 17.64 0a9.821 9.821 0 0 0-17.64 0" />
-                                                    </svg><small class="mt-1 ms-1">59</small></p>
+                        @forelse ($newsPopulars as $newsPopular)
+                            <div class="col-md-12 col-lg-6 mb-3">
+                                <div class="mb-2" style="max-width: 540px;">
+                                    <div class="row g-2">
+                                        <div class="col-md-4">
+                                            @if ($newsPopular->image != null && Storage::disk('public')->exists($newsPopular->image))
+                                                <img src="{{asset('storage/'. $newsPopular->image)}}" class="img-responsive" height="130px" style="width: 100%; object-fit:cover;" alt="">
+                                            @else
+                                                <img src="{{ asset('assets/blank-img.jpg') }}" class="img-responsive" height="130px" style="width: 100%; object-fit:cover;" alt="">
+                                            @endif
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="card-body p-2">
+                                                <h5 class="card-text">
+                                                    {{ Str::limit($newsPopular->name, 60, '...') }}
+                                                </h5>
+                                                <div class="d-flex gap-3 align-items-center ms-0 mt-5 pt-2">
+                                                    <p class="card-text m-0"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 2048 2048">
+                                                            <path fill="#DD1818" d="M1536 171h341v1877H0V171h341V0h171v171h853V0h171zm171 1706V683H171v1194zm0-1365V341H171v171z" />
+                                                        </svg><small class="ms-1">
+                                                            {{ \Carbon\Carbon::parse($newsPopular->date)->locale('id_ID')->isoFormat('dddd, D MMMM YYYY') }}
+                                                        </small>
+                                                    </p>
+                                                    <p class="card-text"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                                            <path fill="#DD1818" d="M12 9a3 3 0 0 1 3 3a3 3 0 0 1-3 3a3 3 0 0 1-3-3a3 3 0 0 1 3-3m0-4.5c5 0 9.27 3.11 11 7.5c-1.73 4.39-6 7.5-11 7.5S2.73 16.39 1 12c1.73-4.39 6-7.5 11-7.5M3.18 12a9.821 9.821 0 0 0 17.64 0a9.821 9.821 0 0 0-17.64 0" />
+                                                        </svg><small class="mt-1 ms-1">{{ $newsPopular->newsViews()->count() }}</small></p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
+                        @empty
+                            <div class="text-center mt-5">
+                                <img src="{{ asset('assets/Empty-cuate.png') }}" alt="" width="200px">
+                                <p>Tidak ada berita</p>
+                            </div>
+                        @endforelse
                     </div>
                 </div>
             </div>
@@ -160,48 +169,31 @@
             <div class="card-body">
                 <h4 class="mb-5">Kategori Trending</h4>
                 <div>
-
-                    <div class="fs-5 mb-4 mt-5 d-flex justify-content-between">
-                        <div>
-                            Pendidikan
+                    @forelse ($categoryPopulars as $categoryPopular)
+                        @php
+                            if ($loop->iteration == 1) {
+                               $color = 'warning';
+                            } elseif ($loop->iteration == 2) {
+                               $color = 'success';
+                            } elseif ($loop->iteration == 3) {
+                               $color = 'danger';
+                            } else {
+                                $color = 'primary';
+                            }
+                        @endphp
+                        <div class="fs-5 mb-4 mt-5 d-flex justify-content-between">
+                            <div>{{ $categoryPopular->name }}</div>
+                            <div>
+                                <span class="badge bg-light-{{ $color }} text-{{ $color }}">{{ $categoryPopular->newsCategories()->count() }}</span>
+                            </div>
                         </div>
-                        <div>
-                            {{-- @if ($index == 1 || $index == 2) --}}
-                            <span class="badge bg-light-warning text-warning">23</span>
-                            {{-- @elseif ($index == 3 || $index == 4)
-                            <span class="badge bg-light-success text-success">{{ $category->news_categories_count }}</span>
-                            @elseif ($index == 0)
-                            <span class="badge bg-light-danger text-danger">{{ $category->news_categories_count }}</span>
-                            @else
-                            <span class="badge bg-light-success text-success">{{ $category->news_categories_count }}</span>
-                            @endif --}}
+                    @empty
+                        <div class="fs-5 mb-4 mt-5 text-center">
+                            <div>
+                                Belum ada kategori
+                            </div>
                         </div>
-                    </div>
-                    <div class="fs-5 mb-4 mt-5 d-flex justify-content-between">
-                        <div>
-                            Hiburan
-                        </div>
-                        <div>
-                            <span class="badge bg-light-success text-success">20</span>
-                        </div>
-                    </div>
-                    <div class="fs-5 mb-4 mt-5 d-flex justify-content-between">
-                        <div>
-                            Sekolah Vokasi
-                        </div>
-                        <div>
-                            <span class="badge bg-light-danger text-danger">15</span>
-                        </div>
-                    </div>
-                    <div class="fs-5 mb-4 mt-5 d-flex justify-content-between">
-                        <div>
-                            Teknologi
-                        </div>
-                        <div>
-                            <span class="badge bg-light-success text-success">38</span>
-                        </div>
-                    </div>
-
+                    @endforelse
                 </div>
             </div>
         </div>
@@ -213,8 +205,9 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="mb-5">Penulis Terbanyak</h4>
-
                 <div>
+
+                    
                     <div class="d-flex justify-content-between mb-3">
                         <div class="d-flex align-items-center">
                             <img src="{{ asset('admin/dist/images/profile/user-1.jpg')}}" class="rounded-circle mb-3 img" style="object-fit: cover" alt="Image" width="40px" height="40px" />

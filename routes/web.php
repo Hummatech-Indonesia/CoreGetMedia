@@ -46,9 +46,7 @@ Route::get('/sitemap.xml', SitemapController::class);
 Route::get('navbar-user', [NewsController::class, 'navbar'])->name('navbar');
 
 // ----- ADMIN -----
-Route::get('/dashboard', function () {
-    return view('pages.admin.home.index');
-})->name('dashboard.admin');
+Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard.admin');
 
 Route::get('category-list', [CategoryController::class, 'index'])->name('category.list.admin');
 Route::put('category-update/{category}', [CategoryController::class, 'update'])->name('category.update.admin');
