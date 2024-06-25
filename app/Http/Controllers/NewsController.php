@@ -85,7 +85,7 @@ class NewsController extends Controller
     public function index()
     {
         $user_id = auth()->user()->id;
-        $news = $this->news->show($user_id);
+        $news = $this->news->showWithTrash($user_id);
         $pendings = $this->news->userStatus($user_id, NewsEnum::PENDING->value);
         $rejecteds = $this->news->userStatus($user_id, NewsEnum::REJECT->value);
         $accepteds = $this->news->userStatus($user_id, NewsEnum::ACCEPTED->value);
@@ -181,12 +181,12 @@ class NewsController extends Controller
 
         $newsId = $this->news->store($data)->id;
         $this->service->storeRelation($newsId, $data['category'], $data['sub_category'], $data['tag']);
-        $newsId->delete();
+        $this->news->delete($newsId);
 
         if (auth()->user()->roles->pluck('name')[0] == "admin") {
-            return redirect('/news-list')->with('success', 'Berhasil mendraft data');
+            return redirect('/news-list')->with('success', 'Berhasil menyimpan draft');
         } else {
-            return redirect('/list-news')->with('success', 'Berhasil mendraft data');
+            return redirect('/list-news')->with('success', 'Berhasil menyimpan draft');
         }
     }
     /**
@@ -232,11 +232,11 @@ class NewsController extends Controller
     public function edit($news)
     {
         $news = $this->news->showWithSLug($news);
-        $news_id = $news->id;
+        $findDraft = $this->news->findDraft($news->id);
 
-        $newsCategory = $this->newscategories->where($news_id);
-        $newsSubcategory = $this->newssubcategories->where($news_id);
-        $newsTags = $this->newstags->wheretag($news_id);
+        $newsCategory = $this->newscategories->where($findDraft->id);
+        $newsSubcategory = $this->newssubcategories->where($findDraft->id);
+        $newsTags = $this->newstags->wheretag($findDraft->id);
         $categories = $this->categories->get();
         $subcategories = $this->subcategories->get();
         $tags = $this->tags->get();
@@ -247,29 +247,55 @@ class NewsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateNewsRequest $request, News $news)
+    public function update(UpdateNewsRequest $request, $id)
     {
-        $data = $this->service->update($request, $news);
+        $findDraft = $this->news->findDraft($id);
+        $data = $this->service->update($request, $findDraft);
         if (auth()->user()->roles->pluck('name')[0] == "admin") {
             $data['status'] = NewsEnum::ACCEPTED->value;
         } else {
             $data['status'] = NewsEnum::PENDING->value;
         }
-        $this->news->update($news->id, $data);
-        $this->service->updateRelation($news->id, $data['category'], $data['sub_category'], $data['tag']);
-        return redirect('/news-list')->with('success', 'Berhasil update data');
+        $this->news->update($findDraft->id, $data);
+        $this->service->updateRelation($findDraft->id, $data['category'], $data['sub_category'], $data['tag']);
+
+        if (auth()->user()->roles->pluck('name')[0] == "admin") {
+            return redirect('/news-list')->with('success', 'Berhasil update data');
+        } else {
+            return redirect('/list-news')->with('success', 'Berhasil update data');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(News $news)
+    public function destroy($id)
     {
-        $this->newscategories->delete($news->id);
-        $this->newssubcategories->delete($news->id);
-        $this->newstags->delete($news->id);
-        $this->news->delete($news->id);
+        $findDraft = $this->news->findDraft($id);
+        $this->newscategories->delete($findDraft->id);
+        $this->newssubcategories->delete($findDraft->id);
+        $this->newstags->delete($findDraft->id);
+        $findDraft->forceDelete();
         return back()->with('success', 'Berhasil menghapus data');
+    }
+
+    public function publish($id)
+    {
+        $findDraft = $this->news->findDraft($id);
+        if($findDraft->trashed()){
+            $findDraft->restore();
+            if (auth()->user()->roles->pluck('name')[0] == "admin") {
+                return redirect('/news-list')->with('success', 'Berhasil mengupload berita');
+            } else {
+                return redirect('/list-news')->with('success', 'Berhasil mengupload berita');
+            }
+        } else {
+            if (auth()->user()->roles->pluck('name')[0] == "admin") {
+                return redirect('/news-list')->with('warning', 'Draft tidak ditemukan');
+            } else {
+                return redirect('/list-news')->with('warning', 'Draft tidak ditemukan');
+            }
+        }
     }
 
     public function home(){
