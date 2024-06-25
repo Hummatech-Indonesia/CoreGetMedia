@@ -89,10 +89,11 @@
                     @endforelse
                 </div>
 
-                {{-- <div class="text-center item-center d-flex justify-content-center"
-                    style="background-color:#F6F6F6; width:100%;height:200px;">
-                    <h5 class="mt-5">Iklan</h5>
-                </div> --}}
+                @if ($advertisement_unders)
+                <div class="mt-4 mb-4">
+                    <img src="{{asset($advertisement_unders && $advertisement_unders->image != null ? 'storage/'.$advertisement_unders->image : "CONTOHIKLAN.png")}}" width="100%" height="225" style="object-fit: cover;" alt="">
+                </div>
+                @endif
 
                 <x-paginator :paginator="$news" />
             </div>
@@ -123,6 +124,12 @@
                                 </div>
                                 @endforelse
                             </ul>
+                        </div>
+                        @endif
+
+                        @if ($advertisement_rights)
+                        <div class="sidebar mt-3 mb-4" style="width: 450px">
+                            <img src="{{asset($advertisement_rights && $advertisement_rights->image != null ? 'storage/'.$advertisement_rights->image : "CONTOHIKLAN.png")}}" width="100%" height="603px" style="object-fit: cover" alt="">
                         </div>
                         @endif
 
