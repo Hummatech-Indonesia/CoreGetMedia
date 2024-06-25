@@ -141,6 +141,10 @@
 </div>
 @endif
 
+<div>
+    @include('layouts.user.notification')
+</div>
+
 @php
 $filteredPin = $newsPins->take(3);
 $pin_id = $filteredPin->pluck('id');
@@ -156,7 +160,6 @@ $includeid = $displayedPopulars->merge($pin_id);
 $popular_down = $populars->whereNotIn('id', $includeid)->take(15);
 $popular_down_id = $popular_down->pluck('id');
 @endphp
-
 
 <div class="container-fluid pb-4">
     <div class="row">
