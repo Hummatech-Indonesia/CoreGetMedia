@@ -28,8 +28,9 @@ class AdminController extends Controller
     private NewsInterface $news;
     private CategoryInterface $category;
     private AdminChartService $adminChart;
+    private UserInterface $user;
 
-    public function __construct(AdminInterface $admins, UserInterface $users, AdminService $admin, VisitorInterface $visitor, AuthorInterface $author, NewsInterface $news, CategoryInterface $category, AdminChartService $adminChart)
+    public function __construct(AdminInterface $admins, UserInterface $users, AdminService $admin, VisitorInterface $visitor, AuthorInterface $author, NewsInterface $news, CategoryInterface $category, AdminChartService $adminChart, UserInterface $user)
     {
         $this->admins = $admins;
         $this->admin = $admin;
@@ -39,6 +40,7 @@ class AdminController extends Controller
         $this->news = $news;
         $this->category = $category;
         $this->adminChart = $adminChart;
+        $this->user = $user;
     }
 
     public function dashboard()
@@ -50,7 +52,8 @@ class AdminController extends Controller
         $newsPopulars = $this->news->newsPopularAdmin();
         $categoryPopulars = $this->category->showWithCount()->take(4);
         $newsChart = $this->adminChart->Chart($this->news);
-        return view('pages.admin.home.index', compact('visitors', 'countAuthor', 'countUser', 'countNews', 'newsPopulars', 'categoryPopulars', 'newsChart'));
+        $authors = $this->user->countAuthor();
+        return view('pages.admin.home.index', compact('visitors', 'countAuthor', 'countUser', 'countNews', 'newsPopulars', 'categoryPopulars', 'newsChart', 'authors'));
     }
 
     /**
