@@ -174,6 +174,16 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->get();
     }
 
+    public function newsPopularAdmin(): mixed
+    {
+        return $this->model->query()
+            ->where('status', NewsEnum::ACCEPTED->value)
+            ->withCount('newsViews')
+            ->orderByDesc('news_views_count')
+            ->take(6)
+            ->get();
+    }
+
     public function whereUserLike($user_id, $ipAddress): mixed
     {
         return $this->model->query()
@@ -356,4 +366,9 @@ class NewsRepository extends BaseRepository implements NewsInterface
     {
         return $this->model->query()->withTrashed()->findOrFail($id);
     } 
+
+    public function accepted()
+    {
+        return $this->model->query()->where('status', NewsEnum::ACCEPTED->value)->get();
+    }
 }

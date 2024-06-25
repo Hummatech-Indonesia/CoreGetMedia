@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\AdminInterface;
+use App\Contracts\Interfaces\AuthorInterface;
+use App\Contracts\Interfaces\CategoryInterface;
+use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\UserInterface;
 use App\Contracts\Interfaces\VisitorInterface;
 use App\Enums\RoleEnum;
@@ -20,19 +23,31 @@ class AdminController extends Controller
     private AdminService $admin;
     private UserInterface $users;
     private VisitorInterface $visitor;
+    private AuthorInterface $author;
+    private NewsInterface $news;
+    private CategoryInterface $category;
 
-    public function __construct(AdminInterface $admins, UserInterface $users, AdminService $admin, VisitorInterface $visitor)
+    public function __construct(AdminInterface $admins, UserInterface $users, AdminService $admin, VisitorInterface $visitor, AuthorInterface $author, NewsInterface $news, CategoryInterface $category)
     {
         $this->admins = $admins;
         $this->admin = $admin;
         $this->users = $users;
         $this->visitor = $visitor;
+        $this->author = $author;
+        $this->news = $news;
+        $this->category = $category;
     }
 
     public function dashboard()
     {
         $visitors = $this->visitor->get()->count();
-        return view('pages.admin.home.index', compact('visitors'));
+        $countAuthor = $this->author->accepted()->count();
+        $countUser = $this->users->get()->count();
+        $countNews = $this->news->accepted()->count();
+        $newsPopulars = $this->news->newsPopularAdmin();
+        $categoryPopulars = $this->category->showWithCount()->take(4);
+
+        return view('pages.admin.home.index', compact('visitors', 'countAuthor', 'countUser', 'countNews', 'newsPopulars', 'categoryPopulars'));
     }
 
     /**
