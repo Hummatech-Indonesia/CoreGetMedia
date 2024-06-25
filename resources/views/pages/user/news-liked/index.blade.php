@@ -46,14 +46,16 @@
                 <div class="col-md-12 col-lg-10 mb-3">
                     <div class="mb-2">
                         <div class="row g-2">
-                            <div class="col-lg-4 col-md-4">
+                            <div class="col-lg-3 col-md-4">
                                 <img src="{{ asset('storage/' . $newsLike->image) }}" class="img-responsive" height="150" style="width: 100%; object-fit:cover;" alt="">
                             </div>
                             <div class="col-md-8 col-md-8">
                                 <div class="card-body p-2">
-                                    <h3 class="card-text">
-                                        {{ Str::limit($newsLike->name, 50) }}
-                                    </h3>
+                                    <a href="{{ route('news.singlepost', $newsLike->slug) }}">
+                                        <h3 class="card-text">
+                                            {{ Str::limit($newsLike->name, 50) }}
+                                        </h3>
+                                    </a>
                                     <p>{!! Str::limit(strip_tags($newsLike->description), 150) !!}</p>
                                     <div class="d-flex gap-3 align-items-center ms-0 mt-4">
                                         <p class="card-text m-0">
