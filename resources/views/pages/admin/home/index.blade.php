@@ -206,23 +206,28 @@
             <div class="card-body">
                 <h4 class="mb-5">Penulis Terbanyak</h4>
                 <div>
-
-                    
-                    <div class="d-flex justify-content-between mb-3">
-                        <div class="d-flex align-items-center">
-                            <img src="{{ asset('admin/dist/images/profile/user-1.jpg')}}" class="rounded-circle mb-3 img" style="object-fit: cover" alt="Image" width="40px" height="40px" />
-                            <div class="ms-3">
-                                <p class="fs-4 fw-semibold fs-2 student-name">M. Ardian</p>
+                    @forelse ($authors as $author)
+                        <div class="d-flex justify-content-between mb-3">
+                            <div class="d-flex align-items-center">
+                                @if ($author->image != null && Storage::disk('public')->exists($author->image))
+                                    <img src="{{ asset('storage/'. $author->image)}}" class="rounded-circle mb-3 img" style="object-fit: cover" alt="Avatar" width="40px" height="40px" />
+                                @else
+                                    <img src="{{ asset('default.png') }}" class="rounded-circle mb-3 img" style="object-fit: cover" alt="Avatar" width="40px" height="40px">
+                                @endif
+                                <div class="ms-3">
+                                    <p class="fs-4 fw-semibold fs-2 student-name">{{ $author->name }}</p>
+                                </div>
                             </div>
-                        </div>
-                        <div>
                             <div>
-                                <span class="badge bg-light-danger text-danger">20</span>
+                                <div>
+                                    <span class="badge bg-light-danger text-danger">{{ $author->newses()->count() }}</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @empty
+                        
+                    @endforelse
                 </div>
-
             </div>
         </div>
     </div>
@@ -565,8 +570,9 @@
     </div>
 </div>
 
-<div class="row">
+{{-- <div class="row">
     <h3 class="mb-3">Fitur Berlangganan</h3>
+    @foreach (range(1, 3) as $item)
     <div class="col-lg-4 col-md-6 col-sm-12 card-hover">
         <div class="card">
             <div class="card-header text-center">
@@ -613,99 +619,8 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-4 col-md-6 col-sm-12 card-hover">
-        <div class="card">
-            <div class="card-header text-center">
-                <h4>Lorem Ipsum dolor</h4>
-            </div>
-            <div class="d-flex justify-content-center">
-                <img src="{{ asset('assets/img/premium/premium2.svg') }}" width="50%" height="200" style="object-fit:cover" class="mb-4" alt="...">
-            </div>
-            <div class="d-flex align-items-center">
-                <div class="ms-auto">
-                    <div class="d-flex justify-content-end">
-
-                    </div>
-                </div>
-            </div>
-            <div class="ms-4 d-flex justify-content-center mb-3 mt-2">
-                <h2 class="card-text text-info">Rp 170.000</h2>
-                <h5 class="mb-0 mt-2 text-info">/bulan</h5>
-            </div>
-            <div class="px-4">
-                <div class="row">
-
-                    <div class="col-lg-12 mb-3" style="display: flex; align-items: center;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 36 35" fill="none" style="flex-shrink: 0; margin-right: 10px;">
-                            <path d="M18 3.28125C9.93586 3.28125 3.375 9.65986 3.375 17.5C3.375 25.3401 9.93586 31.7188 18 31.7188C26.0641 31.7188 32.625 25.3401 32.625 17.5C32.625 9.65986 26.0641 3.28125 18 3.28125ZM25.6113 12.7347L16.1613 23.6722C16.0577 23.7922 15.9287 23.8892 15.7831 23.9565C15.6375 24.0239 15.4788 24.06 15.3176 24.0625H15.2986C15.1409 24.0624 14.985 24.0302 14.841 23.9677C14.6969 23.9053 14.568 23.8142 14.4626 23.7002L10.4126 19.3252C10.3097 19.2191 10.2297 19.0942 10.1772 18.9576C10.1248 18.821 10.1009 18.6757 10.1071 18.53C10.1132 18.3844 10.1493 18.2414 10.2131 18.1095C10.2769 17.9776 10.3671 17.8594 10.4786 17.7619C10.59 17.6644 10.7204 17.5895 10.862 17.5417C11.0037 17.4938 11.1537 17.474 11.3033 17.4834C11.453 17.4927 11.5992 17.5311 11.7333 17.5962C11.8675 17.6612 11.9869 17.7517 12.0846 17.8623L15.2691 21.3021L23.8887 11.3278C24.082 11.1105 24.3556 10.9759 24.6502 10.9531C24.9448 10.9302 25.2368 11.021 25.4631 11.2059C25.6894 11.3907 25.8319 11.6547 25.8596 11.9407C25.8873 12.2268 25.7981 12.512 25.6113 12.7347Z" fill="#13DEB9"></path>
-                        </svg>
-                        <p class="fs-3 fw-semibold" style="margin: 0; flex-grow: 1;">Daftar Hadir Tamu</p>
-                    </div>
-                    <div class="col-lg-12 mb-3" style="display: flex; align-items: center;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 36 35" fill="none" style="flex-shrink: 0; margin-right: 10px;">
-                            <path d="M18 3.28125C9.93586 3.28125 3.375 9.65986 3.375 17.5C3.375 25.3401 9.93586 31.7188 18 31.7188C26.0641 31.7188 32.625 25.3401 32.625 17.5C32.625 9.65986 26.0641 3.28125 18 3.28125ZM25.6113 12.7347L16.1613 23.6722C16.0577 23.7922 15.9287 23.8892 15.7831 23.9565C15.6375 24.0239 15.4788 24.06 15.3176 24.0625H15.2986C15.1409 24.0624 14.985 24.0302 14.841 23.9677C14.6969 23.9053 14.568 23.8142 14.4626 23.7002L10.4126 19.3252C10.3097 19.2191 10.2297 19.0942 10.1772 18.9576C10.1248 18.821 10.1009 18.6757 10.1071 18.53C10.1132 18.3844 10.1493 18.2414 10.2131 18.1095C10.2769 17.9776 10.3671 17.8594 10.4786 17.7619C10.59 17.6644 10.7204 17.5895 10.862 17.5417C11.0037 17.4938 11.1537 17.474 11.3033 17.4834C11.453 17.4927 11.5992 17.5311 11.7333 17.5962C11.8675 17.6612 11.9869 17.7517 12.0846 17.8623L15.2691 21.3021L23.8887 11.3278C24.082 11.1105 24.3556 10.9759 24.6502 10.9531C24.9448 10.9302 25.2368 11.021 25.4631 11.2059C25.6894 11.3907 25.8319 11.6547 25.8596 11.9407C25.8873 12.2268 25.7981 12.512 25.6113 12.7347Z" fill="#13DEB9"></path>
-                        </svg>
-                        <p class="fs-3 fw-semibold" style="margin: 0; flex-grow: 1;">Daftar Hadir Tamu</p>
-                    </div>
-                    <div class="col-lg-12 mb-3" style="display: flex; align-items: center;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 36 35" fill="none" style="flex-shrink: 0; margin-right: 10px;">
-                            <path d="M18 3.28125C9.93586 3.28125 3.375 9.65986 3.375 17.5C3.375 25.3401 9.93586 31.7188 18 31.7188C26.0641 31.7188 32.625 25.3401 32.625 17.5C32.625 9.65986 26.0641 3.28125 18 3.28125ZM25.6113 12.7347L16.1613 23.6722C16.0577 23.7922 15.9287 23.8892 15.7831 23.9565C15.6375 24.0239 15.4788 24.06 15.3176 24.0625H15.2986C15.1409 24.0624 14.985 24.0302 14.841 23.9677C14.6969 23.9053 14.568 23.8142 14.4626 23.7002L10.4126 19.3252C10.3097 19.2191 10.2297 19.0942 10.1772 18.9576C10.1248 18.821 10.1009 18.6757 10.1071 18.53C10.1132 18.3844 10.1493 18.2414 10.2131 18.1095C10.2769 17.9776 10.3671 17.8594 10.4786 17.7619C10.59 17.6644 10.7204 17.5895 10.862 17.5417C11.0037 17.4938 11.1537 17.474 11.3033 17.4834C11.453 17.4927 11.5992 17.5311 11.7333 17.5962C11.8675 17.6612 11.9869 17.7517 12.0846 17.8623L15.2691 21.3021L23.8887 11.3278C24.082 11.1105 24.3556 10.9759 24.6502 10.9531C24.9448 10.9302 25.2368 11.021 25.4631 11.2059C25.6894 11.3907 25.8319 11.6547 25.8596 11.9407C25.8873 12.2268 25.7981 12.512 25.6113 12.7347Z" fill="#13DEB9"></path>
-                        </svg>
-                        <p class="fs-3 fw-semibold" style="margin: 0; flex-grow: 1;">Daftar Hadir Tamu</p>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-4 col-md-6 col-sm-12 card-hover">
-        <div class="card">
-            <div class="card-header text-center">
-                <h4>Lorem Ipsum dolor</h4>
-            </div>
-            <div class="d-flex justify-content-center">
-                <img src="{{ asset('assets/img/premium/premium3.svg') }}" width="50%" height="200" style="object-fit:cover" class="mb-4" alt="...">
-            </div>
-            <div class="d-flex align-items-center">
-                <div class="ms-auto">
-                    <div class="d-flex justify-content-end">
-
-                    </div>
-                </div>
-            </div>
-            <div class="ms-4 d-flex justify-content-center mb-3 mt-2">
-                <h2 class="card-text text-info">Rp 170.000</h2>
-                <h5 class="mb-0 mt-2 text-info">/bulan</h5>
-            </div>
-            <div class="px-4">
-                <div class="row">
-
-                    <div class="col-lg-12 mb-3" style="display: flex; align-items: center;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 36 35" fill="none" style="flex-shrink: 0; margin-right: 10px;">
-                            <path d="M18 3.28125C9.93586 3.28125 3.375 9.65986 3.375 17.5C3.375 25.3401 9.93586 31.7188 18 31.7188C26.0641 31.7188 32.625 25.3401 32.625 17.5C32.625 9.65986 26.0641 3.28125 18 3.28125ZM25.6113 12.7347L16.1613 23.6722C16.0577 23.7922 15.9287 23.8892 15.7831 23.9565C15.6375 24.0239 15.4788 24.06 15.3176 24.0625H15.2986C15.1409 24.0624 14.985 24.0302 14.841 23.9677C14.6969 23.9053 14.568 23.8142 14.4626 23.7002L10.4126 19.3252C10.3097 19.2191 10.2297 19.0942 10.1772 18.9576C10.1248 18.821 10.1009 18.6757 10.1071 18.53C10.1132 18.3844 10.1493 18.2414 10.2131 18.1095C10.2769 17.9776 10.3671 17.8594 10.4786 17.7619C10.59 17.6644 10.7204 17.5895 10.862 17.5417C11.0037 17.4938 11.1537 17.474 11.3033 17.4834C11.453 17.4927 11.5992 17.5311 11.7333 17.5962C11.8675 17.6612 11.9869 17.7517 12.0846 17.8623L15.2691 21.3021L23.8887 11.3278C24.082 11.1105 24.3556 10.9759 24.6502 10.9531C24.9448 10.9302 25.2368 11.021 25.4631 11.2059C25.6894 11.3907 25.8319 11.6547 25.8596 11.9407C25.8873 12.2268 25.7981 12.512 25.6113 12.7347Z" fill="#13DEB9"></path>
-                        </svg>
-                        <p class="fs-3 fw-semibold" style="margin: 0; flex-grow: 1;">Daftar Hadir Tamu</p>
-                    </div>
-                    <div class="col-lg-12 mb-3" style="display: flex; align-items: center;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 36 35" fill="none" style="flex-shrink: 0; margin-right: 10px;">
-                            <path d="M18 3.28125C9.93586 3.28125 3.375 9.65986 3.375 17.5C3.375 25.3401 9.93586 31.7188 18 31.7188C26.0641 31.7188 32.625 25.3401 32.625 17.5C32.625 9.65986 26.0641 3.28125 18 3.28125ZM25.6113 12.7347L16.1613 23.6722C16.0577 23.7922 15.9287 23.8892 15.7831 23.9565C15.6375 24.0239 15.4788 24.06 15.3176 24.0625H15.2986C15.1409 24.0624 14.985 24.0302 14.841 23.9677C14.6969 23.9053 14.568 23.8142 14.4626 23.7002L10.4126 19.3252C10.3097 19.2191 10.2297 19.0942 10.1772 18.9576C10.1248 18.821 10.1009 18.6757 10.1071 18.53C10.1132 18.3844 10.1493 18.2414 10.2131 18.1095C10.2769 17.9776 10.3671 17.8594 10.4786 17.7619C10.59 17.6644 10.7204 17.5895 10.862 17.5417C11.0037 17.4938 11.1537 17.474 11.3033 17.4834C11.453 17.4927 11.5992 17.5311 11.7333 17.5962C11.8675 17.6612 11.9869 17.7517 12.0846 17.8623L15.2691 21.3021L23.8887 11.3278C24.082 11.1105 24.3556 10.9759 24.6502 10.9531C24.9448 10.9302 25.2368 11.021 25.4631 11.2059C25.6894 11.3907 25.8319 11.6547 25.8596 11.9407C25.8873 12.2268 25.7981 12.512 25.6113 12.7347Z" fill="#13DEB9"></path>
-                        </svg>
-                        <p class="fs-3 fw-semibold" style="margin: 0; flex-grow: 1;">Daftar Hadir Tamu</p>
-                    </div>
-                    <div class="col-lg-12 mb-3" style="display: flex; align-items: center;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 36 35" fill="none" style="flex-shrink: 0; margin-right: 10px;">
-                            <path d="M18 3.28125C9.93586 3.28125 3.375 9.65986 3.375 17.5C3.375 25.3401 9.93586 31.7188 18 31.7188C26.0641 31.7188 32.625 25.3401 32.625 17.5C32.625 9.65986 26.0641 3.28125 18 3.28125ZM25.6113 12.7347L16.1613 23.6722C16.0577 23.7922 15.9287 23.8892 15.7831 23.9565C15.6375 24.0239 15.4788 24.06 15.3176 24.0625H15.2986C15.1409 24.0624 14.985 24.0302 14.841 23.9677C14.6969 23.9053 14.568 23.8142 14.4626 23.7002L10.4126 19.3252C10.3097 19.2191 10.2297 19.0942 10.1772 18.9576C10.1248 18.821 10.1009 18.6757 10.1071 18.53C10.1132 18.3844 10.1493 18.2414 10.2131 18.1095C10.2769 17.9776 10.3671 17.8594 10.4786 17.7619C10.59 17.6644 10.7204 17.5895 10.862 17.5417C11.0037 17.4938 11.1537 17.474 11.3033 17.4834C11.453 17.4927 11.5992 17.5311 11.7333 17.5962C11.8675 17.6612 11.9869 17.7517 12.0846 17.8623L15.2691 21.3021L23.8887 11.3278C24.082 11.1105 24.3556 10.9759 24.6502 10.9531C24.9448 10.9302 25.2368 11.021 25.4631 11.2059C25.6894 11.3907 25.8319 11.6547 25.8596 11.9407C25.8873 12.2268 25.7981 12.512 25.6113 12.7347Z" fill="#13DEB9"></path>
-                        </svg>
-                        <p class="fs-3 fw-semibold" style="margin: 0; flex-grow: 1;">Daftar Hadir Tamu</p>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
+    @endforeach
+</div> --}}
 @endsection
 
 @section('script')
@@ -714,80 +629,83 @@
 <script src="{{asset('admin/dist/js/apps/chat.js')}}"></script>
 
 <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var chartData = @json($newsChart);
 
-         
-    var options = {
-          series: [{
-            name: "Desktops",
-            data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
-        }],
-          chart: {
-          height: 350,
-          type: 'line',
-          zoom: {
-            enabled: false
-          }
-        },
-        dataLabels: {
-          enabled: false
-        },
-        stroke: {
-          curve: 'straight'
-        },
-        title: {
-          text: 'Product Trends by Month',
-          align: 'left'
-        },
-        grid: {
-          row: {
-            colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-            opacity: 0.5
-          },
-        },
-        xaxis: {
-          categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', "Nov", 'Des'],
-        }
-    };
+        var categories = chartData.map(item => item.month);
+        var data = chartData.map(item => item.news);
 
-    var chart = new ApexCharts(document.querySelector("#chart-writer"), options);
-    chart.render();
+        var options = {
+            series: [{
+                name: "Berita",
+                data: data
+            }],
+            chart: {
+                height: 350,
+                type: 'line',
+                zoom: {
+                    enabled: false
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                curve: 'straight'
+            },
+            grid: {
+                row: {
+                    colors: ['#f3f3f3', 'transparent'], 
+                    opacity: 0.5
+                }
+            },
+            xaxis: {
+                categories: categories,
+            }
+        };
 
+        var chart = new ApexCharts(document.querySelector("#chart-writer"), options);
+        chart.render();
+    });
 
-    var options = {
-          series: [{
-            name: "Desktops",
-            data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
-        }],
-          chart: {
-          height: 350,
-          type: 'line',
-          zoom: {
-            enabled: false
-          }
-        },
-        dataLabels: {
-          enabled: false
-        },
-        stroke: {
-          curve: 'straight'
-        },
-        title: {
-          text: 'Product Trends by Month',
-          align: 'left'
-        },
-        grid: {
-          row: {
-            colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-            opacity: 0.5
-          },
-        },
-        xaxis: {
-          categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', "Nov", 'Des'],
-        }
-    };
+    document.addEventListener('DOMContentLoaded', function () {
+        var chartData = @json($visitorChart);
 
-    var chart = new ApexCharts(document.querySelector("#chart-pengunjung"), options);
-    chart.render();
+        var categories = chartData.map(item => item.month);
+        var data = chartData.map(item => item.visitor);
+
+        var options = {
+            series: [{
+                name: "Pengunjung",
+                data: data
+            }],
+            chart: {
+                height: 350,
+                type: 'line',
+                zoom: {
+                    enabled: false
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                curve: 'straight'
+            },
+            grid: {
+                row: {
+                    colors: ['#f3f3f3', 'transparent'], 
+                    opacity: 0.5
+                }
+            },
+            xaxis: {
+                categories: categories,
+            }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart-pengunjung"), options);
+        chart.render();
+    });
 
 
     var options = {

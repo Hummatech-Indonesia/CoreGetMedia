@@ -14,6 +14,7 @@ use App\Http\Requests\StoreAdminRequest;
 use App\Http\Requests\UpdateAdminReqeust;
 use App\Models\Admin;
 use App\Models\User;
+use App\Services\AdminChartService;
 use App\Services\AdminService;
 use Illuminate\Http\Request;
 
@@ -26,8 +27,10 @@ class AdminController extends Controller
     private AuthorInterface $author;
     private NewsInterface $news;
     private CategoryInterface $category;
+    private AdminChartService $adminChart;
+    private UserInterface $user;
 
-    public function __construct(AdminInterface $admins, UserInterface $users, AdminService $admin, VisitorInterface $visitor, AuthorInterface $author, NewsInterface $news, CategoryInterface $category)
+    public function __construct(AdminInterface $admins, UserInterface $users, AdminService $admin, VisitorInterface $visitor, AuthorInterface $author, NewsInterface $news, CategoryInterface $category, AdminChartService $adminChart, UserInterface $user)
     {
         $this->admins = $admins;
         $this->admin = $admin;
@@ -36,6 +39,8 @@ class AdminController extends Controller
         $this->author = $author;
         $this->news = $news;
         $this->category = $category;
+        $this->adminChart = $adminChart;
+        $this->user = $user;
     }
 
     public function dashboard()
@@ -46,8 +51,10 @@ class AdminController extends Controller
         $countNews = $this->news->accepted()->count();
         $newsPopulars = $this->news->newsPopularAdmin();
         $categoryPopulars = $this->category->showWithCount()->take(4);
-
-        return view('pages.admin.home.index', compact('visitors', 'countAuthor', 'countUser', 'countNews', 'newsPopulars', 'categoryPopulars'));
+        $newsChart = $this->adminChart->Chart($this->news);
+        $visitorChart = $this->adminChart->ChartVisitor($this->visitor);
+        $authors = $this->user->countAuthor();
+        return view('pages.admin.home.index', compact('visitors', 'countAuthor', 'countUser', 'countNews', 'newsPopulars', 'categoryPopulars', 'newsChart', 'authors', 'visitorChart'));
     }
 
     /**

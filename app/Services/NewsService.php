@@ -234,4 +234,6 @@ class NewsService
     {
         $this->remove($news->image);
     }
+
+    
 }

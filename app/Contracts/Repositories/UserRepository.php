@@ -182,7 +182,7 @@ class UserRepository extends BaseRepository implements UserInterface
         return $this->model->query()
             ->whereRelation('roles', 'name', 'author')
             ->withCount('newses')
-            ->orderBy('newses_count')
+            ->orderByDesc('newses_count')
             ->take(5)
             ->get();
     }
