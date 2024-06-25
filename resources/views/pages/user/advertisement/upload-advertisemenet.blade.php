@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{{ asset('assets/dist/imageuploadify.min.css') }}">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script>
+    {{-- <script>
         $(document).ready(function() {
         // Function to preview the uploaded image
         function previewImage(event) {
@@ -79,7 +79,7 @@
         // Attach the validateImageDimensions function to the image input's change event
         $('#photo').on('change', validateImageDimensions);
         });
-    </script>
+    </script> --}}
 
     <style>
         .card.active {
