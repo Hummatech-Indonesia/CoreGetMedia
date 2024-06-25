@@ -26,6 +26,7 @@ use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\TagInterface;
 use App\Contracts\Interfaces\VoucherInterface;
 use App\Contracts\Interfaces\UserInterface;
+use App\Contracts\Interfaces\VisitorInterface;
 use App\Contracts\Repositories\AboutGetRepository;
 use App\Contracts\Repositories\AdminRepository;
 use App\Contracts\Repositories\AdvertisementRepository;
@@ -50,6 +51,7 @@ use App\Contracts\Repositories\SubCategoryRepository;
 use App\Contracts\Repositories\TagRepository;
 use App\Contracts\Repositories\VoucherRepository;
 use App\Contracts\Repositories\UserRepository;
+use App\Contracts\Repositories\VisitorRepository;
 use App\Services\ImageContentService;
 use Illuminate\Support\ServiceProvider;
 
@@ -80,7 +82,8 @@ class AppServiceProvider extends ServiceProvider
         AdminInterface::class => AdminRepository::class,
         AdvertisementInterface::class => AdvertisementRepository::class,
         AboutGetInterface::class => AboutGetRepository::class,
-        PositionAdvertisementInterface::class => PositionAdvertisementReporitory::class
+        PositionAdvertisementInterface::class => PositionAdvertisementReporitory::class,
+        VisitorInterface::class => VisitorRepository::class,
     ];
 
     /**

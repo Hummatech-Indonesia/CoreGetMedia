@@ -285,6 +285,7 @@ class NewsController extends Controller
         $this->newscategories->delete($findDraft->id);
         $this->newssubcategories->delete($findDraft->id);
         $this->newstags->delete($findDraft->id);
+        $this->service->delete($findDraft);
         $findDraft->forceDelete();
         return back()->with('success', 'Berhasil menghapus data');
     }
