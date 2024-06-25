@@ -155,6 +155,9 @@
                 <div>
                     <x-paginator :paginator="$latests" />
                 </div>
+            </div>
+
+            <div>
                 <div class="col-lg-4">
                     <div class="">
                         <div class="sidebar" style="width: 450px;">
@@ -257,7 +260,6 @@
                     </div>
                 </div>
             </div>
-
 
         </div>
     </div>
