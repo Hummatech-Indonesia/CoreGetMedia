@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\AdminInterface;
 use App\Contracts\Interfaces\UserInterface;
+use App\Contracts\Interfaces\VisitorInterface;
 use App\Enums\RoleEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAdminRequest;
@@ -18,12 +19,20 @@ class AdminController extends Controller
     private AdminInterface $admins;
     private AdminService $admin;
     private UserInterface $users;
+    private VisitorInterface $visitor;
 
-    public function __construct(AdminInterface $admins, UserInterface $users, AdminService $admin)
+    public function __construct(AdminInterface $admins, UserInterface $users, AdminService $admin, VisitorInterface $visitor)
     {
         $this->admins = $admins;
         $this->admin = $admin;
         $this->users = $users;
+        $this->visitor = $visitor;
+    }
+
+    public function dashboard()
+    {
+        $visitors = $this->visitor->get()->count();
+        return view('pages.admin.home.index', compact('visitors'));
     }
 
     /**
