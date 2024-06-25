@@ -5,13 +5,14 @@ namespace App\Contracts\Interfaces;
 use App\Contracts\Interfaces\Eloquent\ChartInterface;
 use App\Contracts\Interfaces\Eloquent\DeleteInterface;
 use App\Contracts\Interfaces\Eloquent\DraftInterface;
+use App\Contracts\Interfaces\Eloquent\FindDraftInterface;
 use App\Contracts\Interfaces\Eloquent\GetInterface;
 use App\Contracts\Interfaces\Eloquent\ShowInterface;
 use App\Contracts\Interfaces\Eloquent\ShowWithSlugInterface;
 use App\Contracts\Interfaces\Eloquent\StoreInterface;
 use App\Contracts\Interfaces\Eloquent\UpdateInterface;
 
-interface NewsInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, ShowWithSlugInterface, ChartInterface, DraftInterface
+interface NewsInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, ShowWithSlugInterface, ChartInterface, DraftInterface, FindDraftInterface
 {
     public function where($data, $paginate) : mixed;
     public function whereSubCategory($id, $query) : mixed;
@@ -34,4 +35,5 @@ interface NewsInterface extends GetInterface, StoreInterface, UpdateInterface, S
     public function newsStatus($user_id, $status) : mixed;
     public function userStatus($user_id, $status): mixed;
     public function monthlyViews($news, int $year): array;
+    public function showWithTrash(mixed $id): mixed;
 }

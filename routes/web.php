@@ -158,9 +158,9 @@ Route::post('store-news', [NewsController::class, 'store'])->name('store.news');
 Route::get('get-sub-category', [SubCategoryController::class, 'show'])->name('get.sub.category');
 Route::get('list-news', [NewsController::class, 'index'])->name('news.list.author');
 Route::get('edit-news/{news}', [NewsController::class, 'edit'])->name('edit.news');
-Route::put('update-news/{news}', [NewsController::class, 'update'])->name('update.news');
-Route::delete('delete-news/{news}', [NewsController::class, 'destroy'])->name('delete.news');
-
+Route::put('update-news/{id}', [NewsController::class, 'update'])->name('update.news');
+Route::delete('delete-news/{id}', [NewsController::class, 'destroy'])->name('delete.news');
+Route::post('publish-news/{id}', [NewsController::class, 'publish'])->name('publish.news');
 
 Route::get('news-statistic', [AuthorController::class, 'statistic'])->name('news.author.statistic');
 

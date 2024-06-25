@@ -68,8 +68,7 @@
         <h5>Baca ketentuan dan persyaratan sembelum mengunggah berita</h5>
     </div> --}}
 
-    <form action="{{ route('update.news', ['news' => $news->id]) }}" method="post" enctype="multipart/form-data">
-        @method('put')
+    <form id="myForm" action="{{ route('update.news', ['id' => $news->id]) }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="ms-1 mt-5 d-flex justify-content-between">
             <h5>Isi form dibawah ini untuk mengunggah berita</h5>
@@ -212,8 +211,11 @@
             <button type="reset" class="btn btn-danger m-2">
                 Batal
             </button>
-            <button type="submit" class="btn btn-primary m-2">
+            <button type="submit" class="btn btn-primary m-2" id="submitButton1">
                 Update
+            </button>
+            <button type="submit" class="btn btn-primary m-2" id="submitButton2">
+                Upload
             </button>
         </div>
         </div>
@@ -367,5 +369,34 @@
             previewImg.classList.add('hide');
         }
     }
+    </script>
+
+    <script>
+        var form = document.getElementById('myForm');
+        var submitButton1 = document.getElementById('submitButton1');
+        var submitButton2 = document.getElementById('submitButton2');
+
+        submitButton1.addEventListener('click', function() {
+            form.action = "{{ route('update.news', ['id' => $news->id]) }}";
+            form.method = "post";
+
+            // Set the hidden _method input to 'put'
+            var methodInput = document.createElement('input');
+            methodInput.setAttribute('type', 'hidden');
+            methodInput.setAttribute('name', '_method');
+            methodInput.setAttribute('value', 'put');
+            form.appendChild(methodInput);
+        });
+
+        submitButton2.addEventListener('click', function() {
+            form.action = "{{ route('publish.news', ['id' => $news->id]) }}";
+            form.method = "post";
+
+            // Remove the hidden _method input if it exists
+            var existingMethodInput = document.querySelector('input[name="_method"]');
+            if (existingMethodInput) {
+                form.removeChild(existingMethodInput);
+            }
+        });
     </script>
 @endsection

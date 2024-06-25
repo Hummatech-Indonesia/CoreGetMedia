@@ -129,15 +129,18 @@
                                 <div class="d-flex justify-content-end">
                                     <div class="text-md-right">
                                         @php
-                                        if ($data->status == 'reject') {
-                                        $color = 'danger';
-                                        $text = 'Ditolak';
+                                        if ($data->deleted_at != null) {
+                                            $color = 'primary';
+                                            $text = 'Draft';
+                                        } elseif ($data->status == 'reject') {
+                                            $color = 'danger';
+                                            $text = 'Ditolak';
                                         } elseif ($data->status == 'accepted') {
-                                        $color = 'success';
-                                        $text = 'Aktif';
+                                            $color = 'success';
+                                            $text = 'Aktif';
                                         } else {
-                                        $color = 'warning';
-                                        $text = 'Pending';
+                                            $color = 'warning';
+                                            $text = 'Pending';
                                         }
                                         @endphp
                                         <div class="col gap-2">
@@ -160,35 +163,54 @@
                             </div>
 
                             <div class="d-flex justify-content-end">
-                                <a href="{{ route('news.singlepost', $data->slug) }}" class="btn btn-sm m-1 mt-5"
-                                    style="background-color: #5D87FF;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="30"
-                                        viewBox="0 0 512 512">
-                                        <path fill="none" stroke="#ffffff" stroke-linecap="round"
-                                            stroke-linejoin="round" stroke-width="32"
-                                            d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 0 0-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 0 0 0-17.47C428.89 172.28 347.8 112 255.66 112" />
-                                        <circle cx="256" cy="256" r="80" fill="none" stroke="#ffffff"
-                                            stroke-miterlimit="10" stroke-width="32" />
-                                    </svg>
-                                </a>
-                                <a href="{{ route('edit.news', ['news' => $data->slug]) }}" class="btn btn-sm m-1 mt-5"
-                                    style="background-color: #FFD643;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="23"
-                                        viewBox="0 0 512 512">
-                                        <path
-                                            d="M64 368v80h80l235.727-235.729-79.999-79.998L64 368zm377.602-217.602c8.531-8.531 8.531-21.334 0-29.865l-50.135-50.135c-8.531-8.531-21.334-8.531-29.865 0l-39.468 39.469 79.999 79.998 39.469-39.467z"
-                                            fill="#ffffff" />
-                                    </svg>
-                                </a>
-                                <button type="submit" class="btn btn-sm m-1 mt-5 btn-delete" data-id="{{ $data->id }}"
-                                    style="background-color: #C94F4F;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="23"
-                                        viewBox="0 0 512 512">
-                                        <path
-                                            d="M128 405.429C128 428.846 147.198 448 170.667 448h170.667C364.802 448 384 428.846 384 405.429V160H128v245.429zM416 96h-80l-26.785-32H202.786L176 96H96v32h320V96z"
-                                            fill="#ffffff" />
-                                    </svg>
-                                </button>
+                                @if ($data->deleted_at != null)
+                                    <button type="submit" id="btn-cencel" data-id="{{ $data->id }}"
+                                        class="btn m-1 mt-5 btn-delete text-white" style="background-color: #C94F4F;">
+                                        Hapus
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24">
+                                            <path fill="#ffffff"
+                                                d="m12 12.708l-5.246 5.246q-.14.14-.344.15t-.364-.15t-.16-.354t.16-.354L11.292 12L6.046 6.754q-.14-.14-.15-.344t.15-.364t.354-.16t.354.16L12 11.292l5.246-5.246q.14-.14.345-.15q.203-.01.363.15t.16.354t-.16.354L12.708 12l5.246 5.246q.14.14.15.345q.01.203-.15.363t-.354.16t-.354-.16z" />
+                                        </svg>
+                                    </button>
+
+                                    <a href="{{ route('edit.news', ['news' => $data->slug]) }}" class="btn m-1 mt-5 text-white" style="background-color: #175A95;">
+                                        Lanjut Mengedit
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
+                                            <path fill="#ffffff"    
+                                                d="m13.292 12l-4.6-4.6l.708-.708L14.708 12L9.4 17.308l-.708-.708z" />
+                                        </svg>
+                                    </a>
+                                @else
+                                    <a href="{{ route('news.singlepost', $data->slug) }}" class="btn btn-sm m-1 mt-5"
+                                        style="background-color: #5D87FF;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="30"
+                                            viewBox="0 0 512 512">
+                                            <path fill="none" stroke="#ffffff" stroke-linecap="round"
+                                                stroke-linejoin="round" stroke-width="32"
+                                                d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 0 0-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 0 0 0-17.47C428.89 172.28 347.8 112 255.66 112" />
+                                            <circle cx="256" cy="256" r="80" fill="none" stroke="#ffffff"
+                                                stroke-miterlimit="10" stroke-width="32" />
+                                        </svg>
+                                    </a>
+                                    <a href="{{ route('edit.news', ['news' => $data->slug]) }}" class="btn btn-sm m-1 mt-5"
+                                        style="background-color: #FFD643;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="23"
+                                            viewBox="0 0 512 512">
+                                            <path
+                                                d="M64 368v80h80l235.727-235.729-79.999-79.998L64 368zm377.602-217.602c8.531-8.531 8.531-21.334 0-29.865l-50.135-50.135c-8.531-8.531-21.334-8.531-29.865 0l-39.468 39.469 79.999 79.998 39.469-39.467z"
+                                                fill="#ffffff" />
+                                        </svg>
+                                    </a>
+                                    <button type="submit" class="btn btn-sm m-1 mt-5 btn-delete" data-id="{{ $data->id }}"
+                                        style="background-color: #C94F4F;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="23"
+                                            viewBox="0 0 512 512">
+                                            <path
+                                                d="M128 405.429C128 428.846 147.198 448 170.667 448h170.667C364.802 448 384 428.846 384 405.429V160H128v245.429zM416 96h-80l-26.785-32H202.786L176 96H96v32h320V96z"
+                                                fill="#ffffff" />
+                                        </svg>
+                                    </button>
+                                @endif
                             </div>
                         </div>
 
@@ -521,19 +543,16 @@
                         <div class="row">
                             <div class="col-md-12 col-lg-2">
                                 <div class="mb-2">
-                                    <img src="" alt="" width="290px" height="180px" class="w-100"
+                                    <img src="{{ asset('storage/'. $draft->image) }}" width="290px" height="180px" class="w-100"
                                         style="width: 100%; object-fit:cover;" />
                                 </div>
                             </div>
                             <div class="row col-md-12 col-lg-7">
                                 <div class="col-lg-12 mb-3">
                                     <h4>
-                                        Draft data
+                                       {{ $draft->name }}
                                     </h4>
-                                    <div class="fs-4 mt-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum
-                                        voluptate natus fugit dolores a pariatur in deleniti repudiandae doloremque soluta
-                                        optio officiis, nihil aliquid eligendi.
-                                    </div>
+                                    <div class="fs-4 mt-2">{!! Str::words(strip_tags($draft->description), 25, '...') !!}</div>
                                 </div>
                             </div>
                             <div class="col-md-12 col-lg-3">
@@ -550,37 +569,26 @@
                                 </div>
 
                                 <div class="d-flex mt-4 justify-content-end">
-                                    24 Juli 2024
+                                    {{ \Carbon\Carbon::parse($draft->upload_date)->format('M d, Y') }}
                                 </div>
 
                                 <div class="d-flex justify-content-end">
-                                    <a href="#" class="btn btn-sm m-1 mt-5" style="background-color: #5D87FF;">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="30"
-                                            viewBox="0 0 512 512">
-                                            <path fill="none" stroke="#ffffff" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="32"
-                                                d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 0 0-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 0 0 0-17.47C428.89 172.28 347.8 112 255.66 112" />
-                                            <circle cx="256" cy="256" r="80" fill="none" stroke="#ffffff"
-                                                stroke-miterlimit="10" stroke-width="32" />
-                                        </svg>
-                                    </a>
-                                    <a href="#" class="btn btn-sm m-1 mt-5" style="background-color: #FFD643;">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="23"
-                                            viewBox="0 0 512 512">
-                                            <path
-                                                d="M64 368v80h80l235.727-235.729-79.999-79.998L64 368zm377.602-217.602c8.531-8.531 8.531-21.334 0-29.865l-50.135-50.135c-8.531-8.531-21.334-8.531-29.865 0l-39.468 39.469 79.999 79.998 39.469-39.467z"
-                                                fill="#ffffff" />
-                                        </svg>
-                                    </a>
-                                    <button type="submit" class="btn btn-sm m-1 mt-5 btn-delete" data-id=""
-                                        style="background-color: #C94F4F;">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="23"
-                                            viewBox="0 0 512 512">
-                                            <path
-                                                d="M128 405.429C128 428.846 147.198 448 170.667 448h170.667C364.802 448 384 428.846 384 405.429V160H128v245.429zM416 96h-80l-26.785-32H202.786L176 96H96v32h320V96z"
-                                                fill="#ffffff" />
+                                    <button type="submit" id="btn-cencel" data-id="{{ $draft->id }}"
+                                        class="btn m-1 mt-5 btn-delete text-white" style="background-color: #C94F4F;">
+                                        Hapus
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24">
+                                            <path fill="#ffffff"
+                                                d="m12 12.708l-5.246 5.246q-.14.14-.344.15t-.364-.15t-.16-.354t.16-.354L11.292 12L6.046 6.754q-.14-.14-.15-.344t.15-.364t.354-.16t.354.16L12 11.292l5.246-5.246q.14-.14.345-.15q.203-.01.363.15t.16.354t-.16.354L12.708 12l5.246 5.246q.14.14.15.345q.01.203-.15.363t-.354.16t-.354-.16z" />
                                         </svg>
                                     </button>
+
+                                    <a href="{{ route('edit.news', ['news' => $draft->slug]) }}" class="btn m-1 mt-5 text-white" style="background-color: #175A95;">
+                                        Lanjut Mengedit
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
+                                            <path fill="#ffffff"    
+                                                d="m13.292 12l-4.6-4.6l.708-.708L14.708 12L9.4 17.308l-.708-.708z" />
+                                        </svg>
+                                    </a>
                                 </div>
                             </div>
 

@@ -43,9 +43,18 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->get();
     }
 
+    public function showWithTrash(mixed $id): mixed
+    {
+        return $this->model->query()
+            ->withTrashed()
+            ->where('user_id', $id)
+            ->get();
+    }
+
     public function showWithSLug(string $slug): mixed
     {
         return $this->model->query()
+            ->withTrashed()
             ->where('slug', $slug)
             ->withCount('newsViews')
             ->withCount('comments')
@@ -239,6 +248,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
     public function update(mixed $id, array $data): mixed
     {
         return $this->model->query()
+            ->withTrashed()
             ->findOrFail($id)
             ->update($data);
     }
@@ -341,4 +351,9 @@ class NewsRepository extends BaseRepository implements NewsInterface
     {
         return $this->model->query()->onlyTrashed()->where('user_id', auth()->user()->id)->get();
     }
+
+    public function findDraft(mixed $id)
+    {
+        return $this->model->query()->withTrashed()->findOrFail($id);
+    } 
 }
