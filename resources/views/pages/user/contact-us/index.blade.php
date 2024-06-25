@@ -100,7 +100,11 @@
                                     </div>
                                     <div class="ms-3">
                                         <h4 class="mb-0 text-white fs-6">Email</h4>
-                                        <span class="text-white">{{ $about_get->email }}</span>
+                                        @if (isset($about_get))
+                                            <span class="text-white">{{ $about_get->email }}</span>
+                                        @else
+                                            <span class="text-white">Email tidak tersedia</span>
+                                        @endif
                                     </div>
 
                                 </div>
@@ -117,7 +121,11 @@
                                     </div>
                                     <div class="ms-3">
                                         <h4 class="mb-0 text-white fs-6">Telepon</h4>
-                                        <span class="text-white">{{ $about_get->phone_number }}</span>
+                                        @if (isset($about_get))
+                                            <span class="text-white">{{ $about_get->phone_number }}</span>
+                                        @else
+                                            <span class="text-white">Nomer telepon tidak tersedia</span>
+                                        @endif
                                     </div>
 
                                 </div>
@@ -128,6 +136,7 @@
                 </div>
                 <div class="mt-5" style="padding-bottom: 250px;">
                     <ul class="social-profile list-style">
+                        @if (isset($about_get))
                         <li>
                             <a href="{{ $about_get->url_facebook }}" target="_blank"><i class="ri-facebook-fill"></i></a>
                         </li>
@@ -140,6 +149,11 @@
                         <li>
                             <a href="{{ $about_get->url_linkedin }}" target="_blank"><i class="ri-linkedin-fill"></i></a>
                         </li>
+                        @else
+                        <li>
+                            <p>Social media belum tersedia</p>
+                        </li>
+                        @endif
                     </ul>
                 </div>
             </div>

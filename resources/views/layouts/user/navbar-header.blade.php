@@ -45,18 +45,24 @@
                 </div>
                 <div class="col-lg-4 col-md-6 col-7">
                     <ul class="social-profile list-style">
-                        <li>
-                            <a href="https://www.fb.com/" target="_blank"><i class="ri-facebook-fill"></i></a>
-                        </li>
-                        <li>
-                            <a href="https://www.twitter.com/" target="_blank"><i class="ri-twitter-fill"></i></a>
-                        </li>
-                        <li>
-                            <a href="https://www.instagram.com/" target="_blank"><i class="ri-instagram-line"></i></a>
-                        </li>
-                        <li>
-                            <a href="https://www.linkedin.com/" target="_blank"><i class="ri-linkedin-fill"></i></a>
-                        </li>
+                        @if (isset($about_get))
+                            <li>
+                                <a href="{{ $about_get->url_facebook }}" target="_blank"><i class="ri-facebook-fill"></i></a>
+                            </li>
+                            <li>
+                                <a href="{{ $about_get->url_twitter }}" target="_blank"><i class="ri-twitter-fill"></i></a>
+                            </li>
+                            <li>
+                                <a href="{{ $about_get->url_instagram }}" target="_blank"><i class="ri-instagram-line"></i></a>
+                            </li>
+                            <li>
+                                <a href="{{ $about_get->url_linkedin }}" target="_blank"><i class="ri-linkedin-fill"></i></a>
+                            </li>
+                        @else
+                            <li>
+                                <p style="color: #FFFFFF"> Social media belum tersedia </p>
+                            </li>
+                        @endif
                     </ul>
                 </div>
             </div>

@@ -39,27 +39,39 @@
                 <div class="col-10">
                     Who We Are
                 </div>
-                <div class="col">
-                    <h1>
-                        {{ $about_get->header }}
-                        {{-- KAMI ADALAH PORTAL BERITA TERBAIK DAN PROFESSIONAL --}}
-                    </h1>
-                </div>
-                <div class="col-12">
-                    <p class="fs-5">
-                        {!! $about_get->description !!}
-                        {{-- Di era digital yang penuh dengan informasi yang tak terhingga, kami hadir sebagai sumber berita
-                        yang terpercaya dan mudah diakses oleh Anda. Kami bukan sekadar portal berita biasa, tetapi
-                        sebuah komunitas yang berkomitmen untuk menyajikan informasi yang akurat, objektif, dan
-                        mencerahkan bagi masyarakat --}}
-                    </p>
-                </div>
-                <div class="image col">
-                    <h4 class="mt-4" style="color: #FFFFFF">
-                        {{ $about_get->slogan }}
-                        {{-- MENGHUBUNGKAN ANDA DENGAN BERITA TERKINI DAN TERHANGAT SETIAP SAAT --}}
-                    </h4>
-                </div>
+                    <div class="col">
+                        <h1>
+                            @if (isset($about_get))
+                                {{ $about_get->header }}
+                            @else
+                                Header belum tersedia
+                            @endif
+                            {{-- KAMI ADALAH PORTAL BERITA TERBAIK DAN PROFESSIONAL --}}
+                        </h1>
+                    </div>
+                    <div class="col-12">
+                        <p class="fs-5">
+                            @if (isset($about_get))
+                                {!! $about_get->description !!}
+                            @else
+                                Deskripsi belum tersedia
+                            @endif
+                            {{-- Di era digital yang penuh dengan informasi yang tak terhingga, kami hadir sebagai sumber berita
+                            yang terpercaya dan mudah diakses oleh Anda. Kami bukan sekadar portal berita biasa, tetapi
+                            sebuah komunitas yang berkomitmen untuk menyajikan informasi yang akurat, objektif, dan
+                            mencerahkan bagi masyarakat --}}
+                        </p>
+                    </div>
+                    <div class="image col">
+                        <h4 class="mt-4" style="color: #FFFFFF">
+                            @if (isset($about_get))
+                                {{ $about_get->slogan }}
+                            @else
+                                Slogan belum tersedia
+                            @endif
+                            {{-- MENGHUBUNGKAN ANDA DENGAN BERITA TERKINI DAN TERHANGAT SETIAP SAAT --}}
+                        </h4>
+                    </div>
             </div>
         </div>
         <div class="col-6 mt-5">
