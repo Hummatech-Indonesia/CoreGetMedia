@@ -155,4 +155,5 @@ class AdvertisementRepository extends BaseRepository implements AdvertisementInt
     {
         return $this->model->query()->withTrashed()->FindOrFail($id);
     }
+
 }
