@@ -1,7 +1,6 @@
 @extends('layouts.user.app')
 {{-- @section('title', 'Artikel Populer') --}}
 
-
 @section('style')
 <style>
     .link-one {
@@ -93,6 +92,10 @@
 </style>
 @endsection
 
+<div>
+    @include('layouts.user.notification')
+</div>
+
 @section('content')
 <div class="container-fluid">
 
@@ -140,10 +143,6 @@
     <img src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/'.$advertisement_tops->image : "CONTOHIKLAN.png") }}" width="100%" height="166px" style="object-fit: cover" alt="">
 </div>
 @endif
-
-<div>
-    @include('layouts.user.notification')
-</div>
 
 @php
 $filteredPin = $newsPins->take(3);
