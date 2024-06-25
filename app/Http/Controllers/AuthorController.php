@@ -158,12 +158,15 @@ class AuthorController extends Controller
         $user->roles()->detach();
         $user->permissions()->detach();
         $user->assignRole(RoleEnum::AUTHOR->value);
-        return redirect()->back()->with(['success' => 'Author Berhasil Dikonfirmasi']);
+        return back()->with(['success' => 'Author Berhasil Dikonfirmasi']);
     }
 
-    public function reject(Author $author)
+    public function reject(Request $request, Author $author)
     {
-        $this->author->update($author->id, ['status' => AuthorEnum::REJECT->value]);
+        $this->author->update($author->id, [
+            'status' => AuthorEnum::REJECT->value,
+            'reject_description' => $request->reject_description,
+        ]);
         return redirect()->back()->with(['success' => 'Author Berhasil Tolak']);
     }
 }

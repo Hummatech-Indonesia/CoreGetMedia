@@ -47,8 +47,11 @@
                             </div>
                             <div class="col-12">
                                 <div class="">
-                                    <label for="exampleInputPassword1" class="form-label fw-semibold mt-4">CV</label>
-                                    <input type="file" class="form-control" id="exampleInputtext" value="#" name="cv">
+                                    <div class="d-flex justify-content-between mt-4">
+                                        <label for="exampleInputPassword1" class="form-label fw-semibold">CV</label>
+                                        <button type="button" class="btn btn-success mb-2" id="viewPdfBtn" style="background-color: #175A95; border: none" disabled>Lihat cv</button>
+                                    </div>
+                                    <input type="file" class="form-control" id="cvInput" name="cv" accept="application/pdf">
                                 </div>
                             </div>
                             <div class="col-lg-12">
@@ -103,6 +106,30 @@
 <script>
     feather.replace();
 </script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+     $(document).ready(function() {
+        var pdfUrl;
+
+        $('#cvInput').on('change', function() {
+            if (this.files && this.files[0]) {
+                pdfUrl = URL.createObjectURL(this.files[0]);
+                $('#viewPdfBtn').prop('disabled', false);
+            } else {
+                $('#viewPdfBtn').prop('disabled', true);
+            }
+        });
+
+        $('#viewPdfBtn').click(function() {
+            if (pdfUrl) {
+                window.open(pdfUrl);
+            }
+        });
+    });
+</script>
+
 <script>
     const switchInput = document.querySelector('.form-check-input');
     const buttonKirim = document.querySelector('.button-kirim');

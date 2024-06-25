@@ -57,7 +57,7 @@
             <div class="row">
                 <div class="col-lg-6 mb-4">
                     <label class="form-label" for="page">Halaman</label>
-                    <select name="page" class="form-select" id="">
+                    <select name="page" class="form-select" id="page-select">
                         <option value="home" {{ $data->page == 'home' ? 'selected' : '' }}>Dashboard</option>
                         <option value="singlepost" {{ $data->page == 'singlepost' ? 'selected' : '' }}>News Post</option>
                         <option value="category" {{ $data->page == 'category' ? 'selected' : '' }}>Kategori</option>
@@ -75,7 +75,17 @@
                 <div class="col-lg-12 mb-4">
                     <label for="position" class="form-label">Posisi Iklan</label>
                     <div class="">
+                        @forelse ($positions as $position)
                         <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="position" id="inlineRadio1-{{ $position->page }}" value="{{ $position->position }}">
+                            <label class="form-check-label" for="inlineRadio1">
+                                <p class="ms-2">Posisi {{ $position->position }} Full</p>
+                                <img src="{{asset($position->image)}}" width="300" height="200" alt="">
+                            </label>
+                        </div>
+                        @empty
+                        @endforelse
+                        {{-- <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="under" {{ $data->position == 'under' ? 'checked' : '' }}>
                             <label class="form-check-label" for="inlineRadio1">
                                 <p class="ms-2">Posisi Bawah Full (1770 x 166)</p>
@@ -112,7 +122,7 @@
                                 <img src="{{ asset('assets/img/news/news-13.webp') }}" width="300" height="200"
                                     alt="">
                             </label>
-                        </div>
+                        </div> --}}
                     </div>
 
                 </div>
@@ -169,7 +179,32 @@
 
 @section('script')
     <script src="{{ asset('assets/dist/imageuploadify.min.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    <script>
+        $(document).ready(function() {
+            const $pageSelect = $('#page-select');
+            const $positionDivs = $('.form-check.form-check-inline');
+
+            function showHidePositionDivs() {
+                const selectedPage = $pageSelect.val();
+
+                $positionDivs.each(function() {
+                    const $positionInput = $(this).find('input[name="position"]');
+                    const positionPage = $positionInput.attr('id').split('-')[1];
+
+                    if (selectedPage === positionPage) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            }
+
+            $pageSelect.on('change', showHidePositionDivs);
+            showHidePositionDivs();
+        });
+    </script>
     <script>
         $(document).ready(function() {
             $('#image-uploadify').imageuploadify();

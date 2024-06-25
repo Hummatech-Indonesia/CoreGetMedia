@@ -35,7 +35,7 @@ class AdvertisementController extends Controller
      */
     public function index()
     {
-        $all_advertisements = $this->advertisement->get();
+        $all_advertisements = $this->advertisement->getall();
         $pending_advertisements = $this->advertisement->where(auth()->user()->id, 'pending');
         $accepted_advertisements = $this->advertisement->where(auth()->user()->id, 'accepted');
         $reject_advertisements = $this->advertisement->where(auth()->user()->id, 'reject');
@@ -70,6 +70,7 @@ class AdvertisementController extends Controller
     {
         $this->user->update(auth()->user()->id, $request->validated());
         $positions = $this->position->get();
+        // dd($positions);
         return view('pages.user.advertisement.upload-advertisemenet', compact('positions'));
     }
 
@@ -107,9 +108,9 @@ class AdvertisementController extends Controller
      */
     public function edit(Advertisement $advertisement)
     {
-        $posisi = $this->position->get();
+        $positions = $this->position->get();
         $data = $this->advertisement->show($advertisement->id);
-        return view('pages.user.advertisement.update-advertisemenet', compact('data', 'posisi'));
+        return view('pages.user.advertisement.update-advertisemenet', compact('data', 'positions'));
     }
 
     /**

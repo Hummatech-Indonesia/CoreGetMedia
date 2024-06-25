@@ -51,8 +51,14 @@ class AdvertisementRepository extends BaseRepository implements AdvertisementInt
     public function get(): mixed
     {
         return $this->model->query()
-        ->where('status', AdvertisementEnum::ACCEPTED->value)
-        ->where('feed', AdvertisementEnum::PAID)
+            ->where('status', AdvertisementEnum::ACCEPTED->value)
+            ->where('feed', AdvertisementEnum::PAID)
+            ->get();
+    }
+
+    public function getall(): mixed
+    {
+        return $this->model->query()
             ->get();
     }
 

@@ -1,83 +1,3 @@
-{{-- @extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
-
-                        <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection --}}
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -262,18 +182,18 @@
                         <div class="row">
                             <div class="my-2 col-12">
                                 <label for="name" class="form-label mb-2">Nama Lengkap</label>
-                                <input type="text" class="form-control " id="name" name="name">
+                                <input type="text" class="form-control " id="name" name="name" value="{{ old('name') }}">
                                 <ul class="text-error mt-1"></ul>
                             </div>
                             <div class="my-2 col-lg-12">
                                 <label for="email" class="form-label mb-2">Email</label>
-                                <input type="email" id="email" class="form-control" name="email">
+                                <input type="email" id="email" class="form-control" name="email" value="{{ old('email') }}">
                                 <ul class="text-error mt-1"></ul>
                             </div>
                             <div class="my-2 col-lg-6 mb-3">
                                 <label for="password" class="form-label mb-2">Password</label>
                                 <div class="input-group input-group-merge has-validation">
-                                    <input type="password" id="password" class="form-control" name="password">
+                                    <input type="password" id="password" class="form-control" name="password" value="{{ old('password') }}">
                                     <span class="input-group-text cursor-pointer">
                                         <svg xmlns="http://www.w3.org/2000/svg" id="togglePasswordIcon"
                                             width="20" height="20" viewBox="0 0 256 256">
