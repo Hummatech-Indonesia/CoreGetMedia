@@ -61,7 +61,12 @@
     </style>
 </head>
 
+
 <body>
+    @if ($news_latest->count() != 0)
+        @include('layouts.user.notification')
+    @endif
+
     @if(!isset($showNavbar) || $showNavbar !== false)
         @include('layouts.user.navbar-header')
         @include('layouts.user.mobile-navbar')
@@ -78,7 +83,6 @@
             <span class="slider round"></span>
         </label>
     </div>
-
 
     @yield('content')
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
@@ -144,6 +148,7 @@
             });
         });
     </script> --}}
+
 </body>
 
 </html>
