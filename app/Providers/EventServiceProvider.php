@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\AboutGet;
 use App\Models\Advertisement;
 use App\Models\Author;
 use App\Models\News;
@@ -44,9 +45,11 @@ class EventServiceProvider extends ServiceProvider
 
         $categories = Category::all();
         $subCategories = SubCategory::all();
+        $about_get = AboutGet::get()->first();
 
         view()->share('categories', $categories);
         view()->share('subCategories', $subCategories);
+        view()->share('about_get', $about_get);
     }
 
     /**

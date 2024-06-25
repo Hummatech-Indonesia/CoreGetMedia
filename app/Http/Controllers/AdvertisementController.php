@@ -92,6 +92,30 @@ class AdvertisementController extends Controller
         return redirect('/status-advertisement-list')->with('success', 'Berhasil menyimpan data iklan');
     }
 
+    public function updateDraft(UpdateAdvertisementRequest $request, $id)
+    {
+        $findDraft = $this->advertisement->withtrash($id);
+        $data = $this->service->update($request, $findDraft);
+        $data['status'] = StatusEnum::PENDING->value;
+        $data['feed'] = StatusEnum::PENDING->value;
+        $data['description'] = null;
+        $advertisement = $this->advertisement->update($findDraft->id, $data);
+        $findDraft->delete();
+        return redirect('/status-advertisement-list')->with('success', 'Berhasil menyimpan data iklan');
+    }
+
+    public function notDraft($id)
+    {
+        $findDraft = $this->advertisement->withtrash($id);
+        if($findDraft->trashed()){
+            $findDraft->restore();
+            return redirect('/status-advertisement-list')->with('success', 'Berhasil memulihkan data iklan');
+        } else {
+            return redirect('/status-advertisement-list')->with('warning', 'Draft tidak di temukan');
+        }
+
+    }
+
     // $advertisements = Advertisement::whereNull('deleted_at')->get();
     // $drafts = Advertisement::onlyTrashed()->get();
 
@@ -116,13 +140,14 @@ class AdvertisementController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAdvertisementRequest $request, Advertisement $advertisement)
+    public function update(UpdateAdvertisementRequest $request, $id)
     {
-        $data = $this->service->update($request, $advertisement);
+        $findDraft = $this->advertisement->withtrash($id);
+        $data = $this->service->update($request, $findDraft);
         $data['status'] = StatusEnum::PENDING->value;
         $data['feed'] = StatusEnum::PENDING->value;
         $data['description'] = null;
-        $this->advertisement->update($advertisement->id, $data);
+        $this->advertisement->update($findDraft->id, $data);
         return redirect('/status-advertisement-list')->with('success', 'Berhasil mengupdate iklan');
     }
 

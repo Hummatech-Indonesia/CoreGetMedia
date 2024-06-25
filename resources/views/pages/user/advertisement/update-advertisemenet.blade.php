@@ -38,16 +38,22 @@
         </div>
     </div>
 
-    <form action="{{ route('update.advertisement', ['advertisement' => $data->id]) }}" method="post" enctype="multipart/form-data">
+    <form id="myForm" action="{{ route('update.advertisement', ['id' => $data->id]) }}" method="post" enctype="multipart/form-data">
         @method('put')
         @csrf
         <div class="d-flex justify-content-between mb-3">
             <h5>Isi form dibawah ini untuk konten iklan</h5>
             <div>
-                <button class="btn btn-md text-white me-2" style="background-color: #1EBB9E;">
+                @if ($data->deleted_at != null)
+                <button type="submit" class="btn btn-md text-white me-2" style="background-color: #1EBB9E;" id="submitButton3">
+                    Pulihkan
+                </button>
+                @else
+                <button type="submit" class="btn btn-md text-white me-2" style="background-color: #1EBB9E;" id="submitButton2">
                     Simpan Draf
                 </button>
-                <button type="submit" class="btn btn-md text-white" style="background-color: #175A95;">
+                @endif
+                <button type="submit" class="btn btn-md text-white" style="background-color: #175A95;" id="submitButton1">
                     Update
                 </button>
             </div>
@@ -180,6 +186,29 @@
 @section('script')
     <script src="{{ asset('assets/dist/imageuploadify.min.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        var form = document.getElementById('myForm');
+        var submitButton1 = document.getElementById('submitButton1');
+        var submitButton2 = document.getElementById('submitButton2');
+
+        submitButton1.addEventListener('click', function() {
+            form.action = "{{ route('update.advertisement', ['id' => $data->id]) }}";
+        });
+
+        submitButton2.addEventListener('click', function() {
+            form.action = "{{ route('advertisement.updatedraft', ['id' => $data->id]) }}";
+        });
+    </script>
+
+    <script>
+        var form = document.getElementById('myForm');
+        var submitButton3 = document.getElementById('submitButton3');
+
+        submitButton3.addEventListener('click', function() {
+            form.action = "{{ route('recovery.advertisement', ['id' => $data->id]) }}";
+        });
+    </script>
 
     <script>
         $(document).ready(function() {

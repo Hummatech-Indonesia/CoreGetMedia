@@ -76,7 +76,7 @@
 </div>
 
 {{-- <div class="container-fluid pb-75 mt-5">
-    
+
 </div> --}}
 @if(session('berhasil'))
 <div class="alert alert-primary" role="alert">
@@ -100,7 +100,11 @@
                                     </div>
                                     <div class="ms-3">
                                         <h4 class="mb-0 text-white fs-6">Email</h4>
-                                        <span class="text-white">getmedia@gmail.com</span>
+                                        @if (isset($about_get))
+                                            <span class="text-white">{{ $about_get->email }}</span>
+                                        @else
+                                            <span class="text-white">Email tidak tersedia</span>
+                                        @endif
                                     </div>
 
                                 </div>
@@ -117,7 +121,11 @@
                                     </div>
                                     <div class="ms-3">
                                         <h4 class="mb-0 text-white fs-6">Telepon</h4>
-                                        <span class="text-white">+62-890-2198-123</span>
+                                        @if (isset($about_get))
+                                            <span class="text-white">{{ $about_get->phone_number }}</span>
+                                        @else
+                                            <span class="text-white">Nomer telepon tidak tersedia</span>
+                                        @endif
                                     </div>
 
                                 </div>
@@ -128,18 +136,24 @@
                 </div>
                 <div class="mt-5" style="padding-bottom: 250px;">
                     <ul class="social-profile list-style">
+                        @if (isset($about_get))
                         <li>
-                            <a href="https://www.fb.com/" target="_blank"><i class="ri-facebook-fill"></i></a>
+                            <a href="{{ $about_get->url_facebook }}" target="_blank"><i class="ri-facebook-fill"></i></a>
                         </li>
                         <li>
-                            <a href="https://www.twitter.com/" target="_blank"><i class="ri-twitter-fill"></i></a>
+                            <a href="{{ $about_get->url_twitter }}" target="_blank"><i class="ri-twitter-fill"></i></a>
                         </li>
                         <li>
-                            <a href="https://www.instagram.com/" target="_blank"><i class="ri-instagram-line"></i></a>
+                            <a href="{{ $about_get->url_instagram }}" target="_blank"><i class="ri-instagram-line"></i></a>
                         </li>
                         <li>
-                            <a href="https://www.linkedin.com/" target="_blank"><i class="ri-linkedin-fill"></i></a>
+                            <a href="{{ $about_get->url_linkedin }}" target="_blank"><i class="ri-linkedin-fill"></i></a>
                         </li>
+                        @else
+                        <li>
+                            <p>Social media belum tersedia</p>
+                        </li>
+                        @endif
                     </ul>
                 </div>
             </div>
@@ -166,7 +180,7 @@
                     <div class="col-md-12">
                         <button class="btn-two py-3">
                             Kirim Pesan
-                            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24"><path fill="#ffffff" d="M3 20v-6l8-2l-8-2V4l19 8z"/></svg>    
+                            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24"><path fill="#ffffff" d="M3 20v-6l8-2l-8-2V4l19 8z"/></svg>
                         </button>
                     </div>
                 </div>

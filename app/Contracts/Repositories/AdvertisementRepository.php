@@ -147,6 +147,7 @@ class AdvertisementRepository extends BaseRepository implements AdvertisementInt
     public function update(mixed $id, array $data): mixed
     {
         return $this->model->query()
+            ->withTrashed()
             ->findOrFail($id)
             ->update($data);
     }
