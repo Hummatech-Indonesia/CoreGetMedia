@@ -40,8 +40,9 @@ class AdvertisementController extends Controller
         $accepted_advertisements = $this->advertisement->where(auth()->user()->id, 'accepted');
         $reject_advertisements = $this->advertisement->where(auth()->user()->id, 'reject');
         $published_advertisements = $this->advertisement->where(auth()->user()->id, 'published');
+        $drafts = Advertisement::onlyTrashed()->get();
 
-        return view('pages.user.advertisement.status-advertisement', compact('all_advertisements', 'pending_advertisements', 'accepted_advertisements', 'reject_advertisements', 'published_advertisements'));
+        return view('pages.user.advertisement.status-advertisement', compact('all_advertisements', 'pending_advertisements', 'accepted_advertisements', 'reject_advertisements', 'published_advertisements', 'drafts'));
     }
 
     public function list_confirm()

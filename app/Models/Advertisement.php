@@ -24,7 +24,8 @@ class Advertisement extends Model
         'price',
         'feed',
         'status',
-        'description'
+        'description',
+        'deleted_at'
     ];
 
     protected $primaryKey = 'id';
