@@ -206,23 +206,28 @@
             <div class="card-body">
                 <h4 class="mb-5">Penulis Terbanyak</h4>
                 <div>
-
-                    
-                    <div class="d-flex justify-content-between mb-3">
-                        <div class="d-flex align-items-center">
-                            <img src="{{ asset('admin/dist/images/profile/user-1.jpg')}}" class="rounded-circle mb-3 img" style="object-fit: cover" alt="Image" width="40px" height="40px" />
-                            <div class="ms-3">
-                                <p class="fs-4 fw-semibold fs-2 student-name">M. Ardian</p>
+                    @forelse ($authors as $author)
+                        <div class="d-flex justify-content-between mb-3">
+                            <div class="d-flex align-items-center">
+                                @if ($author->image != null && Storage::disk('public')->exists($author->image))
+                                    <img src="{{ asset('storage/'. $author->image)}}" class="rounded-circle mb-3 img" style="object-fit: cover" alt="Avatar" width="40px" height="40px" />
+                                @else
+                                    <img src="{{ asset('default.png') }}" class="rounded-circle mb-3 img" style="object-fit: cover" alt="Avatar" width="40px" height="40px">
+                                @endif
+                                <div class="ms-3">
+                                    <p class="fs-4 fw-semibold fs-2 student-name">{{ $author->name }}</p>
+                                </div>
                             </div>
-                        </div>
-                        <div>
                             <div>
-                                <span class="badge bg-light-danger text-danger">20</span>
+                                <div>
+                                    <span class="badge bg-light-danger text-danger">{{ $author->newses()->count() }}</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @empty
+                        
+                    @endforelse
                 </div>
-
             </div>
         </div>
     </div>
@@ -714,44 +719,44 @@
 <script src="{{asset('admin/dist/js/apps/chat.js')}}"></script>
 
 <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var chartData = @json($newsChart);
 
-         
-    var options = {
-          series: [{
-            name: "Desktops",
-            data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
-        }],
-          chart: {
-          height: 350,
-          type: 'line',
-          zoom: {
-            enabled: false
-          }
-        },
-        dataLabels: {
-          enabled: false
-        },
-        stroke: {
-          curve: 'straight'
-        },
-        title: {
-          text: 'Product Trends by Month',
-          align: 'left'
-        },
-        grid: {
-          row: {
-            colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-            opacity: 0.5
-          },
-        },
-        xaxis: {
-          categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', "Nov", 'Des'],
-        }
-    };
+        var categories = chartData.map(item => item.month);
+        var data = chartData.map(item => item.news);
 
-    var chart = new ApexCharts(document.querySelector("#chart-writer"), options);
-    chart.render();
+        var options = {
+            series: [{
+                name: "News",
+                data: data
+            }],
+            chart: {
+                height: 350,
+                type: 'line',
+                zoom: {
+                    enabled: false
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                curve: 'straight'
+            },
+            grid: {
+                row: {
+                    colors: ['#f3f3f3', 'transparent'], 
+                    opacity: 0.5
+                }
+            },
+            xaxis: {
+                categories: categories,
+            }
+        };
 
+        var chart = new ApexCharts(document.querySelector("#chart-writer"), options);
+        chart.render();
+    });
 
     var options = {
           series: [{
