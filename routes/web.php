@@ -259,7 +259,7 @@ Route::post('draft-advertisement', [AdvertisementController::class, 'draft'])->n
 
 Route::get('show-edit-advertisement/{id}', [AdvertisementController::class, 'edit'])->name('show.edit.advertisement');
 
-Route::put('update-advertisement/{advertisement}', [AdvertisementController::class, 'update'])->name('update.advertisement');
+Route::put('update-advertisement/{id}', [AdvertisementController::class, 'update'])->name('update.advertisement');
 Route::delete('delete-advertisement/{advertisement}', [AdvertisementController::class, 'destroy'])->name('delete.advertisement');
 Route::put('cencel-advertisement/{advertisement}', [AdvertisementController::class, 'cancel'])->name('cancel.advertisement');
 

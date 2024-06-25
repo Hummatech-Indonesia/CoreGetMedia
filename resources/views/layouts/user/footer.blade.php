@@ -17,12 +17,9 @@
                     <li></li>
                     <li>
                         <p class="copyright-text mt-4">
-                            {{-- @if ($firstContact)
-                            {{ $firstContact->slogan }}
-                            @endif © --}}
                         </p>
-                        <p class="copyright-text mt-4" style="font-size: 20px"><span>Get</span>Media berita terlengkap
-                            dengan berita terbaru dan terpopuler.</p>
+                        {{-- GetMedia berita terlengkap dengan berita terbaru dan terpopuler. --}}
+                        <p class="copyright-text mt-4" style="font-size: 20px"><span></span>{{ $about_get->slogan }}</p>
                     </li>
                     <li>
                         <ul style="list-style-type: none;" class="p-4">
@@ -52,19 +49,19 @@
             <div class="col-lg-2">
                 <ul style="list-style-type: none;" class="p-4">
                     <span style="color: #92989F; font-size: 15px;">Social Media</span>
-                    <li class="mb-2"><a href="#" style="color: #FFFFFF">Facebook</a></li>
-                    <li class="mb-2"><a href="#" style="color: #FFFFFF">Twitter</a></li>
-                    <li class="mb-2"><a href="#" style="color: #FFFFFF">Instagram</a></li>
-                    <li class="mb-2"><a href="#" style="color: #FFFFFF">Linkedin</a></li>
+                    <li class="mb-2"><a href="{{ $about_get->url_facebook }}" style="color: #FFFFFF">Facebook</a></li>
+                    <li class="mb-2"><a href="{{ $about_get->url_twitter }}" style="color: #FFFFFF">Twitter</a></li>
+                    <li class="mb-2"><a href="{{ $about_get->url_instagram }}" style="color: #FFFFFF">Instagram</a></li>
+                    <li class="mb-2"><a href="{{ $about_get->url_linkedin }}" style="color: #FFFFFF">Linkedin</a></li>
                 </ul>
             </div>
             <div class="col-lg-4">
                 <ul style="list-style-type: none;" class="p-4">
                     <span style="color: #92989F; font-size: 15px;">Kontak</span>
                     <li class="mb-2">
-                        <p>getmedia@gmail.com</p>
+                        <p>{{ $about_get->email }}</p>
                     </li>
-                    <li class="mb-2">+62 *** **** **** </li>
+                    <li class="mb-2">{{ $about_get->phone_number }}</li>
                     {{-- <li class="mb-2"><span style="color: #92989F; font-size: 15px;">Berlangganaan</span></li> --}}
                 </ul>
             </div>

@@ -50,3 +50,6 @@ Route::middleware('auth')->group(function () {
     Route::post('follow-author/{author}', [FollowerController::class, 'store'])->name('follow.author');
     Route::delete('unfollow-author/{author}', [FollowerController::class, 'destroy'])->name('unfollow.author');
 });
+
+Route::put('update-draft-advertisement/{id}', [AdvertisementController::class, 'updateDraft'])->name('advertisement.updatedraft');
+Route::put('recovery-draft-advertisement/{id}', [AdvertisementController::class, 'notDraft'])->name('recovery.advertisement');

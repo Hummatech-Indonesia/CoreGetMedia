@@ -41,20 +41,23 @@
                 </div>
                 <div class="col">
                     <h1>
-                        KAMI ADALAH PORTAL BERITA TERBAIK DAN PROFESSIONAL
+                        {{ $about_get->header }}
+                        {{-- KAMI ADALAH PORTAL BERITA TERBAIK DAN PROFESSIONAL --}}
                     </h1>
                 </div>
                 <div class="col-12">
                     <p class="fs-5">
-                        Di era digital yang penuh dengan informasi yang tak terhingga, kami hadir sebagai sumber berita
+                        {!! $about_get->description !!}
+                        {{-- Di era digital yang penuh dengan informasi yang tak terhingga, kami hadir sebagai sumber berita
                         yang terpercaya dan mudah diakses oleh Anda. Kami bukan sekadar portal berita biasa, tetapi
                         sebuah komunitas yang berkomitmen untuk menyajikan informasi yang akurat, objektif, dan
-                        mencerahkan bagi masyarakat
+                        mencerahkan bagi masyarakat --}}
                     </p>
                 </div>
                 <div class="image col">
                     <h4 class="mt-4" style="color: #FFFFFF">
-                        MENGHUBUNGKAN ANDA DENGAN BERITA TERKINI DAN TERHANGAT SETIAP SAAT
+                        {{ $about_get->slogan }}
+                        {{-- MENGHUBUNGKAN ANDA DENGAN BERITA TERKINI DAN TERHANGAT SETIAP SAAT --}}
                     </h4>
                 </div>
             </div>
