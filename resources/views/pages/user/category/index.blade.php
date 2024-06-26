@@ -102,7 +102,7 @@
                 <div class="mb-5">
                     @php
                     $trending_id = $trendings->take(4)->where('news_views_count', '>', 0)->pluck('id');
-                    $latest_news = $latests->whereNotIn('id', $trending_id);
+                    $latest_news = $latests->whereNotIn('id', $trending_id)->paginate(5);
                     @endphp
 
                     @if($latest_news->isNotEmpty())
@@ -153,7 +153,7 @@
                     @endforelse
                 </div>
                 <div>
-                    <x-paginator :paginator="$latests" />
+                    <x-paginator :paginator="$latest_news" />
                 </div>
             </div>
 
