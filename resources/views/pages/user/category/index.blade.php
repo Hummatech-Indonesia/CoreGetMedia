@@ -62,7 +62,7 @@
 </div>
 
 <div class="sports-wrap ptb-100">
-    <div class="container col-lg-12">
+    <div class="container">
         <div class="row col-lg-12">
             <div class="col-lg-8">
                 @forelse ($newsTop as $item)
@@ -152,6 +152,7 @@
                     </div>
                     @endforelse
                 </div>
+
                 <div>
                     <x-paginator :paginator="$latest_news" />
                 </div>
