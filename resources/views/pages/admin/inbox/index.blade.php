@@ -200,26 +200,29 @@
                 </div>
                 <div class="mb-1">
                     <p class="text-muted mb-0">Artikel yang dilaporkan:</p>
-                    <div class="card card-body row g-0">
-                        <div class="col-auto">
-                            <img src="{{ asset('assets/blank-img.jpg') }}" class="img-fluid" style="width: 80px; height: 80px; object-fit: cover;" alt="...">
-                        </div>
-                        <div class="col">
-                            <p class="text-primary mb-1" style="font-size: 9px">Fashion</p>
-                            <p class="mb-3">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia, quas?</p>
-                            <div class="d-flex gap-3 align-items-center">
-                                <p class="card-text m-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 2048 2048">
-                                        <path fill="#DD1818" d="M1536 171h341v1877H0V171h341V0h171v171h853V0h171zm171 1706V683H171v1194zm0-1365V341H171v171z"/>
-                                    </svg>
-                                    <small class="ms-1">dsdsd</small>
-                                </p>
-                                <p class="card-text m-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
-                                        <path fill="#DD1818" d="M12 9a3 3 0 0 1 3 3a3 3 0 0 1-3 3a3 3 0 0 1-3-3a3 3 0 0 1 3-3m0-4.5c5 0 9.27 3.11 11 7.5c-1.73 4.39-6 7.5-11 7.5S2.73 16.39 1 12c1.73-4.39 6-7.5 11-7.5M3.18 12a9.821 9.821 0 0 0 17.64 0a9.821 9.821 0 0 0-17.64 0"/>
-                                    </svg>
-                                    <small class="mt-1 ms-1">2</small>
-                                </p>
+                    <div class="card shadow-none border-1">
+                        <div class="p-3">
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <img src="{{ asset('assets/img/news/news-100.webp') }}" width="100%" alt="">
+                                </div>
+                                <div class="col-lg-6">
+                                    <p style="color: #175A95; margin-bottom: 5px;">Fashion</p>
+                                    <b>Jiraiya Banks Wants To Teach You How To Build A House Jiraiya Banks Wants To Teach You How To</b>
+                                    <div class="d-flex mt-3 gap-3">
+
+                                        <div class="d-flex">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                                                <path fill="#ef6e6e" d="M5 22q-.825 0-1.412-.587T3 20V6q0-.825.588-1.412T5 4h1V2h2v2h8V2h2v2h1q.825 0 1.413.588T21 6v14q0 .825-.587 1.413T19 22zm0-2h14V10H5zM5 8h14V6H5zm0 0V6z" /></svg>
+                                            <span style="font-size: 13px;" class="ms-1">Apr 25, 2023</span>
+                                        </div>
+                                        <div class="d-flex">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="22" viewBox="0 0 24 24">
+                                                <path fill="#ef6e6e" d="M12 6.5a9.77 9.77 0 0 1 8.82 5.5c-1.65 3.37-5.02 5.5-8.82 5.5S4.83 15.37 3.18 12A9.77 9.77 0 0 1 12 6.5m0-2C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5m0 5a2.5 2.5 0 0 1 0 5a2.5 2.5 0 0 1 0-5m0-2c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5s4.5-2.02 4.5-4.5s-2.02-4.5-4.5-4.5" /></svg>
+                                            <span style="font-size: 13px;" class="ms-1">129x dilihat</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
