@@ -5,7 +5,7 @@ namespace App\Contracts\Repositories;
 use App\Contracts\Interfaces\NewsReportInterface;
 use App\Models\NewsReport;
 
-class NewsReportReporitory extends BaseRepository implements NewsReportInterface
+class NewsReportRepository extends BaseRepository implements NewsReportInterface
 {
     public function __construct(NewsReport $newsReport)
     {
