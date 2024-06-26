@@ -127,10 +127,10 @@
                         </div>
                         <div class="news-card-info">
                             <h3><a data-toggle="tooltip" data-placement="top" title="{{ $new->name }}" href="{{ route('news.singlepost', ['news' => $new->slug]) }}">{!!
-                                    Illuminate\Support\Str::limit($new->name, $limit = 200, $end = '...') !!}
+                                    Illuminate\Support\Str::limit($new->name, $limit = 170, $end = '...') !!}
                                 </a>
                             </h3>
-                            <p>{!! Illuminate\Support\Str::limit($new->description, $limit = 200, $end = '...') !!}</p>
+                            <p>{!! Illuminate\Support\Str::limit($new->description, $limit = 100, $end = '...') !!}</p>
                             <ul class="news-metainfo list-style">
                                 <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($new->created_at)->translatedFormat('d F Y') }}</a>
                                 </li>
