@@ -634,7 +634,7 @@
                                 </svg>
                             </a>
 
-                            <a href="{{ route('show.edit.advertisement', ['advertisement' => $reject_advertisement->id]) }}"
+                            <a href="{{ route('show.edit.advertisement', [$reject_advertisement->id]) }}"
                                 class="btn btn-sm m-1 mt-5" style="background-color: #FFD643;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24">
                                     <path fill="#ffffff"

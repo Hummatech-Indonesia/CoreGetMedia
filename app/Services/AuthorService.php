@@ -8,6 +8,7 @@ use App\Http\Requests\StoreAuthorRequest;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Models\User;
 use App\Traits\UploadTrait;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -67,7 +68,7 @@ class AuthorService
             'name' => $request->input('name'),
             'slug' => Str::slug($request->input('name')),
             'email' => $request->input('email'),
-            'password' => $password,
+            'password' => $password
         ];
     }
 }
