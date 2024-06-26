@@ -172,7 +172,7 @@
                 <div class="col-lg-8">
                     <article>
                         <div>
-                            <h1>{{ $news->name }}</h1>
+                            <h1 class="wow slideInLeft" data-wow-duration="2s">{{ $news->name }}</h1>
                             <p class="d-flex gap-1">Share :
                                 <button class="wpbtn" style="background-color: transparent; border: none" title="Share to WhatsApp" onclick="shareToWhatsApp()">
                                     <svg height="19" width="19" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
