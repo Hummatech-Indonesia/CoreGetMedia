@@ -508,7 +508,7 @@ $popular_down_id = $popular_down->pluck('id');
                     </ul>
                 </div>
                 @endif
-                <div class="sidebar-widget-two">
+                {{-- <div class="sidebar-widget-two">
                     <div class="contact-widget">
                         <img src="assets/img/contact-bg.svg" alt="Image" class="contact-shape" />
                         <a href="index.html" class="logo">
@@ -531,7 +531,7 @@ $popular_down_id = $popular_down->pluck('id');
                             </li>
                         </ul>
                     </div>
-                </div>
+                </div> --}}
                 @if($tags->isNotEmpty())
                 <div class="sidebar-widget">
                     <h3 class="sidebar-widget-title">Tag Populer</h3>

@@ -26,13 +26,13 @@
 <div>
     <ul class="nav nav-underline" id="myTab" role="tablist">
         <li class="nav-item ms-2">
-            <a class="nav-link active" id="artikel-tab" data-bs-toggle="tab" href="#artikel" role="tab"
+            <a class="nav-link active" id="artikel-tab" style="padding-right: 15px; padding-left: 15px;" data-bs-toggle="tab" href="#artikel" role="tab"
                 aria-controls="artikel">
                 <span>artikel</span>
             </a>
         </li>
         <li class="nav-item ms-2">
-            <a class="nav-link" id="komentar-tab" data-bs-toggle="tab" href="#komentar" role="tab"
+            <a class="nav-link" id="komentar-tab" style="padding-right: 15px; padding-left: 15px;" data-bs-toggle="tab" href="#komentar" role="tab"
                 aria-controls="komentar">
                 <span>Komentar</span>
             </a>

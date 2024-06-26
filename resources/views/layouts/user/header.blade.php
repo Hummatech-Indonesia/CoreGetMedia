@@ -139,7 +139,12 @@
                                 <form action="{{ route('logout') }}" method="POST">
                                     @csrf
                                     <div class="d-grid py-4 px-7 pt-8">
-                                        <button class="btn btn-outline-primary" id="logoutBtn">Log Out</button>
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                      document.getElementById('logout-form').submit();">
+                                         {{ __('Logout') }}
+                                        </a>
+                                        {{-- <button class="btn btn-outline-primary" id="logoutBtn">Log Out</button> --}}
                                     </div>
                                 </form>
                             </div>

@@ -91,6 +91,16 @@
         </script>
     <script src="{{ asset('admin/dist/libs/bootstrap-duallistbox/dist/jquery.bootstrap-duallistbox.min.js') }}"></script>
     <script src="{{ asset('assets/js/wow.min.js') }}"></script>
+    <script>
+         wow = new WOW({
+                    boxClass:     'wow',      // default
+                    animateClass: 'animated', // default
+                    offset:       0,          // default
+                    mobile:       true,       // default
+                    live:         true        // default
+                })
+        wow.init();
+    </script>
 
 
     @if(!isset($showFooter) || $showFooter !== false)
