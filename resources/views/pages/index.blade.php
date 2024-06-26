@@ -101,7 +101,7 @@
     @php
     $displayedPopulars = $populars->take(10)->where('news_views_count', '>', 0)->pluck('id');
     @endphp
-    
+
     {{-- @if ($advertisement_tops)
     <div class="container-fluid mt-5 mb-5">
         <img src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/'.$advertisement_tops->image : "CONTOHIKLAN.png") }}" width="100%" height="314px" style="object-fit: cover" alt="">
@@ -560,6 +560,20 @@ $popular_down_id = $popular_down->pluck('id');
                     <img src="{{asset($advertisement_rights && $advertisement_rights->image != null ? 'storage/'.$advertisement_rights->image : "CONTOHIKLAN.png")}}" width="100%" height="473px" style="object-fit: cover" alt="">
                 </div>
                 @endif --}}
+
+                @if ($advertisement_rights)
+                <div class="sidebar">
+                    <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            @foreach ($advertisement_rights as $advertisement_right)
+                            <div class="carousel-item active" data-bs-interval="3000">
+                                <img src="{{ asset($advertisement_right->image ? 'storage/'.$advertisement_right->image : 'CONTOHIKLAN.png') }}" class="d-block" width="100%" height="473px" style="object-fit: cover" alt="...">
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+                @endif
 
 
             </div>
