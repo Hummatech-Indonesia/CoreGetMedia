@@ -39,7 +39,7 @@ use App\Contracts\Repositories\FollowerRepository;
 use App\Contracts\Repositories\NewsCategoryRepository;
 use App\Contracts\Repositories\NewsLikeRepository;
 use App\Contracts\Repositories\NewsRejectRepository;
-use App\Contracts\Repositories\NewsReportReporitory;
+use App\Contracts\Repositories\NewsReportRepository;
 use App\Contracts\Repositories\NewsRepository;
 use App\Contracts\Repositories\NewsSubCategoryRepository;
 use App\Contracts\Repositories\NewsTagRepository;
@@ -78,7 +78,7 @@ class AppServiceProvider extends ServiceProvider
         CommentReportInterface::class => CommentReportRepository::class,
         FollowerInterface::class => FollowerRepository::class,
         NewsRejectInterface::class => NewsRejectRepository::class,
-        NewsReportInterface::class => NewsReportReporitory::class,
+        NewsReportInterface::class => NewsReportRepository::class,
         AdminInterface::class => AdminRepository::class,
         AdvertisementInterface::class => AdvertisementRepository::class,
         AboutGetInterface::class => AboutGetRepository::class,
