@@ -212,7 +212,7 @@
                                 @if ($author->image != null && Storage::disk('public')->exists($author->image))
                                     <img src="{{ asset('storage/'. $author->image)}}" class="rounded-circle mb-3 img" style="object-fit: cover" alt="Avatar" width="40px" height="40px" />
                                 @else
-                                    <img src="{{ asset('default.png') }}" class="rounded-circle mb-3 img" style="object-fit: cover" alt="Avatar" width="40px" height="40px">
+                                    <img src="{{ asset('assets/blank-img.jpg') }}" class="rounded-circle mb-3 img" style="object-fit: cover" alt="Avatar" width="40px" height="40px">
                                 @endif
                                 <div class="ms-3">
                                     <p class="fs-4 fw-semibold fs-2 student-name">{{ $author->name }}</p>

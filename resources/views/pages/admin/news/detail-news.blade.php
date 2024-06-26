@@ -107,7 +107,11 @@
                         <h3 for="" class="form-label">Thumbnail</h3>
                         <div class="gambar-iklan mb-4 d-flex justify-content-center">
                             <img id="preview" class="hide" style="object-fit: cover; border: transparent;" width="350" height="200" alt="">
-                            <img width="350" height="200" src="{{asset('storage/'.  $news->image )}}" alt="">
+                            @if ($news->image != null && Storage::disk('public')->exists($news->image))
+                                <img width="350" height="200" src="{{asset('storage/'.  $news->image )}}" style="object-fit: cover" alt="">
+                            @else
+                                <img width="350" height="200" src="{{ asset('assets/blank-img.jpg') }}" style="object-fit: cover" alt="">
+                            @endif
                         </div>
 
                         @error('photo')
