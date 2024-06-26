@@ -84,7 +84,7 @@
                                 @endif
                             </td>
                             <td>
-                                <button data-bs-toggle="tooltip" title="Detail" class="btn btn-sm btn-detail btn-primary me-2" style="background-color:#5D87FF">
+                                <button data-bs-toggle="tooltip" title="Detail" class="btn btn-sm btn-detail-article btn-primary me-2" style="background-color:#5D87FF">
                                     <i><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
                                             <path fill="currentColor" d="M12 6.5a9.77 9.77 0 0 1 8.82 5.5c-1.65 3.37-5.02 5.5-8.82 5.5S4.83 15.37 3.18 12A9.77 9.77 0 0 1 12 6.5m0-2C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5m0 5a2.5 2.5 0 0 1 0 5a2.5 2.5 0 0 1 0-5m0-2c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5s4.5-2.02 4.5-4.5s-2.02-4.5-4.5-4.5" />
                                         </svg></i>
@@ -139,7 +139,15 @@
                             <td>{{ Str::limit($comment->comment->description, 30, '...') }}</td>
                             <td>{{ Str::limit($comment->description, 40, '...') }}</td>
                             <td>
-                                <button data-bs-toggle="tooltip" title="Detail" class="btn btn-sm btn-detail btn-primary me-2" style="background-color:#5D87FF">
+                                <button data-bs-toggle="tooltip" title="Detail" class="btn btn-sm btn-detail btn-primary me-2" style="background-color:#5D87FF"
+                                    data-id="{{ $comment->id }}"
+                                    data-name-user="{{ $comment->user->name }}"
+                                    data-email-user="{{ $comment->user->email }}"
+                                    data-comment="{{ $comment->comment->description }}"
+                                    data-name-writer="{{ $comment->comment->user->name }}"
+                                    data-email-writer="{{ $comment->comment->user->email }}"
+                                    data-description="{{ $comment->description }}"
+                                >
                                     <i><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
                                             <path fill="currentColor" d="M12 6.5a9.77 9.77 0 0 1 8.82 5.5c-1.65 3.37-5.02 5.5-8.82 5.5S4.83 15.37 3.18 12A9.77 9.77 0 0 1 12 6.5m0-2C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5m0 5a2.5 2.5 0 0 1 0 5a2.5 2.5 0 0 1 0-5m0-2c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5s4.5-2.02 4.5-4.5s-2.02-4.5-4.5-4.5" />
                                         </svg></i>
@@ -170,4 +178,66 @@
         </div>
     </div>
 </div>
+
+{{-- detail modal start --}}
+<div class="modal fade" id="detail-modal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+        <div class="modal-content px-3">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Detail Laporan</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-1">
+                    <p class="text-muted mb-0">Pelapor:</p>
+                    <h6 class="m-0" id="name-user"></h6>
+                    <p class="mt-0" id="email-user"></p>
+                </div>
+                <div class="mb-1">
+                    <p class="text-muted mb-0">Komentar yang dilaporkan:</p>
+                    <p id="comment"></p>
+                </div>
+                <div class="mb-1">
+                    <p class="text-muted mb-0">Penulis komentar:</p>
+                    <h6 class="m-0" id="name-writer"></h6>
+                    <p class="mt-0" id="email-writer"></p>
+                </div>
+                <div class="mb-1">
+                    <p class="text-muted mb-0">Isi laporan:</p>
+                    <p id="description"></p>
+                </div>
+            </div>
+            <div class="modal-footer w-100 d-flex justify-content-between">
+                <a href="" class="btn btn-sm btn-light-success text-success">Lihat komentar</a>
+                <div class="text-end gap-4">
+                    <button class="btn btn-sm btn-light-warning btn-delete-comment text-warning me-2">Hapus komentar</button>
+                    <button type="button" class="btn btn-sm btn-light-danger text-danger" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{-- detail modal end --}}
+@endsection
+
+@section('script')
+    <script>
+        $('.btn-detail').click(function() {
+            var id = $(this).data('id');
+            var nameUser = $(this).data('name-user');
+            var emailUser = $(this).data('email-user');
+            var comment = $(this).data('comment');
+            var nameWriter = $(this).data('name-writer');
+            var emailWriter = $(this).data('email-writer');
+            var description = $(this).data('description');
+
+            $('#name-user').text(nameUser);
+            $('#email-user').text(emailUser);
+            $('#comment').text(comment);
+            $('#name-writer').text(nameWriter);
+            $('#email-writer').text(emailWriter);
+            $('#description').text(description);
+            $('#detail-modal').modal('show');
+        });
+    </script>
 @endsection
