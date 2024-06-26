@@ -270,8 +270,8 @@
                                                     <div>
                                                         <a style="display: inline;text-decoration:none"
                                                             data-toggle="tooltip" data-placement="top"
-                                                            title="author - Karin"
-                                                            href="#">{{ $news->user->name }}</a>
+                                                            title="author - {{ $news->user->name }}"
+                                                            href="{{ route('author.detail', $news->user->id) }}">{{ $news->user->name }}</a>
                                                         </span>
                                                     </div>
                                                 </li>
