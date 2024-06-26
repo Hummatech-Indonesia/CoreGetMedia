@@ -180,6 +180,73 @@
 </div>
 
 {{-- detail modal start --}}
+<div class="modal fade" id="detail-modal-article" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+        <div class="modal-content px-3">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Detail Laporan</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-1">
+                    <p class="text-muted mb-0">Pelapor:</p>
+                    <h6 class="m-0" id="name-user-article">dsfdf</h6>
+                    <p class="mt-0" id="email-user-article">fdcd</p>
+                </div>
+                <div class="mb-1">
+                    <p class="text-muted mb-0">Penulis artikel:</p>
+                    <h6 class="m-0" id="name-writer-article">vdscd</h6>
+                    <p class="mt-0" id="email-writer-article">cfdcd</p>
+                </div>
+                <div class="mb-1">
+                    <p class="text-muted mb-0">Artikel yang dilaporkan:</p>
+                    <div class="card card-body row g-0">
+                        <div class="col-auto">
+                            <img src="{{ asset('assets/blank-img.jpg') }}" class="img-fluid" style="width: 80px; height: 80px; object-fit: cover;" alt="...">
+                        </div>
+                        <div class="col">
+                            <p class="text-primary mb-1" style="font-size: 9px">Fashion</p>
+                            <p class="mb-3">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia, quas?</p>
+                            <div class="d-flex gap-3 align-items-center">
+                                <p class="card-text m-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 2048 2048">
+                                        <path fill="#DD1818" d="M1536 171h341v1877H0V171h341V0h171v171h853V0h171zm171 1706V683H171v1194zm0-1365V341H171v171z"/>
+                                    </svg>
+                                    <small class="ms-1">dsdsd</small>
+                                </p>
+                                <p class="card-text m-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                        <path fill="#DD1818" d="M12 9a3 3 0 0 1 3 3a3 3 0 0 1-3 3a3 3 0 0 1-3-3a3 3 0 0 1 3-3m0-4.5c5 0 9.27 3.11 11 7.5c-1.73 4.39-6 7.5-11 7.5S2.73 16.39 1 12c1.73-4.39 6-7.5 11-7.5M3.18 12a9.821 9.821 0 0 0 17.64 0a9.821 9.821 0 0 0-17.64 0"/>
+                                    </svg>
+                                    <small class="mt-1 ms-1">2</small>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-1">
+                    <p class="text-muted mb-0">Isi laporan:</p>
+                    <p id="description-article">cscddffdsfd</p>
+                </div>
+                <div class="mb-1">
+                    <p class="text-muted mb-0">Bukti:</p>
+                    <img id="proof-detail" class="w-100">
+                </div>
+            </div>
+            <div class="modal-footer w-100 d-flex justify-content-between">
+                <a href="" class="btn btn-sm btn-light-primary text-primary text-start">Download bukti</a>
+                <div class="text-end gap-4">
+                    <a href="" class="btn btn-sm btn-light-success text-success">Lihat artikel</a>
+                    <button class="btn btn-sm btn-light-warning btn-delete-comment text-warning">Banned komentar</button>
+                    <button type="button" class="btn btn-sm btn-light-danger text-danger" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{-- detail modal end --}}
+
+{{-- detail modal start --}}
 <div class="modal fade" id="detail-modal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-lg">
         <div class="modal-content px-3">
@@ -238,6 +305,10 @@
             $('#email-writer').text(emailWriter);
             $('#description').text(description);
             $('#detail-modal').modal('show');
+        });
+
+        $('.btn-detail-article').click(function() {
+            $('#detail-modal-article').modal('show');
         });
     </script>
 @endsection
