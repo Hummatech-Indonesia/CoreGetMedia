@@ -37,22 +37,22 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        User::observe(UserObserver::class);
-        Author::observe(AuthorObserver::class);
-        News::observe(NewsObserver::class);
-        Advertisement::observe(AdvertisementObserver::class);
+        // User::observe(UserObserver::class);
+        // Author::observe(AuthorObserver::class);
+        // News::observe(NewsObserver::class);
+        // Advertisement::observe(AdvertisementObserver::class);
 
-        parent::boot();
+        // parent::boot();
 
-        $categories = Category::all();
-        $subCategories = SubCategory::all();
-        $about_get = AboutGet::get()->first();
-        $news_latest = News::latest()->where('status', NewsEnum::ACCEPTED->value)->get();
+        // $categories = Category::all();
+        // $subCategories = SubCategory::all();
+        // $about_get = AboutGet::get()->first();
+        // $news_latest = News::latest()->where('status', NewsEnum::ACCEPTED->value)->get();
 
-        view()->share('categories', $categories);
-        view()->share('subCategories', $subCategories);
-        view()->share('about_get', $about_get);
-        view()->share('news_latest', $news_latest);
+        // view()->share('categories', $categories);
+        // view()->share('subCategories', $subCategories);
+        // view()->share('about_get', $about_get);
+        // view()->share('news_latest', $news_latest);
     }
 
     /**
