@@ -10,3 +10,4 @@
 <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/dark-theme.css') }}">
 <link rel="stylesheet" href="{{ asset('admin/dist/libs/sweetalert2/dist/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">

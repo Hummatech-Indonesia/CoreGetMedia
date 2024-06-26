@@ -90,7 +90,7 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
         </script>
     <script src="{{ asset('admin/dist/libs/bootstrap-duallistbox/dist/jquery.bootstrap-duallistbox.min.js') }}"></script>
-
+    <script src="{{ asset('assets/js/wow.min.js') }}"></script>
 
 
     @if(!isset($showFooter) || $showFooter !== false)
