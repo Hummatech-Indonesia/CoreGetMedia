@@ -92,9 +92,9 @@
 </style>
 @endsection
 
-@if ($news_latest->count() != 0)
+{{-- @if ($news_latest->count() != 0)
     @include('layouts.user.notification')
-@endif
+@endif --}}
 
 @section('content')
 <div class="container-fluid">
