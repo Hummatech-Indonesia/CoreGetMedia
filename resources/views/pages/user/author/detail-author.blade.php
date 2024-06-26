@@ -247,11 +247,11 @@
                 </ul>
             </div>
 
-            @if ($advertisement_rights)
+            {{-- @if ($advertisement_rights)
             <div class="sidebar mt-3 mb-4" style="width: 450px">
                 <img src="{{asset($advertisement_rights && $advertisement_rights->image != null ? 'storage/'.$advertisement_rights->image : "CONTOHIKLAN.png")}}" width="100%" height="302px" style="object-fit: cover" alt="">
             </div>
-            @endif
+            @endif --}}
 
             <div class="sidebar-widget" style="width: 450px">
                 <h3 class="sidebar-widget-title">Berita Popular</h3>

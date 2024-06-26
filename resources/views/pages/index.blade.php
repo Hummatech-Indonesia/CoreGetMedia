@@ -92,15 +92,21 @@
 </style>
 @endsection
 
-@if ($news_latest->count() != 0)
+{{-- @if ($news_latest->count() != 0)
     @include('layouts.user.notification')
-@endif
+@endif --}}
 
 @section('content')
 <div class="container-fluid">
     @php
     $displayedPopulars = $populars->take(10)->where('news_views_count', '>', 0)->pluck('id');
     @endphp
+    
+    {{-- @if ($advertisement_tops)
+    <div class="container-fluid mt-5 mb-5">
+        <img src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/'.$advertisement_tops->image : "CONTOHIKLAN.png") }}" width="100%" height="314px" style="object-fit: cover" alt="">
+    </div>
+    @endif --}}
     <div class="trending-news-box">
         <div class="row gx-5">
             <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 d-flex justify-content-center">
@@ -136,11 +142,11 @@
     </div>
 </div>
 
-@if ($advertisement_tops)
+{{-- @if ($advertisement_tops)
 <div class="container-fluid mt-5 mb-5">
     <img src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/'.$advertisement_tops->image : "CONTOHIKLAN.png") }}" width="100%" height="166px" style="object-fit: cover" alt="">
 </div>
-@endif
+@endif --}}
 
 @php
 $filteredPin = $newsPins->take(3);
@@ -549,11 +555,11 @@ $popular_down_id = $popular_down->pluck('id');
                 </div>
                 @endif
 
-                @if ($advertisement_rights)
+                {{-- @if ($advertisement_rights)
                 <div class="sidebar">
                     <img src="{{asset($advertisement_rights && $advertisement_rights->image != null ? 'storage/'.$advertisement_rights->image : "CONTOHIKLAN.png")}}" width="100%" height="473px" style="object-fit: cover" alt="">
                 </div>
-                @endif
+                @endif --}}
 
 
             </div>
@@ -649,11 +655,11 @@ $popular_down_id = $popular_down->pluck('id');
     <i class="ri-arrow-up-line"></i>
 </button>
 
-@if ($advertisement_unders)
+{{-- @if ($advertisement_unders)
 <div class="container-fluid mt-5 mb-5">
     <img src="{{ asset($advertisement_unders && $advertisement_unders->image != null ? 'storage/'.$advertisement_unders->image : "CONTOHIKLAN.png") }}" width="100%" height="295px" style="object-fit: cover" alt="">
 </div>
-@endif
+@endif --}}
 {{--
     <div class="modal fade" id="newsletter-popup" tabindex="-1" aria-labelledby="newsletter-popup" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl">

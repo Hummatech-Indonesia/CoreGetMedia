@@ -182,7 +182,7 @@
                             </div>
 
                             <div class="col-md-12 col-lg-6 mb-3">
-                                <label class="form-label" for="nomor">CV</label>
+                                <label class="form-label" for="nomor">CV  <small class="text-danger"> *file harus berupa pdf</small></label>
                                 <input type="file" id="create-cv" name="cv" placeholder="name" value="{{ old('cv') }}" class=" @error('cv') is-invalid @enderror form-control">
                                 @error('cv')
                                 <span class="invalid-feedback" role="alert">
@@ -334,9 +334,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-
                 <p>Apakah anda yakin akan Membuka Blokir penulis ini? </p>
-
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light-danger text-danger font-medium waves-effect" data-bs-dismiss="modal">
