@@ -19,10 +19,14 @@ enum AdvertisementEnum : string
     case ALLNEWS = 'allnews';
 
     // enumnya belum ditambah
-    case ALLNEWS_PINNED = 'allnews_pinned';
-    case ALLNEWS_POPULAR = 'allnews_popular';
-    case TAG = 'tag'; 
+    case ALLNEWS_PINNED = 'allnewspinned';
+    case ALLNEWS_POPULAR = 'allnewspopular';
+    case TAG = 'tag';
     case DETAIL_AUTHOR = 'detail_author';
+    case ALLCATEGORY = 'allcategory';
+    case ALLSUBCATEGORY = 'allsubcategory';
+    case ALLTAG = 'alltag';
+
 
     //type
     case PHOTO = 'photo';
