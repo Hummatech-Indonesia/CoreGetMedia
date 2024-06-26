@@ -168,7 +168,7 @@
                         </div>
                         <div class="col-lg-12 mb-4">
                             <label class="form-label" for="password_confirmation">Tanggal Upload</label>
-                            <input type="datetime-local" id="upload_date" name="upload_date" value="{{ \Carbon\Carbon::parse($news->date)->format('Y-m-d\TH:i'); }}" class="form-control @error('upload_date') is-invalid @enderror">
+                            <input type="datetime-local" id="upload_date" name="upload_date" value="{{ \Carbon\Carbon::parse($news->date)->format('Y-m-d\TH:i'); }}" readonly class="form-control @error('upload_date') is-invalid @enderror">
                             @error('upload_date')
                             <span class="invalid-feedback" role="alert" style="color: red">
                                 <strong>{{ $message }}</strong>
