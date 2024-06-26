@@ -102,7 +102,7 @@
                 <div class="mb-5">
                     @php
                     $trending_id = $trendings->take(4)->where('news_views_count', '>', 0)->pluck('id');
-                    $latest_news = $latests->whereNotIn('id', $trending_id);
+                    $latest_news = $latests->whereNotIn('id', $trending_id)->paginate(5);
                     @endphp
 
                     @if($latest_news->isNotEmpty())
@@ -127,10 +127,10 @@
                         </div>
                         <div class="news-card-info">
                             <h3><a data-toggle="tooltip" data-placement="top" title="{{ $new->name }}" href="{{ route('news.singlepost', ['news' => $new->slug]) }}">{!!
-                                    Illuminate\Support\Str::limit($new->name, $limit = 200, $end = '...') !!}
+                                    Illuminate\Support\Str::limit($new->name, $limit = 170, $end = '...') !!}
                                 </a>
                             </h3>
-                            <p>{!! Illuminate\Support\Str::limit($new->description, $limit = 200, $end = '...') !!}</p>
+                            <p>{!! Illuminate\Support\Str::limit($new->description, $limit = 170, $end = '...') !!}</p>
                             <ul class="news-metainfo list-style">
                                 <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($new->created_at)->translatedFormat('d F Y') }}</a>
                                 </li>
@@ -153,14 +153,13 @@
                     @endforelse
                 </div>
                 <div>
-                    <x-paginator :paginator="$latests" />
+                    <x-paginator :paginator="$latest_news" />
                 </div>
             </div>
 
             <div class="col-lg-4">
-
-                    <div class="sidebar" style="width: 450px;">
-                        @if($CategoryPopulars->isNotEmpty())
+                <div class="sidebar" style="width: 450px;">
+                    @if($CategoryPopulars->isNotEmpty())
                         <div class="sidebar-widget" style="width: 450px">
                             <h3 class="sidebar-widget-title">Kategori Populer</h3>
                             <ul class="category-widget list-style">
@@ -170,71 +169,55 @@
                                 @endforeach
                             </ul>
                         </div>
-                        @endif
+                    @endif
 
-                        @php
-                        $news_top_id = $newsTop->pluck('id');
-                        $trending_news = $trendings->take(4)->whereNotin('id', $news_top_id);
-                        @endphp
+                    @php
+                    $news_top_id = $newsTop->pluck('id');
+                    $trending_news = $trendings->take(4)->whereNotin('id', $news_top_id);
+                    @endphp
 
-                        @if($trending_news->isNotEmpty())
-                        <div class="sidebar-widget" style="width: 450px">
-                            <h3 class="sidebar-widget-title">
-                                Berita Populer
-                            </h3>
-                            @forelse ($trending_news as $trending)
-                            @if ($trending->news_views_count > 0)
-                            <div class="news-card-three">
-                                <div class="news-card-img">
-                                    <img src="{{ asset('storage/' . $trending->image) }}" class="img-popular" alt="Image" />
-                                </div>
-                                <div class="news-card-info">
-                                    <h3><a href="{{ route('news.singlepost', ['news' => $trending->slug]) }}">{!!
-                                            Illuminate\Support\Str::limit($trending->name, $limit = 45, $end = '...')
-                                            !!}</a></h3>
-                                    <ul class="news-metainfo list-style d-flex">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)" style="font-size: 14px;">{{ \Carbon\Carbon::parse($trending->date)->translatedFormat('d F Y') }}</a>
-                                        </li>
-                                        <li><i class="fi fi-rr-eye"></i><a href="javascript:void(0)" style="font-size: 14px;">{{ $trending->news_views_count ? $trending->news_views_count : '0' }}x
-                                                dilihat</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            @endif
-                            @empty
-                            <div class="col-12">
-                                <div class="d-flex justify-content-center">
-                                    <div>
-                                        <img src="{{ asset('assets/img/no-data/empty.png') }}" width="150px" alt="">
-                                    </div>
-                                </div>
-                                <div class="text-center">
-                                    <h5>Tidak ada data</h5>
-                                </div>
-                            </div>
-                            @endforelse
-                        </div>
-                        @endif
-
-                    </div>
-
-                    {{-- @if ($advertisement_rights)
-                    <div class="sidebar" style="width: 450px;">
-                        <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
-                            <div class="carousel-inner">
-                                @foreach ($advertisement_rights as $advertisement_right)
-                                <div class="carousel-item active" data-bs-interval="3000">
-                                    <img src="{{ asset($advertisement_right->image ? 'storage/'.$advertisement_right->image : 'CONTOHIKLAN.png') }}" class="d-block" width="450px" height="603px" style="object-fit: cover" alt="...">
-                                </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                    @endif --}}
-
-
-                    @if($popularTags->isNotEmpty())
+                    @if($trending_news->isNotEmpty())
                     <div class="sidebar-widget" style="width: 450px">
+                        <h3 class="sidebar-widget-title">
+                            Berita Populer
+                        </h3>
+                        @forelse ($trending_news as $trending)
+                        @if ($trending->news_views_count > 0)
+                        <div class="news-card-three">
+                            <div class="news-card-img">
+                                <img src="{{ asset('storage/' . $trending->image) }}" class="img-popular" alt="Image" />
+                            </div>
+                            <div class="news-card-info">
+                                <h3><a href="{{ route('news.singlepost', ['news' => $trending->slug]) }}">{!!
+                                        Illuminate\Support\Str::limit($trending->name, $limit = 45, $end = '...')
+                                        !!}</a></h3>
+                                <ul class="news-metainfo list-style d-flex">
+                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)" style="font-size: 14px;">{{ \Carbon\Carbon::parse($trending->date)->translatedFormat('d F Y') }}</a>
+                                    </li>
+                                    <li><i class="fi fi-rr-eye"></i><a href="javascript:void(0)" style="font-size: 14px;">{{ $trending->news_views_count ? $trending->news_views_count : '0' }}x
+                                            dilihat</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        @endif
+                        @empty
+                        <div class="col-12">
+                            <div class="d-flex justify-content-center">
+                                <div>
+                                    <img src="{{ asset('assets/img/no-data/empty.png') }}" width="150px" alt="">
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <h5>Tidak ada data</h5>
+                            </div>
+                        </div>
+                        @endforelse
+                    </div>
+                    @endif
+                </div>
+
+                @if($popularTags->isNotEmpty())
+                    <div class="sidebar-widget mt-5" style="width: 450px">
                         <h3 class="sidebar-widget-title">Tag Populer</h3>
                         <ul class="tag-list list-style">
                             @forelse ($popularTags as $popularTag)
@@ -253,11 +236,9 @@
                             </div>
                             @endforelse
                         </ul>
-
                     </div>
-                    @endif
+                @endif
             </div>
-
         </div>
     </div>
 </div>

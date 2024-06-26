@@ -200,8 +200,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->whereRelation('newsCategories', 'category_id', $category_id)
             ->where('status', NewsEnum::ACCEPTED->value)
             ->withCount('newsViews')
-            ->latest()
-            ->paginate(5);
+            ->latest();
     }
 
     public function tagLatest($tag_id, $paginate) : mixed
@@ -365,7 +364,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
     public function findDraft(mixed $id)
     {
         return $this->model->query()->withTrashed()->findOrFail($id);
-    } 
+    }
 
     public function accepted()
     {
