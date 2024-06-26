@@ -109,9 +109,7 @@ Route::get('set-price', [PositionAdvertisementController::class, 'index'])->name
 Route::delete('set-price/delete/{positionAdvertisement}', [PositionAdvertisementController::class, 'destroy'])->name('set-price.destroy');
 
 
-Route::get('inbox-admin', function () {
-    return view('pages.admin.inbox.index');
-})->name('inbox-list.admin');
+Route::get('inbox-admin', [AdminController::class, 'inbox'])->name('inbox-list.admin');
 
 Route::get('subscribe-list', function () {
     return view('pages.admin.subscribe.index');

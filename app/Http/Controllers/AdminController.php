@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Contracts\Interfaces\AdminInterface;
 use App\Contracts\Interfaces\AuthorInterface;
 use App\Contracts\Interfaces\CategoryInterface;
+use App\Contracts\Interfaces\CommentReportInterface;
 use App\Contracts\Interfaces\NewsInterface;
+use App\Contracts\Interfaces\NewsReportInterface;
 use App\Contracts\Interfaces\UserInterface;
 use App\Contracts\Interfaces\VisitorInterface;
 use App\Enums\RoleEnum;
@@ -29,8 +31,10 @@ class AdminController extends Controller
     private CategoryInterface $category;
     private AdminChartService $adminChart;
     private UserInterface $user;
+    private NewsReportInterface $newsReport;
+    private CommentReportInterface $commentReport;
 
-    public function __construct(AdminInterface $admins, UserInterface $users, AdminService $admin, VisitorInterface $visitor, AuthorInterface $author, NewsInterface $news, CategoryInterface $category, AdminChartService $adminChart, UserInterface $user)
+    public function __construct(AdminInterface $admins, UserInterface $users, AdminService $admin, VisitorInterface $visitor, AuthorInterface $author, NewsInterface $news, CategoryInterface $category, AdminChartService $adminChart, UserInterface $user, NewsReportInterface $newsReport, CommentReportInterface $commentReport)
     {
         $this->admins = $admins;
         $this->admin = $admin;
@@ -41,6 +45,8 @@ class AdminController extends Controller
         $this->category = $category;
         $this->adminChart = $adminChart;
         $this->user = $user;
+        $this->newsReport = $newsReport;
+        $this->commentReport = $commentReport;
     }
 
     public function dashboard()
@@ -134,5 +140,12 @@ class AdminController extends Controller
         // } catch (\Throwable $th) {
         //     return back()->with('success' , 'Data berhasil dihapus');
         // }
+    }
+    
+    public function inbox()
+    {
+        $articles = $this->newsReport->get();
+        $comments = $this->commentReport->get();
+        return view('pages.admin.inbox.index', compact('articles', 'comments'));
     }
 }

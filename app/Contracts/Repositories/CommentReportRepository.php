@@ -11,6 +11,7 @@ class CommentReportRepository extends BaseRepository implements CommentReportInt
     {
         $this->model = $commentReport;
     }
+    
 
     /**
      * Handle show method and delete data instantly from models.
@@ -43,10 +44,9 @@ class CommentReportRepository extends BaseRepository implements CommentReportInt
      *
      * @return mixed
      */
-    public function get($news_id): mixed
+    public function get(): mixed
     {
         return $this->model->query()
-            ->where('news_id', $news_id)
             ->get();
     }
 
