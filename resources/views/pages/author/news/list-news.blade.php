@@ -116,9 +116,10 @@
                         <div class="row col-md-12 col-lg-7">
                             <div class="col-lg-12 mb-3">
                                 <h4>
-                                    {{ $data->name }}
+                                    {!! Illuminate\Support\Str::limit(strip_tags($data->name), 150, '...') !!}
                                 </h4>
-                                <div class="fs-4 mt-2">{!! Str::words(strip_tags($data->description), 25, '...') !!}
+                                <div class="fs-4 mt-2">
+                                    {!! Illuminate\Support\Str::limit(strip_tags($data->description), 600, '...') !!}
                                 </div>
                             </div>
                         </div>
@@ -246,9 +247,10 @@
                         <div class="row col-md-12 col-lg-7">
                             <div class="col-lg-12 mb-3">
                                 <h4>
-                                    {{ $data->name }}
+                                    {!! Illuminate\Support\Str::limit(strip_tags($data->name), 150, '...') !!}
                                 </h4>
-                                <div class="fs-4 mt-2">{!! Str::words(strip_tags($data->description), 25, '...') !!}
+                                <div class="fs-4 mt-2">
+                                    {!! Illuminate\Support\Str::limit(strip_tags($data->description), 600, '...') !!}
                                 </div>
                             </div>
                         </div>
@@ -346,9 +348,10 @@
                         <div class="row col-md-12 col-lg-7">
                             <div class="col-lg-12 mb-3">
                                 <h4>
-                                    {{ $data->name }}
+                                    {!! Illuminate\Support\Str::limit(strip_tags($data->name), 150, '...') !!}
                                 </h4>
-                                <div class="fs-4 mt-2">{!! Str::words(strip_tags($data->description), 25, '...') !!}
+                                <div class="fs-4 mt-2">
+                                    {!! Illuminate\Support\Str::limit(strip_tags($data->description), 600, '...') !!}
                                 </div>
                             </div>
                         </div>
@@ -454,9 +457,10 @@
                         <div class="row col-md-12 col-lg-7">
                             <div class="col-lg-12 mb-3">
                                 <h4>
-                                    {{ $data->name }}
+                                    {!! Illuminate\Support\Str::limit(strip_tags($data->name), 150, '...') !!}
                                 </h4>
-                                <div class="fs-4 mt-2">{!! Str::words(strip_tags($data->description), 25, '...') !!}
+                                <div class="fs-4 mt-2">
+                                    {!! Illuminate\Support\Str::limit(strip_tags($data->description), 600, '...') !!}
                                 </div>
                             </div>
                         </div>
@@ -552,7 +556,9 @@
                                     <h4>
                                        {{ $draft->name }}
                                     </h4>
-                                    <div class="fs-4 mt-2">{!! Str::words(strip_tags($draft->description), 25, '...') !!}</div>
+                                    <div class="fs-4 mt-2">
+                                        {!! Illuminate\Support\Str::limit(strip_tags($data->description), 600, '...') !!}
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-12 col-lg-3">
