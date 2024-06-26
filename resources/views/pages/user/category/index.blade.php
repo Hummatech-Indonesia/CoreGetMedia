@@ -62,8 +62,8 @@
 </div>
 
 <div class="sports-wrap ptb-100">
-    <div class="container">
-        <div class="row gx-5">
+    <div class="container col-lg-12">
+        <div class="row col-lg-12">
             <div class="col-lg-8">
                 @forelse ($newsTop as $item)
                 <div class="news-card-four" style="height: 550px;">
@@ -130,7 +130,7 @@
                                     Illuminate\Support\Str::limit($new->name, $limit = 170, $end = '...') !!}
                                 </a>
                             </h3>
-                            <p>{!! Illuminate\Support\Str::limit($new->description, $limit = 170, $end = '...') !!}</p>
+                            <p>{!! Illuminate\Support\Str::limit($new->description, $limit = 150, $end = '...') !!}</p>
                             <ul class="news-metainfo list-style">
                                 <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($new->created_at)->translatedFormat('d F Y') }}</a>
                                 </li>
