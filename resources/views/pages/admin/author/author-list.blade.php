@@ -153,8 +153,8 @@
                         <div class="row container">
                             <div class="col-md-12 col-lg-6 mb-3">
                                 <label class="form-label" for="nomor">Nama</label>
-                                <input type="text" id="create-name" name="name" placeholder="nama" value="{{ old('name') }}" class="form-control ">
-                                @error('phone_number')
+                                <input type="text" id="create-name" name="name" placeholder="nama" value="{{ old('name') }}" class="@error('name') is-invalid @enderror form-control">
+                                @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

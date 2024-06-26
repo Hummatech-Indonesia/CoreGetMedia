@@ -89,9 +89,9 @@ class AuthorController extends Controller
         return back()->with('success', 'Berhasil mendaftarkan diri');
     }
 
-    public function storeByAdmin(Request $req, StoreAuthorRequest $request)
+    public function storeByAdmin(StoreAuthorRequest $request)
     {
-        $user = $this->service->storeUser($req);
+        $user = $this->service->storeUser($request);
         $user = $this->user->store($user);
         $user_id = $user->assignRole(RoleEnum::AUTHOR->value)->id;
         $data = $this->service->store($request, $user_id);
