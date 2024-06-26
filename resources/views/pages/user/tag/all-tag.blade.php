@@ -97,11 +97,11 @@
                     @endforelse
                 </div>
 
-                @if ($advertisement_unders)
+                {{-- @if ($advertisement_unders)
                 <div class="mt-4 mb-4">
                     <img src="{{asset($advertisement_unders && $advertisement_unders->image != null ? 'storage/'.$advertisement_unders->image : "CONTOHIKLAN.png")}}" width="100%" height="225" style="object-fit: cover;" alt="">
                 </div>
-                @endif
+                @endif --}}
 
                 <x-paginator :paginator="$newsTags" />
 
@@ -141,11 +141,11 @@
                         </div>
                         @endif
 
-                        @if ($advertisement_rights)
+                        {{-- @if ($advertisement_rights)
                         <div class="sidebar mt-3 mb-4" style="width: 450px">
                             <img src="{{asset($advertisement_rights && $advertisement_rights->image != null ? 'storage/'.$advertisement_rights->image : "CONTOHIKLAN.png")}}" width="100%" height="603px" style="object-fit: cover" alt="">
                         </div>
-                        @endif
+                        @endif --}}
                         
                         @if ($trendings->isNotEmpty())
                         <div class="sidebar-widget" style="width: 450px">
