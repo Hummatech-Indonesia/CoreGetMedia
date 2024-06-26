@@ -71,36 +71,36 @@ class AdvertisementRepository extends BaseRepository implements AdvertisementInt
         ->whereDate('end_date', '>=', now())
         ->when($query == 'right', function($q) use ($page) {
             $q
-            ->where('position', AdvertisementEnum::RIGHT->value)
-            ->where('page', $page)
+            ->whereRelation('positionAdvertisement', 'position', AdvertisementEnum::RIGHT->value)
+            ->whereRelation('positionAdvertisement', 'page', $page)
             ->inRandomOrder()
             // ->take(1)
             ;
         })
         ->when($query == 'left', function($q) use ($page) {
             $q
-            ->where('position', AdvertisementEnum::LEFT->value)
+            ->whereRelation('positionAdvertisement', 'position', AdvertisementEnum::LEFT->value)
             ->inRandomOrder()
             ->take(1);
         })
         ->when($query == 'top', function($q) use ($page) {
             $q
-            ->where('position', AdvertisementEnum::TOP->value)
-            ->where('page', $page)
+            ->whereRelation('positionAdvertisement', 'position', AdvertisementEnum::TOP->value)
+            ->whereRelation('positionAdvertisement', 'page', $page)
             ->inRandomOrder()
             ->take(1);
         })
         ->when($query == 'under', function($q) use ($page) {
             $q
-            ->where('position', AdvertisementEnum::UNDER->value)
-            ->where('page', $page)
+            ->whereRelation('positionAdvertisement', 'position', AdvertisementEnum::UNDER->value)
+            ->whereRelation('positionAdvertisement', 'page', $page)
             ->inRandomOrder()
             ->take(1);
         })
         ->when($query == 'mid', function($q) use ($page) {
             $q
-            ->where('position', AdvertisementEnum::MID->value)
-            ->where('page', $page)
+            ->whereRelation('positionAdvertisement', 'position', AdvertisementEnum::MID->value)
+            ->whereRelation('positionAdvertisement', 'page', $page)
             ->inRandomOrder()
             ->take(1)
             ;
