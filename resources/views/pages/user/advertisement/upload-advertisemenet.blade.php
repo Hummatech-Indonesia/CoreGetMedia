@@ -155,7 +155,7 @@
                     <div class="">
                         @forelse ($positions as $position)
                                 <div class="form-check form-check-inline mt-2" style="display: none">
-                                    <input class="form-check-input" type="radio" name="position" id="inlineRadio1-{{ $position->page }}" value="{{ $position->position }}">
+                                    <input class="form-check-input" type="radio" name="position_advertisement_id" id="inlineRadio1-{{ $position->page }}" value="{{ $position->id }}">
                                     <label class="form-check-label" for="inlineRadio1">
                                             <p class="ms-2">Posisi {{ $position->position }} Full</p>
                                         <img src="{{asset($position->image)}}" width="300" height="200" alt="">
@@ -244,7 +244,7 @@
                 const selectedPage = $pageSelect.val();
 
                 $positionDivs.each(function() {
-                    const $positionInput = $(this).find('input[name="position"]');
+                    const $positionInput = $(this).find('input[name="position_advertisement_id"]');
                     const positionPage = $positionInput.attr('id').split('-')[1];
 
                     if (selectedPage === positionPage) {

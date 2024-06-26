@@ -26,8 +26,7 @@ class StoreAdvertisementRequest extends FormRequest
             'start_date' => 'required',
             'end_date' => 'required',
             'type' => 'required',
-            'page' => 'required',
-            'position' => 'required',
+            'position_advertisement_id' => 'required',
             'url' => 'required'
         ];
     }

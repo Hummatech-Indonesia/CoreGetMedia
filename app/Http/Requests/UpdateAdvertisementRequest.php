@@ -22,12 +22,11 @@ class UpdateAdvertisementRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'image' => 'required|mimes:jpg,jpeg,png,mp4,avi,mov,mkv',
+            'image' => 'mimes:jpg,jpeg,png,mp4,avi,mov,mkv',
             'start_date' => 'required',
             'end_date' => 'required',
             'type' => 'required',
-            'page' => 'required',
-            'position' => 'required',
+            'position_advertisement_id' => 'required',
             'url' => 'required'
         ];
     }

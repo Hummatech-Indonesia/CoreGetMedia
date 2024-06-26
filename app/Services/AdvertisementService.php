@@ -3,23 +3,15 @@
 namespace App\Services;
 
 use App\Enums\StatusEnum;
-use App\Models\News;
 use App\Traits\UploadTrait;
-use Illuminate\Support\Str;
 use App\Enums\UploadDiskEnum;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Dashboard\Article\UpdateRequest;
 use App\Http\Requests\StoreAdvertisementRequest;
-use App\Http\Requests\StorePositionAdvertisementRequest;
 use App\Http\Requests\UpdateAdvertisementRequest;
-use App\Http\Requests\UpdateNewsRequest;
 use App\Http\Requests\UpdatePositionAdvertisementRequest;
 use App\Models\Advertisement;
-use App\Models\NewsCategory;
-use App\Models\NewsSubCategory;
-use App\Models\NewsTag;
 use App\Models\PositionAdvertisement;
-use App\Models\Tags;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AdvertisementService
@@ -52,7 +44,16 @@ class AdvertisementService
     {
         $data = $request->validated();
 
+        $position = PositionAdvertisement::where('id', $data['position_advertisement_id'])->first();
+
         $new_photo = $this->upload(UploadDiskEnum::ADVERTISEMENT->value, $request->image);
+
+        $startDate = Carbon::parse($data['start_date']);
+        $endDate = Carbon::parse($data['end_date']);
+        $daysDifference = $startDate->diffInDays($endDate);
+
+        $datePrice = $position->date_price * $daysDifference;
+        $totalPrice = $position->price + $datePrice;
 
         return [
             'user_id' => auth()->user()->id,
@@ -60,9 +61,9 @@ class AdvertisementService
             'start_date' => $data['start_date'],
             'end_date' => $data['end_date'],
             'type' => $data['type'],
-            'page' => $data['page'],
-            'position' => $data['position'],
-            'url' => $data['url']
+            'position_advertisement_id' => $data['position_advertisement_id'],
+            'url' => $data['url'],
+            'total_price' => $totalPrice,
         ];
     }
 
@@ -77,6 +78,15 @@ class AdvertisementService
     public function update(UpdateAdvertisementRequest $request, Advertisement $advertisement): array|bool
     {
         $data = $request->validated();
+
+        $position = PositionAdvertisement::where('id', $data['position_advertisement_id'])->first();
+
+        $startDate = Carbon::parse($data['start_date']);
+        $endDate = Carbon::parse($data['end_date']);
+        $daysDifference = $startDate->diffInDays($endDate);
+
+        $datePrice = $position->date_price * $daysDifference;
+        $totalPrice = $position->price + $datePrice;
 
         $old_photo = $advertisement->image;
         $new_photo = "";
@@ -98,9 +108,9 @@ class AdvertisementService
             'start_date' => $data['start_date'],
             'end_date' => $data['end_date'],
             'type' => $data['type'],
-            'page' => $data['page'],
-            'position' => $data['position'],
+            'position_advertisement_id' => $data['position_advertisement_id'],
             'url' => $data['url'],
+            'total_price' => $totalPrice,
         ];
     }
 
@@ -119,6 +129,6 @@ class AdvertisementService
 
     public function positionUpdate(UpdatePositionAdvertisementRequest $request)
     {
-        
+
     }
 }

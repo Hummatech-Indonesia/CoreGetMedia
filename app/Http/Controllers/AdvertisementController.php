@@ -59,9 +59,9 @@ class AdvertisementController extends Controller
 
     public function detail_admin(Advertisement $advertisement)
     {
-        $posisi = $this->position->get();
+        $positions = $this->position->get();
         $data = $this->advertisement->show($advertisement->id);
-        return view('pages.admin.advertisement.detail-advertisement', compact('data', 'posisi'));
+        return view('pages.admin.advertisement.detail-advertisement', compact('data', 'positions'));
     }
 
     /**
@@ -160,20 +160,20 @@ class AdvertisementController extends Controller
         return redirect('/confirm-advertisement')->with('success', 'Berhasil menerima iklan');
     }
 
-    public function accepted(Request $request, Advertisement $advertisement)
+    public function accepted(Advertisement $advertisement)
     {
         $this->advertisement->update($advertisement->id, [
             'status' => StatusEnum::ACCEPTED->value,
             'feed' => StatusEnum::NOTPAID->value,
-            'price' => $request->price,
         ]);
         return redirect('/confirm-advertisement')->with('success', 'Berhasil menerima iklan');
     }
 
     public function detail_accepted(Advertisement $advertisement)
     {
+        $positions = $this->position->get();
         $data = $this->advertisement->show($advertisement->id);
-        return view('pages.user.advertisement.detail-payment', compact('data'));
+        return view('pages.user.advertisement.detail-payment', compact('data', 'positions'));
     }
 
     public function rejected(Request $request, Advertisement $advertisement)
@@ -185,8 +185,9 @@ class AdvertisementController extends Controller
 
     public function payment_advertisement(Advertisement $advertisement)
     {
+        $positions = $this->position->get();
         $data = $this->advertisement->show($advertisement->id);
-        return view('pages.user.advertisement.detail-advertisement', compact('data'));
+        return view('pages.user.advertisement.detail-advertisement', compact('data', 'positions'));
     }
 
     /**

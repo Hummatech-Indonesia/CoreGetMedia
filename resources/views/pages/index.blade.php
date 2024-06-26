@@ -105,41 +105,41 @@
     {{-- @if ($advertisement_tops)
     <div class="container-fluid mt-5 mb-5">
         <img src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/'.$advertisement_tops->image : "CONTOHIKLAN.png") }}" width="100%" height="314px" style="object-fit: cover" alt="">
-    </div>
-    @endif --}}
-    <div class="trending-news-box">
-        <div class="row gx-5">
-            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 d-flex justify-content-center">
-                <div class="trending-prev me-3"><i class="flaticon-left-arrow"></i></div>
-                <h4>Artikel Popular</h4>
-                <div class="trending-next ms-3"><i class="flaticon-right-arrow"></i></div>
-            </div>
-            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12">
-                <div class="trending-news-slider swiper">
-                    <div class="swiper-wrapper">
-                        @forelse ($populars->take(10) as $popular)
-                        @if ($popular->news_views_count > 0)
-                        <div class="swiper-slide news-card-one">
-                            <div class="news-card-img">
-                                <img src="{{ asset('storage/' . $popular->image) }}" alt="Image" style="object-fit: cover;" />
-                            </div>
-                            <div class="news-card-info">
-                                <h3><a href="{{ route('news.singlepost', ['news' => $popular->slug]) }}">{{ Str::limit($popular->name, 50, '...') }}</a>
-                                </h3>
-                                <ul class="news-metainfo list-style">
-                                    <li><i class="fi fi-rr-eye"></i>{{ $popular->news_views_count }}x dilihat
-                                    </li>
-                                </ul>
-                            </div>
+</div>
+@endif --}}
+<div class="trending-news-box">
+    <div class="row gx-5">
+        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 d-flex justify-content-center">
+            <div class="trending-prev me-3"><i class="flaticon-left-arrow"></i></div>
+            <h4>Artikel Popular</h4>
+            <div class="trending-next ms-3"><i class="flaticon-right-arrow"></i></div>
+        </div>
+        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12">
+            <div class="trending-news-slider swiper">
+                <div class="swiper-wrapper">
+                    @forelse ($populars->take(10) as $popular)
+                    @if ($popular->news_views_count > 0)
+                    <div class="swiper-slide news-card-one">
+                        <div class="news-card-img">
+                            <img src="{{ asset('storage/' . $popular->image) }}" alt="Image" style="object-fit: cover;" />
                         </div>
-                        @endif
-                        @empty
-                        @endforelse
+                        <div class="news-card-info">
+                            <h3><a href="{{ route('news.singlepost', ['news' => $popular->slug]) }}">{{ Str::limit($popular->name, 50, '...') }}</a>
+                            </h3>
+                            <ul class="news-metainfo list-style">
+                                <li><i class="fi fi-rr-eye"></i>{{ $popular->news_views_count }}x dilihat
+                                </li>
+                            </ul>
+                        </div>
                     </div>
+                    @endif
+                    @empty
+                    @endforelse
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 {{-- @if ($advertisement_tops)
@@ -513,72 +513,67 @@ $popular_down_id = $popular_down->pluck('id');
                         <img src="assets/img/contact-bg.svg" alt="Image" class="contact-shape" />
                         <a href="index.html" class="logo">
                             <img class="logo-light" src="{{ asset('assets/img/logo/get-media-dark.svg') }}" alt="Image" />
-                            <img class="logo-dark" src="{{ asset('assets/img/logo/get-media-light.svg') }}" alt="Image" />
-                        </a>
-                        <p>GetMedia berita terlengkap dengan berita terbaru dan terpopuler.</p>
-                        <ul class="social-profile list-style">
-                            <li>
-                                <a href="https://www.fb.com/" target="_blank"><i class="flaticon-facebook-1"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://www.twitter.com/" target="_blank"><i class="flaticon-twitter-1"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://www.instagram.com/" target="_blank"><i class="flaticon-instagram-2"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/" target="_blank"><i class="flaticon-linkedin"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div> --}}
-                @if($tags->isNotEmpty())
-                <div class="sidebar-widget">
-                    <h3 class="sidebar-widget-title">Tag Populer</h3>
-                    <ul class="tag-list list-style">
-                        @forelse ($tags as $tag)
-                        <li><a href="{{ route('news-tag-list.user', ['tag' => $tag->slug]) }}">{{ $tag->name }}</a>
-                        </li>
-                        @empty
+                <img class="logo-dark" src="{{ asset('assets/img/logo/get-media-light.svg') }}" alt="Image" />
+                </a>
+                <p>GetMedia berita terlengkap dengan berita terbaru dan terpopuler.</p>
+                <ul class="social-profile list-style">
+                    <li>
+                        <a href="https://www.fb.com/" target="_blank"><i class="flaticon-facebook-1"></i></a>
+                    </li>
+                    <li>
+                        <a href="https://www.twitter.com/" target="_blank"><i class="flaticon-twitter-1"></i></a>
+                    </li>
+                    <li>
+                        <a href="https://www.instagram.com/" target="_blank"><i class="flaticon-instagram-2"></i></a>
+                    </li>
+                    <li>
+                        <a href="https://www.linkedin.com/" target="_blank"><i class="flaticon-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div> --}}
+        @if($tags->isNotEmpty())
+        <div class="sidebar-widget">
+            <h3 class="sidebar-widget-title">Tag Populer</h3>
+            <ul class="tag-list list-style">
+                @forelse ($tags as $tag)
+                <li><a href="{{ route('news-tag-list.user', ['tag' => $tag->slug]) }}">{{ $tag->name }}</a>
+                </li>
+                @empty
+                <div>
+                    <div class="d-flex justify-content-center">
                         <div>
-                            <div class="d-flex justify-content-center">
-                                <div>
-                                    <img src="{{ asset('assets/img/no-data/empty.png') }}" width="150px" alt="">
-                                </div>
-                            </div>
-                            <div class="text-center">
-                                <h5>Tidak ada data</h5>
-                            </div>
-                        </div>
-                        @endforelse
-                    </ul>
-                </div>
-                @endif
-
-                {{-- @if ($advertisement_rights)
-                <div class="sidebar">
-                    <img src="{{asset($advertisement_rights && $advertisement_rights->image != null ? 'storage/'.$advertisement_rights->image : "CONTOHIKLAN.png")}}" width="100%" height="473px" style="object-fit: cover" alt="">
-                </div>
-                @endif --}}
-
-                @if ($advertisement_rights)
-                <div class="sidebar">
-                    <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            @foreach ($advertisement_rights as $advertisement_right)
-                            <div class="carousel-item active" data-bs-interval="3000">
-                                <img src="{{ asset($advertisement_right->image ? 'storage/'.$advertisement_right->image : 'CONTOHIKLAN.png') }}" class="d-block" width="100%" height="473px" style="object-fit: cover" alt="...">
-                            </div>
-                            @endforeach
+                            <img src="{{ asset('assets/img/no-data/empty.png') }}" width="150px" alt="">
                         </div>
                     </div>
+                    <div class="text-center">
+                        <h5>Tidak ada data</h5>
+                    </div>
                 </div>
-                @endif
+                @endforelse
+            </ul>
+        </div>
+        @endif
 
-
+        @if ($advertisement_rights)
+        <div class="sidebar">
+            <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <img src="{{ asset('assets/img/news/news-13.webp') }}" width="100%" height="473px" style="object-fit: cover" alt="">
+                    @foreach ($advertisement_rights as $advertisement_right)
+                    <div class="carousel-item active" data-bs-interval="3000">
+                        <img src="{{ asset($advertisement_right->image ? 'storage/'.$advertisement_right->image : 'CONTOHIKLAN.png') }}" class="d-block" width="100%" height="473px" style="object-fit: cover" alt="...">
+                    </div>
+                    @endforeach
+                </div>
             </div>
         </div>
+        @endif
+
+
     </div>
+</div>
+</div>
 
 </div>
 

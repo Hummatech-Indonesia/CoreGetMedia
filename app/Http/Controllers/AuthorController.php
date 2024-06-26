@@ -96,7 +96,13 @@ class AuthorController extends Controller
         $user_id = $user->assignRole(RoleEnum::AUTHOR->value)->id;
         $data = $this->service->store($request, $user_id);
         $this->author->store($data);
-        return back()->with('success', 'Berhasil membuat akun author');
+
+        if ($user['status'] == 'error') {
+            return back()->with('error', 'Data yang anda inputkan kurang lengkap');
+        } else {
+            return back()->with('success', 'Berhasil membuat akun author');
+        }
+
     }
     /**
      * Display the specified resource.

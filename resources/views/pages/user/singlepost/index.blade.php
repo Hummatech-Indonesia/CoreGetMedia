@@ -263,15 +263,17 @@
                                             <div class="col-md-12 col-lg-3 mb-3">
                                                 <li class="author">
                                                     <span class="author-img">
-                                                        <img src="{{ asset($news->user->photo ? 'storage/' . $news->user->photo : 'default.png') }}"
-                                                            alt="Image" width="40px" height="30px"
-                                                            style="border-radius: 50%; object-fit:cover;" />
+                                                        <a href="{{ route('author.detail', ['author' => $news->user->author->id]) }}">
+                                                            <img src="{{ asset($news->user->photo ? 'storage/' . $news->user->photo : 'default.png') }}"
+                                                                alt="Image" width="40px" height="30px"
+                                                                style="border-radius: 50%; object-fit:cover;" />
+                                                        </a>
                                                     </span>
                                                     <div>  
-                                                        <a style="display: inline;text-decoration:none"
+                                                        <a style="display: inline;text-decoration:none" 
                                                             data-toggle="tooltip" data-placement="top"
                                                             title="author - {{ $news->user->name }}"
-                                                            href="{{ route('author.detail', $news->user->id) }}">{{ $news->user->name }}</a>
+                                                            href="{{ route('author.detail', ['author' => $news->user->author->id]) }}">{{ $news->user->name }}</a>
                                                         </span>
                                                     </div>
                                                 </li>

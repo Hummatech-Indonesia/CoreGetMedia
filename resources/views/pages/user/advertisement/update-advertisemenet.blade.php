@@ -64,10 +64,10 @@
                 <div class="col-lg-6 mb-4">
                     <label class="form-label" for="page">Halaman</label>
                     <select name="page" class="form-select" id="page-select">
-                        <option value="home" {{ $data->page == 'home' ? 'selected' : '' }}>Dashboard</option>
-                        <option value="singlepost" {{ $data->page == 'singlepost' ? 'selected' : '' }}>News Post</option>
-                        <option value="category" {{ $data->page == 'category' ? 'selected' : '' }}>Kategori</option>
-                        <option value="subcategory" {{ $data->page == 'subcategory' ? 'selected' : '' }}>Sub Kategori</option>
+                        <option value="home" {{ $data->positionAdvertisement->page == 'home' ? 'selected' : '' }}>Dashboard</option>
+                        <option value="singlepost" {{ $data->positionAdvertisement->page == 'singlepost' ? 'selected' : '' }}>News Post</option>
+                        <option value="category" {{ $data->positionAdvertisement->page == 'category' ? 'selected' : '' }}>Kategori</option>
+                        <option value="subcategory" {{ $data->positionAdvertisement->page == 'subcategory' ? 'selected' : '' }}>Sub Kategori</option>
                     </select>
                 </div>
                 <div class="col-lg-6 mb-4">
@@ -83,7 +83,7 @@
                     <div class="">
                         @forelse ($positions as $position)
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="position" id="inlineRadio1-{{ $position->page }}" value="{{ $position->position }}">
+                            <input class="form-check-input" type="radio" name="position_advertisement_id" id="inlineRadio1-{{ $position->page }}" value="{{ $position->id }}"  {{ $data->position_advertisement_id == $position->id ? 'checked' : '' }}>
                             <label class="form-check-label" for="inlineRadio1">
                                 <p class="ms-2">Posisi {{ $position->position }} Full</p>
                                 <img src="{{asset($position->image)}}" width="300" height="200" alt="">
@@ -165,7 +165,7 @@
                 </div>
                 <div class="col-lg-12 mb-4">
                     <label class="form-label" for="photo">Kontent</label>
-                    <input type="file" id="photo" name="image" onchange="previewImage(event)" placeholder="" class="form-control @error('photo') is-invalid @enderror">
+                    <input type="file" id="photo" value="{{ $data->image }}" name="image" onchange="previewImage(event)" placeholder="" class="form-control @error('photo') is-invalid @enderror">
                     @error('image')
                         <span class="invalid-feedback" role="alert" style="color: red;">
                             <strong>{{ $message }}</strong>
@@ -219,7 +219,7 @@
                 const selectedPage = $pageSelect.val();
 
                 $positionDivs.each(function() {
-                    const $positionInput = $(this).find('input[name="position"]');
+                    const $positionInput = $(this).find('input[name="position_advertisement_id"]');
                     const positionPage = $positionInput.attr('id').split('-')[1];
 
                     if (selectedPage === positionPage) {
@@ -234,6 +234,7 @@
             showHidePositionDivs();
         });
     </script>
+
     <script>
         $(document).ready(function() {
             $('#image-uploadify').imageuploadify();

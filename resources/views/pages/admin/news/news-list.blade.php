@@ -75,7 +75,7 @@
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $item->user->name }}</td>
                 <td>{{ $item->user->email }}</td>
-                <td>{!! Illuminate\Support\Str::limit(strip_tags($item->name), 50, '...') !!}</td>
+                <td><a href="{{ route('news.singlepost', ['news' => $item->slug]) }}" style="color: #4a4a4a">{!! Illuminate\Support\Str::limit(strip_tags($item->name), 50, '...') !!}</a></td>
                 <td>{{ \Carbon\Carbon::parse($item->date)->translatedFormat('d F Y') }}</td>
                 <td>
                     @if ($item->user->roles->pluck('name')[0] == "admin")

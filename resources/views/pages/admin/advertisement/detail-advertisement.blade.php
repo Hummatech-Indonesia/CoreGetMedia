@@ -34,7 +34,7 @@
 @section('content')
 
 <div class="modal fade" id="modal-accepted" tabindex="-1" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-sm">
         <form id="form-accepted" method="POST" class="modal-content">
             @method('put')
             @csrf
@@ -46,8 +46,6 @@
             </div>
             <div class="modal-body">
                 <p>Apakah anda yakin akan menerima iklan ini?</p>
-                <p>Tentukan Harganya : </p>
-                <input type="text" name="price" class="form-control" placeholder="1000">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light-warning text-warning font-medium waves-effect"
@@ -141,11 +139,11 @@
                     <h6>Halaman</h6>
                     <form>
                         <div class="form-group mb-4">
-                            <select class="form-select mr-sm-2" id="inlineFormCustomSelect">
-                                <option value="home" disabled {{ $data->page == 'home' ? 'selected' : '' }}>Dashboard</option>
-                                <option value="singlepost" disabled {{ $data->page == 'singlepost' ? 'selected' : '' }}>News Post</option>
-                                <option value="category" disabled {{ $data->page == 'category' ? 'selected' : '' }}>Kategori</option>
-                                <option value="subcategory" disabled {{ $data->page == 'subcategory' ? 'selected' : '' }}>Sub Kategori</option>
+                            <select name="page" class="form-select" id="page-select" disabled>
+                                <option value="home" {{ $data->positionAdvertisement->page == 'home' ? 'selected' : '' }}>Dashboard</option>
+                                <option value="singlepost" {{ $data->positionAdvertisement->page == 'singlepost' ? 'selected' : '' }}>News Post</option>
+                                <option value="category" {{ $data->positionAdvertisement->page == 'category' ? 'selected' : '' }}>Kategori</option>
+                                <option value="subcategory" {{ $data->positionAdvertisement->page == 'subcategory' ? 'selected' : '' }}>Sub Kategori</option>
                             </select>
                         </div>
                     </form>
@@ -156,44 +154,16 @@
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-12 mb-3">
+                                    @forelse ($positions as $position)
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="under" {{ $data->position == 'under' ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="radio" name="position_advertisement_id" id="inlineRadio1-{{ $position->page }}" value="{{ $position->id }}"  {{ $data->position_advertisement_id == $position->id ? 'checked' : '' }}>
                                         <label class="form-check-label" for="inlineRadio1">
-                                            <p class="ms-2">Posisi Bawah Full (1770 x 166)</p>
-                                            <img src="{{asset('assets/img/news/news-11.webp')}}" width="300" height="200" alt="">
+                                            <p class="ms-2">Posisi {{ $position->position }} Full</p>
+                                            <img src="{{asset($position->image)}}" width="300" height="200" alt="">
                                         </label>
                                     </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="mid" {{ $data->position == 'mid' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="inlineRadio1">
-                                            <p class="ms-2">Posisi Tengah Full (1770 x 166)</p>
-                                            <img src="{{asset('assets/img/news/news-11.webp')}}" width="300" height="200" alt="">
-                                        </label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="top" {{ $data->position == 'top' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="inlineRadio1">
-                                            <p class="ms-2">Posisi Atas Full (1770 x 166)</p>
-                                            <img src="{{ asset('assets/img/news/news-11.webp') }}" width="300" height="200"
-                                                alt="">
-                                        </label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="position" id="inlineRadio2" value="right" {{ $data->position == 'right' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="inlineRadio2">
-                                            <p class="ms-2">Posisi Kanan (456 x 654)</p>
-                                            <img src="{{ asset('assets/img/news/news-12.webp') }}" width="300" height="200"
-                                                alt="">
-                                        </label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="position" id="inlineRadio3" value="left" {{ $data->position == 'left' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="inlineRadio3">
-                                            <p class="ms-2">Posisi Kiri (1245 x 295)</p>
-                                            <img src="{{ asset('assets/img/news/news-13.webp') }}" width="300" height="200"
-                                                alt="">
-                                        </label>
-                                    </div>
+                                    @empty
+                                    @endforelse
                                 </div>
                             </div>
                         </div>
@@ -203,9 +173,9 @@
                     <h6>Jenis Iklan</h6>
                     <form>
                         <div class="form-group mb-4">
-                            <select class="form-select mr-sm-2" id="inlineFormCustomSelect">
-                                <option value="photo" disabled {{ $data->type == 'photo' ? 'selected' : '' }}>Foto</option>
-                                <option value="video" disabled {{ $data->type == 'video' ? 'selected' : '' }}>Video</option>
+                            <select class="form-select mr-sm-2" id="inlineFormCustomSelect" disabled>
+                                <option value="photo" {{ $data->type == 'photo' ? 'selected' : '' }}>Foto</option>
+                                <option value="video" {{ $data->type == 'video' ? 'selected' : '' }}>Video</option>
                             </select>
                         </div>
                     </form>
@@ -310,6 +280,31 @@
 @endsection
 
 @section('script')
+
+<script>
+    $(document).ready(function() {
+            const $pageSelect = $('#page-select');
+            const $positionDivs = $('.form-check.form-check-inline');
+
+            function showHidePositionDivs() {
+                const selectedPage = $pageSelect.val();
+
+                $positionDivs.each(function() {
+                    const $positionInput = $(this).find('input[name="position_advertisement_id"]');
+                    const positionPage = $positionInput.attr('id').split('-')[1];
+
+                    if (selectedPage === positionPage) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            }
+
+            $pageSelect.on('change', showHidePositionDivs);
+            showHidePositionDivs();
+        });
+</script>
 
 <script>
      $('.btn-accepted').click(function() {

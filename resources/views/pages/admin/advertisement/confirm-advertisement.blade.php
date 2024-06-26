@@ -78,7 +78,7 @@
                         <td>{{ $advertisement->type }}</td>
                         <td>{{ $advertisement->start_date }}</td>
                         <td>{{ $advertisement->end_date }}</td>
-                        <td>{{ $advertisement->page }}</td>
+                        <td>{{ $advertisement->positionAdvertisement->page }}</td>
                         <td>
                             <a href="{{ route('detail-advertisement.admin', ['advertisement' => $advertisement->id]) }}" data-bs-toggle="tooltip"
                                 title="Detail" class="btn btn-sm btn-primary btn-detail"
