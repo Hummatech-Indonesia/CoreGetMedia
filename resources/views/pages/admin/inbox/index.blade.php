@@ -237,7 +237,7 @@
                 <a href="" class="btn btn-sm btn-light-primary text-primary text-start">Download bukti</a>
                 <div class="text-end gap-4">
                     <a href="" class="btn btn-sm btn-light-success text-success">Lihat artikel</a>
-                    <button class="btn btn-sm btn-light-warning btn-delete-comment text-warning">Banned komentar</button>
+                    <button class="btn btn-sm btn-light-warning btn-delete-comment text-warning">Banned artikel</button>
                     <button type="button" class="btn btn-sm btn-light-danger text-danger" data-bs-dismiss="modal">Tutup</button>
                 </div>
             </div>
