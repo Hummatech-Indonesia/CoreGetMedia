@@ -19,9 +19,8 @@ class Advertisement extends Model
         'start_date',
         'end_date',
         'type',
-        'page',
-        'position',
-        'price',
+        'position_advertisement_id',
+        'total_price',
         'feed',
         'status',
         'description'
@@ -41,5 +40,15 @@ class Advertisement extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the position that owns the Advertisement
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function positionAdvertisement(): BelongsTo
+    {
+        return $this->belongsTo(PositionAdvertisement::class);
     }
 }

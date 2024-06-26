@@ -182,7 +182,9 @@
                             </div>
 
                             <div class="col-md-12 col-lg-6 mb-3">
-                                <label class="form-label" for="nomor">CV  <small class="text-danger"> *file harus berupa pdf</small></label>
+                                <label class="form-label" for="nomor">
+                                    CV  <small class="text-danger"> *file harus berupa pdf - wajib di isi</small>
+                                </label>
                                 <input type="file" id="create-cv" name="cv" placeholder="name" value="{{ old('cv') }}" class=" @error('cv') is-invalid @enderror form-control">
                                 @error('cv')
                                 <span class="invalid-feedback" role="alert">

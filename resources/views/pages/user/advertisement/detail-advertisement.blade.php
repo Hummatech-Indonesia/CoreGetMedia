@@ -51,35 +51,33 @@
                         </div>
                         <div class="col-lg-12 mb-4">
                             <label class="form-label" for="page">Halaman</label>
-                            {{-- <select name="page" class="form-select" id="" readonly>
-                                <option value="" selected readonly></option>
-                                <option value="dashboard"></option>
-                                <option value="news_post">News Post</option>
-                                <option value="sub_category">Sub Kategori</option>
-                            </select> --}}
-                            <select class="form-select">
-                                <option value="home" disabled {{ $data->page == 'home' ? 'selected' : '' }}>Dashboard</option>
-                                <option value="singlepost" disabled {{ $data->page == 'singlepost' ? 'selected' : '' }}>News Post</option>
-                                <option value="category" disabled {{ $data->page == 'category' ? 'selected' : '' }}>Kategori</option>
-                                <option value="subcategory" disabled {{ $data->page == 'subcategory' ? 'selected' : '' }}>Sub Kategori</option>
+                            <select class="form-select" id="page-select" disabled>
+                                <option value="home" {{ $data->positionAdvertisement->page == 'home' ? 'selected' : '' }}>Dashboard</option>
+                                <option value="singlepost" {{ $data->positionAdvertisement->page == 'singlepost' ? 'selected' : '' }}>News Post</option>
+                                <option value="category" {{ $data->positionAdvertisement->page == 'category' ? 'selected' : '' }}>Kategori</option>
+                                <option value="subcategory" {{ $data->positionAdvertisement->page == 'subcategory' ? 'selected' : '' }}>Sub Kategori</option>
                             </select>
                         </div>
                         <div class="col-lg-12 mb-4">
                             <label for="position" class="form-label">Posisi Iklan</label>
                             <div class="">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="full_horizontal" checked>
-                                    <label class="form-check-label" for="inlineRadio1">
-                                        <img src="{{asset('assets/img/news/news-18.webp')}}" width="200" height="120" alt="">
-                                    </label>
-                                </div>
+                                @forelse ($positions as $position)
+                                    <div class="form-check form-check-inline mt-2">
+                                        <input class="form-check-input" type="radio" name="position_advertisement_id" id="inlineRadio1-{{ $position->page }}" value="{{ $position->id }}"  {{ $data->position_advertisement_id == $position->id ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="inlineRadio1">
+                                            <p class="ms-2">Posisi {{ $position->position }} Full</p>
+                                            <img src="{{asset($position->image)}}" width="300" height="200" alt="">
+                                        </label>
+                                    </div>
+                                @empty
+                                @endforelse
                             </div>
                         </div>
                         <div class="col-lg-12 mb-4">
                             <label class="form-label" for="type">Jenis Iklan</label>
-                            <select class="form-select">
-                                <option value="photo" disabled {{ $data->type == 'photo' ? 'selected' : '' }}>Foto</option>
-                                <option value="video" disabled {{ $data->type == 'video' ? 'selected' : '' }}>Video</option>
+                            <select class="form-select" disabled>
+                                <option value="photo" {{ $data->type == 'photo' ? 'selected' : '' }}>Foto</option>
+                                <option value="video" {{ $data->type == 'video' ? 'selected' : '' }}>Video</option>
                             </select>
                         </div>
 
@@ -165,7 +163,7 @@
                     <div class="d-flex mt-5 justify-content-between">
                         <h5>Harga Upload</h5>
 
-                        <h5>Rp. {{ $data->price }}</h5>
+                        <h5>Rp. {{ $data->total_price }}</h5>
                     </div>
 
                     <div class="mt-4">
@@ -372,6 +370,31 @@
 @section('script')
 
 <script src="{{ asset('assets/dist/imageuploadify.min.js') }}"></script>
+
+<script>
+    $(document).ready(function() {
+            const $pageSelect = $('#page-select');
+            const $positionDivs = $('.form-check.form-check-inline');
+
+            function showHidePositionDivs() {
+                const selectedPage = $pageSelect.val();
+
+                $positionDivs.each(function() {
+                    const $positionInput = $(this).find('input[name="position_advertisement_id"]');
+                    const positionPage = $positionInput.attr('id').split('-')[1];
+
+                    if (selectedPage === positionPage) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            }
+
+            $pageSelect.on('change', showHidePositionDivs);
+            showHidePositionDivs();
+        });
+</script>
 
 <script>
     $(document).ready(function() {

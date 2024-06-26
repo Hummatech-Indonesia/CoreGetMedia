@@ -17,6 +17,8 @@ return new class extends Migration
             $table->text('image');
             $table->enum('page', [AdvertisementEnum::HOME->value, AdvertisementEnum::SINGLEPOST->value, AdvertisementEnum::CATEGORY->value, AdvertisementEnum::SUBCATEGORY->value, AdvertisementEnum::ALLNEWS->value]);
             $table->enum('position', [AdvertisementEnum::TOP->value, AdvertisementEnum::UNDER->value, AdvertisementEnum::MID->value, AdvertisementEnum::RIGHT->value, AdvertisementEnum::LEFT->value]);
+            $table->string('price');
+            $table->string('date_price');
             $table->timestamps();
         });
     }

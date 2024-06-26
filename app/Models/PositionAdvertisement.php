@@ -12,9 +12,11 @@ class PositionAdvertisement extends Model
     use HasFactory;
 
     protected $fillable = [
-        'page',
         'image',
+        'page',
         'position',
+        'price',
+        'date_price',
     ];
 
     protected $casts = [
@@ -22,4 +24,14 @@ class PositionAdvertisement extends Model
     ];
 
     protected $table = 'position_advertisements';
+
+    /**
+     * Get all of the  for the PositionAdvertisement
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function advertisements(): HasMany
+    {
+        return $this->hasMany(Advertisement::class);
+    }
 }
