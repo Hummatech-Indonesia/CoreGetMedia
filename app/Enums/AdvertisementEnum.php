@@ -17,16 +17,8 @@ enum AdvertisementEnum : string
     case CATEGORY = 'category';
     case SUBCATEGORY = 'subcategory';
     case ALLNEWS = 'allnews';
-
-    // enumnya belum ditambah
-    case ALLNEWS_PINNED = 'allnewspinned';
-    case ALLNEWS_POPULAR = 'allnewspopular';
     case TAG = 'tag';
     case DETAIL_AUTHOR = 'detail_author';
-    case ALLCATEGORY = 'allcategory';
-    case ALLSUBCATEGORY = 'allsubcategory';
-    case ALLTAG = 'alltag';
-
 
     //type
     case PHOTO = 'photo';
@@ -53,6 +45,5 @@ enum AdvertisementEnum : string
             self::MID => 'Tengah',
         };
     }
-
 
 }
