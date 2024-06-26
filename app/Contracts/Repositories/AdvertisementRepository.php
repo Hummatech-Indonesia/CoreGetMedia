@@ -66,7 +66,7 @@ class AdvertisementRepository extends BaseRepository implements AdvertisementInt
     {
         return $this->model->query()
         ->where('status', AdvertisementEnum::PUBLISHED->value)
-        ->where('feed', AdvertisementEnum::PAID)
+        ->where('feed', AdvertisementEnum::PAID->value)
         ->whereDate('start_date', '<=', now())
         ->whereDate('end_date', '>=', now())
         ->when($query == 'right', function($q) use ($page) {
