@@ -92,6 +92,10 @@
 </style>
 @endsection
 
+@if ($news_latest->count() != 0)
+    @include('layouts.user.notification')
+@endif
+
 @section('content')
 <div class="container-fluid">
     @php

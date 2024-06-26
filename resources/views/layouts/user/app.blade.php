@@ -63,10 +63,6 @@
 
 
 <body>
-    @if ($news_latest->count() != 0)
-        @include('layouts.user.notification')
-    @endif
-
     @if(!isset($showNavbar) || $showNavbar !== false)
         @include('layouts.user.navbar-header')
         @include('layouts.user.mobile-navbar')
