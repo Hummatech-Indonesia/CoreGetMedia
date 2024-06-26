@@ -158,7 +158,7 @@
             </div>
 
             <div class="col-lg-4">
-                <div class="">
+
                     <div class="sidebar" style="width: 450px;">
                         @if($CategoryPopulars->isNotEmpty())
                         <div class="sidebar-widget" style="width: 450px">
@@ -256,7 +256,6 @@
 
                     </div>
                     @endif
-                </div>
             </div>
 
         </div>
