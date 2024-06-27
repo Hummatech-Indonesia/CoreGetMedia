@@ -184,24 +184,35 @@
                             Berita Populer
                         </h3>
                         @forelse ($trending_news as $trending)
-                        @if ($trending->news_views_count > 0)
-                        <div class="news-card-three">
-                            <div class="news-card-img">
-                                <img src="{{ asset('storage/' . $trending->image) }}" class="img-popular" alt="Image" />
+                            @if ($trending->news_views_count > 0)
+                            <div class="news-card-three">
+                                <div class="news-card-img">
+                                    <img src="{{ asset('storage/' . $trending->image) }}" class="img-popular" alt="Image" />
+                                </div>
+                                <div class="news-card-info">
+                                    <h3><a href="{{ route('news.singlepost', ['news' => $trending->slug]) }}">{!!
+                                            Illuminate\Support\Str::limit($trending->name, $limit = 45, $end = '...')
+                                            !!}</a></h3>
+                                    <ul class="news-metainfo list-style d-flex">
+                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)" style="font-size: 14px;">{{ \Carbon\Carbon::parse($trending->date)->translatedFormat('d F Y') }}</a>
+                                        </li>
+                                        <li><i class="fi fi-rr-eye"></i><a href="javascript:void(0)" style="font-size: 14px;">{{ $trending->news_views_count ? $trending->news_views_count : '0' }}x
+                                                dilihat</a></li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="news-card-info">
-                                <h3><a href="{{ route('news.singlepost', ['news' => $trending->slug]) }}">{!!
-                                        Illuminate\Support\Str::limit($trending->name, $limit = 45, $end = '...')
-                                        !!}</a></h3>
-                                <ul class="news-metainfo list-style d-flex">
-                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)" style="font-size: 14px;">{{ \Carbon\Carbon::parse($trending->date)->translatedFormat('d F Y') }}</a>
-                                    </li>
-                                    <li><i class="fi fi-rr-eye"></i><a href="javascript:void(0)" style="font-size: 14px;">{{ $trending->news_views_count ? $trending->news_views_count : '0' }}x
-                                            dilihat</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        @endif
+                            @else
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-center">
+                                        <div>
+                                            <img src="{{ asset('assets/img/no-data/empty.png') }}" width="150px" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <h5>Tidak ada data</h5>
+                                    </div>
+                                </div>
+                            @endif
                         @empty
                         <div class="col-12">
                             <div class="d-flex justify-content-center">
