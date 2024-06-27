@@ -63,7 +63,7 @@
 
 <div class="sports-wrap ptb-100">
     <div class="container">
-        <div class="row col-lg-12">
+        <div class="row side-responsive">
             <div class="col-lg-8">
                 @forelse ($newsTop as $item)
                 <div class="news-card-four" style="height: 550px;">
@@ -88,9 +88,9 @@
                 @endforelse
 
                 @if ($advertisement_mids)
-                        <div>
-                            <img src="{{asset($advertisement_mid && $advertisement_mid->image != null ? 'storage/'.$advertisement_mid->image : "CONTOHIKLAN.png")}}" width="100%" height="181px" style="object-fit: cover" alt="" alt="...">
-                        </div>
+                <div>
+                    <img src="{{asset($advertisement_mid && $advertisement_mid->image != null ? 'storage/'.$advertisement_mid->image : "CONTOHIKLAN.png")}}" width="100%" height="181px" style="object-fit: cover" alt="" alt="...">
+                </div>
                 @endif
 
                 <div class="mb-5">
@@ -111,7 +111,6 @@
                         </a>
                     </div>
                     @endif
-
 
                     @forelse ($latest_news as $new)
                     <div class="news-card-five">
@@ -153,17 +152,17 @@
             </div>
 
             <div class="col-lg-4">
-                <div class="sidebar" style="width: 450px;">
+                <div class="sidebar">
                     @if($CategoryPopulars->isNotEmpty())
-                        <div class="sidebar-widget" style="width: 450px">
-                            <h3 class="sidebar-widget-title">Kategori Populer</h3>
-                            <ul class="category-widget list-style">
-                                @foreach ($CategoryPopulars as $category)
-                                <li><a data-toggle="tooltip" data-placement="top" title="{{ $category->name }}" href="{{ route('categories.show.user', ['category' => $category->slug]) }}"><img src="{{ asset('assets/img/icons/arrow-right.svg') }}" alt="Image">{{ $category->name }}
-                                        <span>({{ $category->news_categories_count }})</span></a></li>
-                                @endforeach
-                            </ul>
-                        </div>
+                    <div class="sidebar-widget" style="width: 450px">
+                        <h3 class="sidebar-widget-title">Kategori Populer</h3>
+                        <ul class="category-widget list-style">
+                            @foreach ($CategoryPopulars as $category)
+                            <li><a data-toggle="tooltip" data-placement="top" title="{{ $category->name }}" href="{{ route('categories.show.user', ['category' => $category->slug]) }}"><img src="{{ asset('assets/img/icons/arrow-right.svg') }}" alt="Image">{{ $category->name }}
+                                    <span>({{ $category->news_categories_count }})</span></a></li>
+                            @endforeach
+                        </ul>
+                    </div>
                     @endif
 
                     @php
@@ -209,10 +208,10 @@
                         @endforelse
                     </div>
                     @endif
-                </div>
 
-                @if($popularTags->isNotEmpty())
-                    <div class="sidebar-widget mt-5" style="width: 450px">
+
+                    @if($popularTags->isNotEmpty())
+                    <div class="sidebar-widget" style="width: 450px">
                         <h3 class="sidebar-widget-title">Tag Populer</h3>
                         <ul class="tag-list list-style">
                             @forelse ($popularTags as $popularTag)
@@ -232,7 +231,8 @@
                             @endforelse
                         </ul>
                     </div>
-                @endif
+                    @endif
+                </div>
             </div>
         </div>
     </div>
