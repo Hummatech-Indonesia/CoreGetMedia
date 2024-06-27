@@ -44,6 +44,53 @@
     }
 
 </style>
+
+<style>
+    @media only screen and (max-width: 767px) {
+    .sidebar-widget {
+        padding: 15px;
+        width: 100%;
+    }
+
+    .news-card-three {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .news-card-img img {
+        width: 100%;
+        height: auto;
+    }
+
+    .news-card-info h3 {
+        font-size: 1.2em;
+        text-align: center;
+    }
+
+    .news-metainfo {
+        justify-content: center;
+    }
+
+    .news-metainfo li {
+        margin-right: 15px;
+        font-size: 0.9em;
+    }
+
+    .sidebar {
+        width: 100%; 
+    }
+
+    .sidebar-widget-title {
+        font-size: 1.2em;
+    }
+
+    .advertisement {
+        width: 100%;
+        height: auto;
+    }
+}
+</style>
 @endsection
 
 @section('content')
@@ -161,12 +208,17 @@
             <div class="col-lg-4 col-md-12 col-sm-12">
                 <div class="sidebar">
                     @if($CategoryPopulars->isNotEmpty())
-                    <div class="sidebar-widget" style="width: 450px">
+                    <div class="sidebar-widget">
                         <h3 class="sidebar-widget-title">Kategori Populer</h3>
                         <ul class="category-widget list-style">
                             @foreach ($CategoryPopulars as $category)
-                            <li><a data-toggle="tooltip" data-placement="top" title="{{ $category->name }}" href="{{ route('categories.show.user', ['category' => $category->slug]) }}"><img src="{{ asset('assets/img/icons/arrow-right.svg') }}" alt="Image">{{ $category->name }}
-                                    <span>({{ $category->news_categories_count }})</span></a></li>
+                            <li>
+                                <a data-toggle="tooltip" data-placement="top" title="{{ $category->name }}" href="{{ route('categories.show.user', ['category' => $category->slug]) }}">
+                                    <img src="{{ asset('assets/img/icons/arrow-right.svg') }}" alt="Image">
+                                    {{ $category->name }}
+                                    <span>({{ $category->news_categories_count }})</span>
+                                </a>
+                            </li>
                             @endforeach
                         </ul>
                     </div>
@@ -178,27 +230,25 @@
                     @endphp
 
                     @if($trending_news->isNotEmpty())
-                    <div class="sidebar-widget" style="width: 450px">
-                        <h3 class="sidebar-widget-title">
-                            Berita Populer
-                        </h3>
+                    <div class="sidebar-widget">
+                        <h3 class="sidebar-widget-title">Berita Populer</h3>
                         @forelse ($trending_news as $trending)
-                            <div class="news-card-three">
-                                <div class="news-card-img">
-                                    <img src="{{ asset('storage/' . $trending->image) }}" class="img-popular" alt="Image" />
-                                </div>
-                                <div class="news-card-info">
-                                    <h3><a href="{{ route('news.singlepost', ['news' => $trending->slug]) }}">{!!
-                                            Illuminate\Support\Str::limit($trending->name, $limit = 45, $end = '...')
-                                            !!}</a></h3>
-                                    <ul class="news-metainfo list-style d-flex">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)" style="font-size: 14px;">{{ \Carbon\Carbon::parse($trending->date)->translatedFormat('d F Y') }}</a>
-                                        </li>
-                                        <li><i class="fi fi-rr-eye"></i><a href="javascript:void(0)" style="font-size: 14px;">{{ $trending->news_views_count ? $trending->news_views_count : '0' }}x
-                                                dilihat</a></li>
-                                    </ul>
-                                </div>
+                        <div class="news-card-three">
+                            <div class="news-card-img">
+                                <img src="{{ asset('storage/' . $trending->image) }}" class="img-popular" alt="Image" />
                             </div>
+                            <div class="news-card-info">
+                                <h3>
+                                    <a href="{{ route('news.singlepost', ['news' => $trending->slug]) }}">
+                                        {!! Illuminate\Support\Str::limit($trending->name, 45, '...') !!}
+                                    </a>
+                                </h3>
+                                <ul class="news-metainfo list-style d-flex">
+                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)" style="font-size: 14px;">{{ \Carbon\Carbon::parse($trending->date)->translatedFormat('d F Y') }}</a></li>
+                                    <li><i class="fi fi-rr-eye"></i><a href="javascript:void(0)" style="font-size: 14px;">{{ $trending->news_views_count ? $trending->news_views_count : '0' }}x dilihat</a></li>
+                                </ul>
+                            </div>
+                        </div>
                         @empty
                         <div class="col-12">
                             <div class="d-flex justify-content-center">
@@ -215,22 +265,21 @@
                     @endif
 
                     @if ($advertisement_rights)
-                    <div class="sidebar mt-3 mb-4" style="width: 450px">
-                        <img src="{{asset($advertisement_rights && $advertisement_rights->image != null ? 'storage/'.$advertisement_rights->image : "CONTOHIKLAN.png")}}" width="100%" height="603px" style="object-fit: cover" alt="">
+                    <div class="sidebar mt-3 mb-4">
+                        <img src="{{asset($advertisement_rights && $advertisement_rights->image != null ? 'storage/'.$advertisement_rights->image : 'CONTOHIKLAN.png')}}" class="advertisement" style="object-fit: cover" alt="">
                     </div>
                     @else
-                    <div class="sidebar mt-3 mb-4 bg_gray" style="width: 450px; height: 603px;">
+                    <div class="sidebar mt-3 mb-4 bg_gray" style="height: 603px;">
                         <p class="text-center align-middle" style="line-height: 603px;">Iklan</p>
                     </div>
                     @endif
 
                     @if($popularTags->isNotEmpty())
-                    <div class="sidebar-widget" style="width: 450px">
+                    <div class="sidebar-widget">
                         <h3 class="sidebar-widget-title">Tag Populer</h3>
                         <ul class="tag-list list-style">
                             @forelse ($popularTags as $popularTag)
-                            <li><a href="{{route('news-tag-list.user', ['tag' => $popularTag->slug])}}">{{ $popularTag->name }}</a>
-                            </li>
+                            <li><a href="{{route('news-tag-list.user', ['tag' => $popularTag->slug])}}">{{ $popularTag->name }}</a></li>
                             @empty
                             <div class="col-12">
                                 <div class="d-flex justify-content-center">
@@ -248,6 +297,7 @@
                     @endif
                 </div>
             </div>
+
         </div>
     </div>
 </div>
