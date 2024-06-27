@@ -117,8 +117,7 @@
                             </h3>
                             <p>{!! Illuminate\Support\Str::limit($new->description, $limit = 70, $end = '...') !!}</p>
                             <span class="news-metainfo">
-                                <div class=" d-flex gap-3">
-
+                                <div class=" d-flex gap-3" style="display: flex">
                                     <div>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g fill="none" stroke="#e93314" stroke-linecap="round" stroke-width="1.5"><path stroke-linejoin="round" d="M17 4.625H7a4 4 0 0 0-4 4v8.75a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4v-8.75a4 4 0 0 0-4-4m-14 5h18m-4-7v4m-10-4v4"/><path stroke-miterlimit="10" d="M9.5 14.989h5"/></g></svg>
                                         <a href="javascript:void(0)">{{ \Carbon\Carbon::parse($new->created_at)->translatedFormat('d F Y') }}</a>
