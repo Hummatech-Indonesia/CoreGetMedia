@@ -255,7 +255,7 @@
                                             <li class="author d-flex align-items-center">
                                                 <span class="author-img">
                                                     @if(isset($news->user) && isset($news->user->author))
-                                                        <a href="{{ route('author.detail', ['author' => $news->user->author->id]) }}">
+                                                        <a href="{{ route('author.detail', ['author' => $news->user->slug]) }}">
                                                             <img src="{{ asset($news->user->photo ? 'storage/' . $news->user->photo : 'default.png') }}"
                                                                 alt="Image" width="40px" height="30px"
                                                                 style="border-radius: 50%; object-fit:cover;" />
@@ -287,6 +287,7 @@
                                                     <span>{{ $news->news_views_count }}x dilihat</span>
                                                 </li>
                                                 <li class="d-flex align-items-center">
+
                                                     <form id="form-like">
                                                         @csrf
                                                         <button type="submit" style="background: transparent;border:transparent" class="like">
@@ -295,6 +296,7 @@
                                                             </svg>
                                                         </button>
                                                     </form>
+
                                                     <form id="form-liked" style="display: none;">
                                                         @csrf
                                                         <button type="submit" style="background: transparent;border:transparent" class="liked">
@@ -303,6 +305,7 @@
                                                             </svg>
                                                         </button>
                                                     </form>
+
                                                     <span id="like" data-like="{{ $likes }}">{{ $likes }}</span>
                                                 </li>
                                             </div>

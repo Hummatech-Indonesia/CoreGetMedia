@@ -60,6 +60,13 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
             ->paginate(10);
     }
 
+    public function showWithSLug(string $slug): mixed
+    {
+        return $this->model->query()
+            ->where('slug', $slug)
+            ->firstOrFail();
+    }
+
     /**
      * Handle store data event to models.
      *
