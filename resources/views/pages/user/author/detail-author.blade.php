@@ -137,7 +137,7 @@
 
                 <div class="popular-news-wrap">
 
-            @forelse ($newses as $news)
+            @forelse ($newses->take(10) as $news)
             <div class="news-card-five">
                 <div class="news-card-img">
                     <img src="{{ asset('storage/'. $news->image) }}" class="" width="100%" height="150px" style="object-fit: cover" alt="Image">
@@ -172,7 +172,10 @@
             @endforelse
 
         </div>
-        <x-paginator :paginator="$newses" />
+        @php
+            $paginate = $newses->paginate(10);
+        @endphp
+        <x-paginator :paginator="$paginate" />
     </div>
 
     <div class="col-lg-4">
