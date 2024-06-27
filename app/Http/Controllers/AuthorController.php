@@ -109,6 +109,7 @@ class AuthorController extends Controller
         $newses = $this->news->whereDetailAuthor($slug_id->id);
         $popularCategories = $this->category->showWithCount();
         $popularNewses = $this->popular->getpopular();
+        $allauthor = $this->author->getAuthor();
 
         $advertisement_rights = $this->advertisements->wherePosition(AdvertisementEnum::DETAIL_AUTHOR, 'right');
         $advertisement_lefts = $this->advertisements->wherePosition(AdvertisementEnum::DETAIL_AUTHOR, 'left');
@@ -116,7 +117,7 @@ class AuthorController extends Controller
         $advertisement_unders = $this->advertisements->wherePosition(AdvertisementEnum::DETAIL_AUTHOR, 'under');
         $advertisement_mids = $this->advertisements->wherePosition(AdvertisementEnum::DETAIL_AUTHOR, 'mid');
 
-        return view('pages.user.author.detail-author', compact('author', 'newses', 'popularCategories', 'popularNewses', 'advertisement_rights', 'advertisement_lefts', 'advertisement_tops', 'advertisement_unders', 'advertisement_mids'));
+        return view('pages.user.author.detail-author', compact('author', 'newses', 'popularCategories', 'popularNewses', 'advertisement_rights', 'advertisement_lefts', 'advertisement_tops', 'advertisement_unders', 'advertisement_mids', 'allauthor'));
     }
 
     public function statistic()
