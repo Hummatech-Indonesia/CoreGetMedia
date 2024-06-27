@@ -91,8 +91,8 @@
                             <td>
                                 <button data-bs-toggle="tooltip" title="Detail" class="btn btn-sm btn-detail-article btn-primary me-2" style="background-color:#5D87FF"
                                     data-id="{{ $article->id }}"
-                                    data-name-user-article="{{ $article->user->name }}"
-                                    data-email-user-article="{{ $article->user->email }}"
+                                    data-name-user-article="{{ $article->user ? $article->user->name : 'Guest' }}"
+                                    data-email-user-article="{{ $article->user ? $article->user->email : '-' }}"
                                     data-name-writer-article="{{ $article->news->user->name }}"
                                     data-email-writer-article="{{ $article->news->user->email }}"
                                     data-description-article="{{ $article->description }}"
@@ -163,20 +163,25 @@
                    @forelse ($comments as $comment)
                         <tr>
                             <td>
-                                @if ($comment->user->image != null && Storage::disk('public')->exists($comment->user->image))
+                                @if ($comment->user && $comment->user->image != null && Storage::disk('public')->exists($comment->user->image))
                                 <img src="{{ asset('storage/'. $comment->user->image)}}" class="rounded-circle me-2 user-profile" style="object-fit: cover" width="35" height="35" alt="" />
                                 @else
                                     <img src="{{ asset('default.png') }}" class="rounded-circle me-2 user-profile" style="object-fit: cover" width="35" height="35" alt="" />
                                 @endif
-                                {{ $comment->user->name }}
+
+                                @if ($comment->user)
+                                    {{ $comment->user->name }}
+                                @else
+                                    Guest
+                                @endif
                             </td>
                             <td>{{ Str::limit($comment->comment->description, 30, '...') }}</td>
                             <td>{{ Str::limit($comment->description, 40, '...') }}</td>
                             <td>
                                 <button data-bs-toggle="tooltip" title="Detail" class="btn btn-sm btn-detail btn-primary me-2" style="background-color:#5D87FF"
                                     data-id="{{ $comment->id }}"
-                                    data-name-user="{{ $comment->user->name }}"
-                                    data-email-user="{{ $comment->user->email }}"
+                                    data-name-user="{{ $comment->user ? $comment->user->name : 'Guest' }}"
+                                    data-email-user="{{ $comment->user ? $comment->user->email : '-' }}"
                                     data-comment="{{ $comment->comment->description }}"
                                     data-name-writer="{{ $comment->comment->user->name }}"
                                     data-email-writer="{{ $comment->comment->user->email }}"
