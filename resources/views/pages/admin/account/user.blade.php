@@ -126,7 +126,7 @@
                     <tr>
                         <td>{{$loop->iteration}}</td>
                         <td>
-                            <img src="{{asset( $user->photo ? 'storage/'.$user->photo : "default.png")}}" class="rounded-circle me-2 user-profile" style="object-fit: cover" width="35" height="35" alt="" />
+                            <img src="{{asset( $user->image ? 'storage/'.$user->image : "default.png")}}" class="rounded-circle me-2 user-profile" style="object-fit: cover" width="35" height="35" alt="" />
                             {{$user->name}}
                         </td>
                         <td>{{$user->email}}</td>
