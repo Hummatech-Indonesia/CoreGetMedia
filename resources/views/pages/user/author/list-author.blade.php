@@ -111,6 +111,38 @@
     }
 
 </style>
+
+<style>
+    .number-animate {
+        display: inline-block;
+        position: relative;
+        overflow: hidden;
+        vertical-align: bottom;
+    }
+
+    .number-animate span {
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        animation: count 1s linear forwards;
+    }
+
+    @keyframes count {
+        from {
+            opacity: 0;
+            transform: translateY(-50%);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+</style>
 @endsection
 
 @section('content')
@@ -141,7 +173,7 @@
 
 <div class="container-fluid pb-75 mt-5">
     <div class="row">
-        @forelse ($authors as $author)
+        @forelse ($authors as $key => $author)
         <div class="col-md-12 col-lg-4 mb-4 col-12">
             <div class="card-detail p-4 card-hover shadow-sm">
                 <div class="row">
@@ -154,31 +186,31 @@
                         <div class="">
                             <a href="{{ route('author.detail', $author->id) }}" class="btn btn-sm mt-3 mb-1 py-1 px-4 w-100 text-primary bg-light-primary" style="background-color: #CEE4F2; border-radius: 8px;">Detail</a>
                             @auth
-                                @php
-                                    $already = App\Models\Follower::where('author_id', $author->id)->where('user_id', auth()->user()->id)->first()
-                                @endphp 
+                            @php
+                            $already = App\Models\Follower::where('author_id', $author->id)->where('user_id', auth()->user()->id)->first()
+                            @endphp
                             @endauth
                             @if (Auth::check() && $already)
-                                <form action="{{ route('unfollow.author', $author->id) }}" method="POST">
-                                    @method('DELETE')
-                                    @csrf
-                                    <button type="submit" class="btn btn-sm mt-1 py-1 px-4 w-100 text-white" style="background-color: #175A95; border-radius: 8px;">Batal Ikuti</button>
-                                </form>
+                            <form action="{{ route('unfollow.author', $author->id) }}" method="POST">
+                                @method('DELETE')
+                                @csrf
+                                <button type="submit" class="btn btn-sm mt-1 py-1 px-4 w-100 text-white" style="background-color: #175A95; border-radius: 8px;">Batal Ikuti</button>
+                            </form>
                             @else
-                                <form action="{{ route('follow.author', $author->id) }}" method="POST">
-                                    @method('post')
-                                    @csrf
-                                    <button type="submit" class="btn btn-sm mt-1 py-1 px-4 w-100 text-white" style="background-color: #175A95; border-radius: 8px;">Ikuti</button>
-                                </form>
+                            <form action="{{ route('follow.author', $author->id) }}" method="POST">
+                                @method('post')
+                                @csrf
+                                <button type="submit" class="btn btn-sm mt-1 py-1 px-4 w-100 text-white" style="background-color: #175A95; border-radius: 8px;">Ikuti</button>
+                            </form>
                             @endif
                         </div>
                     </div>
                     <div class="col-lg-9">
                         <div>
-                            <b>{{ $author->user->name }}</b>
+                            <p><b>{{ $author->user->name }}</b></p>
                         </div>
                         <div>
-                            <p>{{ $author->description }}</p>
+                            <p>{{ $author->description ? $author->description : "-" }}</p>
                         </div>
                         <div class="text-center px-3" style="margin-top: 10px;">
                             <div class="d-flex align-items-center justify-content-between" style="">
@@ -186,14 +218,14 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
                                         <path fill="#a0a0a0" d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm0 2h7v5h5v11H6zm2 8v2h8v-2zm0 4v2h5v-2z" />
                                     </svg>
-                                    <h5 class="mt-2 text-card" id="animation-number" style="color: #434343;">{{ $author->user->newses()->count() }}</h5>
+                                    <h5 class="mt-2 text-card" id="animation-number{{ $key }}" style="color: #434343;">{{ $author->user->newses()->count() }}</h5>
                                     <span class="mb-3 text-card" style="color: #888888; font-size:15px;">Berita</span>
                                 </div>
                                 <div class="text-center px-4 border-end border-start">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
                                         <path fill="#a0a0a0" d="M5.85 17.1q1.275-.975 2.85-1.537T12 15q1.725 0 3.3.563t2.85 1.537q.875-1.025 1.363-2.325T20 12q0-3.325-2.337-5.663T12 4Q8.675 4 6.337 6.338T4 12q0 1.475.488 2.775T5.85 17.1M12 13q-1.475 0-2.488-1.012T8.5 9.5q0-1.475 1.013-2.488T12 6q1.475 0 2.488 1.013T15.5 9.5q0 1.475-1.012 2.488T12 13m0 9q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22m0-2q1.325 0 2.5-.387t2.15-1.113q-.975-.725-2.15-1.112T12 17q-1.325 0-2.5.388T7.35 18.5q.975.725 2.15 1.113T12 20m0-9q.65 0 1.075-.425T13.5 9.5q0-.65-.425-1.075T12 8q-.65 0-1.075.425T10.5 9.5q0 .65.425 1.075T12 11m0 7.5" />
                                     </svg>
-                                    <h5 class="mt-2 text-card" id="animation-follower" style="color: #434343;">
+                                    <h5 class="mt-2 text-card" id="animation-follower{{ $key }}" style="color: #434343;">
                                         {{ $author->followers()->count() }}
                                     </h5>
                                     <span class="mb-3 text-card" style="color: #888888; font-size:15px;">Pengikut</span>
@@ -209,7 +241,7 @@
                                     $like = App\Models\NewsLike::where('news_id', $news->id)->count();
                                     }
                                     @endphp
-                                    <h5 class="mt-2 text-card" style="color: #434343;">{{ $like }}
+                                    <h5 class="mt-2 text-card" id="animation-like{{ $key }}" style="color: #434343;">{{ $like }}
                                     </h5>
                                     <span class="mb-3 text-card" style="color: #888888; font-size:15px;">Like</span>
                                 </div>
@@ -232,40 +264,55 @@
 
 @section('script')
 <script>
-    function animateValue(obj, start, end, duration) {
-        let startTimestamp = null;
-        const step = (timestamp) => {
-            if (!startTimestamp) startTimestamp = timestamp;
-            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-            obj.innerHTML = Math.floor(progress * (end - start) + start);
-            if (progress < 1) {
-                window.requestAnimationFrame(step);
-            }
-        };
-        window.requestAnimationFrame(step);
-    }
+// document.addEventListener("DOMContentLoaded", function() {
+//     function animateValue(id, start, end, duration) {
+//         const obj = document.getElementById(id);
+//         const range = end - start;
+//         let current = start;
+//         const increment = end > start ? 1 : -1;
+//         const stepTime = Math.abs(Math.floor(duration / range));
+//         const timer = setInterval(function() {
+//             current += increment;
+//             obj.innerHTML = current;
+//             if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
+//                 clearInterval(timer);
+//                 obj.innerHTML = end;
+//             }
+//         }, stepTime);
+//     }
 
-    const obj = document.getElementById("animation-number");
-    animateValue(obj, 100, 0, 5000);
-</script>
-<script>
-    
+//     const newsCount = parseInt("{{ $author->user->newses()->count() }}");
+//     const followerCount = parseInt("{{ $author->followers()->count() }}");
+//     const likeCount = parseInt("{{ $like }}");
 
-    function animateValue(obj, start, end, duration) {
-        let startTimestamp = null;
-        const step = (timestamp) => {
-            if (!startTimestamp) startTimestamp = timestamp;
-            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-            obj.innerHTML = Math.floor(progress * (end - start) + start);
-            if (progress < 1) {
-                window.requestAnimationFrame(step);
-            }
-        };
-        window.requestAnimationFrame(step);
-    }
+//     animateValue("animation-number{{ $key }}", 0, newsCount, 1000);
+//     animateValue("animation-follower{{ $key }}", 0, followerCount, 1000);
+//     animateValue("animation-like{{ $key }}", 0, likeCount, 1000);
+// });
 
-    const obj = document.getElementById("animation-follower");
-    animateValue(obj, 100, 0, 5000);
+document.addEventListener("DOMContentLoaded", function() {
+        function animateValue(id, start, end, duration) {
+            const obj = document.getElementById(id);
+            const range = end - start;
+            let current = start;
+            const increment = end > start ? 1 : -1;
+            const stepTime = Math.abs(Math.floor(duration / range));
+            const timer = setInterval(function() {
+                current += increment;
+                obj.innerHTML = current;
+                if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
+                    clearInterval(timer);
+                    obj.innerHTML = end;
+                }
+            }, stepTime);
+        }
+
+        @foreach ($authors as $key => $newsItem)
+            animateValue("animation-number{{ $key }}", 0, {{ $author->user->newses()->count() }}, 1000);
+            animateValue("animation-follower{{ $key }}", 0,  {{ $author->followers()->count() }}, 1000);
+            animateValue("animation-like{{ $key }}", 0, {{ $like }}, 1000);
+        @endforeach
+    });
 
 </script>
 @endsection

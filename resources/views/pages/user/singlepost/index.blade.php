@@ -431,10 +431,10 @@
                     <div class="comment-item">
                         <div class="comment-author-img">
                             <img src="
-                                                @if ($comment->user_id != null) {{ asset($comment->user->image ? 'storage/' . $comment->user->image : 'default.png') }}
-                                                @else
-                                                    {{ asset('default.png') }} @endif
-                                            " alt="Image">
+                                        @if ($comment->user_id != null) {{ asset($comment->user->image ? 'storage/' . $comment->user->image : 'default.png') }}
+                                        @else
+                                            {{ asset('default.png') }} @endif
+                                    " alt="Image">
                         </div>
                         <div class="comment-author-wrap">
                             <div class="comment-author-info">
@@ -457,28 +457,47 @@
                                                 <path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="3" d="M12 12h.01v.01H12zm0-7h.01v.01H12zm0 14h.01v.01H12z" />
                                             </svg>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                @php
-                                                $ip = request()->ip();
-                                                @endphp
-                                                @if (Auth::check() && $comment->user_id == auth()->user()->id || $comment->ip_address == $ip )
-                                                <li>
-                                                    <button class="btn btn-sm btn-edit-comment" data-id="{{ $comment->id }}" data-description="{{ $comment->description }}">
-                                                        Edit
-                                                    </button>
-                                                </li>
-                                                <li>
-                                                    <button class="btn btn-sm btn-comment-delete" data-id="{{ $comment->id }}">
-                                                        Hapus
-                                                    </button>
-                                                </li>
-                                                @endif
-                                                @if (Auth::check() && $comment->user_id != auth()->user()->id || $comment->ip_address != $ip )
-                                                <li>
-                                                    <button class="btn btn-sm btn-comment-report" data-id="{{ $comment->id }}">
-                                                        Laporkan
-                                                    </button>
-                                                </li>
-                                                @endif
+                                                @auth
+                                                    @if ($comment->user_id == auth()->user()->id && $comment->ip_address == $ipAddress)
+                                                    <li>
+                                                        <button class="btn btn-sm btn-edit-comment" data-id="{{ $comment->id }}" data-description="{{ $comment->description }}">
+                                                            Edit
+                                                        </button>
+                                                    </li>
+                                                    <li>
+                                                        <button class="btn btn-sm btn-comment-delete" data-id="{{ $comment->id }}">
+                                                            Hapus
+                                                        </button>
+                                                    </li>
+                                                    @endif
+                                                    @if ($comment->user_id != auth()->user()->id && $comment->ip_address != $ipAddress )
+                                                    <li>
+                                                        <button class="btn btn-sm btn-comment-report" data-id="{{ $comment->id }}">
+                                                            Laporkan
+                                                        </button>
+                                                    </li>
+                                                    @endif
+                                                @else
+                                                    @if ($comment->user_id == null && $comment->ip_address == $ipAddress)
+                                                    <li>
+                                                        <button class="btn btn-sm btn-edit-comment" data-id="{{ $comment->id }}" data-description="{{ $comment->description }}">
+                                                            Edit
+                                                        </button>
+                                                    </li>
+                                                    <li>
+                                                        <button class="btn btn-sm btn-comment-delete" data-id="{{ $comment->id }}">
+                                                            Hapus
+                                                        </button>
+                                                    </li>
+                                                    @endif
+                                                    @if (!empty($comment->user_id))
+                                                    <li>
+                                                        <button class="btn btn-sm btn-comment-report" data-id="{{ $comment->id }}">
+                                                            Laporkan
+                                                        </button>
+                                                    </li>
+                                                    @endif
+                                                @endauth
                                             </ul>
                                         </a>
                                     </div>
@@ -569,25 +588,47 @@
                                                 <path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="3" d="M12 12h.01v.01H12zm0-7h.01v.01H12zm0 14h.01v.01H12z" />
                                             </svg>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                @if (Auth::check() && $reply->user_id == auth()->user()->id || $reply->ip_address == $ip )
-                                                <li>
-                                                    <button class="btn btn-sm btn-edit-reply" data-id="{{ $reply->id }}" data-description="{{ $reply->description }}">
-                                                        Edit
-                                                    </button>
-                                                </li>
-                                                <li>
-                                                    <button class="btn btn-sm btn-comment-delete" data-id="{{ $reply->id }}">
-                                                        Hapus
-                                                    </button>
-                                                </li>
-                                                @endif
-                                                @if (Auth::check() && $reply->user_id != auth()->user()->id || $reply->ip_address != $ip )
-                                                <li>
-                                                    <button class="btn btn-sm btn-comment-report" data-id="{{ $reply->id }}">
-                                                        Laporkan
-                                                    </button>
-                                                </li>
-                                                @endif
+                                                @auth
+                                                    @if ($reply->user_id == auth()->user()->id || $reply->ip_address == $ipAddress )
+                                                    <li>
+                                                        <button class="btn btn-sm btn-edit-reply" data-id="{{ $reply->id }}" data-description="{{ $reply->description }}">
+                                                            Edit
+                                                        </button>
+                                                    </li>
+                                                    <li>
+                                                        <button class="btn btn-sm btn-comment-delete" data-id="{{ $reply->id }}">
+                                                            Hapus
+                                                        </button>
+                                                    </li>
+                                                    @endif
+                                                    @if ($reply->user_id != auth()->user()->id || $reply->ip_address != $ipAddress )
+                                                    <li>
+                                                        <button class="btn btn-sm btn-comment-report" data-id="{{ $reply->id }}">
+                                                            Laporkan
+                                                        </button>
+                                                    </li>
+                                                    @endif
+                                                @else
+                                                    @if ($reply->user_id == null || $reply->ip_address == $ipAddress )
+                                                    <li>
+                                                        <button class="btn btn-sm btn-edit-reply" data-id="{{ $reply->id }}" data-description="{{ $reply->description }}">
+                                                            Edit
+                                                        </button>
+                                                    </li>
+                                                    <li>
+                                                        <button class="btn btn-sm btn-comment-delete" data-id="{{ $reply->id }}">
+                                                            Hapus
+                                                        </button>
+                                                    </li>
+                                                    @endif
+                                                    @if (!empty($reply->user_id))
+                                                    <li>
+                                                        <button class="btn btn-sm btn-comment-report" data-id="{{ $reply->id }}">
+                                                            Laporkan
+                                                        </button>
+                                                    </li>
+                                                    @endif
+                                                @endauth
                                             </ul>
                                         </a>
                                     </div>
