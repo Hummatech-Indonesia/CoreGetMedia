@@ -20,6 +20,56 @@
 @endsection
 
 @section('content')
+
+<div class="modal fade" id="modal-create" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Paket Berlangganan</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('voucher.store.admin') }}" method="POST">
+                @method('post')
+                @csrf
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label class="form-label mt-2">Kode Voucher</label>
+                            <input class="form-control" type="text" name="code">
+                            <ul class="error-text"></ul>
+                        </div>
+                        <div class="col-lg-12">
+                            <label class="form-label mt-2">Potongan Harga</label>
+                            <input class="form-control" type="text" name="presentation">
+                            <ul class="error-text"></ul>
+                        </div>
+                        <div class="col-lg-12">
+                            <label class="form-label mt-2">Jenis Voucher</label>
+                            <select class="form-control" name="status" id="jenis-voucher">
+                                <option disabled selected>Pilih Jenis</option>
+                                <option value="unlimited">Unlimited</option>
+                                <option value="quota">Quota</option>
+                            </select>
+                            <ul class="error-text"></ul>
+                        </div>
+                        <div class="col-lg-12" id="stok-wrapper">
+                            <label class="form-label mt-2">Stok</label>
+                            <input id="update-quota" class="form-control" class="stok" type="text" name="quota">
+                            <ul class="error-text"></ul>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-rounded btn-light-danger text-danger"
+                            data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-rounded btn-light-success text-success">Tambah</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <div class="card shadow-sm position-relative overflow-hidden" style="background-color: #175A95;">
     <div class="card-body px-4 py-4">
         <div class="row justify-content-between">
@@ -58,30 +108,37 @@
 <div class="tab-content">
 
     <div id="navpill-paket" class="tab-pane fade show active" role="tabpanel">
-        <ul class="nav nav-underline" id="myTab" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" style="padding-right: 15px; padding-left: 15px;" id="active-tab"
-                    data-bs-toggle="tab" href="#active" role="tab" aria-controls="active" aria-expanded="true">
-                    <span>Semua</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" style="padding-right: 15px; padding-left: 15px;" id="link1-tab" data-bs-toggle="tab"
-                    href="#link1" role="tab" aria-controls="link1">
-                    <span>Basic</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" style="padding-right: 15px; padding-left: 15px;" id="link2-tab" data-bs-toggle="tab"
-                    href="#link2" role="tab" aria-controls="link2">
-                    <span>Premium</span>
-                </a>
-            </li>
-        </ul>
+        <div class="d-flex justify-content-between">
+            <ul class="nav nav-underline" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" style="padding-right: 15px; padding-left: 15px;" id="active-tab"
+                        data-bs-toggle="tab" href="#active" role="tab" aria-controls="active" aria-expanded="true">
+                        <span>Semua</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="padding-right: 15px; padding-left: 15px;" id="link1-tab" data-bs-toggle="tab"
+                        href="#link1" role="tab" aria-controls="link1">
+                        <span>Basic</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="padding-right: 15px; padding-left: 15px;" id="link2-tab" data-bs-toggle="tab"
+                        href="#link2" role="tab" aria-controls="link2">
+                        <span>Premium</span>
+                    </a>
+                </li>
+                <div class="d-flex ml-auto">
+                    <button class="btn btn-create text-white" style="background-color: #175A95;" data-bs-toggle="modal" data-bs-target="#modal-create">
+                        Tambah Paket
+                    </button>
+                </div>
+            </ul>
+        </div>
 
         <div class="tab-content tabcontent-border p-3" id="myTabContent">
             <div role="tabpanel" class="tab-pane fade show active" id="active" aria-labelledby="active-tab">
-                
+
                 <div class="row mx-">
                     <div class="col-md-4 mb-3">
                         <div class="card" style="background-image: url({{asset('assets/card-light.png')}}); background-size: cover; background-position: center;">
@@ -122,7 +179,7 @@
                             </div>
                         </div>
                     </div>
-            
+
                     <div class="col-md-4 mb-3">
                         <div class="card" style="background-image: url({{asset('assets/card-dark.png')}}); background-size: cover; background-position: center;">
                             <div class="card-body mx-4">
@@ -170,7 +227,7 @@
                             </div>
                         </div>
                     </div>
-            
+
                     <div class="col-md-4 mb-3">
                         <div class="card" style="background-image: url({{asset('assets/card-light.png')}}); background-size: cover; background-position: center;">
                             <div class="card-body mx-4">
@@ -213,17 +270,17 @@
                             </div>
                         </div>
                     </div>
-            
+
                 </div>
 
             </div>
-    
+
             <div class="tab-pane fade" id="link1" role="tabpanel" aria-labelledby="link1-tab">
-                
+
             </div>
-    
+
             <div class="tab-pane fade" id="link2" role="tabpanel" aria-labelledby="link2-tab">
-                
+
             </div>
         </div>
 
