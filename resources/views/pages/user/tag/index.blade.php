@@ -197,49 +197,48 @@
                             </ul>
                         </div>
                         @endif
-                    </div>
 
+                        @if ($trendings->isNotEmpty())
+                        <div class="sidebar-widget" style="width: 450px">
+                            <h3 class="sidebar-widget-title mt-4">
+                                Berita Popular
+                            </h3>
+                            @forelse ($trendings as $trending)
+                            <div class="news-card-three">
+                                <div class="news-card-img" style="height: 100px; width: 100px">
+                                    <img src="{{ asset('storage/' . $trending->image) }}" alt="Image"
+                                        class="img-popular" />
+                                </div>
+                                <div class="news-card-info">
+                                    <h3>
+                                        <a href="{{ route('news.singlepost', ['news' => $trending->slug]) }}">
+                                            {{ Illuminate\Support\Str::limit($trending->name, 45, '...') }}
+                                        </a>
+                                    </h3>
 
-                    @if ($trendings->isNotEmpty())
-                    <div class="sidebar-widget" style="width: 450px">
-                        <h3 class="sidebar-widget-title mt-4">
-                            Berita Popular
-                        </h3>
-                        @forelse ($trendings as $trending)
-                        <div class="news-card-three">
-                            <div class="news-card-img" style="height: 100px; width: 100px">
-                                <img src="{{ asset('storage/' . $trending->image) }}" alt="Image"
-                                    class="img-popular" />
-                            </div>
-                            <div class="news-card-info">
-                                <h3>
-                                    <a href="{{ route('news.singlepost', ['news' => $trending->slug]) }}">
-                                        {{ Illuminate\Support\Str::limit($trending->name, 45, '...') }}
-                                    </a>
-                                </h3>
-
-                                <ul class="news-metainfo list-style d-flex">
-                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html"
-                                            style="font-size: 15px;">{{ \Carbon\Carbon::parse($trending->created_at)->translatedFormat('d F Y') }}</a></li>
-                                    <li><i class="fi fi-rr-eye"></i><a href="news-by-dateus"
-                                            style="font-size: 15px;">{{ $trending->news_views_count }}</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        @empty
-                        <div class="col-12">
-                            <div class="d-flex justify-content-center">
-                                <div>
-                                    <img src="{{ asset('assets/img/no-data/empty.png') }}" width="150px" alt="">
+                                    <ul class="news-metainfo list-style d-flex">
+                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html"
+                                                style="font-size: 15px;">{{ \Carbon\Carbon::parse($trending->created_at)->translatedFormat('d F Y') }}</a></li>
+                                        <li><i class="fi fi-rr-eye"></i><a href="news-by-dateus"
+                                                style="font-size: 15px;">{{ $trending->news_views_count }}</a></li>
+                                    </ul>
                                 </div>
                             </div>
-                            <div class="text-center">
-                                <h5>Tidak ada data</h5>
+                            @empty
+                            <div class="col-12">
+                                <div class="d-flex justify-content-center">
+                                    <div>
+                                        <img src="{{ asset('assets/img/no-data/empty.png') }}" width="150px" alt="">
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <h5>Tidak ada data</h5>
+                                </div>
                             </div>
+                            @endforelse
                         </div>
-                        @endforelse
-                    </div>
-                    @endif
+                        @endif
+
 
                     @if ($advertisement_rights)
                     <div class="sidebar mt-3 mb-4" style="width: 450px">
@@ -270,6 +269,7 @@
                         </ul>
                     </div>
                     @endif
+                    </div>
                 </div>
             </div>
         </div>

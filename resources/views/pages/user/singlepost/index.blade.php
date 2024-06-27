@@ -269,7 +269,7 @@
 
                                                 <div class="ml-2">
                                                     @if($news->user->hasRole('admin'))
-                                                    <a class="ms-3" style="display: inline; text-decoration: none" data-toggle="tooltip" data-placement="top" title="admin" href="javascript:void(0)">{{ $news->user->name }}</a>
+                                                    <a class="ms-3" style="display: inline; text-decoration: none" data-toggle="tooltip" data-placement="top" title="admin" href="#">{{ $news->user->name }}</a>
                                                     @else
                                                     <a class="ms-4" style="display: inline; text-decoration: none" data-toggle="tooltip" data-placement="top" title="author - {{ $news->user->name }}"  href="{{ route('author.detail', ['author' => $news->user->author->id]) }}">{{ $news->user->name }}</a>
                                                     @endif
