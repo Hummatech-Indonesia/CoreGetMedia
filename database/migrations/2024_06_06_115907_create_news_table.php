@@ -21,7 +21,7 @@ return new class extends Migration
             $table->longText('description');
             $table->date('date');
             $table->boolean('pin')->default('0');
-            $table->enum('status', [NewsEnum::ACCEPTED->value, NewsEnum::REJECT->value, NewsEnum::PENDING->value])->default(NewsEnum::PENDING->value);
+            $table->enum('status', [NewsEnum::ACCEPTED->value, NewsEnum::REJECT->value, NewsEnum::PENDING->value, NewsEnum::BANNED->value])->default(NewsEnum::PENDING->value);
             $table->longText('reject_description')->nullable();
             $table->softDeletes();
             $table->timestamps();
