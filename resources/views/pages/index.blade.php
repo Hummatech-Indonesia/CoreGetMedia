@@ -247,8 +247,8 @@ $popular_down_id = $popular_down->pluck('id');
                 <div class="news-card-info">
                     <h3><a href="{{ route('news.singlepost', ['news' => $categoryPopular->slug]) }}">{{ $categoryPopular->name }}</a></h3>
                     <ul class="news-metainfo row list-style">
-                        <li class="col-sm-6 col-lg-12"><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($categoryPopular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
-                        <li class="col-sm-6 col-lg-12"><i class="fi fi-rr-eye"></i>{{ $categoryPopular->news_views_count }}x dilihat</li>
+                        <li class="col-sm-6 col-lg-6"><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($categoryPopular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
+                        <li class="col-sm-6 col-lg-6"><i class="fi fi-rr-eye"></i>{{ $categoryPopular->news_views_count }}x dilihat</li>
                     </ul>
                 </div>
             </div>
@@ -261,8 +261,8 @@ $popular_down_id = $popular_down->pluck('id');
                     <a href="{{ route('categories.show.user', $categoryPopular->newsCategories[0]->category->slug) }}" class="news-cat">{{ $categoryPopular->newsCategories[0]->category->name }}</a>
                     <h3><a href="{{ route('news.singlepost', ['news' => $categoryPopular->slug]) }}">{{ $categoryPopular->name }}</a></h3>
                     <ul class="news-metainfo row list-style">
-                        <li class="col-sm-6 col-lg-12"><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($categoryPopular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
-                        <li class="col-sm-6 col-lg-12"><i class="fi fi-rr-eye"></i>{{ $categoryPopular->news_views_count }}x dilihat</li>
+                        <li class="col-sm-6 col-lg-6"><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($categoryPopular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
+                        <li class="col-sm-6 col-lg-6"><i class="fi fi-rr-eye"></i>{{ $categoryPopular->news_views_count }}x dilihat</li>
                     </ul>
                 </div>
             </div>
@@ -284,8 +284,8 @@ $popular_down_id = $popular_down->pluck('id');
                 <div class="news-card-info">
                     <h3><a href="{{ route('news.singlepost', ['news' => $newsPin->slug]) }}">{{ $newsPin->name }}</a></h3>
                     <ul class="news-metainfo row">
-                        <li class="col-sm-6 col-lg-12"><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($newsPin->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
-                        <li class="col-sm-6 col-lg-12"><i class="fi fi-rr-eye"></i>{{ $newsPin->news_views_count }}x dilihat</li>
+                        <li class="col-sm-6 col-lg-6"><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($newsPin->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
+                        <li class="col-sm-6 col-lg-6"><i class="fi fi-rr-eye"></i>{{ $newsPin->news_views_count }}x dilihat</li>
                     </ul>
                 </div>
             </div>
@@ -299,8 +299,8 @@ $popular_down_id = $popular_down->pluck('id');
                     <h3><a href="{{ route('news.singlepost', ['news' => $newsPin->slug]) }}">{{ Illuminate\Support\Str::limit($newsPin->name, 50, '...') }}</a></h3>
                     <p>{!! Illuminate\Support\Str::limit($newsPin->description, 65, '...') !!}</p>
                     <ul class="news-metainfo row">
-                        <li class="col-sm-6 col-lg-12"><i class="fi fi-rr-calendar-minus text-start"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($newsPin->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
-                        <li class="col-sm-6 col-lg-12"><i class="fi fi-rr-eye"></i>{{ $newsPin->news_views_count }}x dilihat</li>
+                        <li class="col-sm-6 col-lg-6"><i class="fi fi-rr-calendar-minus text-start"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($newsPin->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
+                        <li class="col-sm-6 col-lg-6"><i class="fi fi-rr-eye"></i>{{ $newsPin->news_views_count }}x dilihat</li>
                     </ul>
                 </div>
             </div>
@@ -330,8 +330,8 @@ $popular_down_id = $popular_down->pluck('id');
                 <div class="news-card-info">
                     <h3><a href="{{ route('news.singlepost', ['news' => $category2Popular->slug]) }}">{{ $category2Popular->name }}</a></h3>
                     <ul class="news-metainfo row list-style">
-                        <li class="col-sm-6 col-lg-12"><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($category2Popular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
-                        <li class="col-sm-6 col-lg-12"><i class="fi fi-rr-eye"></i>{{ $category2Popular->news_views_count }}x dilihat</li>
+                        <li class="col-sm-6 col-lg-6"><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($category2Popular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
+                        <li class="col-sm-6 col-lg-6"><i class="fi fi-rr-eye"></i>{{ $category2Popular->news_views_count }}x dilihat</li>
                     </ul>
                 </div>
             </div>
@@ -344,8 +344,8 @@ $popular_down_id = $popular_down->pluck('id');
                     <a href="{{ route('categories.show.user', $category2Popular->newsCategories[0]->category->slug) }}" class="news-cat">{{ $category2Popular->newsCategories[0]->category->name }}</a>
                     <h3><a href="{{ route('news.singlepost', ['news' => $category2Popular->slug]) }}">{{ $category2Popular->name }}</a></h3>
                     <ul class="news-metainfo row list-style">
-                        <li class="col-sm-6 col-lg-12"><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($category2Popular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
-                        <li class="col-sm-6 col-lg-12"><i class="fi fi-rr-eye"></i>{{ $category2Popular->news_views_count }}x dilihat</li>
+                        <li class="col-sm-6 col-lg-6"><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($category2Popular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
+                        <li class="col-sm-6 col-lg-6"><i class="fi fi-rr-eye"></i>{{ $category2Popular->news_views_count }}x dilihat</li>
                     </ul>
                 </div>
             </div>
@@ -413,9 +413,9 @@ $popular_down_id = $popular_down->pluck('id');
                                 </span>
                                 <a href="javascript:void(0)">{{ $latest->user->name }}</a>
                             </li>
-                            <li class="col-sm-6 col-lg-12"><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($latest->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a>
+                            <li class="col-sm-6 col-lg-6"><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($latest->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a>
                             </li>
-                            <li class="col-sm-6 col-lg-12"><i class="fi fi-rr-eye"></i>{{ $latest->newsViews()->count() }}x dilihat</li>
+                            <li class="col-sm-6 col-lg-6"><i class="fi fi-rr-eye"></i>{{ $latest->newsViews()->count() }}x dilihat</li>
                         </ul>
                     </div>
                 </div>
@@ -455,9 +455,9 @@ $popular_down_id = $popular_down->pluck('id');
                                 <h3><a href="{{ route('news.singlepost', $popular->slug) }}">{{ Str::limit($popular->name, 50, '...') }}</a>
                                 </h3>
                                 <ul class="news-metainfo row list-style">
-                                    <li class="col-sm-6 col-lg-12"><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a>
+                                    <li class="col-sm-6 col-lg-6"><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a>
                                     </li>
-                                    <li class="col-sm-6 col-lg-12"><i class="fi fi-rr-eye"></i>{{ $popular->newsViews()->count() }}x
+                                    <li class="col-sm-6 col-lg-6"><i class="fi fi-rr-eye"></i>{{ $popular->newsViews()->count() }}x
                                         dilihat</li>
                                 </ul>
                             </div>
@@ -473,9 +473,9 @@ $popular_down_id = $popular_down->pluck('id');
                                 </h3>
                                 <p>{{ Str::limit($popular->name, 120, '...') }}</p>
                                 <ul class="news-metainfo row list-style">
-                                    <li class="col-sm-6 col-lg-12"><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a>
+                                    <li class="col-sm-6 col-lg-6"><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a>
                                     </li>
-                                    <li class="col-sm-6 col-lg-12"><i class="fi fi-rr-eye"></i>{{ $popular->newsViews()->count() }}x
+                                    <li class="col-sm-6 col-lg-6"><i class="fi fi-rr-eye"></i>{{ $popular->newsViews()->count() }}x
                                         dilihat</li>
                                 </ul>
                             </div>
@@ -507,9 +507,9 @@ $popular_down_id = $popular_down->pluck('id');
                                 <h3><a href="{{ route('news.singlepost', $popular->slug) }}">{{ Str::limit($popular->name, 50, '...') }}</a>
                                 </h3>
                                 <ul class="news-metainfo row list-style">
-                                    <li class="col-sm-6 col-lg-12"><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a>
+                                    <li class="col-sm-6 col-lg-6"><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a>
                                     </li>
-                                    <li class="col-sm-6 col-lg-12"><i class="fi fi-rr-eye"></i>{{ $popular->newsViews()->count() }}x
+                                    <li class="col-sm-6 col-lg-6"><i class="fi fi-rr-eye"></i>{{ $popular->newsViews()->count() }}x
                                         dilihat</li>
                                 </ul>
                             </div>
@@ -524,9 +524,9 @@ $popular_down_id = $popular_down->pluck('id');
                                 <h3><a href="{{ route('news.singlepost', $popular->slug) }}">{{ Str::limit($popular->name, 50, '...') }}</a>
                                 </h3>
                                 <ul class="news-metainfo row list-style">
-                                    <li class="col-sm-6 col-lg-12"><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a>
+                                    <li class="col-sm-6 col-lg-6"><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a>
                                     </li>
-                                    <li class="col-sm-6 col-lg-12"><i class="fi fi-rr-eye"></i>{{ $popular->newsViews()->count() }}x
+                                    <li class="col-sm-6 col-lg-6"><i class="fi fi-rr-eye"></i>{{ $popular->newsViews()->count() }}x
                                         dilihat</li>
                                 </ul>
                             </div>
@@ -635,11 +635,11 @@ $popular_down_id = $popular_down->pluck('id');
                             <h3 class="pt-2" style="font-size: 12px"><a href="javascript:void(0)">Loerm oamod oekp eocoinw xskni kopi oakoel iaklo oaidnx</a></h3>
                             <div class="news-card-info">
                                 <ul class="news-metainfo row list-style d-flex" style="margin: 0;">
-                                    <li class="col-sm-6 col-lg-12" style="font-size: 11px; margin: 0; padding:0">
+                                    <li class="col-sm-6 col-lg-6" style="font-size: 11px; margin: 0; padding:0">
                                         <i class="fi fi-rr-calendar-minus pt-1" style="font-size: 11px; margin: 0;"></i>
                                         <a href="javascript:void(0)" class="ms-3">Apr 25, 2023</a>
                                     </li>
-                                    <li class="col-sm-6 col-lg-12" style="font-size: 11px; margin: 0; padding:0">
+                                    <li class="col-sm-6 col-lg-6" style="font-size: 11px; margin: 0; padding:0">
                                         <i class="fi fi-rr-eye pt-1" style="font-size: 11px; margin: 0;"></i>
                                         <a href="" class="ms-3">129x dilihat</a>
                                     </li>
@@ -652,11 +652,11 @@ $popular_down_id = $popular_down->pluck('id');
                             <h3 class="pt-2" style="font-size: 12px"><a href="javascript:void(0)">Loerm oamod oekp eocoinw xskni kopi oakoel iaklo oaidnx</a></h3>
                             <div class="news-card-info">
                                 <ul class="news-metainfo row list-style d-flex" style="margin: 0;">
-                                    <li class="col-sm-6 col-lg-12" style="font-size: 11px; margin: 0; padding:0">
+                                    <li class="col-sm-6 col-lg-6" style="font-size: 11px; margin: 0; padding:0">
                                         <i class="fi fi-rr-calendar-minus pt-1" style="font-size: 11px; margin: 0;"></i>
                                         <a href="javascript:void(0)" class="ms-3">Apr 25, 2023</a>
                                     </li>
-                                    <li class="col-sm-6 col-lg-12" style="font-size: 11px; margin: 0; padding:0">
+                                    <li class="col-sm-6 col-lg-6" style="font-size: 11px; margin: 0; padding:0">
                                         <i class="fi fi-rr-eye pt-1" style="font-size: 11px; margin: 0;"></i>
                                         <a href="" class="ms-3">129x dilihat</a>
                                     </li>
@@ -672,11 +672,11 @@ $popular_down_id = $popular_down->pluck('id');
                             <h3 class="pt-2" style="font-size: 12px"><a href="javascript:void(0)">Loerm oamod oekp eocoinw xskni kopi oakoel iaklo oaidnx</a></h3>
                             <div class="news-card-info">
                                 <ul class="news-metainfo row list-style d-flex" style="margin: 0;">
-                                    <li class="col-sm-6 col-lg-12" style="font-size: 11px; margin: 0; padding:0">
+                                    <li class="col-sm-6 col-lg-6" style="font-size: 11px; margin: 0; padding:0">
                                         <i class="fi fi-rr-calendar-minus pt-1" style="font-size: 11px; margin: 0;"></i>
                                         <a href="javascript:void(0)" class="ms-3">Apr 25, 2023</a>
                                     </li>
-                                    <li class="col-sm-6 col-lg-12" style="font-size: 11px; margin: 0; padding:0">
+                                    <li class="col-sm-6 col-lg-6" style="font-size: 11px; margin: 0; padding:0">
                                         <i class="fi fi-rr-eye pt-1" style="font-size: 11px; margin: 0;"></i>
                                         <a href="" class="ms-3">129x dilihat</a>
                                     </li>
@@ -689,11 +689,11 @@ $popular_down_id = $popular_down->pluck('id');
                             <h3 class="pt-2" style="font-size: 12px"><a href="javascript:void(0)">Loerm oamod oekp eocoinw xskni kopi oakoel iaklo oaidnx</a></h3>
                             <div class="news-card-info">
                                 <ul class="news-metainfo row list-style d-flex" style="margin: 0;">
-                                    <li class="col-sm-6 col-lg-12" style="font-size: 11px; margin: 0; padding:0">
+                                    <li class="col-sm-6 col-lg-6" style="font-size: 11px; margin: 0; padding:0">
                                         <i class="fi fi-rr-calendar-minus pt-1" style="font-size: 11px; margin: 0;"></i>
                                         <a href="javascript:void(0)" class="ms-3">Apr 25, 2023</a>
                                     </li>
-                                    <li class="col-sm-6 col-lg-12" style="font-size: 11px; margin: 0; padding:0">
+                                    <li class="col-sm-6 col-lg-6" style="font-size: 11px; margin: 0; padding:0">
                                         <i class="fi fi-rr-eye pt-1" style="font-size: 11px; margin: 0;"></i>
                                         <a href="" class="ms-3">129x dilihat</a>
                                     </li>
