@@ -415,7 +415,7 @@ $popular_down_id = $popular_down->pluck('id');
                                     <img src="{{ asset('default.png') }}">
                                     @endif
                                 </span>
-                                <a href="javascript:void(0)">{{ $latest->user->name }}</a>
+                                <a href="{{ route('author.detail', ['author' => $latest->user->slug]) }}">{{ $latest->user->name }}</a>
                             </li>
                             <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($latest->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a>
                             </li>
