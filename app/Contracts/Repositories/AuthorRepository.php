@@ -36,7 +36,9 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
      */
     public function show(mixed $id): mixed
     {
-        //
+        return $this->model->query()
+            ->where('user_id', $id)
+            ->get();
     }
 
     /**
@@ -58,6 +60,13 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
                 $query->where('status', AuthorEnum::ACCEPTED->value);
             })
             ->paginate(10);
+    }
+
+    public function showWithSLug(string $slug): mixed
+    {
+        return $this->model->query()
+            ->where('slug', $slug)
+            ->firstOrFail();
     }
 
     /**
