@@ -217,6 +217,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->whereRelation('newsSubCategories', 'sub_category_id', $subcategory_id)
             ->where('status', NewsEnum::ACCEPTED->value)
             ->withCount('newsViews')
+            ->orderByDesc('news_views_count')
             ->latest()
             ->paginate(5);
     }
