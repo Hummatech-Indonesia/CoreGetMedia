@@ -405,7 +405,7 @@ $popular_down_id = $popular_down->pluck('id');
                     <div class="news-card-info">
                         <h3><a href="{{ route('news.singlepost', ['news' => $latest->slug]) }}">{{ Str::limit($latest->name, 150, '...') }}</a>
                         </h3>
-                        <p>{!! Str::limit(strip_tags($latest->description), 250) !!}</p>
+                        <p>{!! Str::limit(strip_tags($latest->description), 160) !!}</p>
 
                         <ul class="news-metainfo d-flex list-style">
                             <li class="author">
