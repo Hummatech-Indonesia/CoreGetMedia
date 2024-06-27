@@ -106,8 +106,8 @@
 
     .breadcrumb-wrap {
         padding: 80px 0 74px;
-        /* background-color: var(--bgColor); */
-        background-image: url("assets/img/banner-background.jpg");
+        /* background-color: var(--bgColor); 223*/
+        background-image: url("assets/img/list-author-bg.png");
     }
 
 </style>

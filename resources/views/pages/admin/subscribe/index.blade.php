@@ -141,7 +141,7 @@
 
                 <div class="row mx-">
                     <div class="col-md-4 mb-3">
-                        <div class="card" style="background-image: url({{asset('assets/card-light.png')}}); background-size: cover; background-position: center;">
+                        <div class="card" style="background-image: url({{asset('assets/img/frame-subscribe.png')}}); background-size: cover; background-position: center;">
                             <div class="card-body mx-4">
                                     <span class="badge bg-light-primary fw-semibold" style="color: #175A95; font-size: 25px;">Basic</span>
                                 <div class="mt-3">
@@ -229,7 +229,7 @@
                     </div>
 
                     <div class="col-md-4 mb-3">
-                        <div class="card" style="background-image: url({{asset('assets/card-light.png')}}); background-size: cover; background-position: center;">
+                        <div class="card" style="background-image: url({{asset('assets/img/frame-subscribe.png')}}); background-size: cover; background-position: center;">
                             <div class="card-body mx-4">
                                 <h4>
                                     <span class="badge" style="background-color: #EAF8FF; color: #175A95;">Basic</span>
