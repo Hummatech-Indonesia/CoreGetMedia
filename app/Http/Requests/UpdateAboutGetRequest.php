@@ -22,7 +22,7 @@ class UpdateAboutGetRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'image' => 'required',
+            'image' => 'nullable',
             'slogan' => 'required',
             'email' => 'required',
             'phone_number' => 'required',

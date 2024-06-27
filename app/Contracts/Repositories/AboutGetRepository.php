@@ -48,7 +48,8 @@ class AboutGetRepository extends BaseRepository implements AboutGetInterface
     public function get(): mixed
     {
         return $this->model->query()
-            ->get();
+            ->get()
+            ->first();  
     }
 
     /**
