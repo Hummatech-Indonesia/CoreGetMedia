@@ -7,6 +7,7 @@ use App\Contracts\Interfaces\NewsInterface;
 use App\Models\Faq;
 use App\Enums\NewsEnum;
 use App\Models\News;
+use App\Models\User;
 
 class NewsRepository extends BaseRepository implements NewsInterface
 {
@@ -196,10 +197,12 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->latest();
     }
 
-    public function tagLatest($tag_id, $paginate, $id) : mixed
+    public function tagLatest($tag_id, $paginate, $id, $status) : mixed
     {
         return $this->model->query()
-            ->whereNotIn('id', $id)
+            ->when($status == 'notall', function($q) use ($id) {
+                $q->whereNotIn('id', $id);
+            })
             ->whereRelation('newsTags', 'tags_id', $tag_id)
             ->where('status', NewsEnum::ACCEPTED->value)
             ->withCount('newsViews')

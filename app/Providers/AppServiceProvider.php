@@ -19,6 +19,7 @@ use App\Contracts\Interfaces\NewsReportInterface;
 use App\Contracts\Interfaces\NewsSubCategoryInterface;
 use App\Contracts\Interfaces\NewsTagInterface;
 use App\Contracts\Interfaces\NewsViewInterface;
+use App\Contracts\Interfaces\PackageFeaturesInterface;
 use App\Contracts\Interfaces\PackageInteface;
 use App\Contracts\Interfaces\PopularInterface;
 use App\Contracts\Interfaces\PositionAdvertisementInterface;
@@ -45,6 +46,8 @@ use App\Contracts\Repositories\NewsRepository;
 use App\Contracts\Repositories\NewsSubCategoryRepository;
 use App\Contracts\Repositories\NewsTagRepository;
 use App\Contracts\Repositories\NewsViewRepository;
+use App\Contracts\Repositories\PackageFeaturesRepository;
+use App\Contracts\Repositories\PackageRepository;
 use App\Contracts\Repositories\PopularRepository;
 use App\Contracts\Repositories\PositionAdvertisementReporitory;
 use App\Contracts\Repositories\RegisterRepository;
@@ -85,6 +88,8 @@ class AppServiceProvider extends ServiceProvider
         AboutGetInterface::class => AboutGetRepository::class,
         PositionAdvertisementInterface::class => PositionAdvertisementReporitory::class,
         VisitorInterface::class => VisitorRepository::class,
+        PackageInteface::class => PackageRepository::class,
+        PackageFeaturesInterface::class => PackageFeaturesRepository::class
     ];
 
     /**
