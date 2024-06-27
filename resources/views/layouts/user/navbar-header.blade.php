@@ -104,9 +104,8 @@
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
                         <a href="/" class="nav-link" style="{{ request()->routeIs('home.index') ? 'color: #E93314;' : '' }}"> Beranda </a>
-
-                        {{-- <a href="{{ route('home.index') }}" class="nav-link {{ request()->routeIs('home.index') ? 'active' : '' }}">Home</a> --}}
                     </li>
+
                     @foreach ($categories as $category)
                         @php
                             $isActiveCategory = request()->routeIs('categories.show.user') && request()->route('category') == $category->slug;
@@ -160,7 +159,7 @@
                                 </ul>
                             @endif
                         </li>
-                    @endforeach
+                        @endforeach
                 </ul>
 
 

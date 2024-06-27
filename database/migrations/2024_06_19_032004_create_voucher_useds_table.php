@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('voucher_useds', function (Blueprint $table) {
             $table->id();
+            $table->foreignUuid('advertisement_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignUuid('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('voucherr_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->timestamps();   
+            $table->timestamps();
         });
     }
 
