@@ -3,12 +3,6 @@
 
 @section('style')
 <style>
-    @media (min-width: 768px) {
-        .icon-eye {
-            margin-top: 12px;
-        }
-    }
-
     .tag-list li a:hover {
         background-color: #175A95;
         color: var(--whiteColor);
@@ -31,6 +25,8 @@
         color: var(--whiteColor);
     }
 
+</style>
+<style>
     .breadcrumb-menu li:after {
         color: #000;
     }
@@ -237,5 +233,5 @@
         </div>
     </div>
 </div>
-</div>
+
 @endsection
