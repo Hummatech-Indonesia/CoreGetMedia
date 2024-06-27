@@ -255,7 +255,7 @@
                                             <li class="author d-flex align-items-center">
                                                 <span class="author-img">
                                                     @if(isset($news->user) && isset($news->user->author))
-                                                        <a href="{{ route('author.detail', ['slug' => $news->user->slug]) }}">
+                                                        <a href="{{ route('author.detail', ['author' => $news->user->slug]) }}">
                                                             <img src="{{ asset($news->user->photo ? 'storage/' . $news->user->photo : 'default.png') }}"
                                                                 alt="Image" width="40px" height="30px"
                                                                 style="border-radius: 50%; object-fit:cover;" />
@@ -271,7 +271,7 @@
                                                     @if($news->user->hasRole('admin'))
                                                     <a class="ms-3" style="display: inline; text-decoration: none" data-toggle="tooltip" data-placement="top" title="admin" href="#">{{ $news->user->name }}</a>
                                                     @else
-                                                    <a class="ms-4" style="display: inline; text-decoration: none" data-toggle="tooltip" data-placement="top" title="author - {{ $news->user->name }}"  href="{{ route('author.detail', ['slug' => $news->user->slug]) }}">{{ $news->user->name }}</a>
+                                                    <a class="ms-4" style="display: inline; text-decoration: none" data-toggle="tooltip" data-placement="top" title="author - {{ $news->user->name }}"  href="{{ route('author.detail', ['author' => $news->user->slug]) }}">{{ $news->user->name }}</a>
                                                     @endif
                                                 </div>
                                             </li>
