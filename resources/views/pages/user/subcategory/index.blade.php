@@ -90,7 +90,6 @@
                 @endforelse
 
 
-
                 <div class="mb-5">
                     @php
                     $popular_id = $newsPopulars->where('news_views_count', '>', 0)->pluck('id');

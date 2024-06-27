@@ -88,7 +88,7 @@
                 <div class="mb-5">
                     @php
                     $trending_id = $trendings->take(4)->where('news_views_count', '>', 0)->pluck('id');
-                    $latest_news = $latests->whereNotIn('id', $trending_id)->paginate(5);
+                    $latest_news = $latests->whereNotIn('id', $trending_id)->paginate(4);
                     @endphp
 
                     @if($latest_news->isNotEmpty())
@@ -117,13 +117,12 @@
                             </h3>
                             <p>{!! Illuminate\Support\Str::limit($new->description, $limit = 70, $end = '...') !!}</p>
                             <span class="news-metainfo">
-                                <div class=" d-flex gap-3">
-
-                                    <div>
+                                <div class=" d-flex gap-3" style="display: flex">
+                                    <div class="d-inline">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g fill="none" stroke="#e93314" stroke-linecap="round" stroke-width="1.5"><path stroke-linejoin="round" d="M17 4.625H7a4 4 0 0 0-4 4v8.75a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4v-8.75a4 4 0 0 0-4-4m-14 5h18m-4-7v4m-10-4v4"/><path stroke-miterlimit="10" d="M9.5 14.989h5"/></g></svg>
                                         <a href="javascript:void(0)">{{ \Carbon\Carbon::parse($new->created_at)->translatedFormat('d F Y') }}</a>
                                     </div>
-                                    <div>
+                                    <div class="d-inline ms-3">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256"><path fill="#e93314" d="M247.31 124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57 61.26 162.88 48 128 48S61.43 61.26 36.34 86.35C17.51 105.18 9 124 8.69 124.76a8 8 0 0 0 0 6.5c.35.79 8.82 19.57 27.65 38.4C61.43 194.74 93.12 208 128 208s66.57-13.26 91.66-38.34c18.83-18.83 27.3-37.61 27.65-38.4a8 8 0 0 0 0-6.5M128 192c-30.78 0-57.67-11.19-79.93-33.25A133.5 133.5 0 0 1 25 128a133.3 133.3 0 0 1 23.07-30.75C70.33 75.19 97.22 64 128 64s57.67 11.19 79.93 33.25A133.5 133.5 0 0 1 231.05 128c-7.21 13.46-38.62 64-103.05 64m0-112a48 48 0 1 0 48 48a48.05 48.05 0 0 0-48-48m0 80a32 32 0 1 1 32-32a32 32 0 0 1-32 32"/></svg>
                                         <a href="javascript:void(0)">{{ $new->news_views_count ? $new->news_views_count : '0' }}x
                                             dilihat</a>
@@ -184,24 +183,22 @@
                             Berita Populer
                         </h3>
                         @forelse ($trending_news as $trending)
-                        @if ($trending->news_views_count > 0)
-                        <div class="news-card-three">
-                            <div class="news-card-img">
-                                <img src="{{ asset('storage/' . $trending->image) }}" class="img-popular" alt="Image" />
+                            <div class="news-card-three">
+                                <div class="news-card-img">
+                                    <img src="{{ asset('storage/' . $trending->image) }}" class="img-popular" alt="Image" />
+                                </div>
+                                <div class="news-card-info">
+                                    <h3><a href="{{ route('news.singlepost', ['news' => $trending->slug]) }}">{!!
+                                            Illuminate\Support\Str::limit($trending->name, $limit = 45, $end = '...')
+                                            !!}</a></h3>
+                                    <ul class="news-metainfo list-style d-flex">
+                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)" style="font-size: 14px;">{{ \Carbon\Carbon::parse($trending->date)->translatedFormat('d F Y') }}</a>
+                                        </li>
+                                        <li><i class="fi fi-rr-eye"></i><a href="javascript:void(0)" style="font-size: 14px;">{{ $trending->news_views_count ? $trending->news_views_count : '0' }}x
+                                                dilihat</a></li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="news-card-info">
-                                <h3><a href="{{ route('news.singlepost', ['news' => $trending->slug]) }}">{!!
-                                        Illuminate\Support\Str::limit($trending->name, $limit = 45, $end = '...')
-                                        !!}</a></h3>
-                                <ul class="news-metainfo list-style d-flex">
-                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)" style="font-size: 14px;">{{ \Carbon\Carbon::parse($trending->date)->translatedFormat('d F Y') }}</a>
-                                    </li>
-                                    <li><i class="fi fi-rr-eye"></i><a href="javascript:void(0)" style="font-size: 14px;">{{ $trending->news_views_count ? $trending->news_views_count : '0' }}x
-                                            dilihat</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        @endif
                         @empty
                         <div class="col-12">
                             <div class="d-flex justify-content-center">
