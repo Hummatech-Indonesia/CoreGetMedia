@@ -111,7 +111,7 @@
                             <h3 class="sidebar-widget-title">Tag Populer</h3>
                             <ul class="tag-list list-style">
                                 @forelse ($popularTags as $popularTag)
-                                <li><a href="{{ route('list-tag.user') }}">{{ $popularTag->name }}</a></li>
+                                <li><a href="{{ route('news-tag-list.user', ['tag' => $popularTag->slug]) }}">{{ $popularTag->name }}</a></li>
                                 @empty
                                 @endforelse
                             </ul>

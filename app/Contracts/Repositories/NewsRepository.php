@@ -104,7 +104,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
                 $q->take(1);
             })
             ->when($query == 'notop', function($q){
-                $q->take(7);
+                $q->take(4);
             })
             ->where('status', NewsEnum::ACCEPTED->value)
             ->latest()
@@ -306,7 +306,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
     }
 
     public function whereDetailAuthor($id): mixed
-    {   
+    {
         return $this->model->query()
             ->where('user_id', $id)
             ->withCount('newsViews')

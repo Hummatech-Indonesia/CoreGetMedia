@@ -145,12 +145,7 @@
 
 
                 <div class="mb-5">
-                    @php
-                    $popular_id = $newsPopulars->where('news_views_count', '>', 0)->pluck('id');
-                    $news_down = $news->whereNotIn('id', $popular_id);
-                    @endphp
-
-                    @if($news_down->isNotEmpty())
+                    @if($news->isNotEmpty())
                     <div class="d-flex justify-content-between mb-3 mt-3">
                         <h3>Terbaru</h3>
                         <a href="{{ route('all-subcategory-list.user', ['subcategory' => $subcategory->slug]) }}">
@@ -165,7 +160,7 @@
                     </div>
                     @endif
 
-                    @forelse ($news_down as $data)
+                    @forelse ($news as $data)
                     <div class="news-card-five">
                         <div class="news-card-img">
                             <a href="{{ route('news.singlepost', ['news' => $data->slug]) }}">
@@ -183,7 +178,7 @@
                             <ul class="news-metainfo list-style">
                                 <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">{{ \Carbon\Carbon::parse($data->date)->translatedFormat('d F Y') }}</a>
                                 </li>
-                                <li><i class="fi fi-rr-eye"></i><a href="news-by-dateus">{{ $data->news_views_count ? $item->news_views_count : '0' }}x
+                                <li><i class="fi fi-rr-eye"></i><a href="news-by-dateus">{{ $data->news_views_count }}x
                                         dilihat</a></li>
                             </ul>
                         </div>

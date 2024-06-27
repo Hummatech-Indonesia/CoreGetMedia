@@ -58,7 +58,7 @@ class NewsSubCategoryController extends Controller
         $subCategories = $this->subCategories->get();
         $newsTop = $this->news->whereSubCategory($subcategory_id, 'top');
         $idTop = $newsTop->pluck('id');
-        $newsPopulars = $this->news->whereSubCategory($subcategory_id, 'popular');
+        $newsPopulars = $this->news->whereSubCategory($subcategory_id, 'notop');
         $idPop = $newsPopulars->pluck('id');
         $ids = $idTop->merge($idPop);
 
@@ -72,8 +72,7 @@ class NewsSubCategoryController extends Controller
         $advertisement_unders = $this->advertisements->wherePosition(AdvertisementEnum::SUBCATEGORY, 'under');
         $advertisement_mids = $this->advertisements->wherePosition(AdvertisementEnum::SUBCATEGORY, 'mid');
 
-        return view(
-            'pages.user.subcategory.index',
+        return view('pages.user.subcategory.index',
             compact(
                 'categories',
                 'subCategories',
@@ -103,7 +102,7 @@ class NewsSubCategoryController extends Controller
         $categories = $this->category->get();
         $subCategories = $this->subCategories->get();
         $query = $request->input('search');
-        $newsPopulars = $this->news->whereSubCategory($subCategory_id, 'popular');
+        $newsPopulars = $this->news->whereSubCategory($subCategory_id, 'notop');
         $news = $this->news->whereAllSubCategory($subCategory_id);
         $popularCategory = $this->category->showWithCount();
         $popularTags = $this->tags->showWithCount();
