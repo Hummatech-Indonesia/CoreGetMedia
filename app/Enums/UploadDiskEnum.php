@@ -20,4 +20,6 @@ enum UploadDiskEnum: string
 
     //logo
     case LOGO = 'logo';
+
+    case PROOF = 'proof';
 }
