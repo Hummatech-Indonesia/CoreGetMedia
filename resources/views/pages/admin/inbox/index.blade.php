@@ -295,8 +295,8 @@
                 </div>
             </div>
             <div class="modal-footer w-100 d-flex justify-content-between">
-                <a href="" class=" btn btn-sm btn-light-primary text-primary text-start">Download bukti</a>
-                <div class=" gap-4">
+                <a id="download-proof" class=" btn btn-sm btn-light-primary text-primary text-start">Download bukti</a>
+                <div class="gap-4">
                     <a id="url-article" class=" btn btn-sm btn-light-success text-success" target="_blank">Lihat artikel</a>
                     <button type="button" class=" btn btn-sm btn-light-danger text-danger" data-bs-dismiss="modal">Tutup</button>
                 </div>
@@ -452,6 +452,7 @@
             var button = $(this).data('button');
 
             var newsImage = $(this).data('news-image');
+            var newsImageName = 'bukti-laporan-'+nameUser+'.png';
             var newsCategory = $(this).data('news-category');
             var newsName = $(this).data('news-name');
             var newsDate = $(this).data('news-date');
@@ -472,6 +473,8 @@
             $('#news-date').text(newsDate);
             $('#news-view').text(newsView);
             $('#url-article').attr('href', newsUrl);
+            $('#download-proof').attr('href', newsImage);
+            $('#download-proof').attr('download', newsImageName);
             
             $('#detail-article-btn').html(button);
 
