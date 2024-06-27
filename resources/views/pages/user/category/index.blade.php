@@ -60,7 +60,7 @@
 <div class="sports-wrap ptb-100">
     <div class="container">
         <div class="d-flex side-responsive">
-            <div class="col-lg-8 me-4 col-md-12 col-lg-12">
+            <div class="col-lg-8 me-4 col-md-12 col-sm-12">
                 @forelse ($newsTop as $item)
                 <div class="news-card-four" style="height: 550px;">
                     <div class="news-card-img">
@@ -147,7 +147,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-12 col-lg-12">
+            <div class="col-lg-4 col-md-12 col-sm-12">
                 <div class="sidebar">
                     @if($CategoryPopulars->isNotEmpty())
                     <div class="sidebar-widget" style="width: 450px">
