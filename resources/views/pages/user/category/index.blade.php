@@ -83,15 +83,7 @@
                 @empty
                 @endforelse
 
-                @if ($advertisement_mids)
-                <div>
-                    <img src="{{asset($advertisement_mid && $advertisement_mid->image != null ? 'storage/'.$advertisement_mid->image : "CONTOHIKLAN.png")}}" width="100%" height="181px" style="object-fit: cover" alt="" alt="...">
-                </div>
-                @else
-                <div class="bg_gray" style="width: 100%; height: 181px;">
-                    <p class="text-center align-middle" style="line-height: 181px;">Advertisement</p>
-                </div>
-                @endif
+                
 
                 <div class="mb-5">
                     @php
@@ -123,7 +115,7 @@
                                     Illuminate\Support\Str::limit($new->name, $limit = 170, $end = '...') !!}
                                 </a>
                             </h3>
-                            <p>{!! Illuminate\Support\Str::limit($new->description, $limit = 150, $end = '...') !!}</p>
+                            <p>{!! Illuminate\Support\Str::limit($new->description, $limit = 60, $end = '...') !!}</p>
                             <ul class="news-metainfo list-style">
                                 <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($new->created_at)->translatedFormat('d F Y') }}</a>
                                 </li>
@@ -145,7 +137,15 @@
                     </div>
                     @endforelse
                 </div>
-
+                @if ($advertisement_mids)
+                <div>
+                    <img src="{{asset($advertisement_mid && $advertisement_mid->image != null ? 'storage/'.$advertisement_mid->image : "CONTOHIKLAN.png")}}" width="100%" height="181px" style="object-fit: cover" alt="" alt="...">
+                </div>
+                @else
+                <div class="bg_gray" style="width: 100%; height: 181px;">
+                    <p class="text-center align-middle" style="line-height: 181px;">Advertisement</p>
+                </div>
+                @endif
                 <div>
                     <x-paginator :paginator="$latest_news" />
                 </div>
