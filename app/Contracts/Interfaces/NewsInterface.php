@@ -39,4 +39,5 @@ interface NewsInterface extends GetInterface, StoreInterface, UpdateInterface, S
     public function showWithTrash(mixed $id): mixed;
     public function accepted();
     public function NewsChart(mixed $year, mixed $month): mixed;
+    public function whereDetailAuthor($id) : mixed;
 }
