@@ -149,7 +149,7 @@ class NewsController extends Controller
     {
         $data['status'] = NewsEnum::ACCEPTED->value;
         $this->news->update($news->id, $data);
-        return redirect('/news-list')->with('success', 'Berhasil menerima berita');
+        return redirect('/confirm-news')->with('success', 'Berhasil menerima berita');
     }
 
     public function reject_news(Request $request, News $news)
@@ -158,7 +158,7 @@ class NewsController extends Controller
             'status' => NewsEnum::REJECT->value,
             'reject_description' => $request->reject_description,
         ]);
-        return redirect('/news-list')->with('success', 'Berhasil menolak berita');
+        return redirect('/confirm-news')->with('success', 'Berhasil menolak berita');
     }
 
     /**
