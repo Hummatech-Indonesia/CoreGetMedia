@@ -69,7 +69,7 @@
 
     .news-card-info h3 {
         font-size: 1.2em;
-        text-align: center;
+        text-align: left;
     }
 
     .news-metainfo {
@@ -82,7 +82,7 @@
     }
 
     .sidebar {
-        width: 100%; 
+        width: 100%;
     }
 
     .sidebar-widget-title {
