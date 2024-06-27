@@ -111,10 +111,9 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->get();
     }
 
-    public function whereAllSubCategory($id, $not_id): mixed
+    public function whereAllSubCategory($id): mixed
     {
         return $this->model->query()
-            ->whereNotIn('id', $not_id)
             ->where('status', NewsEnum::ACCEPTED->value)
             ->whereRelation('newsSubCategories', 'sub_category_id', $id)
             ->withCount('newsViews')

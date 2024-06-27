@@ -104,8 +104,7 @@ class NewsSubCategoryController extends Controller
         $subCategories = $this->subCategories->get();
         $query = $request->input('search');
         $newsPopulars = $this->news->whereSubCategory($subCategory_id, 'popular');
-        $popular_id = $newsPopulars->pluck('id');
-        $news = $this->news->whereAllSubCategory($subCategory_id, $popular_id);
+        $news = $this->news->whereAllSubCategory($subCategory_id);
         $popularCategory = $this->category->showWithCount();
         $popularTags = $this->tags->showWithCount();
         $newsTop = $this->news->whereSubCategory($subCategory_id, 'top');
