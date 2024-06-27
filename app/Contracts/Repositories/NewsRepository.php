@@ -104,7 +104,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
                 $q->take(1);
             })
             ->when($query == 'notop', function($q){
-                $q->take(3);
+                $q->take(4);
             })
             ->where('status', NewsEnum::ACCEPTED->value)
             ->latest()
