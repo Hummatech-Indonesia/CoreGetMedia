@@ -90,6 +90,75 @@
     }
 
 </style>
+
+<style>
+    .carousel-control-next, .carousel-control-prev {
+        width: 50px;
+        height: 50px;
+        background-color: rgba(0, 0, 0, 0.5);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .carousel-control-next {
+        right: 0;
+    }
+
+    .carousel-control-prev {
+        left: 0;
+    }
+
+    .carousel-control-next-icon, .carousel-control-prev-icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .d-flex.position-relative {
+        position: relative;
+    }
+
+    .news-item {
+        flex: 1;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
+
+    .news-item img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+    }
+
+    .news-metainfo {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    .news-metainfo.d-flex {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .news-metainfo li {
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+    }
+
+    .news-metainfo li a {
+        text-decoration: none;
+        color: inherit;
+        margin-left: 0px;
+    }
+
+</style>
+
 @endsection
 
 {{-- @if ($news_latest->count() != 0)
@@ -484,6 +553,95 @@ $popular_down_id = $popular_down->pluck('id');
         </div>
         <div class="col-xl-3">
             <div class="sidebar">
+
+                <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
+                    <div class="carousel-inner mb-3">
+                        <div class="carousel-item active">
+                            <div class="d-flex">
+                                <div>
+                                    <img src="{{ asset('assets/img/news/news-2.webp') }}" class="d-block w-100" alt="...">
+                                    <h3 class="pt-2" style="font-size: 12px"><a href="javascript:void(0)">Loerm oamod oekp eocoinw xskni kopi oakoel iaklo oaidnx</a></h3>
+                                    <div class="news-card-info">
+                                        <ul class="news-metainfo list-style d-flex" style="margin: 0;">
+                                            <li style="font-size: 11px; margin: 0; padding:0">
+                                                <i class="fi fi-rr-calendar-minus pt-1" style="font-size: 11px; margin: 0;"></i>
+                                                <a href="javascript:void(0)" class="ms-3">Apr 25, 2023</a>
+                                            </li>
+                                            <li style="font-size: 11px; margin: 0; padding:0">
+                                                <i class="fi fi-rr-eye pt-1" style="font-size: 11px; margin: 0;"></i>
+                                                <a href="" class="ms-3">129x dilihat</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                                <div class="ms-3">
+                                    <img src="{{ asset('assets/img/news/news-2.webp') }}" class="d-block w-100" alt="...">
+                                    <h3 class="pt-2" style="font-size: 12px"><a href="javascript:void(0)">Loerm oamod oekp eocoinw xskni kopi oakoel iaklo oaidnx</a></h3>
+                                    <div class="news-card-info">
+                                        <ul class="news-metainfo list-style d-flex" style="margin: 0;">
+                                            <li style="font-size: 11px; margin: 0; padding:0">
+                                                <i class="fi fi-rr-calendar-minus pt-1" style="font-size: 11px; margin: 0;"></i>
+                                                <a href="javascript:void(0)" class="ms-3">Apr 25, 2023</a>
+                                            </li>
+                                            <li style="font-size: 11px; margin: 0; padding:0">
+                                                <i class="fi fi-rr-eye pt-1" style="font-size: 11px; margin: 0;"></i>
+                                                <a href="" class="ms-3">129x dilihat</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="d-flex">
+                                <div>
+                                    <img src="{{ asset('assets/img/news/news-2.webp') }}" class="d-block w-100" alt="...">
+                                    <h3 class="pt-2" style="font-size: 12px"><a href="javascript:void(0)">Loerm oamod oekp eocoinw xskni kopi oakoel iaklo oaidnx</a></h3>
+                                    <div class="news-card-info">
+                                        <ul class="news-metainfo list-style d-flex" style="margin: 0;">
+                                            <li style="font-size: 11px; margin: 0; padding:0">
+                                                <i class="fi fi-rr-calendar-minus pt-1" style="font-size: 11px; margin: 0;"></i>
+                                                <a href="javascript:void(0)" class="ms-3">Apr 25, 2023</a>
+                                            </li>
+                                            <li style="font-size: 11px; margin: 0; padding:0">
+                                                <i class="fi fi-rr-eye pt-1" style="font-size: 11px; margin: 0;"></i>
+                                                <a href="" class="ms-3">129x dilihat</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                                <div class="ms-3">
+                                    <img src="{{ asset('assets/img/news/news-2.webp') }}" class="d-block w-100" alt="...">
+                                    <h3 class="pt-2" style="font-size: 12px"><a href="javascript:void(0)">Loerm oamod oekp eocoinw xskni kopi oakoel iaklo oaidnx</a></h3>
+                                    <div class="news-card-info">
+                                        <ul class="news-metainfo list-style d-flex" style="margin: 0;">
+                                            <li style="font-size: 11px; margin: 0; padding:0">
+                                                <i class="fi fi-rr-calendar-minus pt-1" style="font-size: 11px; margin: 0;"></i>
+                                                <a href="javascript:void(0)" class="ms-3">Apr 25, 2023</a>
+                                            </li>
+                                            <li style="font-size: 11px; margin: 0; padding:0">
+                                                <i class="fi fi-rr-eye pt-1" style="font-size: 11px; margin: 0;"></i>
+                                                <a href="" class="ms-3">129x dilihat</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+
+
                 @if($popularCategories->isNotEmpty())
                 <div class="sidebar-widget">
                     <h3 class="sidebar-widget-title">Kategori Populer</h3>
