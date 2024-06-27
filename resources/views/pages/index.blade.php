@@ -200,6 +200,7 @@
                             <h3><a href="{{ route('news.singlepost', ['news' => $popular->slug]) }}">{{ Str::limit($popular->name, 50, '...') }}</a>
                             </h3>
                             <ul class="news-metainfo d-flex list-style">
+                                <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
                                 <li><i class="fi fi-rr-eye"></i>{{ $popular->news_views_count }}x dilihat
                                 </li>
                             </ul>
