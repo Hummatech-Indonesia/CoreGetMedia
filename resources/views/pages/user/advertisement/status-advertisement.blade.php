@@ -26,7 +26,7 @@
             </div>
             <!-- Modal body -->
             <form id="form-celcel" method="post">
-                @method('put')
+                @method('DELETE')
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">
@@ -265,7 +265,7 @@
 
                                 @if ($all_advertisement->status == 'accepted' && $all_advertisement->feed == 'notpaid')
                                 <div class="d-flex justify-content-end">
-                                    <button type="button" id="btn-cencel" data-id="{{ $all_advertisement->id }}" class="btn m-1 mt-5 btn-cencel text-white px-4 py-1" style="background-color: #C94F4F;">
+                                    <button type="button" id="btn-delete" data-id="{{ $all_advertisement->id }}" class="btn m-1 mt-5 btn-delete text-white px-4 py-1" style="background-color: #C94F4F;">
                                         Batalkan
                                         <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24">
                                             <path fill="#ffffff" d="m12 12.708l-5.246 5.246q-.14.14-.344.15t-.364-.15t-.16-.354t.16-.354L11.292 12L6.046 6.754q-.14-.14-.15-.344t.15-.364t.354-.16t.354.16L12 11.292l5.246-5.246q.14-.14.345-.15q.203-.01.363.15t.16.354t-.16.354L12.708 12l5.246 5.246q.14.14.15.345q.01.203-.15.363t-.354.16t-.354-.16z" /></svg>
@@ -737,7 +737,7 @@
 
         $('.btn-cencel').on('click', function() {
             var id = $(this).data('id');
-            $('#form-cencel').attr('action', '/cencel-advertisement/' + id);
+            $('#form-cencel').attr('action', '/delete-advertisement/' + id);
             $('#modal-cencel').modal('show');
         });
 

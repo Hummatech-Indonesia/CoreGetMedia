@@ -193,9 +193,10 @@ class AdvertisementController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Advertisement $advertisement)
+    public function destroy($advertisement)
     {
-        $this->advertisement->delete($advertisement->id);
+        $findDraft = $this->advertisement->withtrash($advertisement);
+        $findDraft->forceDelete();
         return back()->with('success', 'Berhasil menghapus iklan');
     }
 
