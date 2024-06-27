@@ -626,7 +626,7 @@ $popular_down_id = $popular_down->pluck('id');
         </div>
         @endif
 
-        <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
+        {{-- <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
             <div class="carousel-inner mb-3">
                 <div class="carousel-item active">
                     <div class="d-flex">
@@ -711,21 +711,16 @@ $popular_down_id = $popular_down->pluck('id');
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
-        </div>
+        </div> --}}
 
         @if ($advertisement_rights)
-        <div class="sidebar">
-            <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <img src="{{ asset('assets/img/news/news-13.webp') }}" width="100%" height="473px" style="object-fit: cover" alt="">
-                    @foreach ($advertisement_rights as $advertisement_right)
-                    <div class="carousel-item active" data-bs-interval="3000">
-                        <img src="{{ asset($advertisement_right->image ? 'storage/'.$advertisement_right->image : 'CONTOHIKLAN.png') }}" class="d-block" width="100%" height="473px" style="object-fit: cover" alt="...">
-                    </div>
-                    @endforeach
-                </div>
+            <div class="sidebar">
+                <img src="{{ asset($advertisement_rights->image ? 'storage/'.$advertisement_rights->image : 'CONTOHIKLAN.png') }}" width="100%" height="473px" style="object-fit: cover" alt="...">
             </div>
-        </div>
+        @else
+            <div class="sidebar-widget d-flex justify-content-center align-items-center" style="height: 473px">
+                <p style="color: #22222278">Advertisement</p>
+            </div>
         @endif
 
 

@@ -59,7 +59,7 @@
 
 <div class="sports-wrap ptb-100">
     <div class="container">
-        <div class="d-flex side-responsive">
+        <div class="side-responsive d-lg-flex flex-lg-row flex-sm-column flex-md-column">
             <div class="col-lg-8 me-4 col-md-12 col-sm-12">
                 @forelse ($newsTop as $item)
                 <div class="news-card-four" style="height: 550px;">
