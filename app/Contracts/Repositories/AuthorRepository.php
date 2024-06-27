@@ -36,7 +36,9 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
      */
     public function show(mixed $id): mixed
     {
-        //
+        return $this->model->query()
+            ->where('user_id', $id)
+            ->get();
     }
 
     /**
