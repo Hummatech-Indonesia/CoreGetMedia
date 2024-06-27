@@ -24,7 +24,9 @@ class AboutGetController extends Controller
      */
     public function index()
     {
-        return view('pages.admin.about.index');
+        $data = $this->aboutGet->get();
+        // dd($data);
+        return view('pages.admin.about.index', compact('data'));
     }
 
     /**
@@ -64,10 +66,10 @@ class AboutGetController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAboutGetRequest $request, AboutGet $aboutGet)
+    public function update(UpdateAboutGetRequest $request, AboutGet $about)
     {
-        $data = $this->service->updateAbout($request, $aboutGet);
-        $this->aboutGet->update($aboutGet->id,$data);
+        $data = $this->service->updateAbout($request, $about);
+        $this->aboutGet->update($about->id, $data);
         return back()->with('success', 'Berhasil update about us');
     }
 

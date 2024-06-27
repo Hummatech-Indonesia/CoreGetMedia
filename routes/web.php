@@ -260,7 +260,7 @@ Route::put('cencel-advertisement/{advertisement}', [AdvertisementController::cla
 
 Route::get('about-getmedia', [AboutGetController::class, 'index'])->name('about-getmedia.admin');
 Route::post('about-getmedia', [AboutGetController::class, 'store'])->name('about-getmedia.store');
-Route::put('about-getmedia/{about}', [AboutGetController::class, 'update'])->name('about-getmedia.update');
+Route::put('update-about-getmedia/{about}', [AboutGetController::class, 'update'])->name('about-getmedia.update');
 
 Route::get('admin-account-list', [AdminController::class, 'index'])->name('admin-account.list.admin');
 Route::post('admin-account-store', [AdminController::class, 'store'])->name('admin-account.store');

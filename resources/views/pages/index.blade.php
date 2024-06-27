@@ -50,6 +50,7 @@
 
     .btn-three {
         color: #175A95;
+        background-color: #ffffff;
     }
 
     /* .theme-dark .btn-three {
