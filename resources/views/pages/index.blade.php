@@ -780,11 +780,11 @@ $popular_down_id = $popular_down->pluck('id');
                                             </div>
                                             <h3><a href="{{ route('news.singlepost', $newsPin->slug) }}">{{ Str::limit($newsPin->name, 50, '...') }}</a>
                                             </h3>
-                                            <ul class="news-metainfo row list-style">
-                                                <li class="col-sm-4 col-lg-4"><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($newsPin->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a>
+                                            <ul class="news-metainfo d-flex list-style">
+                                                <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($newsPin->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a>
                                                 </li>
-                                                <li class="col-sm-4 col-lg-4"><i class="fi fi-rr-comment"></i>0</li>
-                                                <li class="col-sm-4 col-lg-4"><i class="fi fi-rr-eye"></i>{{ $newsPin->newsViews()->count() }}x
+                                                <li><i class="fi fi-rr-comment"></i>0</li>
+                                                <li><i class="fi fi-rr-eye"></i>{{ $newsPin->newsViews()->count() }}x
                                                     dilihat</li>
                                             </ul>
                                         </div>
