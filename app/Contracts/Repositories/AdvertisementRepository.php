@@ -74,7 +74,7 @@ class AdvertisementRepository extends BaseRepository implements AdvertisementInt
             ->whereRelation('positionAdvertisement', 'position', AdvertisementEnum::RIGHT->value)
             ->whereRelation('positionAdvertisement', 'page', $page)
             ->inRandomOrder()
-            // ->take(1)
+            ->take(1)
             ;
         })
         ->when($query == 'left', function($q) use ($page) {
@@ -105,7 +105,7 @@ class AdvertisementRepository extends BaseRepository implements AdvertisementInt
             ->take(1)
             ;
         })
-        ->get();
+        ->first();
     }
 
     public function where($user_id, $status): mixed

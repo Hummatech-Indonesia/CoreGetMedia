@@ -26,7 +26,7 @@
         <div class="col-md-4 mb-3">
             <div class="card" style="background-image: url({{asset('assets/card-light.png')}}); background-size: cover; background-position: center;">
                 <div class="card-body mx-4">
-                    <h4>
+
                         <span class="badge" style="background-color: #EAF8FF; color: #175A95;">Basic</span>
                     </h4>
                     <p class="card-text pt-2 text-muted">Akses berita terbaru dan terlengkap dengan paket dasar kami yang hemat dan terjangkau.</p>

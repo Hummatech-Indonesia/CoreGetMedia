@@ -66,9 +66,9 @@
             <div class="col-lg-8">
                 @forelse ($newsTop as $item)
                 @if ($item->news_views_count > 0)
-                <div class="news-card-four" style="height: 550px;">
+                <div class="news-card-four">
                     <div class="news-card-img">
-                        <a href="javascript:void(0)"> <img src="{{asset('storage/' . $item->image)}}" alt="Image" width="100%" style="object-fit: cover" height="450" /></a>
+                        <a href="javascript:void(0)"> <img src="{{asset('storage/' . $item->image)}}" alt="Image" width="100%" style="object-fit: cover" height="470" /></a>
                     </div>
 
                     <div class="news-card-info">
@@ -89,11 +89,11 @@
                 @empty
                 @endforelse
 
-                {{-- @if ($advertisement_mids)
+                @if ($advertisement_mids)
                 <div class="mt-4 mb-4">
                     <img src="{{asset($advertisement_mids && $advertisement_mids->image != null ? 'storage/'.$advertisement_mids->image : "CONTOHIKLAN.png")}}" width="100%" height="181px" style="object-fit: cover" alt="">
                 </div>
-                @endif --}}
+                @endif
 
                 <div class="mb-5">
                     @php
@@ -228,11 +228,11 @@
                     </div>
                     @endif
 
-                    {{-- @if ($advertisement_rights)
+                    @if ($advertisement_rights)
                     <div class="sidebar mt-3 mb-4" style="width: 450px">
                         <img src="{{asset($advertisement_rights && $advertisement_rights->image != null ? 'storage/'.$advertisement_rights->image : "CONTOHIKLAN.png")}}" width="100%" height="603px" style="object-fit: cover" alt="">
                     </div>
-                    @endif --}}
+                    @endif
 
                     @if($popularTags->isNotEmpty())
                     <div class="sidebar-widget" style="width: 450px">
