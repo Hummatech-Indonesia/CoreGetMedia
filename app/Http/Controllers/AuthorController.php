@@ -102,9 +102,9 @@ class AuthorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($author)
+    public function show($slug)
     {
-        $slug_id = $this->user->showWithSLug($author);
+        $slug_id = $this->user->showWithSLug($slug);
         $author = $this->author->show($slug_id);
         $newses = $this->news->whereUser($slug_id);
         $popularCategories = $this->category->showWithCount();
