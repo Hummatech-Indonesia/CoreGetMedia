@@ -153,7 +153,7 @@ class NewsService
                 $tag = Tags::updateOrCreate(
                     ['name' => $tagName],
                     ['slug' => Str::slug($tagName)]
-                );
+                );  
                 $newTags[] = $tag->id;
             }
 
@@ -235,5 +235,5 @@ class NewsService
         $this->remove($news->image);
     }
 
-    
+
 }
