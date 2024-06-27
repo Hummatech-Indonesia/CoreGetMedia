@@ -222,7 +222,7 @@
                                     <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html"
                                             style="font-size: 15px;">{{ \Carbon\Carbon::parse($trending->created_at)->translatedFormat('d F Y') }}</a></li>
                                     <li><i class="fi fi-rr-eye"></i><a href="news-by-dateus"
-                                            style="font-size: 15px;">{{ $trending->newS_views_count }}</a></li>
+                                            style="font-size: 15px;">{{ $trending->news_views_count }}</a></li>
                                 </ul>
                             </div>
                         </div>
