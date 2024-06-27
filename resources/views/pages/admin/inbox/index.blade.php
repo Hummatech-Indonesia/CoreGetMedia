@@ -359,7 +359,7 @@
 {{-- banned confirm start --}}
 <div class="modal fade" id="confirm-banned-modal" tabindex="-1" aria-labelledby="vertical-center-modal" aria-hidden="true">
     <div class="modal-dialog modal-sm">
-    <div class="modal-content modal-filled bg-light-warning">
+    <div class="modal-content   ">
         <form id="banned-form" method="post">
             @csrf
             @method('PATCH')
@@ -387,7 +387,7 @@
 {{-- unbanned confirm start --}}
 <div class="modal fade" id="confirm-unbanned-modal" tabindex="-1" aria-labelledby="vertical-center-modal" aria-hidden="true">
     <div class="modal-dialog modal-sm">
-    <div class="modal-content modal-filled bg-light-success">
+    <div class="modal-content">
         <form id="unbanned-form" method="post">
             @csrf
             @method('PATCH')
