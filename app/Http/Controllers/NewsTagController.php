@@ -45,7 +45,7 @@ class NewsTagController extends Controller
         $id = $news_tags->pluck('id');
         $ids = $trending_id->merge($id);
 
-        $newsTags = $this->news->tagLatest($news->id, 5, $ids);
+        $newsTags = $this->news->tagLatest($news->id, 1, $ids);
 
         $CategoryPopulars = $this->category->showWithCount();
         $popularTags = $this->tag->showWithCount();
