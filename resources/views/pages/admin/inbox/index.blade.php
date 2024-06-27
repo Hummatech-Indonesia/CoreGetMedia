@@ -119,7 +119,7 @@
                                     </button>
                                 @endif
             
-                                <button type="submit" style="background-color: #EF6E6E" class="btn btn-sm text-white btn-delete">
+                                <button type="submit" style="background-color: #EF6E6E" class="btn btn-sm text-white btn-delete" data-id="{{ $article->id }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24">
                                         <path fill="#ffffff" d="M7 21q-.825 0-1.412-.587T5 19V6q-.425 0-.712-.288T4 5t.288-.712T5 4h4q0-.425.288-.712T10 3h4q.425 0 .713.288T15 4h4q.425 0 .713.288T20 5t-.288.713T19 6v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zm-7 11q.425 0 .713-.288T11 16V9q0-.425-.288-.712T10 8t-.712.288T9 9v7q0 .425.288.713T10 17m4 0q.425 0 .713-.288T15 16V9q0-.425-.288-.712T14 8t-.712.288T13 9v7q0 .425.288.713T14 17M7 6v13z" />
                                     </svg>
@@ -207,6 +207,36 @@
         </div>
     </div>
 </div>
+
+{{-- delete modal start --}}
+    <div class="modal fade" id="modal-delete" tabindex="-1" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <form id="form-delete" method="POST" class="modal-content">
+                @csrf
+                @method('delete')
+                <div class="modal-header d-flex align-items-center">
+                    <h4 class="modal-title" id="myModalLabel">
+                        Hapus data
+                    </h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <p>Apakah anda yakin akan menghapus data ini? </p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light-danger text-danger font-medium waves-effect" data-bs-dismiss="modal">
+                        Batal
+                    </button>
+                    <button type="submit" class="btn btn-light-danger text-secondery font-medium waves-effect" data-bs-dismiss="modal">
+                        Hapus
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+{{-- delete modal end --}}
 
 {{-- detail modal start --}}
 <div class="modal fade" id="detail-modal-article" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -375,16 +405,20 @@
 
 @section('script')
     <script>
+        $('.btn-delete').click(function() {
+            var id = $(this).data('id');
+            $('#form-delete').attr('action', '/news-report/'+id);
+            $('#modal-delete').modal('show');
+        });
+
         $('.btn-banned').click(function() {
             var id = $(this).data('id');
-            console.log(id);
             $('#banned-form').attr('action', '/news/banned/'+id);
             $('#confirm-banned-modal').modal('show');
         });
 
         $('.btn-unbanned').click(function() {
             var id = $(this).data('id');
-            console.log(id);
             $('#unbanned-form').attr('action', '/news/unbanned/'+id);
             $('#confirm-unbanned-modal').modal('show');
         });
