@@ -171,11 +171,15 @@
     $displayedPopulars = $populars->take(10)->where('news_views_count', '>', 0)->pluck('id');
     @endphp
 
-    {{-- @if ($advertisement_tops)
+@if ($advertisement_tops)
     <div class="container-fluid mt-5 mb-5">
         <img src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/'.$advertisement_tops->image : "CONTOHIKLAN.png") }}" width="100%" height="314px" style="object-fit: cover" alt="">
-</div>
-@endif --}}
+    </div>
+@else
+    <div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center" style="height: 166px;  background-color: var(--bgColor);">
+        <p style="color: #22222278">Iklan</p>
+    </div>
+@endif
 <div class="trending-news-box">
     <div class="row gx-5">
         <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 d-flex justify-content-center">
@@ -411,7 +415,7 @@ $popular_down_id = $popular_down->pluck('id');
                                     <img src="{{ asset('default.png') }}">
                                     @endif
                                 </span>
-                                <a href="javascript:void(0)">{{ $latest->user->name }}</a>
+                                <a href="{{ route('author.detail', ['author' => $latest->user->slug]) }}">{{ $latest->user->name }}</a>
                             </li>
                             <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($latest->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a>
                             </li>
@@ -719,7 +723,7 @@ $popular_down_id = $popular_down->pluck('id');
             </div>
         @else
             <div class="sidebar-widget d-flex justify-content-center align-items-center" style="height: 473px">
-                <p style="color: #22222278">Advertisement</p>
+                <p style="color: #22222278">Iklan</p>
             </div>
         @endif
 
@@ -770,7 +774,7 @@ $popular_down_id = $popular_down->pluck('id');
                                                     <img src="{{ asset('default.png') }}">
                                                     @endif
                                                 </div>
-                                                <h5>By <a href="javascript:void(0)">{{ $newsPin->user->name }}</a>
+                                                <h5>By <a href="{{ route('author.detail', ['author' => $newsPin->user->slug]) }}">{{ $newsPin->user->name }}</a>
                                                 </h5>
                                             </div>
                                             <h3><a href="{{ route('news.singlepost', $newsPin->slug) }}">{{ Str::limit($newsPin->name, 50, '...') }}</a>
@@ -817,11 +821,15 @@ $popular_down_id = $popular_down->pluck('id');
     <i class="ri-arrow-up-line"></i>
 </button>
 
-{{-- @if ($advertisement_unders)
-<div class="container-fluid mt-5 mb-5">
-    <img src="{{ asset($advertisement_unders && $advertisement_unders->image != null ? 'storage/'.$advertisement_unders->image : "CONTOHIKLAN.png") }}" width="100%" height="295px" style="object-fit: cover" alt="">
-</div>
-@endif --}}
+@if ($advertisement_unders)
+    <div class="container-fluid mt-5 mb-5">
+        <img src="{{ asset($advertisement_unders && $advertisement_unders->image != null ? 'storage/'.$advertisement_unders->image : "CONTOHIKLAN.png") }}" width="100%" height="295px" style="object-fit: cover" alt="">
+    </div>
+@else
+    <div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center" style="height: 295px;  background-color: var(--bgColor);">
+        <p style="color: #22222278">Iklan</p>
+    </div>
+@endif
 {{--
     <div class="modal fade" id="newsletter-popup" tabindex="-1" aria-labelledby="newsletter-popup" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl">

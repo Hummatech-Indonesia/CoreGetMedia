@@ -255,7 +255,7 @@
                                             <li class="author d-flex align-items-center">
                                                 <span class="author-img">
                                                     @if(isset($news->user) && isset($news->user->author))
-                                                        <a href="{{ route('author.detail', ['author' => $news->user->author->id]) }}">
+                                                        <a href="{{ route('author.detail', ['author' => $news->user->slug]) }}">
                                                             <img src="{{ asset($news->user->photo ? 'storage/' . $news->user->photo : 'default.png') }}"
                                                                 alt="Image" width="40px" height="30px"
                                                                 style="border-radius: 50%; object-fit:cover;" />
@@ -271,7 +271,7 @@
                                                     @if($news->user->hasRole('admin'))
                                                     <a class="ms-3" style="display: inline; text-decoration: none" data-toggle="tooltip" data-placement="top" title="admin" href="#">{{ $news->user->name }}</a>
                                                     @else
-                                                    <a class="ms-4" style="display: inline; text-decoration: none" data-toggle="tooltip" data-placement="top" title="author - {{ $news->user->name }}"  href="{{ route('author.detail', ['author' => $news->user->author->id]) }}">{{ $news->user->name }}</a>
+                                                    <a class="ms-4" style="display: inline; text-decoration: none" data-toggle="tooltip" data-placement="top" title="author - {{ $news->user->name }}"  href="{{ route('author.detail', ['author' => $news->user->slug]) }}">{{ $news->user->name }}</a>
                                                     @endif
                                                 </div>
                                             </li>
@@ -287,6 +287,7 @@
                                                     <span>{{ $news->news_views_count }}x dilihat</span>
                                                 </li>
                                                 <li class="d-flex align-items-center">
+
                                                     <form id="form-like">
                                                         @csrf
                                                         <button type="submit" style="background: transparent;border:transparent" class="like">
@@ -295,6 +296,7 @@
                                                             </svg>
                                                         </button>
                                                     </form>
+
                                                     <form id="form-liked" style="display: none;">
                                                         @csrf
                                                         <button type="submit" style="background: transparent;border:transparent" class="liked">
@@ -303,8 +305,10 @@
                                                             </svg>
                                                         </button>
                                                     </form>
+
                                                     <span id="like" data-like="{{ $likes }}">{{ $likes }}</span>
                                                 </li>
+
                                             </div>
                                         </div>
                                     </div>
@@ -719,7 +723,7 @@
 
 </script>
 
-<script>
+{{-- <script>
     document.addEventListener('DOMContentLoaded', function() {
 
         var formLike = document.getElementById('form-like');
@@ -809,6 +813,84 @@
             });
     });
 
+</script> --}}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var formLike = document.getElementById('form-like');
+        var formLiked = document.getElementById('form-liked');
+        var likeCount = document.getElementById('like');
+        var likedByUser = {{ $likedByUser ? 'true' : 'false' }};
+        var likeData = parseInt(likeCount.getAttribute('data-like'));
+
+        if (likedByUser) {
+            formLike.style.display = 'none';
+            formLiked.style.display = 'inline-block';
+        } else {
+            formLike.style.display = 'inline-block';
+            formLiked.style.display = 'none';
+        }
+
+        formLike.addEventListener('submit', function(event) {
+            event.preventDefault();
+            var csrfToken = formLike.querySelector('input[name="_token"]').value;
+
+            fetch('/like-news/{{ $news_id }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken
+                }
+            })
+            .then(function(response) {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Error: ' + response.status);
+                }
+            })
+            .then(function(data) {
+                formLike.style.display = 'none';
+                formLiked.style.display = 'inline-block';
+                likeData++;
+                likeCount.innerHTML = likeData;
+                likeCount.setAttribute('data-like', likeData);
+            })
+            .catch(function(error) {
+                console.error(error);
+            });
+        });
+
+        formLiked.addEventListener('submit', function(event) {
+            event.preventDefault();
+            var csrfToken = formLiked.querySelector('input[name="_token"]').value;
+
+            fetch('/unlike-news/{{ $news_id }}', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken
+                }
+            })
+            .then(function(response) {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Error: ' + response.status);
+                }
+            })
+            .then(function(data) {
+                formLike.style.display = 'inline-block';
+                formLiked.style.display = 'none';
+                likeData--;
+                likeCount.innerHTML = likeData;
+                likeCount.setAttribute('data-like', likeData);
+            })
+            .catch(function(error) {
+                console.error(error);
+            });
+        });
+    });
 </script>
 
 <script>
