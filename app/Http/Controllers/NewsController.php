@@ -235,7 +235,7 @@ class NewsController extends Controller
         $advertisement_unders = $this->advertisements->wherePosition(AdvertisementEnum::ALLNEWS, 'under');
         $advertisement_mids = $this->advertisements->wherePosition(AdvertisementEnum::ALLNEWS, 'mid');
 
-        return view('pages.user.singlepost.index', compact('likedByUser', 'news', 'news_id', 'CategoryPopulars', 'tags', 'popularTags', 'comments', 'likes', 'processedContent', 'newsTags', 'advertisement_rights', 'advertisement_lefts', 'advertisement_tops', 'advertisement_unders', 'advertisement_mids'));
+        return view('pages.user.singlepost.index', compact('ipAddress','likedByUser', 'news', 'news_id', 'CategoryPopulars', 'tags', 'popularTags', 'comments', 'likes', 'processedContent', 'newsTags', 'advertisement_rights', 'advertisement_lefts', 'advertisement_tops', 'advertisement_unders', 'advertisement_mids'));
     }
 
     public function showPinned()

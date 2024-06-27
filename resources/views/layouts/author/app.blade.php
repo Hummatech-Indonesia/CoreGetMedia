@@ -83,7 +83,7 @@
         <!--  Main wrapper -->
         <div class="body-wrapper">
             <!--  Header Start -->
-            @include('layouts.admin.header')
+            @include('layouts.user.header')
             <!--  Header End -->
             <div class="container-fluid">
                 @yield('content')
