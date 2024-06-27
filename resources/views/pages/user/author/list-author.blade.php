@@ -264,31 +264,55 @@
 
 @section('script')
 <script>
+// document.addEventListener("DOMContentLoaded", function() {
+//     function animateValue(id, start, end, duration) {
+//         const obj = document.getElementById(id);
+//         const range = end - start;
+//         let current = start;
+//         const increment = end > start ? 1 : -1;
+//         const stepTime = Math.abs(Math.floor(duration / range));
+//         const timer = setInterval(function() {
+//             current += increment;
+//             obj.innerHTML = current;
+//             if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
+//                 clearInterval(timer);
+//                 obj.innerHTML = end;
+//             }
+//         }, stepTime);
+//     }
+
+//     const newsCount = parseInt("{{ $author->user->newses()->count() }}");
+//     const followerCount = parseInt("{{ $author->followers()->count() }}");
+//     const likeCount = parseInt("{{ $like }}");
+
+//     animateValue("animation-number{{ $key }}", 0, newsCount, 1000);
+//     animateValue("animation-follower{{ $key }}", 0, followerCount, 1000);
+//     animateValue("animation-like{{ $key }}", 0, likeCount, 1000);
+// });
+
 document.addEventListener("DOMContentLoaded", function() {
-    function animateValue(id, start, end, duration) {
-        const obj = document.getElementById(id);
-        const range = end - start;
-        let current = start;
-        const increment = end > start ? 1 : -1;
-        const stepTime = Math.abs(Math.floor(duration / range));
-        const timer = setInterval(function() {
-            current += increment;
-            obj.innerHTML = current;
-            if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
-                clearInterval(timer);
-                obj.innerHTML = end; // Pastikan nilai akhir yang tepat
-            }
-        }, stepTime);
-    }
+        function animateValue(id, start, end, duration) {
+            const obj = document.getElementById(id);
+            const range = end - start;
+            let current = start;
+            const increment = end > start ? 1 : -1;
+            const stepTime = Math.abs(Math.floor(duration / range));
+            const timer = setInterval(function() {
+                current += increment;
+                obj.innerHTML = current;
+                if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
+                    clearInterval(timer);
+                    obj.innerHTML = end;
+                }
+            }, stepTime);
+        }
 
-    const newsCount = parseInt("{{ $author->user->newses()->count() }}");
-    const followerCount = parseInt("{{ $author->followers()->count() }}");
-    const likeCount = parseInt("{{ $like }}");
-
-    animateValue("animation-number{{ $key }}", 0, 12, 1000); // Ubah durasi animasi (ms) sesuai kebutuhan
-    animateValue("animation-follower{{ $key }}", 0, followerCount, 1000); // Ubah durasi animasi (ms) sesuai kebutuhan
-    animateValue("animation-like{{ $key }}", 0, likeCount, 1000); // Ubah durasi animasi (ms) sesuai kebutuhan
-});
+        @foreach ($authors as $key => $newsItem)
+            animateValue("animation-number{{ $key }}", 0, {{ $author->user->newses()->count() }}, 1000);
+            animateValue("animation-follower{{ $key }}", 0,  {{ $author->followers()->count() }}, 1000);
+            animateValue("animation-like{{ $key }}", 0, {{ $like }}, 1000);
+        @endforeach
+    });
 
 </script>
 @endsection
