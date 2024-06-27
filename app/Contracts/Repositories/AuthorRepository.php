@@ -38,7 +38,7 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
     {
         return $this->model->query()
             ->where('user_id', $id)
-            ->get();
+            ->first();
     }
 
     /**
