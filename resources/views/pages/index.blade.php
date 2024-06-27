@@ -177,7 +177,7 @@
     </div>
 @else
     <div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center" style="height: 166px; background-color:#F6F6F6">
-        <p style="color: #22222278">Advertisement</p>
+        <p style="color: #22222278">Iklan</p>
     </div>
 @endif
 <div class="trending-news-box">
@@ -723,7 +723,7 @@ $popular_down_id = $popular_down->pluck('id');
             </div>
         @else
             <div class="sidebar-widget d-flex justify-content-center align-items-center" style="height: 473px">
-                <p style="color: #22222278">Advertisement</p>
+                <p style="color: #22222278">Iklan</p>
             </div>
         @endif
 
@@ -827,7 +827,7 @@ $popular_down_id = $popular_down->pluck('id');
     </div>
 @else
     <div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center" style="height: 295px; background-color:#F6F6F6">
-        <p style="color: #22222278">Advertisement</p>
+        <p style="color: #22222278">Iklan</p>
     </div>
 @endif
 {{--
