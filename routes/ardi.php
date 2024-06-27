@@ -53,3 +53,5 @@ Route::middleware('auth')->group(function () {
 
 Route::put('update-draft-advertisement/{id}', [AdvertisementController::class, 'updateDraft'])->name('advertisement.updatedraft');
 Route::put('recovery-draft-advertisement/{id}', [AdvertisementController::class, 'notDraft'])->name('recovery.advertisement');
+
+Route::put('banned-news/{news}', [NewsController::class, 'banned_news'])->name('banned.news.admin');

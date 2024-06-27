@@ -117,6 +117,12 @@ class NewsController extends Controller
         return back()->with('success', 'Berhasil mengunpin berita');
     }
 
+    public function banned_news(News $news)
+    {
+        $this->news->update($news->id, ['status' => NewsEnum::BANNED->value]);
+        return back()->with('success', 'Berhasil banned berita');
+    }
+
     public function news_list()
     {
         $news = $this->news->where(NewsEnum::ACCEPTED->value, 10);
