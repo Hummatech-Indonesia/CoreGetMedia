@@ -45,7 +45,7 @@ class NewsTagController extends Controller
         $id = $news_tags->pluck('id');
         $ids = $trending_id->merge($id);
 
-        $newsTags = $this->news->tagLatest($news->id, 5, $ids);
+        $newsTags = $this->news->tagLatest($news->id, 5, $ids, 'notall');
 
         $CategoryPopulars = $this->category->showWithCount();
         $popularTags = $this->tag->showWithCount();
@@ -93,7 +93,7 @@ class NewsTagController extends Controller
         $news = $this->tag->showWithSLug($slug);
 
         $query = $request->input('search');
-        $newsTags = $this->news->taglatest($news->id, 10, 0);
+        $newsTags = $this->news->taglatest($news->id, 10, 0, 'all');
         $CategoryPopulars = $this->category->showWithCount();
         $query = $request->input('search');
         $trendings = $this->news->whereCategory($news->id, $query);
