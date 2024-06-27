@@ -59,6 +59,7 @@ class AdvertisementRepository extends BaseRepository implements AdvertisementInt
     public function getall(): mixed
     {
         return $this->model->query()
+            ->where('user_id', auth()->user()->id)
             ->get();
     }
 
@@ -156,7 +157,7 @@ class AdvertisementRepository extends BaseRepository implements AdvertisementInt
 
     public function withtrash($id): mixed
     {
-        return $this->model->query()->withTrashed()->FindOrFail($id);
+        return $this->model->query()->withTrashed()->findOrFail($id);
     }
 
 }
