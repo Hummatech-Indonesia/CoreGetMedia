@@ -176,7 +176,7 @@
         <img src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/'.$advertisement_tops->image : "CONTOHIKLAN.png") }}" width="100%" height="314px" style="object-fit: cover" alt="">
     </div>
 @else
-    <div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center" style="height: 166px; background-color:#F6F6F6">
+    <div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center" style="height: 166px;  background-color: var(--bgColor);">
         <p style="color: #22222278">Iklan</p>
     </div>
 @endif
@@ -826,7 +826,7 @@ $popular_down_id = $popular_down->pluck('id');
         <img src="{{ asset($advertisement_unders && $advertisement_unders->image != null ? 'storage/'.$advertisement_unders->image : "CONTOHIKLAN.png") }}" width="100%" height="295px" style="object-fit: cover" alt="">
     </div>
 @else
-    <div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center" style="height: 295px; background-color:#F6F6F6">
+    <div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center" style="height: 295px;  background-color: var(--bgColor);">
         <p style="color: #22222278">Iklan</p>
     </div>
 @endif
