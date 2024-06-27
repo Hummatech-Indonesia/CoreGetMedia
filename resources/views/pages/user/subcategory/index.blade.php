@@ -59,7 +59,7 @@
     .news-card-three {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: left;
     }
 
     .news-card-img img {
@@ -73,7 +73,7 @@
     }
 
     .news-metainfo {
-        justify-content: center;
+        justify-content: left;
     }
 
     .news-metainfo li {
