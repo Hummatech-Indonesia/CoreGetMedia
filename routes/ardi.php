@@ -55,3 +55,4 @@ Route::put('update-draft-advertisement/{id}', [AdvertisementController::class, '
 Route::put('recovery-draft-advertisement/{id}', [AdvertisementController::class, 'notDraft'])->name('recovery.advertisement');
 
 Route::put('banned-news/{news}', [NewsController::class, 'banned_news'])->name('banned.news.admin');
+Route::put('unbanned-news/{news}', [NewsController::class, 'unbanned_news'])->name('unbanned.news.admin');
