@@ -93,6 +93,10 @@
                 <div class="mt-4 mb-4">
                     <img src="{{asset($advertisement_mids && $advertisement_mids->image != null ? 'storage/'.$advertisement_mids->image : "CONTOHIKLAN.png")}}" width="100%" height="181px" style="object-fit: cover" alt="">
                 </div>
+                @else
+                <div class="bg_gray" style="width: 100%; height: 181px;">
+                    <p class="text-center align-middle" style="line-height: 181px;">Advertisement</p>
+                </div>
                 @endif
 
                 <div class="mb-5">
@@ -231,6 +235,10 @@
                     @if ($advertisement_rights)
                     <div class="sidebar mt-3 mb-4" style="width: 450px">
                         <img src="{{asset($advertisement_rights && $advertisement_rights->image != null ? 'storage/'.$advertisement_rights->image : "CONTOHIKLAN.png")}}" width="100%" height="603px" style="object-fit: cover" alt="">
+                    </div>
+                    @else
+                    <div class="sidebar mt-3 mb-4 bg_gray" style="width: 450px; height: 603px;">
+                        <p class="text-center align-middle" style="line-height: 603px;">Advertisement</p>
                     </div>
                     @endif
 
