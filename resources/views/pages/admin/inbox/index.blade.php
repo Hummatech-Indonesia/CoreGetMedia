@@ -57,7 +57,7 @@
                     @forelse ($articles as $article)
                         <tr>
                             <td>
-                                @if ($article->user->image != null && Storage::disk('public')->exists($article->user->image))
+                                @if (!$article->user->image == null && Storage::disk('public')->exists($article->user->image))
                                     <img src="{{ asset('storage/'. $article->user->image)}}" class="rounded-circle me-2 user-profile" style="object-fit: cover" width="35" height="35" alt="" />
                                 @else
                                     <img src="{{ asset('default.png') }}" class="rounded-circle me-2 user-profile" style="object-fit: cover" width="35" height="35" alt="" />
