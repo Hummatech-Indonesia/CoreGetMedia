@@ -774,7 +774,7 @@ $popular_down_id = $popular_down->pluck('id');
                                                     <img src="{{ asset('default.png') }}">
                                                     @endif
                                                 </div>
-                                                <h5>By <a href="javascript:void(0)">{{ $newsPin->user->name }}</a>
+                                                <h5>By <a href="{{ route('author.detail', $newsPin->user->id) }}">{{ $newsPin->user->name }}</a>
                                                 </h5>
                                             </div>
                                             <h3><a href="{{ route('news.singlepost', $newsPin->slug) }}">{{ Str::limit($newsPin->name, 50, '...') }}</a>
