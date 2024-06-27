@@ -203,7 +203,7 @@
 
     .theme-dark .btn-three {
         background-color: #222222;
-        color: #175A95;
+     
     }
 
 </style>
