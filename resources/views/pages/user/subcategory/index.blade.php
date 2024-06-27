@@ -66,9 +66,9 @@
             <div class="col-lg-8">
                 @forelse ($newsTop as $item)
                 @if ($item->news_views_count > 0)
-                <div class="news-card-four" style="height: 550px;">
+                <div class="news-card-four">
                     <div class="news-card-img">
-                        <a href="javascript:void(0)"> <img src="{{asset('storage/' . $item->image)}}" alt="Image" width="100%" style="object-fit: cover" height="450" /></a>
+                        <a href="javascript:void(0)"> <img src="{{asset('storage/' . $item->image)}}" alt="Image" width="100%" style="object-fit: cover" height="470" /></a>
                     </div>
 
                     <div class="news-card-info">
