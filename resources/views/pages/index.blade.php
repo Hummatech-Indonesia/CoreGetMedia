@@ -11,24 +11,24 @@
         color: #175A95;
     }
 
-    .btn-three {
+    /* .btn-three {
         color: var(--secondaryColor);
         background-color: #ffffff;
-    }
+    } */
 
-    .theme-dark.btn-three {
+    /* .theme-dark.btn-three {
         color: var(--secondaryColor);
         background-color: #ffffff;
-    }
+    } */
 
     .btn-three {
         color: #175A95;
     }
 
-    .theme-dark .btn-three {
+    /* .theme-dark .btn-three {
         background-color: #222222;
         color: #ffffff;
-    }
+    } */
 
     .btn-three i {
         color: #175A95;
@@ -38,24 +38,24 @@
         color: #175A95;
     }
 
-    .btn-three {
+    /* .btn-three {
         color: var(--secondaryColor);
         background-color: #ffffff;
-    }
+    } */
 
-    .theme-dark.btn-three {
+    /* .theme-dark.btn-three {
         color: var(--secondaryColor);
         background-color: #ffffff;
-    }
+    } */
 
     .btn-three {
         color: #175A95;
     }
 
-    .theme-dark .btn-three {
+    /* .theme-dark .btn-three {
         background-color: #222222;
         color: #ffffff;
-    }
+    } */
 
     .btn-three i {
         color: #175A95;
@@ -92,7 +92,8 @@
 </style>
 
 <style>
-    .carousel-control-next, .carousel-control-prev {
+    .carousel-control-next,
+    .carousel-control-prev {
         width: 50px;
         height: 50px;
         background-color: rgba(0, 0, 0, 0.5);
@@ -113,7 +114,8 @@
         left: 0;
     }
 
-    .carousel-control-next-icon, .carousel-control-prev-icon {
+    .carousel-control-next-icon,
+    .carousel-control-prev-icon {
         width: 20px;
         height: 20px;
     }
@@ -159,6 +161,53 @@
 
 </style>
 
+<style>
+    .theme-dark .link-one:hover,
+    .theme-dark .link-one.active,
+    .theme-dark .link-two:hover,
+    .theme-dark .link-two.active,
+    .theme-dark .single-product-tablist .nav-item .nav-link:hover,
+    .theme-dark .single-product-tablist .nav-item .nav-link.active,
+    .theme-dark .cart-table table tbody tr td .cart-item:hover,
+    .theme-dark .cart-table table tbody tr td .cart-item.active,
+    .theme-dark .author-box .social-profile li a i:hover,
+    .theme-dark .author-box .social-profile li a i.active,
+    .theme-dark .checkbox label a:hover,
+    .theme-dark .checkbox label a.active,
+    .theme-dark .hero-news-card .hero-news-info h3 a:hover,
+    .theme-dark .hero-news-card .hero-news-info h3 a.active,
+    .theme-dark .news-tablist .nav-item .nav-link:hover,
+    .theme-dark .news-tablist .nav-item .nav-link.active,
+    .theme-dark .social-widget li a:hover,
+    .theme-dark .social-widget li a.active,
+    .theme-dark .social-widget-two li a:hover,
+    .theme-dark .social-widget-two li a.active,
+    .theme-dark .news-card-info .news-author h5 a:hover,
+    .theme-dark .news-card-info .news-author h5 a.active,
+    .theme-dark .news-card-one .news-card-info h3 a:hover,
+    .theme-dark .news-card-one .news-card-info h3 a.active,
+    .theme-dark .navbar-area.header-one .navbar .navbar-nav .nav-item .nav-link:hover,
+    .theme-dark .navbar-area.header-one .navbar .navbar-nav .nav-item .nav-link.active,
+    .theme-dark .navbar-area.header-two .navbar .navbar-nav .nav-item .nav-link:hover,
+    .theme-dark .navbar-area.header-two .navbar .navbar-nav .nav-item .nav-link.active,
+    .theme-dark .navbar-area.header-three .navbar .navbar-nav .nav-item .nav-link:hover,
+    .theme-dark .navbar-area.header-three .navbar .navbar-nav .nav-item .nav-link.active,
+    .theme-dark .blog-card-one .blog-card-info h3 a:hover,
+    .theme-dark .blog-card-one .blog-card-info h3 a.active,
+    .theme-dark .blog-card-two .blog-card-info h3 a:hover,
+    .theme-dark .blog-card-two .blog-card-info h3 a.active,
+    .theme-dark .breadcrumb-content .breadcrumb-menu li a:hover,
+    .theme-dark .breadcrumb-content .breadcrumb-menu li a.active {
+        color: #175A95;
+    }
+
+    .theme-dark .btn-three {
+        background-color: #222222;
+     
+    }
+
+</style>
+
 @endsection
 
 {{-- @if ($news_latest->count() != 0)
@@ -171,49 +220,49 @@
     $displayedPopulars = $populars->take(10)->where('news_views_count', '>', 0)->pluck('id');
     @endphp
 
-@if ($advertisement_tops)
+    @if ($advertisement_tops)
     <div class="container-fluid mt-5 mb-5">
         <img src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/'.$advertisement_tops->image : "CONTOHIKLAN.png") }}" width="100%" height="314px" style="object-fit: cover" alt="">
     </div>
-@else
+    @else
     <div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center" style="height: 166px;  background-color: var(--bgColor);">
         <p style="color: #22222278">Iklan</p>
     </div>
-@endif
-<div class="trending-news-box">
-    <div class="row gx-5">
-        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 d-flex justify-content-center">
-            <div class="trending-prev me-3"><i class="flaticon-left-arrow"></i></div>
-            <h4>Artikel Popular</h4>
-            <div class="trending-next ms-3"><i class="flaticon-right-arrow"></i></div>
-        </div>
-        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12">
-            <div class="trending-news-slider swiper">
-                <div class="swiper-wrapper">
-                    @forelse ($populars->take(10) as $popular)
-                    @if ($popular->news_views_count > 0)
-                    <div class="swiper-slide news-card-one">
-                        <div class="news-card-img">
-                            <img src="{{ asset('storage/' . $popular->image) }}" alt="Image" style="object-fit: cover;" />
+    @endif
+    <div class="trending-news-box">
+        <div class="row gx-5">
+            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 d-flex justify-content-center">
+                <div class="trending-prev me-3"><i class="flaticon-left-arrow"></i></div>
+                <h4>Artikel Popular</h4>
+                <div class="trending-next ms-3"><i class="flaticon-right-arrow"></i></div>
+            </div>
+            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12">
+                <div class="trending-news-slider swiper">
+                    <div class="swiper-wrapper">
+                        @forelse ($populars->take(10) as $popular)
+                        @if ($popular->news_views_count > 0)
+                        <div class="swiper-slide news-card-one">
+                            <div class="news-card-img">
+                                <img src="{{ asset('storage/' . $popular->image) }}" alt="Image" style="object-fit: cover;" />
+                            </div>
+                            <div class="news-card-info">
+                                <h3><a href="{{ route('news.singlepost', ['news' => $popular->slug]) }}">{{ Str::limit($popular->name, 50, '...') }}</a>
+                                </h3>
+                                <ul class="news-metainfo d-flex list-style">
+                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
+                                    <li><i class="fi fi-rr-eye"></i>{{ $popular->news_views_count }}x dilihat
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="news-card-info">
-                            <h3><a href="{{ route('news.singlepost', ['news' => $popular->slug]) }}">{{ Str::limit($popular->name, 50, '...') }}</a>
-                            </h3>
-                            <ul class="news-metainfo d-flex list-style">
-                                <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
-                                <li><i class="fi fi-rr-eye"></i>{{ $popular->news_views_count }}x dilihat
-                                </li>
-                            </ul>
-                        </div>
+                        @endif
+                        @empty
+                        @endforelse
                     </div>
-                    @endif
-                    @empty
-                    @endforelse
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 
 {{-- @if ($advertisement_tops)
@@ -637,99 +686,99 @@ $popular_down_id = $popular_down->pluck('id');
                     <div class="d-flex">
                         <div>
                             <img src="{{ asset('assets/img/news/news-2.webp') }}" class="d-block w-100" alt="...">
-                            <h3 class="pt-2" style="font-size: 12px"><a href="javascript:void(0)">Loerm oamod oekp eocoinw xskni kopi oakoel iaklo oaidnx</a></h3>
-                            <div class="news-card-info">
-                                <ul class="news-metainfo d-flex list-style d-flex" style="margin: 0;">
-                                    <li style="font-size: 11px; margin: 0; padding:0">
-                                        <i class="fi fi-rr-calendar-minus pt-1" style="font-size: 11px; margin: 0;"></i>
-                                        <a href="javascript:void(0)" class="ms-3">Apr 25, 2023</a>
-                                    </li>
-                                    <li style="font-size: 11px; margin: 0; padding:0">
-                                        <i class="fi fi-rr-eye pt-1" style="font-size: 11px; margin: 0;"></i>
-                                        <a href="" class="ms-3">129x dilihat</a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                        </div>
-                        <div class="ms-3">
-                            <img src="{{ asset('assets/img/news/news-2.webp') }}" class="d-block w-100" alt="...">
-                            <h3 class="pt-2" style="font-size: 12px"><a href="javascript:void(0)">Loerm oamod oekp eocoinw xskni kopi oakoel iaklo oaidnx</a></h3>
-                            <div class="news-card-info">
-                                <ul class="news-metainfo d-flex list-style d-flex" style="margin: 0;">
-                                    <li style="font-size: 11px; margin: 0; padding:0">
-                                        <i class="fi fi-rr-calendar-minus pt-1" style="font-size: 11px; margin: 0;"></i>
-                                        <a href="javascript:void(0)" class="ms-3">Apr 25, 2023</a>
-                                    </li>
-                                    <li style="font-size: 11px; margin: 0; padding:0">
-                                        <i class="fi fi-rr-eye pt-1" style="font-size: 11px; margin: 0;"></i>
-                                        <a href="" class="ms-3">129x dilihat</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="d-flex">
-                        <div>
-                            <img src="{{ asset('assets/img/news/news-2.webp') }}" class="d-block w-100" alt="...">
-                            <h3 class="pt-2" style="font-size: 12px"><a href="javascript:void(0)">Loerm oamod oekp eocoinw xskni kopi oakoel iaklo oaidnx</a></h3>
-                            <div class="news-card-info">
-                                <ul class="news-metainfo d-flex list-style d-flex" style="margin: 0;">
-                                    <li style="font-size: 11px; margin: 0; padding:0">
-                                        <i class="fi fi-rr-calendar-minus pt-1" style="font-size: 11px; margin: 0;"></i>
-                                        <a href="javascript:void(0)" class="ms-3">Apr 25, 2023</a>
-                                    </li>
-                                    <li style="font-size: 11px; margin: 0; padding:0">
-                                        <i class="fi fi-rr-eye pt-1" style="font-size: 11px; margin: 0;"></i>
-                                        <a href="" class="ms-3">129x dilihat</a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                        </div>
-                        <div class="ms-3">
-                            <img src="{{ asset('assets/img/news/news-2.webp') }}" class="d-block w-100" alt="...">
-                            <h3 class="pt-2" style="font-size: 12px"><a href="javascript:void(0)">Loerm oamod oekp eocoinw xskni kopi oakoel iaklo oaidnx</a></h3>
-                            <div class="news-card-info">
-                                <ul class="news-metainfo d-flex list-style d-flex" style="margin: 0;">
-                                    <li style="font-size: 11px; margin: 0; padding:0">
-                                        <i class="fi fi-rr-calendar-minus pt-1" style="font-size: 11px; margin: 0;"></i>
-                                        <a href="javascript:void(0)" class="ms-3">Apr 25, 2023</a>
-                                    </li>
-                                    <li style="font-size: 11px; margin: 0; padding:0">
-                                        <i class="fi fi-rr-eye pt-1" style="font-size: 11px; margin: 0;"></i>
-                                        <a href="" class="ms-3">129x dilihat</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div> --}}
-
-        @if ($advertisement_rights)
-            <div class="sidebar">
-                <img src="{{ asset($advertisement_rights->image ? 'storage/'.$advertisement_rights->image : 'CONTOHIKLAN.png') }}" width="100%" height="473px" style="object-fit: cover" alt="...">
-            </div>
-        @else
-            <div class="sidebar-widget d-flex justify-content-center align-items-center" style="height: 473px">
-                <p style="color: #22222278">Iklan</p>
-            </div>
-        @endif
-
+        <h3 class="pt-2" style="font-size: 12px"><a href="javascript:void(0)">Loerm oamod oekp eocoinw xskni kopi oakoel iaklo oaidnx</a></h3>
+        <div class="news-card-info">
+            <ul class="news-metainfo d-flex list-style d-flex" style="margin: 0;">
+                <li style="font-size: 11px; margin: 0; padding:0">
+                    <i class="fi fi-rr-calendar-minus pt-1" style="font-size: 11px; margin: 0;"></i>
+                    <a href="javascript:void(0)" class="ms-3">Apr 25, 2023</a>
+                </li>
+                <li style="font-size: 11px; margin: 0; padding:0">
+                    <i class="fi fi-rr-eye pt-1" style="font-size: 11px; margin: 0;"></i>
+                    <a href="" class="ms-3">129x dilihat</a>
+                </li>
+            </ul>
+        </div>
 
     </div>
+    <div class="ms-3">
+        <img src="{{ asset('assets/img/news/news-2.webp') }}" class="d-block w-100" alt="...">
+        <h3 class="pt-2" style="font-size: 12px"><a href="javascript:void(0)">Loerm oamod oekp eocoinw xskni kopi oakoel iaklo oaidnx</a></h3>
+        <div class="news-card-info">
+            <ul class="news-metainfo d-flex list-style d-flex" style="margin: 0;">
+                <li style="font-size: 11px; margin: 0; padding:0">
+                    <i class="fi fi-rr-calendar-minus pt-1" style="font-size: 11px; margin: 0;"></i>
+                    <a href="javascript:void(0)" class="ms-3">Apr 25, 2023</a>
+                </li>
+                <li style="font-size: 11px; margin: 0; padding:0">
+                    <i class="fi fi-rr-eye pt-1" style="font-size: 11px; margin: 0;"></i>
+                    <a href="" class="ms-3">129x dilihat</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+<div class="carousel-item">
+    <div class="d-flex">
+        <div>
+            <img src="{{ asset('assets/img/news/news-2.webp') }}" class="d-block w-100" alt="...">
+            <h3 class="pt-2" style="font-size: 12px"><a href="javascript:void(0)">Loerm oamod oekp eocoinw xskni kopi oakoel iaklo oaidnx</a></h3>
+            <div class="news-card-info">
+                <ul class="news-metainfo d-flex list-style d-flex" style="margin: 0;">
+                    <li style="font-size: 11px; margin: 0; padding:0">
+                        <i class="fi fi-rr-calendar-minus pt-1" style="font-size: 11px; margin: 0;"></i>
+                        <a href="javascript:void(0)" class="ms-3">Apr 25, 2023</a>
+                    </li>
+                    <li style="font-size: 11px; margin: 0; padding:0">
+                        <i class="fi fi-rr-eye pt-1" style="font-size: 11px; margin: 0;"></i>
+                        <a href="" class="ms-3">129x dilihat</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="ms-3">
+            <img src="{{ asset('assets/img/news/news-2.webp') }}" class="d-block w-100" alt="...">
+            <h3 class="pt-2" style="font-size: 12px"><a href="javascript:void(0)">Loerm oamod oekp eocoinw xskni kopi oakoel iaklo oaidnx</a></h3>
+            <div class="news-card-info">
+                <ul class="news-metainfo d-flex list-style d-flex" style="margin: 0;">
+                    <li style="font-size: 11px; margin: 0; padding:0">
+                        <i class="fi fi-rr-calendar-minus pt-1" style="font-size: 11px; margin: 0;"></i>
+                        <a href="javascript:void(0)" class="ms-3">Apr 25, 2023</a>
+                    </li>
+                    <li style="font-size: 11px; margin: 0; padding:0">
+                        <i class="fi fi-rr-eye pt-1" style="font-size: 11px; margin: 0;"></i>
+                        <a href="" class="ms-3">129x dilihat</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+</button>
+<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+</button>
+</div> --}}
+
+@if ($advertisement_rights)
+<div class="sidebar">
+    <img src="{{ asset($advertisement_rights->image ? 'storage/'.$advertisement_rights->image : 'CONTOHIKLAN.png') }}" width="100%" height="473px" style="object-fit: cover" alt="...">
+</div>
+@else
+<div class="sidebar-widget d-flex justify-content-center align-items-center" style="height: 473px">
+    <p style="color: #22222278">Iklan</p>
+</div>
+@endif
+
+
+</div>
 </div>
 </div>
 
@@ -823,13 +872,13 @@ $popular_down_id = $popular_down->pluck('id');
 </button>
 
 @if ($advertisement_unders)
-    <div class="container-fluid mt-5 mb-5">
-        <img src="{{ asset($advertisement_unders && $advertisement_unders->image != null ? 'storage/'.$advertisement_unders->image : "CONTOHIKLAN.png") }}" width="100%" height="295px" style="object-fit: cover" alt="">
-    </div>
+<div class="container-fluid mt-5 mb-5">
+    <img src="{{ asset($advertisement_unders && $advertisement_unders->image != null ? 'storage/'.$advertisement_unders->image : "CONTOHIKLAN.png") }}" width="100%" height="295px" style="object-fit: cover" alt="">
+</div>
 @else
-    <div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center" style="height: 295px;  background-color: var(--bgColor);">
-        <p style="color: #22222278">Iklan</p>
-    </div>
+<div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center" style="height: 295px;  background-color: var(--bgColor);">
+    <p style="color: #22222278">Iklan</p>
+</div>
 @endif
 {{--
     <div class="modal fade" id="newsletter-popup" tabindex="-1" aria-labelledby="newsletter-popup" aria-hidden="true">
