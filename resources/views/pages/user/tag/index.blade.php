@@ -67,7 +67,7 @@
                 @if ($news_tags->isNotEmpty())
                 <div class="">
                     @forelse ($news_tags as $item)
-                    <div class="news-card-four" style="height: 550px;">
+                    <div class="news-card-four">
                         <div class="news-card-img">
                             <a href="{{ route('news.singlepost', ['news' => $item->slug]) }}"> <img
                                     src="{{asset('storage/' . $item->image)}}" alt="Image" width="100%"
@@ -220,9 +220,9 @@
 
                                 <ul class="news-metainfo list-style d-flex">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html"
-                                            style="font-size: 15px;">15 Apr 2023</a></li>
+                                            style="font-size: 15px;">{{ \Carbon\Carbon::parse($trending->created_at)->translatedFormat('d F Y') }}</a></li>
                                     <li><i class="fi fi-rr-eye"></i><a href="news-by-dateus"
-                                            style="font-size: 15px;">10</a></li>
+                                            style="font-size: 15px;">{{ $trending->newS_views_count }}</a></li>
                                 </ul>
                             </div>
                         </div>

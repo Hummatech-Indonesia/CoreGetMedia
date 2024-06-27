@@ -152,15 +152,8 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->where('status', NewsEnum::ACCEPTED->value)
             ->whereRelation('newsTags', 'tags_id', $tags)
             ->withCount('newsViews')
-            ->when($query == 'popular', function($q){
-                $q->orderByDesc('news_views_count');
-            })
-            ->when($query == 'top', function($q){
-                $q->take(1);
-            })
-            ->when($query == 'notop', function($q){
-                $q->latest();
-            })
+            ->orderByDesc('news_views_count')
+            ->take(1)
             ->get();
     }
 
@@ -203,9 +196,10 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->latest();
     }
 
-    public function tagLatest($tag_id, $paginate) : mixed
+    public function tagLatest($tag_id, $paginate, $id) : mixed
     {
         return $this->model->query()
+            ->whereNotIn('id', $id)
             ->whereRelation('newsTags', 'tags_id', $tag_id)
             ->where('status', NewsEnum::ACCEPTED->value)
             ->withCount('newsViews')
