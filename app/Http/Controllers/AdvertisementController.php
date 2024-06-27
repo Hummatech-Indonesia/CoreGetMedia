@@ -204,6 +204,6 @@ class AdvertisementController extends Controller
         $data['status'] = StatusEnum::CANCELED->value;
         $data['feed'] = StatusEnum::CANCELED->value;
         $this->advertisement->update($advertisement->id, $data);
-        return back()->with('success', 'Berhasil membatalkan pengiklanan');
+        return redirect('/status-advertisement-list')->with('success', 'Berhasil membatalkan pengiklanan');
     }
 }
