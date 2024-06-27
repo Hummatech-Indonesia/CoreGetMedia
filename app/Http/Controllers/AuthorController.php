@@ -97,12 +97,7 @@ class AuthorController extends Controller
         $data = $this->service->store($request, $user_id);
         $this->author->store($data);
 
-        if ($user['status'] == 'error') {
-            return back()->with('error', 'Data yang anda inputkan kurang lengkap');
-        } else {
-            return back()->with('success', 'Berhasil membuat akun author');
-        }
-
+        return back()->with('success', 'Berhasil membuat akun author');
     }
     /**
      * Display the specified resource.

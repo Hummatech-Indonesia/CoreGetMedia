@@ -3,12 +3,6 @@
 
 @section('style')
 <style>
-    @media (min-width: 768px) {
-        .icon-eye {
-            margin-top: 12px;
-        }
-    }
-
     .tag-list li a:hover {
         background-color: #175A95;
         color: var(--whiteColor);
@@ -31,6 +25,8 @@
         color: var(--whiteColor);
     }
 
+</style>
+<style>
     .breadcrumb-menu li:after {
         color: #000;
     }
@@ -63,8 +59,8 @@
 
 <div class="sports-wrap ptb-100">
     <div class="container">
-        <div class="row side-responsive">
-            <div class="col-lg-8">
+        <div class="side-responsive d-lg-flex flex-lg-row flex-sm-column flex-md-column">
+            <div class="col-lg-8 me-4 col-md-12 col-sm-12">
                 @forelse ($newsTop as $item)
                 <div class="news-card-four" style="height: 550px;">
                     <div class="news-card-img">
@@ -151,7 +147,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-4">
+            <div class="col-lg-4 col-md-12 col-sm-12">
                 <div class="sidebar">
                     @if($CategoryPopulars->isNotEmpty())
                     <div class="sidebar-widget" style="width: 450px">
@@ -237,5 +233,5 @@
         </div>
     </div>
 </div>
-</div>
+
 @endsection
