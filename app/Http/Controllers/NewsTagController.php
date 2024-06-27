@@ -51,7 +51,9 @@ class NewsTagController extends Controller
         $advertisement_unders = $this->advertisements->wherePosition(AdvertisementEnum::TAG, 'under');
         $advertisement_mids = $this->advertisements->wherePosition(AdvertisementEnum::TAG, 'mid');
 
-        return view('pages.user.tag.index', compact('news_tags', 'news', 'newsTags', 'CategoryPopulars', 'trendings', 'popularTags'));
+        return view('pages.user.tag.index', compact(
+            'news_tags', 'news', 'newsTags', 'CategoryPopulars', 'trendings', 'popularTags'
+        ,'advertisement_rights', 'advertisement_lefts', 'advertisement_tops', 'advertisement_unders', 'advertisement_mids'));
     }
 
     /**
