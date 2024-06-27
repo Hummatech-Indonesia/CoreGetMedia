@@ -184,7 +184,6 @@
                             Berita Populer
                         </h3>
                         @forelse ($trending_news as $trending)
-                            @if ($trending->news_views_count > 0)
                             <div class="news-card-three">
                                 <div class="news-card-img">
                                     <img src="{{ asset('storage/' . $trending->image) }}" class="img-popular" alt="Image" />
@@ -201,8 +200,6 @@
                                     </ul>
                                 </div>
                             </div>
-                            @else
-                            @endif
                         @empty
                         <div class="col-12">
                             <div class="d-flex justify-content-center">
