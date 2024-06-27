@@ -111,6 +111,38 @@
     }
 
 </style>
+
+<style>
+    .number-animate {
+        display: inline-block;
+        position: relative;
+        overflow: hidden;
+        vertical-align: bottom;
+    }
+
+    .number-animate span {
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        animation: count 1s linear forwards;
+    }
+
+    @keyframes count {
+        from {
+            opacity: 0;
+            transform: translateY(-50%);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+</style>
 @endsection
 
 @section('content')
@@ -154,28 +186,28 @@
                         <div class="">
                             <a href="{{ route('author.detail', $author->id) }}" class="btn btn-sm mt-3 mb-1 py-1 px-4 w-100 text-primary bg-light-primary" style="background-color: #CEE4F2; border-radius: 8px;">Detail</a>
                             @auth
-                                @php
-                                    $already = App\Models\Follower::where('author_id', $author->id)->where('user_id', auth()->user()->id)->first()
-                                @endphp 
+                            @php
+                            $already = App\Models\Follower::where('author_id', $author->id)->where('user_id', auth()->user()->id)->first()
+                            @endphp
                             @endauth
                             @if (Auth::check() && $already)
-                                <form action="{{ route('unfollow.author', $author->id) }}" method="POST">
-                                    @method('DELETE')
-                                    @csrf
-                                    <button type="submit" class="btn btn-sm mt-1 py-1 px-4 w-100 text-white" style="background-color: #175A95; border-radius: 8px;">Batal Ikuti</button>
-                                </form>
+                            <form action="{{ route('unfollow.author', $author->id) }}" method="POST">
+                                @method('DELETE')
+                                @csrf
+                                <button type="submit" class="btn btn-sm mt-1 py-1 px-4 w-100 text-white" style="background-color: #175A95; border-radius: 8px;">Batal Ikuti</button>
+                            </form>
                             @else
-                                <form action="{{ route('follow.author', $author->id) }}" method="POST">
-                                    @method('post')
-                                    @csrf
-                                    <button type="submit" class="btn btn-sm mt-1 py-1 px-4 w-100 text-white" style="background-color: #175A95; border-radius: 8px;">Ikuti</button>
-                                </form>
+                            <form action="{{ route('follow.author', $author->id) }}" method="POST">
+                                @method('post')
+                                @csrf
+                                <button type="submit" class="btn btn-sm mt-1 py-1 px-4 w-100 text-white" style="background-color: #175A95; border-radius: 8px;">Ikuti</button>
+                            </form>
                             @endif
                         </div>
                     </div>
                     <div class="col-lg-9">
                         <div>
-                            <b>{{ $author->user->name }}</b>
+                            <p><b>{{ $author->user->name }}</b></p>
                         </div>
                         <div>
                             <p>{{ $author->description }}</p>
@@ -231,7 +263,7 @@
 @endsection
 
 @section('script')
-<script>
+{{-- <script>
     function animateValue(obj, start, end, duration) {
         let startTimestamp = null;
         const step = (timestamp) => {
@@ -266,6 +298,36 @@
 
     const obj = document.getElementById("animation-follower");
     animateValue(obj, 100, 0, 5000);
+
+</script> --}}
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    function animateValue(id, start, end, duration) {
+        const obj = document.getElementById(id);
+        const range = end - start;
+        let current = start;
+        const increment = end > start ? 1 : -1;
+        const stepTime = Math.abs(Math.floor(duration / range));
+        const timer = setInterval(function() {
+            current += increment;
+            obj.innerHTML = current;
+            if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
+                clearInterval(timer);
+                obj.innerHTML = end; // Pastikan nilai akhir yang tepat
+            }
+        }, stepTime);
+    }
+
+    // Mendapatkan nilai dari Blade Laravel dan menerapkannya pada animasi
+    const newsCount = parseInt("{{ $author->user->newses()->count() }}");
+    const followerCount = parseInt("{{ $author->followers()->count() }}");
+    const likeCount = parseInt("{{ $like }}");
+
+    animateValue("animation-number", 0, newsCount, 1000); // Ganti 1000 dengan durasi yang diinginkan (ms)
+    animateValue("animation-follower", 0, followerCount, 1000); // Ganti 1000 dengan durasi yang diinginkan (ms)
+    animateValue("animation-like", 0, likeCount, 1000); // Ganti 1000 dengan durasi yang diinginkan (ms)
+});
 
 </script>
 @endsection
