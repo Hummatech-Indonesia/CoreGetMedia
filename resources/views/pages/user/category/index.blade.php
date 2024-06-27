@@ -115,7 +115,7 @@
                                     Illuminate\Support\Str::limit($new->name, $limit = 170, $end = '...') !!}
                                 </a>
                             </h3>
-                            <p>{!! Str::limit(strip_tags($new->description), 70) !!}</p>
+                            <p>{!! Str::limit(strip_tags($new->description), 130) !!}</p>
                             <span class="news-metainfo">
                                 <div class=" d-flex gap-3" style="display: flex">
                                     <div class="d-inline">
