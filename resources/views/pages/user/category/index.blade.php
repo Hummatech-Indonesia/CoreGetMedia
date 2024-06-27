@@ -83,7 +83,7 @@
                 @empty
                 @endforelse
 
-                
+
 
                 <div class="mb-5">
                     @php
@@ -143,7 +143,7 @@
                 </div>
                 @else
                 <div class="bg_gray" style="width: 100%; height: 181px;">
-                    <p class="text-center align-middle" style="line-height: 181px;">Advertisement</p>
+                    <p class="text-center align-middle" style="line-height: 181px;">Iklan</p>
                 </div>
                 @endif
                 <div>
@@ -215,7 +215,7 @@
                     </div>
                     @else
                     <div class="sidebar mt-3 mb-4 bg_gray" style="width: 450px; height: 603px;">
-                        <p class="text-center align-middle" style="line-height: 603px;">Advertisement</p>
+                        <p class="text-center align-middle" style="line-height: 603px;">Iklan</p>
                     </div>
                     @endif
 
