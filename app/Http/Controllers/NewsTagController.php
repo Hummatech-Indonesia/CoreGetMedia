@@ -39,7 +39,7 @@ class NewsTagController extends Controller
 
         $query = $request->input('search');
         $news_tags = $this->news->whereTag($news->id, 'top');
-        $id = $news_tags->id;
+        $id = $news_tags->pluck('id');
         $newsTags = $this->news->tagLatest($news->id, 2, $id);
 
         $CategoryPopulars = $this->category->showWithCount();
