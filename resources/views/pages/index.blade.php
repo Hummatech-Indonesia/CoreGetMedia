@@ -142,7 +142,7 @@
 
     .news-metainfo.d-flex {
         display: flex;
-        gap: 10px;
+        gap: 5px;
     }
 
     .news-metainfo li {
