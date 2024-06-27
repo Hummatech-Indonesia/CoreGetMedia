@@ -84,7 +84,23 @@
                                 @endif
                             </td>
                             <td>
-                                <button data-bs-toggle="tooltip" title="Detail" class="btn btn-sm btn-detail-article btn-primary me-2" style="background-color:#5D87FF">
+                                <button data-bs-toggle="tooltip" title="Detail" class="btn btn-sm btn-detail-article btn-primary me-2" style="background-color:#5D87FF"
+                                    data-id="{{ $article->id }}"
+                                    data-name-user-article="{{ $article->user->name }}"
+                                    data-email-user-article="{{ $article->user->email }}"
+                                    data-name-writer-article="{{ $article->news->user->name }}"
+                                    data-email-writer-article="{{ $article->news->user->email }}"
+                                    data-description-article="{{ $article->description }}"
+                                    data-proof-detail="{{ $article->proof != null && Storage::disk('public')->exists($article->proof) ? asset('storage/' . $article->proof) : asset('assets/blank-img.jpg') }}"
+                                    data-news-image="{{ $article->news->image != null && Storage::disk('public')->exists($article->news->image) ? asset('storage/' . $article->news->image) : asset('assets/blank-img.jpg') }}"
+                                    data-news-category="{{ $article->news->newsCategories[0]->category->name }}"
+                                    data-news-name="{{ Str::limit($article->news->name, 40, '...') }}"
+                                    data-news-date="{{ \Carbon\Carbon::parse($article->news->date)->locale('id_ID')->isoFormat('D MMMM Y') }}"
+                                    data-news-view="{{ $article->news->newsViews()->count() }}x dilihat"
+                                    data-news-id="{{ $article->news_id }}"
+                                    data-url="{{ route('news.singlepost', $article->news->slug) }}"
+                                    data-button="{{ $article->news->status == 'banned' ? '<button class="btn btn-sm btn-light-warning btn-unbanned text-warning">Buka banned artikel</button>' : '<button class="btn btn-sm btn-light-warning btn-banned text-warning">Banned artikel</button>' }}"
+                                >
                                     <i><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
                                             <path fill="currentColor" d="M12 6.5a9.77 9.77 0 0 1 8.82 5.5c-1.65 3.37-5.02 5.5-8.82 5.5S4.83 15.37 3.18 12A9.77 9.77 0 0 1 12 6.5m0-2C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5m0 5a2.5 2.5 0 0 1 0 5a2.5 2.5 0 0 1 0-5m0-2c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5s4.5-2.02 4.5-4.5s-2.02-4.5-4.5-4.5" />
                                         </svg></i>
@@ -190,13 +206,13 @@
             <div class="modal-body">
                 <div class="mb-1">
                     <p class="text-muted mb-0">Pelapor:</p>
-                    <h6 class="m-0" id="name-user-article">dsfdf</h6>
-                    <p class="mt-0" id="email-user-article">fdcd</p>
+                    <h6 class="m-0" id="name-user-article"></h6>
+                    <p class="mt-0" id="email-user-article"></p>
                 </div>
                 <div class="mb-1">
                     <p class="text-muted mb-0">Penulis artikel:</p>
-                    <h6 class="m-0" id="name-writer-article">vdscd</h6>
-                    <p class="mt-0" id="email-writer-article">cfdcd</p>
+                    <h6 class="m-0" id="name-writer-article"></h6>
+                    <p class="mt-0" id="email-writer-article"></p>
                 </div>
                 <div class="mb-1">
                     <p class="text-muted mb-0">Artikel yang dilaporkan:</p>
@@ -204,22 +220,21 @@
                         <div class="p-3">
                             <div class="row">
                                 <div class="col-lg-2">
-                                    <img src="{{ asset('assets/img/news/news-100.webp') }}" width="100%" alt="">
+                                    <img id="news-image" width="80px" height="80px" style="object-fit: cover" alt="">
                                 </div>
                                 <div class="col-lg-6">
-                                    <p style="color: #175A95; margin-bottom: 5px;">Fashion</p>
-                                    <b>Jiraiya Banks Wants To Teach You How To Build A House Jiraiya Banks Wants To Teach You How To</b>
+                                    <p id="news-category" style="color: #175A95; margin-bottom: 5px;"></p>
+                                    <b id="news-name"></b>
                                     <div class="d-flex mt-3 gap-3">
-
                                         <div class="d-flex">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
                                                 <path fill="#ef6e6e" d="M5 22q-.825 0-1.412-.587T3 20V6q0-.825.588-1.412T5 4h1V2h2v2h8V2h2v2h1q.825 0 1.413.588T21 6v14q0 .825-.587 1.413T19 22zm0-2h14V10H5zM5 8h14V6H5zm0 0V6z" /></svg>
-                                            <span style="font-size: 13px;" class="ms-1">Apr 25, 2023</span>
+                                            <span style="font-size: 13px;" class="ms-1" id="news-date"></span>
                                         </div>
                                         <div class="d-flex">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="21" height="22" viewBox="0 0 24 24">
                                                 <path fill="#ef6e6e" d="M12 6.5a9.77 9.77 0 0 1 8.82 5.5c-1.65 3.37-5.02 5.5-8.82 5.5S4.83 15.37 3.18 12A9.77 9.77 0 0 1 12 6.5m0-2C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5m0 5a2.5 2.5 0 0 1 0 5a2.5 2.5 0 0 1 0-5m0-2c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5s4.5-2.02 4.5-4.5s-2.02-4.5-4.5-4.5" /></svg>
-                                            <span style="font-size: 13px;" class="ms-1">129x dilihat</span>
+                                            <span style="font-size: 13px;" class="ms-1" id="news-view"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -229,7 +244,7 @@
                 </div>
                 <div class="mb-1">
                     <p class="text-muted mb-0">Isi laporan:</p>
-                    <p id="description-article">cscddffdsfd</p>
+                    <p id="description-article"></p>
                 </div>
                 <div class="mb-1">
                     <p class="text-muted mb-0">Bukti:</p>
@@ -239,8 +254,10 @@
             <div class="modal-footer w-100 d-flex justify-content-between">
                 <a href="" class="btn btn-sm btn-light-primary text-primary text-start">Download bukti</a>
                 <div class="text-end gap-4">
-                    <a href="" class="btn btn-sm btn-light-success text-success">Lihat artikel</a>
-                    <button class="btn btn-sm btn-light-warning btn-delete-comment text-warning">Banned artikel</button>
+                    <a id="url-article" class="btn btn-sm btn-light-success text-success" target="_blank">Lihat artikel</a>
+                    <div id="detail-article-btn">
+
+                    </div>
                     <button type="button" class="btn btn-sm btn-light-danger text-danger" data-bs-dismiss="modal">Tutup</button>
                 </div>
             </div>
@@ -288,10 +305,45 @@
     </div>
 </div>
 {{-- detail modal end --}}
+
+{{-- banned confirm start --}}
+<div class="modal fade" id="confirm-banned-modal" tabindex="-1" aria-labelledby="vertical-center-modal" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+    <div class="modal-content modal-filled bg-light-warning">
+        <form id="banned-form" method="post">
+            @csrf
+            @method('PATCH')
+            <div class="modal-body p-4">
+                <div class="text-center text-warning">
+                    <i class="ti ti-alert-octagon fs-7"></i>
+                    <h4 class="mt-2">Konfirmasi banned</h4>
+                    <p class="mt-3">
+                        Apakah Anda yakin ingin membanned berita ini?
+                    </p>
+                    <button type="button" class="btn btn-light my-2 me-2" data-bs-dismiss="modal">
+                    Tidak
+                    </button>
+                    <button type="submit" class="btn btn-warning my-2 btn-banned-submit">
+                    Yakin
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    </div>
+</div>
+{{-- banned confirm end --}}
 @endsection
 
 @section('script')
     <script>
+        $('.btn-banned').click(function() {
+            var id = $(this).data('id');
+            $('#banned-form').attr('action', '/news/banned/'+id);
+            $('#confirm-banned-modal').modal('show');
+            $('#detail-modal-article').modal('hide');
+        });
+
         $('.btn-detail').click(function() {
             var id = $(this).data('id');
             var nameUser = $(this).data('name-user');
@@ -311,6 +363,41 @@
         });
 
         $('.btn-detail-article').click(function() {
+            var id = $(this).data('id');
+            var nameUser = $(this).data('name-user-article');
+            var emailUser = $(this).data('email-user-article');
+            var nameWriter = $(this).data('name-writer-article');
+            var emailWriter = $(this).data('email-writer-article');
+            var description = $(this).data('description-article');
+            var proof = $(this).data('proof-detail');
+            var button = $(this).data('button');
+
+            var newsImage = $(this).data('news-image');
+            var newsCategory = $(this).data('news-category');
+            var newsName = $(this).data('news-name');
+            var newsDate = $(this).data('news-date');
+            var newsView = $(this).data('news-view');
+            var newsUrl = $(this).data('url');
+            var newsId = $(this).data('news-id');
+
+            $('#name-user-article').text(nameUser);
+            $('#email-user-article').text(emailUser);
+            $('#name-writer-article').text(nameWriter);
+            $('#email-writer-article').text(emailWriter);
+            $('#description-article').text(description);
+            $('#proof-detail').attr('src', proof);
+
+            $('#news-image').attr('src', newsImage);
+            $('#news-category').text(newsCategory);
+            $('#news-name').text(newsName);
+            $('#news-date').text(newsDate);
+            $('#news-view').text(newsView);
+            $('#url-article').attr('href', newsUrl);
+            
+            $('#detail-article-btn').html(button);
+
+            $('.btn-banned').attr('data-id', newsId);
+
             $('#detail-modal-article').modal('show');
         });
     </script>

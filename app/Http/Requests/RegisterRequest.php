@@ -26,7 +26,11 @@ class RegisterRequest extends FormRequest
             'email' => 'required|string|email|max:255|unique:users,email',
             'password' => 'required|string|min:8',
         ];
+        
+    }
 
+    public function messages() : array
+    {
         return [
             'name.required' => 'Nama wajib diisi.',
             'name.string' => 'Nama harus berupa teks.',
@@ -43,6 +47,5 @@ class RegisterRequest extends FormRequest
             'password.string' => 'Kata sandi harus berupa teks.',
             'password.min' => 'Kata sandi minimal 8 karakter.',
         ];
-        
     }
 }

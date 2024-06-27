@@ -87,17 +87,11 @@
                 @empty
                 @endforelse
 
-                {{-- @if ($advertisement_mids)
-                <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        @foreach ($advertisement_mids as $advertisement_mid)
-                        <div class="carousel-item active" data-bs-interval="2000">
-                            <img src="{{asset($advertisement_mid && $advertisement_mid->image != null ? 'storage/'.$advertisement_mid->image : "CONTOHIKLAN.png")}}" width="100%" height="181px" style="object-fit: cover" alt="" class="d-block w-100" alt="...">
+                @if ($advertisement_mids)
+                        <div>
+                            <img src="{{asset($advertisement_mid && $advertisement_mid->image != null ? 'storage/'.$advertisement_mid->image : "CONTOHIKLAN.png")}}" width="100%" height="181px" style="object-fit: cover" alt="" alt="...">
                         </div>
-                        @endforeach
-                    </div>
-                </div>
-                @endif --}}
+                @endif
 
                 <div class="mb-5">
                     @php
