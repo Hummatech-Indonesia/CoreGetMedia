@@ -72,8 +72,7 @@ class NewsSubCategoryController extends Controller
         $advertisement_unders = $this->advertisements->wherePosition(AdvertisementEnum::SUBCATEGORY, 'under');
         $advertisement_mids = $this->advertisements->wherePosition(AdvertisementEnum::SUBCATEGORY, 'mid');
 
-        return view(
-            'pages.user.subcategory.index',
+        return view('pages.user.subcategory.index',
             compact(
                 'categories',
                 'subCategories',
