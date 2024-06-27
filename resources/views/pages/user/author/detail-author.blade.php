@@ -8,7 +8,7 @@
             padding: 2%;
             border-radius: 10px;
             /* width: 400px;
-                                                height: 130px; */
+                                            height: 130px; */
         }
 
         .card-category {
@@ -42,25 +42,7 @@
         }
     </style>
 
-    <style>
-        .news-metainfo {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
 
-        .news-metainfo li {
-            display: flex;
-            align-items: center;
-        }
-
-        .news-metainfo li i {
-            margin-right: 5px;
-        }
-    </style>
 @endsection
 
 @section('content')
@@ -215,9 +197,9 @@
                                 width="100%" height="302px" style="object-fit: cover" alt="">
                         </div>
                     @else
-                        <div class="sidebar mt-4 mb-4 bg_gray" style="width: 400px; height: 302px;">
-                            <p class="text-center align-middle" style="line-height: 302px;">Iklan</p>
-                        </div>
+                    <div class="sidebar mt-4 mb-4 bg_gray" style="width: 400px; height: 302px;">
+                        <p class="text-center align-middle" style="line-height: 500px;">Iklan</p>
+                    </div>
                     @endif
 
                 </div>
@@ -264,7 +246,7 @@
                         @forelse ($newses as $news)
                             <div class="news-card-five">
                                 <div class="news-card-img">
-                                    <img src="{{ asset('storage/' . $news->image) }}" class="mb-4" width="100%"
+                                    <img src="{{ asset('storage/' . $news->image) }}" class="" width="100%"
                                         height="150px" style="object-fit: cover" alt="Image">
 
                                 </div>
@@ -299,23 +281,12 @@
                                     </ul> --}}
 
 
-                                    {{-- <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus text-danger"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($news->date)->translatedFormat('d F Y') }}</a>
+                                    <ul class="news-metainfo list-style">
+                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($news->date)->translatedFormat('d F Y') }}</a>
                                         </li>
                                         <li><i class="fi fi-rr-eye text-danger"></i><a href="javascript:void(0)">{{ $news->newsViews()->count() }}x
                                                 dilihat</a></li>
-                                    </ul> --}}
-
-                                    <div class="container mt-5">
-                                        <ul class="news-metainfo list-style">
-                                            <li><i class="fi fi-rr-calendar-minus"></i><a
-                                                    href="javascript:void(0)">{{ \Carbon\Carbon::parse($news->date)->translatedFormat('d F Y') }}</a>
-                                            </li>
-                                            <li><i class="fi fi-rr-eye"></i><a
-                                                    href="javascript:void(0)">{{ $news->newsViews()->count() }}x
-                                                    dilihat</a></li>
-                                        </ul>
-                                    </div>
+                                    </ul>
 
                                 </div>
                             </div>
@@ -332,6 +303,7 @@
             </div>
         </div>
     </div>
+
 @endsection
 
 {{-- @section('script')
