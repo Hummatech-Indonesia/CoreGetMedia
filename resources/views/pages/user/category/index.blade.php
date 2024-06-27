@@ -60,7 +60,7 @@
 <div class="sports-wrap ptb-100">
     <div class="container">
         <div class="side-responsive d-lg-flex flex-lg-row flex-sm-column flex-md-column">
-            <div class="col-lg-8 me-4 col-md-12 col-sm-12">
+            <div class="col-lg-8 me-5 col-md-12 col-sm-12">
                 @forelse ($newsTop as $item)
                 <div class="news-card-four" style="height: 550px;">
                     <div class="news-card-img">
@@ -86,6 +86,10 @@
                 @if ($advertisement_mids)
                 <div>
                     <img src="{{asset($advertisement_mid && $advertisement_mid->image != null ? 'storage/'.$advertisement_mid->image : "CONTOHIKLAN.png")}}" width="100%" height="181px" style="object-fit: cover" alt="" alt="...">
+                </div>
+                @else
+                <div class="bg_gray" style="width: 100%; height: 181px;">
+                    <p class="text-center align-middle" style="line-height: 181px;">Advertisement</p>
                 </div>
                 @endif
 
@@ -205,6 +209,15 @@
                     </div>
                     @endif
 
+                    @if ($advertisement_rights)
+                    <div class="sidebar mt-3 mb-4" style="width: 450px">
+                        <img src="{{asset($advertisement_rights && $advertisement_rights->image != null ? 'storage/'.$advertisement_rights->image : "CONTOHIKLAN.png")}}" width="100%" height="603px" style="object-fit: cover" alt="">
+                    </div>
+                    @else
+                    <div class="sidebar mt-3 mb-4 bg_gray" style="width: 450px; height: 603px;">
+                        <p class="text-center align-middle" style="line-height: 603px;">Advertisement</p>
+                    </div>
+                    @endif
 
                     @if($popularTags->isNotEmpty())
                     <div class="sidebar-widget" style="width: 450px">
