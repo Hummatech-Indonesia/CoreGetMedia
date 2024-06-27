@@ -298,11 +298,21 @@ class NewsRepository extends BaseRepository implements NewsInterface
     public function whereUser($id)
     {
         return $this->model->query()
-        ->where('user_id', $id)
-        ->withCount('newsViews')
-        ->withCount('newsLikes')
-        ->where('status', NewsEnum::ACCEPTED->value)
-        ->get();
+            ->where('user_id', $id)
+            ->withCount('newsViews')
+            ->withCount('newsLikes')
+            ->where('status', NewsEnum::ACCEPTED->value)
+            ->get();
+    }
+
+    public function whereDetailAuthor($id): mixed
+    {   
+        return $this->model->query()
+            ->where('user_id', $id)
+            ->withCount('newsViews')
+            ->withCount('newsLikes')
+            ->where('status', NewsEnum::ACCEPTED->value)
+            ->paginate(10);
     }
 
     public function countByUserAndStatus($id, $status)

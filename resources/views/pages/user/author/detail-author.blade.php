@@ -172,10 +172,7 @@
             @endforelse
 
         </div>
-        {{-- @php
-            $paginate = $newses->paginate(10);
-        @endphp
-        <x-paginator :paginator="$paginate" /> --}}
+        <x-paginator :paginator="$newses" />
     </div>
 
     <div class="col-lg-4">
