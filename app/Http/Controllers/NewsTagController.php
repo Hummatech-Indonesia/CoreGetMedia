@@ -39,11 +39,15 @@ class NewsTagController extends Controller
 
         $query = $request->input('search');
         $news_tags = $this->news->whereTag($news->id, 'top');
+        $trendings = $this->news->newsPopular();
+
+        $trending_id = $trendings->pluck('id');
         $id = $news_tags->pluck('id');
-        $newsTags = $this->news->tagLatest($news->id, 2, $id);
+        $ids = $trending_id->merge($id);
+
+        $newsTags = $this->news->tagLatest($news->id, 5, $ids, 'notall');
 
         $CategoryPopulars = $this->category->showWithCount();
-        $trendings = $this->news->newsPopular();
         $popularTags = $this->tag->showWithCount();
 
         $advertisement_rights = $this->advertisements->wherePosition(AdvertisementEnum::TAG, 'right');
@@ -89,7 +93,7 @@ class NewsTagController extends Controller
         $news = $this->tag->showWithSLug($slug);
 
         $query = $request->input('search');
-        $newsTags = $this->news->taglatest($news->id, 10, null);
+        $newsTags = $this->news->taglatest($news->id, 10, 0, 'all');
         $CategoryPopulars = $this->category->showWithCount();
         $query = $request->input('search');
         $trendings = $this->news->whereCategory($news->id, $query);

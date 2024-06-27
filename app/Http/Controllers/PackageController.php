@@ -2,18 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Interfaces\PackageFeaturesInterface;
 use App\Contracts\Interfaces\PackageInteface;
 use App\Models\Package;
 use App\Http\Requests\StorePackageRequest;
-use App\Http\Requests\UpdatePackageRequest;
+use App\Services\PackageService;
 
 class PackageController extends Controller
 {
     private PackageInteface $package;
+    private PackageFeaturesInterface $packageFeatures;
+    private PackageService $service;
 
-    public function __construct(PackageInteface $package)
+    public function __construct(PackageInteface $package, PackageService $service, PackageFeaturesInterface $packageFeatures)
     {
-        //
+        $this->package = $package;
+        $this->packageFeatures = $packageFeatures;
+        $this->service = $package;
     }
 
     /**
@@ -21,7 +26,8 @@ class PackageController extends Controller
      */
     public function index()
     {
-        //
+        $packages = $this->package->get();
+        return view('', compact('packages'));
     }
 
     /**
@@ -37,7 +43,11 @@ class PackageController extends Controller
      */
     public function store(StorePackageRequest $request)
     {
-        //
+        $data = $this->service->store($request);
+        $package_id = $this->package->store($data)->id;
+
+        $this->service->storeFeatures($data['name_features'], $package_id);
+        return back()->with('success', 'Berhasil menambahkan paket berlangganan.');
     }
 
     /**
@@ -59,9 +69,13 @@ class PackageController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePackageRequest $request, Package $package)
+    public function update(StorePackageRequest $request, Package $package)
     {
-        //
+        $data = $this->service->store($request);
+        $package_id = $this->package->update($package->id, $data)->id;
+
+        $this->service->storeFeatures($data['name_features'], $package_id);
+        return back()->with('success', 'Berhasil mengupdate paket berlangganan.');
     }
 
     /**
@@ -69,6 +83,7 @@ class PackageController extends Controller
      */
     public function destroy(Package $package)
     {
-        //
+        $this->package->delete($package->id);
+        return back()->with('success', 'Berhasil menghapus paket berlangganan.');
     }
 }
