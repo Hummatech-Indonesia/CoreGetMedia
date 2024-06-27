@@ -817,11 +817,15 @@ $popular_down_id = $popular_down->pluck('id');
     <i class="ri-arrow-up-line"></i>
 </button>
 
-{{-- @if ($advertisement_unders)
-<div class="container-fluid mt-5 mb-5">
-    <img src="{{ asset($advertisement_unders && $advertisement_unders->image != null ? 'storage/'.$advertisement_unders->image : "CONTOHIKLAN.png") }}" width="100%" height="295px" style="object-fit: cover" alt="">
-</div>
-@endif --}}
+@if ($advertisement_unders)
+    <div class="container-fluid mt-5 mb-5">
+        <img src="{{ asset($advertisement_unders && $advertisement_unders->image != null ? 'storage/'.$advertisement_unders->image : "CONTOHIKLAN.png") }}" width="100%" height="295px" style="object-fit: cover" alt="">
+    </div>
+@else
+    <div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center" style="height: 295px; background-color:#F6F6F6">
+        <p style="color: #22222278">Advertisement</p>
+    </div>
+@endif
 {{--
     <div class="modal fade" id="newsletter-popup" tabindex="-1" aria-labelledby="newsletter-popup" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl">
