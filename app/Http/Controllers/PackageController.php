@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Interfaces\PackageInteface;
 use App\Models\Package;
 use App\Http\Requests\StorePackageRequest;
 use App\Http\Requests\UpdatePackageRequest;
 
 class PackageController extends Controller
 {
+    private PackageInteface $package;
+
+    public function __construct(PackageInteface $package)
+    {
+        //
+    }
+
     /**
      * Display a listing of the resource.
      */

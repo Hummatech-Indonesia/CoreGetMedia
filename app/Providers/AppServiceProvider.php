@@ -19,6 +19,7 @@ use App\Contracts\Interfaces\NewsReportInterface;
 use App\Contracts\Interfaces\NewsSubCategoryInterface;
 use App\Contracts\Interfaces\NewsTagInterface;
 use App\Contracts\Interfaces\NewsViewInterface;
+use App\Contracts\Interfaces\PackageInteface;
 use App\Contracts\Interfaces\PopularInterface;
 use App\Contracts\Interfaces\PositionAdvertisementInterface;
 use App\Contracts\Interfaces\RegisterInterface;
