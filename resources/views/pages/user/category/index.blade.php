@@ -88,7 +88,7 @@
                 <div class="mb-5">
                     @php
                     $trending_id = $trendings->take(4)->where('news_views_count', '>', 0)->pluck('id');
-                    $latest_news = $latests->whereNotIn('id', $trending_id)->paginate(5);
+                    $latest_news = $latests->whereNotIn('id', $trending_id)->paginate(4);
                     @endphp
 
                     @if($latest_news->isNotEmpty())
