@@ -87,17 +87,18 @@
 
                 @endif
                 @empty
+                <div class="col-12">
+                    <div class="d-flex justify-content-center">
+                        <div>
+                            <img src="{{ asset('assets/img/no-data/empty.png') }}" width="150px" alt="">
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <h5>Tidak ada data</h5>
+                    </div>
+                </div>
                 @endforelse
 
-                @if ($advertisement_mids)
-                <div class="mt-4 mb-4">
-                    <img src="{{asset($advertisement_mids && $advertisement_mids->image != null ? 'storage/'.$advertisement_mids->image : "CONTOHIKLAN.png")}}" width="100%" height="181px" style="object-fit: cover" alt="">
-                </div>
-                @else
-                <div class="bg_gray" style="width: 100%; height: 181px;">
-                    <p class="text-center align-middle" style="line-height: 181px;">Iklan</p>
-                </div>
-                @endif
 
                 <div class="mb-5">
                     @php
@@ -156,6 +157,17 @@
                     </div>
                     @endforelse
                 </div>
+
+                @if ($advertisement_mids)
+                <div class="mt-4 mb-4">
+                    <img src="{{asset($advertisement_mids && $advertisement_mids->image != null ? 'storage/'.$advertisement_mids->image : "CONTOHIKLAN.png")}}" width="100%" height="181px" style="object-fit: cover" alt="">
+                </div>
+                @else
+                <div class="bg_gray" style="width: 100%; height: 181px;">
+                    <p class="text-center align-middle" style="line-height: 181px;">Iklan</p>
+                </div>
+                @endif
+
                 <x-paginator :paginator="$news" />
             </div>
 
@@ -196,27 +208,27 @@
                         </h3>
 
                         @forelse ($trending_news as $trending)
-                        @if ($trending->news_views_count > 0)
-                        <div class="news-card-three">
-                            <div class="news-card-img">
-                                <img src="{{ asset('storage/' . $trending->image) }}" class="img-popular" alt="Image" />
-                            </div>
-                            <div class="news-card-info">
-                                <h3>
-                                    <a href="{{ route('news.singlepost', ['news' => $trending->slug]) }}">
-                                        {{ Illuminate\Support\Str::limit($trending->name, 45, '...') }}
-                                    </a>
-                                </h3>
+                            {{-- @if ($trending->news_views_count > 0) --}}
+                            <div class="news-card-three">
+                                <div class="news-card-img">
+                                    <img src="{{ asset('storage/' . $trending->image) }}" class="img-popular" alt="Image" />
+                                </div>
+                                <div class="news-card-info">
+                                    <h3>
+                                        <a href="{{ route('news.singlepost', ['news' => $trending->slug]) }}">
+                                            {{ Illuminate\Support\Str::limit($trending->name, 45, '...') }}
+                                        </a>
+                                    </h3>
 
-                                <ul class="news-metainfo list-style d-flex">
-                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)" style="font-size: 14px;">{{ \Carbon\Carbon::parse($trending->date)->translatedFormat('d F Y') }}</a>
-                                    </li>
-                                    <li><i class="fi fi-rr-eye"></i><a href="javscript:void(0)" style="font-size: 14px;">{{ $trending->news_views_count ? $trending->news_views_count : '0' }}x
-                                            dilihat</a></li>
-                                </ul>
+                                    <ul class="news-metainfo list-style d-flex">
+                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)" style="font-size: 14px;">{{ \Carbon\Carbon::parse($trending->date)->translatedFormat('d F Y') }}</a>
+                                        </li>
+                                        <li><i class="fi fi-rr-eye"></i><a href="javscript:void(0)" style="font-size: 14px;">{{ $trending->news_views_count ? $trending->news_views_count : '0' }}x
+                                                dilihat</a></li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                        @endif
+                            {{-- @endif --}}
                         @empty
                         <div class="col-12">
                             <div class="d-flex justify-content-center">
