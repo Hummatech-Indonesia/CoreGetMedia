@@ -142,7 +142,7 @@
 
     .news-metainfo.d-flex {
         display: flex;
-        justify-content: space-between;
+        gap: 10px;
     }
 
     .news-metainfo li {
@@ -195,7 +195,7 @@
                         <div class="news-card-info">
                             <h3><a href="{{ route('news.singlepost', ['news' => $popular->slug]) }}">{{ Str::limit($popular->name, 50, '...') }}</a>
                             </h3>
-                            <ul class="news-metainfo list-style">
+                            <ul class="news-metainfo d-flex list-style">
                                 <li><i class="fi fi-rr-eye"></i>{{ $popular->news_views_count }}x dilihat
                                 </li>
                             </ul>
@@ -246,7 +246,7 @@ $popular_down_id = $popular_down->pluck('id');
                 </div>
                 <div class="news-card-info">
                     <h3><a href="{{ route('news.singlepost', ['news' => $categoryPopular->slug]) }}">{{ $categoryPopular->name }}</a></h3>
-                    <ul class="news-metainfo list-style">
+                    <ul class="news-metainfo d-flex list-style">
                         <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($categoryPopular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
                         <li><i class="fi fi-rr-eye"></i>{{ $categoryPopular->news_views_count }}x dilihat</li>
                     </ul>
@@ -260,7 +260,7 @@ $popular_down_id = $popular_down->pluck('id');
                 <div class="news-card-info">
                     <a href="{{ route('categories.show.user', $categoryPopular->newsCategories[0]->category->slug) }}" class="news-cat">{{ $categoryPopular->newsCategories[0]->category->name }}</a>
                     <h3><a href="{{ route('news.singlepost', ['news' => $categoryPopular->slug]) }}">{{ $categoryPopular->name }}</a></h3>
-                    <ul class="news-metainfo list-style">
+                    <ul class="news-metainfo d-flex list-style">
                         <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($categoryPopular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
                         <li><i class="fi fi-rr-eye"></i>{{ $categoryPopular->news_views_count }}x dilihat</li>
                     </ul>
@@ -283,7 +283,7 @@ $popular_down_id = $popular_down->pluck('id');
                 <img src="{{ asset('storage/' . $newsPin->image) }}" class="w-100" style="height: 450px; object-fit: cover;" alt="Image" />
                 <div class="news-card-info">
                     <h3><a href="{{ route('news.singlepost', ['news' => $newsPin->slug]) }}">{{ $newsPin->name }}</a></h3>
-                    <ul class="news-metainfo">
+                    <ul class="news-metainfo d-flex">
                         <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($newsPin->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
                         <li><i class="fi fi-rr-eye"></i>{{ $newsPin->news_views_count }}x dilihat</li>
                     </ul>
@@ -298,7 +298,7 @@ $popular_down_id = $popular_down->pluck('id');
                 <div class="news-card-info text-start">
                     <h3><a href="{{ route('news.singlepost', ['news' => $newsPin->slug]) }}">{{ Illuminate\Support\Str::limit($newsPin->name, 50, '...') }}</a></h3>
                     <p>{!! Illuminate\Support\Str::limit($newsPin->description, 65, '...') !!}</p>
-                    <ul class="news-metainfo">
+                    <ul class="news-metainfo d-flex">
                         <li><i class="fi fi-rr-calendar-minus text-start"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($newsPin->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
                         <li><i class="fi fi-rr-eye"></i>{{ $newsPin->news_views_count }}x dilihat</li>
                     </ul>
@@ -329,7 +329,7 @@ $popular_down_id = $popular_down->pluck('id');
                 </div>
                 <div class="news-card-info">
                     <h3><a href="{{ route('news.singlepost', ['news' => $category2Popular->slug]) }}">{{ $category2Popular->name }}</a></h3>
-                    <ul class="news-metainfo list-style">
+                    <ul class="news-metainfo d-flex list-style">
                         <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($category2Popular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
                         <li><i class="fi fi-rr-eye"></i>{{ $category2Popular->news_views_count }}x dilihat</li>
                     </ul>
@@ -343,7 +343,7 @@ $popular_down_id = $popular_down->pluck('id');
                 <div class="news-card-info">
                     <a href="{{ route('categories.show.user', $category2Popular->newsCategories[0]->category->slug) }}" class="news-cat">{{ $category2Popular->newsCategories[0]->category->name }}</a>
                     <h3><a href="{{ route('news.singlepost', ['news' => $category2Popular->slug]) }}">{{ $category2Popular->name }}</a></h3>
-                    <ul class="news-metainfo list-style">
+                    <ul class="news-metainfo d-flex list-style">
                         <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($category2Popular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
                         <li><i class="fi fi-rr-eye"></i>{{ $category2Popular->news_views_count }}x dilihat</li>
                     </ul>
@@ -402,7 +402,7 @@ $popular_down_id = $popular_down->pluck('id');
                         </h3>
                         <p>{!! Str::limit(strip_tags($latest->description), 250) !!}</p>
 
-                        <ul class="news-metainfo list-style">
+                        <ul class="news-metainfo d-flex list-style">
                             <li class="author">
                                 <span class="author-img">
                                     @if ($latest->user->image != null && Storage::disk('public')->exists($latest->user->image))
@@ -454,7 +454,7 @@ $popular_down_id = $popular_down->pluck('id');
                             <div class="news-card-info">
                                 <h3><a href="{{ route('news.singlepost', $popular->slug) }}">{{ Str::limit($popular->name, 50, '...') }}</a>
                                 </h3>
-                                <ul class="news-metainfo list-style">
+                                <ul class="news-metainfo d-flex list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a>
                                     </li>
                                     <li><i class="fi fi-rr-eye"></i>{{ $popular->newsViews()->count() }}x
@@ -472,7 +472,7 @@ $popular_down_id = $popular_down->pluck('id');
                                 <h3><a href="{{ route('news.singlepost', $popular->slug) }}">{{ Str::limit($popular->name, 50, '...') }}</a>
                                 </h3>
                                 <p>{{ Str::limit($popular->name, 120, '...') }}</p>
-                                <ul class="news-metainfo list-style">
+                                <ul class="news-metainfo d-flex list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a>
                                     </li>
                                     <li><i class="fi fi-rr-eye"></i>{{ $popular->newsViews()->count() }}x
@@ -506,7 +506,7 @@ $popular_down_id = $popular_down->pluck('id');
                             <div class="news-card-info">
                                 <h3><a href="{{ route('news.singlepost', $popular->slug) }}">{{ Str::limit($popular->name, 50, '...') }}</a>
                                 </h3>
-                                <ul class="news-metainfo list-style">
+                                <ul class="news-metainfo d-flex list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a>
                                     </li>
                                     <li><i class="fi fi-rr-eye"></i>{{ $popular->newsViews()->count() }}x
@@ -523,7 +523,7 @@ $popular_down_id = $popular_down->pluck('id');
                                 <a href="{{ route('categories.show.user', $popular->newsCategories[0]->category->slug) }}" class="news-cat">{{ $popular->newsCategories[0]->category->name }}</a>
                                 <h3><a href="{{ route('news.singlepost', $popular->slug) }}">{{ Str::limit($popular->name, 50, '...') }}</a>
                                 </h3>
-                                <ul class="news-metainfo list-style">
+                                <ul class="news-metainfo d-flex list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a>
                                     </li>
                                     <li><i class="fi fi-rr-eye"></i>{{ $popular->newsViews()->count() }}x
@@ -634,7 +634,7 @@ $popular_down_id = $popular_down->pluck('id');
                             <img src="{{ asset('assets/img/news/news-2.webp') }}" class="d-block w-100" alt="...">
                             <h3 class="pt-2" style="font-size: 12px"><a href="javascript:void(0)">Loerm oamod oekp eocoinw xskni kopi oakoel iaklo oaidnx</a></h3>
                             <div class="news-card-info">
-                                <ul class="news-metainfo list-style d-flex" style="margin: 0;">
+                                <ul class="news-metainfo d-flex list-style d-flex" style="margin: 0;">
                                     <li style="font-size: 11px; margin: 0; padding:0">
                                         <i class="fi fi-rr-calendar-minus pt-1" style="font-size: 11px; margin: 0;"></i>
                                         <a href="javascript:void(0)" class="ms-3">Apr 25, 2023</a>
@@ -651,7 +651,7 @@ $popular_down_id = $popular_down->pluck('id');
                             <img src="{{ asset('assets/img/news/news-2.webp') }}" class="d-block w-100" alt="...">
                             <h3 class="pt-2" style="font-size: 12px"><a href="javascript:void(0)">Loerm oamod oekp eocoinw xskni kopi oakoel iaklo oaidnx</a></h3>
                             <div class="news-card-info">
-                                <ul class="news-metainfo list-style d-flex" style="margin: 0;">
+                                <ul class="news-metainfo d-flex list-style d-flex" style="margin: 0;">
                                     <li style="font-size: 11px; margin: 0; padding:0">
                                         <i class="fi fi-rr-calendar-minus pt-1" style="font-size: 11px; margin: 0;"></i>
                                         <a href="javascript:void(0)" class="ms-3">Apr 25, 2023</a>
@@ -671,7 +671,7 @@ $popular_down_id = $popular_down->pluck('id');
                             <img src="{{ asset('assets/img/news/news-2.webp') }}" class="d-block w-100" alt="...">
                             <h3 class="pt-2" style="font-size: 12px"><a href="javascript:void(0)">Loerm oamod oekp eocoinw xskni kopi oakoel iaklo oaidnx</a></h3>
                             <div class="news-card-info">
-                                <ul class="news-metainfo list-style d-flex" style="margin: 0;">
+                                <ul class="news-metainfo d-flex list-style d-flex" style="margin: 0;">
                                     <li style="font-size: 11px; margin: 0; padding:0">
                                         <i class="fi fi-rr-calendar-minus pt-1" style="font-size: 11px; margin: 0;"></i>
                                         <a href="javascript:void(0)" class="ms-3">Apr 25, 2023</a>
@@ -688,7 +688,7 @@ $popular_down_id = $popular_down->pluck('id');
                             <img src="{{ asset('assets/img/news/news-2.webp') }}" class="d-block w-100" alt="...">
                             <h3 class="pt-2" style="font-size: 12px"><a href="javascript:void(0)">Loerm oamod oekp eocoinw xskni kopi oakoel iaklo oaidnx</a></h3>
                             <div class="news-card-info">
-                                <ul class="news-metainfo list-style d-flex" style="margin: 0;">
+                                <ul class="news-metainfo d-flex list-style d-flex" style="margin: 0;">
                                     <li style="font-size: 11px; margin: 0; padding:0">
                                         <i class="fi fi-rr-calendar-minus pt-1" style="font-size: 11px; margin: 0;"></i>
                                         <a href="javascript:void(0)" class="ms-3">Apr 25, 2023</a>
@@ -780,7 +780,7 @@ $popular_down_id = $popular_down->pluck('id');
                                             </div>
                                             <h3><a href="{{ route('news.singlepost', $newsPin->slug) }}">{{ Str::limit($newsPin->name, 50, '...') }}</a>
                                             </h3>
-                                            <ul class="news-metainfo list-style">
+                                            <ul class="news-metainfo d-flex list-style">
                                                 <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($newsPin->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a>
                                                 </li>
                                                 <li><i class="fi fi-rr-comment"></i>0</li>
