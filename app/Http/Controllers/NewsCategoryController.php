@@ -104,7 +104,17 @@ class NewsCategoryController extends Controller
         $newsTop = $this->news->whereCategory($category_id, 'top');
         $trendings = $this->news->whereCategory($category_id, $query, 10);
 
-        return view('pages.user.category.all-category', compact('category', 'news', 'categories', 'subCategories', 'popularCategory', 'popularTags', 'trendings', 'newsTop'));
+        $advertisement_rights = $this->advertisements->wherePosition(AdvertisementEnum::SUBCATEGORY, 'right');
+        $advertisement_lefts = $this->advertisements->wherePosition(AdvertisementEnum::SUBCATEGORY, 'left');
+        $advertisement_tops = $this->advertisements->wherePosition(AdvertisementEnum::SUBCATEGORY, 'top');
+        $advertisement_unders = $this->advertisements->wherePosition(AdvertisementEnum::SUBCATEGORY, 'under');
+        $advertisement_mids = $this->advertisements->wherePosition(AdvertisementEnum::SUBCATEGORY, 'mid');
+
+        return view('pages.user.category.all-category', compact('category', 'news', 'categories', 'subCategories', 'popularCategory', 'popularTags', 'trendings', 'newsTop',  'advertisement_rights',
+        'advertisement_lefts',
+        'advertisement_tops',
+        'advertisement_unders',
+        'advertisement_mids'));
     }
 
 
