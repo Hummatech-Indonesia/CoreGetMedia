@@ -87,6 +87,16 @@
 
                 @endif
                 @empty
+                <div class="col-12">
+                    <div class="d-flex justify-content-center">
+                        <div>
+                            <img src="{{ asset('assets/img/no-data/empty.png') }}" width="150px" alt="">
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <h5>Tidak ada data</h5>
+                    </div>
+                </div>
                 @endforelse
 
 
