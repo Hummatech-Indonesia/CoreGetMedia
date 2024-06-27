@@ -37,7 +37,7 @@
                     </a>
                 </div>
                 <div class="d-flex justify-content-center align-items-center">
-                    <img src="{{asset('assets/img/auth/bg-forget-password.svg')}}" width="520px" alt="auth-login-cover" class="img-fluid my-5 " data-app-dark-img="illustrations/auth-login-illustration-dark.html">
+                    <img src="{{asset('assets/img/auth/scooby.png')}}" width="520px" alt="auth-login-cover" class="img-fluid my-5 " data-app-dark-img="illustrations/auth-login-illustration-dark.html">
                 </div>
             </div>
 

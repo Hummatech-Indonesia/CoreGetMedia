@@ -91,7 +91,7 @@ class AdminService
                 unlink(public_path($old_photo));
             }
 
-            $new_photo = $this->upload(UploadDiskEnum::NEWS->value, $request->image);
+            $new_photo = $this->upload(UploadDiskEnum::LOGO->value, $request->image);
 
             $aboutGet->image = $new_photo;
         }

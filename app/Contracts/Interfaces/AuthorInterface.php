@@ -15,4 +15,6 @@ interface AuthorInterface extends GetInterface, StoreInterface, UpdateInterface,
     public function accepted();
     public function updateByUser($user, array $data) : mixed;
     public function whereUserId();
+    public function getAuthor(): mixed;
+
 }

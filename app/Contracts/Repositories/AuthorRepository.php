@@ -116,4 +116,11 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
         return $this->model->query()
         ->where('user_id', auth()->user()->id)->first();
     }
+
+    public function getAuthor(): mixed
+    {
+        return $this->model->query()
+            ->where('status', AuthorEnum::ACCEPTED->value)
+            ->paginate(10);
+    }
 }
