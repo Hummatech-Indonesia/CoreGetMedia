@@ -149,7 +149,7 @@
                                         <div class="stat-container">
                                             <div class="vertical-line"></div>
                                             <div class="text-center">
-                                                <h5>963</h5>
+                                                <h5>{{ $follows }}</h5>
                                                 <p class="text-muted">Mengikuti</p>
                                             </div>
                                         </div>
@@ -177,7 +177,7 @@
                                     @endif
 
                                     <div class="ms-3">
-                                        <h6>{{ $author->user->name }}</h6>
+                                        <a href="{{ route('author.detail', $author->user->slug) }}"><h6>{{ $author->user->name }}</h6></a>
                                         <p class="text-muted">Penulis</p>
                                     </div>
                                 </div>
