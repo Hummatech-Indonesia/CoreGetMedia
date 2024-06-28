@@ -182,6 +182,7 @@ class NewsController extends Controller
      */
     public function store(StoreNewsRequest $request)
     {
+        dd($request);
         $data = $this->service->store($request);
         if (auth()->user()->roles->pluck('name')[0] == "admin") {
             $data['status'] = NewsEnum::ACCEPTED->value;

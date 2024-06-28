@@ -55,7 +55,7 @@
                         </div> --}}
                         <label class="form-label">Nama Fitur</label>
                         <div class="email-repeater mb-3">
-                            <div data-repeater-list="name_features">
+                            <div data-repeater-list="name_feature">
                               <div data-repeater-item class="row mb-3">
                                 <div class="col-md-10">
                                     <input type="text" name="name_feature" class="form-control" placeholder="Nama Fitur" />
