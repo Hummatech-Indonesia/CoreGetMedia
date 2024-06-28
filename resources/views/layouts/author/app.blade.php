@@ -60,13 +60,13 @@
 
 <body>
     <div class="preloader">
-        <img src="{{ asset('assets/img/logo-get.png') }}" style="width:150px !important" alt="loader"
-            class="lds-ripple img-fluid animate-bounce bounce2" />
+        <img src="{{ asset('assets/img/logo/logo-get.svg') }}" class="lds-ripple img-fluid animate-bounce" alt="loader"
+        class="lds-ripple img-fluid animate-bounce bounce2" />
     </div>
     <!-- Preloader -->
     <div class="preloader">
-        <img src="{{ asset('assets/img/logo-get.png') }}" style="width:150px !important" alt="loader"
-            class="lds-ripple img-fluid animate-bounce bounce2" />
+        <img src="{{ asset('assets/img/logo/logo-get.svg') }}" class="lds-ripple img-fluid animate-bounce" alt="loader"
+        class="lds-ripple img-fluid animate-bounce bounce2" />
     </div>
 
     <!--  Body Wrapper -->
@@ -119,7 +119,7 @@
     <script src="{{ asset('admin/dist/libs/bootstrap-switch/dist/js/bootstrap-switch.min.js') }}"></script>
     <script src="{{ asset('admin/dist/js/forms/bootstrap-switch.js') }}"></script>
     <script src="{{ asset('admin/dist/libs/bootstrap-duallistbox/dist/jquery.bootstrap-duallistbox.min.js') }}"></script>
-    <script>    
+    <script>
         const authToken = localStorage.getItem('token')
         $.ajaxSetup({
             headers: {
