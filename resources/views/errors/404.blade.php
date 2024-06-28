@@ -13,7 +13,7 @@
 
 <div class="pt-2">
     <div class="my-5 text-center">
-        <h2>Business Article</h2>
+        <h2>Berita Direkomendasikan</h2>
         <div class="mx-auto" style="width: 200px; height: 5px; border-radius: 20px; background-color: #175A95;"></div>
     </div>
     <div class="container">
