@@ -261,7 +261,6 @@
                             </div>
                         </form>
 
-
                     </div>
 
                     <div class="popular-news-wrap">
