@@ -77,6 +77,7 @@ Route::get('detail-news/{news}', [NewsController::class, 'detail_news_admin'])->
 Route::put('approved-news/{news}', [NewsController::class, 'approved_news'])->name('approved.news.admin');
 
 Route::get('news-list', [NewsController::class, 'news_list'])->name('news-list.admin');
+Route::get('news-list/draft', [NewsController::class, 'draft_list'])->name('draft-list.admin');
 
 Route::get('confirm-author-list', [AuthorController::class, 'index'])->name('confirm-author.admin');
 Route::get('author-list', [AuthorController::class, 'list_author'])->name('author-list.admin');
