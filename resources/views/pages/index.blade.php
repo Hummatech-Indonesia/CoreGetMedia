@@ -187,53 +187,13 @@
 
     }
 
-    /* 
-@media (max-width: 1023.98px) and (min-width: 1024px) {
+    
+@media (min-width: 1024px) {
     .iklan-top {
-        padding-right: 170px;
-        padding-left: 170px;
+       height: 250px;
     }
 }
 
-@media (min-width: 768px) and (max-width: 1023.98px) {
-    .iklan-top {
-        padding-right: 50px;
-        padding-left: 50px;
-    }
-}
-@media (min-width: 768px) and (max-width: 1023.98px) {
-    .iklan-top {
-        padding-right: 30px;
-        padding-left: 30px;
-    }
-}
-
-@media (min-width: 768px) and (max-width: 1023.98px) {
-    .iklan-top {
-        padding-right: 55px;
-        padding-left: 55px;
-    }
-}
-
-@media (min-width: 768px) and (max-width: 1023.98px) {
-    .iklan-top {
-        padding-right: 120px;
-        padding-left: 120px;
-    }
-}
-@media (min-width: 576px) and (max-width: 767.98px) {
-    .iklan-top {
-        padding-right: 50px;
-        padding-left: 50px;
-    }
-}
-
-@media (max-width: 575.98px) {
-    .iklan-top {
-        padding-right: 10px;
-        padding-left: 10px;
-    }
-} */
 
 </style>
 
@@ -249,7 +209,7 @@
 
     @if ($advertisement_tops)
     <div class="mt-4 iklan-top">
-        <img src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/'.$advertisement_tops->image : "CONTOHIKLAN.png") }}" width="100%" height="250px" style="object-fit: cover" alt="">
+        <img class="iklan-top" src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/'.$advertisement_tops->image : "CONTOHIKLAN.png") }}" width="100%" height="auto" alt="">
     </div>
     @else
     <div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center" style="height: 250px;  background-color: var(--bgColor);">
@@ -278,7 +238,7 @@ $displayedPopulars = $populars->take(10)->where('news_views_count', '>', 0)->plu
                     @if ($popular->news_views_count > 0)
                     <div class="swiper-slide news-card-one">
                         <div class="news-card-img">
-                            <img src="{{ asset('storage/' . $popular->image) }}" alt="Image" height="100px" width="100px" />
+                            <img src="{{ asset('storage/' . $popular->image) }}" alt="Image" height="100px" width="100px" style="object-fit: cover;" />
                         </div>
                         <div class="news-card-info">
                             <h3><a href="{{ route('news.singlepost', ['news' => $popular->slug]) }}">{{ Str::limit($popular->name, 50, '...') }}</a>

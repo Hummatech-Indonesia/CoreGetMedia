@@ -32,16 +32,16 @@
                             </div>
                             <div class="col-lg-12">
                                 <label for="exampleInputPassword1" class="form-label fw-semibold mt-4">No
-                                    Telephone (opsional)</label>
-                                <input type="text" class="form-control" id="exampleInputtext" placeholder="No Telephone"
+                                    Telepon (opsional)</label>
+                                <input type="text" class="form-control" id="exampleInputtext" placeholder="No Telepon"
                                     value="{{ auth()->user()->phone_number }}" name="phone_number">
                             </div>
                             <div class="col-12">
                                 <div class="">
-                                    <label for="exampleInputPassword1" class="form-label fw-semibold mt-4">Address
+                                    <label for="exampleInputPassword1" class="form-label fw-semibold mt-4">Alamat
                                         (opsional)</label>
                                     <textarea type="text" class="form-control" name="address" id="exampleInputtext"
-                                        placeholder="Address" value="{{ auth()->user()->address }}"
+                                        placeholder="Alamat" value="{{ auth()->user()->address }}"
                                         style="resize: none">{{ auth()->user()->address }}</textarea>
                                 </div>
                             </div>

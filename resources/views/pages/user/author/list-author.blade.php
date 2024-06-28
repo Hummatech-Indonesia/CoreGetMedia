@@ -104,12 +104,6 @@
         border-color: transparent;
     }
 
-    .breadcrumb-wrap {
-        padding: 80px 0 74px;
-        /* background-color: var(--bgColor); 223*/
-        background-image: url("assets/img/list-author-bg.png");
-    }
-
 </style>
 
 <style>
@@ -145,11 +139,11 @@
 @endsection
 
 @section('content')
-<div class="breadcrumb-wrap">
-    <div class="container">
-        <h2 class="breadcrumb-title text-white">Penulis</h2>
+<div class="col-lg-12">
+    <div class="breadcrumb-wrap">
+        <h2 class="breadcrumb-title">Penulis</h2>
         <ul class="breadcrumb-menu list-style">
-            <li><a class="text-white" href="/">Beranda</a></li>
+            <li><a href="/">Beranda</a></li>
             <li>Penulis</li>
         </ul>
     </div>

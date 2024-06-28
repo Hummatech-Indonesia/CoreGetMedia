@@ -69,15 +69,15 @@
 @endsection
 
 @section('content')
-    <div class="breadcrumb-wrap" style="background-image: url({{ asset('detail-author.png') }});">
-        <div class="container">
-            <h2 class="breadcrumb-title text-light">Author</h2>
-            <ul class="breadcrumb-menu list-style">
-                <li><a href="/" class="text-light">Beranda</a></li>
-                <li>Author</li>
-            </ul>
-        </div>
+<div class="col-lg-12">
+    <div class="breadcrumb-wrap">
+        <h2 class="breadcrumb-title">Penulis</h2>
+        <ul class="breadcrumb-menu list-style">
+            <li><a href="/">Beranda</a></li>
+            <li>Penulis</li>
+        </ul>
     </div>
+</div>
 
 
     <div class="author-wrap">

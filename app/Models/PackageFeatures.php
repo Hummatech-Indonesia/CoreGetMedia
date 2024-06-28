@@ -12,7 +12,7 @@ class PackageFeatures extends Model
 
     protected $fillable = [
         'package_id',
-        'name',
+        'name_feature',
     ];
 
     protected $table = 'package_features';

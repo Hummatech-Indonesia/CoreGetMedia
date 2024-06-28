@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('package_features', function (Blueprint $table) {
             $table->id();
             $table->foreignId('package_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->string('name');
+            $table->string('name_feature');
             $table->timestamps();
         });
     }

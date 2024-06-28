@@ -24,16 +24,16 @@ class PackageService
             'name' => $data['name'],
             'price' => $data['price'],
             'description' => $data['description'],
-            'name_features' => $data['name_features']
+            'name_feature' => $data['name_feature']
         ];
     }
 
-    public function storeFeatures($name_features, $package)
+    public function storeFeatures(array $name_features, $package)
     {
         foreach ($name_features as $data) {
             PackageFeatures::create([
                 'package_id' => $package,
-                'name' => $data,
+                'name_feature' => $data['name_feature'],
             ]);
         };
     }
