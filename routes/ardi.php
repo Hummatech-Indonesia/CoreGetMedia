@@ -12,6 +12,7 @@ use App\Http\Controllers\NewsLikeController;
 use App\Http\Controllers\NewsRejectController;
 use App\Http\Controllers\NewsReportController;
 use App\Http\Controllers\NewsSubCategoryController;
+use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PositionAdvertisementController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -56,3 +57,7 @@ Route::put('recovery-draft-advertisement/{id}', [AdvertisementController::class,
 
 Route::put('banned-news/{news}', [NewsController::class, 'banned_news'])->name('banned.news.admin');
 Route::put('unbanned-news/{news}', [NewsController::class, 'unbanned_news'])->name('unbanned.news.admin');
+
+Route::post('create-package', [PackageController::class, 'store'])->name('create.package.admin');
+Route::put('update-package/{package}', [PackageController::class, 'update'])->name('update.package.admin');
+Route::delete('delete-package/{package}', [PackageController::class, 'destroy'])->name('delete.package.admin');

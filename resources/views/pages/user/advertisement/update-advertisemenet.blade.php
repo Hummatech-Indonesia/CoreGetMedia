@@ -46,7 +46,7 @@
             <div>
                 @if ($data->deleted_at != null)
                 <button type="submit" class="btn btn-md text-white me-2" style="background-color: #1EBB9E;" id="submitButton3">
-                    Pulihkan
+                    Unggah
                 </button>
                 @else
                 <button type="submit" class="btn btn-md text-white me-2" style="background-color: #1EBB9E;" id="submitButton2">
@@ -54,7 +54,11 @@
                 </button>
                 @endif
                 <button type="submit" class="btn btn-md text-white" style="background-color: #175A95;" id="submitButton1">
-                    Update
+                    @if ($data->deleted_at != null)
+                        Simpan
+                    @else
+                        Update
+                    @endif
                 </button>
             </div>
         </div>
