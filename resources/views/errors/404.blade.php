@@ -20,166 +20,34 @@
         <div class="row gx-55 gx-5">
             <div class="col-lg-12">
                 <div class="row justify-content-center">
-                    <div class="col-md-6">
-                        <div class="news-card-five">
-                            <div class="news-card-img">
-                                <img src="assets/img/news/news-60.webp" alt="Image">
-                                <a href="business.html" class="news-cat">Travel</a>
-                            </div>
-                            <div class="news-card-info">
-                                <h3><a href="business-details.html">Selective Focus Photography Of Orange Fox Life</a>
-                                </h3>
-                                <p>Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print,
-                                    graphic or
-                                    web desi…</p>
-                                <ul class="news-metainfo list-style">
-                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 03,
-                                            2024</a></li>
-                                    <li><i class="fi fi-rr-clock-three"></i>11 Min Read</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="news-card-five">
-                            <div class="news-card-img">
-                                <img src="assets/img/news/news-60.webp" alt="Image">
-                                <a href="business.html" class="news-cat">Travel</a>
-                            </div>
-                            <div class="news-card-info">
-                                <h3><a href="business-details.html">Selective Focus Photography Of Orange Fox Life</a>
-                                </h3>
-                                <p>Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print,
-                                    graphic or
-                                    web desi…</p>
-                                <ul class="news-metainfo list-style">
-                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 03,
-                                            2024</a></li>
-                                    <li><i class="fi fi-rr-clock-three"></i>11 Min Read</li>
-                                </ul>
+                    @forelse ($news_latest->take(10) as $news)
+                        <div class="col-md-6">
+                            <div class="news-card-five">
+                                <div class="news-card-img">
+                                    @if ($news->image != null && Storage::disk('public')->exists($news->image))
+                                        <img src="{{ asset('storage/' . $news->image) }}" class="w-100" style="height: 120px; object-fit: cover;" alt="Image" />
+                                    @else
+                                        <img src="{{ asset('assets/blank-img.jpg') }}" class="w-100" style="height: 120px; object-fit: cover;" alt="Image" />
+                                    @endif
+                                    <a href="{{ route('categories.show.user', $news->newsCategories[0]->category->slug) }}" class="news-cat">{{ $news->newsCategories[0]->category->name }}</a>
+                                </div>
+                                <div class="news-card-info">
+                                    <h3><a href="{{ route('news.singlepost', $news->slug) }}">{{ Illuminate\Support\Str::limit($news->name, 30, '...') }}</a>
+                                    </h3>
+                                    <p style="max-height: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: block; ">{!! Str::limit(strip_tags($news->description), 130) !!}</p>
+                                    <ul class="news-metainfo list-style">
+                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($news->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
+                                        <li><i class="fi fi-rr-eye"></i>{{ $news->newsViews()->count() }}x dilihat</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="news-card-five">
-                            <div class="news-card-img">
-                                <img src="assets/img/news/news-60.webp" alt="Image">
-                                <a href="business.html" class="news-cat">Travel</a>
-                            </div>
-                            <div class="news-card-info">
-                                <h3><a href="business-details.html">Selective Focus Photography Of Orange Fox Life</a>
-                                </h3>
-                                <p>Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print,
-                                    graphic or
-                                    web desi…</p>
-                                <ul class="news-metainfo list-style">
-                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 03,
-                                            2024</a></li>
-                                    <li><i class="fi fi-rr-clock-three"></i>11 Min Read</li>
-                                </ul>
-                            </div>
+                    @empty
+                        <div class="col-12 col-md-12 text-center">
+                            <img src="{{ asset('assets/img/author/empty.png') }}" width="200px" alt="">
+                            <p>Belum ada data</p>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="news-card-five">
-                            <div class="news-card-img">
-                                <img src="assets/img/news/news-60.webp" alt="Image">
-                                <a href="business.html" class="news-cat">Travel</a>
-                            </div>
-                            <div class="news-card-info">
-                                <h3><a href="business-details.html">Selective Focus Photography Of Orange Fox Life</a>
-                                </h3>
-                                <p>Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print,
-                                    graphic or
-                                    web desi…</p>
-                                <ul class="news-metainfo list-style">
-                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 03,
-                                            2024</a></li>
-                                    <li><i class="fi fi-rr-clock-three"></i>11 Min Read</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="news-card-five">
-                            <div class="news-card-img">
-                                <img src="assets/img/news/news-60.webp" alt="Image">
-                                <a href="business.html" class="news-cat">Travel</a>
-                            </div>
-                            <div class="news-card-info">
-                                <h3><a href="business-details.html">Selective Focus Photography Of Orange Fox Life</a>
-                                </h3>
-                                <p>Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print,
-                                    graphic or
-                                    web desi…</p>
-                                <ul class="news-metainfo list-style">
-                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 03,
-                                            2024</a></li>
-                                    <li><i class="fi fi-rr-clock-three"></i>11 Min Read</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="news-card-five">
-                            <div class="news-card-img">
-                                <img src="assets/img/news/news-60.webp" alt="Image">
-                                <a href="business.html" class="news-cat">Travel</a>
-                            </div>
-                            <div class="news-card-info">
-                                <h3><a href="business-details.html">Selective Focus Photography Of Orange Fox Life</a>
-                                </h3>
-                                <p>Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print,
-                                    graphic or
-                                    web desi…</p>
-                                <ul class="news-metainfo list-style">
-                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 03,
-                                            2024</a></li>
-                                    <li><i class="fi fi-rr-clock-three"></i>11 Min Read</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="news-card-five">
-                            <div class="news-card-img">
-                                <img src="assets/img/news/news-60.webp" alt="Image">
-                                <a href="business.html" class="news-cat">Travel</a>
-                            </div>
-                            <div class="news-card-info">
-                                <h3><a href="business-details.html">Selective Focus Photography Of Orange Fox Life</a>
-                                </h3>
-                                <p>Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print,
-                                    graphic or
-                                    web desi…</p>
-                                <ul class="news-metainfo list-style">
-                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 03,
-                                            2024</a></li>
-                                    <li><i class="fi fi-rr-clock-three"></i>11 Min Read</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="news-card-five">
-                            <div class="news-card-img">
-                                <img src="assets/img/news/news-60.webp" alt="Image">
-                                <a href="business.html" class="news-cat">Travel</a>
-                            </div>
-                            <div class="news-card-info">
-                                <h3><a href="business-details.html">Selective Focus Photography Of Orange Fox Life</a>
-                                </h3>
-                                <p>Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print,
-                                    graphic or
-                                    web desi…</p>
-                                <ul class="news-metainfo list-style">
-                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 03,
-                                            2024</a></li>
-                                    <li><i class="fi fi-rr-clock-three"></i>11 Min Read</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    @endforelse
                 </div>
             </div>
         </div>
