@@ -148,9 +148,9 @@
                             </a>
                         </h3>
                         <ul class="news-metainfo list-style">
-                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">{{ \Carbon\Carbon::parse($item->created_at)->translatedFormat('d F Y') }}</a>
+                            <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($item->created_at)->translatedFormat('d F Y') }}</a>
                             </li>
-                            <li><i class="fi fi-rr-eye"></i><a href="news-by-dateus">{{ $item->news_views_count ? $item->news_views_count : '0' }}x
+                            <li><i class="fi fi-rr-eye"></i><a href="javascript:void(0)">{{ $item->news_views_count ? $item->news_views_count : '0' }}x
                                     dilihat</a></li>
                         </ul>
                     </div>

@@ -24,17 +24,26 @@
                                     Anda</label>
                                 <input type="text" class="form-control" placeholder="Name"
                                     value="{{ auth()->user()->name }}" name="name" id="exampleInputtext">
+                                @error('name')
+                                    <strong class="text-danger">{{ $message }}</strong>
+                                @enderror
                             </div>
                             <div class="col-lg-12">
                                 <label for="exampleInputPassword1" class="form-label fw-semibold mt-4">Email</label>
                                 <input type="email" class="form-control" id="exampleInputtext"
                                     value="{{ auth()->user()->email }}" name="email" placeholder="Email">
+                                @error('email')
+                                    <strong class="text-danger">{{ $message }}</strong>
+                                @enderror
                             </div>
                             <div class="col-lg-12">
                                 <label for="exampleInputPassword1" class="form-label fw-semibold mt-4">No
-                                    Telepon (opsional)</label>
+                                    Telepon</label>
                                 <input type="text" class="form-control" id="exampleInputtext" placeholder="No Telepon"
                                     value="{{ auth()->user()->phone_number }}" name="phone_number">
+                                @error('phone_number')
+                                    <strong class="text-danger">{{ $message }}</strong>
+                                @enderror
                             </div>
                             <div class="col-12">
                                 <div class="">
@@ -43,6 +52,9 @@
                                     <textarea type="text" class="form-control" name="address" id="exampleInputtext"
                                         placeholder="Alamat" value="{{ auth()->user()->address }}"
                                         style="resize: none">{{ auth()->user()->address }}</textarea>
+                                    @error('address')
+                                        <strong class="text-danger">{{ $message }}</strong>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-12">
@@ -52,6 +64,9 @@
                                         <button type="button" class="btn btn-success mb-2" id="viewPdfBtn" style="background-color: #175A95; border: none" disabled>Lihat cv</button>
                                     </div>
                                     <input type="file" class="form-control" id="cvInput" name="cv" accept="application/pdf">
+                                    @error('cv')
+                                        <strong class="text-danger">{{ $message }}</strong>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-lg-12">
@@ -59,6 +74,9 @@
                                     Singkat (untuk tampil di akun) (opsional)</label>
                                 <input type="text" class="form-control" id="exampleInputtext" value=""
                                     name="description">
+                                @error('description')
+                                    <strong class="text-danger">{{ $message }}</strong>
+                                @enderror
                             </div>
                             <div class="row">
 
