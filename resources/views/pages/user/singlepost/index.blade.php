@@ -49,34 +49,63 @@
     }
 
 </style>
-{{-- <style>
-    .tooltip-custom {
-        position: fixed;
-        background-color: #333;
-        color: #fff;
-        padding: 5px 10px;
-        border-radius: 5px;
-        font-size: 12px;
-        display: none;
-        z-index: 1000;
-    }
-
-</style> --}}
 
 <style>
 #copy-tooltip {
     position: fixed;
-    top: 20px; /* Ubah sesuai keinginan Anda */
+    top: 20px;
     left: 50%;
     transform: translateX(-50%);
     background-color: white;
     color: #1EBB9E;
     padding: 10px;
     border-radius: 5px;
-    display: none; /* Hidden by default */
-    z-index: 1000; /* Ensure it appears above other content */
+    display: none;
+    z-index: 1000; 
 }
 
+</style>
+
+<style>
+    @media only screen and (max-width: 767px) {
+        .sidebar-widget {
+            padding: 15px;
+            width: 100%;
+        }
+
+        .news-card-three {
+            display: flex;
+            flex-direction: column;
+            align-items: left;
+        }
+
+        .news-card-img img {
+            width: 100%;
+            height: auto;
+        }
+
+        .news-card-info h3 {
+            font-size: 1.2em;
+            text-align: left;
+        }
+
+        .news-metainfo {
+            justify-content: left;
+        }
+
+        .news-metainfo li {
+            margin-right: 15px;
+            font-size: 0.9em;
+        }
+
+        .sidebar {
+            width: 100%;
+        }
+
+        .sidebar-widget-title {
+            font-size: 1.2em;
+        }
+    }
 </style>
 @endsection
 
@@ -661,35 +690,42 @@
             </div>
             <div class="col-lg-4">
                 <div class="sidebar">
-                    <div class="sidebar-widget" style="width: 450px">
+                    <div class="sidebar-widget" id="popular-categories">
                         <h3 class="sidebar-widget-title">Kategori Populer</h3>
                         <ul class="category-widget list-style">
                             @foreach ($CategoryPopulars as $category)
-                            <li><a data-toggle="tooltip" data-placement="top" title="{{ $category->name }}" href="{{ route('categories.show.user', ['category' => $category->slug]) }}"><img src="{{ asset('assets/img/icons/arrow-right.svg') }}" alt="Image">{{ $category->name }}
-                                    <span>({{ $category->news_categories_count }})</span></a></li>
+                                <li>
+                                    <a data-toggle="tooltip" data-placement="top" title="{{ $category->name }}"
+                                        href="{{ route('categories.show.user', ['category' => $category->slug]) }}">
+                                        <img src="{{ asset('assets/img/icons/arrow-right.svg') }}"
+                                            alt="Image">{{ $category->name }}
+                                        <span>({{ $category->news_categories_count }})</span>
+                                    </a>
+                                </li>
                             @endforeach
                         </ul>
                     </div>
-                    <div class="sidebar-widget" style="width: 450px">
+                    <div class="sidebar-widget" id="popular-tags">
                         <h3 class="sidebar-widget-title">Tag Populer</h3>
                         <ul class="tag-list list-style">
                             @forelse ($popularTags as $popularTag)
-                            <li><a href="{{ route('news-tag-list.user', ['tag' => $popularTag->slug]) }}">{{ $popularTag->name }}</a>
-                            </li>
+                                <li><a
+                                        href="{{ route('news-tag-list.user', ['tag' => $popularTag->slug]) }}">{{ $popularTag->name }}</a>
+                                </li>
                             @empty
                             @endforelse
                         </ul>
                     </div>
 
                     @if ($advertisement_rights)
-                    <div class="sidebar mt-3 mb-4" style="width: 450px">
-                        <img src="{{asset($advertisement_rights && $advertisement_rights->image != null ? 'storage/'.$advertisement_rights->image : "CONTOHIKLAN.png")}}" width="100%" height="603px" style="object-fit: cover" alt="">
-                    </div>
+                        <div class="sidebar mt-3 mb-4" id="right-advertisement">
+                            <img src="{{ asset($advertisement_rights && $advertisement_rights->image != null ? 'storage/' . $advertisement_rights->image : 'CONTOHIKLAN.png') }}"
+                                alt="Advertisement">
+                        </div>
                     @else
-                    <div class="sidebar bg_gray" style="width: 450px; height: 603px; display: flex; align-items: center; justify-content: center;">
-                        <p>iklan</p>
-                    </div>
-
+                        <div class="sidebar mt-3 mb-4 bg_gray" style="height: 603px;">
+                            <p class="text-center align-middle" style="line-height: 603px;">Iklan</p>
+                        </div>
                     @endif
                 </div>
             </div>

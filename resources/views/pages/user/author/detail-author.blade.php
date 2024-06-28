@@ -184,8 +184,8 @@
 
                             @empty
                                 <div class="col-12 col-md-12 text-center">
-                                    <img src="{{ asset('assets/img/author/empty.png') }}" width="300px" alt="">
-                                    <p>Penulis ini belum menuliskan berita</p>
+                                    <img src="{{ asset('assets/img/author/empty.png') }}" width="200px" alt="">
+                                    <p>Belum ada data</p>
                                 </div>
                             @endforelse
                         </div>

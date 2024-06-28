@@ -135,6 +135,12 @@ class NewsController extends Controller
         return view('pages.admin.news.news-list', compact('news'));
     }
 
+    public function draft_list()
+    {
+        $news = $this->news->draft();
+        return view('pages.admin.news.draft', compact('news'));
+    }
+
     public function detail_news_admin($news)
     {
         $news = $this->news->showWithSLug($news);
