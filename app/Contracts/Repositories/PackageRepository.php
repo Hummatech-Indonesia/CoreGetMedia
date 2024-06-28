@@ -58,16 +58,8 @@ class PackageRepository extends BaseRepository implements PackageInteface
      */
     public function store(array $data): mixed
     {
-        $feature = $this->model->query()
+        return $this->model->query()
             ->create($data);
-
-        foreach ($data['name_feature'] as $item) {
-            $data['name_feature'] = $item;
-
-            $feature->packageFeatures()->create($data);
-        }
-
-        return $feature;
     }
 
     /**

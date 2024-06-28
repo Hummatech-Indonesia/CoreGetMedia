@@ -25,7 +25,8 @@ class StorePackageRequest extends FormRequest
             'name' => 'required',
             'price' => 'required',
             'description' => 'required',
-            'name_feature' => 'required'
+            'name_feature' => 'array|required',
+            'name_feature.*' => 'required'
         ];
     }
 }

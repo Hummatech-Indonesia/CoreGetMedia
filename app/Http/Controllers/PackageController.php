@@ -44,8 +44,9 @@ class PackageController extends Controller
     public function store(StorePackageRequest $request)
     {
         $data = $this->service->store($request);
-        $this->package->store($data);
+        $package_id = $this->package->store($data)->id;
 
+        $this->service->storeFeatures($data['name_feature'], $package_id);
         return back()->with('success', 'Berhasil menambahkan paket berlangganan.');
     }
 
