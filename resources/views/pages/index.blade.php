@@ -186,7 +186,8 @@
         background-color: #222222;
 
     }
-/* 
+
+    /* 
 @media (max-width: 1023.98px) and (min-width: 1024px) {
     .iklan-top {
         padding-right: 170px;
@@ -234,7 +235,6 @@
     }
 } */
 
-
 </style>
 
 @endsection
@@ -248,56 +248,56 @@
 <div class="container-fluid">
 
     @if ($advertisement_tops)
-<div class="mt-4 iklan-top">
-    <img src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/'.$advertisement_tops->image : "CONTOHIKLAN.png") }}" width="100%" height="250px" style="object-fit: contain" alt="">
-</div>
-@else
-<div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center" style="height: 250px;  background-color: var(--bgColor);">
-    <p style="color: #22222278">Iklan</p>
-</div>
-{{-- <div class="mt-4 iklan-top">
+    <div class="mt-4 iklan-top">
+        <img src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/'.$advertisement_tops->image : "CONTOHIKLAN.png") }}" width="100%" height="250px" style="object-fit: cover" alt="">
+    </div>
+    @else
+    <div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center" style="height: 250px;  background-color: var(--bgColor);">
+        <p style="color: #22222278">Iklan</p>
+    </div>
+    {{-- <div class="mt-4 iklan-top">
     <img src="{{ asset('assets/img/news/news-11.webp') }}" width="100%" height="250px" style="object-fit: cover" alt="">
 </div> --}}
 @endif
 
-    @php
-    $displayedPopulars = $populars->take(10)->where('news_views_count', '>', 0)->pluck('id');
-    @endphp
+@php
+$displayedPopulars = $populars->take(10)->where('news_views_count', '>', 0)->pluck('id');
+@endphp
 
-    <div class="trending-news-box">
-        <div class="row gx-5">
-            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 d-flex justify-content-center">
-                <div class="trending-prev me-3"><i class="flaticon-left-arrow"></i></div>
-                <h4>Artikel Popular</h4>
-                <div class="trending-next ms-3"><i class="flaticon-right-arrow"></i></div>
-            </div>
-            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12">
-                <div class="trending-news-slider swiper">
-                    <div class="swiper-wrapper">
-                        @forelse ($populars->take(10) as $popular)
-                        @if ($popular->news_views_count > 0)
-                        <div class="swiper-slide news-card-one">
-                            <div class="news-card-img">
-                                <img src="{{ asset('storage/' . $popular->image) }}" alt="Image" style="object-fit: cover;" />
-                            </div>
-                            <div class="news-card-info">
-                                <h3><a href="{{ route('news.singlepost', ['news' => $popular->slug]) }}">{{ Str::limit($popular->name, 50, '...') }}</a>
-                                </h3>
-                                <ul class="news-metainfo d-flex list-style">
-                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
-                                    <li><i class="fi fi-rr-eye"></i>{{ $popular->news_views_count }}x dilihat
-                                    </li>
-                                </ul>
-                            </div>
+<div class="trending-news-box">
+    <div class="row gx-5">
+        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 d-flex justify-content-center">
+            <div class="trending-prev me-3"><i class="flaticon-left-arrow"></i></div>
+            <h4>Artikel Popular</h4>
+            <div class="trending-next ms-3"><i class="flaticon-right-arrow"></i></div>
+        </div>
+        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12">
+            <div class="trending-news-slider swiper">
+                <div class="swiper-wrapper">
+                    @forelse ($populars->take(10) as $popular)
+                    @if ($popular->news_views_count > 0)
+                    <div class="swiper-slide news-card-one">
+                        <div class="news-card-img">
+                            <img src="{{ asset('storage/' . $popular->image) }}" alt="Image" height="100px" width="100px" />
                         </div>
-                        @endif
-                        @empty
-                        @endforelse
+                        <div class="news-card-info">
+                            <h3><a href="{{ route('news.singlepost', ['news' => $popular->slug]) }}">{{ Str::limit($popular->name, 50, '...') }}</a>
+                            </h3>
+                            <ul class="news-metainfo d-flex list-style">
+                                <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
+                                <li><i class="fi fi-rr-eye"></i>{{ $popular->news_views_count }}x dilihat
+                                </li>
+                            </ul>
+                        </div>
                     </div>
+                    @endif
+                    @empty
+                    @endforelse
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 {{-- @if ($advertisement_tops)
