@@ -61,8 +61,22 @@
     </div>
 </div>
 
-<div class="sports-wrap ptb-100">
+<div class="sports-wrap">
     <div class="container">
+        @if ($advertisement_tops)
+        <a href="{{ $advertisement_tops->url }}">
+            <div class="mt-4 iklan-top" style="position: relative; width: 100%; height: 250px; overflow: hidden;">
+                <img class="iklan-top-img" src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/'.$advertisement_tops->image : "CONTOHIKLAN.png") }}" width="100%" height="auto" alt="">
+                <div style="width: 100%; background-color: rgba(0, 0, 0, 0.5); color: white; text-align: center; padding: 10px; box-sizing: border-box; position: relative; top: -50px;">
+                    <a href="jascript:void(0)">Ingin baca berita tanpa iklan?</a> <a href="/subscribe" style="color: #7cadd8; text-decoration: underline;">Berlangganan</a>
+                </div>
+            </div>
+        </a>
+        @else
+        <div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center bg_gray top-noiklan" style="height: 250px;">
+            <p style="color: #22222278">Iklan</p>
+        </div>
+        @endif
         <div class="row gx-55 gx-5">
             <div class="col-lg-8">
 
