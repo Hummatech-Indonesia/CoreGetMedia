@@ -76,7 +76,7 @@
             opacity: 0;
             transition: all 0.3s ease-out;
         }
-        .loaded img{
+        .loaded img#loadImg{
             opacity: 0;
             transition: all 0.3s ease-out;
         }
@@ -134,7 +134,7 @@
 
 <body>
     <div id="loader-wrapper">
-        <img src="{{ asset('assets/img/logo/preloader.gif') }}" class="lds-ripple img-fluid animate-bounce" alt="loader" style="width: 12pc; top: 18pc;"/>
+        <img src="{{ asset('assets/img/logo/preloader.gif') }}" id="loadImg" class="lds-ripple img-fluid animate-bounce" alt="loader" style="width: 12pc; top: 18pc;"/>
         <div id="loader"></div>
     </div>
 
