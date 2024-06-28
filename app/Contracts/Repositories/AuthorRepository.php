@@ -121,7 +121,7 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
     {
         return $this->model->query()
             ->where('status', AuthorEnum::ACCEPTED->value)
-            ->whereNotIn('user_id', $id)
+            ->whereNot('user_id', $id)
             ->paginate(10);
     }
 }
