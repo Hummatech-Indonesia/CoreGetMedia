@@ -47,6 +47,17 @@
         object-fit: cover;
     }
 
+    @media (min-width: 1024px) {
+        .iklan-top {
+            height: 250px;
+            width: 1350px;
+        }
+
+        .top-noiklan {
+            width: 1350px;
+        }
+    }
+
 </style>
 @endsection
 
@@ -113,9 +124,11 @@
                     @endforelse
 
                     @if ($advertisement_unders)
-                    <div class="mt-4 mb-4">
-                        <img src="{{asset($advertisement_unders && $advertisement_unders->image != null ? 'storage/'.$advertisement_unders->image : "CONTOHIKLAN.png")}}" width="100%" height="225" style="object-fit: cover;" alt="">
-                    </div>
+                    <a href="{{ $advertisement_unders->url }}">
+                        <div class="mt-4 mb-4">
+                            <img src="{{asset($advertisement_unders && $advertisement_unders->image != null ? 'storage/'.$advertisement_unders->image : "CONTOHIKLAN.png")}}" width="100%" height="225" style="object-fit: cover;" alt="">
+                        </div>
+                    </a>
                     @else
                     <div class="bg_gray" style="width: 100%; height: 225px;">
                         <p class="text-center align-middle" style="line-height: 225px;">Advertisement</p>
@@ -147,11 +160,6 @@
                         </div>
                         @endif
 
-                        @if ($advertisement_rights)
-                        <div class="sidebar mt-3 mb-4" style="width: 450px">
-                            <img src="{{asset($advertisement_rights && $advertisement_rights->image != null ? 'storage/'.$advertisement_rights->image : "CONTOHIKLAN.png")}}" width="100%" height="603px" style="object-fit: cover" alt="">
-                        </div>
-                        @endif
 
                         @php
                         $news_top_id = $newsTop->pluck('id');
@@ -198,9 +206,11 @@
                         @endif
 
                         @if ($advertisement_rights)
-                        <div class="sidebar mt-3 mb-4" style="width: 450px">
-                            <img src="{{asset($advertisement_rights && $advertisement_rights->image != null ? 'storage/'.$advertisement_rights->image : "CONTOHIKLAN.png")}}" width="100%" height="603px" style="object-fit: cover" alt="">
-                        </div>
+                        <a href="{{ $advertisement_rights->url }}">
+                            <div class="sidebar mt-3 mb-4" style="width: 450px">
+                                <img src="{{asset($advertisement_rights && $advertisement_rights->image != null ? 'storage/'.$advertisement_rights->image : "CONTOHIKLAN.png")}}" width="100%" height="603px" style="object-fit: cover" alt="">
+                            </div>
+                        </a>
                         @else
                         <div class="sidebar mt-3 mb-4 bg_gray" style="width: 450px; height: 603px;">
                             <p class="text-center align-middle" style="line-height: 603px;">Iklan</p>
