@@ -249,7 +249,7 @@
 
     @if ($advertisement_tops)
     <div class="mt-4 iklan-top">
-        <img src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/'.$advertisement_tops->image : "CONTOHIKLAN.png") }}" width="100%" height="250px" style="object-fit: cover" alt="">
+        <img src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/'.$advertisement_tops->image : "CONTOHIKLAN.png") }}" width="100%" height="250px" alt="">
     </div>
     @else
     <div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center" style="height: 250px;  background-color: var(--bgColor);">
@@ -278,7 +278,7 @@ $displayedPopulars = $populars->take(10)->where('news_views_count', '>', 0)->plu
                     @if ($popular->news_views_count > 0)
                     <div class="swiper-slide news-card-one">
                         <div class="news-card-img">
-                            <img src="{{ asset('storage/' . $popular->image) }}" alt="Image" height="100px" width="100px" />
+                            <img src="{{ asset('storage/' . $popular->image) }}" alt="Image" height="100px" width="100px" style="object-fit: cover;" />
                         </div>
                         <div class="news-card-info">
                             <h3><a href="{{ route('news.singlepost', ['news' => $popular->slug]) }}">{{ Str::limit($popular->name, 50, '...') }}</a>
