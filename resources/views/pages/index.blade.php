@@ -204,7 +204,7 @@
 
     .theme-dark .btn-three {
         background-color: #222222;
-     
+
     }
 
 </style>
@@ -216,20 +216,20 @@
 @endif --}}
 
 @section('content')
+@if ($advertisement_tops)
+<div class="mt-4">
+    <img src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/'.$advertisement_tops->image : "CONTOHIKLAN.png") }}" width="100%" height="314px" style="object-fit: contain" alt="">
+</div>
+@else
+<div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center" style="height: 314px;  background-color: var(--bgColor);">
+    <p style="color: #22222278">Iklan</p>
+</div>
+@endif
 <div class="container-fluid">
     @php
     $displayedPopulars = $populars->take(10)->where('news_views_count', '>', 0)->pluck('id');
     @endphp
 
-    @if ($advertisement_tops)
-    <div class="container-fluid mt-5 mb-5">
-        <img src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/'.$advertisement_tops->image : "CONTOHIKLAN.png") }}" width="100%" height="314px" style="object-fit: contain" alt="">
-    </div>
-    @else
-    <div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center" style="height: 314px;  background-color: var(--bgColor);">
-        <p style="color: #22222278">Iklan</p>
-    </div>
-    @endif
     <div class="trending-news-box">
         <div class="row gx-5">
             <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 d-flex justify-content-center">
