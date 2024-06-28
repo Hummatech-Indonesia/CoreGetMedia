@@ -18,7 +18,7 @@ class PackageController extends Controller
     {
         $this->package = $package;
         $this->packageFeatures = $packageFeatures;
-        $this->service = $package;
+        $this->service = $service;
     }
 
     /**

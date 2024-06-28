@@ -208,15 +208,17 @@
             </div>
         </div>
         <div class="d-flex justify-content-end">
-            <button type="reset" class="btn btn-danger m-2">
+            <a href="{{ auth()->user()->roles->pluck('name')[0] == "admin" ? route('news-list.admin') : route('news.list.author') }}" class="btn btn-danger m-2">
                 Batal
-            </button>
+            </a>
             <button type="submit" class="btn btn-primary m-2" id="submitButton1">
                 Update
             </button>
-            <button type="submit" class="btn btn-success m-2" id="submitButton2">
-                Upload
-            </button>
+            @if ($news->deleted_at != null)
+                <button type="submit" class="btn btn-success m-2" id="submitButton2">
+                    Upload
+                </button>
+            @endif
         </div>
         </div>
     </form>

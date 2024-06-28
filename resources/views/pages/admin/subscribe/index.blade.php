@@ -28,34 +28,52 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Paket Berlangganan</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ route('voucher.store.admin') }}" method="POST">
+            <form action="{{ route('create.package.admin') }}" method="POST">
                 @method('post')
                 @csrf
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <label class="form-label mt-2">Kode Voucher</label>
-                            <input class="form-control" type="text" name="code">
+                            <label class="form-label mt-2">Nama Paket</label>
+                            <input class="form-control" type="text" name="name">
                             <ul class="error-text"></ul>
                         </div>
                         <div class="col-lg-12">
-                            <label class="form-label mt-2">Potongan Harga</label>
-                            <input class="form-control" type="text" name="presentation">
-                            <ul class="error-text"></ul>
-                        </div>
-                        <div class="col-lg-12">
-                            <label class="form-label mt-2">Jenis Voucher</label>
-                            <select class="form-control" name="status" id="jenis-voucher">
-                                <option disabled selected>Pilih Jenis</option>
-                                <option value="unlimited">Unlimited</option>
-                                <option value="quota">Quota</option>
-                            </select>
+                            <label class="form-label mt-2">Deskripsi Pakett</label>
+                            <input class="form-control" type="text" name="description">
                             <ul class="error-text"></ul>
                         </div>
                         <div class="col-lg-12" id="stok-wrapper">
-                            <label class="form-label mt-2">Stok</label>
+                            <label class="form-label mt-2">Harga Paket</label>
+                            <input class="form-control" type="text" name="price">
+                            <ul class="error-text"></ul>
+                        </div>
+                        {{-- <div class="col-lg-12" id="stok-wrapper">
+                            <label class="form-label mt-2">Nama Fitur</label>
                             <input id="update-quota" class="form-control" class="stok" type="text" name="quota">
                             <ul class="error-text"></ul>
+                        </div> --}}
+                        <label class="form-label">Nama Fitur</label>
+                        <div class="email-repeater mb-3">
+                            <div data-repeater-list="name_features">
+                              <div data-repeater-item class="row mb-3">
+                                <div class="col-md-10">
+                                    <input type="text" name="name_feature" class="form-control" placeholder="Nama Fitur" />
+                                </div>
+                                <div class="col-md-2">
+                                  <button data-repeater-delete="" class="btn btn-danger waves-effect waves-light"
+                                    type="button">
+                                    <i class="ti ti-circle-x fs-5"></i>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                            <button type="button" data-repeater-create="" class="btn btn-info waves-effect waves-light">
+                              <div class="d-flex align-items-center">
+                                Tambah Fitur
+                                <i class="ti ti-circle-plus ms-1 fs-5"></i>
+                              </div>
+                            </button>
                         </div>
                     </div>
 
@@ -296,6 +314,9 @@
 
 @section('script')
 <script src="{{ asset('admin/dist/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
+
+<script src="{{ asset('admin/dist/libs/jquery.repeater/jquery.repeater.min.js') }}"></script>
+<script src="{{ asset('admin/dist/js/plugins/repeater-init.js') }}"></script>
 
 <script>
     var options = {

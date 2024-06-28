@@ -72,11 +72,13 @@ Route::post('voucher-create', [VoucherrController::class, 'store'])->name('vouch
 Route::put('voucher-update/{voucherr}', [VoucherrController::class, 'update'])->name('voucher.update.admin');
 Route::delete('voucher-delete/{voucherr}', [VoucherrController::class, 'destroy'])->name('voucher.delete.admin');
 
+
 Route::get('confirm-news', [NewsController::class, 'confirm_news'])->name('confirm.news.admin');
 Route::get('detail-news/{news}', [NewsController::class, 'detail_news_admin'])->name('detail-news.admin');
 Route::put('approved-news/{news}', [NewsController::class, 'approved_news'])->name('approved.news.admin');
 
 Route::get('news-list', [NewsController::class, 'news_list'])->name('news-list.admin');
+Route::get('news-list/draft', [NewsController::class, 'draft_list'])->name('draft-list.admin');
 
 Route::get('confirm-author-list', [AuthorController::class, 'index'])->name('confirm-author.admin');
 Route::get('author-list', [AuthorController::class, 'list_author'])->name('author-list.admin');
