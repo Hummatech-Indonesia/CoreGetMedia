@@ -123,17 +123,14 @@
             </a>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item">
-                        <a href="/" class="nav-link"
-                            style="{{ request()->routeIs('home.index') ? 'color: #E93314;' : '' }}"> Beranda </a>
-                    </li>
-
+                    <li class="nav-item"> <a href="/" class="nav-link"
+                            style="{{ request()->routeIs('home.index') ? 'color: #E93314;' : '' }}"> Beranda </a> </li>
                     @php
-                    $showMoreCategories = false;
-                    $limitedCategories = $categories->take(5);
+                    $categoryCount = 0;
+                    $otherCategories = collect();
                     @endphp
 
-                    @foreach ($limitedCategories as $category)
+                    @foreach ($categories as $category)
                     @php
                     $isActiveCategory = request()->routeIs('categories.show.user') && request()->route('category') ==
                     $category->slug;
@@ -146,10 +143,10 @@
                     }
                     @endphp
 
-                    <li class="nav-item dropdown">
+                    @if ($categoryCount < 5) <li class="nav-item">
                         <a href="{{ route('categories.show.user', ['category' => $category->slug]) }}"
                             class="dropdown-toggle nav-link {{ $isActiveCategory ? 'active' : '' }}"
-                            style="{{ $isActiveCategory ? 'color: #E93314;' : '' }}" data-bs-toggle="dropdown">
+                            style="{{ $isActiveCategory ? 'color: #E93314;' : '' }}">
                             {{ $category->name }}
                         </a>
                         @if (count($subCategories->where('category_id', $category->id)) > 0)
@@ -165,7 +162,7 @@
                                     <a href="{{ route('news.subcategory', ['slug' => $subCategory->slug]) }}"
                                         class="nav-link {{ $isActive ? 'active' : '' }}"
                                         style="{{ $isActive ? 'color: #E93314;' : '' }}">
-                                        {{ $subCategory->name }}
+                                        {{ Str::limit($subCategory->name, 50) }}
                                     </a>
 
                                     @if (($loop->iteration % 5) == 0)
@@ -191,51 +188,41 @@
                             </div>
                         </ul>
                         @endif
-                    </li>
-                    @endforeach
+                        </li>
+                        @php
+                        $categoryCount++;
+                        @endphp
+                        @else
+                        @php
+                        $otherCategories->push($category);
+                        @endphp
+                        @endif
+                        @endforeach
 
-                    @if (count($categories) > 5)
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            Kategori Lainnya <i class="fas fa-ellipsis-h"></i>
-                        </a>
-                        <ul class="dropdown-menu">
-                            @foreach ($categories->skip(5) as $category)
-                            <li class="nav-item dropdown" style="position: relative;">
-                                <a href="{{ route('categories.show.user', ['category' => $category->slug]) }}"
-                                    class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                    {{ $category->name }}
-                                </a>
-                                @if (count($subCategories->where('category_id', $category->id)) > 0)
-                                <ul class="dropdown-menu"
-                                    style="left: 100%; top: 0; margin-top: -6px; position: absolute;">
-                                    @foreach ($subCategories->where('category_id', $category->id) as $subCategory)
-                                    <li>
-                                        <a href="{{ route('news.subcategory', ['slug' => $subCategory->slug]) }}"
-                                            class="dropdown-item">
-                                            <i class="fas fa-caret-left" style="margin-right: 5px;"></i>
-                                            {{ $subCategory->name }}
+                        @if ($otherCategories->count() > 0)
+                        <li class="nav-item">
+                            <a href="{{ route('categories.show.user', ['category' => 'lainnya']) }}"
+                                class="dropdown-toggle nav-link {{ request()->routeIs('categories.show.user') && request()->route('category') === 'lainnya' ? 'active' : '' }}"
+                                style="{{ request()->routeIs('categories.show.user') && request()->route('category') === 'lainnya' ? 'color: #E93314;' : '' }}">
+                                Lainnya
+                            </a>
+                            <ul class="dropdown-menu">
+                                <div class="d-flex">
+                                    <li class="nav-item">
+                                        @foreach ($otherCategories as $category)
+                                        <a href="{{ route('categories.show.user', ['category' => $category->slug]) }}"
+                                            class="nav-link {{ request()->routeIs('categories.show.user') && request()->route('category') === $category->slug ? 'active' : '' }}"
+                                            style="{{ request()->routeIs('categories.show.user') && request()->route('category') === $category->slug ? 'color: #E93314;' : '' }}">
+                                            {{ $category->name }}
                                         </a>
+                                        @endforeach
                                     </li>
-                                    @endforeach
-                                </ul>
-                                @else
-                                <ul class="dropdown-menu"
-                                    style="left: 100%; top: 0; margin-top: -6px; position: absolute;">
-                                    <li>
-                                        <a class="dropdown-item">Data Kosong</a>
-                                    </li>
-                                </ul>
-                                @endif
-                            </li>
-                            @endforeach
-                        </ul>
-                    </li>
-                    @php
-                    $showMoreCategories = true;
-                    @endphp
-                    @endif
+                                </div>
+                            </ul>
+                        </li>
+                        @endif
                 </ul>
+
 
 
 
@@ -425,6 +412,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (currentLocation === homepageUrl && url === homepageUrl) {
             link.classList.add('active');
         } else if (currentLocation === url) {
+
             link.classList.add('active');
         } else {
             link.classList.remove('active');
