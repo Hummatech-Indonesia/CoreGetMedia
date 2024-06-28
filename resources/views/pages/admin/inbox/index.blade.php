@@ -183,16 +183,18 @@
                                     data-name-user="{{ $comment->user ? $comment->user->name : 'Guest' }}"
                                     data-email-user="{{ $comment->user ? $comment->user->email : '-' }}"
                                     data-comment="{{ $comment->comment->description }}"
+                                    data-comment-id="{{ $comment->comment->id }}"
                                     data-name-writer="{{ $comment->comment->user->name }}"
                                     data-email-writer="{{ $comment->comment->user->email }}"
                                     data-description="{{ $comment->description }}"
+                                    data-url="{{ route('news.singlepost', $comment->comment->news->slug) }}"
                                 >
                                     <i><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
                                             <path fill="currentColor" d="M12 6.5a9.77 9.77 0 0 1 8.82 5.5c-1.65 3.37-5.02 5.5-8.82 5.5S4.83 15.37 3.18 12A9.77 9.77 0 0 1 12 6.5m0-2C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5m0 5a2.5 2.5 0 0 1 0 5a2.5 2.5 0 0 1 0-5m0-2c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5s4.5-2.02 4.5-4.5s-2.02-4.5-4.5-4.5" />
                                         </svg></i>
                                 </button>
             
-                                <button type="submit" style="background-color: #EF6E6E" class="btn btn-sm text-white btn-delete">
+                                <button type="submit" style="background-color: #EF6E6E" class="btn btn-sm text-white btn-delete-report-comment" data-id="{{ $comment->id }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24">
                                         <path fill="#ffffff" d="M7 21q-.825 0-1.412-.587T5 19V6q-.425 0-.712-.288T4 5t.288-.712T5 4h4q0-.425.288-.712T10 3h4q.425 0 .713.288T15 4h4q.425 0 .713.288T20 5t-.288.713T19 6v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zm-7 11q.425 0 .713-.288T11 16V9q0-.425-.288-.712T10 8t-.712.288T9 9v7q0 .425.288.713T10 17m4 0q.425 0 .713-.288T15 16V9q0-.425-.288-.712T14 8t-.712.288T13 9v7q0 .425.288.713T14 17M7 6v13z" />
                                     </svg>
@@ -345,9 +347,9 @@
                 </div>
             </div>
             <div class="modal-footer w-100 d-flex justify-content-between">
-                <a href="" class="btn btn-sm btn-light-success text-success">Lihat komentar</a>
+                <a id="url-comment" class="btn btn-sm btn-light-success text-success" target="_blank">Lihat komentar</a>
                 <div class="text-end gap-4">
-                    <button class="btn btn-sm btn-light-warning btn-delete-comment text-warning me-2">Hapus komentar</button>
+                    <button class="btn btn-sm btn-light-warning btn-delete-comment text-warning me-2" id="delete-comment-btn">Hapus komentar</button>
                     <button type="button" class="btn btn-sm btn-light-danger text-danger" data-bs-dismiss="modal">Tutup</button>
                 </div>
             </div>
@@ -355,6 +357,34 @@
     </div>
 </div>
 {{-- detail modal end --}}
+
+{{-- delete comment modal start --}}
+<div class="modal fade" id="delete-comment-modal" tabindex="-1" aria-labelledby="vertical-center-modal" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+    <div class="modal-content   ">
+        <form id="delete-comment-form" method="post">
+            @csrf
+            @method('DELETE')
+            <div class="modal-body p-4">
+                <div class="text-center text-warning">
+                    <i class="ti ti-alert-octagon fs-7"></i>
+                    <h4 class="mt-2">Konfirmasi hapus komentar</h4>
+                    <p class="mt-3">
+                        Apakah Anda yakin ingin menghapus komentar yang telah dilaporkan?
+                    </p>
+                    <button type="button" class="btn btn-light-danger text-danger my-2 me-2" data-bs-dismiss="modal">
+                    Tidak
+                    </button>
+                    <button type="submit" class="btn btn-warning my-2">
+                    Yakin
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    </div>
+</div>
+{{-- delete comment modal end --}}
 
 {{-- banned confirm start --}}
 <div class="modal fade" id="confirm-banned-modal" tabindex="-1" aria-labelledby="vertical-center-modal" aria-hidden="true">
@@ -421,6 +451,19 @@
             $('#modal-delete').modal('show');
         });
 
+        $('.btn-delete-report-comment').click(function() {
+            var id = $(this).data('id');
+            $('#form-delete').attr('action', '/comment-report/'+id);
+            $('#modal-delete').modal('show');
+        });
+
+        $('.btn-delete-comment').click(function() {
+            var id = $(this).data('id');
+            $('#delete-comment-form').attr('action', '/delete-comment/'+id);
+            $('#detail-modal').modal('hide');
+            $('#delete-comment-modal').modal('show');
+        });
+
         $('.btn-banned').click(function() {
             var id = $(this).data('id');
             $('#banned-form').attr('action', '/news/banned/'+id);
@@ -438,9 +481,11 @@
             var nameUser = $(this).data('name-user');
             var emailUser = $(this).data('email-user');
             var comment = $(this).data('comment');
+            var commentId = $(this).data('comment-id');
             var nameWriter = $(this).data('name-writer');
             var emailWriter = $(this).data('email-writer');
             var description = $(this).data('description');
+            var newsUrl = $(this).data('url');
 
             $('#name-user').text(nameUser);
             $('#email-user').text(emailUser);
@@ -448,6 +493,8 @@
             $('#name-writer').text(nameWriter);
             $('#email-writer').text(emailWriter);
             $('#description').text(description);
+            $('#url-comment').attr('href', newsUrl);
+            $('#delete-comment-btn').attr('data-id', commentId);
             $('#detail-modal').modal('show');
         });
 
@@ -459,8 +506,6 @@
             var emailWriter = $(this).data('email-writer-article');
             var description = $(this).data('description-article');
             var proof = $(this).data('proof-detail');
-            var button = $(this).data('button');
-
             var newsImage = $(this).data('news-image');
             var newsImageName = 'bukti-laporan-'+nameUser+'.png';
             var newsCategory = $(this).data('news-category');
@@ -486,8 +531,6 @@
             $('#download-proof').attr('href', newsImage);
             $('#download-proof').attr('download', newsImageName);
             
-            $('#detail-article-btn').html(button);
-
             $('#detail-modal-article').modal('show');
         });
     </script>
