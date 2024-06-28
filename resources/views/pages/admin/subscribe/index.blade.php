@@ -58,7 +58,7 @@
                             <div data-repeater-list="name_features">
                               <div data-repeater-item class="row mb-3">
                                 <div class="col-md-10">
-                                    <input type="text" name="name_feature" class="form-control" placeholder="Nama Fitur" />
+                                    <input type="text" class="form-control" placeholder="Nama Fitur" />
                                 </div>
                                 <div class="col-md-2">
                                   <button data-repeater-delete="" class="btn btn-danger waves-effect waves-light"

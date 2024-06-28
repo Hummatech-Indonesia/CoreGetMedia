@@ -28,7 +28,7 @@ class PackageService
         ];
     }
 
-    public function storeFeatures($name_features, $package)
+    public function storeFeatures(array $name_features, $package)
     {
         foreach ($name_features as $data) {
             PackageFeatures::create([
