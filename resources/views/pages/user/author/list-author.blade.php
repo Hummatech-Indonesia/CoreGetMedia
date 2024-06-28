@@ -183,7 +183,7 @@
                         <img src="{{ asset('default.png') }}" style="border-radius: 50%;" class="mb-3" style="object-fit: cover" width="90" height="90">
                         @endif
                         <div class="">
-                            <a href="{{ route('author.detail', $author->id) }}" class="btn btn-sm mt-3 mb-1 py-1 px-4 w-100 text-primary bg-light-primary" style="background-color: #CEE4F2; border-radius: 8px;">Detail</a>
+                            <a href="{{ route('author.detail', $author->user->slug) }}" class="btn btn-sm mt-3 mb-1 py-1 px-4 w-100 text-primary bg-light-primary" style="background-color: #CEE4F2; border-radius: 8px;">Detail</a>
                             @auth
                             @php
                             $already = App\Models\Follower::where('author_id', $author->id)->where('user_id', auth()->user()->id)->first()

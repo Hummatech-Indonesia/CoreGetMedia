@@ -149,7 +149,7 @@
                                         <div class="stat-container">
                                             <div class="vertical-line"></div>
                                             <div class="text-center">
-                                                <h5>963</h5>
+                                                <h5>{{ $follows }}</h5>
                                                 <p class="text-muted">Mengikuti</p>
                                             </div>
                                         </div>
@@ -177,7 +177,7 @@
                                     @endif
 
                                     <div class="ms-3">
-                                        <h6>{{ $author->user->name }}</h6>
+                                        <a href="{{ route('author.detail', $author->user->slug) }}"><h6>{{ $author->user->name }}</h6></a>
                                         <p class="text-muted">Penulis</p>
                                     </div>
                                 </div>
@@ -258,35 +258,20 @@
                                     <p>
                                         {!! Str::limit($news->description, 60, '...') !!}
                                     </p>
-                                    {{-- <ul class="news-metainfo list-style">
-                                        <li>
-                                            <i class="fi fi-rr-calendar-minus"></i><a
-                                                href="javascript:view(0)">{{ Carbon\Carbon::parse($news->date)->locale('id_ID')->isoFormat('D MMMM YY') }}</a>
-                                        </li>
-                                        <li>
-                                            <i>
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="20"
-                                                    height="20" viewBox="0 0 24 24">
-                                                    <path fill="#E93314"
-                                                        d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
-                                                </svg>
-                                            </i><a href="javascript:void(0sing)">{{ $news->newsViews()->count() }}x
-                                                dilihat</a>
-                                        </li>
-                                        </li>
-                                    </ul> --}}
-                                    {{-- <ul class="news-metainfo d-flex list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ Carbon\Carbon::parse($news->date)->locale('id_ID')->isoFormat('D MMMM YY') }}</a></li>
-                                        <li><i class="fi fi-rr-eye"></i>{{ $news->newsViews()->count() }}x dilihat</li>
-                                    </ul> --}}
 
-
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($news->date)->translatedFormat('d F Y') }}</a>
-                                        </li>
-                                        <li><i class="fi fi-rr-eye text-danger"></i><a href="javascript:void(0)">{{ $news->newsViews()->count() }}x
-                                                dilihat</a></li>
-                                    </ul>
+                                    <span class="news-metainfo">
+                                        <div class=" d-flex gap-3" style="display: flex">
+                                            <div class="d-inline">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g fill="none" stroke="#e93314" stroke-linecap="round" stroke-width="1.5"><path stroke-linejoin="round" d="M17 4.625H7a4 4 0 0 0-4 4v8.75a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4v-8.75a4 4 0 0 0-4-4m-14 5h18m-4-7v4m-10-4v4"/><path stroke-miterlimit="10" d="M9.5 14.989h5"/></g></svg>
+                                                <a href="javascript:void(0)">{{ \Carbon\Carbon::parse($news->date)->translatedFormat('d F Y') }}</a>
+                                            </div>
+                                            <div class="d-inline ms-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256"><path fill="#e93314" d="M247.31 124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57 61.26 162.88 48 128 48S61.43 61.26 36.34 86.35C17.51 105.18 9 124 8.69 124.76a8 8 0 0 0 0 6.5c.35.79 8.82 19.57 27.65 38.4C61.43 194.74 93.12 208 128 208s66.57-13.26 91.66-38.34c18.83-18.83 27.3-37.61 27.65-38.4a8 8 0 0 0 0-6.5M128 192c-30.78 0-57.67-11.19-79.93-33.25A133.5 133.5 0 0 1 25 128a133.3 133.3 0 0 1 23.07-30.75C70.33 75.19 97.22 64 128 64s57.67 11.19 79.93 33.25A133.5 133.5 0 0 1 231.05 128c-7.21 13.46-38.62 64-103.05 64m0-112a48 48 0 1 0 48 48a48.05 48.05 0 0 0-48-48m0 80a32 32 0 1 1 32-32a32 32 0 0 1-32 32"/></svg>
+                                                <a href="javascript:void(0)">{{ $news->newsViews()->count() }}x
+                                                    dilihat</a>
+                                            </div>
+                                        </div>
+                                    </span>
 
                                 </div>
                             </div>
