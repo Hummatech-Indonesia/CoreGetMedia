@@ -177,7 +177,7 @@
                                     @endif
 
                                     <div class="ms-3">
-                                        <h6>{{ $author->user->name }}</h6>
+                                        <a href="{{ route('author.detail', $author->user->slug) }}"><h6>{{ $author->user->name }}</h6></a>
                                         <p class="text-muted">Penulis</p>
                                     </div>
                                 </div>
