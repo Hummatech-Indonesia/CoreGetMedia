@@ -51,18 +51,18 @@
 </style>
 
 <style>
-#copy-tooltip {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: white;
-    color: #1EBB9E;
-    padding: 10px;
-    border-radius: 5px;
-    display: none;
-    z-index: 1000; 
-}
+    #copy-tooltip {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: white;
+        color: #1EBB9E;
+        padding: 10px;
+        border-radius: 5px;
+        display: none;
+        z-index: 1000;
+    }
 
 </style>
 
@@ -106,6 +106,33 @@
             font-size: 1.2em;
         }
     }
+
+    @keyframes slideInLeft {
+        0% {
+            opacity: 0;
+            -webkit-transform: translateX(-150px);
+            -ms-transform: translateX(-150px);
+            transform: translateX(-150px);
+        }
+
+        100% {
+            -webkit-transform: translateX(0);
+            -ms-transform: translateX(0);
+            transform: translateX(0);
+        }
+    }
+
+    .slideInLeft {
+        -webkit-animation-name: slideInLeft;
+        animation-name: slideInLeft;
+    }
+
+    @media (min-width: 1024px) {
+        .iklan-top {
+            height: 250px;
+        }
+    }
+
 </style>
 @endsection
 
@@ -210,8 +237,22 @@
     </div>
 </div>
 
-<div class="news-details-wrap ptb-100">
+<div class="news-details-wrap">
     <div class="container">
+        @if ($advertisement_tops)
+        <a href="{{ $advertisement_tops->url }}">
+            <div class="mt-4 iklan-top" style="position: relative; width: 100%; height: 250px; overflow: hidden;">
+                <img class="iklan-top" src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/'.$advertisement_tops->image : "CONTOHIKLAN.png") }}" width="100%" height="auto" alt="">
+                <div style="width: 100%; background-color: rgba(0, 0, 0, 0.5); color: white; text-align: center; padding: 10px; box-sizing: border-box; position: relative; top: -50px;">
+                    Ingin baca berita tanpa iklan? <a href="/subscribe" style="color: #175A95; text-decoration: underline;">Berlangganan</a>
+                </div>
+            </div>
+        </a>
+        @else
+        <div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center" style="height: 250px;  background-color: var(--bgColor);">
+            <p style="color: #22222278">Iklan</p>
+        </div>
+        @endif
         <div class="row gx-55 gx-5">
             <div class="col-lg-8">
                 <article>
@@ -284,7 +325,8 @@
                                     </svg>
                                 </span>
                                 <div id="copy-tooltip">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m9.55 18l-5.7-5.7l1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z"/></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+                                        <path fill="currentColor" d="m9.55 18l-5.7-5.7l1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z" /></svg>
                                     Berhasil disalin
                                 </div>
                             </a>
@@ -303,15 +345,11 @@
                                             <li class="author d-flex align-items-center">
                                                 <span class="author-img">
                                                     @if(isset($news->user) && isset($news->user->author))
-                                                        <a href="{{ route('author.detail', ['author' => $news->user->slug]) }}">
-                                                            <img src="{{ asset($news->user->photo ? 'storage/' . $news->user->photo : 'default.png') }}"
-                                                                alt="Image" width="40px" height="30px"
-                                                                style="border-radius: 50%; object-fit:cover;" />
-                                                        </a>
+                                                    <a href="{{ route('author.detail', ['author' => $news->user->slug]) }}">
+                                                        <img src="{{ asset($news->user->photo ? 'storage/' . $news->user->photo : 'default.png') }}" alt="Image" width="40px" height="30px" style="border-radius: 50%; object-fit:cover;" />
+                                                    </a>
                                                     @else
-                                                        <img src="{{ asset('default.png') }}"
-                                                            alt="Image" width="40px" height="30px"
-                                                            style="border-radius: 50%; object-fit:cover;" />
+                                                    <img src="{{ asset('default.png') }}" alt="Image" width="40px" height="30px" style="border-radius: 50%; object-fit:cover;" />
                                                     @endif
                                                 </span>
 
@@ -319,7 +357,7 @@
                                                     @if($news->user->hasRole('admin'))
                                                     <a class="ms-3" style="display: inline; text-decoration: none" data-toggle="tooltip" data-placement="top" title="admin" href="#">{{ $news->user->name }}</a>
                                                     @else
-                                                    <a class="ms-4" style="display: inline; text-decoration: none" data-toggle="tooltip" data-placement="top" title="author - {{ $news->user->name }}"  href="{{ route('author.detail', ['author' => $news->user->slug]) }}">{{ $news->user->name }}</a>
+                                                    <a class="ms-4" style="display: inline; text-decoration: none" data-toggle="tooltip" data-placement="top" title="author - {{ $news->user->name }}" href="{{ route('author.detail', ['author' => $news->user->slug]) }}">{{ $news->user->name }}</a>
                                                     @endif
                                                 </div>
                                             </li>
@@ -486,45 +524,45 @@
                                             </svg>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                 @auth
-                                                    @if ($comment->user_id == auth()->user()->id && $comment->ip_address == $ipAddress)
-                                                    <li>
-                                                        <button class="btn btn-sm btn-edit-comment" data-id="{{ $comment->id }}" data-description="{{ $comment->description }}">
-                                                            Edit
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <button class="btn btn-sm btn-comment-delete" data-id="{{ $comment->id }}">
-                                                            Hapus
-                                                        </button>
-                                                    </li>
-                                                    @endif
-                                                    @if ($comment->user_id != auth()->user()->id && $comment->ip_address != $ipAddress )
-                                                    <li>
-                                                        <button class="btn btn-sm btn-comment-report" data-id="{{ $comment->id }}">
-                                                            Laporkan
-                                                        </button>
-                                                    </li>
-                                                    @endif
+                                                @if ($comment->user_id == auth()->user()->id && $comment->ip_address == $ipAddress)
+                                                <li>
+                                                    <button class="btn btn-sm btn-edit-comment" data-id="{{ $comment->id }}" data-description="{{ $comment->description }}">
+                                                        Edit
+                                                    </button>
+                                                </li>
+                                                <li>
+                                                    <button class="btn btn-sm btn-comment-delete" data-id="{{ $comment->id }}">
+                                                        Hapus
+                                                    </button>
+                                                </li>
+                                                @endif
+                                                @if ($comment->user_id != auth()->user()->id && $comment->ip_address != $ipAddress )
+                                                <li>
+                                                    <button class="btn btn-sm btn-comment-report" data-id="{{ $comment->id }}">
+                                                        Laporkan
+                                                    </button>
+                                                </li>
+                                                @endif
                                                 @else
-                                                    @if ($comment->user_id == null && $comment->ip_address == $ipAddress)
-                                                    <li>
-                                                        <button class="btn btn-sm btn-edit-comment" data-id="{{ $comment->id }}" data-description="{{ $comment->description }}">
-                                                            Edit
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <button class="btn btn-sm btn-comment-delete" data-id="{{ $comment->id }}">
-                                                            Hapus
-                                                        </button>
-                                                    </li>
-                                                    @endif
-                                                    @if (!empty($comment->user_id))
-                                                    <li>
-                                                        <button class="btn btn-sm btn-comment-report" data-id="{{ $comment->id }}">
-                                                            Laporkan
-                                                        </button>
-                                                    </li>
-                                                    @endif
+                                                @if ($comment->user_id == null && $comment->ip_address == $ipAddress)
+                                                <li>
+                                                    <button class="btn btn-sm btn-edit-comment" data-id="{{ $comment->id }}" data-description="{{ $comment->description }}">
+                                                        Edit
+                                                    </button>
+                                                </li>
+                                                <li>
+                                                    <button class="btn btn-sm btn-comment-delete" data-id="{{ $comment->id }}">
+                                                        Hapus
+                                                    </button>
+                                                </li>
+                                                @endif
+                                                @if (!empty($comment->user_id))
+                                                <li>
+                                                    <button class="btn btn-sm btn-comment-report" data-id="{{ $comment->id }}">
+                                                        Laporkan
+                                                    </button>
+                                                </li>
+                                                @endif
                                                 @endauth
                                             </ul>
                                         </a>
@@ -616,45 +654,45 @@
                                             </svg>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                 @auth
-                                                    @if ($reply->user_id == auth()->user()->id || $reply->ip_address == $ipAddress )
-                                                    <li>
-                                                        <button class="btn btn-sm btn-edit-reply" data-id="{{ $reply->id }}" data-description="{{ $reply->description }}">
-                                                            Edit
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <button class="btn btn-sm btn-comment-delete" data-id="{{ $reply->id }}">
-                                                            Hapus
-                                                        </button>
-                                                    </li>
-                                                    @endif
-                                                    @if ($reply->user_id != auth()->user()->id || $reply->ip_address != $ipAddress )
-                                                    <li>
-                                                        <button class="btn btn-sm btn-comment-report" data-id="{{ $reply->id }}">
-                                                            Laporkan
-                                                        </button>
-                                                    </li>
-                                                    @endif
+                                                @if ($reply->user_id == auth()->user()->id || $reply->ip_address == $ipAddress )
+                                                <li>
+                                                    <button class="btn btn-sm btn-edit-reply" data-id="{{ $reply->id }}" data-description="{{ $reply->description }}">
+                                                        Edit
+                                                    </button>
+                                                </li>
+                                                <li>
+                                                    <button class="btn btn-sm btn-comment-delete" data-id="{{ $reply->id }}">
+                                                        Hapus
+                                                    </button>
+                                                </li>
+                                                @endif
+                                                @if ($reply->user_id != auth()->user()->id || $reply->ip_address != $ipAddress )
+                                                <li>
+                                                    <button class="btn btn-sm btn-comment-report" data-id="{{ $reply->id }}">
+                                                        Laporkan
+                                                    </button>
+                                                </li>
+                                                @endif
                                                 @else
-                                                    @if ($reply->user_id == null || $reply->ip_address == $ipAddress )
-                                                    <li>
-                                                        <button class="btn btn-sm btn-edit-reply" data-id="{{ $reply->id }}" data-description="{{ $reply->description }}">
-                                                            Edit
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <button class="btn btn-sm btn-comment-delete" data-id="{{ $reply->id }}">
-                                                            Hapus
-                                                        </button>
-                                                    </li>
-                                                    @endif
-                                                    @if (!empty($reply->user_id))
-                                                    <li>
-                                                        <button class="btn btn-sm btn-comment-report" data-id="{{ $reply->id }}">
-                                                            Laporkan
-                                                        </button>
-                                                    </li>
-                                                    @endif
+                                                @if ($reply->user_id == null || $reply->ip_address == $ipAddress )
+                                                <li>
+                                                    <button class="btn btn-sm btn-edit-reply" data-id="{{ $reply->id }}" data-description="{{ $reply->description }}">
+                                                        Edit
+                                                    </button>
+                                                </li>
+                                                <li>
+                                                    <button class="btn btn-sm btn-comment-delete" data-id="{{ $reply->id }}">
+                                                        Hapus
+                                                    </button>
+                                                </li>
+                                                @endif
+                                                @if (!empty($reply->user_id))
+                                                <li>
+                                                    <button class="btn btn-sm btn-comment-report" data-id="{{ $reply->id }}">
+                                                        Laporkan
+                                                    </button>
+                                                </li>
+                                                @endif
                                                 @endauth
                                             </ul>
                                         </a>
@@ -694,14 +732,12 @@
                         <h3 class="sidebar-widget-title">Kategori Populer</h3>
                         <ul class="category-widget list-style">
                             @foreach ($CategoryPopulars as $category)
-                                <li>
-                                    <a data-toggle="tooltip" data-placement="top" title="{{ $category->name }}"
-                                        href="{{ route('categories.show.user', ['category' => $category->slug]) }}">
-                                        <img src="{{ asset('assets/img/icons/arrow-right.svg') }}"
-                                            alt="Image">{{ $category->name }}
-                                        <span>({{ $category->news_categories_count }})</span>
-                                    </a>
-                                </li>
+                            <li>
+                                <a data-toggle="tooltip" data-placement="top" title="{{ $category->name }}" href="{{ route('categories.show.user', ['category' => $category->slug]) }}">
+                                    <img src="{{ asset('assets/img/icons/arrow-right.svg') }}" alt="Image">{{ $category->name }}
+                                    <span>({{ $category->news_categories_count }})</span>
+                                </a>
+                            </li>
                             @endforeach
                         </ul>
                     </div>
@@ -709,23 +745,23 @@
                         <h3 class="sidebar-widget-title">Tag Populer</h3>
                         <ul class="tag-list list-style">
                             @forelse ($popularTags as $popularTag)
-                                <li><a
-                                        href="{{ route('news-tag-list.user', ['tag' => $popularTag->slug]) }}">{{ $popularTag->name }}</a>
-                                </li>
+                            <li><a href="{{ route('news-tag-list.user', ['tag' => $popularTag->slug]) }}">{{ $popularTag->name }}</a>
+                            </li>
                             @empty
                             @endforelse
                         </ul>
                     </div>
 
                     @if ($advertisement_rights)
+                    <a href="{{ $advertisement_rights->url }}">
                         <div class="sidebar mt-3 mb-4" id="right-advertisement">
-                            <img src="{{ asset($advertisement_rights && $advertisement_rights->image != null ? 'storage/' . $advertisement_rights->image : 'CONTOHIKLAN.png') }}"
-                                alt="Advertisement">
+                            <img src="{{ asset($advertisement_rights && $advertisement_rights->image != null ? 'storage/' . $advertisement_rights->image : 'CONTOHIKLAN.png') }}" alt="Advertisement">
                         </div>
+                    </a>
                     @else
-                        <div class="sidebar mt-3 mb-4 bg_gray" style="height: 603px;">
-                            <p class="text-center align-middle" style="line-height: 603px;">Iklan</p>
-                        </div>
+                    <div class="sidebar mt-3 mb-4 bg_gray" style="height: 603px;">
+                        <p class="text-center align-middle" style="line-height: 603px;">Iklan</p>
+                    </div>
                     @endif
                 </div>
             </div>
@@ -781,79 +817,83 @@
 
 <script>
     $(document).ready(function() {
-    var formLike = $('#form-like');
-    var formLiked = $('#form-liked');
-    var likeCount = $('#like');
-    var likedByUser = {{ $likedByUser ? 'true' : 'false' }};
-    var likeData = parseInt(likeCount.data('like'));
-    var isProcessing = false;
-
-    if (likedByUser) {
-        formLike.hide();
-        formLiked.show();
-    } else {
-        formLike.show();
-        formLiked.hide();
-    }
-
-    formLike.on('submit', function(event) {
-        event.preventDefault();
-        if (isProcessing) return;
-        isProcessing = true;
-        var csrfToken = formLike.find('input[name="_token"]').val();
-
-        $.ajax({
-            url: '/like-news/{{ $news_id }}',
-            type: 'POST',
-            contentType: 'application/json',
-            headers: {
-                'X-CSRF-TOKEN': csrfToken
-            },
-            success: function(data) {
-                formLike.hide();
-                formLiked.show();
-                likeData++;
-                likeCount.html(likeData);
-                likeCount.data('like', likeData);
-            },
-            error: function(xhr) {
-                console.error('Error: ' + xhr.status);
-            },
-            complete: function() {
-                isProcessing = false; // Re-enable the buttons
+        var formLike = $('#form-like');
+        var formLiked = $('#form-liked');
+        var likeCount = $('#like');
+        var likedByUser = {
+            {
+                $likedByUser ? 'true' : 'false'
             }
+        };
+        var likeData = parseInt(likeCount.data('like'));
+        var isProcessing = false;
+
+        if (likedByUser) {
+            formLike.hide();
+            formLiked.show();
+        } else {
+            formLike.show();
+            formLiked.hide();
+        }
+
+        formLike.on('submit', function(event) {
+            event.preventDefault();
+            if (isProcessing) return;
+            isProcessing = true;
+            var csrfToken = formLike.find('input[name="_token"]').val();
+
+            $.ajax({
+                url: '/like-news/{{ $news_id }}'
+                , type: 'POST'
+                , contentType: 'application/json'
+                , headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                }
+                , success: function(data) {
+                    formLike.hide();
+                    formLiked.show();
+                    likeData++;
+                    likeCount.html(likeData);
+                    likeCount.data('like', likeData);
+                }
+                , error: function(xhr) {
+                    console.error('Error: ' + xhr.status);
+                }
+                , complete: function() {
+                    isProcessing = false; // Re-enable the buttons
+                }
+            });
+        });
+
+        formLiked.on('submit', function(event) {
+            event.preventDefault();
+            if (isProcessing) return; // Prevent multiple requests
+            isProcessing = true;
+            var csrfToken = formLiked.find('input[name="_token"]').val();
+
+            $.ajax({
+                url: '/unlike-news/{{ $news_id }}'
+                , type: 'DELETE'
+                , contentType: 'application/json'
+                , headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                }
+                , success: function(data) {
+                    formLike.show();
+                    formLiked.hide();
+                    likeData--;
+                    likeCount.html(likeData);
+                    likeCount.data('like', likeData);
+                }
+                , error: function(xhr) {
+                    console.error('Error: ' + xhr.status);
+                }
+                , complete: function() {
+                    isProcessing = false; // Re-enable the buttons
+                }
+            });
         });
     });
-
-    formLiked.on('submit', function(event) {
-        event.preventDefault();
-        if (isProcessing) return; // Prevent multiple requests
-        isProcessing = true;
-        var csrfToken = formLiked.find('input[name="_token"]').val();
-
-        $.ajax({
-            url: '/unlike-news/{{ $news_id }}',
-            type: 'DELETE',
-            contentType: 'application/json',
-            headers: {
-                'X-CSRF-TOKEN': csrfToken
-            },
-            success: function(data) {
-                formLike.show();
-                formLiked.hide();
-                likeData--;
-                likeCount.html(likeData);
-                likeCount.data('like', likeData);
-            },
-            error: function(xhr) {
-                console.error('Error: ' + xhr.status);
-            },
-            complete: function() {
-                isProcessing = false; // Re-enable the buttons
-            }
-        });
-    });
-});
 
 </script>
 
@@ -912,18 +952,18 @@
 
 </script>
 <script>
-function copyToClipboard() {
-    const url = window.location.href;
-    navigator.clipboard.writeText(url).then(function() {
-        const tooltip = document.getElementById('copy-tooltip');
-        tooltip.style.display = 'block';
-        setTimeout(function() {
-            tooltip.style.display = 'none';
-        }, 2000);
-    }, function(err) {
-        console.error('Failed to copy: ', err);
-    });
-}
+    function copyToClipboard() {
+        const url = window.location.href;
+        navigator.clipboard.writeText(url).then(function() {
+            const tooltip = document.getElementById('copy-tooltip');
+            tooltip.style.display = 'block';
+            setTimeout(function() {
+                tooltip.style.display = 'none';
+            }, 2000);
+        }, function(err) {
+            console.error('Failed to copy: ', err);
+        });
+    }
 
     function shareToWhatsApp() {
         var currentUrl = window.location.href;
