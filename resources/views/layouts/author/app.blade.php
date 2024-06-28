@@ -18,27 +18,85 @@
     <link rel="stylesheet" href="{{ asset('admin/dist/libs/sweetalert2/dist/sweetalert2.min.css') }}">
     <link id="themeColors" rel="stylesheet" href="{{ asset('admin/dist/css/style.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('admin/dist/libs/prismjs/themes/prism-okaidia.min.css') }}">
-    <link rel="stylesheet"
-        href="{{ asset('admin/dist/libs/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/dist/libs/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/dist/libs/select2/dist/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/dist/libs/sweetalert2/dist/sweetalert2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/dist/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/dist/libs/bootstrap-duallistbox/dist/bootstrap-duallistbox.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{-- <script>
+         $(window).on('load', function () {
+            $('#get-preloader').addClass('loaded');
+            $("#preloader").fadeOut(2000);
 
+            if ($('#get-preloader').hasClass('loaded')) {
+                $('#preloader').delay(100000).queue(function () {
+                    $(this).remove();
+                });
+            }
+        });
+    </script> --}}
+    <script>
+        $(document).ready(function(){
+            setTimeout(function(){
+                $('body').addClass('loaded');
+            }, 2400);
+        });
+    </script>
 
 
     @yield('style')
     <style>
+        /*Loader*/
+        #loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white; /* Anda bisa mengganti warna sesuai kebutuhan */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        /*Background Section Animation*/
+        #loader-wrapper .loader-section {
+            position: fixed;
+            top: 0;
+            width: 51%;
+            height: 100%;
+            background: #222;
+            z-index: 1000;
+        }
+
+        .loaded #loader {
+            opacity: 0;
+            transition: all 0.3s ease-out;
+        }
+        .loaded img{
+            opacity: 0;
+            transition: all 0.3s ease-out;
+        }
+        .loaded #loader-wrapper {
+            visibility: hidden;
+            transform: translateY(-100%);
+            transition: all 0.3s 1s ease-out;
+        }
+    </style>
+
+    <style>
         .important {
             color: red;
         }
+        
         .bounce2 {
-            animation: bounce2 2s ease infinite;
+            animation: bounce2 3s ease infinite;
         }
-
+    
         @keyframes bounce2 {
-
             0%,
             20%,
             50%,
@@ -46,28 +104,46 @@
             100% {
                 transform: translateY(0);
             }
-
             40% {
                 transform: translateY(-30px);
             }
-
             60% {
                 transform: translateY(-15px);
             }
         }
+    
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white; /* Anda bisa mengganti warna sesuai kebutuhan */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+    
+        .preloader img {
+            width: 10pc;
+        }
     </style>
+    
 </head>
 
 <body>
-    <div class="preloader">
-        <img src="{{ asset('assets/img/logo/logo-get.svg') }}" class="lds-ripple img-fluid animate-bounce" alt="loader"
-        class="lds-ripple img-fluid animate-bounce bounce2" />
+    <div id="loader-wrapper">
+        <img src="{{ asset('assets/img/logo/preloader.gif') }}" class="lds-ripple img-fluid animate-bounce" alt="loader" style="width: 12pc; top: 18pc;"/>
+        <div id="loader"></div>
     </div>
-    <!-- Preloader -->
-    <div class="preloader">
-        <img src="{{ asset('assets/img/logo/logo-get.svg') }}" class="lds-ripple img-fluid animate-bounce" alt="loader"
-        class="lds-ripple img-fluid animate-bounce bounce2" />
-    </div>
+
+    {{-- <div class="preloader" id="preloader">
+        <div id="get-preloader">
+            <img src="{{ asset('assets/img/logo/preloader.gif') }}" class="lds-ripple img-fluid animate-bounce" alt="loader" />
+        </div>
+    </div> --}}
+    
 
     <!--  Body Wrapper -->
     <div class="page-wrapper" id="main-wrapper" data-theme="blue_theme" data-layout="vertical" data-sidebartype="full"
@@ -111,7 +187,6 @@
     <script src="{{ asset('admin/dist/libs/jquery-validation/dist/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('admin/dist/js/forms/form-wizard.js') }}"></script>
 
-
     <script src="{{ asset('admin/dist/libs/sweetalert2/dist/sweetalert2.min.js') }}"></script>
     <script src="{{ asset('admin/dist/libs/select2/dist/js/select2.full.min.js') }}"></script>
     <script src="{{ asset('admin/dist/libs/select2/dist/js/select2.min.js') }}"></script>
@@ -119,6 +194,20 @@
     <script src="{{ asset('admin/dist/libs/bootstrap-switch/dist/js/bootstrap-switch.min.js') }}"></script>
     <script src="{{ asset('admin/dist/js/forms/bootstrap-switch.js') }}"></script>
     <script src="{{ asset('admin/dist/libs/bootstrap-duallistbox/dist/jquery.bootstrap-duallistbox.min.js') }}"></script>
+
+    
+    {{-- <script>
+        $(window).on('load', function () {
+            $('#get-preloader').addClass('loaded');
+
+            // Hilangkan preloader setelah 10 detik
+            setTimeout(function() {
+                $("#preloader").fadeOut(1000, function() {
+                    $(this).remove();
+                });
+            }, 9000000); // 10000 milidetik = 10 detik
+        });
+    </script> --}}
     <script>
         const authToken = localStorage.getItem('token')
         $.ajaxSetup({
@@ -333,15 +422,6 @@
     </script>
 
     @yield('script')
-    <script>
-  document.addEventListener('DOMContentLoaded', function() {
-        var preloader = document.querySelector('.preloader');
-        if (preloader) {
-            preloader.style.display = 'none';
-        }
-    });
-
-</script>
 </body>
 
 </html>
