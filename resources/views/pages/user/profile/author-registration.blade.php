@@ -69,10 +69,7 @@
                                     Persyaratan untuk menjadi
                                     penulis
                                 </p>
-                                <button class="btn btn-xs px-3 py-1 text-white" type="button" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal1"
-                                    style="background-color: #175A95; font-size: 16px;">Ketentuan dan
-                                    Persyaratan</button>
+                                <a href="{{ route('terms-conditions') }}" class="btn btn-xs px-3 py-1 text-white" style="background-color: #175A95; font-size: 16px;">Ketentuan dan Persyaratan</a>
                             </div>
                             <div class="col-lg-12 mt-4">
                                 <div class="form-check form-switch">
