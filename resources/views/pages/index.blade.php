@@ -223,7 +223,7 @@
 
     @if ($advertisement_tops)
     <div class="container-fluid mt-5 mb-5">
-        <img src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/'.$advertisement_tops->image : "CONTOHIKLAN.png") }}" width="100%" height="314px" style="object-fit: cover" alt="">
+        <img src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/'.$advertisement_tops->image : "CONTOHIKLAN.png") }}" width="100%" height="166px" style="object-fit: cover" alt="">
     </div>
     @else
     <div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center" style="height: 166px;  background-color: var(--bgColor);">
