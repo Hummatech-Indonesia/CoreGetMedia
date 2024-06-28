@@ -817,85 +817,82 @@
 
 <script>
     $(document).ready(function() {
-        var formLike = $('#form-like');
-        var formLiked = $('#form-liked');
-        var likeCount = $('#like');
-        var likedByUser = {
-            {
-                $likedByUser ? 'true' : 'false'
+    var formLike = $('#form-like');
+    var formLiked = $('#form-liked');
+    var likeCount = $('#like');
+    var likedByUser = {{ $likedByUser ? 'true' : 'false' }};
+    var likeData = parseInt(likeCount.data('like'));
+    var isProcessing = false;
+
+    if (likedByUser) {
+        formLike.hide();
+        formLiked.show();
+    } else {
+        formLike.show();
+        formLiked.hide();
+    }
+
+    formLike.on('submit', function(event) {
+        event.preventDefault();
+        if (isProcessing) return;
+        isProcessing = true;
+        var csrfToken = formLike.find('input[name="_token"]').val();
+
+        $.ajax({
+            url: '/like-news/{{ $news_id }}',
+            type: 'POST',
+            contentType: 'application/json',
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
+            success: function(data) {
+                formLike.hide();
+                formLiked.show();
+                likeData++;
+                likeCount.html(likeData);
+                likeCount.data('like', likeData);
+            },
+            error: function(xhr) {
+                console.error('Error: ' + xhr.status);
+            },
+            complete: function() {
+                isProcessing = false; // Re-enable the buttons
             }
-        };
-        var likeData = parseInt(likeCount.data('like'));
-        var isProcessing = false;
-
-        if (likedByUser) {
-            formLike.hide();
-            formLiked.show();
-        } else {
-            formLike.show();
-            formLiked.hide();
-        }
-
-        formLike.on('submit', function(event) {
-            event.preventDefault();
-            if (isProcessing) return;
-            isProcessing = true;
-            var csrfToken = formLike.find('input[name="_token"]').val();
-
-            $.ajax({
-                url: '/like-news/{{ $news_id }}'
-                , type: 'POST'
-                , contentType: 'application/json'
-                , headers: {
-                    'X-CSRF-TOKEN': csrfToken
-                }
-                , success: function(data) {
-                    formLike.hide();
-                    formLiked.show();
-                    likeData++;
-                    likeCount.html(likeData);
-                    likeCount.data('like', likeData);
-                }
-                , error: function(xhr) {
-                    console.error('Error: ' + xhr.status);
-                }
-                , complete: function() {
-                    isProcessing = false; // Re-enable the buttons
-                }
-            });
-        });
-
-        formLiked.on('submit', function(event) {
-            event.preventDefault();
-            if (isProcessing) return; // Prevent multiple requests
-            isProcessing = true;
-            var csrfToken = formLiked.find('input[name="_token"]').val();
-
-            $.ajax({
-                url: '/unlike-news/{{ $news_id }}'
-                , type: 'DELETE'
-                , contentType: 'application/json'
-                , headers: {
-                    'X-CSRF-TOKEN': csrfToken
-                }
-                , success: function(data) {
-                    formLike.show();
-                    formLiked.hide();
-                    likeData--;
-                    likeCount.html(likeData);
-                    likeCount.data('like', likeData);
-                }
-                , error: function(xhr) {
-                    console.error('Error: ' + xhr.status);
-                }
-                , complete: function() {
-                    isProcessing = false; // Re-enable the buttons
-                }
-            });
         });
     });
 
+    formLiked.on('submit', function(event) {
+        event.preventDefault();
+        if (isProcessing) return; // Prevent multiple requests
+        isProcessing = true;
+        var csrfToken = formLiked.find('input[name="_token"]').val();
+
+        $.ajax({
+            url: '/unlike-news/{{ $news_id }}',
+            type: 'DELETE',
+            contentType: 'application/json',
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
+            success: function(data) {
+                formLike.show();
+                formLiked.hide();
+                likeData--;
+                likeCount.html(likeData);
+                likeCount.data('like', likeData);
+            },
+            error: function(xhr) {
+                console.error('Error: ' + xhr.status);
+            },
+            complete: function() {
+                isProcessing = false; // Re-enable the buttons
+            }
+        });
+    });
+});
+
 </script>
+
 
 <script>
     $('.btn-news-report').on('click', function() {
