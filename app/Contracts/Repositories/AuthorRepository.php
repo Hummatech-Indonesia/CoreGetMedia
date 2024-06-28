@@ -117,10 +117,11 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
         ->where('user_id', auth()->user()->id)->first();
     }
 
-    public function getAuthor(): mixed
+    public function getAuthor($id): mixed
     {
         return $this->model->query()
             ->where('status', AuthorEnum::ACCEPTED->value)
+            ->whereNotIn('user_id', $id)
             ->paginate(10);
     }
 }
