@@ -52,9 +52,9 @@
                 </div>
                 <div class="col-lg-4 col-md-6 md-none">
                     @if (isset($about_get))
-                    <a class="navbar-brand" href="/">
-                        <img class="" src="{{asset($about_get->image)}}" alt=" logo" />
-                        <!-- <img class="logo-dark" src="{{asset($about_get->image)}}" alt=" logo" /> -->
+                    <a class="navbar-brand" href="index.html">
+                        <img class="logo-light" src="{{asset($about_get->image)}}" alt="logo" />
+                        <img class="logo-dark" src="{{asset($about_get->image)}}" alt="logo" />
                     </a>
                     @else
                     <div class="navbar-brand ms-5">
@@ -66,18 +66,18 @@
                     <ul class="social-profile list-style">
                         @if (isset($about_get))
                         <li>
-                            <a href="{{ $about_get->url_facebook }}" target=" _blank"><i
+                            <a href="{{ $about_get->url_facebook }}" target="_blank"><i
                                     class="ri-facebook-fill"></i></a>
                         </li>
                         <li>
-                            <a href="{{ $about_get->url_twitter }}" target=" _blank"><i class="ri-twitter-fill"></i></a>
+                            <a href="{{ $about_get->url_twitter }}" target="_blank"><i class="ri-twitter-fill"></i></a>
                         </li>
                         <li>
-                            <a href="{{ $about_get->url_instagram }}" target=" _blank"><i
+                            <a href="{{ $about_get->url_instagram }}" target="_blank"><i
                                     class="ri-instagram-line"></i></a>
                         </li>
                         <li>
-                            <a href="{{ $about_get->url_linkedin }}" target=" _blank"><i
+                            <a href="{{ $about_get->url_linkedin }}" target="_blank"><i
                                     class="ri-linkedin-fill"></i></a>
                         </li>
                         @else
@@ -147,7 +147,7 @@
                     @endphp
 
                     <li class="nav-item dropdown">
-                        <a href="/{{ route('categories.show.user', ['category' => $category->slug]) }}"
+                        <a href="{{ route('categories.show.user', ['category' => $category->slug]) }}"
                             class="dropdown-toggle nav-link {{ $isActiveCategory ? 'active' : '' }}"
                             style="{{ $isActiveCategory ? 'color: #E93314;' : '' }}" data-bs-toggle="dropdown">
                             {{ $category->name }}
@@ -201,7 +201,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             @foreach ($categories->skip(5) as $category)
-                            <li class="nav- item dropdown" style="position: relative;">
+                            <li class="nav-item dropdown" style="position: relative;">
                                 <a href="{{ route('categories.show.user', ['category' => $category->slug]) }}"
                                     class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                     {{ $category->name }}
@@ -254,7 +254,7 @@
                     <div class="option-item">
                         <ul class="navbar-nav">
 
-                            <li class="nav-item ">
+                            <li class="nav-item">
                                 <a href="javascript:void(0)" class="nav-link">
                                     <img src="{{ asset(Auth::user()->image ? 'storage/' . Auth::user()->image : "default.png")  }}"
                                         class="mb-2" alt="Image" width="40" height="40"
@@ -390,8 +390,8 @@
 {{--
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-                var currentLocation = window.location.href.split(/[?#]/)[0];
-                var homepageUrl = "{{ route('home.index') }}".split(/[?#]/)[0];
+        var currentLocation = window.location.href.split(/[?#]/)[0];
+        var homepageUrl = "{{ route('home.index') }}".split(/[?#]/)[0];
 
 console.log("Current Location:", currentLocation);
 console.log("Homepage URL:", homepageUrl);
