@@ -11,6 +11,29 @@
                                             height: 130px; */
         }
 
+        .theme-dark .card-detail {
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        }
+        
+        .theme-dark .card-detail .text-muted{
+            color: #fff !important;
+        }
+        
+        .theme-dark .input-theme {
+            background-color: #0101;
+        }
+
+        .theme-dark .form-select {
+            background-color: #000; /* Black background */
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            color: #fff; /* White text */
+        }
+
+        .theme-dark .form-select option {
+            background-color: #000; /* Black background */
+            color: #fff; /* White text */
+        }
+
         .card-category {
             box-shadow: 0 5px 2px rgba(0, 0, 0, 0.1);
             border: 1px solid #f4f4f4;
@@ -73,7 +96,7 @@
         <div class="container">
             <div class="row gx-5">
                 <div class="col-lg-4">
-                    <div class="card">
+                    <div class="card-detail">
                         <div class="card-body">
                             <h5 class="card-title mb-3">Data Penulis</h5>
                             <div class="container mt-4">
@@ -162,7 +185,7 @@
                         </div>
                     </div>
 
-                    <div class="card mt-4">
+                    <div class=" card-detail mt-4">
                         <div class="card-body">
                             <h5 class="card-title mb-4">Penulis Lainnya</h5>
                             @forelse ($allauthor as $author)
@@ -226,7 +249,7 @@
                                 </div>
                             </div>
 
-                            <div class="input-group" style="width: 250px">
+                            <div class="input-group input-theme" style="width: 250px">
                                 <select class="form-select" name="filter">
                                     <option value="terbaru">Terbaru</option>
                                     <option value="terlama">Terlama</option>
