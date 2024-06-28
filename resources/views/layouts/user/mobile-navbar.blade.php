@@ -9,27 +9,23 @@
             <i class="ri-close-line"></i>
         </button>
     </div>
-    < class="offcanvas-body">
+    <div class="offcanvas-body">
         <div class="accordion" id="navbarAccordion">
+
             @foreach ($categories as $category)
                 <div class="accordion-item">
-                    <h2 class="accordion-header" id="heading{{$loop->index}}">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapse{{$loop->index}}" aria-expanded="false"
-                            aria-controls="collapse{{$loop->index}}">
-                            {{$category->name}}
-                        </button>
-                    </h2>
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapse{{$loop->index}}" aria-expanded="false"
+                        aria-controls="collapse{{$loop->index}}">{{$categories[$loop->index]->name}}</button>
                     <div id="collapse{{$loop->index}}" class="accordion-collapse collapse"
-                        aria-labelledby="heading{{$loop->index}}" data-bs-parent="#navbarAccordion">
+                        data-bs-parent="#navbarAccordion{{$loop->index}}">
                         <div class="accordion-body">
                             <div class="accordion" id="navbarAccordion{{$loop->index}}">
-                                @forelse ($category->subCategories as $subCategory)
+                                @forelse ($categories[$loop->index]->subCategories as $subCategory)
                                     <div class="accordion-item">
                                         <a href="{{ route('news.subcategory', ['slug' => $subCategory->slug]) }}"
                                             class="accordion-link">
-                                            {{ $subCategory->name }}
-                                        </a>
+                                            {{ $subCategory->name }}</a>
                                     </div>
                                 @empty
                                     <div class="accordion-item">
@@ -41,36 +37,8 @@
                     </div>
                 </div>
             @endforeach
+
         </div>
-
-        <script>
-            document.querySelectorAll('.accordion-button').forEach(button => {
-                button.addEventListener('click', () => {
-                    const collapseElement = document.querySelector(button.dataset.bsTarget);
-                    if (collapseElement.classList.contains('show')) {
-                        collapseElement.classList.remove('show');
-                        collapseElement.style.height = null;
-                        button.classList.add('collapsed');
-                        button.setAttribute('aria-expanded', 'false');
-                    } else {
-                        document.querySelectorAll('.accordion-collapse.show').forEach(openCollapse => {
-                            openCollapse.classList.remove('show');
-                            openCollapse.style.height = null;
-                            const openButton = document.querySelector(
-                                `button[data-bs-target="#${openCollapse.id}"]`);
-                            openButton.classList.add('collapsed');
-                            openButton.setAttribute('aria-expanded', 'false');
-                        });
-                        collapseElement.classList.add('show');
-                        collapseElement.style.height = collapseElement.scrollHeight + 'px';
-                        button.classList.remove('collapsed');
-                        button.setAttribute('aria-expanded', 'true');
-                    }
-                });
-            });
-        </script>
-
-
 
         <div class="offcanvas-contact-info">
             <div class="accordion">
@@ -188,5 +156,5 @@
             @endauth
 
         </div>
-    </ div>
+    </div>
 </div>
