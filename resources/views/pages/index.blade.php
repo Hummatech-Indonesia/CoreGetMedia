@@ -23,72 +23,52 @@
 
     .btn-three {
         color: #175A95;
-    }
 
-    /* .theme-dark .btn-three {
-        background-color: #222222;
-        color: #ffffff;
-    } */
+        .btn-three i {
+            color: #175A95;
+        }
 
-    .btn-three i {
-        color: #175A95;
-    }
+        .news-tablist .nav-item .nav-link.active {
+            color: #175A95;
+        }
 
-    .news-tablist .nav-item .nav-link.active {
-        color: #175A95;
-    }
 
-    /* .btn-three {
-        color: var(--secondaryColor);
-        background-color: #ffffff;
-    } */
+        .btn-three {
+            color: #175A95;
+            background-color: #ffffff;
+        }
 
-    /* .theme-dark.btn-three {
-        color: var(--secondaryColor);
-        background-color: #ffffff;
-    } */
+        .btn-three i {
+            color: #175A95;
+        }
 
-    .btn-three {
-        color: #175A95;
-        background-color: #ffffff;
-    }
+        .tag-list li a:hover {
+            background-color: #175A95;
+            color: var(--whiteColor);
+        }
 
-    /* .theme-dark .btn-three {
-        background-color: #222222;
-        color: #ffffff;
-    } */
+        .tag-list li a {
+            color: var(--optionalColor);
+            background-color: var(--whiteColor);
+            border-radius: 5px;
+            padding: 7px 15px 3px 17px;
+            font-size: 14px;
+            line-height: 30px;
+            display: inline-block;
+            border: 1px solid #eee;
+        }
 
-    .btn-three i {
-        color: #175A95;
-    }
+        .theme-dark .tag-list li a:hover {
+            background-color: #175A95;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--whiteColor);
+        }
 
-    .tag-list li a:hover {
-        background-color: #175A95;
-        color: var(--whiteColor);
-    }
-
-    .tag-list li a {
-        color: var(--optionalColor);
-        background-color: var(--whiteColor);
-        border-radius: 5px;
-        padding: 7px 15px 3px 17px;
-        font-size: 14px;
-        line-height: 30px;
-        display: inline-block;
-        border: 1px solid #eee;
-    }
-
-    .theme-dark .tag-list li a:hover {
-        background-color: #175A95;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        color: var(--whiteColor);
-    }
-
-    .news-card-one .news-card-img img {
-        border-radius: 50%;
-        height: 100px;
-        width: 100px;
-    }
+        .news-card-one .news-card-img img {
+            border-radius: 50%;
+            height: 100px;
+            width: 100px;
+        }
 
 </style>
 
@@ -207,6 +187,14 @@
 
     }
 
+    
+@media (min-width: 1024px) {
+    .iklan-top {
+       height: 250px;
+    }
+}
+
+
 </style>
 
 @endsection
@@ -216,54 +204,60 @@
 @endif --}}
 
 @section('content')
-@if ($advertisement_tops)
-<div class="mt-4">
-    <img src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/'.$advertisement_tops->image : "CONTOHIKLAN.png") }}" width="100%" height="314px" style="object-fit: contain" alt="">
-</div>
-@else
-<div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center" style="height: 314px;  background-color: var(--bgColor);">
-    <p style="color: #22222278">Iklan</p>
-</div>
-@endif
-<div class="container-fluid">
-    @php
-    $displayedPopulars = $populars->take(10)->where('news_views_count', '>', 0)->pluck('id');
-    @endphp
 
-    <div class="trending-news-box">
-        <div class="row gx-5">
-            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 d-flex justify-content-center">
-                <div class="trending-prev me-3"><i class="flaticon-left-arrow"></i></div>
-                <h4>Artikel Popular</h4>
-                <div class="trending-next ms-3"><i class="flaticon-right-arrow"></i></div>
-            </div>
-            <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12">
-                <div class="trending-news-slider swiper">
-                    <div class="swiper-wrapper">
-                        @forelse ($populars->take(10) as $popular)
-                        @if ($popular->news_views_count > 0)
-                        <div class="swiper-slide news-card-one">
-                            <div class="news-card-img">
-                                <img src="{{ asset('storage/' . $popular->image) }}" alt="Image" style="object-fit: cover;" />
-                            </div>
-                            <div class="news-card-info">
-                                <h3><a href="{{ route('news.singlepost', ['news' => $popular->slug]) }}">{{ Str::limit($popular->name, 50, '...') }}</a>
-                                </h3>
-                                <ul class="news-metainfo d-flex list-style">
-                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
-                                    <li><i class="fi fi-rr-eye"></i>{{ $popular->news_views_count }}x dilihat
-                                    </li>
-                                </ul>
-                            </div>
+<div class="container-fluid">
+
+    @if ($advertisement_tops)
+    <div class="mt-4 iklan-top">
+        <img class="iklan-top" src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/'.$advertisement_tops->image : "CONTOHIKLAN.png") }}" width="100%" height="auto" alt="">
+    </div>
+    @else
+    <div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center" style="height: 250px;  background-color: var(--bgColor);">
+        <p style="color: #22222278">Iklan</p>
+    </div>
+    {{-- <div class="mt-4 iklan-top">
+    <img src="{{ asset('assets/img/news/news-11.webp') }}" width="100%" height="250px" style="object-fit: cover" alt="">
+</div> --}}
+@endif
+
+@php
+$displayedPopulars = $populars->take(10)->where('news_views_count', '>', 0)->pluck('id');
+@endphp
+
+<div class="trending-news-box">
+    <div class="row gx-5">
+        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 d-flex justify-content-center">
+            <div class="trending-prev me-3"><i class="flaticon-left-arrow"></i></div>
+            <h4>Artikel Popular</h4>
+            <div class="trending-next ms-3"><i class="flaticon-right-arrow"></i></div>
+        </div>
+        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12">
+            <div class="trending-news-slider swiper">
+                <div class="swiper-wrapper">
+                    @forelse ($populars->take(10) as $popular)
+                    @if ($popular->news_views_count > 0)
+                    <div class="swiper-slide news-card-one">
+                        <div class="news-card-img">
+                            <img src="{{ asset('storage/' . $popular->image) }}" alt="Image" height="100px" width="100px" style="object-fit: cover;" />
                         </div>
-                        @endif
-                        @empty
-                        @endforelse
+                        <div class="news-card-info">
+                            <h3><a href="{{ route('news.singlepost', ['news' => $popular->slug]) }}">{{ Str::limit($popular->name, 50, '...') }}</a>
+                            </h3>
+                            <ul class="news-metainfo d-flex list-style">
+                                <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
+                                <li><i class="fi fi-rr-eye"></i>{{ $popular->news_views_count }}x dilihat
+                                </li>
+                            </ul>
+                        </div>
                     </div>
+                    @endif
+                    @empty
+                    @endforelse
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 {{-- @if ($advertisement_tops)
