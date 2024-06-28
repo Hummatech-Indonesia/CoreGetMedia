@@ -136,10 +136,10 @@
                                             }
                                         @endphp
 
-                                        <li class="nav-item">
+                                        <li class="nav-item dropdown">
                                             <a href="{{ route('categories.show.user', ['category' => $category->slug]) }}"
                                                 class="dropdown-toggle nav-link {{ $isActiveCategory ? 'active' : '' }}"
-                                                style="{{ $isActiveCategory ? 'color: #E93314;' : '' }}">
+                                                style="{{ $isActiveCategory ? 'color: #E93314;' : '' }}" data-bs-toggle="dropdown">
                                                 {{ $category->name }}
                                             </a>
                                             @if (count($subCategories->where('category_id', $category->id)) > 0)
@@ -191,11 +191,32 @@
                                             </a>
                                             <ul class="dropdown-menu">
                                                 @foreach ($categories->skip(5) as $category)
-                                                    <li class="nav-item">
+                                                    <li class="nav-item dropdown" style="position: relative;">
                                                         <a href="{{ route('categories.show.user', ['category' => $category->slug]) }}"
-                                                            class="nav-link">
+                                                            class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                                             {{ $category->name }}
                                                         </a>
+                                                        @if (count($subCategories->where('category_id', $category->id)) > 0)
+                                                            <ul class="dropdown-menu"
+                                                                style="left: 100%; top: 0; margin-top: -6px; position: absolute;">
+                                                                @foreach ($subCategories->where('category_id', $category->id) as $subCategory)
+                                                                    <li>
+                                                                        <a href="{{ route('news.subcategory', ['slug' => $subCategory->slug]) }}"
+                                                                            class="dropdown-item">
+                                                                            <i class="fas fa-caret-left" style="margin-right: 5px;"></i>
+                                                                            {{ $subCategory->name }}
+                                                                        </a>
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        @else
+                                                            <ul class="dropdown-menu"
+                                                                style="left: 100%; top: 0; margin-top: -6px; position: absolute;">
+                                                                <li>
+                                                                    <a class="dropdown-item">Data Kosong</a>
+                                                                </li>
+                                                            </ul>
+                                                        @endif
                                                     </li>
                                                 @endforeach
                                             </ul>
@@ -205,6 +226,8 @@
                                         @endphp
                     @endif
                 </ul>
+
+
 
 
 
@@ -397,5 +420,6 @@
                 link.classList.remove('active');
             }
         });
+
     });
 </script>
