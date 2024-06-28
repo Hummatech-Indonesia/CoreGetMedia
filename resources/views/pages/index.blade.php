@@ -220,9 +220,14 @@
 <div class="container-fluid">
 
     @if ($advertisement_tops)
-    <div class="mt-4 iklan-top">
-        <img class="iklan-top" src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/'.$advertisement_tops->image : "CONTOHIKLAN.png") }}" width="100%" height="auto" alt="">
-    </div>
+    <a href="{{ $advertisement_tops->url }}">
+        <div class="mt-4 iklan-top" style="position: relative; width: 100%; height: 250px; overflow: hidden;">
+            <img class="iklan-top" src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/'.$advertisement_tops->image : "CONTOHIKLAN.png") }}" width="100%" height="auto" alt="">
+            <div style="width: 100%; background-color: rgba(0, 0, 0, 0.5); color: white; text-align: center; padding: 10px; box-sizing: border-box; position: relative; top: -50px;">
+                <a class="text-white" href="jascript:void(0)">Ingin baca berita tanpa iklan?</a> <a href="/subscribe" style="color: #7cadd8; text-decoration: underline;">Berlangganan</a>
+            </div>
+        </div>
+    </a>
     @else
     <div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center" style="height: 250px;  background-color: var(--bgColor);">
         <p style="color: #22222278">Iklan</p>
@@ -233,8 +238,9 @@
 @endif
 
 @php
-$displayedPopulars = $populars->take(10)->where('news_views_count', '>', 0)->pluck('id');
+    $displayedPopulars = $populars->take(10)->where('news_views_count', '>', 0)->pluck('id');
 @endphp
+
 
 <div class="trending-news-box">
     <div class="row gx-5">
@@ -270,6 +276,7 @@ $displayedPopulars = $populars->take(10)->where('news_views_count', '>', 0)->plu
         </div>
     </div>
 </div>
+
 </div>
 
 {{-- @if ($advertisement_tops)
@@ -775,9 +782,11 @@ $popular_down_id = $popular_down->pluck('id');
 </div> --}}
 
 @if ($advertisement_rights)
-<div class="sidebar">
-    <img src="{{ asset($advertisement_rights->image ? 'storage/'.$advertisement_rights->image : 'CONTOHIKLAN.png') }}" width="100%" height="473px" style="object-fit: cover" alt="...">
-</div>
+<a href="{{ $advertisement_rights->url }}">
+    <div class="sidebar">
+        <img src="{{ asset($advertisement_rights->image ? 'storage/'.$advertisement_rights->image : 'CONTOHIKLAN.png') }}" width="100%" height="473px" style="object-fit: cover" alt="...">
+    </div>
+</a>
 @else
 <div class="sidebar-widget d-flex justify-content-center align-items-center" style="height: 473px">
     <p style="color: #22222278">Iklan</p>
@@ -879,9 +888,11 @@ $popular_down_id = $popular_down->pluck('id');
 </button>
 
 @if ($advertisement_unders)
-<div class="container-fluid mt-5 mb-5">
-    <img src="{{ asset($advertisement_unders && $advertisement_unders->image != null ? 'storage/'.$advertisement_unders->image : "CONTOHIKLAN.png") }}" width="100%" height="295px" style="object-fit: cover" alt="">
-</div>
+<a href="{{ $advertisement_unders->url }}">
+    <div class="container-fluid mt-5 mb-5">
+        <img src="{{ asset($advertisement_unders && $advertisement_unders->image != null ? 'storage/'.$advertisement_unders->image : "CONTOHIKLAN.png") }}" width="100%" height="295px" style="object-fit: cover" alt="">
+    </div>
+</a>
 @else
 <div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center" style="height: 295px;  background-color: var(--bgColor);">
     <p style="color: #22222278">Iklan</p>
