@@ -108,6 +108,12 @@
                 </td>
             </tr>
             @empty
+            <tr>
+                <td colspan="6" class="text-center mt-5">
+                    <img src="{{ asset('assets/Empty-cuate.png') }}" alt="" width="230px">
+                    <p>Tidak ada berita</p>
+                </td>
+            </tr>
             @endforelse
         </tbody>
     </table>
