@@ -446,8 +446,7 @@
                                             @else
                                             <h5>{{ $comment->name }}</h5>
                                             @endif
-                                            <span class="comment-date">{{ $comment->created_at->diffInMinutes() }}
-                                                Menit yang lalu</span>
+                                            <span class="comment-date">{{ $comment->created_at->diffForHumans() }}</span>
                                         </div>
                                     </div>
 
@@ -578,8 +577,7 @@
                                             @else
                                             <h5>{{ $reply->name }}</h5>
                                             @endif
-                                            <span class="comment-date">{{ $reply->created_at->diffInMinutes() }}
-                                                Menit yang lalu</span>
+                                            <span class="comment-date">{{ $reply->created_at->diffForHumans() }}</span>
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-sm-3 col-3 text-md-end order-md-1 order-sm-1 order-1">

@@ -136,7 +136,7 @@
                             <td colspan="5">
                                 <div class="text-center mt-5">
                                     <img src="{{ asset('assets/Empty-cuate.png') }}" alt="" width="200px">
-                                    <p>Tidak ada berita</p>
+                                    <p>Tidak ada laporan artikel</p>
                                 </div>
                             </td>
                         </tr>
@@ -204,7 +204,7 @@
                             <td colspan="4">
                                 <div class="text-center mt-5">
                                     <img src="{{ asset('assets/Empty-cuate.png') }}" alt="" width="200px">
-                                    <p>Tidak ada berita</p>
+                                    <p>Tidak ada laporan komentar</p>
                                 </div>
                             </td>
                         </tr>
