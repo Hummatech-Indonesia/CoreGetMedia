@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Contracts\Interfaces\AdvertisementInterface;
 use App\Contracts\Interfaces\AuthorInterface;
 use App\Contracts\Interfaces\CategoryInterface;
+use App\Contracts\Interfaces\FollowerInterface;
 use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\NewsLikeInterface;
 use App\Contracts\Interfaces\NewsViewInterface;
@@ -35,8 +36,9 @@ class AuthorController extends Controller
     private UserService $userService;
     private AuthorChartService $authorChart;
     private AdvertisementInterface $advertisements;
+    private FollowerInterface $follower;
 
-    public function __construct(UserInterface $user, AuthorInterface $author, AuthorService $service, NewsInterface $news, CategoryInterface $category, PopularInterface $popular, NewsLikeInterface $newsLike, NewsViewInterface $newsView, UserService $userService, AuthorChartService $authorChart, AdvertisementInterface $advertisements)
+    public function __construct(UserInterface $user, AuthorInterface $author, AuthorService $service, NewsInterface $news, CategoryInterface $category, PopularInterface $popular, NewsLikeInterface $newsLike, NewsViewInterface $newsView, UserService $userService, AuthorChartService $authorChart, AdvertisementInterface $advertisements, FollowerInterface $follower)
     {
         $this->author = $author;
         $this->news = $news;
@@ -49,6 +51,7 @@ class AuthorController extends Controller
         $this->userService = $userService;
         $this->authorChart = $authorChart;
         $this->advertisements = $advertisements;
+        $this->follower = $follower;
     }
 
     /**
@@ -105,11 +108,14 @@ class AuthorController extends Controller
     public function show($slug)
     {
         $slug_id = $this->user->showWithSLug($slug);
+
         $author = $this->author->show($slug_id->id);
         $newses = $this->news->whereDetailAuthor($slug_id->id);
         $popularCategories = $this->category->showWithCount();
         $popularNewses = $this->popular->getpopular();
-        $allauthor = $this->author->getAuthor();
+        $follows = $this->follower->countWhere('user_id', $slug_id->id);
+
+        $allauthor = $this->author->getAuthor($slug_id->id);
 
         $advertisement_rights = $this->advertisements->wherePosition(AdvertisementEnum::DETAIL_AUTHOR, 'right');
         $advertisement_lefts = $this->advertisements->wherePosition(AdvertisementEnum::DETAIL_AUTHOR, 'left');
@@ -117,7 +123,7 @@ class AuthorController extends Controller
         $advertisement_unders = $this->advertisements->wherePosition(AdvertisementEnum::DETAIL_AUTHOR, 'under');
         $advertisement_mids = $this->advertisements->wherePosition(AdvertisementEnum::DETAIL_AUTHOR, 'mid');
 
-        return view('pages.user.author.detail-author', compact('author', 'newses', 'popularCategories', 'popularNewses', 'advertisement_rights', 'advertisement_lefts', 'advertisement_tops', 'advertisement_unders', 'advertisement_mids', 'allauthor'));
+        return view('pages.user.author.detail-author', compact('follows','author', 'newses', 'popularCategories', 'popularNewses', 'advertisement_rights', 'advertisement_lefts', 'advertisement_tops', 'advertisement_unders', 'advertisement_mids', 'allauthor'));
     }
 
     public function statistic()

@@ -149,7 +149,7 @@
                                         <div class="stat-container">
                                             <div class="vertical-line"></div>
                                             <div class="text-center">
-                                                <h5>963</h5>
+                                                <h5>{{ $follows }}</h5>
                                                 <p class="text-muted">Mengikuti</p>
                                             </div>
                                         </div>
