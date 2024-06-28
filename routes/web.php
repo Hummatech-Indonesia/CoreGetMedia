@@ -234,6 +234,10 @@ Route::get('author-registration', function () {
     return view('pages.user.profile.author-registration');
 })->name('author-registration');
 
+Route::get('terms-conditions', function() {
+    return view('pages.user.profile.term-condition');
+})->name('terms-conditions');
+
 
 Route::get('all-pinned', [NewsController::class, 'showPinned'])->name('all-pinned-list.user');
 
