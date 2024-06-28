@@ -234,7 +234,7 @@ Route::get('author-registration', function () {
     return view('pages.user.profile.author-registration');
 })->name('author-registration');
 
-Route::get('terms-conditions', function() {
+Route::get('terms-conditions', function () {
     return view('pages.user.profile.term-condition');
 })->name('terms-conditions');
 
@@ -243,9 +243,9 @@ Route::get('all-pinned', [NewsController::class, 'showPinned'])->name('all-pinne
 
 Route::put('/blok-user/{user}', [UserController::class, 'banned'])->name('user.banned');
 
-Route::get('status-advertisement-list', [AdvertisementController::class, 'index'] )->name('status-advertisement.user');
+Route::get('status-advertisement-list', [AdvertisementController::class, 'index'])->name('status-advertisement.user');
 
-Route::get('advertisement-biodata', function(){
+Route::get('advertisement-biodata', function () {
     return view('pages.user.advertisement.biodata-advertisement');
 })->name('biodata-advertisement');
 
@@ -273,6 +273,7 @@ Route::post('admin-account-store', [AdminController::class, 'store'])->name('adm
 
 Route::put('admin-account-update/{admin}', [AdminController::class, 'update'])->name('admin-account.update');
 Route::delete('admin-account-list/{user}', [AdminController::class, 'destroy'])->name('admin-account.delete');
+Route::get('category/{category}', [NewsCategoryController::class, 'index'])->name('categories.show.userr');
 
 
 require_once __DIR__ . '/jovita.php';
