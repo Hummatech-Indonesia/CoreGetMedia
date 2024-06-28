@@ -23,72 +23,52 @@
 
     .btn-three {
         color: #175A95;
-    }
 
-    /* .theme-dark .btn-three {
-        background-color: #222222;
-        color: #ffffff;
-    } */
+        .btn-three i {
+            color: #175A95;
+        }
 
-    .btn-three i {
-        color: #175A95;
-    }
+        .news-tablist .nav-item .nav-link.active {
+            color: #175A95;
+        }
 
-    .news-tablist .nav-item .nav-link.active {
-        color: #175A95;
-    }
 
-    /* .btn-three {
-        color: var(--secondaryColor);
-        background-color: #ffffff;
-    } */
+        .btn-three {
+            color: #175A95;
+            background-color: #ffffff;
+        }
 
-    /* .theme-dark.btn-three {
-        color: var(--secondaryColor);
-        background-color: #ffffff;
-    } */
+        .btn-three i {
+            color: #175A95;
+        }
 
-    .btn-three {
-        color: #175A95;
-        background-color: #ffffff;
-    }
+        .tag-list li a:hover {
+            background-color: #175A95;
+            color: var(--whiteColor);
+        }
 
-    /* .theme-dark .btn-three {
-        background-color: #222222;
-        color: #ffffff;
-    } */
+        .tag-list li a {
+            color: var(--optionalColor);
+            background-color: var(--whiteColor);
+            border-radius: 5px;
+            padding: 7px 15px 3px 17px;
+            font-size: 14px;
+            line-height: 30px;
+            display: inline-block;
+            border: 1px solid #eee;
+        }
 
-    .btn-three i {
-        color: #175A95;
-    }
+        .theme-dark .tag-list li a:hover {
+            background-color: #175A95;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--whiteColor);
+        }
 
-    .tag-list li a:hover {
-        background-color: #175A95;
-        color: var(--whiteColor);
-    }
-
-    .tag-list li a {
-        color: var(--optionalColor);
-        background-color: var(--whiteColor);
-        border-radius: 5px;
-        padding: 7px 15px 3px 17px;
-        font-size: 14px;
-        line-height: 30px;
-        display: inline-block;
-        border: 1px solid #eee;
-    }
-
-    .theme-dark .tag-list li a:hover {
-        background-color: #175A95;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        color: var(--whiteColor);
-    }
-
-    .news-card-one .news-card-img img {
-        border-radius: 50%;
-        height: 100px;
-        width: 100px;
-    }
+        .news-card-one .news-card-img img {
+            border-radius: 50%;
+            height: 100px;
+            width: 100px;
+        }
 
 </style>
 
@@ -206,6 +186,54 @@
         background-color: #222222;
 
     }
+/* 
+@media (max-width: 1023.98px) and (min-width: 1024px) {
+    .iklan-top {
+        padding-right: 170px;
+        padding-left: 170px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023.98px) {
+    .iklan-top {
+        padding-right: 50px;
+        padding-left: 50px;
+    }
+}
+@media (min-width: 768px) and (max-width: 1023.98px) {
+    .iklan-top {
+        padding-right: 30px;
+        padding-left: 30px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023.98px) {
+    .iklan-top {
+        padding-right: 55px;
+        padding-left: 55px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023.98px) {
+    .iklan-top {
+        padding-right: 120px;
+        padding-left: 120px;
+    }
+}
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .iklan-top {
+        padding-right: 50px;
+        padding-left: 50px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .iklan-top {
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+} */
+
 
 </style>
 
@@ -216,16 +244,22 @@
 @endif --}}
 
 @section('content')
-@if ($advertisement_tops)
-<div class="mt-4">
-    <img src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/'.$advertisement_tops->image : "CONTOHIKLAN.png") }}" width="100%" height="314px" style="object-fit: contain" alt="">
+
+<div class="container-fluid">
+
+    @if ($advertisement_tops)
+<div class="mt-4 iklan-top">
+    <img src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/'.$advertisement_tops->image : "CONTOHIKLAN.png") }}" width="100%" height="250px" style="object-fit: contain" alt="">
 </div>
 @else
-<div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center" style="height: 314px;  background-color: var(--bgColor);">
+<div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center" style="height: 250px;  background-color: var(--bgColor);">
     <p style="color: #22222278">Iklan</p>
 </div>
+{{-- <div class="mt-4 iklan-top">
+    <img src="{{ asset('assets/img/news/news-11.webp') }}" width="100%" height="250px" style="object-fit: cover" alt="">
+</div> --}}
 @endif
-<div class="container-fluid">
+
     @php
     $displayedPopulars = $populars->take(10)->where('news_views_count', '>', 0)->pluck('id');
     @endphp
