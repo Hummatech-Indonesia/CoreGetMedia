@@ -1,12 +1,12 @@
 @extends('layouts.user.app')
 {{-- @section('title', 'Artikel Populer') --}}
 @section('seo')
-<meta name="description" content="{{ Str::limit(strip_tags($about_get->description), 200) }}" />
+<meta name="description" content="{{ Str::limit(strip_tags($about_get->description), 100) }}" />
 <meta name="title" content="{{ $about_get->slogan }} - Get Media" />
-<meta name="og:image" content="{{ asset('assets/img/logo/get-media-light.svg') }}" />
-<meta name="og:image:secure_url" content="{{ asset('assets/img/logo/get-media-light.svg') }}" />
-<meta name="og:image:type" content="image/jpeg" />
-<meta property="og:image" content="{{ asset('assets/img/logo/get-media-light.svg') }}" />
+<meta name="og:image" content="{{ asset('assets/img/getmedia-logo.png') }}" />
+<meta name="og:image:secure_url" content="{{ asset('assets/img/getmedia-logo.png') }}" />
+<meta name="og:image:type" content="image/png" />
+<meta property="og:image" content="{{ asset('assets/img/getmedia-logo.png') }}" />
 <meta property="og:image:alt" content="{{ $about_get->slogan }}" />
 <meta property="og:url" content="{{ url('/') }}" />
 <meta property="og:type" content="home" />
