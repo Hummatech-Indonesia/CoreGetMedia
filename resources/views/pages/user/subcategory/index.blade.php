@@ -49,46 +49,59 @@
 </style>
 
 <style>
+    @media only screen and (max-width: 767px) {
+        .sidebar-widget {
+            padding: 15px;
+            width: 100%;
+        }
 
-@media only screen and (max-width: 767px) {
-    .sidebar-widget {
-        padding: 15px;
-        width: 100%;
+        .news-card-three {
+            display: flex;
+            flex-direction: column;
+            align-items: left;
+        }
+
+        .news-card-img img {
+            width: 100%;
+            height: auto;
+        }
+
+        .news-card-info h3 {
+            font-size: 1.2em;
+            text-align: left;
+        }
+
+        .news-metainfo {
+            justify-content: left;
+        }
+
+        .news-metainfo li {
+            margin-right: 15px;
+            font-size: 0.9em;
+        }
+
+        .sidebar {
+            width: 100%;
+        }
+
+        .sidebar-widget-title {
+            font-size: 1.2em;
+        }
     }
 
-    .news-card-three {
-        display: flex;
-        flex-direction: column;
-        align-items: left;
-    }
+    @media (min-width: 1024px) {
+        .iklan-top {
+            height: 250px;
+        }
 
-    .news-card-img img {
-        width: 100%;
-        height: auto;
-    }
+        .iklan-top-img {
+            width: 1300px;
+        }
 
-    .news-card-info h3 {
-        font-size: 1.2em;
-        text-align: left;
+        .top-noiklan {
+            width: 1300px;
+        }
     }
-
-    .news-metainfo {
-        justify-content: left;
-    }
-
-    .news-metainfo li {
-        margin-right: 15px;
-        font-size: 0.9em;
-    }
-
-    .sidebar {
-        width: 100%;
-    }
-
-    .sidebar-widget-title {
-        font-size: 1.2em;
-    }
-}
 
 </style>
 @endsection
@@ -104,7 +117,21 @@
     </div>
 </div>
 
-<div class="sports-wrap ptb-100">
+<div class="sports-wrap">
+    @if ($advertisement_tops)
+    <a href="{{ $advertisement_tops->url }}">
+        <div class="mt-4 iklan-top" style="position: relative; width: 100%; height: 250px; overflow: hidden;">
+            <img class="iklan-top-img" src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/'.$advertisement_tops->image : "CONTOHIKLAN.png") }}" width="100%" height="auto" alt="">
+            <div style="width: 100%; background-color: rgba(0, 0, 0, 0.5); color: white; text-align: center; padding: 10px; box-sizing: border-box; position: relative; top: -50px;">
+                <a href="jascript:void(0)">Ingin baca berita tanpa iklan?</a> <a href="/subscribe" style="color: #7cadd8; text-decoration: underline;">Berlangganan</a>
+            </div>
+        </div>
+    </a>
+    @else
+    <div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center bg_gray top-noiklan" style="height: 250px;">
+        <p style="color: #22222278">Iklan</p>
+    </div>
+    @endif
     <div class="container">
         <div class="row gx-5">
             <div class="col-lg-8">
@@ -198,9 +225,11 @@
                 </div>
 
                 @if ($advertisement_mids)
-                <div class="mt-4 mb-4">
-                    <img src="{{asset($advertisement_mids && $advertisement_mids->image != null ? 'storage/'.$advertisement_mids->image : "CONTOHIKLAN.png")}}" width="100%" height="181px" style="object-fit: cover" alt="">
-                </div>
+                <a href="{{ $advertisement_mids->url }}">
+                    <div class="mt-4 mb-4">
+                        <img src="{{asset($advertisement_mids && $advertisement_mids->image != null ? 'storage/'.$advertisement_mids->image : "CONTOHIKLAN.png")}}" width="100%" height="181px" style="object-fit: cover" alt="">
+                    </div>
+                </a>
                 @else
                 <div class="bg_gray" style="width: 100%; height: 181px;">
                     <p class="text-center align-middle" style="line-height: 181px;">Iklan</p>
@@ -272,9 +301,11 @@
                     @endif
 
                     @if ($advertisement_rights)
-                    <div class="sidebar mt-3 mb-4">
-                        <img src="{{asset($advertisement_rights && $advertisement_rights->image != null ? 'storage/'.$advertisement_rights->image : 'CONTOHIKLAN.png')}}" width="100%" height="auto" style="object-fit: cover" alt="">
-                    </div>
+                    <a href="{{ $advertisement_rights->url }}">
+                        <div class="sidebar mt-3 mb-4">
+                            <img src="{{asset($advertisement_rights && $advertisement_rights->image != null ? 'storage/'.$advertisement_rights->image : 'CONTOHIKLAN.png')}}" width="100%" height="auto" style="object-fit: cover" alt="">
+                        </div>
+                    </a>
                     @else
                     <div class="sidebar mt-3 mb-4 bg_gray" style="height: 603px;">
                         <p class="text-center align-middle" style="line-height: 603px;">Iklan</p>
