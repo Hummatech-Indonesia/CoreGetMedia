@@ -342,29 +342,37 @@
                                 <div class="col-lg-11 col-md-11">
                                     <div class="row">
                                         <div class="col-md-12 col-lg-3 mb-3">
-                                            <li class="author d-flex align-items-center">
-                                                <span class="author-img">
-                                                    @if(isset($news->user) && isset($news->user->author))
-                                                    <a href="{{ route('author.detail', ['author' => $news->user->slug]) }}">
-                                                        <img src="{{ asset($news->user->photo ? 'storage/' . $news->user->photo : 'default.png') }}" alt="Image" width="40px" height="30px" style="border-radius: 50%; object-fit:cover;" />
-                                                    </a>
-                                                    @else
-                                                    <img src="{{ asset('default.png') }}" alt="Image" width="40px" height="30px" style="border-radius: 50%; object-fit:cover;" />
-                                                    @endif
-                                                </span>
-
-                                                <div class="ml-2">
-                                                    @if($news->user->hasRole('admin'))
-                                                    <a class="ms-3" style="display: inline; text-decoration: none" data-toggle="tooltip" data-placement="top" title="admin" href="#">{{ $news->user->name }}</a>
-                                                    @else
-                                                    <a class="ms-4" style="display: inline; text-decoration: none" data-toggle="tooltip" data-placement="top" title="author - {{ $news->user->name }}" href="{{ route('author.detail', ['author' => $news->user->slug]) }}">{{ $news->user->name }}</a>
-                                                    @endif
+                                            <li class="author d-flex align-items-center justify-content-between w-100">
+                                                <div class="d-flex align-items-center">
+                                                    <span class="author-img">
+                                                        @if(isset($news->user) && isset($news->user->author))
+                                                        <a href="{{ route('author.detail', ['author' => $news->user->slug]) }}">
+                                                            <img src="{{ asset($news->user->photo ? 'storage/' . $news->user->photo : 'default.png') }}" alt="Image" width="40px" height="30px" style="border-radius: 50%; object-fit:cover;" />
+                                                        </a>
+                                                        @else
+                                                        <img src="{{ asset('default.png') }}" alt="Image" width="40px" height="30px" style="border-radius: 50%; object-fit:cover;" />
+                                                        @endif
+                                                    </span>
+                                                    <div class="ml-2">
+                                                        @if($news->user->hasRole('admin'))
+                                                        <a class="ms-3" style="display: inline; text-decoration: none" data-toggle="tooltip" data-placement="top" title="admin" href="#">{{ $news->user->name }}</a>
+                                                        @else
+                                                        <a class="ms-4" style="display: inline; text-decoration: none" data-toggle="tooltip" data-placement="top" title="author - {{ $news->user->name }}" href="{{ route('author.detail', ['author' => $news->user->slug]) }}">{{ $news->user->name }}</a>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="d-md-none">
+                                                    <button style="border: none; background-color: #FFFFFF;" class="btn-news-report" type="button" data-id="{{ $news->id }}">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                                                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a5 5 0 0 1 7 0a5 5 0 0 0 7 0v9a5 5 0 0 1-7 0a5 5 0 0 0-7 0zm0 16v-7" />
+                                                        </svg>
+                                                    </button>
                                                 </div>
                                             </li>
                                         </div>
 
                                         <div class="col-md-12 col-sm-12 col-lg-9">
-                                            <div class="d-flex align-items-center">
+                                            <div class="d-flex align-items-center justify-content-between">
                                                 <li class="mr-4"><i class="fi fi-rr-calendar-minus"></i>
                                                     <span id="formattedDate" class="font-date">{{ \Carbon\Carbon::parse($news->created_at)->translatedFormat('d F Y') }}</span>
                                                 </li>
@@ -395,11 +403,35 @@
                                                     <span id="like" data-like="{{ $likes }}">{{ $likes }}</span>
                                                 </li>
 
+                                                {{-- mobile --}}
+                                                <li class="d-flex align-items-center d-md-none d-none">
+
+                                                    <form id="form-like">
+                                                        @csrf
+                                                        <button type="submit" style="background: transparent;border:transparent" class="like">
+                                                            <svg class="last mb-1" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                                                <path fill="#E93314" d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
+                                                            </svg>
+                                                        </button>
+                                                    </form>
+
+                                                    <form id="form-liked" style="display: none;">
+                                                        @csrf
+                                                        <button type="submit" style="background: transparent;border:transparent" class="liked">
+                                                            <svg class="last mb-1" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                                                <path fill="red" d="M18 21H8V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L15.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.037.375t-.113.375l-3 7.05q-.225.5-.75.85T18 21M6 8v13H2V8z" />
+                                                            </svg>
+                                                        </button>
+                                                    </form>
+
+                                                    <span id="like" data-like="{{ $likes }}">{{ $likes }}</span>
+                                                </li>
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-1 col-sm-1 col-lg-1 d-flex align-items-center justify-content-end">
+                                <div class="col-md-1 col-sm-1 col-lg-1 d-none d-md-flex align-items-center justify-content-end mb-3">
                                     <button style="border: none; background-color: #FFFFFF" class="btn-news-report" type="button" data-id="{{ $news->id }}">
                                         <li>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
@@ -410,6 +442,7 @@
                                 </div>
                             </div>
                         </ul>
+
                     </div>
 
                     <div class="news-para text-justify">
