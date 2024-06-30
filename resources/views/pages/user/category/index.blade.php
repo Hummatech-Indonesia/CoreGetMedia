@@ -1,5 +1,17 @@
 @extends('layouts.user.app')
 
+@section('seo')
+<meta name="description" content="Berita Kategori {{ $category->name }} Terbaru, {{ Str::limit(strip_tags($latestsTop->name), 100) }}" />
+<meta name="title" content="Kategori {{ $category->name }} Terkini - GetMedia" />
+<meta name="og:image" content="{{ asset('assets/img/getmedia-logo.png') }}" />
+<meta name="og:image:secure_url" content="{{ asset('assets/img/getmedia-logo.png') }}" />
+<meta name="og:image:type" content="image/png" />
+<meta property="og:image" content="{{ asset('assets/img/getmedia-logo.png') }}" />
+<meta property="og:image:alt" content="{{ isset($about_get->slogan) }}" />
+<meta property="og:url" content="{{ route('categories.show.user', ['category' => $category->slug]) }}" />
+<meta property="og:type" content="category" />
+<link rel="canonical" href="{{ route('categories.show.user', ['category' => $category->slug]) }}" />
+@endsection
 
 @section('style')
 <style>
@@ -44,7 +56,6 @@
     }
 
 </style>
-
 <style>
     @media only screen and (max-width: 767px) {
         .sidebar-widget {

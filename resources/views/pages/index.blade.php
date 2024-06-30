@@ -1,13 +1,13 @@
 @extends('layouts.user.app')
-{{-- @section('title', 'Artikel Populer') --}}
+
 @section('seo')
-<meta name="description" content="{{ Str::limit(strip_tags($about_get->description), 100) }}" />
-<meta name="title" content="{{ $about_get->slogan }} - Get Media" />
+<meta name="description" content="{{ Str::limit(strip_tags(isset($about_get->description)), 100) }}" />
+<meta name="title" content="{{ isset($about_get->slogan) }} - GetMedia" />
 <meta name="og:image" content="{{ asset('assets/img/getmedia-logo.png') }}" />
 <meta name="og:image:secure_url" content="{{ asset('assets/img/getmedia-logo.png') }}" />
 <meta name="og:image:type" content="image/png" />
 <meta property="og:image" content="{{ asset('assets/img/getmedia-logo.png') }}" />
-<meta property="og:image:alt" content="{{ $about_get->slogan }}" />
+<meta property="og:image:alt" content="{{ isset($about_get->slogan) }}" />
 <meta property="og:url" content="{{ url('/') }}" />
 <meta property="og:type" content="home" />
 <link rel="canonical" href="{{ url('/') }}" />
@@ -232,9 +232,6 @@
     <div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center" style="height: 250px;  background-color: var(--bgColor);">
         <p style="color: #22222278">Iklan</p>
     </div>
-    {{-- <div class="mt-4 iklan-top">
-    <img src="{{ asset('assets/img/news/news-11.webp') }}" width="100%" height="250px" style="object-fit: cover" alt="">
-</div> --}}
 @endif
 
 @php
