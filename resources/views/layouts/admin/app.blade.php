@@ -28,6 +28,45 @@
         href="{{ asset('admin/dist/libs/bootstrap-duallistbox/dist/bootstrap-duallistbox.min.css') }}">
     @yield('style')
     <style>
+        /*Loader*/
+        #loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white; /* Anda bisa mengganti warna sesuai kebutuhan */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        /*Background Section Animation*/
+        #loader-wrapper .loader-section {
+            position: fixed;
+            top: 0;
+            width: 51%;
+            height: 100%;
+            background: #222;
+            z-index: 1000;
+        }
+
+        .loaded #loader {
+            opacity: 0;
+            transition: all 0.3s ease-out;
+        }
+        .loaded img#loadImg{
+            opacity: 0;
+            transition: all 0.3s ease-out;
+        }
+        .loaded #loader-wrapper {
+            visibility: hidden;
+            transform: translateY(-100%);
+            transition: all 0.3s 1s ease-out;
+        }
+    </style>
+    <style>
         .important {
             color: red;
         }
@@ -70,12 +109,34 @@
             --bs-bg-opacity: 1;
             background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;
         }
+
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white; /* Anda bisa mengganti warna sesuai kebutuhan */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .preloader img {
+            width: 10pc;
+        }
     </style>
 </head>
 
 <body>
     <!-- Preloader -->
-    <div class="preloader">
+    <div id="loader-wrapper">
+        <img src="{{ asset('assets/img/logo/preloader.gif') }}" id="loadImg" class="lds-ripple img-fluid animate-bounce" alt="loader" style="width: 12pc; top: 18pc;"/>
+        <div id="loader"></div>
+    </div>
+
+    {{-- <div class="preloader">
         <img src="{{ asset('assets/img/logo/logo-get.svg') }}" class="lds-ripple img-fluid animate-bounce" alt="loader"
             class="lds-ripple img-fluid animate-bounce bounce2" />
     </div>
@@ -83,7 +144,7 @@
     <div class="preloader">
         <img src="{{ asset('assets/img/logo/logo-get.svg') }}" class="lds-ripple img-fluid animate-bounce" alt="loader"
             class="lds-ripple img-fluid animate-bounce bounce2" />
-    </div>
+    </div> --}}
     <!--  Body Wrapper -->
     <div class="page-wrapper" id="main-wrapper" data-theme="blue_theme" data-layout="vertical" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed">
@@ -339,8 +400,16 @@
         }
     </script>
     @yield('script')
-    <script>
+    {{-- <script>
         $('.preloader').fadeOut();
+    </script> --}}
+
+    <script>
+        $(document).ready(function(){
+            setTimeout(function(){
+                $('body').addClass('loaded');
+            }, 2400);
+        });
     </script>
 </body>
 
