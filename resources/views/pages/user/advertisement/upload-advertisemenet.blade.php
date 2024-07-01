@@ -199,7 +199,7 @@
                 <div class="col-lg-12 mb-4">
                     <label class="form-label" for="photo">Konten</label>
                     <input type="file" id="photo" name="image" onchange="previewImage(event)" placeholder=""
-                        value="{{ old('photo') }}" class="form-control @error('photo') is-invalid @enderror">
+                        value="{{ old('photo') }}" class="form-control @error('photo') is-invalid @enderror" style="height: auto;">
                     @error('photo')
                         <span class="invalid-feedback" role="alert" style="color: red;">
                             <strong>{{ $message }}</strong>

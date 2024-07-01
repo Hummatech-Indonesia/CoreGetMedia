@@ -4,7 +4,6 @@
             <img class="logo-light" src="{{asset('assets/img/logo/get-media-dark.svg')}}" alt="logo" />
             <img class="logo-dark" src="{{asset('assets/img/logo/get-media-light.svg')}}" alt="logo" />
         </a>
-
         <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
             <i class="ri-close-line"></i>
         </button>
