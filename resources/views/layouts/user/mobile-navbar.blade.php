@@ -64,7 +64,7 @@
 
             @auth
                 <div class="row">
-                    <div class="col-lg-3 col-md-12">
+                    <div class="col-lg-3 col-3">
                         <div class="">
                             <ul class="navbar-nav mx-auto">
                                 <div class="news-card-img mb-2 ms-2" style="padding-right: 0px;">
@@ -90,11 +90,10 @@
                                     </a>
                                     @endrole
                                 </div>
-
                             </ul>
                         </div>
                     </div>
-                    <div class="col-lg-8 col-md-12">
+                    <div class="col-lg-8 col-8">
                         <div class="">
                             <p style="line-height: 0px;" class="mt-3"><b>{{ auth()->user()->name }}</b></p>
                         </div>
@@ -104,7 +103,7 @@
                             </p>
                         </div>
                     </div>
-                    <div class="col-lg-1 col-md-12">
+                    <div class="col-lg-1 col-1">
                         <div class="d-flex justify-content-end">
                             @role('user')
                             <a href="{{route('profile-user.user')}}" class="btn btn-sm" style="background-color: #175A95">

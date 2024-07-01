@@ -18,6 +18,10 @@
 .li::after {
     color: #FFFFFF !important;
 }
+
+.dark-theme .dark{
+    color: #FFFFFF
+}
 </style>
 @endsection
 
@@ -36,8 +40,8 @@
         <div class="col-6 mt-5">
             <div class="row ps-5">
                 <div class="col-2 mt-2 mb-3" style="background-color:#175A95"></div>
-                <div class="col-10">
-                    Who We Are
+                <div class="col-10 dark">
+                    <p>Who We Are</p>
                 </div>
                     <div class="col">
                         <h1>
