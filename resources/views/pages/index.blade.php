@@ -206,6 +206,10 @@
     }
 }
 
+.btn-three i {
+    font-size: 14px;
+    color: #175A95;
+}
 
 </style>
 
@@ -243,7 +247,7 @@
     <div class="row gx-5">
         <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 d-flex justify-content-center">
             <div class="trending-prev me-3"><i class="flaticon-left-arrow"></i></div>
-            <h4>Artikel Popular</h4>
+            <h4 class="mt-1">Artikel Populer</h4>
             <div class="trending-next ms-3"><i class="flaticon-right-arrow"></i></div>
         </div>
         <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12">
