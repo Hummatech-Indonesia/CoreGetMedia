@@ -27,7 +27,9 @@ class PackageController extends Controller
     public function index()
     {
         $packages = $this->package->get();
-        return view('', compact('packages'));
+        $package_id = $packages->pluck('id');
+        $fiture = $this->packageFeatures->show($package_id);
+        return view('pages.admin.subscribe.index', compact('packages', 'fiture'));
     }
 
     /**
