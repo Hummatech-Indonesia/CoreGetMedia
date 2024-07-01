@@ -60,7 +60,7 @@
                             <div class="col-12">
                                 <div class="">
                                     <div class="d-flex justify-content-between mt-4">
-                                        <label for="exampleInputPassword1" class="form-label fw-semibold">CV</label>
+                                        <label for="exampleInputPassword1" class="form-label fw-semibold">CV <small class="text-danger"> *file harus berupa pdf - wajib di isi</small></label>
                                         <button type="button" class="btn btn-success mb-2" id="viewPdfBtn" style="background-color: #175A95; border: none" disabled>Lihat cv</button>
                                     </div>
                                     <input type="file" class="form-control" id="cvInput" name="cv" accept="application/pdf">
