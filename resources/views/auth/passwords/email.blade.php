@@ -39,8 +39,8 @@
                         <img src="{{asset('assets/img/auth/get-back.svg')}}" width="190" alt="">
                     </a>
                 </div>
-                <div class="d-flex justify-content-center align-items-center">
-                    <img src="{{asset('assets/img/auth/scooby.png')}}" width="520px" alt="auth-login-cover" class="img-fluid my-5 " data-app-dark-img="illustrations/auth-login-illustration-dark.html">
+                <div class="d-flex justify-content-center align-items-center mt-5">
+                    <img src="{{asset('assets/img/reset_bg.png')}}" width="580px" alt="auth-login-cover" class="img-fluid my-5 " data-app-dark-img="illustrations/auth-login-illustration-dark.html">
                 </div>
             </div>
 
