@@ -133,6 +133,27 @@
         }
     }
 
+    .theme-dark .form-control {
+        display: block;
+        width: 100%;
+        padding: .375rem .75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: var(--bs-body-color) !important;
+        background-color: var(--bs-body-bg);
+        background-clip: padding-box;
+        border: var(--bs-border-width) solid var(--bs-border-color) !important;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border-radius: var(--bs-border-radius);
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    }
+
+.theme-dark .form-control .edit-coment{
+    color: #ffffff !important;
+}
 </style>
 @endsection
 
@@ -143,7 +164,7 @@
         <div class="modal-content">
             <!-- Modal content -->
             <div class="modal-header">
-                <h3 class="modal-title">Laporkan Berita</h3>
+                <h3 class="modal-title text-dark">Laporkan Berita</h3>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <!-- Modal body -->
@@ -164,15 +185,15 @@
                         <label for="description" class="form-label">Deskripsi laporan:</label>
                         <textarea name="description" style="height: 150px; resize: none" class="form-control @error('description') is-invalid @enderror" placeholder="Deskripsi laporan"></textarea>
                         @error('description')
-                        <span class="invalid-feedback" role="alert" style="color: red;">
+                        <span class="invalid-feedback" role="alert" style="color: rgb(255, 0, 0);">
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-rounded btn-light-danger text-danger" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-rounded btn-light-warning text-warning">Laporkan</button>
+                    <button type="button" class="btn text-dark px-3" style="background-color: #c9c9c9" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn text-white px-4" style="background-color: #DD1818;">Laporkan</button>
                 </div>
             </form>
         </div>
@@ -184,7 +205,7 @@
         <div class="modal-content">
             <!-- Modal content -->
             <div class="modal-header">
-                <h3 class="modal-title">Laporkan Komentar</h3>
+                <h3 class="modal-title text-dark">Laporkan Komentar</h3>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <!-- Modal body -->
@@ -203,8 +224,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn text-warning" style="background-color: #FEF5E5;" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn text-danger" style="background-color: #FBF2EF;">Laporkan</button>
+                    <button type="button" class="btn text-dark" style="background-color: #C9C9C9;" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn text-white" style="background-color: #DD1818;">Laporkan</button>
                 </div>
             </form>
         </div>
@@ -216,7 +237,7 @@
         <div class="modal-content">
             <!-- Modal content -->
             <div class="modal-header">
-                <h3 class="modal-title">Hapus Komentar</h3>
+                <h3 class="modal-title text-dark">Hapus Komentar</h3>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <!-- Modal body -->
@@ -229,8 +250,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-rounded btn-light-primary text-primary" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-rounded btn-light-danger text-danger">Hapus</button>
+                    <button type="button" class="btn text-dark" style="background-color: #C9C9C9" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn text-white" style="background-color: #DD1818">Hapus</button>
                 </div>
             </form>
         </div>
@@ -432,7 +453,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-1 col-sm-1 col-lg-1 d-none d-md-flex align-items-center justify-content-end mb-3">
-                                    <button style="border: none; background-color: #FFFFFF" class="btn-news-report" type="button" data-id="{{ $news->id }}">
+                                    <button style="border: none;" class="btn-news-report bg-transparent" type="button" data-id="{{ $news->id }}">
                                         <li>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
                                                 <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a5 5 0 0 1 7 0a5 5 0 0 0 7 0v9a5 5 0 0 1-7 0a5 5 0 0 0-7 0zm0 16v-7" />
@@ -619,7 +640,7 @@
                             @csrf
                             <div class="row">
                                 <div class="col-lg-12 mt-2">
-                                    <textarea name="description" id="update-description-{{ $comment->id }}" class="form-control mb-2" cols="100" rows="2" placeholder="Balas Komentar" style="resize: none"></textarea>
+                                    <textarea name="description" id="update-description-{{ $comment->id }}" class="form-control mb-2 edit-coment" cols="100" rows="2" placeholder="Balas Komentar" style="resize: none; colo"></textarea>
                                 </div>
                             </div>
                             <div class="d-flex gap-2">
@@ -850,79 +871,83 @@
 
 <script>
     $(document).ready(function() {
-    var formLike = $('#form-like');
-    var formLiked = $('#form-liked');
-    var likeCount = $('#like');
-    var likedByUser = {{ $likedByUser ? 'true' : 'false' }};
-    var likeData = parseInt(likeCount.data('like'));
-    var isProcessing = false;
-
-    if (likedByUser) {
-        formLike.hide();
-        formLiked.show();
-    } else {
-        formLike.show();
-        formLiked.hide();
-    }
-
-    formLike.on('submit', function(event) {
-        event.preventDefault();
-        if (isProcessing) return;
-        isProcessing = true;
-        var csrfToken = formLike.find('input[name="_token"]').val();
-
-        $.ajax({
-            url: '/like-news/{{ $news_id }}',
-            type: 'POST',
-            contentType: 'application/json',
-            headers: {
-                'X-CSRF-TOKEN': csrfToken
-            },
-            success: function(data) {
-                formLike.hide();
-                formLiked.show();
-                likeData++;
-                likeCount.html(likeData);
-                likeCount.data('like', likeData);
-            },
-            error: function(xhr) {
-                console.error('Error: ' + xhr.status);
-            },
-            complete: function() {
-                isProcessing = false; // Re-enable the buttons
+        var formLike = $('#form-like');
+        var formLiked = $('#form-liked');
+        var likeCount = $('#like');
+        var likedByUser = {
+            {
+                $likedByUser ? 'true' : 'false'
             }
+        };
+        var likeData = parseInt(likeCount.data('like'));
+        var isProcessing = false;
+
+        if (likedByUser) {
+            formLike.hide();
+            formLiked.show();
+        } else {
+            formLike.show();
+            formLiked.hide();
+        }
+
+        formLike.on('submit', function(event) {
+            event.preventDefault();
+            if (isProcessing) return;
+            isProcessing = true;
+            var csrfToken = formLike.find('input[name="_token"]').val();
+
+            $.ajax({
+                url: '/like-news/{{ $news_id }}'
+                , type: 'POST'
+                , contentType: 'application/json'
+                , headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                }
+                , success: function(data) {
+                    formLike.hide();
+                    formLiked.show();
+                    likeData++;
+                    likeCount.html(likeData);
+                    likeCount.data('like', likeData);
+                }
+                , error: function(xhr) {
+                    console.error('Error: ' + xhr.status);
+                }
+                , complete: function() {
+                    isProcessing = false; // Re-enable the buttons
+                }
+            });
+        });
+
+        formLiked.on('submit', function(event) {
+            event.preventDefault();
+            if (isProcessing) return; // Prevent multiple requests
+            isProcessing = true;
+            var csrfToken = formLiked.find('input[name="_token"]').val();
+
+            $.ajax({
+                url: '/unlike-news/{{ $news_id }}'
+                , type: 'DELETE'
+                , contentType: 'application/json'
+                , headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                }
+                , success: function(data) {
+                    formLike.show();
+                    formLiked.hide();
+                    likeData--;
+                    likeCount.html(likeData);
+                    likeCount.data('like', likeData);
+                }
+                , error: function(xhr) {
+                    console.error('Error: ' + xhr.status);
+                }
+                , complete: function() {
+                    isProcessing = false; // Re-enable the buttons
+                }
+            });
         });
     });
-
-    formLiked.on('submit', function(event) {
-        event.preventDefault();
-        if (isProcessing) return; // Prevent multiple requests
-        isProcessing = true;
-        var csrfToken = formLiked.find('input[name="_token"]').val();
-
-        $.ajax({
-            url: '/unlike-news/{{ $news_id }}',
-            type: 'DELETE',
-            contentType: 'application/json',
-            headers: {
-                'X-CSRF-TOKEN': csrfToken
-            },
-            success: function(data) {
-                formLike.show();
-                formLiked.hide();
-                likeData--;
-                likeCount.html(likeData);
-                likeCount.data('like', likeData);
-            },
-            error: function(xhr) {
-                console.error('Error: ' + xhr.status);
-            },
-            complete: function() {
-                isProcessing = false; // Re-enable the buttons
-            }
-        });
-    });
-});
 
 </script>
 
