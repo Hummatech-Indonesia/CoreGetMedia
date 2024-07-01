@@ -206,8 +206,9 @@
 
 <button class="btn btn-sm mx-auto px-4 py-2 text-white" type="submit" data-bs-toggle="modal"
     data-bs-target="#exampleModal1"
-    style="background-color: #175A95; font-size: large; display: block; margin: 20px auto; font-size: 1rem;">Pasang
-    Iklan Sekarang
+    style="background-color: #175A95; font-size: large; display: block; margin: 20px auto; font-size: 1rem;">
+    <a href="{{ route('status-advertisement.user') }}" style="color: white;">Pasang
+        Iklan Sekarang</a>
     <i data-feather="chevron-right"></i>
 </button>
 
