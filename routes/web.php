@@ -17,6 +17,7 @@ use App\Http\Controllers\VoucherrController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\NewsCategoryController;
 use App\Http\Controllers\NewsLikeController;
+use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PositionAdvertisementController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SitemapController;
@@ -113,9 +114,8 @@ Route::delete('set-price/delete/{positionAdvertisement}', [PositionAdvertisement
 
 Route::get('inbox-admin', [AdminController::class, 'inbox'])->name('inbox-list.admin');
 
-Route::get('subscribe-list', function () {
-    return view('pages.admin.subscribe.index');
-})->name('subscribe-list.admin');
+
+Route::get('subscribe-list', [PackageController::class, 'index'])->name('subscribe-list.admin');
 
 Route::get('news-premium', function () {
     return view('pages.admin.news_premium.index');
