@@ -49,9 +49,9 @@
                                 style="width: 120px; height: 120px;" ;>
                                 <div class="border-4 border-white d-flex align-items-center justify-content-center rounded-circle overflow-hidden"
                                     style="width: 100px; height: 100px;">
-                                    <img style="object-fit: cover"
-                                        src="{{asset('user/dist/images/profile/user-2.jpg')}}" alt=""
-                                        class="w-100 h-100">
+                                    <img src="{{asset(auth()->user()->image ? "storage/".auth()->user()->image : "admin/dist/images/profile/user-8.jpg")}}" alt=""
+                                                    class="img-fluid rounded-circle" width="120" height="120">
+                                                    <form method="POST" action="{{ route('image.update', ['user' => auth()->user()->id]) }}" id="upload-photo" enctype="multipart/form-data">
                                 </div>
                             </div>
 
@@ -170,7 +170,7 @@
 
             <div class="col-md-12 col-lg-6 mb-4">
                 <label class="form-label" for="email">Nama</label>
-                <input type="text" class="form-control" readonly value="M. Ardian">
+                <input type="text" class="form-control" readonly value="{{ auth()->user()->name }}">
                 @error('name')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -179,7 +179,7 @@
             </div>
             <div class="col-md-12 col-lg-6 mb-4">
                 <label class="form-label" for="phone_number">No Hp</label>
-                <input type="text" class="form-control" readonly value="08926752364">
+                <input type="text" class="form-control" readonly value="{{ auth()->user()->phone_number }}">
                 @error('phone_number')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -188,7 +188,7 @@
             </div>
             <div class="col-md-12 col-lg-6 mb-4">
                 <label class="form-label" for="email">Email</label>
-                <input type="text" class="form-control" readonly value="ardian@gmail.com">
+                <input type="text" class="form-control" readonly value="{{ auth()->user()->email }}">
                 @error('email')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -197,7 +197,7 @@
             </div>
             <div class="col-md-12 col-lg-6 mb-4">
                 <label class="form-label" for="email">Tanggal Lahir</label>
-                <input type="text" class="form-control" readonly value="01/02/2022">
+                <input type="text" class="form-control" readonly value="{{ auth()->user()->date_of_birth }}">
                 @error('name')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -206,7 +206,7 @@
             </div>
             <div class="col-md-12 col-lg-12 mb-3">
                 <label class="form-label" for="email">Alamat</label>
-                <textarea name="" class="form-control" placeholder="jl. Indonesia Raya" id="" cols="30" rows="5"
+                <textarea name="" class="form-control" placeholder="{{ auth()->user()->address }}" id="" cols="30" rows="5"
                     readonly style="resize: none"></textarea>
             </div>
         </div>
