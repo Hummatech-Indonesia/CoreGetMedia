@@ -79,7 +79,7 @@
             menjangkau
             audiens yang luas
             dari individu yang terlibat dan terinformasi yang mencari berita dan pembaruan terbaru di berbagai topik,
-            memungkinkan Anda untuk secara efektif mempromosikan pesan merek Anda kepada audiens yang reseptif.</p>
+            memungkinkan Anda untuk secara efektif mempromosikan pesan merek Anda kepada audiens yang reseptif.</p>
     </div>
 </div>
 
@@ -206,8 +206,12 @@
 
 <button class="btn btn-sm mx-auto px-4 py-2 text-white" type="submit" data-bs-toggle="modal"
     data-bs-target="#exampleModal1"
-    style="background-color: #175A95; font-size: large; display: block; margin: 20px auto; font-size: 1rem;">Pasang
-    Iklan Sekarang
+    style="background-color: #175A95; font-size: large; display: block; margin: 20px auto; font-size: 1rem;">
+    @auth
+        <a href="{{ route('status-advertisement.user') }}" style="color: white;">Pasang Iklan Sekarang</a>
+    @else
+        <a href="{{ route('login') }}" style="color: white;">Pasang Iklan Sekarang</a>
+    @endauth
     <i data-feather="chevron-right"></i>
 </button>
 
