@@ -1,13 +1,13 @@
 @extends('layouts.user.app')
-{{-- @section('title', 'Artikel Populer') --}}
+
 @section('seo')
-<meta name="description" content="{{ Str::limit(strip_tags($about_get->description), 100) }}" />
-<meta name="title" content="{{ $about_get->slogan }} - Get Media" />
+<meta name="description" content="{{ Str::limit(strip_tags(isset($about_get->description)), 100) }}" />
+<meta name="title" content="{{ isset($about_get->slogan) }} - GetMedia" />
 <meta name="og:image" content="{{ asset('assets/img/getmedia-logo.png') }}" />
 <meta name="og:image:secure_url" content="{{ asset('assets/img/getmedia-logo.png') }}" />
 <meta name="og:image:type" content="image/png" />
 <meta property="og:image" content="{{ asset('assets/img/getmedia-logo.png') }}" />
-<meta property="og:image:alt" content="{{ $about_get->slogan }}" />
+<meta property="og:image:alt" content="{{ isset($about_get->slogan) }}" />
 <meta property="og:url" content="{{ url('/') }}" />
 <meta property="og:type" content="home" />
 <link rel="canonical" href="{{ url('/') }}" />
@@ -206,6 +206,10 @@
     }
 }
 
+.btn-three i {
+    font-size: 14px;
+    color: #175A95;
+}
 
 </style>
 
@@ -232,9 +236,6 @@
     <div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center" style="height: 250px;  background-color: var(--bgColor);">
         <p style="color: #22222278">Iklan</p>
     </div>
-    {{-- <div class="mt-4 iklan-top">
-    <img src="{{ asset('assets/img/news/news-11.webp') }}" width="100%" height="250px" style="object-fit: cover" alt="">
-</div> --}}
 @endif
 
 @php
@@ -246,7 +247,7 @@
     <div class="row gx-5">
         <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 d-flex justify-content-center">
             <div class="trending-prev me-3"><i class="flaticon-left-arrow"></i></div>
-            <h4>Artikel Popular</h4>
+            <h4 class="mt-1">Artikel Populer</h4>
             <div class="trending-next ms-3"><i class="flaticon-right-arrow"></i></div>
         </div>
         <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12">

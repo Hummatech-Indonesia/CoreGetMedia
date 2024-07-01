@@ -48,11 +48,6 @@
                             <input class="form-control" type="text" name="price">
                             <ul class="error-text"></ul>
                         </div>
-                        {{-- <div class="col-lg-12" id="stok-wrapper">
-                            <label class="form-label mt-2">Nama Fitur</label>
-                            <input id="update-quota" class="form-control" class="stok" type="text" name="quota">
-                            <ul class="error-text"></ul>
-                        </div> --}}
                         <label class="form-label">Nama Fitur</label>
                         <div class="email-repeater mb-3">
                             <div data-repeater-list="name_feature">
@@ -76,11 +71,73 @@
                             </button>
                         </div>
                     </div>
-
                     <div class="modal-footer">
                         <button type="button" class="btn btn-rounded btn-light-danger text-danger"
                             data-bs-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-rounded btn-light-success text-success">Tambah</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-update" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Update Paket Berlangganan</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="form-update" method="POST">
+                @method('put')
+                @csrf
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label class="form-label mt-2">Nama Paket</label>
+                            <input class="form-control" id="name-update" type="text" name="name">
+                            <ul class="error-text"></ul>
+                        </div>
+                        <div class="col-lg-12">
+                            <label class="form-label mt-2">Deskripsi Pakett</label>
+                            <input class="form-control" id="description-update" type="text" name="description">
+                            <ul class="error-text"></ul>
+                        </div>
+                        <div class="col-lg-12" id="stok-wrapper">
+                            <label class="form-label mt-2">Harga Paket</label>
+                            <input class="form-control" id="price-update" type="text" name="price">
+                            <ul class="error-text"></ul>
+                        </div>
+                        <label class="form-label">Nama Fitur</label>
+                        <div class="email-repeater mb-3">
+                            <div data-repeater-list="name_feature">
+                            @foreach ($fiture as $fitur)
+                            <div data-repeater-item class="row mb-3">
+                                <div class="col-md-10">
+                                    <input type="text" value="{{ $fitur->name_feature }}" name="name_feature" class="form-control" placeholder="Nama Fitur" />
+                                </div>
+                                <div class="col-md-2">
+                                    <button data-repeater-delete="" class="btn btn-danger waves-effect waves-light"
+                                    type="button">
+                                    <i class="ti ti-circle-x fs-5"></i>
+                                </button>
+                                </div>
+                            </div>
+                            @endforeach
+                            </div>
+                            <button type="button" data-repeater-create="" class="btn btn-info waves-effect waves-light">
+                              <div class="d-flex align-items-center">
+                                Tambah Fitur
+                                <i class="ti ti-circle-plus ms-1 fs-5"></i>
+                              </div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-rounded btn-light-danger text-danger"
+                            data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-rounded btn-light-success text-success">Update</button>
                     </div>
                 </div>
             </form>
@@ -134,7 +191,7 @@
                         <span>Semua</span>
                     </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" style="padding-right: 15px; padding-left: 15px;" id="link1-tab" data-bs-toggle="tab"
                         href="#link1" role="tab" aria-controls="link1">
                         <span>Basic</span>
@@ -145,7 +202,7 @@
                         href="#link2" role="tab" aria-controls="link2">
                         <span>Premium</span>
                     </a>
-                </li>
+                </li> --}}
                 <div class="d-flex ml-auto">
                     <button class="btn btn-create text-white" style="background-color: #175A95;" data-bs-toggle="modal" data-bs-target="#modal-create">
                         Tambah Paket
@@ -156,193 +213,65 @@
 
         <div class="tab-content tabcontent-border p-3" id="myTabContent">
             <div role="tabpanel" class="tab-pane fade show active" id="active" aria-labelledby="active-tab">
-
                 <div class="row mx-">
-                    <div class="col-md-4 mb-3">
-                        <div class="card ms-2 me-2" style="background-image: url({{asset('assets/img/frame-subscribe.png')}}); background-size: cover; background-position: center;">
-                            <div class="card-body mx-4">
-                                <div class="d-flex justify-content-between mt-3 mb-4">
-                                    <span class="badge bg-light-primary fw-semibold" style="color: #175A95; font-size: 25px;">Basic</span>
-
-                                    <div class="dropdown dropstart" style="margin-left: auto;">
-                                        <a href="#" class="link" style="float: right;" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256">
-                                                <path fill="#000000" d="M156 128a28 28 0 1 1-28-28a28 28 0 0 1 28 28m-28-52a28 28 0 1 0-28-28a28 28 0 0 0 28 28m0 104a28 28 0 1 0 28 28a28 28 0 0 0-28-28" />
-                                            </svg>
-                                        </a>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <li>
-                                                <button class="dropdown-item btn-edit">Edit</button>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item btn-delete" style="color: red">Hapus</a>
-                                            </li>
-                                        </ul>
+                    @forelse ($packages as $package)
+                        <div class="col-md-4 mb-3">
+                            <div class="card ms-2 me-2" style="background-image: url({{asset('assets/img/frame-subscribe.png')}}); background-size: cover; background-position: center;">
+                                <div class="card-body mx-4">
+                                    <div class="d-flex justify-content-between mt-3 mb-4">
+                                        <span class="badge bg-light-primary fw-semibold" style="color: #175A95; font-size: 25px;">Basic</span>
+                                        <div class="dropdown dropstart" style="margin-left: auto;">
+                                            <a href="#" class="link" style="float: right;" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256">
+                                                    <path fill="#000000" d="M156 128a28 28 0 1 1-28-28a28 28 0 0 1 28 28m-28-52a28 28 0 1 0-28-28a28 28 0 0 0 28 28m0 104a28 28 0 1 0 28 28a28 28 0 0 0-28-28" />
+                                                </svg>
+                                            </a>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <li>
+                                                    <button class="dropdown-item btn-edit" data-name="{{ $package->name }}" data-description="{{ $package->description }}" data-feature="{{ $package->packageFeatures }}" data-price="{{ $package->price }}" data-id="{{ $package->id }}">Edit</button>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item btn-delete" data-id="{{ $package->id }}" style="color: red">Hapus</a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
-
-                                </div>
-                                <div class="mt-3">
-                                    <span class="fw-semibold" style="color: #175A95; font-size: 25px;">Paket 1</span>
-                                </div>
-                                <p class="card-text pt-2 text-muted fs-5">Akses berita terbaru dan terlengkap dengan paket dasar kami yang hemat dan terjangkau.</p>
-                                <h4 class="text-center pt-4 mt-5 mb-5">
-                                    <sup class="pb-4" style="font-size: 23px; color: #175A95">Rp</sup>
-                                    <sub class="fw-semibold"  style="font-size: 45px; color: #175A95">50.000</sub>
-                                    <sub class="text-muted" style="font-size: 14px">/ 1 bulan</sub>
-                                </h4>
-                                <div class="pt-4">
-                                    <p style="font-size: 18px">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-                                            <path fill="#28a745" d="m10 13.6l5.9-5.9q.275-.275.7-.275t.7.275t.275.7t-.275.7l-6.6 6.6q-.3.3-.7.3t-.7-.3l-2.6-2.6q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275z"/>
-                                        </svg>
-                                        Blokir iklan selama 1 bulan
-                                    </p>
-                                    <hr>
-                                    <p style="font-size: 18px">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-                                            <path fill="#28a745" d="m10 13.6l5.9-5.9q.275-.275.7-.275t.7.275t.275.7t-.275.7l-6.6 6.6q-.3.3-.7.3t-.7-.3l-2.6-2.6q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275z"/>
-                                        </svg>
-                                        Blokir iklan selama 1 bulan
-                                    </p>
-                                    <hr>
-                                    <p style="font-size: 18px">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-                                            <path fill="#28a745" d="m10 13.6l5.9-5.9q.275-.275.7-.275t.7.275t.275.7t-.275.7l-6.6 6.6q-.3.3-.7.3t-.7-.3l-2.6-2.6q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275z"/>
-                                        </svg>
-                                        Blokir iklan selama 1 bulan
-                                    </p>
-                                    <hr>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 mb-3">
-                        <div class="card ms-2 me-2" style="background-image: url({{asset('assets/img/frame-subscribe.png')}}); background-size: cover; background-position: center;">
-                            <div class="card-body mx-4">
-                                <div class="d-flex justify-content-between mt-3 mb-4">
-                                    <span class="badge bg-light-primary fw-semibold" style="color: #175A95; font-size: 25px;">Basic</span>
-
-                                    <div class="dropdown dropstart" style="margin-left: auto;">
-                                        <a href="#" class="link" style="float: right;" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256">
-                                                <path fill="#000000" d="M156 128a28 28 0 1 1-28-28a28 28 0 0 1 28 28m-28-52a28 28 0 1 0-28-28a28 28 0 0 0 28 28m0 104a28 28 0 1 0 28 28a28 28 0 0 0-28-28" />
-                                            </svg>
-                                        </a>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <li>
-                                                <button class="dropdown-item btn-edit">Edit</button>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item btn-delete" style="color: red">Hapus</a>
-                                            </li>
-                                        </ul>
+                                    <div class="mt-3">
+                                        <span class="fw-semibold" style="color: #175A95; font-size: 25px;">{{ $package->name }}</span>
                                     </div>
-
-                                </div>
-                                <div class="mt-3">
-                                    <span class="fw-semibold" style="color: #175A95; font-size: 25px;">Paket 1</span>
-                                </div>
-                                <p class="card-text pt-2 text-muted fs-5">Akses berita terbaru dan terlengkap dengan paket dasar kami yang hemat dan terjangkau.</p>
-                                <h4 class="text-center pt-4 mt-5 mb-5">
-                                    <sup class="pb-4" style="font-size: 23px; color: #175A95">Rp</sup>
-                                    <sub class="fw-semibold"  style="font-size: 45px; color: #175A95">50.000</sub>
-                                    <sub class="text-muted" style="font-size: 14px">/ 1 bulan</sub>
-                                </h4>
-                                <div class="pt-4">
-                                    <p style="font-size: 18px">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-                                            <path fill="#28a745" d="m10 13.6l5.9-5.9q.275-.275.7-.275t.7.275t.275.7t-.275.7l-6.6 6.6q-.3.3-.7.3t-.7-.3l-2.6-2.6q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275z"/>
-                                        </svg>
-                                        Blokir iklan selama 1 bulan
-                                    </p>
-                                    <hr>
-                                    <p style="font-size: 18px">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-                                            <path fill="#28a745" d="m10 13.6l5.9-5.9q.275-.275.7-.275t.7.275t.275.7t-.275.7l-6.6 6.6q-.3.3-.7.3t-.7-.3l-2.6-2.6q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275z"/>
-                                        </svg>
-                                        Blokir iklan selama 1 bulan
-                                    </p>
-                                    <hr>
-                                    <p style="font-size: 18px">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-                                            <path fill="#28a745" d="m10 13.6l5.9-5.9q.275-.275.7-.275t.7.275t.275.7t-.275.7l-6.6 6.6q-.3.3-.7.3t-.7-.3l-2.6-2.6q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275z"/>
-                                        </svg>
-                                        Blokir iklan selama 1 bulan
-                                    </p>
-                                    <hr>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 mb-3">
-                        <div class="card ms-2 me-2" style="background-image: url({{asset('assets/card-dark.png')}}); background-size: cover; background-position: center;">
-                            <div class="card-body mx-4">
-                                <div class="d-flex justify-content-between">
-                                    <h4>
-                                        <span class="badge" style="background-color: #ffffff; color: #000000;">Premium</span>
+                                    <p class="card-text pt-2 text-muted fs-5">{{ $package->description }}</p>
+                                    <h4 class="text-center pt-4 mt-5 mb-5">
+                                        <sup class="pb-4" style="font-size: 23px; color: #175A95">Rp</sup>
+                                        <sub class="fw-semibold"  style="font-size: 45px; color: #175A95">{{ $package->price }}</sub>
+                                        <sub class="text-muted" style="font-size: 14px">/ 1 bulan</sub>
                                     </h4>
-                                    <h6>
-                                        <span class="badge" style="background-color: #DD1818; color: #ffffff;">Popular</span>
-                                    </h6>
-                                </div>
-                                <p class="card-text pt-2 text-light">Akses berita terbaru dan terlengkap dengan paket dasar kami yang hemat dan terjangkau.</p>
-                                <h4 class="text-center pt-4">
-                                    <sup style="font-size: 20px; color: #ffffff">Rp</sup>
-                                    <sub style="font-size: 36px; color: #ffffff">50.000</sub>
-                                    <sub class="text-light" style="font-size: 14px">/ 1 bulan</sub>
-                                </h4>
-                                <h3 class="pt-5 text-center">
-                                    <a href="#" class="btn btn-outline-primary rounded-3 btn-border-transparent w-100"
-                                       style="border-color: #ffffff; color: #ffffff;">Beli Sekarang</a>
-                                </h3>
-                                <div class="pt-4 text-light">
-                                    <p style="font-size: 18px">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-                                            <path fill="#28a745" d="m10 13.6l5.9-5.9q.275-.275.7-.275t.7.275t.275.7t-.275.7l-6.6 6.6q-.3.3-.7.3t-.7-.3l-2.6-2.6q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275z"/>
-                                        </svg>
-                                        Blokir iklan selama 1 bulan
-                                    </p>
-                                    <hr>
-                                    <p style="font-size: 18px">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-                                            <path fill="#28a745" d="m10 13.6l5.9-5.9q.275-.275.7-.275t.7.275t.275.7t-.275.7l-6.6 6.6q-.3.3-.7.3t-.7-.3l-2.6-2.6q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275z"/>
-                                        </svg>
-                                        Blokir iklan selama 1 bulan
-                                    </p>
-                                    <hr>
-                                    <p style="font-size: 18px">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-                                            <path fill="#28a745" d="m10 13.6l5.9-5.9q.275-.275.7-.275t.7.275t.275.7t-.275.7l-6.6 6.6q-.3.3-.7.3t-.7-.3l-2.6-2.6q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275z"/>
-                                        </svg>
-                                        Blokir iklan selama 1 bulan
-                                    </p>
-                                    <hr>
+                                    <div class="pt-4">
+                                        @foreach ($package->packageFeatures as $fitur)
+                                            <p style="font-size: 18px">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+                                                    <path fill="#28a745" d="m10 13.6l5.9-5.9q.275-.275.7-.275t.7.275t.275.7t-.275.7l-6.6 6.6q-.3.3-.7.3t-.7-.3l-2.6-2.6q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275z"/>
+                                                </svg>
+                                                {{ $fitur->name_feature }}
+                                            </p>
+                                            <hr>
+                                        @endforeach
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
+                    @empty
+                    @endforelse
                 </div>
-
             </div>
-
-            <div class="tab-pane fade" id="link1" role="tabpanel" aria-labelledby="link1-tab">
-
+            {{-- <div class="tab-pane fade" id="link1" role="tabpanel" aria-labelledby="link1-tab">
             </div>
-
             <div class="tab-pane fade" id="link2" role="tabpanel" aria-labelledby="link2-tab">
-
-            </div>
+            </div> --}}
         </div>
-
     </div>
-
     <div id="navpill-statistik" class="tab-pane fade" role="tabpanel">
         statistik
     </div>
-
 </div>
 
 @endsection
@@ -352,6 +281,20 @@
 
 <script src="{{ asset('admin/dist/libs/jquery.repeater/jquery.repeater.min.js') }}"></script>
 <script src="{{ asset('admin/dist/js/plugins/repeater-init.js') }}"></script>
+
+<script>
+     $('.btn-edit').on('click', function() {
+        var id = $(this).data('id');
+        var name = $(this).data('name');
+        var description = $(this).data('description');
+        var price = $(this).data('price');
+        $('#form-update').attr('action', '/admin-account-update/' + id);
+        $('#name-update').val(name);
+        $('#description-update').val(description);
+        $('#price-update').val(price);
+        $('#modal-update').modal('show');
+    });
+</script>
 
 <script>
     var options = {

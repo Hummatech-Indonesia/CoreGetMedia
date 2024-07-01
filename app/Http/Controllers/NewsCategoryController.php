@@ -46,7 +46,8 @@ class NewsCategoryController extends Controller
         $query = $request->input('search');
         $trendings = $this->news->whereCategory($category_id, $query, 10);
         $newsTop = $this->news->whereCategory($category_id, 'top');
-        $latests = $this->news->categoryLatest($category_id);
+        $latests = $this->news->categoryLatest($category_id, '0');
+        $latestsTop = $this->news->categoryLatest($category_id, '1')->first();
         $CategoryPopulars = $this->category->showWithCount();
         $popularTags = $this->tags->showWithCount();
 
@@ -58,7 +59,7 @@ class NewsCategoryController extends Controller
         $advertisement_tops = $this->advertisements->wherePosition(AdvertisementEnum::CATEGORY, 'top');
         $advertisement_unders = $this->advertisements->wherePosition(AdvertisementEnum::CATEGORY, 'under');
         $advertisement_mids = $this->advertisements->wherePosition(AdvertisementEnum::CATEGORY, 'mid');
-        return view('pages.user.category.index', compact('categories', 'subCategories', 'category', 'trendings', 'newsTop', 'latests', 'CategoryPopulars', 'popularTags', 'advertisement_rights', 'advertisement_lefts', 'advertisement_tops', 'advertisement_unders', 'advertisement_mids'));
+        return view('pages.user.category.index', compact('categories', 'subCategories', 'category', 'trendings', 'newsTop', 'latests', 'CategoryPopulars', 'popularTags', 'advertisement_rights', 'advertisement_lefts', 'advertisement_tops', 'advertisement_unders', 'advertisement_mids', 'latestsTop'));
     }
 
     /**

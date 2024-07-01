@@ -35,7 +35,9 @@ class PackageFeaturesRepository extends BaseRepository implements PackageFeature
      */
     public function show(mixed $id): mixed
     {
-        //
+        return $this->model->query()
+            ->whereIn('package_id', $id)
+            ->get();
     }
 
     /**
