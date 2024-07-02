@@ -120,11 +120,11 @@
             <tbody>
                 @forelse ($data as $item)
                     <tr>
-                        <td>1</td>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $item->type }}</td>
                         <td>{{ $item->start_date }}</td>
                         <td>{{ $item->end_date }}</td>
-                        <td>{{ $item->page }}</td>
+                        <td>{{ $item->positionAdvertisement->page }}</td>
                         <td>
                             @if ($item->feed == 'paid')
                                 <span class="mb-1 badge rounded-pill font-medium bg-light-success text-success w-50">Sudah Bayar</span>
