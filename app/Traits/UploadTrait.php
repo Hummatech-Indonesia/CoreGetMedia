@@ -51,6 +51,23 @@ trait UploadTrait
         return Storage::put($disk, $file);
     }
 
+    public function uploadNews(string $disk, UploadedFile $file, string $customName = null,  bool $originalName = false): string
+    {
+        if (!$this->exist($disk)) {
+            Storage::makeDirectory($disk);
+        }
+
+        if ($originalName) {
+            return $file->storeAs($disk, $file->getClientOriginalName());
+        }
+
+        // Generate a filename, either using customName or uniqid
+        $filename = $customName . '.' . $file->getClientOriginalExtension();
+        $path = Storage::putFileAs($disk, $file, $filename);
+
+        return $path;
+    }
+
     /**
      * Handle get original name
      * @param UploadedFile $file
@@ -97,27 +114,33 @@ trait UploadTrait
       * @see https://image.intervention.io/v3/introduction/index
       * @see https://image.intervention.io/v3/modifying/resizing
       */
-    public function compressImage($fileName, $file): mixed
-    {
-        $imageInfo = getimagesize($file);
-        $imageType = $imageInfo[2];
+      public function compressImage($fileName, $file): mixed
+      {
+          $imageInfo = getimagesize($file);
+          $imageType = $imageInfo[2];
 
-        switch ($imageType) {
-        case IMAGETYPE_JPEG:
-        $sourceImage = imagecreatefromjpeg($file);
-        break;
-        case IMAGETYPE_PNG:
-        $sourceImage = imagecreatefrompng($file);
-        break;
-        default:
-        throw new Exception('Unsupported image type');
-        }
+          switch ($imageType) {
+              case IMAGETYPE_JPEG:
+                  $sourceImage = imagecreatefromjpeg($file);
+                  break;
+              case IMAGETYPE_PNG:
+                  $sourceImage = imagecreatefrompng($file);
+                  break;
+              default:
+                  throw new Exception('Unsupported image type');
+          }
 
-        $compressedImagePath = tempnam(sys_get_temp_dir(), 'compressed_image') . '.webp';
-        imagewebp($sourceImage, $compressedImagePath, 80);
-        imagedestroy($sourceImage);
+          // Generate temporary file name with specific prefix and .webp extension
+          $tempFileName = $fileName . '.webp';
+          $tempFilePath = sys_get_temp_dir() . '/' . $tempFileName;
 
-        return new UploadedFile($compressedImagePath, basename($compressedImagePath), 'image/webp', null, true);
-    }
+          // Save the compressed image as webp
+          imagewebp($sourceImage, $tempFilePath, 80);
 
+          // Clean up resources
+          imagedestroy($sourceImage);
+
+          // Create an UploadedFile instance to return
+          return new UploadedFile($tempFilePath, $tempFileName, 'image/webp', null, true);
+      }
 }

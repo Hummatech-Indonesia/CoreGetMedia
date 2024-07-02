@@ -119,7 +119,8 @@
 
 
  <div class="col-md-12 col-lg-5">
-    <form action="#" method="post" enctype="multipart/form-data">
+    <form action="{{ route('transaction.advertisement', ['advertisement' => $data->id]) }}" method="post" enctype="multipart/form-data">
+        @method('post')
         @csrf
         <div class="card shadow-sm">
             <div class="card-header d-flex justify-content-center py-2" style="background-color: #175A95">
@@ -127,23 +128,15 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <input type="hidden" id="advertisement_id" name="advertisement_id" value="">
                     <div class="col-12 mb-4 mt-4">
                         <label class="form-label" for="nomor">Metode Pembayaran</label>
                         <div class="input-group">
-                            {{-- <input type="hidden" id="payment_method_input" name="payment_method" value=""> --}}
-                            <input type="text" style="color:#5D87FF;" id="payment_method_input" name="payment_method"  onchange="previewPayment(event)" placeholder="pilih metode pembayaran" value="Pilih Metode Pembayaran" class="preview form-control @error('payment_method') is-invalid @enderror" readonly>
+                            <input type="text" style="color:#5D87FF;" id="payment_method_input" name="payment_code"  onchange="previewPayment(event)" placeholder="pilih metode pembayaran" value="Pilih Metode Pembayaran" class="preview form-control @error('payment_code') is-invalid @enderror" readonly>
                             <button type="button" data-bs-toggle="modal" data-bs-target="#modal-create" class="btn btn-sm text-white px-4" style="background-color: #5D87FF;">Pilih</button>
                         </div>
                         <div class="d-flex align-items-center">
-                            {{-- <div class="form-check">
-                                <input class="form-check-input" type="radio" name="payment_method" id="bri" value="BRI" onclick="selectPayment(this)">
-                                <label class="form-check-label" for="bri">
-                                    BRI Virtual Account
-                                </label>
-                            </div> --}}
                         </div>
-                        @error('payment_method')
+                        @error('payment_code')
                         <span class="invalid-feedback" role="alert" style="color: red;">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -162,14 +155,18 @@
 
                     <div class="d-flex mt-5 justify-content-between">
                         <h5>Harga Upload</h5>
-
+                        <input type="hidden" name="amount" value="{{ $data->total_price }}">
                         <h5>Rp. {{ $data->total_price }}</h5>
                     </div>
 
                     <div class="mt-4">
-                        <a href="{{ route('detail-advertisement', [$data->id]) }}" class="btn btn-md text-white w-100" style="background-color: #175A95">
+                        {{-- <button href="{{ route('payment.advertisement', [$data->id]) }}" class="btn btn-md text-white w-100" style="background-color: #175A95">
                             Berikutnya
-                        </a>
+                        </button> --}}
+
+                        <button type="submit" class="btn btn-md text-white w-100" style="background-color: #175A95">
+                            Berikutnya
+                        </button>
                     </div>
                 </div>
             </div>
@@ -187,26 +184,29 @@
                             <span class="fw-semibold text-dark fs-4">Bank</span>
 
                             <div class="row">
-                                <div class="col-lg-6 mt-2">
-                                    <div class="card p-3 border" onclick="selectCard(this)">
-                                        <div class="d-flex align-items-center">
-                                            <input type="radio" name="payment_method" value="bri" style="display: none;" class="me-2">
-                                            <label for="bri_va" class="mb-0 d-flex">
-                                                <div class="d-flex">
-                                                    <img src="{{asset('assets/img/bank-bri.svg')}}" width="100px" alt="">
-                                                    <div class="ms-4 mt-3">
-                                                        <p class="text-dark">BRI Virtual Account</p>
+                                @forelse ($paymentChannel as $payment)
+                                    <div class="col-lg-6 mt-2">
+                                        <div class="card p-3 border" onclick="selectCard(this)">
+                                            <div class="d-flex align-items-center">
+                                                <input type="radio" name="payment_code" value="{{ $payment['code'] }}" style="display: none;" class="me-2">
+                                                <label for="bri_va" class="mb-0 d-flex">
+                                                    <div class="d-flex">
+                                                        <img src="{{ $payment['icon_url'] }}" width="100px" alt="">
+                                                        <div class="ms-4 mt-3">
+                                                            <p class="text-dark">{{ $payment['name'] }}</p>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </label>
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
+                                @empty
+                                @endforelse
 
-                                </div>
-                                <div class="col-lg-6 mt-2">
+                                {{-- <div class="col-lg-6 mt-2">
                                     <div class="card p-3 border" onclick="selectCard(this)">
                                         <div class="d-flex align-items-center">
-                                            <input type="radio" name="payment_method" value="mandiri" style="display: none;" class="me-2">
+                                            <input type="radio" name="payment_code" value="mandiri" style="display: none;" class="me-2">
                                             <label for="bri_va" class="mb-0 d-flex">
                                                 <div class="d-flex">
                                                     <img src="{{asset('assets/img/bank-mandiri.svg')}}" width="100px" alt="">
@@ -222,7 +222,7 @@
                                 <div class="col-lg-6">
                                     <div class="card p-3 border" onclick="selectCard(this)">
                                         <div class="d-flex align-items-center">
-                                            <input type="radio" name="payment_method" value="bca" style="display: none;" class="me-2">
+                                            <input type="radio" name="payment_code" value="bca" style="display: none;" class="me-2">
                                             <label for="bri_va" class="mb-0 d-flex">
                                                 <div class="d-flex">
                                                     <img src="{{asset('assets/img/bank-bca.svg')}}" width="100px" alt="">
@@ -237,7 +237,7 @@
                                 <div class="col-lg-6">
                                     <div class="card p-3 border" onclick="selectCard(this)">
                                         <div class="d-flex align-items-center">
-                                            <input type="radio" name="payment_method" value="bni" style="display: none;" class="me-2">
+                                            <input type="radio" name="payment_code" value="bni" style="display: none;" class="me-2">
                                             <label for="bri_va" class="mb-0 d-flex">
                                                 <div class="d-flex">
                                                     <img src="{{asset('assets/img/bank-bni.svg')}}" width="100px" alt="">
@@ -252,7 +252,7 @@
                                 <div class="col-lg-6">
                                     <div class="card p-3 border" onclick="selectCard(this)">
                                         <div class="d-flex align-items-center">
-                                            <input type="radio" name="payment_method" value="bsi" style="display: none;" class="me-2">
+                                            <input type="radio" name="payment_code" value="bsi" style="display: none;" class="me-2">
                                             <label for="bri_va" class="mb-0 d-flex">
                                                 <div class="d-flex">
                                                     <img src="{{asset('assets/img/bank-bsi.svg')}}" width="100px" alt="">
@@ -263,15 +263,15 @@
                                             </label>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
 
 
-                            <span class="fw-semibold text-dark fs-4">E-Wallet</span>
+                            {{-- <span class="fw-semibold text-dark fs-4">E-Wallet</span>
 
                             <div class="col-lg-6 mt-2">
                                 <div class="card p-3 border" onclick="selectCard(this)">
                                     <div class="d-flex align-items-center">
-                                        <input type="radio" name="payment_method" value="gopay" style="display: none;" class="me-2">
+                                        <input type="radio" name="payment_code" value="gopay" style="display: none;" class="me-2">
                                         <label for="bri_va" class="mb-0 d-flex">
                                             <div class="d-flex">
                                                 <img src="{{asset('assets/img/wallet-gopay.svg')}}" width="100px" alt="">
@@ -287,7 +287,7 @@
                             <div class="col-lg-6 mt-2">
                                 <div class="card p-3 border" onclick="selectCard(this)">
                                     <div class="d-flex align-items-center">
-                                        <input type="radio" name="payment_method" value="ovo" style="display: none;" class="me-2">
+                                        <input type="radio" name="payment_code" value="ovo" style="display: none;" class="me-2">
                                         <label for="bri_va" class="mb-0 d-flex">
                                             <div class="d-flex">
                                                 <img src="{{asset('assets/img/wallet-ovo.svg')}}" width="100px" alt="">
@@ -303,7 +303,7 @@
                             <div class="col-lg-6">
                                 <div class="card p-3 border" onclick="selectCard(this)">
                                     <div class="d-flex align-items-center">
-                                        <input type="radio" name="payment_method" value="dana" style="display: none;" class="me-2">
+                                        <input type="radio" name="payment_code" value="dana" style="display: none;" class="me-2">
                                         <label for="bri_va" class="mb-0 d-flex">
                                             <div class="d-flex">
                                                 <img src="{{asset('assets/img/wallet-dana.svg')}}" width="100px" alt="">
@@ -319,7 +319,7 @@
                             <div class="col-lg-6">
                                 <div class="card p-3 border" onclick="selectCard(this)">
                                     <div class="d-flex align-items-center">
-                                        <input type="radio" name="payment_method" value="indomart" style="display: none;" class="me-2">
+                                        <input type="radio" name="payment_code" value="indomart" style="display: none;" class="me-2">
                                         <label for="bri_va" class="mb-0 d-flex">
                                             <div class="d-flex">
                                                 <img src="{{asset('assets/img/wallet-indomart.svg')}}" width="100px" alt="">
@@ -335,7 +335,7 @@
                             <div class="col-lg-6">
                                 <div class="card p-3 border" onclick="selectCard(this)">
                                     <div class="d-flex align-items-center">
-                                        <input type="radio" name="payment_method" value="alfamart" style="display: none;" class="me-2">
+                                        <input type="radio" name="payment_code" value="alfamart" style="display: none;" class="me-2">
                                         <label for="bri_va" class="mb-0 d-flex">
                                             <div class="d-flex">
                                                 <img src="{{asset('assets/img/wallet-alfamart.svg')}}" width="100px" alt="">
@@ -346,7 +346,7 @@
                                         </label>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                         </div>
 
@@ -422,11 +422,11 @@
     }
 
     function addPaymentMethod() {
-        var paymentMethod = $('input[name="payment_method"]:checked').val(); // Ambil nilai payment_method yang dipilih
-        $('#payment_method_input').val(paymentMethod); // Set nilai payment_method ke dalam input tersembunyi
+        var paymentMethod = $('input[name="payment_code"]:checked').val(); // Ambil nilai payment_code yang dipilih
+        $('#payment_method_input').val(paymentMethod); // Set nilai payment_code ke dalam input tersembunyi
         $('#modal-create').modal('hide'); // Sembunyikan modal
 
-        // Setelah payment_method diatur, Anda dapat mengirimkan form atau melakukan operasi lainnya seperti yang Anda perlukan
+        // Setelah payment_code diatur, Anda dapat mengirimkan form atau melakukan operasi lainnya seperti yang Anda perlukan
         // Misalnya, Anda dapat menyimpan data dengan mengirimkan form dengan JavaScript
         $('#form-create').submit(); // Kirim form
     }

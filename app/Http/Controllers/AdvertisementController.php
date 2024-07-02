@@ -13,6 +13,7 @@ use App\Http\Requests\UpdateAdvertisementRequest;
 use App\Models\PositionAdvertisement;
 use App\Models\User;
 use App\Services\AdvertisementService;
+use App\Services\TripayService;
 use Illuminate\Http\Request;
 
 class AdvertisementController extends Controller
@@ -22,12 +23,16 @@ class AdvertisementController extends Controller
     private AdvertisementService $service;
     private UserInterface $user;
 
-    public function __construct(UserInterface $user, AdvertisementInterface $advertisement, PositionAdvertisementInterface $position, AdvertisementService $service)
+    private TripayService $tripayService;
+
+    public function __construct(TripayService $tripayService, UserInterface $user, AdvertisementInterface $advertisement, PositionAdvertisementInterface $position, AdvertisementService $service)
     {
         $this->advertisement = $advertisement;
         $this->position = $position;
         $this->service = $service;
         $this->user = $user;
+
+        $this->tripayService = $tripayService;
     }
 
     /**
@@ -185,9 +190,10 @@ class AdvertisementController extends Controller
 
     public function payment_advertisement(Advertisement $advertisement)
     {
+        $paymentChannel = $this->tripayService->handlePaymentChannel();
         $positions = $this->position->get();
         $data = $this->advertisement->show($advertisement->id);
-        return view('pages.user.advertisement.detail-advertisement', compact('data', 'positions'));
+        return view('pages.user.advertisement.detail-advertisement', compact('data', 'positions', 'paymentChannel'));
     }
 
     /**

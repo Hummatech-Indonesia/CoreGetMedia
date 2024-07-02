@@ -61,7 +61,7 @@ class NewsService
 
         $slug = Str::slug($data['name']);
         $compressedImage = $this->compressImage($slug, $request->image);
-        $new_photo = $this->upload(UploadDiskEnum::NEWS->value, $compressedImage);
+        $new_photo = $this->uploadNews(UploadDiskEnum::NEWS->value, $compressedImage, $slug);
 
         $domQuestion = new \DOMDocument();
         libxml_use_internal_errors(true);
@@ -153,7 +153,7 @@ class NewsService
                 $tag = Tags::updateOrCreate(
                     ['name' => $tagName],
                     ['slug' => Str::slug($tagName)]
-                );  
+                );
                 $newTags[] = $tag->id;
             }
 
@@ -171,10 +171,19 @@ class NewsService
             }
 
             $compressedImage = $this->compressImage($slug, $request->image);
-            $new_photo = $this->upload(UploadDiskEnum::NEWS->value, $compressedImage);
+            $new_photo = $this->uploadNews(UploadDiskEnum::NEWS->value, $compressedImage, $slug);
 
-            $news->image = $new_photo;
+        } else {
+             if ($slug !== $news->slug) {
+                $pathInfo = pathinfo($old_photo);
+                $new_photo = $pathInfo['dirname'] . '/' . $slug . '.' . $pathInfo['extension'];
+                Storage::move($old_photo, $new_photo);
+            } else {
+                $new_photo = $old_photo;
+            }
         }
+
+        $news->image = $new_photo;
 
         $domQuestion = new \DOMDocument();
         libxml_use_internal_errors(true);

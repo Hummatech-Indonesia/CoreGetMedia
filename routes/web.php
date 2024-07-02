@@ -17,9 +17,12 @@ use App\Http\Controllers\VoucherrController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\NewsCategoryController;
 use App\Http\Controllers\NewsLikeController;
+use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PositionAdvertisementController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SitemapController;
+use App\Http\Controllers\SocialiteController;
+use App\Http\Controllers\SubscribeController;
 use App\Models\Advertisement;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +44,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 Auth::routes();
+
+Route::get('login/google/redirect', [SocialiteController::class, 'redirect'])->middleware(['guest'])->name('redirect.google');
+Route::get('login/google/callback', [SocialiteController::class, 'callback'])->middleware(['guest'])->name('callback.google');
+
 Route::get('/sitemap.xml', SitemapController::class);
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('navbar-user', [NewsController::class, 'navbar'])->name('navbar');
@@ -113,9 +120,7 @@ Route::delete('set-price/delete/{positionAdvertisement}', [PositionAdvertisement
 
 Route::get('inbox-admin', [AdminController::class, 'inbox'])->name('inbox-list.admin');
 
-Route::get('subscribe-list', function () {
-    return view('pages.admin.subscribe.index');
-})->name('subscribe-list.admin');
+Route::get('subscribe-list', [PackageController::class, 'index'])->name('subscribe-list.admin');
 
 Route::get('news-premium', function () {
     return view('pages.admin.news_premium.index');
@@ -250,9 +255,7 @@ Route::get('advertisement-biodata', function () {
 })->name('biodata-advertisement');
 
 Route::put('advertisement-upload/{user}', [AdvertisementController::class, 'create'])->name('upload-advertisement');
-
 Route::get('detail-payment-advertisemenet/{advertisement}', [AdvertisementController::class, 'payment_advertisement'])->name('detail-payment-advertisement');
-
 Route::get('detail-advertisement-accepted/{advertisement}', [AdvertisementController::class, 'detail_accepted'])->name('detail-advertisement');
 
 Route::post('create-advertisement', [AdvertisementController::class, 'store'])->name('create.advertisement');

@@ -569,7 +569,7 @@
                                                     </button>
                                                 </li>
                                                 @endif
-                                                @if ($comment->user_id != auth()->user()->id && $comment->ip_address != $ipAddress )
+                                                @if ($comment->user_id != auth()->user()->id)
                                                 <li>
                                                     <button class="btn btn-sm btn-comment-report" data-id="{{ $comment->id }}">
                                                         Laporkan
@@ -687,9 +687,9 @@
                                             </svg>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                 @auth
-                                                @if ($reply->user_id == auth()->user()->id || $reply->ip_address == $ipAddress )
+                                                @if ($reply->user_id == auth()->user()->id && $reply->ip_address == $ipAddress)
                                                 <li>
-                                                    <button class="btn btn-sm btn-edit-reply" data-id="{{ $reply->id }}" data-description="{{ $reply->description }}">
+                                                    <button class="btn btn-sm btn-edit-comment" data-id="{{ $reply->id }}" data-description="{{ $reply->description }}">
                                                         Edit
                                                     </button>
                                                 </li>
@@ -699,7 +699,7 @@
                                                     </button>
                                                 </li>
                                                 @endif
-                                                @if ($reply->user_id != auth()->user()->id || $reply->ip_address != $ipAddress )
+                                                @if ($reply->user_id != auth()->user()->id)
                                                 <li>
                                                     <button class="btn btn-sm btn-comment-report" data-id="{{ $reply->id }}">
                                                         Laporkan
@@ -707,9 +707,9 @@
                                                 </li>
                                                 @endif
                                                 @else
-                                                @if ($reply->user_id == null || $reply->ip_address == $ipAddress )
+                                                @if ($reply->user_id == null && $reply->ip_address == $ipAddress)
                                                 <li>
-                                                    <button class="btn btn-sm btn-edit-reply" data-id="{{ $reply->id }}" data-description="{{ $reply->description }}">
+                                                    <button class="btn btn-sm btn-edit-comment" data-id="{{ $reply->id }}" data-description="{{ $reply->description }}">
                                                         Edit
                                                     </button>
                                                 </li>

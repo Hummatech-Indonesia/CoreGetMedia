@@ -213,16 +213,17 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->paginate($paginate);
     }
 
-    public function subcategoryLatest($subcategory_id, $id) : mixed
+    public function subcategoryLatest($subcategory_id, $id, $status) : mixed
     {
         return $this->model->query()
             ->whereNotIn('id', $id)
             ->whereRelation('newsSubCategories', 'sub_category_id', $subcategory_id)
             ->where('status', NewsEnum::ACCEPTED->value)
             ->withCount('newsViews')
-            ->orderByDesc('news_views_count')
             ->latest()
-            ->paginate(5);
+            ->when($status == '1', function($q) {
+                $q->first();
+            });
     }
 
     public function latest() : mixed
