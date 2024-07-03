@@ -6,6 +6,22 @@
             background-image: linear-gradient(to right, #DD1818, #175A95);
         }
     </style>
+    <style>
+        #copy-tooltip {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: white;
+            border-radius: 10px;
+            color: #1EBB9E;
+            padding: 10px;
+            border: 1px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: none;
+            z-index: 1000;
+        }
+    </style>
 @endsection
 @section('content')
     <div class="row">
@@ -94,16 +110,27 @@
 
                             <div class="d-flex justify-content-center mt-4">
                                 <div>
-                                    <h5>{{ $voucher->code }}
-                                        <span class="badge ms-3" style="background-color: #E9E9E9;">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"
-                                                viewBox="0 0 512 512">
-                                                <path fill="#888888"
-                                                    d="M408 480H184a72 72 0 0 1-72-72V184a72 72 0 0 1 72-72h224a72 72 0 0 1 72 72v224a72 72 0 0 1-72 72" />
-                                                <path fill="#888888"
-                                                    d="M160 80h235.88A72.12 72.12 0 0 0 328 32H104a72 72 0 0 0-72 72v224a72.12 72.12 0 0 0 48 67.88V160a80 80 0 0 1 80-80" />
+                                    <h5 id="kode">{{ $voucher->code }}
+                                        <a id="copylink" tooltip="Salin Link">
+                                            <span class="badge ms-3 copyLink" style="background-color: #E9E9E9;"
+                                                onclick="copyToClipboard()" id="copy">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                                    viewBox="0 0 512 512">
+                                                    <path fill="#888888"
+                                                        d="M408 480H184a72 72 0 0 1-72-72V184a72 72 0 0 1 72-72h224a72 72 0 0 1 72 72v224a72 72 0 0 1-72 72" />
+                                                    <path fill="#888888"
+                                                        d="M160 80h235.88A72.12 72.12 0 0 0 328 32H104a72 72 0 0 0-72 72v224a72.12 72.12 0 0 0 48 67.88V160a80 80 0 0 1 80-80" />
+                                                </svg>
+                                            </span>
+                                        </a>
+                                        <div id="copy-tooltip">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                                viewBox="0 0 24 24">
+                                                <path fill="currentColor"
+                                                    d="m9.55 18l-5.7-5.7l1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z" />
                                             </svg>
-                                        </span>
+                                            Berhasil disalin
+                                        </div>
                                     </h5>
                                 </div>
                             </div>
@@ -127,7 +154,8 @@
                             <div class="text-center mt-4">
                                 <h5>Masa Aktif</h5>
                                 <div class=" mt-3">
-                                    <h5 style="color: #175A95;">{{ $voucher->start_date }} - {{ $voucher->end_date }}</h5>
+                                    <h5 style="color: #175A95;">{{ $voucher->start_date }} - {{ $voucher->end_date }}
+                                    </h5>
                                 </div>
                             </div>
                         </div>
@@ -335,5 +363,30 @@
                 }
             });
         });
+
+        // function copyToClipboard(kode) {
+        //     const tempInput = document.createElement('input');
+        //     tempInput.value = kode;
+        //     document.body.appendChild(tempInput);
+        //     tempInput.select();
+        //     tempInput.setSelectionRange(0, 99999); // Untuk perangkat mobile
+        //     document.execCommand('copy');
+        //     document.body.removeChild(tempInput);
+        //     alert('Kode telah disalin: ' + kode);
+        // }
+
+
+        function copyToClipboard() {
+            const kode = document.getElementById('kode').innerText.trim();
+            navigator.clipboard.writeText(kode).then(function() {
+                const tooltip = document.getElementById('copy-tooltip');
+                tooltip.style.display = 'block';
+                setTimeout(function() {
+                    tooltip.style.display = 'none';
+                }, 2000);
+            }, function(err) {
+                console.error('Failed to copy: ', err);
+            });
+        }
     </script>
 @endsection
