@@ -13,8 +13,11 @@ use App\Http\Controllers\NewsRejectController;
 use App\Http\Controllers\NewsReportController;
 use App\Http\Controllers\NewsSubCategoryController;
 use App\Http\Controllers\PackageController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PositionAdvertisementController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SocialiteController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 
 Route::get('news/{slug}', [NewsCategoryController::class, 'index'])->name('news.category.user');
@@ -61,3 +64,6 @@ Route::put('unbanned-news/{news}', [NewsController::class, 'unbanned_news'])->na
 Route::post('create-package', [PackageController::class, 'store'])->name('create.package.admin');
 Route::put('update-package/{package}', [PackageController::class, 'update'])->name('update.package.admin');
 Route::delete('delete-package/{package}', [PackageController::class, 'destroy'])->name('delete.package.admin');
+
+Route::post('transaction-advertisement/{advertisement}', [TransactionController::class, 'store_advertisement'])->name('transaction.advertisement');
+Route::get('detail-transaction/{advertisement}/{reference}', [TransactionController::class, 'show'])->name('detail.transaction');

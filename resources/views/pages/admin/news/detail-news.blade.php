@@ -266,7 +266,7 @@
             </div>
             <div class="modal-body">
 
-                <p>Apakah anda yakin akan mengpin berita ini?</p>
+                <p>Apakah anda yakin akan pin berita ini?</p>
 
             </div>
             <div class="modal-footer">
@@ -294,7 +294,7 @@
             </div>
             <div class="modal-body">
 
-                <p>Apakah anda yakin akan mengunpin berita ini?</p>
+                <p>Apakah anda yakin akan unpin berita ini?</p>
 
             </div>
             <div class="modal-footer">
@@ -328,7 +328,7 @@
                                 <h5 class="mb-3">Berikan Alasan</h5>
                             </div>
                             <div>
-                                <textarea class="form-control" name="reject_description" id="" cols="30" rows="10" placeholder="Berita yang ditulis ada unsur penghinaan pihak tertentu" style="resize: none;"></textarea>
+                                <textarea class="form-control" name="reject_description" id="reason-show" cols="30" rows="10" placeholder="Berita yang ditulis ada unsur penghinaan pihak tertentu" style="resize: none;"></textarea>
                             </div>
                         </div>
 

@@ -133,41 +133,37 @@
     </div>
 
 
-    <div class="col-md-12 col-lg-5">
-        <form action="#" method="post" enctype="multipart/form-data">
-            @csrf
-            <div class="card shadow-sm">
-                <div class="card-header d-flex justify-content-center py-2" style="background-color: #175A95">
-                    <h4 class="text-white">Pembayaran</h4>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <input type="hidden" id="advertisement_id" name="advertisement_id" value="">
-                        <div class="col-12 mb-4 mt-4">
-                            <label class="form-label" for="nomor">Metode Pembayaran</label>
-                            <div class="input-group">
-                                {{-- <input type="hidden" id="payment_method_input" name="payment_method" value=""> --}}
-                                <input type="text" style="color:#5D87FF;" id="payment_method_input"
-                                    name="payment_method" onchange="previewPayment(event)"
-                                    placeholder="pilih metode pembayaran" value="Pilih Metode Pembayaran"
-                                    class="preview form-control @error('payment_method') is-invalid @enderror" readonly>
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#modal-create"
-                                    class="btn btn-sm text-white px-4" style="background-color: #5D87FF;">Pilih</button>
-                            </div>
-                            {{-- <div class="d-flex align-items-center">
-                             <div class="form-check">
+ <div class="col-md-12 col-lg-5">
+    <form action="#" method="post" enctype="multipart/form-data">
+        @csrf
+        <div class="card shadow-sm">
+            <div class="card-header d-flex justify-content-center py-2" style="background-color: #175A95">
+                <h4 class="text-white">Pembayaran</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <input type="hidden" id="advertisement_id" name="advertisement_id" value="">
+                    <div class="col-12 mb-4 mt-4">
+                        <label class="form-label" for="nomor">Metode Pembayaran</label>
+                        <div class="input-group">
+                            {{-- <input type="hidden" id="payment_method_input" name="payment_method" value=""> --}}
+                            <input type="text" style="color:#5D87FF;" id="payment_method_input" name="payment_method"  onchange="previewPayment(event)" placeholder="pilih metode pembayaran" value="Pilih Metode Pembayaran" class="preview form-control @error('payment_method') is-invalid @enderror" readonly>
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#modal-create" class="btn btn-sm text-white px-4" style="background-color: #5D87FF;">Pilih</button>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            {{-- <div class="form-check">
                                 <input class="form-check-input" type="radio" name="payment_method" id="bri" value="BRI" onclick="selectPayment(this)">
                                 <label class="form-check-label" for="bri">
                                     BRI Virtual Account
                                 </label>
-                            </div>
-                        </div> --}}
-                            @error('payment_method')
-                            <span class="invalid-feedback" role="alert" style="color: red;">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
+                            </div> --}}
                         </div>
+                        @error('payment_method')
+                        <span class="invalid-feedback" role="alert" style="color: red;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
 
                         <div class="col-12 mb-4">
                             <label class="form-label" for="nomor">Kode Voucher (opsional)</label>
@@ -181,21 +177,20 @@
                             @enderror
                         </div>
 
-                        <div class="d-flex mt-5 justify-content-between">
-                            <h5>Harga Upload</h5>
+                    <div class="d-flex mt-5 justify-content-between">
+                        <h5>Harga Upload</h5>
 
-                            <h5>Rp. {{ $data->total_price }}</h5>
-                        </div>
+                        <h5>Rp. {{ $data->total_price }}</h5>
+                    </div>
 
-                        <div class="mt-4">
-                            <a href="{{ route('detail-advertisement', [$data->id]) }}"
-                                class="btn btn-md text-white w-100" style="background-color: #175A95">
-                                Berikutnya
-                            </a>
-                        </div>
+                    <div class="mt-4">
+                        <a href="{{ route('detail-advertisement', [$data->id]) }}" class="btn btn-md text-white w-100" style="background-color: #175A95">
+                            Berikutnya
+                        </a>
                     </div>
                 </div>
             </div>
+        </div>
 
 
             <div class="modal fade" id="modal-create" tabindex="-1" aria-labelledby="tambahdataLabel"
@@ -209,143 +204,78 @@
                             <div class="modal-body">
                                 <span class="fw-semibold text-dark fs-4">Bank</span>
 
-                                <div class="row">
-                                    <div class="col-lg-6 mt-2">
-                                        <div class="card p-3 border" onclick="selectCard(this)">
-                                            <div class="d-flex justify-content-center align-items-center">
-                                                <input type="radio" name="payment_method" value="bri"
-                                                    style="display: none;" class="me-2">
-                                                <label for="bri_va" class="mb-0 d-flex justify-content-center">
-                                                    <div class="d-flex">
-                                                        <img src="{{asset('assets/img/bank-bri.svg')}}"
-                                                            class="payment-image" alt="">
+                            <div class="row">
+                                <div class="col-lg-6 mt-2">
+                                    <div class="card p-3 border" onclick="selectCard(this)">
+                                        <div class="d-flex align-items-center">
+                                            <input type="radio" name="payment_method" value="bri" style="display: none;" class="me-2">
+                                            <label for="bri_va" class="mb-0 d-flex">
+                                                <div class="d-flex">
+                                                    <img src="{{asset('assets/img/bank-bri.svg')}}" width="100px" alt="">
+                                                    <div class="ms-4 mt-3">
+                                                        <p class="text-dark">BRI Virtual Account</p>
                                                     </div>
                                                 </label>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 mt-2">
-                                        <div class="card p-3 border" onclick="selectCard(this)">
-                                            <div class="d-flex justify-content-center align-items-center">
-                                                <input type="radio" name="payment_method" value="mandiri"
-                                                    style="display: none;" class="me-2">
-                                                <label for="bri_va" class="mb-0 d-flex justify-content-center">
-                                                    <div class="d-flex">
-                                                        <img src="{{asset('assets/img/bank-mandiri.svg')}}"
-                                                            class="payment-image" alt="">
+
+                                </div>
+                                <div class="col-lg-6 mt-2">
+                                    <div class="card p-3 border" onclick="selectCard(this)">
+                                        <div class="d-flex align-items-center">
+                                            <input type="radio" name="payment_method" value="mandiri" style="display: none;" class="me-2">
+                                            <label for="bri_va" class="mb-0 d-flex">
+                                                <div class="d-flex">
+                                                    <img src="{{asset('assets/img/bank-mandiri.svg')}}" width="100px" alt="">
+                                                    <div class="ms-4 mt-3">
+                                                        <p class="text-dark">Marndiri Virtual Account</p>
                                                     </div>
                                                 </label>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
-                                        <div class="card p-3 border" onclick="selectCard(this)">
-                                            <div class="d-flex justify-content-center align-items-center">
-                                                <input type="radio" name="payment_method" value="bca"
-                                                    style="display: none;" class="me-2">
-                                                <label for="bri_va" class="mb-0 d-flex justify-content-center">
-                                                    <div class="d-flex">
-                                                        <img src="{{asset('assets/img/bank-bca.svg')}}"
-                                                            class="payment-image" alt="">
+
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="card p-3 border" onclick="selectCard(this)">
+                                        <div class="d-flex align-items-center">
+                                            <input type="radio" name="payment_method" value="bca" style="display: none;" class="me-2">
+                                            <label for="bri_va" class="mb-0 d-flex">
+                                                <div class="d-flex">
+                                                    <img src="{{asset('assets/img/bank-bca.svg')}}" width="100px" alt="">
+                                                    <div class="ms-4 mt-3">
+                                                        <p class="text-dark">BCA Virtual Account</p>
                                                     </div>
-                                                </label>
-                                            </div>
+                                                </div>
+                                            </label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
-                                        <div class="card p-3 border" onclick="selectCard(this)">
-                                            <div class="d-flex justify-content-center align-items-center">
-                                                <input type="radio" name="payment_method" value="bni"
-                                                    style="display: none;" class="me-2">
-                                                <label for="bri_va" class="mb-0 d-flex justify-content-center">
-                                                    <div class="d-flex">
-                                                        <img src="{{asset('assets/img/bank-bni.svg')}}"
-                                                            class="payment-image" alt="">
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="card p-3 border" onclick="selectCard(this)">
+                                        <div class="d-flex align-items-center">
+                                            <input type="radio" name="payment_method" value="bni" style="display: none;" class="me-2">
+                                            <label for="bri_va" class="mb-0 d-flex">
+                                                <div class="d-flex">
+                                                    <img src="{{asset('assets/img/bank-bni.svg')}}" width="100px" alt="">
+                                                    <div class="ms-4 mt-3">
+                                                        <p class="text-dark">BNI Virtual Account</p>
                                                     </div>
-                                                </label>
-                                            </div>
+                                                </div>
+                                            </label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
-                                        <div class="card p-3 border" onclick="selectCard(this)">
-                                            <div class="d-flex justify-content-center align-items-center">
-                                                <input type="radio" name="payment_method" value="bsi"
-                                                    style="display: none;" class="me-2">
-                                                <label for="bri_va" class="mb-0 d-flex justify-content-center">
-                                                    <div class="d-flex">
-                                                        <img src="{{asset('assets/img/bank-bsi.svg')}}"
-                                                            class="payment-image" alt="">
-                                                    </div>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <span class="fw-semibold text-dark fs-4">E-Wallet</span>
-                                    <div class="col-lg-6 mt-2">
-                                        <div class="card p-3 border" onclick="selectCard(this)">
-                                            <div class="d-flex justify-content-center align-items-center">
-                                                <input type="radio" name="payment_method" value="gopay"
-                                                    style="display: none;" class="me-2">
-                                                <label for="bri_va" class="mb-0 d-flex justify-content-center">
-                                                    <div class="d-flex">
-                                                        <img src="{{asset('assets/img/wallet-gopay.svg')}}"
-                                                            class="payment-image" alt="">
-                                                    </div>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 mt-2">
-                                        <div class="card p-3 border" onclick="selectCard(this)">
-                                            <div class="d-flex justify-content-center align-items-center">
-                                                <input type="radio" name="payment_method" value="ovo"
-                                                    style="display: none;" class="me-2">
-                                                <label for="bri_va" class="mb-0 d-flex justify-content-center">
-                                                    <div class="d-flex">
-                                                        <img src="{{asset('assets/img/wallet-ovo.svg')}}"
-                                                            class="payment-image" alt="">
-                                                    </div>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="card p-3 border" onclick="selectCard(this)">
-                                            <div class="d-flex justify-content-center align-items-center">
-                                                <input type="radio" name="payment_method" value="dana"
-                                                    style="display: none;" class="me-2">
-                                                <label for="bri_va" class="mb-0 d-flex justify-content-center">
-                                                    <div class="d-flex">
-                                                        <img src="{{asset('assets/img/wallet-dana.svg')}}"
-                                                            class="payment-image" alt="">
-                                                    </div>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="card p-3 border" onclick="selectCard(this)">
-                                            <div class="d-flex justify-content-center align-items-center">
-                                                <input type="radio" name="payment_method" value="indomaret"
-                                                    style="display: none;" class="me-2">
-                                                <label for="bri_va" class="mb-0 d-flex justify-content-center">
-                                                    <div class="d-flex">
-                                                        <img src="{{asset('assets/img/wallet-indomaret.svg')}}"
-                                                            class="payment-image" alt="">
-                                                    </div>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="card p-3 border" onclick="selectCard(this)">
-                                            <div class="d-flex justify-content-center align-items-center">
-                                                <input type="radio" name="payment_method" value="alfamart"
-                                                    style="display: none;" class="me-2">
-                                                <label for="bri_va" class="mb-0 d-flex justify-content-center">
-                                                    <div class="d-flex">
-                                                        <img src="{{asset('assets/img/wallet-alfamart.png')}}"
-                                                            class="payment-image" alt="">
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="card p-3 border" onclick="selectCard(this)">
+                                        <div class="d-flex align-items-center">
+                                            <input type="radio" name="payment_method" value="bsi" style="display: none;" class="me-2">
+                                            <label for="bri_va" class="mb-0 d-flex">
+                                                <div class="d-flex">
+                                                    <img src="{{asset('assets/img/bank-bsi.svg')}}" width="100px" alt="">
+                                                    <div class="ms-4 mt-3">
+                                                        <p class="text-dark">BSI Virtual Account</p>
                                                     </div>
                                                 </label>
                                             </div>
@@ -353,6 +283,90 @@
                                     </div>
                                 </div>
 
+
+                            <span class="fw-semibold text-dark fs-4">E-Wallet</span>
+
+                            <div class="col-lg-6 mt-2">
+                                <div class="card p-3 border" onclick="selectCard(this)">
+                                    <div class="d-flex align-items-center">
+                                        <input type="radio" name="payment_method" value="gopay" style="display: none;" class="me-2">
+                                        <label for="bri_va" class="mb-0 d-flex">
+                                            <div class="d-flex">
+                                                <img src="{{asset('assets/img/wallet-gopay.svg')}}" width="100px" alt="">
+                                                <div class="ms-4 mt-3">
+                                                    <p class="text-dark">GOPAY</p>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 mt-2">
+                                <div class="card p-3 border" onclick="selectCard(this)">
+                                    <div class="d-flex align-items-center">
+                                        <input type="radio" name="payment_method" value="ovo" style="display: none;" class="me-2">
+                                        <label for="bri_va" class="mb-0 d-flex">
+                                            <div class="d-flex">
+                                                <img src="{{asset('assets/img/wallet-ovo.svg')}}" width="100px" alt="">
+                                                <div class="ms-4 mt-3">
+                                                    <p class="text-dark">OVO</p>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="card p-3 border" onclick="selectCard(this)">
+                                    <div class="d-flex align-items-center">
+                                        <input type="radio" name="payment_method" value="dana" style="display: none;" class="me-2">
+                                        <label for="bri_va" class="mb-0 d-flex">
+                                            <div class="d-flex">
+                                                <img src="{{asset('assets/img/wallet-dana.svg')}}" width="100px" alt="">
+                                                <div class="ms-4 mt-3">
+                                                    <p class="text-dark">DANA</p>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="card p-3 border" onclick="selectCard(this)">
+                                    <div class="d-flex align-items-center">
+                                        <input type="radio" name="payment_method" value="indomart" style="display: none;" class="me-2">
+                                        <label for="bri_va" class="mb-0 d-flex">
+                                            <div class="d-flex">
+                                                <img src="{{asset('assets/img/wallet-indomart.svg')}}" width="100px" alt="">
+                                                <div class="ms-4 mt-3">
+                                                    <p class="text-dark">indomart</p>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="card p-3 border" onclick="selectCard(this)">
+                                    <div class="d-flex align-items-center">
+                                        <input type="radio" name="payment_method" value="alfamart" style="display: none;" class="me-2">
+                                        <label for="bri_va" class="mb-0 d-flex">
+                                            <div class="d-flex">
+                                                <img src="{{asset('assets/img/wallet-alfamart.svg')}}" width="100px" alt="">
+                                                <div class="ms-4 mt-3">
+                                                    <p class="text-dark">Alfamart</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
 
                             </div>
                             <div class="modal-footer">
@@ -426,15 +440,15 @@ function selectCard(card) {
     }
 }
 
-function addPaymentMethod() {
-    var paymentMethod = $('input[name="payment_method"]:checked').val(); // Ambil nilai payment_method yang dipilih
-    $('#payment_method_input').val(paymentMethod); // Set nilai payment_method ke dalam input tersembunyi
-    $('#modal-create').modal('hide'); // Sembunyikan modal
+    function addPaymentMethod() {
+        var paymentMethod = $('input[name="payment_method"]:checked').val(); // Ambil nilai payment_method yang dipilih
+        $('#payment_method_input').val(paymentMethod); // Set nilai payment_method ke dalam input tersembunyi
+        $('#modal-create').modal('hide'); // Sembunyikan modal
 
-    // Setelah payment_method diatur, Anda dapat mengirimkan form atau melakukan operasi lainnya seperti yang Anda perlukan
-    // Misalnya, Anda dapat menyimpan data dengan mengirimkan form dengan JavaScript
-    $('#form-create').submit(); // Kirim form
-}
+        // Setelah payment_method diatur, Anda dapat mengirimkan form atau melakukan operasi lainnya seperti yang Anda perlukan
+        // Misalnya, Anda dapat menyimpan data dengan mengirimkan form dengan JavaScript
+        $('#form-create').submit(); // Kirim form
+    }
 
 
 function previewPayment(event) {
