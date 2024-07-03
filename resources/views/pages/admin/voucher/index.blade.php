@@ -67,10 +67,16 @@
                                         </a>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                             <li>
-                                                <button id="btn-edit-{{ $voucher->id }}" data-id="{{ $voucher->id }}" data-code="{{ $voucher->code }}" data-quota="{{ $voucher->quota }}"
-                                                    data-presentation="{{ $voucher->presentation }}" data-status="{{ $voucher->status }}" data-start_date="{{ $voucher->start_date }}" data-end_date="{{ $voucher->end_date }}"
-                                                    class="dropdown-item btn-edit" data-bs-toggle="modal" data-bs-target="#modal-update">Edit</button>
-                                                <button data-id="{{ $voucher->id }}" id="btn-delete-{{ $voucher->id }}" class="dropdown-item btn-delete" data-bs-toggle="modal" data-bs-target="#modal-delete">Hapus</button>
+                                                <button id="btn-edit-{{ $voucher->id }}" data-id="{{ $voucher->id }}"
+                                                    data-code="{{ $voucher->code }}" data-quota="{{ $voucher->quota }}"
+                                                    data-presentation="{{ $voucher->presentation }}"
+                                                    data-status="{{ $voucher->status }}" data-stok="{{ $voucher->stok }}"
+                                                    data-start_date="{{ $voucher->start_date }}"
+                                                    data-end_date="{{ $voucher->end_date }}" class="dropdown-item btn-edit"
+                                                    data-bs-toggle="modal" data-bs-target="#modal-update">Edit</button>
+                                                <button data-id="{{ $voucher->id }}" id="btn-delete-{{ $voucher->id }}"
+                                                    class="dropdown-item btn-delete" data-bs-toggle="modal"
+                                                    data-bs-target="#modal-delete">Hapus</button>
                                             </li>
                                         </ul>
                                     </div>
@@ -107,7 +113,8 @@
                                     @if ($voucher->quota > 0)
                                         {{-- <div class="progress-bar" style="width:{{ $voucher->voucher_useds_count }}%; height: 6px; border-width: {{ $voucher->quota }}%;" role="progressbar"></div> --}}
                                     @else
-                                        <div class="progress-bar" style="width: 100%; height: 6px; border-width: 100%;" role="progressbar"></div>
+                                        <div class="progress-bar" style="width: 100%; height: 6px; border-width: 100%;"
+                                            role="progressbar"></div>
                                     @endif
                                 </div>
                                 @if ($voucher->quota > 0)
@@ -176,7 +183,8 @@
                             </div>
                             <div class="col-lg-12" id="stok-wrapper">
                                 <label class="form-label mt-2">Stok</label>
-                                <input id="update-quota" class="form-control" class="stok" type="text" name="quota">
+                                <input id="stok" class="form-control" class="stok" type="text"
+                                    name="quota">
                                 <ul class="error-text"></ul>
                             </div>
                         </div>
@@ -226,16 +234,16 @@
                             </div>
                             <div class="col-lg-12">
                                 <label class="form-label mt-2">Jenis Voucher</label>
-                                <select class="form-control" name="status" id="jenis-voucher" value="{{ $voucher->status }}">
-                                    <option disabled selected>Pilih Jenis</option>
-                                    <option value="unlimited" {{ $voucher->status == 'unlimited' ? 'selected' : '' }}>Unlimited</option>
-                                    <option value="quota" {{ $voucher->status == 'quota' ? 'selected' : '' }}>Quota</option>
+                                <select class="form-control" name="status" id="update-status">
+                                    @foreach ($vouchers as $voucher)
+                                        <option value="{{ $voucher->id }}">{{ $voucher->status }}</option>
+                                    @endforeach
                                 </select>
                                 <ul class="error-text"></ul>
                             </div>
                             <div class="col-lg-12">
                                 <label class="form-label mt-2">Stok</label>
-                                <input id="update-quota" class="form-control" type="text" name="quota" value="{{ $voucher->quota }}">
+                                <input id="update-quota" class="form-control" type="text" name="quota">
                                 <ul class="error-text"></ul>
                             </div>
                         </div>
@@ -284,12 +292,13 @@
 
 @section('script')
     <script>
-        $('.btn-edit').click(function(){
+        $('.btn-edit').click(function() {
             var id = $(this).data('id');
             var code = $(this).data('code');
             var quota = $(this).data('quota');
             var presentation = $(this).data('presentation');
             var status = $(this).data('status');
+            var stok = $(this).data('stok');
             var start_date = $(this).data('start_date');
             var end_date = $(this).data('end_date');
 
@@ -297,25 +306,28 @@
             $('#update-quota').val(quota);
             $('#update-presentation').val(presentation);
             $('#update-status').val(status);
+            $('#update-stok').val(stok);
             $('#update-start_date').val(start_date);
             $('#update-end_date').val(end_date);
             $('#form-update').attr('action', '/voucher-update/' + id);
+
+            $('#update-status').trigger('change');
             $('#modal-update').modal('show');
         });
 
-        $('.btn-delete').click(function(){
+        $('.btn-delete').click(function() {
             var id = $(this).data('id');
             $('#form-delete').attr('action', '/voucher-delete/' + id);
             $('#modal-delete').modal('show');
         });
 
         $(document).ready(function() {
-        // Menyembunyikan input stok saat halaman pertama kali dimuat
-        $('#stok-wrapper').hide();
+            // Menyembunyikan input stok saat halaman pertama kali dimuat
+            $('#stok-wrapper').hide();
 
-        // Mendengarkan perubahan pada dropdown jenis voucher
-        $('#jenis-voucher').change(function() {
-            var selectedValue = $(this).val();
+            // Mendengarkan perubahan pada dropdown jenis voucher
+            $('#jenis-voucher').change(function() {
+                var selectedValue = $(this).val();
                 if (selectedValue === 'unlimited') {
                     $('#stok-wrapper').hide();
                 } else if (selectedValue === 'quota') {
