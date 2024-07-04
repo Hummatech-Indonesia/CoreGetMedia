@@ -133,7 +133,7 @@ class AuthorController extends Controller
         $newsLike = $this->newsLike->count(auth()->user()->id);
         $newses = $this->news->whereUser(auth()->user()->id);
         $newsView = $this->newsView->show(auth()->user()->id);
-        $newsPopulers = $this->news->whereUser(auth()->user()->id);
+        $newsPopulers = $this->news->show(auth()->user()->id);
         $news = $this->news;
         $chartData = $this->authorChart->chart($news);
         // dd($chartData);

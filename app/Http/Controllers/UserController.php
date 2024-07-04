@@ -75,9 +75,12 @@ class UserController extends Controller
     {
         $data = $request->validated();
         $data['slug'] = Str::slug($data['name']);
-        $authorData = [ 'description' => $data['description'] ];
         $this->users->update($user->id, $data);
-        $this->authors->updateByUser($user->id, $authorData);
+
+        if (auth()->user()->roles->pluck('name')[0] == 'author' && $data['description'] != null) {
+            $authorData = [ 'description' => $data['description'] ];
+            $this->authors->updateByUser($user->id, $authorData);
+        }
         return back()->with('success', 'Berhasil memperbarui profile');
     }
 

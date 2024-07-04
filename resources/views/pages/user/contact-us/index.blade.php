@@ -1,5 +1,18 @@
 @extends('layouts.user.app')
 
+@section('seo')
+<meta name="description" content="{{ Str::limit(strip_tags(isset($about_get->description)), 100) }}" />
+<meta name="title" content="{{ isset($about_get->slogan) }} - GetMedia" />
+<meta name="og:image" content="{{ asset('assets/img/getmedia-logo.png') }}" />
+<meta name="og:image:secure_url" content="{{ asset('assets/img/getmedia-logo.png') }}" />
+<meta name="og:image:type" content="image/png" />
+<meta property="og:image" content="{{ asset('assets/img/getmedia-logo.png') }}" />
+<meta property="og:image:alt" content="{{ isset($about_get->slogan) }}" />
+<meta property="og:url" content="{{ url('/') }}" />
+<meta property="og:type" content="home" />
+<link rel="canonical" href="{{ url('/') }}" />
+@endsection
+
 @section('style')
 <style>
     .social-profile li a {

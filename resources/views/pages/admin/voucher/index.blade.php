@@ -333,19 +333,12 @@
             $('#update-code').val(code);
             $('#update-quota').val(quota);
             $('#update-presentation').val(presentation);
-            $(`#update-status option[value="${status}"]`).attr('selected', true);
             $('#update-stok').val(stok);
             $('#update-start_date').val(start_date);
             $('#update-end_date').val(end_date);
             $('#form-update').attr('action', '/voucher-update/' + id);
+
             $('#update-jenis-voucher').val(status).trigger('change');
-
-            if (status === 'unlimited') {
-                $('#update-stok-wrapper').hide();
-            } else if (status === 'quota') {
-                $('#update-stok-wrapper').show();
-            }
-
             $('#modal-update').modal('show');
         });
 
@@ -357,12 +350,13 @@
 
         $(document).ready(function() {
             $('#stok-wrapper').hide();
+
             $('#update-jenis-voucher').change(function() {
                 var selectedValue = $(this).val();
                 if (selectedValue === 'unlimited') {
-                    $('#stok-wrapper').hide();
+                    $('#update-stok-wrapper').hide();
                 } else if (selectedValue === 'quota') {
-                    $('#stok-wrapper').show();
+                    $('#update-stok-wrapper').show();
                 }
             });
 
