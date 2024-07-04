@@ -82,18 +82,20 @@ class AuthorController extends Controller
      */
     public function store(Request $req, StoreAuthorRequest $request)
     {
+        $request->merge(['calling_method' => 'store']);
         $data = $this->service->store($request, '');
         $data['description'] = $req->input('description');
         $this->user->update(auth()->user()->id, [
             'phone_number' => $req->input('phone_number'),
-            'address' => $req->input('address')
+            'address' => $req->input('address'),
         ]);
         $this->author->store($data);
-        return back()->with('success', 'Berhasil mendaftarkan diri');
+        return redirect('/profile-user')->with('success', 'Berhasil mendaftarkan diri');
     }
 
     public function storeByAdmin(StoreAuthorRequest $request)
     {
+        $request->merge(['calling_method' => 'storeByAdmin']);
         $user = $this->service->storeUser($request);
         $user = $this->user->store($user);
         $user_id = $user->assignRole(RoleEnum::AUTHOR->value)->id;

@@ -6,20 +6,26 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class VoucherUsed extends Model
+class AdvertisementTransaction extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'advertisement_id',
+        'reference',
+        'merchant_ref',
+        'payment_method',
+        'payment_name',
         'user_id',
-        'voucherr_id'
+        'advertisement_id',
+        'callback_url',
+        'pay_code',
+        'total_amount',
+        'total_fee',
+        'status'
     ];
 
-    protected $table = 'voucher_useds';
-
     /**
-     * Get the user that owns the VoucherUsed
+     * Get the user that owns the AdvertisementTransaction
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -29,21 +35,11 @@ class VoucherUsed extends Model
     }
 
     /**
-     * Get the voucherr that owns the VoucherUsed
+     * Get the advertisment that owns the AdvertisementTransaction
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function voucherr(): BelongsTo
-    {
-        return $this->belongsTo(Voucherr::class);
-    }
-    
-    /**
-     * Get the advertisment that owns the VoucherUsed
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function advertisement(): BelongsTo
+    public function advertisment(): BelongsTo
     {
         return $this->belongsTo(Advertisement::class);
     }

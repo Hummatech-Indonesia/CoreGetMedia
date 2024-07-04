@@ -296,6 +296,10 @@
                         <p>Login Akun Google<a style="color:#438ac8" href="{{ route('redirect.google') }}">Login</a></p>
                     </div>
 
+                    {{-- <div class="text-center mt-4">
+                        <p>Login Akun FaceBook<a style="color:#438ac8" href="{{ route('auth.facebook') }}">Login</a></p>
+                    </div> --}}
+
                 </div>
 
             </div>

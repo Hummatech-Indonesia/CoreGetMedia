@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Contracts\Interfaces\AboutGetInterface;
 use App\Contracts\Interfaces\AdminInterface;
 use App\Contracts\Interfaces\AdvertisementInterface;
+use App\Contracts\Interfaces\AdvertismentTransactionInterface;
 use App\Contracts\Interfaces\AuthorInterface;
 use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\CommentInterface;
@@ -29,9 +30,11 @@ use App\Contracts\Interfaces\TagInterface;
 use App\Contracts\Interfaces\VoucherInterface;
 use App\Contracts\Interfaces\UserInterface;
 use App\Contracts\Interfaces\VisitorInterface;
+use App\Contracts\Interfaces\VoucherUsedInterface;
 use App\Contracts\Repositories\AboutGetRepository;
 use App\Contracts\Repositories\AdminRepository;
 use App\Contracts\Repositories\AdvertisementRepository;
+use App\Contracts\Repositories\AdvertismentTransactionRepository;
 use App\Contracts\Repositories\AuthorRepository;
 use App\Contracts\Repositories\CategoryRepository;
 use App\Contracts\Repositories\CommentReportRepository;
@@ -56,12 +59,12 @@ use App\Contracts\Repositories\TagRepository;
 use App\Contracts\Repositories\VoucherRepository;
 use App\Contracts\Repositories\UserRepository;
 use App\Contracts\Repositories\VisitorRepository;
+use App\Contracts\Repositories\VoucherUsedRepository;
 use App\Services\ImageContentService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-
     private array $register = [
         CategoryInterface::class => CategoryRepository::class,
         SubCategoryInterface::class => SubCategoryRepository::class,
@@ -85,11 +88,13 @@ class AppServiceProvider extends ServiceProvider
         NewsReportInterface::class => NewsReportRepository::class,
         AdminInterface::class => AdminRepository::class,
         AdvertisementInterface::class => AdvertisementRepository::class,
+        AdvertismentTransactionInterface::class => AdvertismentTransactionRepository::class,
         AboutGetInterface::class => AboutGetRepository::class,
         PositionAdvertisementInterface::class => PositionAdvertisementReporitory::class,
         VisitorInterface::class => VisitorRepository::class,
         PackageInteface::class => PackageRepository::class,
-        PackageFeaturesInterface::class => PackageFeaturesRepository::class
+        PackageFeaturesInterface::class => PackageFeaturesRepository::class,
+        VoucherUsedInterface::class => VoucherUsedRepository::class,
     ];
 
     /**

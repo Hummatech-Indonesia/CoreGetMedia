@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\AdvertisementInterface;
+use App\Contracts\Interfaces\AdvertismentTransactionInterface;
 use App\Contracts\Interfaces\PositionAdvertisementInterface;
 use App\Contracts\Interfaces\UserInterface;
 use App\Enums\StatusEnum;
@@ -23,16 +24,17 @@ class AdvertisementController extends Controller
     private AdvertisementService $service;
     private UserInterface $user;
 
+    private AdvertismentTransactionInterface $advertisementPay;
     private TripayService $tripayService;
 
-    public function __construct(TripayService $tripayService, UserInterface $user, AdvertisementInterface $advertisement, PositionAdvertisementInterface $position, AdvertisementService $service)
+    public function __construct(AdvertismentTransactionInterface $advertisementPay, TripayService $tripayService, UserInterface $user, AdvertisementInterface $advertisement, PositionAdvertisementInterface $position, AdvertisementService $service)
     {
         $this->advertisement = $advertisement;
         $this->position = $position;
         $this->service = $service;
         $this->user = $user;
-
         $this->tripayService = $tripayService;
+        $this->advertisementPay = $advertisementPay;
     }
 
     /**
@@ -193,7 +195,13 @@ class AdvertisementController extends Controller
         $paymentChannel = $this->tripayService->handlePaymentChannel();
         $positions = $this->position->get();
         $data = $this->advertisement->show($advertisement->id);
-        return view('pages.user.advertisement.detail-advertisement', compact('data', 'positions', 'paymentChannel'));
+
+        $advertisementPays = $this->advertisementPay->show($advertisement->id);
+        if ($advertisementPays != null ) {
+            return redirect()->route('detail.transaction', ['advertisement' =>$advertisementPays->advertisement_id ,'reference' => $advertisementPays->reference]);
+        } else {
+            return view('pages.user.advertisement.detail-advertisement', compact('data', 'positions', 'paymentChannel'));
+        }
     }
 
     /**

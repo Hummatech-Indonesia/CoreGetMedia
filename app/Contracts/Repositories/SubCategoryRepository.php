@@ -56,7 +56,7 @@ class SubCategoryRepository extends BaseRepository implements SubCategoryInterfa
     {
         return $this->model->query()
             ->where('slug', $slug)
-            ->firstOrFail();
+            ->first();
     }
 
     /**

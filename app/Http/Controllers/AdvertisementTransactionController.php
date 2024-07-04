@@ -2,26 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\Interfaces\PackageInteface;
-use App\Models\cr;
-use Illuminate\Http\Request;
+use App\Models\AdvertisementTransaction;
+use App\Http\Requests\StoreAdvertisementTransactionRequest;
+use App\Http\Requests\UpdateAdvertisementTransactionRequest;
 
-class SubscribeController extends Controller
+class AdvertisementTransactionController extends Controller
 {
-    private PackageInteface $packages;
-
-    public function __construct(PackageInteface $packages)
-    {
-        $this->packages = $packages;
-    }
-
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $packages = $this->packages->get();
-        return view('pages.user.subscribe.index', compact('packages'));
+        //
     }
 
     /**
@@ -35,7 +27,7 @@ class SubscribeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreAdvertisementTransactionRequest $request)
     {
         //
     }
@@ -43,7 +35,7 @@ class SubscribeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show(AdvertisementTransaction $advertisementTransaction)
     {
         //
     }
@@ -51,7 +43,7 @@ class SubscribeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit()
+    public function edit(AdvertisementTransaction $advertisementTransaction)
     {
         //
     }
@@ -59,7 +51,7 @@ class SubscribeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, )
+    public function update(UpdateAdvertisementTransactionRequest $request, AdvertisementTransaction $advertisementTransaction)
     {
         //
     }
@@ -67,7 +59,7 @@ class SubscribeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy()
+    public function destroy(AdvertisementTransaction $advertisementTransaction)
     {
         //
     }

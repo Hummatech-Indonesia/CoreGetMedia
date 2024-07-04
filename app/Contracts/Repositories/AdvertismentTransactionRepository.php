@@ -2,14 +2,14 @@
 
 namespace App\Contracts\Repositories;
 
-use App\Contracts\Interfaces\VoucherInterface;
-use App\Models\Voucherr;
+use App\Contracts\Interfaces\AdvertismentTransactionInterface;
+use App\Models\AdvertisementTransaction;
 
-class VoucherRepository extends BaseRepository implements VoucherInterface
+class AdvertismentTransactionRepository extends BaseRepository implements AdvertismentTransactionInterface
 {
-    public function __construct(Voucherr $voucher)
+    public function __construct(AdvertisementTransaction $advertisement)
     {
-        $this->model = $voucher;
+        $this->model = $advertisement;
     }
 
     /**
@@ -22,8 +22,8 @@ class VoucherRepository extends BaseRepository implements VoucherInterface
     public function delete(mixed $id): mixed
     {
         return $this->model->query()
-        ->findOrFail($id)
-        ->delete();
+            ->findOrFail($id)
+            ->delete();
     }
 
     /**
@@ -35,13 +35,8 @@ class VoucherRepository extends BaseRepository implements VoucherInterface
      */
     public function show(mixed $id): mixed
     {
-        //
-    }
-
-    public function first($code): mixed
-    {
         return $this->model->query()
-            ->where('code', $code)
+            ->where('advertisement_id', $id)
             ->first();
     }
 
@@ -53,16 +48,7 @@ class VoucherRepository extends BaseRepository implements VoucherInterface
     public function get(): mixed
     {
         return $this->model->query()
-            ->withCount('voucherUseds')
             ->get();
-    }
-
-    public function paginate(): mixed
-    {
-        return $this->model->query()
-            ->withCount('voucherUseds')
-            ->orderby('voucher_useds_count')
-            ->paginate(10);
     }
 
     /**
