@@ -262,10 +262,9 @@
                             </div>
                             <div class="col-lg-12">
                                 <label class="form-label mt-2">Jenis Voucher</label>
-                                <select class="form-control" name="status" id="update-status">
-                                    @foreach ($vouchers as $voucher)
-                                    <option value="{{ $voucher->status }}" {{ (old('status') == $voucher->status) ? 'selected' : '' }}>{{ $voucher->status }}</option>
-                                    @endforeach
+                                <select class="form-control" name="status" id="update-jenis-voucher">
+                                    <option value="unlimited">Unlimited</option>
+                                    <option value="quota">Quota</option>
                                 </select>
                                 <ul class="error-text"></ul>
                             </div>
