@@ -1,7 +1,7 @@
 @extends('layouts.user.app')
 
 @section('seo')
-<meta name="description" content="Berita Sub Kategori {{ $subcategory->name }} Terbaru, {{ $newsSeo->name != null ? $newsSeo->name : '' }}" />
+<meta name="description" content="Berita Sub Kategori {{ $subcategory->name }} Terbaru, {{ $newsSeo ? $newsSeo->name : '' }}" />
 <meta name="title" content="Sub Kategori {{ $subcategory->name }} Terkini - GetMedia" />
 <meta name="og:image" content="{{ asset('assets/img/getmedia-logo.png') }}" />
 <meta name="og:image:secure_url" content="{{ asset('assets/img/getmedia-logo.png') }}" />
