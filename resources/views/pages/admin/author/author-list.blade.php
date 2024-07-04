@@ -101,7 +101,7 @@
                     <td>
                         <div class="d-flex">
 
-                            <button data-bs-toggle="tooltip" title="Detail" data-id="{{ $author->id }}" data-name="{{ $author->user->name }}" data-birth="{{ $author->user->date_of_birth ? $author->user->date_of_birth : "-" }}" data-address="{{ $author->user->address ? $author->user->address : "-" }}" data-image="{{ $author->user->image ? 'storage/'.$author->user->image : "default.png" }}" data-email="{{ $author->user->email }}" class="btn btn-sm btn-detail btn-primary me-2" style="background-color:#5D87FF">
+                            <button data-bs-toggle="tooltip" title="Detail" data-id="{{ $author->id }}" data-name="{{ $author->user->name }}" data-birth="{{ $author->user->date_of_birth ? $author->user->date_of_birth : "-" }}" data-address="{{ $author->user->address ? $author->user->address : "-" }}" data-image="{{ $author->user->image ? 'storage/'.$author->user->image : "default.png" }}" data-email="{{ $author->user->email }}" data-cv="{{ asset('storage/'. $author->cv) }}" class="btn btn-sm btn-detail btn-primary me-2" style="background-color:#5D87FF">
                                 <i><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
                                         <path fill="currentColor" d="M12 6.5a9.77 9.77 0 0 1 8.82 5.5c-1.65 3.37-5.02 5.5-8.82 5.5S4.83 15.37 3.18 12A9.77 9.77 0 0 1 12 6.5m0-2C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5m0 5a2.5 2.5 0 0 1 0 5a2.5 2.5 0 0 1 0-5m0-2c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5s4.5-2.02 4.5-4.5s-2.02-4.5-4.5-4.5" />
                                     </svg></i>
@@ -278,12 +278,15 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    @if (file_exists(public_path('storage/' . $author->cv)))
-                    <a href="{{ asset('storage/' . $author->cv) }}" target="_blank" class="btn btn-light-primary text-primary me-2 fs-4 px-2 py-2">Lihat CV</a>
+                    @if (isset($author) && file_exists(public_path('storage/' . $author->cv)))
+                        <a href="{{ asset('storage/' . $author->cv) }}" target="_blank" class="btn btn-light-primary text-primary me-2 fs-4 px-2 py-2">Lihat CV</a>
+                        <a href="#" type="button" class="btn btn-light-primary text-primary me-2 fs-4 px-2 py-2 btn-download" data-id="{{ $author->id }}" data-task="{{ asset('storage/' . $author->cv) }}" data-name="{{ optional($author->user)->name }}">
+                            <div class="mx-1">Download CV</div>
+                        </a>
                     @else
-                    <p>CV tidak tersedia</p>
+                        <p class="mb-0 me-2">CV tidak tersedia</p>
                     @endif
-                    <a href="#" type="button" class="btn btn-light-primary text-primary me-2 fs-4 px-2 py-2 btn-download" data-id="{{$author->id}}" data-task="{{ file_exists(public_path('storage/' . $author->cv)) ? asset('storage/' . $author->cv) : asset('no data.png') }}" data-name="{{$author->user->name}}">
+                    <a href="#" type="button" class="btn btn-light-primary text-primary me-2 fs-4 px-2 py-2 btn-download" data-id="{{$author->id}}" data-task="{{ asset('storage/' . $author->cv) }}" data-name="{{$author->user->name}}">
                         <div class="mx-1">
                             Download CV
                         </div>
@@ -362,6 +365,7 @@
         var image = $(this).data('image');
         var date = $(this).data('data_of_birth')
         var address = $(this).data('address')
+        var cv = $(this).data('cv')
         $('#form-tolak').attr('action', '/confirm-author/' + id);
         $('#form-terima').attr('action', '/confirm-author/' + id);
         $('#detail-name').text(name);
@@ -369,8 +373,16 @@
         $('#detail-image').attr('src', image);
         $('#detail-birth_date').text(date)
         $('#detail-address').text(address)
+        $('#data-cv').attr('href', cv);
         console.log(id);
         $('#modal-detail').modal('show');
+
+        var $btnCv = $('#btn-cv');
+        if ($btnCv.length > 0) {
+            $btnCv.attr('data-cv', cv);
+        } else {
+            console.error('Elemen dengan id "btn-cv" tidak ditemukan');
+        }
     });
 
 

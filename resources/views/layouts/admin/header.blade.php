@@ -24,12 +24,16 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <div class="d-flex align-items-center justify-content-between">
                 <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-center">
-                    <li class="nav item">
-                        <div class="d-none d-md-flex flex-column align-items-end justify-content-center">
-                            <span class="mt-2 fs-4 lh-1 text-end fw-semibold">{{ auth()->user()->name }}</span>
-                            <span class="fs-4 text-end">{{ auth()->user()->email }}</span>
-                        </div>
-                    </li>
+                    <div class="col-md-5">
+                        {{-- <button
+                          type="button"
+                          class="btn d-flex btn-light-primary w-100 d-block text-primary font-medium"
+                        >
+                          Primary
+                          <span class="badge ms-auto bg-primary">1</span>
+                        </button> --}}
+                        {{-- <span class="bg-light-primary w-100 d-block text-primary font-medium">Admin</span> --}}
+                      </div>
                     <li class="nav-item dropdown">
                         <a class="nav-link pe-0" href="javascript:void(0)" id="drop1" data-bs-toggle="dropdown"
                             aria-expanded="false">
