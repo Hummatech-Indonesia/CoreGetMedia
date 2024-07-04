@@ -2,12 +2,12 @@
 
 namespace App\Contracts\Repositories;
 
-use App\Contracts\Interfaces\AdvertismentTransactionInterface;
-use App\Models\AdvertisementTransaction;
+use App\Contracts\Interfaces\TransactionsInterface;
+use App\Models\Transaction;
 
-class AdvertismentTransactionRepository extends BaseRepository implements AdvertismentTransactionInterface
+class TransactionsRepository extends BaseRepository implements TransactionsInterface
 {
-    public function __construct(AdvertisementTransaction $advertisement)
+    public function __construct(Transaction $advertisement)
     {
         $this->model = $advertisement;
     }
@@ -37,6 +37,13 @@ class AdvertismentTransactionRepository extends BaseRepository implements Advert
     {
         return $this->model->query()
             ->where('advertisement_id', $id)
+            ->first();
+    }
+
+    public function first($reference): mixed
+    {
+        return $this->model->query()
+            ->where('reference', $reference)
             ->first();
     }
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\AdvertisementInterface;
-use App\Contracts\Interfaces\AdvertismentTransactionInterface;
+use App\Contracts\Interfaces\TransactionsInterface;
 use App\Contracts\Interfaces\PositionAdvertisementInterface;
 use App\Contracts\Interfaces\UserInterface;
 use App\Enums\StatusEnum;
@@ -24,10 +24,10 @@ class AdvertisementController extends Controller
     private AdvertisementService $service;
     private UserInterface $user;
 
-    private AdvertismentTransactionInterface $advertisementPay;
+    private TransactionsInterface $advertisementPay;
     private TripayService $tripayService;
 
-    public function __construct(AdvertismentTransactionInterface $advertisementPay, TripayService $tripayService, UserInterface $user, AdvertisementInterface $advertisement, PositionAdvertisementInterface $position, AdvertisementService $service)
+    public function __construct(TransactionsInterface $advertisementPay, TripayService $tripayService, UserInterface $user, AdvertisementInterface $advertisement, PositionAdvertisementInterface $position, AdvertisementService $service)
     {
         $this->advertisement = $advertisement;
         $this->position = $position;

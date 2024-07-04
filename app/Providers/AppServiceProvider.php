@@ -5,7 +5,6 @@ namespace App\Providers;
 use App\Contracts\Interfaces\AboutGetInterface;
 use App\Contracts\Interfaces\AdminInterface;
 use App\Contracts\Interfaces\AdvertisementInterface;
-use App\Contracts\Interfaces\AdvertismentTransactionInterface;
 use App\Contracts\Interfaces\AuthorInterface;
 use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\CommentInterface;
@@ -27,6 +26,7 @@ use App\Contracts\Interfaces\PositionAdvertisementInterface;
 use App\Contracts\Interfaces\RegisterInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\TagInterface;
+use App\Contracts\Interfaces\TransactionsInterface;
 use App\Contracts\Interfaces\VoucherInterface;
 use App\Contracts\Interfaces\UserInterface;
 use App\Contracts\Interfaces\VisitorInterface;
@@ -34,7 +34,6 @@ use App\Contracts\Interfaces\VoucherUsedInterface;
 use App\Contracts\Repositories\AboutGetRepository;
 use App\Contracts\Repositories\AdminRepository;
 use App\Contracts\Repositories\AdvertisementRepository;
-use App\Contracts\Repositories\AdvertismentTransactionRepository;
 use App\Contracts\Repositories\AuthorRepository;
 use App\Contracts\Repositories\CategoryRepository;
 use App\Contracts\Repositories\CommentReportRepository;
@@ -56,6 +55,7 @@ use App\Contracts\Repositories\PositionAdvertisementReporitory;
 use App\Contracts\Repositories\RegisterRepository;
 use App\Contracts\Repositories\SubCategoryRepository;
 use App\Contracts\Repositories\TagRepository;
+use App\Contracts\Repositories\TransactionsRepository;
 use App\Contracts\Repositories\VoucherRepository;
 use App\Contracts\Repositories\UserRepository;
 use App\Contracts\Repositories\VisitorRepository;
@@ -88,7 +88,7 @@ class AppServiceProvider extends ServiceProvider
         NewsReportInterface::class => NewsReportRepository::class,
         AdminInterface::class => AdminRepository::class,
         AdvertisementInterface::class => AdvertisementRepository::class,
-        AdvertismentTransactionInterface::class => AdvertismentTransactionRepository::class,
+        TransactionsInterface::class => TransactionsRepository::class,
         AboutGetInterface::class => AboutGetRepository::class,
         PositionAdvertisementInterface::class => PositionAdvertisementReporitory::class,
         VisitorInterface::class => VisitorRepository::class,

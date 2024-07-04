@@ -8,7 +8,7 @@ use App\Contracts\Interfaces\Eloquent\ShowInterface;
 use App\Contracts\Interfaces\Eloquent\StoreInterface;
 use App\Contracts\Interfaces\Eloquent\UpdateInterface;
 
-interface AdvertismentTransactionInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface
+interface TransactionsInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface
 {
-    //
+    public function first($reference) : mixed;
 }

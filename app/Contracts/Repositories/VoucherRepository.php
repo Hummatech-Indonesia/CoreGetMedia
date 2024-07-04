@@ -35,7 +35,9 @@ class VoucherRepository extends BaseRepository implements VoucherInterface
      */
     public function show(mixed $id): mixed
     {
-        //
+        return $this->model->query()
+            ->whereRelation('voucherUseds', 'advertisement_id', $id)
+            ->first();
     }
 
     public function first($code): mixed
