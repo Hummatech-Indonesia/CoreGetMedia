@@ -1,5 +1,17 @@
 @extends('layouts.user.app')
 
+@section('seo')
+<meta name="description" content="Berita dengan Tag {{ $news->name }} Terbaru, {{ $newsSeo ? $newsSeo->name : '' }}" />
+<meta name="title" content="Tag {{ $news->name }} Terkini - GetMedia" />
+<meta name="og:image" content="{{ asset('assets/img/getmedia-logo.png') }}" />
+<meta name="og:image:secure_url" content="{{ asset('assets/img/getmedia-logo.png') }}" />
+<meta name="og:image:type" content="image/png" />
+<meta property="og:image" content="{{ asset('assets/img/getmedia-logo.png') }}" />
+<meta property="og:image:alt" content="{{ isset($about_get->slogan) }}" />
+<meta property="og:url" content="{{ route('news-tag-list.user', ['tag' => $news->slug]) }}" />
+<meta property="og:type" content="tag" />
+<link rel="canonical" href="{{ route('news-tag-list.user', ['tag' => $news->slug]) }}" />
+@endsection
 
 @section('style')
 <style>

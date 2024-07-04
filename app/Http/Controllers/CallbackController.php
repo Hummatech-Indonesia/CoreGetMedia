@@ -54,68 +54,37 @@ class CallbackController extends Controller
         $status = strtoupper((string) $data->status);
 
         if ($data->is_closed_payment === 1) {
-            $advertisement = $this->transaction->first($tripayReference);
+            $transactions = $this->transaction->first($tripayReference);
 
-            if ($advertisement->advertisement_id != null) {
-                if (! $advertisement) {
-                    return Response::json([
-                        'success' => false,
-                        'message' => 'No invoice found or already paid: ' . $tripayReference,
-                    ]);
-                }
-
-                switch ($status) {
-                    case 'PAID':
-                        $advertisement->update(['status' => StatusEnum::PAID->value]);
-                        $this->advertisement->update($advertisement->advertisement_id, ['status' => StatusEnum::PAID->value]);
-                        break;
-
-                    case 'EXPIRED':
-                        $advertisement->update(['status' => StatusEnum::NOTPAID->value]);
-                        break;
-
-                    case 'FAILED':
-                        $advertisement->update(['status' => 'FAILED']);
-                        break;
-
-                    default:
-                        return Response::json([
-                            'success' => false,
-                            'message' => 'Unrecognized payment status',
-                        ]);
-                }
+            if (! $transactions) {
+                return Response::json([
+                    'success' => false,
+                    'message' => 'No invoice found or already paid: ' . $tripayReference,
+                ]);
             }
 
-            if ($advertisement->package_id != null) {
-                if (! $advertisement) {
+            switch ($status) {
+                case 'PAID':
+                    $transactions->update(['status' => StatusEnum::PAID->value]);
+                    if ($transactions->advertisement_id != null) {
+                        $this->advertisement->update($transactions->advertisement_id, ['status' => StatusEnum::PAID->value]);
+                    }
+                    break;
+
+                case 'EXPIRED':
+                    $transactions->update(['status' => StatusEnum::NOTPAID->value]);
+                    break;
+
+                case 'FAILED':
+                    $transactions->update(['status' => 'FAILED']);
+                    break;
+
+                default:
                     return Response::json([
                         'success' => false,
-                        'message' => 'No invoice found or already paid: ' . $tripayReference,
+                        'message' => 'Unrecognized payment status',
                     ]);
-                }
-
-                switch ($status) {
-                    case 'PAID':
-                        $advertisement->update(['status' => StatusEnum::PAID->value]);
-                        $this->advertisement->update($advertisement->advertisement_id, ['status' => StatusEnum::PAID->value]);
-                        break;
-
-                    case 'EXPIRED':
-                        $advertisement->update(['status' => StatusEnum::NOTPAID->value]);
-                        break;
-
-                    case 'FAILED':
-                        $advertisement->update(['status' => 'FAILED']);
-                        break;
-
-                    default:
-                        return Response::json([
-                            'success' => false,
-                            'message' => 'Unrecognized payment status',
-                        ]);
-                }
             }
-
 
             return Response::json(['success' => true]);
         }
