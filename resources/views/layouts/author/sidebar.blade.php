@@ -77,7 +77,7 @@
                     </a>
                 </li>
 
-                <li class="nav-small-cap">
+                {{-- <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu text-white">BERLANGGANAN</span>
                 </li>
@@ -104,7 +104,7 @@
                         </svg>                                
                         <span class="hide-menu ms-1">Iklan</span>
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </nav>
     </div>

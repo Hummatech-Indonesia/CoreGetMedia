@@ -49,7 +49,7 @@
                     </ul>
                 </li>
 
-                <li class="nav-small-cap">
+                {{-- <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu text-white">BERLANGGANAN</span>
                 </li>
@@ -76,7 +76,7 @@
                         </svg>
                         <span class="hide-menu">Iklan</span>
                     </a>
-                </li>
+                </li> --}}
 
                 {{-- <li class="sidebar-item">
                     <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">

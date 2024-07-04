@@ -47,9 +47,9 @@
     <div class="header-top">
         <div class="container-fluid">
             <div class="row align-items-center">
-                <div class="col-lg-4 col-md-6 col-5">
+                {{-- <div class="col-lg-4 col-md-6 col-5">
                     <a class="subscribe-btn" href="/subscribe">Berlangganan<i class="flaticon-right-arrow"></i></a>
-                </div>
+                </div> --}}
                 <div class="col-lg-4 col-md-6 md-none">
                     @if (isset($about_get))
                         <a class="navbar-brand" href="index.html">
