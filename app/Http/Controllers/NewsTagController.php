@@ -45,7 +45,8 @@ class NewsTagController extends Controller
         $id = $news_tags->pluck('id');
         $ids = $trending_id->merge($id);
 
-        $newsTags = $this->news->tagLatest($news->id, 5, $ids, 'notall');
+        $newsTags = $this->news->tagLatest($news->id, 0, $ids, 'notall')->paginate(5);
+        $newsSeo = $this->news->tagLatest($news->id, 0, 0, '1')->get();
 
         $CategoryPopulars = $this->category->showWithCount();
         $popularTags = $this->tag->showWithCount();
@@ -58,7 +59,7 @@ class NewsTagController extends Controller
 
         return view('pages.user.tag.index', compact(
             'news_tags', 'news', 'newsTags', 'CategoryPopulars', 'trendings', 'popularTags'
-        ,'advertisement_rights', 'advertisement_lefts', 'advertisement_tops', 'advertisement_unders', 'advertisement_mids'));
+        ,'advertisement_rights', 'advertisement_lefts', 'advertisement_tops', 'advertisement_unders', 'advertisement_mids', 'newsSeo'));
     }
 
     /**
@@ -93,7 +94,7 @@ class NewsTagController extends Controller
         $news = $this->tag->showWithSLug($slug);
 
         $query = $request->input('search');
-        $newsTags = $this->news->taglatest($news->id, 10, 0, 'all');
+        $newsTags = $this->news->taglatest($news->id, 0, 0, 'all')->paginate(10);
         $CategoryPopulars = $this->category->showWithCount();
         $query = $request->input('search');
         $trendings = $this->news->whereCategory($news->id, $query);

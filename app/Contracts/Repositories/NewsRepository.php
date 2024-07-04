@@ -209,8 +209,10 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->whereRelation('newsTags', 'tags_id', $tag_id)
             ->where('status', NewsEnum::ACCEPTED->value)
             ->withCount('newsViews')
-            ->latest()
-            ->paginate($paginate);
+            ->when($status == '1', function($take){
+                $take->first();
+            })
+            ->latest();
     }
 
     public function subcategoryLatest($subcategory_id, $id, $status) : mixed
