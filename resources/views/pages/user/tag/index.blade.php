@@ -1,7 +1,7 @@
 @extends('layouts.user.app')
 
 @section('seo')
-<meta name="description" content="Berita dengan Tag {{ $news->name }} Terbaru, {{ isset(Str::limit(strip_tags($newsSeo->name), 100)) }}" />
+<meta name="description" content="Berita dengan Tag {{ $news->name }} Terbaru, {{ $newsSeo->name != null ? $newsSeo->name : '' }}" />
 <meta name="title" content="Tag {{ $news->name }} Terkini - GetMedia" />
 <meta name="og:image" content="{{ asset('assets/img/getmedia-logo.png') }}" />
 <meta name="og:image:secure_url" content="{{ asset('assets/img/getmedia-logo.png') }}" />
