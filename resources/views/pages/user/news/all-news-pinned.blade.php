@@ -71,7 +71,7 @@
 <div class="">
     <div class="sports-wrap">
         <div class="container">
-            @if ($advertisement_tops)
+            {{-- @if ($advertisement_tops)
             <a href="{{ $advertisement_tops->url }}">
                 <div class="mt-4 iklan-top" style="position: relative; width: 100%; height: 200px; overflow: hidden;">
                     <img class="iklan-top-img" src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/'.$advertisement_tops->image : "CONTOHIKLAN.png") }}" width="100%" height="auto" alt="">
@@ -84,7 +84,7 @@
             <div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center bg_gray top-noiklan" style="height: 200px;">
                 <p style="color: #22222278">Iklan</p>
             </div>
-            @endif
+            @endif --}}
             <div class="row gx-55 gx-5">
                 <div class="col-lg-8">
                     <div class="row">
@@ -123,7 +123,7 @@
                         @endforelse
 
                     </div>
-                    @if ($advertisement_mids)
+                    {{-- @if ($advertisement_mids)
                     <a href="{{ $advertisement_mids->url }}">
                         <div>
                             <img src="{{asset($advertisement_mid && $advertisement_mid->image != null ? 'storage/'.$advertisement_mid->image : "CONTOHIKLAN.png")}}" width="100%" height="181px" style="object-fit: cover" alt="" alt="...">
@@ -133,7 +133,7 @@
                     <div class="bg_gray" style="width: 100%; height: 181px;">
                         <p class="text-center align-middle" style="line-height: 181px;">Iklan</p>
                     </div>
-                    @endif
+                    @endif --}}
                     <x-paginator :paginator="$newsPin" />
 
                 </div>

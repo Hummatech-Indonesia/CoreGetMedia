@@ -197,7 +197,7 @@
                     </div>
                 </div>
 
-                @if ($advertisement_lefts)
+                {{-- @if ($advertisement_lefts)
                 <a href="{{ $advertisement_lefts->url }}">
                     <div class="sidebar mt-4 mb-4" style="width: 400px">
                         <img src="{{ asset($advertisement_lefts && $advertisement_lefts->image != null ? 'storage/' . $advertisement_lefts->image : 'CONTOHIKLAN.png') }}" width="100%" height="302px" style="object-fit: cover" alt="">
@@ -207,7 +207,7 @@
                 <div class="sidebar mt-4 mb-4 bg_gray" style="width: 400px; height: 302px;">
                     <p class="text-center align-middle" style="line-height: 302px;">Iklan</p>
                 </div>
-                @endif
+                @endif --}}
 
             </div>
 

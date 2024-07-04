@@ -260,7 +260,7 @@
 
 <div class="news-details-wrap">
     <div class="container">
-        @if ($advertisement_tops)
+        {{-- @if ($advertisement_tops)
         <a href="{{ $advertisement_tops->url }}">
             <div class="mt-4 iklan-top" style="position: relative; width: 100%; height: 200px; overflow: hidden;">
                 <img class="iklan-top" src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/'.$advertisement_tops->image : "CONTOHIKLAN.png") }}" width="100%" height="auto" alt="">
@@ -273,7 +273,7 @@
         <div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center" style="height: 200px;  background-color: var(--bgColor);">
             <p style="color: #22222278">Iklan</p>
         </div>
-        @endif
+        @endif --}}
         <div class="row gx-55 gx-5">
             <div class="col-lg-8">
                 <article>
@@ -820,13 +820,13 @@
                         </ul>
                     </div>
 
-                    @if ($advertisement_rights)
+                    {{-- @if ($advertisement_rights)
                     <a href="{{ $advertisement_rights->url }}">
                         <div class="sidebar mt-3 mb-4" id="right-advertisement">
                             <img src="{{ asset($advertisement_rights && $advertisement_rights->image != null ? 'storage/' . $advertisement_rights->image : 'CONTOHIKLAN.png') }}" alt="Advertisement">
                         </div>
                     </a>
-                    @else
+                    @else --}}
                     <div class="sidebar mt-3 mb-4 bg_gray" style="height: 603px;">
                         <p class="text-center align-middle" style="line-height: 603px;">Iklan</p>
                     </div>

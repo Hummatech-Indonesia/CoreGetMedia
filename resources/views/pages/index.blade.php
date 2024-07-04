@@ -223,7 +223,7 @@
 
 <div class="container-fluid">
 
-    @if ($advertisement_tops)
+    {{-- @if ($advertisement_tops)
     <a href="{{ $advertisement_tops->url }}">
         <div class="mt-4 iklan-top" style="position: relative; width: 100%; height: 200px; overflow: hidden;">
             <img class="iklan-top" src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/'.$advertisement_tops->image : "CONTOHIKLAN.png") }}" width="100%" height="auto" alt="">
@@ -236,7 +236,7 @@
     <div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center" style="height: 200px;  background-color: var(--bgColor);">
         <p style="color: #22222278">Iklan</p>
     </div>
-@endif
+@endif --}}
 
 @php
     $displayedPopulars = $populars->take(10)->where('news_views_count', '>', 0)->pluck('id');
@@ -782,7 +782,7 @@ $popular_down_id = $popular_down->pluck('id');
 </button>
 </div> --}}
 
-@if ($advertisement_rights)
+{{-- @if ($advertisement_rights)
 <a href="{{ $advertisement_rights->url }}">
     <div class="sidebar">
         <img src="{{ asset($advertisement_rights->image ? 'storage/'.$advertisement_rights->image : 'CONTOHIKLAN.png') }}" width="100%" height="473px" style="object-fit: cover" alt="...">
@@ -792,7 +792,7 @@ $popular_down_id = $popular_down->pluck('id');
 <div class="sidebar-widget d-flex justify-content-center align-items-center" style="height: 473px">
     <p style="color: #22222278">Iklan</p>
 </div>
-@endif
+@endif --}}
 
 
 </div>
@@ -888,7 +888,7 @@ $popular_down_id = $popular_down->pluck('id');
     <i class="ri-arrow-up-line"></i>
 </button>
 
-@if ($advertisement_unders)
+{{-- @if ($advertisement_unders)
 <a href="{{ $advertisement_unders->url }}">
     <div class="container-fluid mt-5 mb-5">
         <img src="{{ asset($advertisement_unders && $advertisement_unders->image != null ? 'storage/'.$advertisement_unders->image : "CONTOHIKLAN.png") }}" width="100%" height="295px" style="object-fit: cover" alt="">
@@ -898,7 +898,7 @@ $popular_down_id = $popular_down->pluck('id');
 <div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center" style="height: 295px;  background-color: var(--bgColor);">
     <p style="color: #22222278">Iklan</p>
 </div>
-@endif
+@endif --}}
 {{--
     <div class="modal fade" id="newsletter-popup" tabindex="-1" aria-labelledby="newsletter-popup" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl">
