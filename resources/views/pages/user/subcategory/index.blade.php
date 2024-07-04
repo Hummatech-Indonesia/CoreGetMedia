@@ -130,7 +130,7 @@
 <div class="sports-wrap">
     @if ($advertisement_tops)
         <a href="{{ $advertisement_tops->url }}">
-            <div class="mt-4 iklan-top" style="position: relative; width: 100%; height: 250px; overflow: hidden;">
+            <div class="mt-4 iklan-top" style="position: relative; width: 100%; height: 200px; overflow: hidden;">
                 <img class="iklan-top-img"
                     src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/' . $advertisement_tops->image : "CONTOHIKLAN.png") }}"
                     width="100%" height="auto" alt="">
@@ -143,7 +143,7 @@
         </a>
     @else
         <div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center bg_gray top-noiklan"
-            style="height: 250px;">
+            style="height: 200px;">
             <p style="color: #22222278">Iklan</p>
         </div>
     @endif

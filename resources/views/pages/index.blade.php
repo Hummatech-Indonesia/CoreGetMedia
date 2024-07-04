@@ -225,7 +225,7 @@
 
     @if ($advertisement_tops)
     <a href="{{ $advertisement_tops->url }}">
-        <div class="mt-4 iklan-top" style="position: relative; width: 100%; height: 250px; overflow: hidden;">
+        <div class="mt-4 iklan-top" style="position: relative; width: 100%; height: 200px; overflow: hidden;">
             <img class="iklan-top" src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/'.$advertisement_tops->image : "CONTOHIKLAN.png") }}" width="100%" height="auto" alt="">
             <div style="width: 100%; background-color: rgba(0, 0, 0, 0.5); color: white; text-align: center; padding: 10px; box-sizing: border-box; position: relative; top: -50px;">
                 <a class="text-white" href="jascript:void(0)">Ingin baca berita tanpa iklan?</a> <a href="/subscribe" style="color: #7cadd8; text-decoration: underline;">Berlangganan</a>
@@ -233,7 +233,7 @@
         </div>
     </a>
     @else
-    <div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center" style="height: 250px;  background-color: var(--bgColor);">
+    <div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center" style="height: 200px;  background-color: var(--bgColor);">
         <p style="color: #22222278">Iklan</p>
     </div>
 @endif
