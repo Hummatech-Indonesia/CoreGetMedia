@@ -6,6 +6,22 @@
             background-image: linear-gradient(to right, #DD1818, #175A95);
         }
     </style>
+    <style>
+        #copy-tooltip {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: white;
+            border-radius: 10px;
+            color: #1EBB9E;
+            padding: 10px;
+            border: 1px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: none;
+            z-index: 1000;
+        }
+    </style>
 @endsection
 @section('content')
     <div class="row">
@@ -67,10 +83,16 @@
                                         </a>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                             <li>
-                                                <button id="btn-edit-{{ $voucher->id }}" data-id="{{ $voucher->id }}" data-code="{{ $voucher->code }}" data-quota="{{ $voucher->quota }}"
-                                                    data-presentation="{{ $voucher->presentation }}" data-status="{{ $voucher->status }}" data-start_date="{{ $voucher->start_date }}" data-end_date="{{ $voucher->end_date }}"
-                                                    class="dropdown-item btn-edit" data-bs-toggle="modal" data-bs-target="#modal-update">Edit</button>
-                                                <button data-id="{{ $voucher->id }}" id="btn-delete-{{ $voucher->id }}" class="dropdown-item btn-delete" data-bs-toggle="modal" data-bs-target="#modal-delete">Hapus</button>
+                                                <button id="btn-edit-{{ $voucher->id }}" data-id="{{ $voucher->id }}"
+                                                    data-code="{{ $voucher->code }}" data-quota="{{ $voucher->quota }}"
+                                                    data-presentation="{{ $voucher->presentation }}"
+                                                    data-status="{{ $voucher->status }}" data-stok="{{ $voucher->stok }}"
+                                                    data-start_date="{{ $voucher->start_date }}"
+                                                    data-end_date="{{ $voucher->end_date }}" class="dropdown-item btn-edit"
+                                                    data-bs-toggle="modal" data-bs-target="#modal-update">Edit</button>
+                                                <button data-id="{{ $voucher->id }}" id="btn-delete-{{ $voucher->id }}"
+                                                    class="dropdown-item btn-delete" data-bs-toggle="modal"
+                                                    data-bs-target="#modal-delete">Hapus</button>
                                             </li>
                                         </ul>
                                     </div>
@@ -88,16 +110,27 @@
 
                             <div class="d-flex justify-content-center mt-4">
                                 <div>
-                                    <h5>{{ $voucher->code }}
-                                        <span class="badge ms-3" style="background-color: #E9E9E9;">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"
-                                                viewBox="0 0 512 512">
-                                                <path fill="#888888"
-                                                    d="M408 480H184a72 72 0 0 1-72-72V184a72 72 0 0 1 72-72h224a72 72 0 0 1 72 72v224a72 72 0 0 1-72 72" />
-                                                <path fill="#888888"
-                                                    d="M160 80h235.88A72.12 72.12 0 0 0 328 32H104a72 72 0 0 0-72 72v224a72.12 72.12 0 0 0 48 67.88V160a80 80 0 0 1 80-80" />
+                                    <h5 id="kode">{{ $voucher->code }}
+                                        <a id="copylink" tooltip="Salin Link">
+                                            <span class="badge ms-3 copyLink" style="background-color: #E9E9E9;"
+                                                onclick="copyToClipboard()" id="copy">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"
+                                                    viewBox="0 0 512 512">
+                                                    <path fill="#888888"
+                                                        d="M408 480H184a72 72 0 0 1-72-72V184a72 72 0 0 1 72-72h224a72 72 0 0 1 72 72v224a72 72 0 0 1-72 72" />
+                                                    <path fill="#888888"
+                                                        d="M160 80h235.88A72.12 72.12 0 0 0 328 32H104a72 72 0 0 0-72 72v224a72.12 72.12 0 0 0 48 67.88V160a80 80 0 0 1 80-80" />
+                                                </svg>
+                                            </span>
+                                        </a>
+                                        <div id="copy-tooltip">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                                viewBox="0 0 24 24">
+                                                <path fill="currentColor"
+                                                    d="m9.55 18l-5.7-5.7l1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z" />
                                             </svg>
-                                        </span>
+                                            Berhasil disalin
+                                        </div>
                                     </h5>
                                 </div>
                             </div>
@@ -107,7 +140,8 @@
                                     @if ($voucher->quota > 0)
                                         {{-- <div class="progress-bar" style="width:{{ $voucher->voucher_useds_count }}%; height: 6px; border-width: {{ $voucher->quota }}%;" role="progressbar"></div> --}}
                                     @else
-                                        <div class="progress-bar" style="width: 100%; height: 6px; border-width: 100%;" role="progressbar"></div>
+                                        <div class="progress-bar" style="width: 100%; height: 6px; border-width: 100%;"
+                                            role="progressbar"></div>
                                     @endif
                                 </div>
                                 @if ($voucher->quota > 0)
@@ -120,7 +154,8 @@
                             <div class="text-center mt-4">
                                 <h5>Masa Aktif</h5>
                                 <div class=" mt-3">
-                                    <h5 style="color: #175A95;">{{ $voucher->start_date }} - {{ $voucher->end_date }}</h5>
+                                    <h5 style="color: #175A95;">{{ $voucher->start_date }} - {{ $voucher->end_date }}
+                                    </h5>
                                 </div>
                             </div>
                         </div>
@@ -176,7 +211,8 @@
                             </div>
                             <div class="col-lg-12" id="stok-wrapper">
                                 <label class="form-label mt-2">Stok</label>
-                                <input id="update-quota" class="form-control" class="stok" type="text" name="quota">
+                                <input id="stok" class="form-control" class="stok" type="text"
+                                    name="quota">
                                 <ul class="error-text"></ul>
                             </div>
                         </div>
@@ -284,12 +320,13 @@
 
 @section('script')
     <script>
-        $('.btn-edit').click(function(){
+        $('.btn-edit').click(function() {
             var id = $(this).data('id');
             var code = $(this).data('code');
             var quota = $(this).data('quota');
             var presentation = $(this).data('presentation');
             var status = $(this).data('status');
+            var stok = $(this).data('stok');
             var start_date = $(this).data('start_date');
             var end_date = $(this).data('end_date');
 
@@ -297,25 +334,28 @@
             $('#update-quota').val(quota);
             $('#update-presentation').val(presentation);
             $('#update-status').val(status);
+            $('#update-stok').val(stok);
             $('#update-start_date').val(start_date);
             $('#update-end_date').val(end_date);
             $('#form-update').attr('action', '/voucher-update/' + id);
+
+            $('#update-status').trigger('change');
             $('#modal-update').modal('show');
         });
 
-        $('.btn-delete').click(function(){
+        $('.btn-delete').click(function() {
             var id = $(this).data('id');
             $('#form-delete').attr('action', '/voucher-delete/' + id);
             $('#modal-delete').modal('show');
         });
 
         $(document).ready(function() {
-        // Menyembunyikan input stok saat halaman pertama kali dimuat
-        $('#stok-wrapper').hide();
+            // Menyembunyikan input stok saat halaman pertama kali dimuat
+            $('#stok-wrapper').hide();
 
-        // Mendengarkan perubahan pada dropdown jenis voucher
-        $('#jenis-voucher').change(function() {
-            var selectedValue = $(this).val();
+            // Mendengarkan perubahan pada dropdown jenis voucher
+            $('#jenis-voucher').change(function() {
+                var selectedValue = $(this).val();
                 if (selectedValue === 'unlimited') {
                     $('#stok-wrapper').hide();
                 } else if (selectedValue === 'quota') {
@@ -323,5 +363,30 @@
                 }
             });
         });
+
+        // function copyToClipboard(kode) {
+        //     const tempInput = document.createElement('input');
+        //     tempInput.value = kode;
+        //     document.body.appendChild(tempInput);
+        //     tempInput.select();
+        //     tempInput.setSelectionRange(0, 99999); // Untuk perangkat mobile
+        //     document.execCommand('copy');
+        //     document.body.removeChild(tempInput);
+        //     alert('Kode telah disalin: ' + kode);
+        // }
+
+
+        function copyToClipboard() {
+            const kode = document.getElementById('kode').innerText.trim();
+            navigator.clipboard.writeText(kode).then(function() {
+                const tooltip = document.getElementById('copy-tooltip');
+                tooltip.style.display = 'block';
+                setTimeout(function() {
+                    tooltip.style.display = 'none';
+                }, 2000);
+            }, function(err) {
+                console.error('Failed to copy: ', err);
+            });
+        }
     </script>
 @endsection

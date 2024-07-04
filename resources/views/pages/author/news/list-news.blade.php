@@ -654,7 +654,9 @@
             </div>
             <div class="modal-body">
                 <h5>Alasan: </h5>
-                <p id="reason-show"></p>
+                <div class="d-flex">
+                <p name="reject_description" id="reason-show" ></p>
+            </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light-danger text-danger font-medium waves-effect"
