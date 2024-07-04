@@ -755,7 +755,8 @@
                                             </span>
                                         </div>
                                     </div>
-                                    @elseif ($all_advertisement->status == 'accepted' && $all_advertisement->feed == 'notpaid')
+                                    
+                                    @if ($all_advertisement->status == 'accepted' && $all_advertisement->feed == 'notpaid')
                                     <div class="d-flex justify-content-end">
                                         <div class="text-md-right">
                                             <span class="badge bg-light-danger text-danger fs-4 me-2 px-3 py-2">
@@ -812,7 +813,7 @@
                                             <path fill="#ffffff" d="m13.292 12l-4.6-4.6l.708-.708L14.708 12L9.4 17.308l-.708-.708z" /></svg>
                                     </a>
 
-                                    
+
                                 </div>
                                 @elseif ($all_advertisement->status == 'accepted' && $all_advertisement->feed == 'paid')
                                 <div class="d-flex justify-content-end">
