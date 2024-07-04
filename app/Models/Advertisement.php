@@ -60,7 +60,7 @@ class Advertisement extends Model
      */
     public function advertismentTransactions(): HasMany
     {
-        return $this->hasMany(AdvertisementTransaction::class);
+        return $this->hasMany(Transaction::class);
     }
 
     /**

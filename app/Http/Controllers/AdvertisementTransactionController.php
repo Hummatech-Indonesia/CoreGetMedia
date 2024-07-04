@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AdvertisementTransaction;
 use App\Http\Requests\StoreAdvertisementTransactionRequest;
 use App\Http\Requests\UpdateAdvertisementTransactionRequest;
+use App\Models\Transaction;
 
 class AdvertisementTransactionController extends Controller
 {
@@ -35,7 +36,7 @@ class AdvertisementTransactionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(AdvertisementTransaction $advertisementTransaction)
+    public function show(Transaction $transaction)
     {
         //
     }
@@ -43,7 +44,7 @@ class AdvertisementTransactionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(AdvertisementTransaction $advertisementTransaction)
+    public function edit(Transaction $transaction)
     {
         //
     }
@@ -51,7 +52,7 @@ class AdvertisementTransactionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAdvertisementTransactionRequest $request, AdvertisementTransaction $advertisementTransaction)
+    public function update(UpdateAdvertisementTransactionRequest $request, Transaction $transaction)
     {
         //
     }
@@ -59,7 +60,7 @@ class AdvertisementTransactionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(AdvertisementTransaction $advertisementTransaction)
+    public function destroy(Transaction $transaction)
     {
         //
     }

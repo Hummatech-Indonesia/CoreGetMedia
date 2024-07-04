@@ -127,24 +127,61 @@
                         <p class="fw-semibold">Harga Upload</p>
 
                         <div class="d-flex">
-                            {{-- <del><p class="fs-3 me-3" style="color: #175A95;">Rp. 100.000</p></del> --}}
-                            <p class="fs-3" style="color: #175A95;">Rp. {{ $transaction->amount }}</p>
+                            <p class="fs-3" style="color: #175A95;">Rp. {{ number_format($data->total_price, 0,'','.') }}</p>
                         </div>
                     </div>
 
-                    {{-- <div class="d-flex mt-4 justify-content-between">
-                        <p class="fw-semibold">Diskon Voucher</p>
+                    <div class="d-flex mt-4 justify-content-between">
+                        @php
+                            $ppn = ($data->total_price / 100) * 11;
+                        @endphp
+                        <p class="fw-semibold">Harga PPN (11%)</p>
 
                         <div class="d-flex">
-                            <p class="fs-3" style="color: #175A95;"><span>-</span>Rp. 20.000</p>
+                            <p class="fs-3" style="color: #175A95;">Rp. {{ number_format($ppn, 0,'','.') }}</p>
                         </div>
-                    </div> --}}
+                    </div>
+
+                    @isset($voucher)
+                        <div class="d-flex mt-4 justify-content-between">
+                            <p class="fw-semibold">Code Voucher</p>
+
+                            <div class="d-flex">
+                                <p class="fs-3" style="color: #175A95;">
+                                    @if (isset($voucher->code))
+                                        {{ $voucher->code }}
+                                    @else
+                                        kode kosong
+                                    @endif
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex mt-4 justify-content-between">
+                            <p class="fw-semibold">Diskon Voucher</p>
+                            @isset($voucher->presentation)
+                                @php
+                                    $discount = ($data->total_price * $voucher->presentation) / 100;
+                                @endphp
+                            @endisset
+                            <div class="d-flex">
+                                <p class="fs-3" style="color: #175A95;">
+                                    Rp.
+                                    @if (isset($discount))
+                                        {{ number_format($discount, 0,'','.') }}
+                                    @else
+                                        0
+                                    @endif
+                                </p>
+                            </div>
+                        </div>
+                    @endisset
 
                     <div class="d-flex mt-4 justify-content-between">
                         <p class="fw-semibold">Total Pembayaran</p>
 
                         <div class="d-flex">
-                            <p class="fs-3" style="color: #175A95;">Rp. {{ $transaction->amount }}</p>
+                            <p class="fs-3" style="color: #175A95;">Rp. {{ number_format($transaction->amount, 0,'','.') }}</p>
                         </div>
                     </div>
 

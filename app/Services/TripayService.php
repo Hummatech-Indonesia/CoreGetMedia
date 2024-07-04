@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\Advertisement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
@@ -38,32 +37,29 @@ class TripayService
         $privateKey   = config('tripay.private_key');
         $merchantCode = config('tripay.merchant_code');
 
-        $amount11 = ($amount * 11) / 100;
-        $finalAmount = $amount + $amount11;
-
         $data = [
             'method'         => $method,
             'merchant_ref'   => $merchantRef,
-            'amount'         => $finalAmount,
+            'amount'         => $amount,
             'customer_name'  => auth()->user()->name,
             'customer_email' => auth()->user()->email,
             'customer_phone' => auth()->user()->phone_number,
             'order_items'    => [
                 [
                     'name'        => $name,
-                    'price'       => $finalAmount,
+                    'price'       => $amount,
                     'quantity'    => 1,
                 ],
             ],
             'expired_time' => (time() + (24 * 60 * 60)),
-            'signature'    => hash_hmac('sha256', $merchantCode.$merchantRef.$finalAmount,$privateKey)
+            'signature'    => hash_hmac('sha256', $merchantCode.$merchantRef.$amount,$privateKey)
         ];
 
         $curl = curl_init();
 
         curl_setopt_array($curl, [
             CURLOPT_FRESH_CONNECT  => true,
-            CURLOPT_URL            => 'https://tripay.co.id/api-sandbox/transaction/create',
+            CURLOPT_URL            => (config('tripay.api_url') . "transaction/create"),
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_HEADER         => false,
             CURLOPT_HTTPHEADER     => ['Authorization: Bearer '.$apiKey],
@@ -93,7 +89,7 @@ class TripayService
 
         curl_setopt_array($curl, [
             CURLOPT_FRESH_CONNECT  => true,
-            CURLOPT_URL            => 'https://tripay.co.id/api-sandbox/transaction/detail?'.http_build_query($payload),
+            CURLOPT_URL            => (config('tripay.api_url') . "transaction/detail?").http_build_query($payload),
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_HEADER         => false,
             CURLOPT_HTTPHEADER     => ['Authorization: Bearer '.$apiKey],

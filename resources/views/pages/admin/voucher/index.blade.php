@@ -262,16 +262,16 @@
                             </div>
                             <div class="col-lg-12">
                                 <label class="form-label mt-2">Jenis Voucher</label>
-                                <select class="form-control" name="status" id="jenis-voucher">
-                                    <option disabled selected>Pilih Jenis</option>
+                                <select class="form-control" name="status" id="update-jenis-voucher">
                                     <option value="unlimited">Unlimited</option>
                                     <option value="quota">Quota</option>
                                 </select>
                                 <ul class="error-text"></ul>
                             </div>
-                            <div class="col-lg-12">
+                            <div class="col-lg-12" id="update-stok-wrapper">
                                 <label class="form-label mt-2">Stok</label>
-                                <input id="update-quota" class="form-control" type="text" name="quota">
+                                <input id="update-quota" class="form-control" class="stok" type="text"
+                                    name="quota">
                                 <ul class="error-text"></ul>
                             </div>
                         </div>
@@ -338,8 +338,14 @@
             $('#update-start_date').val(start_date);
             $('#update-end_date').val(end_date);
             $('#form-update').attr('action', '/voucher-update/' + id);
+            $('#update-jenis-voucher').val(status).trigger('change');
 
-            $('#update-status').trigger('change');
+            if (status === 'unlimited') {
+                $('#update-stok-wrapper').hide();
+            } else if (status === 'quota') {
+                $('#update-stok-wrapper').show();
+            }
+
             $('#modal-update').modal('show');
         });
 
@@ -350,10 +356,16 @@
         });
 
         $(document).ready(function() {
-            // Menyembunyikan input stok saat halaman pertama kali dimuat
             $('#stok-wrapper').hide();
+            $('#update-jenis-voucher').change(function() {
+                var selectedValue = $(this).val();
+                if (selectedValue === 'unlimited') {
+                    $('#stok-wrapper').hide();
+                } else if (selectedValue === 'quota') {
+                    $('#stok-wrapper').show();
+                }
+            });
 
-            // Mendengarkan perubahan pada dropdown jenis voucher
             $('#jenis-voucher').change(function() {
                 var selectedValue = $(this).val();
                 if (selectedValue === 'unlimited') {
@@ -363,18 +375,6 @@
                 }
             });
         });
-
-        // function copyToClipboard(kode) {
-        //     const tempInput = document.createElement('input');
-        //     tempInput.value = kode;
-        //     document.body.appendChild(tempInput);
-        //     tempInput.select();
-        //     tempInput.setSelectionRange(0, 99999); // Untuk perangkat mobile
-        //     document.execCommand('copy');
-        //     document.body.removeChild(tempInput);
-        //     alert('Kode telah disalin: ' + kode);
-        // }
-
 
         function copyToClipboard() {
             const kode = document.getElementById('kode').innerText.trim();

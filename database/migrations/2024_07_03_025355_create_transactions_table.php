@@ -12,14 +12,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('advertisement_transactions', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->string('reference');
             $table->string('merchant_ref');
             $table->string('payment_method');
             $table->string('payment_name');
             $table->foreignUuid('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignUuid('advertisement_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignUuid('advertisement_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('package_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('callback_url');
             $table->string('pay_code');
             $table->bigInteger('total_amount');

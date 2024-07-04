@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class AdvertisementTransaction extends Model
+class Transaction extends Model
 {
     use HasFactory;
 
@@ -17,12 +17,15 @@ class AdvertisementTransaction extends Model
         'payment_name',
         'user_id',
         'advertisement_id',
+        'package_id',
         'callback_url',
         'pay_code',
         'total_amount',
         'total_fee',
         'status'
     ];
+
+    protected $table = 'transactions';
 
     /**
      * Get the user that owns the AdvertisementTransaction
