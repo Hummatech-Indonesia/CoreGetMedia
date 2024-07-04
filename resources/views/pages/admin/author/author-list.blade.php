@@ -286,12 +286,6 @@
                     @else
                         <p class="mb-0 me-2">CV tidak tersedia</p>
                     @endif
-                    <a href="#" type="button" class="btn btn-light-primary text-primary me-2 fs-4 px-2 py-2 btn-download" data-id="{{$author->id}}" data-task="{{ asset('storage/' . $author->cv) }}" data-name="{{$author->user->name}}">
-                        <div class="mx-1">
-                            Download CV
-                        </div>
-                    </a>
-
                     <a class="download-file" style="display: none;"></a>
                     <button type="button" class="btn btn-light-danger text-danger" data-bs-dismiss="modal">Tutup</button>
                 </div>
@@ -412,6 +406,7 @@
 <script>
     $(document).ready(function() {
         let cvPath = $('.btn-download').data('task');
+        console.log(cvPath);
         $('#open-cv').attr('href', cvPath);
 
         $('.btn-download').click(function(e) {
