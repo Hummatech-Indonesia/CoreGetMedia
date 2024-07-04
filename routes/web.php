@@ -278,6 +278,10 @@ Route::put('admin-account-update/{admin}', [AdminController::class, 'update'])->
 Route::delete('admin-account-list/{user}', [AdminController::class, 'destroy'])->name('admin-account.delete');
 Route::get('category/{category}', [NewsCategoryController::class, 'index'])->name('categories.show.userr');
 
+Route::get('subscribe-history', function(){
+    return view('pages.user.subscribe.subscribe-history');
+}) -> name('subscribe-history');
+
 
 require_once __DIR__ . '/jovita.php';
 require_once __DIR__ . '/ardi.php';

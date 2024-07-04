@@ -264,7 +264,7 @@
                                 <label class="form-label mt-2">Jenis Voucher</label>
                                 <select class="form-control" name="status" id="update-status">
                                     @foreach ($vouchers as $voucher)
-                                        <option value="{{ $voucher->id }}">{{ $voucher->status }}</option>
+                                        <option value="{{ $voucher->name }}">{{ $voucher->status }}</option>
                                     @endforeach
                                 </select>
                                 <ul class="error-text"></ul>
@@ -333,13 +333,13 @@
             $('#update-code').val(code);
             $('#update-quota').val(quota);
             $('#update-presentation').val(presentation);
-            $('#update-status').val(status);
+            // $('#update-status').val(status);
             $('#update-stok').val(stok);
             $('#update-start_date').val(start_date);
             $('#update-end_date').val(end_date);
             $('#form-update').attr('action', '/voucher-update/' + id);
 
-            $('#update-status').trigger('change');
+            $('#update-status').val(status).trigger('change');
             $('#modal-update').modal('show');
         });
 
@@ -349,20 +349,18 @@
             $('#modal-delete').modal('show');
         });
 
-        $(document).ready(function() {
-            // Menyembunyikan input stok saat halaman pertama kali dimuat
-            $('#stok-wrapper').hide();
+        // $(document).ready(function() {
+        //     $('#stok-wrapper').hide();
 
-            // Mendengarkan perubahan pada dropdown jenis voucher
-            $('#jenis-voucher').change(function() {
-                var selectedValue = $(this).val();
-                if (selectedValue === 'unlimited') {
-                    $('#stok-wrapper').hide();
-                } else if (selectedValue === 'quota') {
-                    $('#stok-wrapper').show();
-                }
-            });
-        });
+        //     $('#jenis-voucher').change(function() {
+        //         var selectedValue = $(this).val();
+        //         if (selectedValue === 'unlimited') {
+        //             $('#stok-wrapper').hide();
+        //         } else if (selectedValue === 'quota') {
+        //             $('#stok-wrapper').show();
+        //         }
+        //     });
+        // });
 
         // function copyToClipboard(kode) {
         //     const tempInput = document.createElement('input');
