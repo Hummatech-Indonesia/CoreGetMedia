@@ -14,8 +14,13 @@
                 </button>
 
                 <div>
-                    <a href="/" class="btn btn-sm btn-primary text-white">
-                        Beranda
+                    <a href="/" class="btn-home">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 24"
+                            class="mb-1">
+                            <path fill="currentColor"
+                                d="M6 19h3v-5q0-.425.288-.712T10 13h4q.425 0 .713.288T15 14v5h3v-9l-6-4.5L6 10zm-2 0v-9q0-.475.213-.9t.587-.7l6-4.5q.525-.4 1.2-.4t1.2.4l6 4.5q.375.275.588.7T20 10v9q0 .825-.588 1.413T18 21h-4q-.425 0-.712-.288T13 20v-5h-2v5q0 .425-.288.713T10 21H6q-.825 0-1.412-.587T4 19m8-6.75" />
+                        </svg>
+                        <span class="ms-1">Beranda</span>
                     </a>
                 </div>
             </div>
@@ -24,16 +29,9 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <div class="d-flex align-items-center justify-content-between">
                 <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-center">
-                    <div class="col-md-5">
-                        {{-- <button
-                          type="button"
-                          class="btn d-flex btn-light-primary w-100 d-block text-primary font-medium"
-                        >
-                          Primary
-                          <span class="badge ms-auto bg-primary">1</span>
-                        </button> --}}
-                        {{-- <span class="bg-light-primary w-100 d-block text-primary font-medium">Admin</span> --}}
-                      </div>
+                    <div class="d-flex align-items-center">
+                        <span class="badge bg-light-primary text-primary me-1" style="font-size: 16px">{{ auth()->user()->roles->pluck('name')[0] }}</span>
+                    </div>
                     <li class="nav-item dropdown">
                         <a class="nav-link pe-0" href="javascript:void(0)" id="drop1" data-bs-toggle="dropdown"
                             aria-expanded="false">

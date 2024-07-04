@@ -164,7 +164,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-rounded btn-light-danger text-danger" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-rounded btn-light-warning text-warning">Edit</button>
+                    <button type="submit" class="btn btn-rounded btn-light-success text-success">Simpan</button>
                 </div>
             </form>
         </div>
