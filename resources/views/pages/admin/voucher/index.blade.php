@@ -264,7 +264,7 @@
                                 <label class="form-label mt-2">Jenis Voucher</label>
                                 <select class="form-control" name="status" id="update-status">
                                     @foreach ($vouchers as $voucher)
-                                        <option value="{{ $voucher->name }}">{{ $voucher->status }}</option>
+                                    <option value="{{ $voucher->status }}" {{ (old('status') == $voucher->status) ? 'selected' : '' }}>{{ $voucher->status }}</option>
                                     @endforeach
                                 </select>
                                 <ul class="error-text"></ul>
@@ -333,13 +333,13 @@
             $('#update-code').val(code);
             $('#update-quota').val(quota);
             $('#update-presentation').val(presentation);
-            // $('#update-status').val(status);
+            $(`#update-status option[value="${status}"]`).attr('selected', true);
             $('#update-stok').val(stok);
             $('#update-start_date').val(start_date);
             $('#update-end_date').val(end_date);
             $('#form-update').attr('action', '/voucher-update/' + id);
 
-            $('#update-status').val(status).trigger('change');
+            $('#update-status').trigger('change');
             $('#modal-update').modal('show');
         });
 
