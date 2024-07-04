@@ -46,7 +46,7 @@ class NewsTagController extends Controller
         $ids = $trending_id->merge($id);
 
         $newsTags = $this->news->tagLatest($news->id, 0, $ids, 'notall')->paginate(5);
-        $newsSeo = $this->news->tagLatest($news->id, 0, 0, '1')->get();
+        $newsSeo = $this->news->tagLatest($news->id, 0, 0, '1')->first();
 
         $CategoryPopulars = $this->category->showWithCount();
         $popularTags = $this->tag->showWithCount();
