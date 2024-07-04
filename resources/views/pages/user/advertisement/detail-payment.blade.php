@@ -1,4 +1,4 @@
-@extends('layouts.author.sidebar')  
+@extends('layouts.user.sidebar')
 
 @section('style')
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -117,50 +117,46 @@
                 </div>
                 <div class="card-body shadow-sm">
 
-                    <div class="d-flex mt-5 justify-content-between">
+                    {{-- <div class="d-flex mt-5 justify-content-between">
                         <p class="fw-semibold">Kode Voucher</p>
 
                         <p class="fs-3" style="color: #175A95;">ABCDE</p>
-                    </div>
+                    </div> --}}
 
                     <div class="d-flex mt-4 justify-content-between">
                         <p class="fw-semibold">Harga Upload</p>
 
                         <div class="d-flex">
                             {{-- <del><p class="fs-3 me-3" style="color: #175A95;">Rp. 100.000</p></del> --}}
-                            <p class="fs-3" style="color: #175A95;">Rp. 10.000</p>
+                            <p class="fs-3" style="color: #175A95;">Rp. {{ $transaction->amount }}</p>
                         </div>
                     </div>
 
-                    <div class="d-flex mt-4 justify-content-between">
+                    {{-- <div class="d-flex mt-4 justify-content-between">
                         <p class="fw-semibold">Diskon Voucher</p>
 
                         <div class="d-flex">
                             <p class="fs-3" style="color: #175A95;"><span>-</span>Rp. 20.000</p>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="d-flex mt-4 justify-content-between">
                         <p class="fw-semibold">Total Pembayaran</p>
 
                         <div class="d-flex">
-                            <p class="fs-3" style="color: #175A95;">Rp. 80.000</p>
+                            <p class="fs-3" style="color: #175A95;">Rp. {{ $transaction->amount }}</p>
                         </div>
                     </div>
 
                     <div class="d-flex mt-4 justify-content-between">
-                        <p class="fw-semibold">Bayar Sebelum Tanggal</p>
-                        <p class="fs-3" style="color: #175A95;">12/12/2020</p>
-                    </div>
-
-                    <div class="d-flex mt-4 justify-content-between">
                         <p class="fw-semibold">Kode Transaksi</p>
-                        <p class="fs-3" style="color: #175A95;">DEV-T26250149620IYONL</p>
+                        <p class="fs-3" style="color: #175A95;">{{ $transaction->reference }}</p>
                     </div>
 
                     <div class="d-flex mt-4 justify-content-between">
                         <p class="fw-semibold">Metode Pembayaran</p>
-                        <img src="{{asset('assets/img/bca.svg')}}" width="80px" alt="">
+                        {{-- <img src="{{asset('assets/img/bca.svg')}}" width="80px" alt=""> --}}
+                        <p class="fs-3" style="color: #175A95;">{{ $transaction->payment_method }}</p>
                         {{-- <button type="button" class="btn btn-outline-light text-primary" data-bs-toggle="modal" data-bs-target="#modal-create">Pilih metode pembayaran</button> --}}
                     </div>
 
@@ -168,7 +164,7 @@
                             <p class="fw-semibold">Kode Pembayaran</p>
 
                             <div class="d-flex">
-                                <p class="fs-3" style="color: #175A95;">473635346744955</p>
+                                <p class="fs-3" style="color: #175A95;">{{ $transaction->pay_code }}</p>
                                 <div>
                                     <button class="btn btn-sm text-white ms-2 px-3" style="background-color: #175A95;">
                                         Salin
@@ -177,21 +173,50 @@
                             </div>
                     </div>
 
-                    <div class="d-flex mt-4 justify-content-between">
-                        <p class="fw-semibold">Status</p>
-                        <div>
-                            @if ($data->feed == 'paid')
-                                <span class="badge ms-2 px-3 bg-light-success text-success">
-                                    Sudah Bayar
-                                </span>
-                            @elseif ($data->feed == 'notpaid')
-                                <span class="badge ms-2 px-3 bg-light-danger text-danger">
-                                    Belum Bayar
-                                </span>
-                            @endif
+                    <div class=" mt-4 justify-content-between">
+                        <p class="fw-semibold">Intruksi Pembayaran</p>
+                        <div class="accordion" id="accordionExample">
+                            <div class="container">
+                              <div class="card m-5">
+                                @forelse ($transaction->instructions as $key => $instruction)
+                                <div class="accordion-item">
+                                  <h2 class="accordion-header" id="heading{{ ++$key }}">
+                                    <button class="accordion-button {{ $key != 1 ? 'collapsed' : '' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $key }}" aria-expanded="true" aria-controls="collapseOne">
+                                      {{ $instruction->title }}
+                                    </button>
+                                  </h2>
+                                  <div id="collapse{{ $key }}" class="accordion-collapse collapse {{ $key == 1 ? 'show' : '' }}" aria-labelledby="heading{{ $key }}" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        @foreach ($instruction->steps as $step)
+                                            <p class="text-sm">
+                                                {{ $loop->iteration }}. {!! $step !!}
+                                            </p>
+                                        @endforeach
+                                    </div>
+                                  </div>
+                                </div>
+                              @empty
+
+                              @endforelse
+                              </div>
+                            </div>
+                          </div>
+
+                        <div class="d-flex mt-4 justify-content-between">
+                            <p class="fw-semibold">Status</p>
+                            <div>
+                                @if ($data->feed == 'paid')
+                                    <span class="badge ms-2 px-3 bg-light-success text-success">
+                                        Sudah Bayar
+                                    </span>
+                                @elseif ($data->feed == 'notpaid')
+                                    <span class="badge ms-2 px-3 bg-light-danger text-danger">
+                                        Belum Bayar
+                                    </span>
+                                @endif
+                            </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

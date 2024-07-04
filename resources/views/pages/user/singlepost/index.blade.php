@@ -597,6 +597,13 @@
                                                     </button>
                                                 </li>
                                                 @endif
+                                                @if ($news->user_id == auth()->user()->id)
+                                                <li>
+                                                    <button class="btn btn-sm btn-comment-delete" data-id="{{ $comment->id }}">
+                                                        Hapus
+                                                    </button>
+                                                </li>
+                                                @endif
                                                 @else
                                                 @if ($comment->user_id == null && $comment->ip_address == $ipAddress)
                                                 <li>
@@ -724,6 +731,13 @@
                                                 <li>
                                                     <button class="btn btn-sm btn-comment-report" data-id="{{ $reply->id }}">
                                                         Laporkan
+                                                    </button>
+                                                </li>
+                                                @endif
+                                                @if ($news->user_id == auth()->user()->id)
+                                                <li>
+                                                    <button class="btn btn-sm btn-comment-delete" data-id="{{ $comment->id }}">
+                                                        Hapus
                                                     </button>
                                                 </li>
                                                 @endif

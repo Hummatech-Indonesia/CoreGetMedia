@@ -226,16 +226,16 @@
                             </div>
                             <div class="col-lg-12">
                                 <label class="form-label mt-2">Jenis Voucher</label>
-                                <select class="form-control" name="status" id="jenis-voucher" value="{{ $voucher->status }}">
+                                <select class="form-control" name="status" id="jenis-voucher">
                                     <option disabled selected>Pilih Jenis</option>
-                                    <option value="unlimited" {{ $voucher->status == 'unlimited' ? 'selected' : '' }}>Unlimited</option>
-                                    <option value="quota" {{ $voucher->status == 'quota' ? 'selected' : '' }}>Quota</option>
+                                    <option value="unlimited">Unlimited</option>
+                                    <option value="quota">Quota</option>
                                 </select>
                                 <ul class="error-text"></ul>
                             </div>
                             <div class="col-lg-12">
                                 <label class="form-label mt-2">Stok</label>
-                                <input id="update-quota" class="form-control" type="text" name="quota" value="{{ $voucher->quota }}">
+                                <input id="update-quota" class="form-control" type="text" name="quota">
                                 <ul class="error-text"></ul>
                             </div>
                         </div>

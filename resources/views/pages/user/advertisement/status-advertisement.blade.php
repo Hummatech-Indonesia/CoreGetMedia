@@ -171,7 +171,7 @@
                                         <div class="fs-4 text-black">
                                             Halaman:
                                         </div>
-                                        <div class="fs-4 mt-2">{{ $all_advertisement->page }}</div>
+                                        <div class="fs-4 mt-2">{{ $all_advertisement->positionAdvertisement->page }}</div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="fs-4 text-black">
@@ -271,11 +271,15 @@
                                             <path fill="#ffffff" d="m12 12.708l-5.246 5.246q-.14.14-.344.15t-.364-.15t-.16-.354t.16-.354L11.292 12L6.046 6.754q-.14-.14-.15-.344t.15-.364t.354-.16t.354.16L12 11.292l5.246-5.246q.14-.14.345-.15q.203-.01.363.15t.16.354t-.16.354L12.708 12l5.246 5.246q.14.14.15.345q.01.203-.15.363t-.354.16t-.354-.16z" /></svg>
                                     </button>
 
+
+
                                     <a href="{{ route('detail-payment-advertisement', ['advertisement' => $all_advertisement->id]) }}" class="btn m-1 mt-5 text-white" style="background-color: #5D87FF;">
                                         Lanjut Pembayaran
                                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
                                             <path fill="#ffffff" d="m13.292 12l-4.6-4.6l.708-.708L14.708 12L9.4 17.308l-.708-.708z" /></svg>
                                     </a>
+
+                                    
                                 </div>
                                 @elseif ($all_advertisement->status == 'accepted' && $all_advertisement->feed == 'paid')
                                 <div class="d-flex justify-content-end">

@@ -134,7 +134,7 @@
 
 
  <div class="col-md-12 col-lg-5">
-    <form action="#" method="post" enctype="multipart/form-data">
+    <form action="{{ route('transaction.advertisement', ['advertisement' => $data->id]) }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="card shadow-sm">
             <div class="card-header d-flex justify-content-center py-2" style="background-color: #175A95">
@@ -146,17 +146,10 @@
                     <div class="col-12 mb-4 mt-4">
                         <label class="form-label" for="nomor">Metode Pembayaran</label>
                         <div class="input-group">
-                            {{-- <input type="hidden" id="payment_method_input" name="payment_method" value=""> --}}
-                            <input type="text" style="color:#5D87FF;" id="payment_method_input" name="payment_method"  onchange="previewPayment(event)" placeholder="pilih metode pembayaran" value="Pilih Metode Pembayaran" class="preview form-control @error('payment_method') is-invalid @enderror" readonly>
+                            <input type="text" style="color:#5D87FF;" id="payment_method_input" name="payment_code"  onchange="previewPayment(event)" placeholder="pilih metode pembayaran" value="Pilih Metode Pembayaran" class="preview form-control @error('payment_method') is-invalid @enderror" readonly>
                             <button type="button" data-bs-toggle="modal" data-bs-target="#modal-create" class="btn btn-sm text-white px-4" style="background-color: #5D87FF;">Pilih</button>
                         </div>
                         <div class="d-flex align-items-center">
-                            {{-- <div class="form-check">
-                                <input class="form-check-input" type="radio" name="payment_method" id="bri" value="BRI" onclick="selectPayment(this)">
-                                <label class="form-check-label" for="bri">
-                                    BRI Virtual Account
-                                </label>
-                            </div> --}}
                         </div>
                         @error('payment_method')
                         <span class="invalid-feedback" role="alert" style="color: red;">
@@ -167,7 +160,7 @@
 
                         <div class="col-12 mb-4">
                             <label class="form-label" for="nomor">Kode Voucher (opsional)</label>
-                            <input type="text" id="voucher" name="voucher" placeholder="kode voucher"
+                            <input type="text" id="voucher" name="voucher_code" placeholder="kode voucher"
                                 value="{{ old('voucher') }}"
                                 class="form-control @error('voucher') is-invalid @enderror">
                             @error('voucher')
@@ -179,14 +172,14 @@
 
                     <div class="d-flex mt-5 justify-content-between">
                         <h5>Harga Upload</h5>
-
+                        <input type="hidden" name="price" value="{{ $data->total_price }}">
                         <h5>Rp. {{ $data->total_price }}</h5>
                     </div>
 
                     <div class="mt-4">
-                        <a href="{{ route('detail-advertisement', [$data->id]) }}" class="btn btn-md text-white w-100" style="background-color: #175A95">
+                        <button type="submit" class="btn btn-md text-white w-100" style="background-color: #175A95">
                             Berikutnya
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -203,25 +196,28 @@
                         <form id="form-create" method="post">
                             <div class="modal-body">
                                 <span class="fw-semibold text-dark fs-4">Bank</span>
-
                             <div class="row">
-                                <div class="col-lg-6 mt-2">
-                                    <div class="card p-3 border" onclick="selectCard(this)">
-                                        <div class="d-flex align-items-center">
-                                            <input type="radio" name="payment_method" value="bri" style="display: none;" class="me-2">
-                                            <label for="bri_va" class="mb-0 d-flex">
-                                                <div class="d-flex">
-                                                    <img src="{{asset('assets/img/bank-bri.svg')}}" width="100px" alt="">
-                                                    <div class="ms-4 mt-3">
-                                                        <p class="text-dark">BRI Virtual Account</p>
-                                                    </div>
-                                                </label>
+
+                                @forelse ($paymentChannel as $payment)
+                                    <div class="col-lg-6 mt-2">
+                                        <div class="card p-3 border" onclick="selectCard(this)">
+                                            <div class="d-flex align-items-center">
+                                                <input type="radio" name="payment_code" value="{{ $payment['code'] }}" style="display: none;" class="me-2">
+                                                <label for="bri_va" class="mb-0 d-flex">
+                                                    <div class="d-flex">
+                                                        <img src="{{$payment['icon_url']}}" width="100px" alt="">
+                                                        <div class="ms-4 mt-3">
+                                                            <p class="text-dark">{{$payment['name']}}</p>
+                                                        </div>
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                @empty
+                                @endforelse
 
-                                </div>
-                                <div class="col-lg-6 mt-2">
+                                {{-- <div class="col-lg-6 mt-2">
                                     <div class="card p-3 border" onclick="selectCard(this)">
                                         <div class="d-flex align-items-center">
                                             <input type="radio" name="payment_method" value="mandiri" style="display: none;" class="me-2">
@@ -364,7 +360,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                         </div>
 
@@ -441,7 +437,7 @@ function selectCard(card) {
 }
 
     function addPaymentMethod() {
-        var paymentMethod = $('input[name="payment_method"]:checked').val(); // Ambil nilai payment_method yang dipilih
+        var paymentMethod = $('input[name="payment_code"]:checked').val(); // Ambil nilai payment_method yang dipilih
         $('#payment_method_input').val(paymentMethod); // Set nilai payment_method ke dalam input tersembunyi
         $('#modal-create').modal('hide'); // Sembunyikan modal
 

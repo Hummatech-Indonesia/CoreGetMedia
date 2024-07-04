@@ -21,13 +21,22 @@ class StoreAuthorRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $callingMethod = $this->input('calling_method');
+
+        $rules = [
             'cv' => 'required|mimes:pdf',
             'name' => 'required',
             'email' => 'required',
-            'password' => 'required',
             'phone_number' => 'required'
         ];
+
+        if ($callingMethod === 'storeByAdmin') {
+            $rules['password'] = 'required';
+        } else {
+            $rules['password'] = 'nullable';
+        }
+
+        return $rules;
     }
 
     public function messages() : array

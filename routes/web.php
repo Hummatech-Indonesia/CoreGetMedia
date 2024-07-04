@@ -45,6 +45,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 Auth::routes();
 
+Route::get('/auth/facebook', [SocialiteController::class, 'redirectToFacebook'])->name('auth.facebook');
+Route::get('/auth/facebook/callback', [SocialiteController::class, 'handleFacebookCallback']);
+
 Route::get('login/google/redirect', [SocialiteController::class, 'redirect'])->middleware(['guest'])->name('redirect.google');
 Route::get('login/google/callback', [SocialiteController::class, 'callback'])->middleware(['guest'])->name('callback.google');
 
@@ -150,9 +153,7 @@ Route::get('create-news', function () {
     return view('pages.author.news.create');
 })->name('create.news');
 
-Route::get('subscribe', function () {
-    return view('pages.user.subscribe.index');
-})->name('news.subscribe');
+Route::get('subscribe', [SubscribeController::class, 'index'])->name('news.subscribe');
 
 //Author
 Route::get('create-news', [NewsController::class, 'create'])->name('create.news');

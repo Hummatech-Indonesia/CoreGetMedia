@@ -4,6 +4,7 @@ use App\Http\Controllers\AdvertisementController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\CallbackController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CommentReportController;
 use App\Http\Controllers\FollowerController;
@@ -67,3 +68,7 @@ Route::delete('delete-package/{package}', [PackageController::class, 'destroy'])
 
 Route::post('transaction-advertisement/{advertisement}', [TransactionController::class, 'store_advertisement'])->name('transaction.advertisement');
 Route::get('detail-transaction/{advertisement}/{reference}', [TransactionController::class, 'show'])->name('detail.transaction');
+
+
+// callback 
+Route::post('callback', [CallbackController::class, 'handle'])->name('callback');

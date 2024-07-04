@@ -32,37 +32,31 @@ class TripayService
         return collect($res['data']);
     }
 
-    public function hendleRequestTransaction($merchantRef, $method, Advertisement $advertisement)
+    public function hendleRequestTransaction($merchantRef, $method, $name, $amount)
     {
-
         $apiKey       = config('tripay.api_key');
         $privateKey   = config('tripay.private_key');
         $merchantCode = config('tripay.merchant_code');
-        $amount = $advertisement->total_price;
+
+        $amount11 = ($amount * 11) / 100;
+        $finalAmount = $amount + $amount11;
 
         $data = [
             'method'         => $method,
             'merchant_ref'   => $merchantRef,
-            'amount'         => $advertisement->total_price,
-            'image'          => $advertisement->image,
-            'page'           => $advertisement->positionAdvertisement->page,
-            'position'       => $advertisement->positionAdvertisement->position,
-            'type'           => $advertisement->type,
-            'start_date'     => $advertisement->start_date,
-            'end_date'       => $advertisement->end_date,
-            'url'            => $advertisement->url,
+            'amount'         => $finalAmount,
             'customer_name'  => auth()->user()->name,
             'customer_email' => auth()->user()->email,
             'customer_phone' => auth()->user()->phone_number,
             'order_items'    => [
                 [
-                    'name'        => $advertisement->url,
-                    'price'       => $advertisement->total_price,
+                    'name'        => $name,
+                    'price'       => $finalAmount,
                     'quantity'    => 1,
                 ],
             ],
-            'expired_time' => (time() + (24 * 60 * 60)), // 24 jam
-            'signature'    => hash_hmac('sha256', $merchantCode.$merchantRef.$amount,$privateKey)
+            'expired_time' => (time() + (24 * 60 * 60)),
+            'signature'    => hash_hmac('sha256', $merchantCode.$merchantRef.$finalAmount,$privateKey)
         ];
 
         $curl = curl_init();
@@ -81,7 +75,6 @@ class TripayService
 
         $response = curl_exec($curl);
         $error = curl_error($curl);
-
         curl_close($curl);
 
         $response = json_decode($response)->data;
