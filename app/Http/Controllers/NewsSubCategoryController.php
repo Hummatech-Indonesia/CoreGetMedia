@@ -63,7 +63,7 @@ class NewsSubCategoryController extends Controller
         $ids = $idTop->merge($idPop);
 
         $news = $this->news->subcategoryLatest($subcategory_id, $ids, '0')->paginate(5);
-        $newsSeo = $this->news->subcategoryLatest($subcategory_id, ['1'], '1')->get();
+        $newsSeo = $this->news->subcategoryLatest($subcategory_id, ['1'], '1')->first();
         $popularCategory = $this->category->showWithCount();
         $popularTags = $this->tags->showWithCount();
 
