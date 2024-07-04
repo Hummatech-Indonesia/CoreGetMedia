@@ -278,10 +278,13 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    @if (file_exists(public_path('storage/' . $author->cv)))
-                    <a href="{{ asset('storage/' . $author->cv) }}" target="_blank" class="btn btn-light-primary text-primary me-2 fs-4 px-2 py-2">Lihat CV</a>
+                    @if (isset($author) && file_exists(public_path('storage/' . $author->cv)))
+                        <a href="{{ asset('storage/' . $author->cv) }}" target="_blank" class="btn btn-light-primary text-primary me-2 fs-4 px-2 py-2">Lihat CV</a>
+                        <a href="#" type="button" class="btn btn-light-primary text-primary me-2 fs-4 px-2 py-2 btn-download" data-id="{{ $author->id }}" data-task="{{ asset('storage/' . $author->cv) }}" data-name="{{ optional($author->user)->name }}">
+                            <div class="mx-1">Download CV</div>
+                        </a>
                     @else
-                    <p>CV tidak tersedia</p>
+                        <p class="mb-0 me-2">CV tidak tersedia</p>
                     @endif
                     <a href="#" type="button" class="btn btn-light-primary text-primary me-2 fs-4 px-2 py-2 btn-download" data-id="{{$author->id}}" data-task="{{ asset('storage/' . $author->cv) }}" data-name="{{$author->user->name}}">
                         <div class="mx-1">
