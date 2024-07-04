@@ -108,7 +108,7 @@
                                     class="mb-1 badge rounded-pill font-medium bg-light-primary text-primary w-30">Aktif</span>
                             </td>
                             <td>
-                                <button class="btn btn-sm btn-primary btn-detail me-2" style="background-color:#175A95">
+                                <button id="" class="btn btn-sm btn-primary btn-detail me-2" style="background-color:#175A95">
                                     <i><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                             viewBox="0 0 24 24">
                                             <path fill="currentColor"

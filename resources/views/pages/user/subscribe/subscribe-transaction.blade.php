@@ -1,0 +1,1 @@
+@extends(auth()->user()->hasRole('author') ? 'layouts.author.app' : 'layouts.user.sidebar')
