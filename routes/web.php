@@ -283,6 +283,9 @@ Route::get('subscribe-history', function(){
     return view('pages.user.subscribe.subscribe-history');
 }) -> name('subscribe-history');
 
+Route::get('subscribe-transaction', function(){
+    return view('pages.user.subscribe.subscribe-transaction');
+}) -> name('subscribe-transaction');
 
 require_once __DIR__ . '/jovita.php';
 require_once __DIR__ . '/ardi.php';
