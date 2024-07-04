@@ -183,7 +183,7 @@
 
                             <div class="col-md-12 col-lg-6 mb-3">
                                 <label class="form-label" for="nomor">
-                                    CV <small class="text-danger"> *file harus berupa pdf - wajib di isi</small>
+                                    CV  <small class="text-danger"> *file harus berupa pdf - wajib di isi</small>
                                 </label>
                                 <input type="file" id="create-cv" name="cv" placeholder="name" value="{{ old('cv') }}" class=" @error('cv') is-invalid @enderror form-control">
                                 @error('cv')
@@ -278,18 +278,19 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    @if (isset($author) && file_exists(public_path('storage/' . $author->cv)))
+                    @if (file_exists(public_path('storage/' . $author->cv)))
                     <a href="{{ asset('storage/' . $author->cv) }}" target="_blank" class="btn btn-light-primary text-primary me-2 fs-4 px-2 py-2">Lihat CV</a>
-                    <a href="#" type="button" class="btn btn-light-primary text-primary me-2 fs-4 px-2 py-2 btn-download" data-id="{{ $author->id }}" data-task="{{ asset('storage/' . $author->cv) }}" data-name="{{ optional($author->user)->name }}">
-                        <div class="mx-1">Download CV</div>
-                    </a>
                     @else
-                    <p class="mb-0 me-2">CV tidak tersedia</p>
+                    <p>CV tidak tersedia</p>
                     @endif
+                    <a href="#" type="button" class="btn btn-light-primary text-primary me-2 fs-4 px-2 py-2 btn-download" data-id="{{$author->id}}" data-task="{{ asset('storage/' . $author->cv) }}" data-name="{{$author->user->name}}">
+                        <div class="mx-1">
+                            Download CV
+                        </div>
+                    </a>
 
                     <a class="download-file" style="display: none;"></a>
-                    <button type="button" data-id="button-tolak" id="btn-tolak" class="btn btn-sm btn-reject btn-light-danger text-danger fs-4 me-2 px-2">Tolak</button>
-                    <button data-id="button-terima" id="btn-terima" type="button" class="btn btn-sm btn-accepted btn-light-success text-success fs-4 px-2">Terima</button>
+                    <button type="button" class="btn btn-light-danger text-danger" data-bs-dismiss="modal">Tutup</button>
                 </div>
             </div>
         </div>
@@ -372,6 +373,13 @@
         $('#data-cv').attr('href', cv);
         console.log(id);
         $('#modal-detail').modal('show');
+
+        var $btnCv = $('#btn-cv');
+        if ($btnCv.length > 0) {
+            $btnCv.attr('data-cv', cv);
+        } else {
+            console.error('Elemen dengan id "btn-cv" tidak ditemukan');
+        }
     });
 
 
