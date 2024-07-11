@@ -128,7 +128,7 @@
 </div>
 
 <div class="sports-wrap">
-    @if ($advertisement_tops)
+    {{-- @if ($advertisement_tops)
         <a href="{{ $advertisement_tops->url }}">
             <div class="mt-4 iklan-top" style="position: relative; width: 100%; height: 200px; overflow: hidden;">
                 <img class="iklan-top-img"
@@ -146,7 +146,7 @@
             style="height: 200px;">
             <p style="color: #22222278">Iklan</p>
         </div>
-    @endif
+    @endif --}}
     <div class="container">
         <div class="row gx-5">
             <div class="col-lg-8">
@@ -234,7 +234,7 @@
                     @endforelse
                 </div>
 
-                @if ($advertisement_mids)
+                {{-- @if ($advertisement_mids)
                     <a href="{{ $advertisement_mids->url }}">
                         <div class="mt-4 mb-4">
                             <img src="{{asset($advertisement_mids && $advertisement_mids->image != null ? 'storage/' . $advertisement_mids->image : "CONTOHIKLAN.png")}}"
@@ -245,7 +245,7 @@
                     <div class="bg_gray" style="width: 100%; height: 181px;">
                         <p class="text-center align-middle" style="line-height: 181px;">Iklan</p>
                     </div>
-                @endif
+                @endif --}}
 
                 <x-paginator :paginator="$news" />
             </div>
@@ -316,7 +316,7 @@
                         </div>
                     @endif
 
-                    @if ($advertisement_rights)
+                    {{-- @if ($advertisement_rights)
                         <a href="{{ $advertisement_rights->url }}">
                             <div class="sidebar mt-3 mb-4">
                                 <img src="{{asset($advertisement_rights && $advertisement_rights->image != null ? 'storage/' . $advertisement_rights->image : 'CONTOHIKLAN.png')}}"
@@ -327,7 +327,7 @@
                         <div class="sidebar mt-3 mb-4 bg_gray" style="height: 603px;">
                             <p class="text-center align-middle" style="line-height: 603px;">Iklan</p>
                         </div>
-                    @endif
+                    @endif --}}
 
                     @if($popularTags->isNotEmpty())
                         <div class="sidebar-widget">

@@ -23,12 +23,11 @@ class UpdateProfileRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'slug' =>  'nullable',
             'email' => 'required',
             'phone_number' => 'nullable',
             'date_of_birth' => 'nullable',
             'address' => 'nullable',
-            'description' => 'nullable'
+            'description' => 'nullable',
         ];
     }
 }

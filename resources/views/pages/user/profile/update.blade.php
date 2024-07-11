@@ -91,7 +91,7 @@
                                                 <h5 class="mt-5">Bio</h5>
                                             </div>
                                             <div class="col-lg-8">
-                                                <textarea name="description" class="form-control mt-5" value="{{ auth()->user()->author->description }}" style="resize: none; height: 150px;">{{ auth()->user()->author->description }}</textarea>
+                                                <textarea name="description" class="form-control mt-5" style="resize: none; height: 150px;">{{ auth()->user()->author->description }}</textarea>
                                             </div>
                                         </div>
                                         @endrole

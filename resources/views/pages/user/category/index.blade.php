@@ -134,7 +134,7 @@
 <div class="sports-wrap">
 
     <div class="container">
-        @if ($advertisement_tops)
+        {{-- @if ($advertisement_tops)
         <a href="{{ $advertisement_tops->url }}">
             <div class="mt-4 iklan-top" style="position: relative; width: 100%; height: 250px; overflow: hidden;">
                 <img class="iklan-top-img" src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/'.$advertisement_tops->image : "CONTOHIKLAN.png") }}" width="100%" height="auto" alt="">
@@ -147,7 +147,7 @@
         <div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center bg_gray top-noiklan" style="height: 250px;">
             <p style="color: #22222278">Iklan</p>
         </div>
-        @endif
+        @endif --}}
 
         <div class="side-responsive gx-5 d-lg-flex flex-lg-row flex-sm-column flex-md-column">
             <div class="col-lg-8 me-5 col-md-12 col-sm-12">
@@ -240,7 +240,7 @@
                     </div>
                     @endforelse
                 </div>
-                @if ($advertisement_mids)
+                {{-- @if ($advertisement_mids)
                 <a href="{{ $advertisement_mids->url }}">
                     <div>
                         <img src="{{asset($advertisement_mid && $advertisement_mid->image != null ? 'storage/'.$advertisement_mid->image : "CONTOHIKLAN.png")}}" width="100%" height="181px" style="object-fit: cover" alt="" alt="...">
@@ -250,7 +250,7 @@
                 <div class="bg_gray" style="width: 100%; height: 181px;">
                     <p class="text-center align-middle" style="line-height: 181px;">Iklan</p>
                 </div>
-                @endif
+                @endif --}}
                 <div>
                     <x-paginator :paginator="$latest_news" />
                 </div>
@@ -315,7 +315,7 @@
                     </div>
                     @endif
 
-                    @if ($advertisement_rights)
+                    {{-- @if ($advertisement_rights)
                     <a href="{{ $advertisement_rights->url }}">
                         <div class="sidebar mt-3 mb-4">
                             <img src="{{asset($advertisement_rights && $advertisement_rights->image != null ? 'storage/'.$advertisement_rights->image : 'CONTOHIKLAN.png')}}" class="advertisement" style="object-fit: cover" alt="">
@@ -325,7 +325,7 @@
                     <div class="sidebar mt-3 mb-4 bg_gray" style="height: 603px;">
                         <p class="text-center align-middle" style="line-height: 603px;">Iklan</p>
                     </div>
-                    @endif
+                    @endif --}}
 
                     @if($popularTags->isNotEmpty())
                     <div class="sidebar-widget">
