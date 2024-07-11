@@ -38,7 +38,7 @@
                             <sub class="text-muted" style="font-size: 14px">/ 1 bulan</sub>
                         </h4>
                         <h3 class="pt-5 text-center">
-                            <a href="#" class="btn btn-outline-primary rounded-3 btn-border-transparent w-100"
+                            <a href="{{ route('subscribe-transaction') }}" class="btn btn-outline-primary rounded-3 btn-border-transparent w-100"
                             style="border-color: #175A95; color: #175A95;">Beli Sekarang</a>
                         </h3>
                         <div class="pt-4">
