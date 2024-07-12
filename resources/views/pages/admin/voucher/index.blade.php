@@ -338,7 +338,7 @@
             $('#update-end_date').val(end_date);
             $('#form-update').attr('action', '/voucher-update/' + id);
 
-            $('#update-jenis-voucher').val(status).trigger('change');
+            $('#update-jenis-voucher').val(status).triggerRef('change');
             $('#modal-update').modal('show');
         });
 

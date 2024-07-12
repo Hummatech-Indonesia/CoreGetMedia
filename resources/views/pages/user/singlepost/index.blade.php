@@ -826,11 +826,11 @@
                             <img src="{{ asset($advertisement_rights && $advertisement_rights->image != null ? 'storage/' . $advertisement_rights->image : 'CONTOHIKLAN.png') }}" alt="Advertisement">
                         </div>
                     </a>
-                    @else --}}
+                    @else
                     <div class="sidebar mt-3 mb-4 bg_gray" style="height: 603px;">
                         <p class="text-center align-middle" style="line-height: 603px;">Iklan</p>
                     </div>
-                    @endif
+                    @endif --}}
                 </div>
             </div>
         </div>
