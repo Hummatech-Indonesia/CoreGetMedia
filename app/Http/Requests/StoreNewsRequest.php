@@ -35,4 +35,22 @@ class StoreNewsRequest extends FormRequest
             'tag.*' => 'required',
         ];
     }
+
+     /**
+     * Pesan kesalahan yang berlaku untuk permintaan ini.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Nama berita wajib diisi.',
+            'image.required' => 'Gambar berita wajib diisi',
+            'description.required' => 'Isi berita mohon diisi',
+            'date.required' => 'Tanggal berita mohon diisi',
+            'category.required' => 'Kategori mohon diisi',
+            'sub_category' => 'Sub Kategori mohon diisi',
+            'tag.required' => 'Tag mohon diisi',
+        ];
+    }
 }
