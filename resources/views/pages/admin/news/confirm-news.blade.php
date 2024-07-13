@@ -59,7 +59,7 @@
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $data->user->name }}</td>
                 <td>{{ $data->user->email }}</td>
-                <td>{!! Illuminate\Support\Str::limit(strip_tags($data->description), 50, '...') !!}</td>
+                <td>{!! Illuminate\Support\Str::limit(strip_tags($data->name), 50, '...') !!}</td>
                 <td>{{ \Carbon\Carbon::parse($data->date)->translatedFormat('d F Y') }}</td>
                 <td>
                     <a href="{{route('detail-news.admin', ['news' => $data->slug])}}" data-bs-toggle="tooltip" title="Detail" class="btn btn-sm btn-primary btn-detail" style="background-color:#0F4D8A">
