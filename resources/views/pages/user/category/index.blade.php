@@ -149,7 +149,7 @@
         </div>
         @endif --}}
 
-        <div class="side-responsive gx-5 d-lg-flex flex-lg-row flex-sm-column flex-md-column">
+        <div class="side-responsive gx-5 d-lg-flex flex-lg-row flex-sm-column flex-md-column mt-5">
             <div class="col-lg-8 me-5 col-md-12 col-sm-12">
                 @forelse ($newsTop as $item)
                 <div class="news-card-four" style="height: 550px;">

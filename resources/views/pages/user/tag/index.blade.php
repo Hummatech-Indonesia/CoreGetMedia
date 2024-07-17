@@ -102,7 +102,7 @@
     </div>
     @endif --}}
     <div class="container">
-        <div class="row">
+        <div class="row mt-5">
             <div class="col-lg-8">
                 @if ($news_tags->isNotEmpty())
                 <div class="">

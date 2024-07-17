@@ -148,7 +148,7 @@
         </div>
     @endif --}}
     <div class="container">
-        <div class="row gx-5">
+        <div class="row gx-5 mt-5">
             <div class="col-lg-8">
                 @forelse ($newsTop as $item)
                         @if ($item->news_views_count > 0)
