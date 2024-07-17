@@ -52,9 +52,8 @@
                 </div> --}}
                 <div class="col-lg-4 col-md-6 md-none">
                     @if (isset($about_get))
-                        <a class="navbar-brand" href="/">
-                            <img class="logo-light" src="{{ asset($about_get->image) }}" alt="logo" />
-                            <img class="logo-dark" src="{{ asset($about_get->image) }}" alt="logo" />
+                        <a class="" href="/">
+                            <img class="" src="{{ asset($about_get->image) }}" alt="logo" />
                         </a>
                     @else
                         <div class="navbar-brand ms-5">
