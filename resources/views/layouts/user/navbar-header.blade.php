@@ -62,7 +62,7 @@
                         </div>
                     @endif
                 </div>
-                <div class="col-lg-4 col-md-6 col-7">
+                <div class="col-lg-8 col-md-6">
                     <ul class="social-profile list-style">
                         @if (isset($about_get))
                             <li>
