@@ -49,6 +49,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
         return $this->model->query()
             ->withTrashed()
             ->where('user_id', $id)
+            ->latest()
             ->get();
     }
 

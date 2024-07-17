@@ -142,9 +142,9 @@
                         <div class="col-lg-12 mb-4">
                             <label class="form-label" for="password_confirmation">Tanggal Upload</label>
                             <input type="datetime-local" id="upload_date" name="date" placeholder="date"
-                                value="{{ old('upload_date') }}"
+                                value="{{ old('date') }}"
                                 class="form-control @error('upload_date') is-invalid @enderror">
-                            @error('upload_date')
+                            @error('date')
                                 <span class="invalid-feedback" role="alert" style="color: red">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -184,9 +184,9 @@
                             </div>
                             <div class="col-lg-12 mb-4" style="height: auto;">
                                 <label class="form-label" for="content">Isi Berita</label>
-                                <textarea id="content" name="description" placeholder="{{ old('content') }}" value="{{ old('content') }}"
-                                    class="form  @error('content') is-invalid @enderror">{{ old('content') }}</textarea>
-                                @error('content')
+                                <textarea id="content" name="description" placeholder="{{ old('content') }}" value="{{ old('description') }}"
+                                    class="form  @error('content') is-invalid @enderror">{{ old('description') }}</textarea>
+                                @error('description')
                                     <span class="invalid-feedback" role="alert" style="color: red;">
                                         <strong>{{ $message }}</strong>
                                     </span>
