@@ -52,9 +52,9 @@
                 </div> --}}
                 <div class="col-lg-4 col-md-6 md-none">
                     @if (isset($about_get))
-                        <a class="navbar-brand" href="index.html">
-                            <img class="logo-light" src="{{asset($about_get->image)}}" alt="logo" />
-                            <img class="logo-dark" src="{{asset($about_get->image)}}" alt="logo" />
+                        <a class="navbar-brand" href="/">
+                            <img class="logo-light" src="{{ asset($about_get->image) }}" alt="logo" />
+                            <img class="logo-dark" src="{{ asset($about_get->image) }}" alt="logo" />
                         </a>
                     @else
                         <div class="navbar-brand ms-5">
@@ -70,7 +70,8 @@
                                         class="ri-facebook-fill"></i></a>
                             </li>
                             <li>
-                                <a href="{{ $about_get->url_twitter }}" target="_blank"><i class="ri-twitter-fill"></i></a>
+                                <a href="{{ $about_get->url_twitter }}" target="_blank"><i
+                                        class="ri-twitter-fill"></i></a>
                             </li>
                             <li>
                                 <a href="{{ $about_get->url_instagram }}" target="_blank"><i
@@ -94,7 +95,7 @@
         <nav class="navbar navbar-expand-lg">
             <a class="sidebar-toggler md-none d-flex" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button"
                 aria-controls="navbarOffcanvas">
-                <img src="{{asset('assets/img/icons/menubar-white.svg')}}" alt="Image" />
+                <img src="{{ asset('assets/img/icons/menubar-white.svg') }}" alt="Image" />
                 <div class="ms-4 mt-3">
                     @php
                         use Carbon\Carbon;
@@ -106,8 +107,8 @@
                 </div>
             </a>
             <a class="navbar-brand d-lg-none" href="/">
-                <img class="logo-light" src="{{asset('assets/img/logo/get-media-light.svg')}}" alt="logo" />
-                <img class="logo-dark" src="{{asset('assets/img/logo/get-media-light.svg')}}" alt="logo" />
+                <img class="logo-light" src="{{ asset('assets/img/logo/get-media-light.svg') }}" alt="logo" />
+                <img class="logo-dark" src="{{ asset('assets/img/logo/get-media-light.svg') }}" alt="logo" />
             </a>
             <button type="button" class="search-btn d-lg-none" data-bs-toggle="modal" data-bs-target="#searchModal"
                 style="margin-top: 12px;">
@@ -131,126 +132,128 @@
                     @endphp
 
                     @foreach ($categories as $category)
-                                        @php
-                                            $isActiveCategory = request()->routeIs('categories.show.user') && request()->route('category') ==
-                                                $category->slug;
+                        @php
+                            $isActiveCategory =
+                                request()->routeIs('categories.show.user') &&
+                                request()->route('category') == $category->slug;
 
-                                            if (request()->routeIs('news.subcategory')) {
-                                                $subCategory = $subCategories->where('slug', request()->route('slug'))->first();
-                                                if ($subCategory && $subCategory->category_id === $category->id) {
-                                                    $isActiveCategory = true;
-                                                }
-                                            }
-                                        @endphp
+                            if (request()->routeIs('news.subcategory')) {
+                                $subCategory = $subCategories->where('slug', request()->route('slug'))->first();
+                                if ($subCategory && $subCategory->category_id === $category->id) {
+                                    $isActiveCategory = true;
+                                }
+                            }
+                        @endphp
 
-                                        @if ($categoryCount < 5)
-                                                        <li class="nav-item">
-                                                            <a href="{{ route('categories.show.user', ['category' => $category->slug]) }}"
-                                                                class="dropdown-toggle nav-link {{ $isActiveCategory ? 'active' : '' }}"
-                                                                style="{{ $isActiveCategory ? 'color: #E93314;' : '' }}">
-                                                                {{ $category->name }}
-                                                            </a>
-                                                            @if (count($subCategories->where('category_id', $category->id)) > 0)
-                                                                        <ul class="dropdown-menu">
-                                                                            <div class="d-flex">
-                                                                                <li class="nav-item">
-                                                                                    @forelse ($subCategories->where('category_id', $category->id) as $subCategory)
-                                                                                                            @php
-                                                                                                                $isActive = Route::currentRouteName() == 'news.subcategory' &&
-                                                                                                                    request()->route('slug') == $subCategory->slug;
-                                                                                                            @endphp
-
-                                                                                                            <a href="{{ route('news.subcategory', ['slug' => $subCategory->slug]) }}"
-                                                                                                                class="nav-link {{ $isActive ? 'active' : '' }}"
-                                                                                                                style="{{ $isActive ? 'color: #E93314;' : '' }}">
-                                                                                                                {{ Str::limit($subCategory->name, 50) }}
-                                                                                                            </a>
-
-                                                                                                            @if (($loop->iteration % 5) == 0)
-                                                                                                                </li>
-                                                                                                                <li class="nav-item">
-                                                                                                            @endif
-                                                                                    @empty
-                                                                                        <div class="nav-link">
-                                                                                            Data Kosong
-                                                                                        </div>
-                                                                                    @endforelse
-                                                                                </li>
-                                                                            </div>
-                                                                        </ul>
-                                                            @else
-                                                                <ul class="dropdown-menu">
-                                                                    <div class="d-flex">
-                                                                        <div class="nav-item">
-                                                                            <p class="nav-link">
-                                                                                Data Kosong
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-                                                                </ul>
-                                                            @endif
-                                                        </li>
-                                                        @php
-                                                            $categoryCount++;
-                                                        @endphp
-                                        @else
-                                                        @php
-                                                            $otherCategories->push($category);
-                                                        @endphp
-                                        @endif
-                    @endforeach
-
-                    @if ($otherCategories->count() > 0)
-                        <li class="nav-item">
-                            <a href="{{ route('categories.show.user', ['category' => 'lainnya']) }}"
-                                class="dropdown-toggle nav-link {{ request()->routeIs('categories.show.user') && request()->route('category') === 'lainnya' ? 'active' : '' }}"
-                                style="{{ request()->routeIs('categories.show.user') && request()->route('category') === 'lainnya' ? 'color: #E93314;' : '' }}">
-                                Lainnya
-                            </a>
-                            <ul class="dropdown-menu">
-                                <div class="d-flex">
-                                    <li class="nav-item">
-                                        @foreach ($otherCategories as $category)
-                                            <a href="{{ route('categories.show.user', ['category' => $category->slug]) }}"
-                                                class="nav-link {{ request()->routeIs('categories.show.user') && request()->route('category') === $category->slug ? 'active' : '' }}"
-                                                style="{{ request()->routeIs('categories.show.user') && request()->route('category') === $category->slug ? 'color: #E93314;' : '' }}">
-                                                {{ $category->name }}
-                                            </a>
-                                        @endforeach
-                                    </li>
-                                </div>
-                            </ul>
-                        </li>
-                    @endif
-                </ul>
-
-
-
-
-
-
-
-
-                <div class="others-option d-flex align-items-center">
-                    <div class="option-item">
-                        <button type="button" class="search-btn" data-bs-toggle="modal" data-bs-target="#searchModal">
-                            <i class="flaticon-loupe"></i>
-                        </button>
-                    </div>
-
-                    @auth
-                        <div class="option-item">
-                            <ul class="navbar-nav">
-
-                                <li class="nav-item">
-                                    <a href="javascript:void(0)" class="nav-link">
-                                        <img src="{{ asset(Auth::user()->image ? 'storage/' . Auth::user()->image : "default.png")  }}"
-                                            class="mb-2" alt="Image" width="40" height="40"
-                                            style="min-width: 40px;border-radius: 50%;object-fit:cover;min-height: 40px;" />
-                                    </a>
+                        @if ($categoryCount < 5)
+                            <li class="nav-item">
+                                <a href="{{ route('categories.show.user', ['category' => $category->slug]) }}"
+                                    class="dropdown-toggle nav-link {{ $isActiveCategory ? 'active' : '' }}"
+                                    style="{{ $isActiveCategory ? 'color: #E93314;' : '' }}">
+                                    {{ $category->name }}
+                                </a>
+                                @if (count($subCategories->where('category_id', $category->id)) > 0)
                                     <ul class="dropdown-menu">
-                                        <li class="nav-item">
-                                            @role('author')
+                                        <div class="d-flex">
+                                            <li class="nav-item">
+                                                @forelse ($subCategories->where('category_id', $category->id) as $subCategory)
+                                                    @php
+                                                        $isActive =
+                                                            Route::currentRouteName() == 'news.subcategory' &&
+                                                            request()->route('slug') == $subCategory->slug;
+                                                    @endphp
+
+                                                    <a href="{{ route('news.subcategory', ['slug' => $subCategory->slug]) }}"
+                                                        class="nav-link {{ $isActive ? 'active' : '' }}"
+                                                        style="{{ $isActive ? 'color: #E93314;' : '' }}">
+                                                        {{ Str::limit($subCategory->name, 50) }}
+                                                    </a>
+
+                                                    @if ($loop->iteration % 5 == 0)
+                                            </li>
+                                            <li class="nav-item">
+                                @endif
+                            @empty
+                                <div class="nav-link">
+                                    Data Kosong
+                                </div>
+                        @endforelse
+                        </li>
+            </div>
+            </ul>
+        @else
+            <ul class="dropdown-menu">
+                <div class="d-flex">
+                    <div class="nav-item">
+                        <p class="nav-link">
+                            Data Kosong
+                        </p>
+                    </div>
+                </div>
+            </ul>
+            @endif
+            </li>
+            @php
+                $categoryCount++;
+            @endphp
+        @else
+            @php
+                $otherCategories->push($category);
+            @endphp
+            @endif
+            @endforeach
+
+            @if ($otherCategories->count() > 0)
+                <li class="nav-item">
+                    <a href="{{ route('categories.show.user', ['category' => 'lainnya']) }}"
+                        class="dropdown-toggle nav-link {{ request()->routeIs('categories.show.user') && request()->route('category') === 'lainnya' ? 'active' : '' }}"
+                        style="{{ request()->routeIs('categories.show.user') && request()->route('category') === 'lainnya' ? 'color: #E93314;' : '' }}">
+                        Lainnya
+                    </a>
+                    <ul class="dropdown-menu">
+                        <div class="d-flex">
+                            <li class="nav-item">
+                                @foreach ($otherCategories as $category)
+                                    <a href="{{ route('categories.show.user', ['category' => $category->slug]) }}"
+                                        class="nav-link {{ request()->routeIs('categories.show.user') && request()->route('category') === $category->slug ? 'active' : '' }}"
+                                        style="{{ request()->routeIs('categories.show.user') && request()->route('category') === $category->slug ? 'color: #E93314;' : '' }}">
+                                        {{ $category->name }}
+                                    </a>
+                                @endforeach
+                            </li>
+                        </div>
+                    </ul>
+                </li>
+            @endif
+            </ul>
+
+
+
+
+
+
+
+
+            <div class="others-option d-flex align-items-center">
+                <div class="option-item">
+                    <button type="button" class="search-btn" data-bs-toggle="modal" data-bs-target="#searchModal">
+                        <i class="flaticon-loupe"></i>
+                    </button>
+                </div>
+
+                @auth
+                    <div class="option-item">
+                        <ul class="navbar-nav">
+
+                            <li class="nav-item">
+                                <a href="javascript:void(0)" class="nav-link">
+                                    <img src="{{ asset(Auth::user()->image ? 'storage/' . Auth::user()->image : 'default.png') }}"
+                                        class="mb-2" alt="Image" width="40" height="40"
+                                        style="min-width: 40px;border-radius: 50%;object-fit:cover;min-height: 40px;" />
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item">
+                                        @role('author')
                                             <div class="news-card-img">
                                                 <a href="{{ route('profile.author') }}" class="nav-link">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -279,10 +282,10 @@
                                                 class="d-none">
                                                 @csrf
                                             </form>
-                                            @endrole
-                                        </li>
-                                        <li class="nav-item">
-                                            @role('user')
+                                        @endrole
+                                    </li>
+                                    <li class="nav-item">
+                                        @role('user')
                                             <a href="{{ route('profile-user.user') }}" class="nav-link">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                     viewBox="0 0 24 24">
@@ -309,13 +312,13 @@
                                                 class="d-none">
                                                 @csrf
                                             </form>
-                                            @endrole
-                                        </li>
-                                        <li class="nav-item">
-                                            @role('admin')
+                                        @endrole
+                                    </li>
+                                    <li class="nav-item">
+                                        @role('admin')
                                             <a href="/dashboard" class="nav-link d-flex">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="me-1" width="23" height="23"
-                                                    viewBox="0 0 24 24">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="me-1" width="23"
+                                                    height="23" viewBox="0 0 24 24">
                                                     <path fill="currentColor"
                                                         d="M12 12q-1.65 0-2.825-1.175T8 8q0-1.65 1.175-2.825T12 4q1.65 0 2.825 1.175T16 8q0 1.65-1.175 2.825T12 12m-8 8v-2.8q0-.85.438-1.562T5.6 14.55q1.55-.775 3.15-1.162T12 13q1.65 0 3.25.388t3.15 1.162q.725.375 1.163 1.088T20 17.2V20z" />
                                                 </svg>
@@ -339,33 +342,33 @@
                                                 class="d-none">
                                                 @csrf
                                             </form>
-                                            @endrole
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
+                                        @endrole
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    @if (Auth::check() && Auth::user()->roles() == 'author')
+                    @endif
+                @else
+                    <div class="">
+                        <div class="option-item">
+                            <a href="/login" class="btn-two" id="signInBtn">Masuk</a>
                         </div>
-                        @if (Auth::check() && Auth::user()->roles() == "author")
-                        @endif
-                    @else
-
-                        <div class="">
-                            <div class="option-item">
-                                <a href="/login" class="btn-two" id="signInBtn">Masuk</a>
-                            </div>
-                        </div>
-                    @endauth
-                </div>
+                    </div>
+                @endauth
             </div>
-        </nav>
     </div>
+    </nav>
+</div>
 </div>
 
 <div class="modal fade searchModal" id="searchModal" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <form action="#" method="GET">
-                <input type="search" name="q" id="search-input" class="form-control" placeholder="Search here...." />
+                <input type="search" name="q" id="search-input" class="form-control"
+                    placeholder="Search here...." />
                 <button type="submit"><i class="fi fi-rr-search"></i></button>
             </form>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
@@ -403,11 +406,11 @@
 </script> --}}
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         var currentLocation = window.location.href.split(/[?#]/)[0];
         var homepageUrl = "{{ route('home.index') }}".split(/[?#]/)[0];
 
-        document.querySelectorAll('.nav-link').forEach(function (link) {
+        document.querySelectorAll('.nav-link').forEach(function(link) {
             var url = link.getAttribute('href').split(/[?#]/)[0];
 
             if (currentLocation === homepageUrl && url === homepageUrl) {
