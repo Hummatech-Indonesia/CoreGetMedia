@@ -262,9 +262,9 @@
         </div>
     </div>
 
-    <div class="news-details-wrap">
-        <div class="container">
-            {{-- @if ($advertisement_tops)
+<div class="news-details-wrap">
+    <div class="container mt-5">
+        {{-- @if (isset($advertisement_tops))
         <a href="{{ $advertisement_tops->url }}">
             <div class="mt-4 iklan-top" style="position: relative; width: 100%; height: 200px; overflow: hidden;">
                 <img class="iklan-top" src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/'.$advertisement_tops->image : "CONTOHIKLAN.png") }}" width="100%" height="auto" alt="">
@@ -278,28 +278,22 @@
             <p style="color: #22222278">Iklan</p>
         </div>
         @endif --}}
-            <div class="row gx-55 gx-5 mt-5">
-                <div class="col-lg-8">
-                    <article>
-                        <div>
-                            <h1 class="wow slideInLeft" data-wow-duration="2s">{{ $news->name }}</h1>
-                            <p class="d-flex gap-1">Share :
-                                <button class="wpbtn" style="background-color: transparent; border: none"
-                                    title="Share to WhatsApp" onclick="shareToWhatsApp()">
-                                    <svg height="19" width="19" version="1.1" id="Capa_1"
-                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                        viewBox="0 0 58 58" xml:space="preserve" fill="#000000">
-                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                        <g id="SVGRepo_iconCarrier">
-                                            <g>
-                                                <path style="fill:#2CB742;"
-                                                    d="M0,58l4.988-14.963C2.457,38.78,1,33.812,1,28.5C1,12.76,13.76,0,29.5,0S58,12.76,58,28.5 S45.24,57,29.5,57c-4.789,0-9.299-1.187-13.26-3.273L0,58z">
-                                                </path>
-                                                <path style="fill:#FFFFFF;"
-                                                    d="M47.683,37.985c-1.316-2.487-6.169-5.331-6.169-5.331c-1.098-0.626-2.423-0.696-3.049,0.42 c0,0-1.577,1.891-1.978,2.163c-1.832,1.241-3.529,1.193-5.242-0.52l-3.981-3.981l-3.981-3.981c-1.713-1.713-1.761-3.41-0.52-5.242 c0.272-0.401,2.163-1.978,2.163-1.978c1.116-0.627,1.046-1.951,0.42-3.049c0,0-2.844-4.853-5.331-6.169 c-1.058-0.56-2.357-0.364-3.203,0.482l-1.758,1.758c-5.577,5.577-2.831,11.873,2.746,17.45l5.097,5.097l5.097,5.097 c5.577,5.577,11.873,8.323,17.45,2.746l1.758-1.758C48.048,40.341,48.243,39.042,47.683,37.985z">
-                                                </path>
-                                            </g>
+        <div class="row gx-55 gx-5">
+            <div class="col-lg-8">
+                <article>
+                    <div>
+                        <h1 class="wow slideInLeft" data-wow-duration="2s">{{ $news->name }}</h1>
+                        <p class="d-flex gap-1">Share :
+                            <button class="wpbtn" style="background-color: transparent; border: none" title="Share to WhatsApp" onclick="shareToWhatsApp()">
+                                <svg height="19" width="19" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 58 58" xml:space="preserve" fill="#000000">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier">
+                                        <g>
+                                            <path style="fill:#2CB742;" d="M0,58l4.988-14.963C2.457,38.78,1,33.812,1,28.5C1,12.76,13.76,0,29.5,0S58,12.76,58,28.5 S45.24,57,29.5,57c-4.789,0-9.299-1.187-13.26-3.273L0,58z">
+                                            </path>
+                                            <path style="fill:#FFFFFF;" d="M47.683,37.985c-1.316-2.487-6.169-5.331-6.169-5.331c-1.098-0.626-2.423-0.696-3.049,0.42 c0,0-1.577,1.891-1.978,2.163c-1.832,1.241-3.529,1.193-5.242-0.52l-3.981-3.981l-3.981-3.981c-1.713-1.713-1.761-3.41-0.52-5.242 c0.272-0.401,2.163-1.978,2.163-1.978c1.116-0.627,1.046-1.951,0.42-3.049c0,0-2.844-4.853-5.331-6.169 c-1.058-0.56-2.357-0.364-3.203,0.482l-1.758,1.758c-5.577,5.577-2.831,11.873,2.746,17.45l5.097,5.097l5.097,5.097 c5.577,5.577,11.873,8.323,17.45,2.746l1.758-1.758C48.048,40.341,48.243,39.042,47.683,37.985z">
+                                            </path>
                                         </g>
                                     </svg>
                                 </button>
@@ -455,9 +449,8 @@
 
                                                         <form id="form-like">
                                                             @csrf
-                                                            <button type="submit"
-                                                                style="background: transparent;border:transparent"
-                                                                class="like">
+                                                            <button type="submit" style="background: transparent;border:transparent"
+                                                                class="like btn-like">
                                                                 <svg class="last mb-1" xmlns="http://www.w3.org/2000/svg"
                                                                     width="18" height="18" viewBox="0 0 24 24">
                                                                     <path fill="#E93314"
@@ -468,9 +461,9 @@
 
                                                         <form id="form-liked" style="display: none;">
                                                             @csrf
-                                                            <button type="submit"
+                                                            <button type="button"
                                                                 style="background: transparent;border:transparent"
-                                                                class="liked">
+                                                                class="liked btn-liked">
                                                                 <svg class="last mb-1" xmlns="http://www.w3.org/2000/svg"
                                                                     width="18" height="18" viewBox="0 0 24 24">
                                                                     <path fill="red"
@@ -484,37 +477,37 @@
                                                     </li>
 
                                                     {{-- mobile --}}
-                                                    <li class="d-flex align-items-center d-md-none d-none">
+                                                    {{-- <li class="d-flex align-items-center d-md-none d-none">
 
-                                                        <form id="form-like">
+                                                        <div id="form-like">
                                                             @csrf
-                                                            <button type="submit"
+                                                            <button type="button"
                                                                 style="background: transparent;border:transparent"
-                                                                class="like">
+                                                                class="like btn-like">
                                                                 <svg class="last mb-1" xmlns="http://www.w3.org/2000/svg"
                                                                     width="18" height="18" viewBox="0 0 24 24">
                                                                     <path fill="#E93314"
                                                                         d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
                                                                 </svg>
                                                             </button>
-                                                        </form>
+                                                        </div>
 
-                                                        <form id="form-liked" style="display: none;">
+                                                        <div id="form-liked" style="display: none;">
                                                             @csrf
-                                                            <button type="submit"
+                                                            <button type="button"
                                                                 style="background: transparent;border:transparent"
-                                                                class="liked">
+                                                                class="liked btn-liked">
                                                                 <svg class="last mb-1" xmlns="http://www.w3.org/2000/svg"
                                                                     width="18" height="18" viewBox="0 0 24 24">
                                                                     <path fill="red"
                                                                         d="M18 21H8V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L15.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.037.375t-.113.375l-3 7.05q-.225.5-.75.85T18 21M6 8v13H2V8z" />
                                                                 </svg>
                                                             </button>
-                                                        </form>
+                                                        </div>
 
                                                         <span id="like"
                                                             data-like="{{ $likes }}">{{ $likes }}</span>
-                                                    </li>
+                                                    </li> --}}
 
                                                 </div>
                                             </div>
@@ -733,7 +726,7 @@
                                                     <a href="avascript:void(0)" class="reply-btn"
                                                         onclick="showReplyForm({{ $comment->id }})">Balas</a>
                                                 </div>
-                                            </div>
+                                            </li>
                                         </div>
                                     </div>
                                 </div>
@@ -956,7 +949,7 @@
                             </ul>
                         </div>
 
-                        {{-- @if ($advertisement_rights)
+                    {{-- @if (isset($advertisement_rights))
                     <a href="{{ $advertisement_rights->url }}">
                         <div class="sidebar mt-3 mb-4" id="right-advertisement">
                             <img src="{{ asset($advertisement_rights && $advertisement_rights->image != null ? 'storage/' . $advertisement_rights->image : 'CONTOHIKLAN.png') }}" alt="Advertisement">
@@ -967,7 +960,6 @@
                         <p class="text-center align-middle" style="line-height: 603px;">Iklan</p>
                     </div>
                     @endif --}}
-                    </div>
                 </div>
             </div>
         </div>
@@ -1025,14 +1017,12 @@
 @section('script')
     <script>
         $(document).ready(function() {
+            var likedByUser = @json($likedByUser);
             var formLike = $('#form-like');
             var formLiked = $('#form-liked');
+            var btnLike = $('.btn-like');
+            var btnUnlike = $('.btn-liked');
             var likeCount = $('#like');
-            var likedByUser = {
-                {
-                    $likedByUser ? 'true' : 'false'
-                }
-            };
             var likeData = parseInt(likeCount.data('like'));
             var isProcessing = false;
 
@@ -1044,7 +1034,7 @@
                 formLiked.hide();
             }
 
-            formLike.on('submit', function(event) {
+            btnLike.on('click', function(event) {
                 event.preventDefault();
                 if (isProcessing) return;
                 isProcessing = true;
@@ -1068,14 +1058,14 @@
                         console.error('Error: ' + xhr.status);
                     },
                     complete: function() {
-                        isProcessing = false; // Re-enable the buttons
+                        isProcessing = false;
                     }
                 });
             });
 
-            formLiked.on('submit', function(event) {
+            btnUnlike.on('click', function(event) {
                 event.preventDefault();
-                if (isProcessing) return; // Prevent multiple requests
+                if (isProcessing) return;
                 isProcessing = true;
                 var csrfToken = formLiked.find('input[name="_token"]').val();
 
@@ -1103,7 +1093,6 @@
             });
         });
     </script>
-
 
     <script>
         $('.btn-news-report').on('click', function() {

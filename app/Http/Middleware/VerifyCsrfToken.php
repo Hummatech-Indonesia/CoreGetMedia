@@ -13,6 +13,8 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         'register',
-        'callback'
+        'callback',
+        'like-news/',
+        'unlike-news/'
     ];
 }
