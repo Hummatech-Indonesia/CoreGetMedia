@@ -79,28 +79,34 @@
                 <div class="card">
                     <div class="card-body">
                         <h3 for="" class="form-label">Thumbnail</h3>
-
+                        @php
+                            $fileExtension = pathinfo($news->image, PATHINFO_EXTENSION);
+                            $videoExtensions = ['mp4', 'avi', 'mov'];
+                            $imageExtensions = ['png', 'jpg', 'jpeg', 'gif', 'webp'];
+                        @endphp
                         <div class="gambar-iklan mb-4 d-flex justify-content-center">
-                            <img id="preview" src="{{ asset('storage/'.$news->image) }}" style="object-fit: cover; border: transparent;"
-                                width="350" height="200" alt="">
+                            @if (in_array($fileExtension, $videoExtensions))
+                                <video id="preview" src="{{ asset('storage/'. $news->image) }}" style="object-fit: cover; border: transparent;" width="350" height="200" controls></video>
+                            @elseif(in_array($fileExtension, $imageExtensions))
+                                <img id="preview" src="{{ asset('storage/'.$news->image) }}" style="object-fit: cover; border: transparent;" width="350" height="200" alt="">
+                            @endif
                         </div>
-                        <div class="d-flex justify-content-center mt-3">
-                            <label for="image-upload" class="btn btn-primary">
-                                Unggah
-                            </label>
-                            <input type="file" name="image" id="image-upload" class="hide" value="{{ $news->image }}"
-                                onchange="previewImage(event)">
-                        </div>
-                        <div class="d-flex justify-content-center">
-                            <p class="text-muted mt-3">File dengan format Jpg atau Png </p>
-                        </div>
-
-                        @error('photo')
-                            <span class="invalid-feedback" role="alert" style="color: red;">
+                        <div class="">
+                            <div class="d-flex justify-content-center">
+                                <label for="image-upload" class="btn btn-primary">
+                                    Unggah
+                                </label>
+                            </div>
+                            <input type="file" name="image" id="image-upload" class="hide" value="{{ $news->image }}" onchange="previewImage(event)">
+                            @error('image')
+                            <span class="invalid-feedback text-center " role="alert" style="color: red;">
                                 <strong>{{ $message }}</strong>
                             </span>
-                        @enderror
-
+                            @enderror
+                            <div class="d-flex justify-content-center">
+                                <p class="text-muted mt-3">File dengan format Jpg atau Png </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="card">
@@ -112,9 +118,7 @@
                                 class="select2 form-control category @error('category') is-invalid @enderror"
                                 name="category[]" multiple aria-label="Default select example">
                                 @foreach ($categories as $category)
-                                <option value="{{ $category->id }}" {{ $newsCategory->contains('category_id', $category->id) ? 'selected' : '' }}>
-                                    {{ $category->name }}
-                                </option>
+                                <option value="{{ $category->id }}" @if(in_array($category->id, old('category', $newsCategory->pluck('category_id')->toArray()))) selected @endif>{{ $category->name }}</option>
                             @endforeach
                             </select>
                             @error('category')
@@ -131,9 +135,8 @@
                                     name="sub_category[]" multiple="true" aria-label="Default select example">
 
                                     @if ($subcategories != null)
-                                        <option >pilih sub kategori</option>
                                         @foreach ($subcategories as $subcategory)
-                                        <option value="{{ $subcategory->id }}" {{ $newsSubcategory->contains('sub_category_id', $subcategory->id) ? 'selected' : '' }}>
+                                        <option value="{{ $subcategory->id }}" @if(in_array($subcategory->id, old('sub_category', $newsSubcategory->pluck('sub_category_id')->toArray()))) selected @endif>
                                             {{ $subcategory->name }}
                                         </option>
                                         @endforeach
@@ -151,8 +154,8 @@
                             <label class="form-label" for="password_confirmation">Tanggal Upload</label>
                             <input type="datetime-local" id="upload_date" name="date" placeholder="date"
                                 value="{{ \Carbon\Carbon::parse($news->date)->format('Y-m-d\TH:i') }}"
-                                class="form-control @error('upload_date') is-invalid @enderror">
-                            @error('upload_date')
+                                class="form-control @error('date') is-invalid @enderror">
+                            @error('date')
                                 <span class="invalid-feedback" role="alert" style="color: red">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -163,7 +166,7 @@
                             <select class="form-control @error('tag') is-invalid @enderror select2 tags" name="tag[]"
                                 multiple="multiple">
                                 @foreach ($tags as $tag)
-                                    <option value="{{ $tag->name }}" {{ $newsTags->pluck('tags_id')->contains($tag->id) ? 'selected' : '' }}>
+                                    <option value="{{ $tag->name }}" @if(in_array($tag->name, old('tag', $newsTags->pluck('tags_id')->toArray()))) selected @endif>
                                     {{ $tag->name }}
                                     </option>
                                 @endforeach
@@ -195,8 +198,8 @@
                             <div class="col-lg-12 mb-4" style="height: auto;">
                                 <label class="form-label" for="content">Isi Berita</label>
                                 <textarea id="content" name="description" placeholder="content" value="{{ $news->description }}"
-                                    class="form  @error('content') is-invalid @enderror">{{ $news->description }}</textarea>
-                                @error('content')
+                                    class="form  @error('description') is-invalid @enderror">{{ $news->description }}</textarea>
+                                @error('description')
                                     <span class="invalid-feedback" role="alert" style="color: red;">
                                         <strong>{{ $message }}</strong>
                                     </span>

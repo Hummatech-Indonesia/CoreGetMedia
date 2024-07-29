@@ -47,7 +47,16 @@
                     <div class="mb-2">
                         <div class="row g-2">
                             <div class="col-lg-3 col-md-4">
-                                <img src="{{ asset('storage/' . $newsLike->image) }}" class="img-responsive" height="150" style="width: 100%; object-fit:cover;" alt="">
+                                @php
+                                    $fileExtension = pathinfo($newsLike->image, PATHINFO_EXTENSION);
+                                    $videoExtensions = ['mp4', 'avi', 'mov'];
+                                    $imageExtensions = ['png', 'jpg', 'jpeg', 'gif', 'webp'];
+                                @endphp
+                                @if (in_array($fileExtension, $videoExtensions))
+                                    <video src="{{ asset('storage/' . $newsLike->image) }}" class="img-responsive" height="150" style="width: 100%; object-fit:cover;" controls></video>
+                                @elseif(in_array($fileExtension, $imageExtensions))
+                                    <img src="{{ asset('storage/' . $newsLike->image) }}" class="img-responsive" height="150" style="width: 100%; object-fit:cover;" alt="">
+                                @endif
                             </div>
                             <div class="col-md-8 col-md-8">
                                 <div class="card-body p-2">

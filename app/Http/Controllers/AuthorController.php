@@ -57,15 +57,15 @@ class AuthorController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $authors = $this->author->get();
+        $authors = $this->author->get($request);
         return view('pages.admin.author.confirm-author', compact('authors'));
     }
 
-    public function list_author()
+    public function list_author(Request $request)
     {
-        $authors = $this->author->where('accepted');
+        $authors = $this->author->where('accepted', $request);
         return view('pages.admin.author.author-list', compact('authors'));
     }
 

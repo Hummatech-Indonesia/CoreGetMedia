@@ -84,27 +84,24 @@
                     <div class="card-body">
                         <h3 for="" class="form-label">Thumbnail</h3>
 
-                        <div class="gambar-iklan mb-4 d-flex justify-content-center">
-                            <img id="preview" class="hide" style="object-fit: cover; border: transparent;"
-                                width="350" height="200" alt="">
+                        <div id="preview-container" class="gambar-iklan mb-4 d-flex justify-content-center">
                         </div>
-                        <div class="d-flex justify-content-center mt-3">
-                            <label for="image-upload" class="btn btn-primary">
-                                Unggah
-                            </label>
-                            <input type="file" name="image" id="image-upload"
-                                class="hide @error('photo') is-invalid @enderror" onchange="previewImage(event)">
+                        <div class="">
+                            <div class="d-flex justify-content-center">
+                                <label for="image-upload" class="btn btn-primary">
+                                    Unggah
+                                </label>
+                            </div>
+                            <input type="file" name="image" id="image-upload" accept="image/*,video/*" class="hide @error('image') is-invalid @enderror">
+                            @error('image')
+                                <span class="invalid-feedback text-center " role="alert" style="color: red;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="d-flex justify-content-center">
                             <p class="text-muted mt-3">File dengan format Jpg atau Png </p>
                         </div>
-
-                        @error('photo')
-                            <span class="invalid-feedback" role="alert" style="color: red;">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-
                     </div>
                 </div>
                 <div class="card">
@@ -116,7 +113,7 @@
                                 class="select2 form-control category @error('category') is-invalid @enderror"
                                 name="category[]" multiple aria-label="Default select example">
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    <option value="{{ $category->id }}" @if(in_array($category->id, old('category', []))) selected @endif>{{ $category->name }}</option>
                                 @endforeach
                             </select>
                             @error('category')
@@ -131,6 +128,9 @@
                                 <select id="sub_category_id"
                                     class="form-control sub-category select2 @error('sub_category') is-invalid @enderror"
                                     name="sub_category[]" multiple="true" aria-label="Default select example">
+                                    @foreach ($subCategories as $subCategory)
+                                        <option value="{{ $subCategory->id }}" @if(in_array($subCategory->id, old('sub_category', []))) selected @endif>{{ $subCategory->name }}</option>
+                                    @endforeach
                                 </select>
                                 @error('sub_category')
                                     <span class="invalid-feedback" role="alert" style="color: red">
@@ -141,9 +141,7 @@
                         </div>
                         <div class="col-lg-12 mb-4">
                             <label class="form-label" for="password_confirmation">Tanggal Upload</label>
-                            <input type="datetime-local" id="upload_date" name="date" placeholder="date"
-                                value="{{ old('date') }}"
-                                class="form-control @error('upload_date') is-invalid @enderror">
+                            <input type="datetime-local" id="upload_date" name="date" placeholder="date" value="{{ old('date') }}" class="form-control @error('date') is-invalid @enderror">
                             @error('date')
                                 <span class="invalid-feedback" role="alert" style="color: red">
                                     <strong>{{ $message }}</strong>
@@ -155,7 +153,7 @@
                             <select class="form-control @error('tag') is-invalid @enderror select2 tags" name="tag[]"
                                 multiple="multiple">
                                 @foreach ($tags as $tag)
-                                    <option value="{{ $tag->name }}">{{ $tag->name }}</option>
+                                    <option value="{{ $tag->name }}" @if(in_array($tag->name, old('tag', []))) selected @endif>{{ $tag->name }}</option>
                                 @endforeach
                             </select>
                             @error('tag')
@@ -357,20 +355,49 @@
             tokenSeparators: [',', ' ']
         })
 
-        function previewImage(event) {
-            var input = event.target;
-            var previewImg = document.getElementById('preview');
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    previewImg.src = e.target.result;
-                    previewImg.classList.remove('hide');
+        $(document).ready(function () {
+            $('#image-upload').on('change', function (event) {
+                var file = event.target.files[0];
+                var fileType = file.type;
+                var previewContainer = $('#preview-container');
+
+                // Bersihkan pratinjau sebelumnya
+                previewContainer.empty();
+
+                // Cek apakah file adalah gambar
+                if (fileType.startsWith('image/')) {
+                    var imgPreview = $('<img>', {
+                        id: 'preview',
+                        style: 'object-fit: cover; border: transparent; width: 350px; height: 200px;',
+                        alt: 'Image Preview'
+                    });
+
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        imgPreview.attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(file);
+                    previewContainer.append(imgPreview);
                 }
-                reader.readAsDataURL(input.files[0]);
-            } else {
-                previewImg.src = '';
-                previewImg.classList.add('hide');
-            }
-        }
+                // Cek apakah file adalah video
+                else if (fileType.startsWith('video/')) {
+                    var videoPreview = $('<video>', {
+                        id: 'preview',
+                        style: 'object-fit: cover; border: transparent; width: 350px; height: 200px;',
+                        controls: true
+                    });
+
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        videoPreview.attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(file);
+                    previewContainer.append(videoPreview);
+                } else {
+                    alert('File tidak didukung!');
+                }
+            });
+        });
+
     </script>
 @endsection
