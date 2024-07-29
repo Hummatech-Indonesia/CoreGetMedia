@@ -82,7 +82,7 @@
                         @php
                             $fileExtension = pathinfo($news->image, PATHINFO_EXTENSION);
                             $videoExtensions = ['mp4', 'avi', 'mov'];
-                            $imageExtensions = ['png', 'jpg', 'jpeg', 'gif'];
+                            $imageExtensions = ['png', 'jpg', 'jpeg', 'gif', 'webp'];
                         @endphp
                         <div class="gambar-iklan mb-4 d-flex justify-content-center">
                             @if (in_array($fileExtension, $videoExtensions))
