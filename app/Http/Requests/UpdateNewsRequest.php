@@ -24,7 +24,7 @@ class UpdateNewsRequest extends FormRequest
         return [
             'name' => 'required|string',
             'slug' => 'unique:news,slug',
-            'image' => 'nullable|mimes:png,jpg,jpeg',
+            'image' => 'required|mimes:png,jpg,jpeg,gif,giffile,mp4,avi,mov',
             'description'=> 'required|string',
             'date'=> 'required|date',
             'category' => 'array|required',

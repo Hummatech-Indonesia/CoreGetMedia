@@ -69,17 +69,17 @@
                 </div>
                 <div
                     class="col-lg-2 order-lg-2 order-2 justify-content-center justify-content-lg-end text-center me-lg-5">
-                    <div class="d-flex align-items-center justify-content-center justify-content-lg-between m-4 gap-5">
-                        <div class="text-center">
+                    <div class="d-flex align-items-center justify-content-end justify-content-lg-end m-4 gap-5">
+                        {{-- <div class="text-center">
                             <i class="ti ti-coins fs-6 d-block mb-2"></i>
                             <h5 class="mb-0 fw-semibold lh-1">1232</h5>
                             <p class="mb-0 fs-4">Koin</p>
-                        </div>
+                        </div> --}}
 
                         <a type="button" data-bs-toggle="modal" data-bs-target="#modal-following">
                             <div class="text-center">
                                 <i class="ti ti-user-check fs-6 d-block mb-2"></i>
-                                <h5 class="mb-0 fw-semibold lh-1">347</h5>
+                                <h5 class="mb-0 fw-semibold lh-1">{{ $followings->count() }}</h5>
                                 <p class="mb-0 fs-3">Mengikuti</p>
                             </div>
                         </a>

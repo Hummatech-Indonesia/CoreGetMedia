@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\AuthorInterface;
+use App\Contracts\Interfaces\FollowerInterface;
 use App\Contracts\Interfaces\UserInterface;
 use App\Models\Profile;
 use App\Http\Requests\StoreProfileRequest;
@@ -16,13 +17,14 @@ class ProfileController extends Controller
     private UserInterface $user;
     private AuthorInterface $author;
     private UserService $service;
+    private FollowerInterface $follower;
 
-    public function __construct(UserInterface $user, AuthorInterface $author, UserService $service)
+    public function __construct(UserInterface $user, AuthorInterface $author, UserService $service, FollowerInterface $follower)
     {
         $this->user = $user;
         $this->author = $author;
-
         $this->service = $service;
+        $this->follower = $follower;
     }
 
     /**
@@ -30,7 +32,8 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        return view('pages.user.profile.index');
+        $followings = $this->follower->where('user_id', auth()->user()->id);
+        return view('pages.user.profile.index', compact('followings'));
     }
 
     /**

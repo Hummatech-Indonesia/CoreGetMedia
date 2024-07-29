@@ -60,8 +60,15 @@ class NewsService
         }
 
         $slug = Str::slug($data['name']);
-        $compressedImage = $this->compressImage($slug, $request->image);
-        $new_photo = $this->uploadNews(UploadDiskEnum::NEWS->value, $compressedImage, $slug);
+        $file = $request->image;
+        $mimeType = $file->getMimeType();
+        if (Str::startsWith($mimeType, 'image/') && $mimeType !== 'image/gif') {
+            $compressedImage = $this->compressImage($slug, $request->image);
+            $new_photo = $this->uploadNews(UploadDiskEnum::NEWS->value, $compressedImage, $slug);
+        } else {
+            $new_photo = $this->uploadNews(UploadDiskEnum::NEWS->value, $file, $slug);
+        }
+
 
         $domQuestion = new \DOMDocument();
         libxml_use_internal_errors(true);
@@ -170,11 +177,16 @@ class NewsService
                 unlink(public_path($old_photo));
             }
 
-            $compressedImage = $this->compressImage($slug, $request->image);
-            $new_photo = $this->uploadNews(UploadDiskEnum::NEWS->value, $compressedImage, $slug);
-
+            $file = $request->image;
+            $mimeType = $file->getMimeType();
+            if (Str::startsWith($mimeType, 'image/') && $mimeType !== 'image/gif') {
+                $compressedImage = $this->compressImage($slug, $request->image);
+                $new_photo = $this->uploadNews(UploadDiskEnum::NEWS->value, $compressedImage, $slug);
+            } else {
+                $new_photo = $this->uploadNews(UploadDiskEnum::NEWS->value, $file, $slug);
+            }
         } else {
-             if ($slug !== $news->slug) {
+            if ($slug !== $news->slug) {
                 $pathInfo = pathinfo($old_photo);
                 $new_photo = $pathInfo['dirname'] . '/' . $slug . '.' . $pathInfo['extension'];
                 Storage::move($old_photo, $new_photo);

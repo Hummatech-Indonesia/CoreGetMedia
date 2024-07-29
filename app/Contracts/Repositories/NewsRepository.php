@@ -183,8 +183,8 @@ class NewsRepository extends BaseRepository implements NewsInterface
     {
         return $this->model->query()
             ->where('status', NewsEnum::ACCEPTED->value)
-            ->whereRelation('newsLikes', 'user_id', $user_id)
             ->whereRelation('newsLikes', 'ip_address', $ipAddress)
+            ->orWhereRelation('newsLikes', 'user_id', $user_id)
             ->withCount('newsViews')
             ->get();
     }

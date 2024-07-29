@@ -85,8 +85,7 @@
                         <h3 for="" class="form-label">Thumbnail</h3>
 
                         <div class="gambar-iklan mb-4 d-flex justify-content-center">
-                            <img id="preview" class="hide" style="object-fit: cover; border: transparent;"
-                                width="350" height="200" alt="">
+                            <img id="preview" class="hide" style="object-fit: cover; border: transparent;" width="350" height="200" alt="">
                         </div>
                         <div class="d-flex justify-content-center mt-3">
                             <label for="image-upload" class="btn btn-primary">

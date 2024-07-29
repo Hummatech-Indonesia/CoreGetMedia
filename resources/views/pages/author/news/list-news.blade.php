@@ -103,10 +103,18 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12 col-lg-2">
+                            @php
+                                $fileExtension = pathinfo($data->image, PATHINFO_EXTENSION);
+                                $videoExtensions = ['mp4', 'avi', 'mov'];
+                                $imageExtensions = ['png', 'jpg', 'jpeg', 'gif'];
+                            @endphp
                             <div class="mb-2">
                                 @if ($data->image != null && Storage::disk('public')->exists($data->image))
-                                <img src="{{ asset('storage/' . $data->image) }}" alt="{{ $data->name }}" width="290px"
-                                    height="180px" class="w-100" style="width: 100%; object-fit:cover;" />
+                                    @if (in_array($fileExtension, $videoExtensions))
+                                        <video src="{{ asset('storage/'. $data->image) }}" width="290px" height="180px" class="w-100" style="width: 100%; object-fit:cover;" controls></video>
+                                    @elseif(in_array($fileExtension, $imageExtensions))
+                                        <img src="{{ asset('storage/' . $data->image) }}" alt="{{ $data->name }}" width="290px" height="180px" class="w-100" style="width: 100%; object-fit:cover;" />
+                                    @endif
                                 @else
                                 <img src="{{ asset('assets/blank-img.jpg') }}" alt="{{ $data->name }}" width="290px"
                                     height="180px" class="w-100" style="width: 100%; object-fit:cover;" />
