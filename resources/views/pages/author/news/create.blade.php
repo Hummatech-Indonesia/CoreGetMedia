@@ -94,14 +94,14 @@
                             </div>
                             <input type="file" name="image" id="image-upload" accept="image/*,video/*" class="hide @error('image') is-invalid @enderror">
                             @error('image')
-                            <span class="invalid-feedback text-center " role="alert" style="color: red;">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                                <span class="invalid-feedback text-center " role="alert" style="color: red;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                             @enderror
                         </div>
-                            <div class="d-flex justify-content-center">
-                                <p class="text-muted mt-3">File dengan format Jpg atau Png </p>
-                            </div>
+                        <div class="d-flex justify-content-center">
+                            <p class="text-muted mt-3">File dengan format Jpg atau Png </p>
+                        </div>
                     </div>
                 </div>
                 <div class="card">
