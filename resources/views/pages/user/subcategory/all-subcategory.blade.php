@@ -76,7 +76,7 @@
             <p style="color: #22222278">Iklan</p>
         </div>
         @endif --}}
-        <div class="row gx-55 gx-5">
+        <div class="row gx-55 gx-5 mb-5 mt-5">
             <div class="col-lg-8">
                 <div class="mb-5">
                     @forelse ($news as $data)
