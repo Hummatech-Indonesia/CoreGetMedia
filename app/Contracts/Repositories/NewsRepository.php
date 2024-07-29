@@ -8,6 +8,7 @@ use App\Models\Faq;
 use App\Enums\NewsEnum;
 use App\Models\News;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class NewsRepository extends BaseRepository implements NewsInterface
 {
@@ -26,8 +27,8 @@ class NewsRepository extends BaseRepository implements NewsInterface
     public function delete(mixed $id): mixed
     {
         return $this->model->query()
-        ->findOrFail($id)
-        ->delete();
+            ->findOrFail($id)
+            ->delete();
     }
 
     /**
@@ -74,15 +75,18 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->get();
     }
 
-    public function where($data, $paginate): mixed
+    public function where($data, $paginate, Request $request): mixed
     {
         return $this->model->query()
             ->where('status', $data)
             ->orderByDesc('pin', '1')
+            ->when($request->name, function ($query) use ($request) {
+                $query->where('name', 'LIKE', '%' .  $request->name . '%');
+            })
             ->paginate($paginate);
     }
 
-    public function news_pin() : mixed
+    public function news_pin(): mixed
     {
         return $this->model->query()
             ->where('status', NewsEnum::ACCEPTED->value)
@@ -91,7 +95,6 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->orderByDesc('news_views_count')
             ->take(3)
             ->get();
-
     }
 
     public function whereSubCategory($id, $query): mixed
@@ -101,10 +104,10 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->whereRelation('newsSubCategories', 'sub_category_id', $id)
             ->withCount('newsViews')
             ->orderByDesc('news_views_count')
-            ->when($query == 'top', function($q){
+            ->when($query == 'top', function ($q) {
                 $q->take(1);
             })
-            ->when($query == 'notop', function($q){
+            ->when($query == 'notop', function ($q) {
                 $q->take(4);
             })
             ->where('status', NewsEnum::ACCEPTED->value)
@@ -130,7 +133,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->whereRelation('newsCategories', 'category_id', $id)
             ->withCount('newsViews')
             ->orderByDesc('news_views_count')
-            ->when($query == 'top', function($q){
+            ->when($query == 'top', function ($q) {
                 $q->take(1);
             })
             ->latest()
@@ -189,34 +192,34 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->get();
     }
 
-    public function categoryLatest($category_id, $status) : mixed
+    public function categoryLatest($category_id, $status): mixed
     {
         return $this->model->query()
             ->whereRelation('newsCategories', 'category_id', $category_id)
             ->where('status', NewsEnum::ACCEPTED->value)
             ->withCount('newsViews')
-            ->when($status == '1', function($q) {
+            ->when($status == '1', function ($q) {
                 $q->first();
             })
             ->latest();
     }
 
-    public function tagLatest($tag_id, $paginate, $id, $status) : mixed
+    public function tagLatest($tag_id, $paginate, $id, $status): mixed
     {
         return $this->model->query()
-            ->when($status == 'notall', function($q) use ($id) {
+            ->when($status == 'notall', function ($q) use ($id) {
                 $q->whereNotIn('id', $id);
             })
             ->whereRelation('newsTags', 'tags_id', $tag_id)
             ->where('status', NewsEnum::ACCEPTED->value)
             ->withCount('newsViews')
-            ->when($status == '1', function($take){
+            ->when($status == '1', function ($take) {
                 $take->first();
             })
             ->latest();
     }
 
-    public function subcategoryLatest($subcategory_id, $id, $status) : mixed
+    public function subcategoryLatest($subcategory_id, $id, $status): mixed
     {
         return $this->model->query()
             ->whereNotIn('id', $id)
@@ -224,12 +227,12 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->where('status', NewsEnum::ACCEPTED->value)
             ->withCount('newsViews')
             ->latest()
-            ->when($status == '1', function($q) {
+            ->when($status == '1', function ($q) {
                 $q->first();
             });
     }
 
-    public function latest() : mixed
+    public function latest(): mixed
     {
         return $this->model->query()
             ->where('status', NewsEnum::ACCEPTED->value)
@@ -268,7 +271,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->update($data);
     }
 
-    public function news_pin_categories() : mixed
+    public function news_pin_categories(): mixed
     {
         return $this->model->query()
             ->select('categories.name')
@@ -280,7 +283,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->get();
     }
 
-    public function news_by_category($categoryName) : mixed
+    public function news_by_category($categoryName): mixed
     {
         return $this->model->query()
             ->join('news_categories', 'news.id', '=', 'news_categories.news_id')
@@ -292,7 +295,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->get();
     }
 
-    public function allPin() : mixed
+    public function allPin(): mixed
     {
         return $this->model->query()
             ->where('status', NewsEnum::ACCEPTED->value)
@@ -325,9 +328,9 @@ class NewsRepository extends BaseRepository implements NewsInterface
     public function countByUserAndStatus($id, $status)
     {
         return $this->model->query()
-        ->where('user_id', $id)
-        ->where('status', $status)
-        ->count();
+            ->where('user_id', $id)
+            ->where('status', $status)
+            ->count();
     }
 
     public function newsStatus($user_id, $status): mixed

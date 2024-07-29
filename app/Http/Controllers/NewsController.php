@@ -97,9 +97,9 @@ class NewsController extends Controller
         return view('pages.author.news.list-news', compact('news', 'pendings', 'rejecteds', 'accepteds', 'drafts'));
     }
 
-    public function confirm_news()
+    public function confirm_news(Request $request)
     {
-        $news = $this->news->where(NewsEnum::PENDING->value, 10);
+        $news = $this->news->where(NewsEnum::PENDING->value, 10, $request);
         return view('pages.admin.news.confirm-news', compact('news'));
     }
 
