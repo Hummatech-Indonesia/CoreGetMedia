@@ -32,7 +32,7 @@ class NewsLikeController extends Controller
     {
         $ip_Address = $request->ip();
         $user_id = auth()->user()->id;
-        $newsLike = $this->news->whereUserLike($user_id, $ip_Address);
+        $newsLike = $this->news->whereUserLike($user_id, $ip_Address, $request);
 
         return view('pages.user.news-liked.index', compact('newsLike', 'ip_Address', 'user_id'));
     }

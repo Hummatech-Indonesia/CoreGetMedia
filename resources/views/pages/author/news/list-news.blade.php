@@ -76,17 +76,17 @@
             <div class="input-group src-input">
                 <input type="text" name="name" class="form-control search-chat py-2 px-3 ps-5" placeholder="Search">
                 <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
-                <button type="submit" class="btn btn-outline-primary px-4">Cariff</button>
+                <button type="submit" class="btn btn-outline-primary px-4">Cari</button>
             </div>
 
-            <div class="d-flex gap-2 ms-2">
+            {{-- <div class="d-flex gap-2 ms-2">
                 <select class="form-select" id="status" style="width: 200px" name="status">
                     <option value="">Tampilkan semua</option>
                     <option value="panding">Pending</option>
                     <option value="active">Approved</option>
                     <option value="nonactive">Reject</option>
                 </select>
-            </div>
+            </div> --}}
         </div>
 
         <div class="justify-content-end">

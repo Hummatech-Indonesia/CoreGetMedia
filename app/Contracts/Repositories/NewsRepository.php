@@ -183,13 +183,19 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->get();
     }
 
-    public function whereUserLike($user_id, $ipAddress): mixed
+    public function whereUserLike($user_id, $ipAddress, Request $request): mixed
     {
         return $this->model->query()
             ->where('status', NewsEnum::ACCEPTED->value)
             ->whereRelation('newsLikes', 'ip_address', $ipAddress)
             ->orWhereRelation('newsLikes', 'user_id', $user_id)
             ->withCount('newsViews')
+            ->when($request->filter === "terbaru", function($query) {
+                $query->latest();
+            })
+            ->when($request->filter === "terlama", function($query) {
+                $query->oldest();
+            })
             ->get();
     }
 
