@@ -35,9 +35,9 @@ interface NewsInterface extends GetInterface, StoreInterface, UpdateInterface, S
     public function newsPopular() : mixed;
     public function newsPopularAdmin(): mixed;
     public function newsStatus($user_id, $status) : mixed;
-    public function userStatus($user_id, $status): mixed;
+    public function userStatus($user_id, $status, Request $request): mixed;
     public function monthlyViews($news, int $year): array;
-    public function showWithTrash(mixed $id): mixed;
+    public function showWithTrash(mixed $id, Request $request): mixed;
     public function accepted();
     public function NewsChart(mixed $year, mixed $month): mixed;
     public function whereDetailAuthor($id) : mixed;

@@ -74,9 +74,9 @@
     <form class="d-flex justify-content-between">
         <div class="d-flex">
             <div class="input-group src-input">
-                <input type="text" name="search" class="form-control search-chat py-2 px-3 ps-5" placeholder="Search">
+                <input type="text" name="name" class="form-control search-chat py-2 px-3 ps-5" placeholder="Search">
                 <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
-                <button type="submit" class="btn btn-outline-primary px-4">Cari</button>
+                <button type="submit" class="btn btn-outline-primary px-4">Cariff</button>
             </div>
 
             <div class="d-flex gap-2 ms-2">
@@ -692,4 +692,29 @@ $('.btn-reason').on('click', function() {
     $('#modal-reason').modal('show');
 });
 </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Mendapatkan referensi ke semua tab
+        var tabs = document.querySelectorAll('#myTab .nav-link');
+    
+        // Menyimpan tab yang dipilih di localStorage saat tab diklik
+        tabs.forEach(function(tab) {
+            tab.addEventListener('click', function() {
+                localStorage.setItem('selectedTab', tab.getAttribute('id'));
+            });
+        });
+    
+        // Memulihkan tab yang dipilih dari localStorage
+        var selectedTab = localStorage.getItem('selectedTab');
+        if (selectedTab) {
+            var tab = document.querySelector(`#${selectedTab}`);
+            if (tab) {
+                var tabTrigger = new bootstrap.Tab(tab);
+                tabTrigger.show();
+            }
+        }
+    });
+    </script>
+    
 @endsection
