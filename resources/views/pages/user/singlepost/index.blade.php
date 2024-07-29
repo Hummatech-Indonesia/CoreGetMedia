@@ -436,7 +436,7 @@
                     <div class="news-para">
                         @php
                             $paragraphs = explode('</p>', $news->description);
-                            $insertAt = ceil(count($paragraphs) / 2);
+                            $insertAt = ceil(count($paragraphs) / 5);
                         @endphp
 
                         @foreach ($paragraphs as $index => $paragraph)
