@@ -262,33 +262,49 @@
         </div>
     </div>
 
-<div class="news-details-wrap">
-    <div class="container mt-5">
-        {{-- @if (isset($advertisement_tops))
-        <a href="{{ $advertisement_tops->url }}">
-            <div class="mt-4 iklan-top" style="position: relative; width: 100%; height: 200px; overflow: hidden;">
-                <img class="iklan-top" src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/'.$advertisement_tops->image : "CONTOHIKLAN.png") }}" width="100%" height="auto" alt="">
-                <div style="width: 100%; background-color: rgba(0, 0, 0, 0.5); color: white; text-align: center; padding: 10px; box-sizing: border-box; position: relative; top: -50px;">
-                    Ingin baca berita tanpa iklan? <a href="/subscribe" style="color: #175A95; text-decoration: underline;">Berlangganan</a>
-                </div>
+{{-- komentar1 --}}
+    {{-- @if (isset($advertisement_tops))
+<a href="{{ $advertisement_tops->url }}">
+    <div class="mt-4 iklan-top" style="position: relative; width: 100%; height: 200px; overflow: hidden;">
+        <img class="iklan-top" src="{{ asset($advertisement_tops && $advertisement_tops->image != null ? 'storage/'.$advertisement_tops->image : "CONTOHIKLAN.png") }}" width="100%" height="auto" alt="">
+        <div style="width: 100%; background-color: rgba(0, 0, 0, 0.5); color: white; text-align: center; padding: 10px; box-sizing: border-box; position: relative; top: -50px;">
+            Ingin baca berita tanpa iklan? <a href="/subscribe" style="color: #175A95; text-decoration: underline;">Berlangganan</a>
+        </div>
+    </div>
+</a>
+@else
+<div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center" style="height: 200px;  background-color: var(--bgColor);">
+    <p style="color: #22222278">Iklan</p>
+</div>
+@endif --}}
+
+{{-- komentar2 --}}
+{{-- @if (isset($advertisement_rights))
+        <a href="{{ $advertisement_rights->url }}">
+            <div class="sidebar mt-3 mb-4" id="right-advertisement">
+                <img src="{{ asset($advertisement_rights && $advertisement_rights->image != null ? 'storage/' . $advertisement_rights->image : 'CONTOHIKLAN.png') }}" alt="Advertisement">
             </div>
         </a>
         @else
-        <div class="container-fluid mt-5 mb-5 d-flex justify-content-center align-items-center" style="height: 200px;  background-color: var(--bgColor);">
-            <p style="color: #22222278">Iklan</p>
+        <div class="sidebar mt-3 mb-4 bg_gray" style="height: 603px;">
+            <p class="text-center align-middle" style="line-height: 603px;">Iklan</p>
         </div>
-        @endif --}}
+    @endif --}}
+
+<div class="news-details-wrap">
+    <div class="container mt-5">
+        {{-- komentar1 --}}
         <div class="row gx-55 gx-5">
             <div class="col-lg-8">
                 <article>
                     <div>
                         <h1 class="wow slideInLeft" data-wow-duration="2s">{{ $news->name }}</h1>
                         <p class="d-flex gap-1">Share :
-                            <button class="wpbtn" style="background-color: transparent; border: none" title="Share to WhatsApp" onclick="shareToWhatsApp()">
-                                <svg height="19" width="19" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 58 58" xml:space="preserve" fill="#000000">
-                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                    <g id="SVGRepo_iconCarrier">
+                                <button class="wpbtn" style="background-color: transparent; border: none" title="Share to WhatsApp" onclick="shareToWhatsApp()">
+                                    <svg height="19" width="19" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 58 58" xml:space="preserve" fill="#000000">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                        <g id="SVGRepo_iconCarrier">
                                         <g>
                                             <path style="fill:#2CB742;" d="M0,58l4.988-14.963C2.457,38.78,1,33.812,1,28.5C1,12.76,13.76,0,29.5,0S58,12.76,58,28.5 S45.24,57,29.5,57c-4.789,0-9.299-1.187-13.26-3.273L0,58z">
                                             </path>
@@ -373,594 +389,580 @@
                                         Berhasil disalin
                                     </div>
                                 </a>
-                            </p>
-                        </div>
-                        <div class="news-img">
-                            <img src="{{ asset('storage/' . $news->image) }}" width="100%" height="470"
-                                style="object-fit: cover" alt="Image">
-                            <a href="/{{ $news->newsCategories[0]->category->name }}"
-                                class="news-cat">{{ $news->newsCategories[0]->category->name }}</a>
-                        </div>
-                        <div>
-                            <ul class="news-metainfo list-style">
-                                <div class="d-flex justify-content-between">
-                                    <div class="col-lg-11 col-md-11">
-                                        <div class="row">
-                                            <div class="col-md-12 col-lg-3 mb-3">
-                                                <li class="author d-flex align-items-center justify-content-between w-100">
-                                                    <div class="d-flex align-items-center">
-                                                        <span class="author-img">
-                                                            @if (isset($news->user) && isset($news->user->author))
-                                                                <a
-                                                                    href="{{ route('author.detail', ['author' => $news->user->slug]) }}">
-                                                                    <img src="{{ asset($news->user->photo ? 'storage/' . $news->user->photo : 'default.png') }}"
-                                                                        alt="Image" width="40px" height="30px"
-                                                                        style="border-radius: 50%; object-fit:cover;" />
-                                                                </a>
-                                                            @else
-                                                                <img src="{{ asset('default.png') }}" alt="Image"
-                                                                    width="40px" height="30px"
+                        </p>
+                    </div>
+                    <div class="news-img">
+                        <img src="{{ asset('storage/' . $news->image) }}" width="100%" height="470" style="object-fit: cover" alt="Image">
+                        <a href="/{{ $news->newsCategories[0]->category->name }}" class="news-cat">{{ $news->newsCategories[0]->category->name }}</a>
+                    </div>
+                    <div>
+                        <ul class="news-metainfo list-style">
+                            <div class="d-flex justify-content-between">
+                                <div class="col-lg-11 col-md-11">
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-3 mb-3">
+                                            <li class="author d-flex align-items-center justify-content-between w-100">
+                                                <div class="d-flex align-items-center">
+                                                    <span class="author-img">
+                                                        @if (isset($news->user) && isset($news->user->author))
+                                                            <a
+                                                                href="{{ route('author.detail', ['author' => $news->user->slug]) }}">
+                                                                <img src="{{ asset($news->user->photo ? 'storage/' . $news->user->photo : 'default.png') }}"
+                                                                    alt="Image" width="40px" height="30px"
                                                                     style="border-radius: 50%; object-fit:cover;" />
-                                                            @endif
-                                                        </span>
-                                                        <div class="ml-2">
-                                                            @if ($news->user->hasRole('admin'))
-                                                                <a class="ms-3"
-                                                                    style="display: inline; text-decoration: none"
-                                                                    data-toggle="tooltip" data-placement="top"
-                                                                    title="admin"
-                                                                    href="#">{{ $news->user->name }}</a>
-                                                            @else
-                                                                <a class="ms-4"
-                                                                    style="display: inline; text-decoration: none"
-                                                                    data-toggle="tooltip" data-placement="top"
-                                                                    title="author - {{ $news->user->name }}"
-                                                                    href="{{ route('author.detail', ['author' => $news->user->slug]) }}">{{ $news->user->name }}</a>
-                                                            @endif
-                                                        </div>
+                                                            </a>
+                                                        @else
+                                                            <img src="{{ asset('default.png') }}" alt="Image"
+                                                                width="40px" height="30px"
+                                                                style="border-radius: 50%; object-fit:cover;" />
+                                                        @endif
+                                                    </span>
+                                                    <div class="ml-2">
+                                                        @if ($news->user->hasRole('admin'))
+                                                            <a class="ms-3"
+                                                                style="display: inline; text-decoration: none"
+                                                                data-toggle="tooltip" data-placement="top"
+                                                                title="admin"
+                                                                href="#">{{ $news->user->name }}</a>
+                                                        @else
+                                                            <a class="ms-4"
+                                                                style="display: inline; text-decoration: none"
+                                                                data-toggle="tooltip" data-placement="top"
+                                                                title="author - {{ $news->user->name }}"
+                                                                href="{{ route('author.detail', ['author' => $news->user->slug]) }}">{{ $news->user->name }}</a>
+                                                        @endif
                                                     </div>
-                                                    <div class="d-md-none">
-                                                        <button style="border: none; background-color: #FFFFFF;"
-                                                            class="btn-news-report" type="button"
-                                                            data-id="{{ $news->id }}">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="20"
-                                                                height="20" viewBox="0 0 24 24">
-                                                                <path fill="none" stroke="currentColor"
-                                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                                    stroke-width="2"
-                                                                    d="M5 5a5 5 0 0 1 7 0a5 5 0 0 0 7 0v9a5 5 0 0 1-7 0a5 5 0 0 0-7 0zm0 16v-7" />
+                                                </div>
+                                                <div class="d-md-none">
+                                                    <button style="border: none; background-color: #FFFFFF;"
+                                                        class="btn-news-report" type="button"
+                                                        data-id="{{ $news->id }}">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                                            height="20" viewBox="0 0 24 24">
+                                                            <path fill="none" stroke="currentColor"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2"
+                                                                d="M5 5a5 5 0 0 1 7 0a5 5 0 0 0 7 0v9a5 5 0 0 1-7 0a5 5 0 0 0-7 0zm0 16v-7" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </li>
+                                        </div>
+
+                                        <div class="col-md-12 col-sm-12 col-lg-9">
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <li class="mr-4"><i class="fi fi-rr-calendar-minus"></i>
+                                                    <span id="formattedDate"
+                                                        class="font-date">{{ \Carbon\Carbon::parse($news->created_at)->translatedFormat('d F Y') }}</span>
+                                                </li>
+                                                <li class="mr-4">
+                                                    <i class="fi fi-rr-eye" style="margin-top: 2px;"></i>
+                                                    <span>{{ $news->news_views_count }}x dilihat</span>
+                                                </li>
+                                                <li class="d-flex align-items-center">
+
+                                                    <form id="form-like">
+                                                        @csrf
+                                                        <button type="submit" style="background: transparent;border:transparent"
+                                                            class="like btn-like">
+                                                            <svg class="last mb-1" xmlns="http://www.w3.org/2000/svg"
+                                                                width="18" height="18" viewBox="0 0 24 24">
+                                                                <path fill="#E93314"
+                                                                    d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
+                                                            </svg>
+                                                        </button>
+                                                    </form>
+
+                                                    <form id="form-liked" style="display: none;">
+                                                        @csrf
+                                                        <button type="button"
+                                                            style="background: transparent;border:transparent"
+                                                            class="liked btn-liked">
+                                                            <svg class="last mb-1" xmlns="http://www.w3.org/2000/svg"
+                                                                width="18" height="18" viewBox="0 0 24 24">
+                                                                <path fill="red"
+                                                                    d="M18 21H8V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L15.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.037.375t-.113.375l-3 7.05q-.225.5-.75.85T18 21M6 8v13H2V8z" />
+                                                            </svg>
+                                                        </button>
+                                                    </form>
+
+                                                    <span id="like"
+                                                        data-like="{{ $likes }}">{{ $likes }}</span>
+                                                </li>
+
+                                                {{-- mobile --}}
+                                                {{-- <li class="d-flex align-items-center d-md-none d-none">
+
+                                                    <div id="form-like">
+                                                        @csrf
+                                                        <button type="button"
+                                                            style="background: transparent;border:transparent"
+                                                            class="like btn-like">
+                                                            <svg class="last mb-1" xmlns="http://www.w3.org/2000/svg"
+                                                                width="18" height="18" viewBox="0 0 24 24">
+                                                                <path fill="#E93314"
+                                                                    d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
                                                             </svg>
                                                         </button>
                                                     </div>
-                                                </li>
-                                            </div>
 
-                                            <div class="col-md-12 col-sm-12 col-lg-9">
-                                                <div class="d-flex align-items-center justify-content-between">
-                                                    <li class="mr-4"><i class="fi fi-rr-calendar-minus"></i>
-                                                        <span id="formattedDate"
-                                                            class="font-date">{{ \Carbon\Carbon::parse($news->created_at)->translatedFormat('d F Y') }}</span>
-                                                    </li>
-                                                    <li class="mr-4">
-                                                        <i class="fi fi-rr-eye" style="margin-top: 2px;"></i>
-                                                        <span>{{ $news->news_views_count }}x dilihat</span>
-                                                    </li>
-                                                    <li class="d-flex align-items-center">
+                                                    <div id="form-liked" style="display: none;">
+                                                        @csrf
+                                                        <button type="button"
+                                                            style="background: transparent;border:transparent"
+                                                            class="liked btn-liked">
+                                                            <svg class="last mb-1" xmlns="http://www.w3.org/2000/svg"
+                                                                width="18" height="18" viewBox="0 0 24 24">
+                                                                <path fill="red"
+                                                                    d="M18 21H8V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L15.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.037.375t-.113.375l-3 7.05q-.225.5-.75.85T18 21M6 8v13H2V8z" />
+                                                            </svg>
+                                                        </button>
+                                                    </div>
 
-                                                        <form id="form-like">
-                                                            @csrf
-                                                            <button type="submit" style="background: transparent;border:transparent"
-                                                                class="like btn-like">
-                                                                <svg class="last mb-1" xmlns="http://www.w3.org/2000/svg"
-                                                                    width="18" height="18" viewBox="0 0 24 24">
-                                                                    <path fill="#E93314"
-                                                                        d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
-                                                                </svg>
-                                                            </button>
-                                                        </form>
+                                                    <span id="like"
+                                                        data-like="{{ $likes }}">{{ $likes }}</span>
+                                                </li> --}}
 
-                                                        <form id="form-liked" style="display: none;">
-                                                            @csrf
-                                                            <button type="button"
-                                                                style="background: transparent;border:transparent"
-                                                                class="liked btn-liked">
-                                                                <svg class="last mb-1" xmlns="http://www.w3.org/2000/svg"
-                                                                    width="18" height="18" viewBox="0 0 24 24">
-                                                                    <path fill="red"
-                                                                        d="M18 21H8V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L15.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.037.375t-.113.375l-3 7.05q-.225.5-.75.85T18 21M6 8v13H2V8z" />
-                                                                </svg>
-                                                            </button>
-                                                        </form>
-
-                                                        <span id="like"
-                                                            data-like="{{ $likes }}">{{ $likes }}</span>
-                                                    </li>
-
-                                                    {{-- mobile --}}
-                                                    {{-- <li class="d-flex align-items-center d-md-none d-none">
-
-                                                        <div id="form-like">
-                                                            @csrf
-                                                            <button type="button"
-                                                                style="background: transparent;border:transparent"
-                                                                class="like btn-like">
-                                                                <svg class="last mb-1" xmlns="http://www.w3.org/2000/svg"
-                                                                    width="18" height="18" viewBox="0 0 24 24">
-                                                                    <path fill="#E93314"
-                                                                        d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
-                                                                </svg>
-                                                            </button>
-                                                        </div>
-
-                                                        <div id="form-liked" style="display: none;">
-                                                            @csrf
-                                                            <button type="button"
-                                                                style="background: transparent;border:transparent"
-                                                                class="liked btn-liked">
-                                                                <svg class="last mb-1" xmlns="http://www.w3.org/2000/svg"
-                                                                    width="18" height="18" viewBox="0 0 24 24">
-                                                                    <path fill="red"
-                                                                        d="M18 21H8V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L15.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.037.375t-.113.375l-3 7.05q-.225.5-.75.85T18 21M6 8v13H2V8z" />
-                                                                </svg>
-                                                            </button>
-                                                        </div>
-
-                                                        <span id="like"
-                                                            data-like="{{ $likes }}">{{ $likes }}</span>
-                                                    </li> --}}
-
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div
-                                        class="col-md-1 col-sm-1 col-lg-1 d-none d-md-flex align-items-center justify-content-end mb-3">
-                                        <button style="border: none;" class="btn-news-report bg-transparent"
-                                            type="button" data-id="{{ $news->id }}">
-                                            <li>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                    viewBox="0 0 24 24">
-                                                    <path fill="none" stroke="currentColor" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="2"
-                                                        d="M5 5a5 5 0 0 1 7 0a5 5 0 0 0 7 0v9a5 5 0 0 1-7 0a5 5 0 0 0-7 0zm0 16v-7" />
-                                                </svg>
-                                            </li>
-                                        </button>
-                                    </div>
                                 </div>
-                            </ul>
-
-                        </div>
-
-                        <div class="news-para text-justify">
-                            <p>
-                                {!! $processedContent !!}
-                            </p>
-
-                        </div>
-                        <p> Tag :
-                            @forelse ($newsTags as $tag)
-                                <a data-toggle="tooltip" data-placement="top" title="{{ $tag->tags->name }}"
-                                    href="{{ route('news-tag-list.user', ['tag' => $tag->tags->slug]) }}"
-                                    class="btn btn-rounded btn-outline-primary">{{ $tag->tags->name }}</a>
-                            @empty
-                            @endforelse
-                        </p>
-                    </article>
-
-                    <div id="cmt-form">
-                        @auth
-                            <div class="mb-30">
-                                <h3 class="comment-box-title">Tinggalkan Komentar</h3>
+                                <div
+                                    class="col-md-1 col-sm-1 col-lg-1 d-none d-md-flex align-items-center justify-content-end mb-3">
+                                    <button style="border: none;" class="btn-news-report bg-transparent"
+                                        type="button" data-id="{{ $news->id }}">
+                                        <li>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                viewBox="0 0 24 24">
+                                                <path fill="none" stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 5a5 5 0 0 1 7 0a5 5 0 0 0 7 0v9a5 5 0 0 1-7 0a5 5 0 0 0-7 0zm0 16v-7" />
+                                            </svg>
+                                        </li>
+                                    </button>
+                                </div>
                             </div>
-                            <form action="{{ route('comment.create', ['news' => $news->id]) }}" class="comment-form"
-                                method="POST">
-                                @method('post')
-                                @csrf
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <textarea name="description" id="messages" cols="30" rows="10" placeholder="Tinggalkan komentar"></textarea>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12 mt-1 d-flex justify-content-end">
-                                        <button type="submit" class="btn-two">Komentar</button>
-                                    </div>
-                                </div>
-                            </form>
-                        @else
-                            <div class="mb-30">
-                                <h3 class="comment-box-title">Tinggalkan Komentar</h3>
-                            </div>
-                            <form action="{{ route('comment.create', ['news' => $news->id]) }}" class="comment-form"
-                                method="POST">
-                                @method('post')
-                                @csrf
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <input type="text" name="name" id="name" required placeholder="Nama">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <input type="email" name="email" id="email" required
-                                                placeholder="Alamat Email*">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <textarea name="description" id="messages" cols="30" rows="10" placeholder="Tinggalkan komentar"></textarea>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12 mt-1 d-flex justify-content-end">
-                                        <button type="submit" class="btn-two">Komentar</button>
-                                    </div>
-                                </div>
-                            </form>
-                        @endauth
+                        </ul>
                     </div>
 
-                    <h3 class="comment-box-title mt-5">{{ $news->comments_count }} Komentar</h3>
-                    <div class="comment-item-wrap">
-                        @php
-                            $groupedReplies = [];
-                            foreach ($comments as $comment) {
-                                if ($comment->parent_id) {
-                                    $parentId = $comment->parent_id;
-                                    if (!isset($groupedReplies[$parentId])) {
-                                        $groupedReplies[$parentId] = [];
-                                    }
-                                    $groupedReplies[$parentId][] = $comment;
-                                }
-                            }
-                        @endphp
+                    <div class="news-para text-justify">
+                        <p>
+                            {!! $processedContent !!}
+                        </p>
+                    </div>
 
-                        @forelse ($comments as $comment)
-                            @if ($comment->parent_id === null)
-                                <div class="comment-item">
-                                    <div class="comment-author-img">
-                                        <img src="
-                                        @if ($comment->user_id != null) {{ asset($comment->user->image ? 'storage/' . $comment->user->image : 'default.png') }}
-                                        @else
-                                            {{ asset('default.png') }} @endif
-                                    "
-                                            alt="Image">
-                                    </div>
-                                    <div class="comment-author-wrap">
-                                        <div class="comment-author-info">
-                                            <div class="row align-items-start">
-                                                <div class="col-md-9 col-sm-12 col-12 order-md-1 order-sm-1 order-1">
-                                                    <div class="comment-author-name">
-                                                        @if ($comment->user != null)
-                                                            <h5>{{ $comment->user->name }}</h5>
-                                                        @else
-                                                            <h5>{{ $comment->name }}</h5>
-                                                        @endif
-                                                        <span
-                                                            class="comment-date">{{ $comment->created_at->diffForHumans() }}</span>
-                                                    </div>
-                                                </div>
-
-                                                <div
-                                                    class="col-md-3 col-sm-3 col-3 text-md-end order-md-1 order-sm-1 order-1">
-                                                    <a class="" href="javascript:void(0)" role="button"
-                                                        id="dropdownMenuLink1" data-bs-toggle="dropdown"
-                                                        aria-expanded="false">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="19"
-                                                            height="19" viewBox="0 0 24 24">
-                                                            <path fill="none" stroke="currentColor"
-                                                                stroke-linejoin="round" stroke-width="3"
-                                                                d="M12 12h.01v.01H12zm0-7h.01v.01H12zm0 14h.01v.01H12z" />
-                                                        </svg>
-                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                            @auth
-                                                                @if ($comment->user_id == auth()->user()->id && $comment->ip_address == $ipAddress)
-                                                                    <li>
-                                                                        <button class="btn btn-sm btn-edit-comment"
-                                                                            data-id="{{ $comment->id }}"
-                                                                            data-description="{{ $comment->description }}">
-                                                                            Edit
-                                                                        </button>
-                                                                    </li>
-                                                                    <li>
-                                                                        <button class="btn btn-sm btn-comment-delete"
-                                                                            data-id="{{ $comment->id }}">
-                                                                            Hapus
-                                                                        </button>
-                                                                    </li>
-                                                                @endif
-                                                                @if ($comment->user_id != auth()->user()->id)
-                                                                    <li>
-                                                                        <button class="btn btn-sm btn-comment-report"
-                                                                            data-id="{{ $comment->id }}">
-                                                                            Laporkan
-                                                                        </button>
-                                                                    </li>
-                                                                @endif
-                                                                @if ($news->user_id == auth()->user()->id)
-                                                                    <li>
-                                                                        <button class="btn btn-sm btn-comment-delete"
-                                                                            data-id="{{ $comment->id }}">
-                                                                            Hapus
-                                                                        </button>
-                                                                    </li>
-                                                                @endif
-                                                            @else
-                                                                @if ($comment->user_id == null && $comment->ip_address == $ipAddress)
-                                                                    <li>
-                                                                        <button class="btn btn-sm btn-edit-comment"
-                                                                            data-id="{{ $comment->id }}"
-                                                                            data-description="{{ $comment->description }}">
-                                                                            Edit
-                                                                        </button>
-                                                                    </li>
-                                                                    <li>
-                                                                        <button class="btn btn-sm btn-comment-delete"
-                                                                            data-id="{{ $comment->id }}">
-                                                                            Hapus
-                                                                        </button>
-                                                                    </li>
-                                                                @endif
-                                                                @if (!empty($comment->user_id))
-                                                                    <li>
-                                                                        <button class="btn btn-sm btn-comment-report"
-                                                                            data-id="{{ $comment->id }}">
-                                                                            Laporkan
-                                                                        </button>
-                                                                    </li>
-                                                                @endif
-                                                            @endauth
-                                                        </ul>
-                                                    </a>
-                                                </div>
-                                                <div class="col-md-12 col-sm-12 col-12 order-md-3 order-sm-3 order-3">
-                                                    <div class="comment-text">
-                                                        <p>{{ $comment->description }}</p>
-                                                    </div>
-                                                </div>
-                                                <div
-                                                    class="col-md-12 col-sm-12 col-12 text-md-start order-md-3 order-sm-3 order-3">
-                                                    <a href="avascript:void(0)" class="reply-btn"
-                                                        onclick="showReplyForm({{ $comment->id }})">Balas</a>
-                                                </div>
-                                            </li>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div id="edit-form-{{ $comment->id }}" class="reply-form mt-3 mb-3"
-                                    style="display: none;">
-                                    <form id="form-edit-{{ $comment->id }}" method="post">
-                                        @method('put')
-                                        @csrf
-                                        <div class="row">
-                                            <div class="col-lg-12 mt-2">
-                                                <textarea name="description" id="update-description-{{ $comment->id }}" class="form-control mb-2 edit-coment"
-                                                    cols="100" rows="2" placeholder="Balas Komentar" style="resize: none; colo"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex gap-2">
-                                            <button type="button" class="btn-two w-40 btn-cancel-edit"
-                                                data-id="{{ $comment->id }}"
-                                                style="background-color: #0F4D8A;padding:10px !important">Batal</button>
-                                            <button type="submit" class="btn-two w-100 btn"
-                                                style="background-color: #0F4D8A;padding:10px !important">Edit
-                                                Komentar</button>
-                                        </div>
-                                    </form>
-                                </div>
-
-                                <div id="reply-form-{{ $comment->id }}" class="reply-form mt-3" style="display: none;">
-                                    <form
-                                        action="{{ route('reply.create', ['news' => $news->id, 'comment' => $comment->id]) }}"
-                                        method="post">
-                                        @method('post')
-                                        @csrf
-                                        <div class="row">
-                                            @auth
-                                                <div class="col-lg-12 mt-2">
-                                                    <textarea name="description" class="form-control mb-2" cols="100" rows="2" placeholder="Balas Komentar"
-                                                        style="resize: none"></textarea>
-                                                </div>
-                                            @else
-                                                <div class="col-md-6">
-                                                    <input type="text" class="form-control" name="name" id="name"
-                                                        required placeholder="Nama">
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <input type="email" class="form-control" name="email" id="email"
-                                                        required placeholder="Alamat Email*">
-                                                </div>
-                                                <div class="col-lg-12 mt-2">
-                                                    <textarea name="description" class="form-control mb-2" cols="100" rows="2" placeholder="Balas Komentar"
-                                                        style="resize: none"></textarea>
-                                                </div>
-                                            @endauth
-                                        </div>
-                                        <div>
-                                            <button type="submit" class="btn-two w-100 btn"
-                                                style="background-color: #0F4D8A;padding:10px !important">Kirim
-                                                Balasan</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            @endif
-
-                            @foreach ($groupedReplies[$comment->id] ?? [] as $index => $reply)
-                                <div class="comment-item reply">
-                                    <div class="comment-author-img">
-                                        <img src="
-                                                @if ($reply->user_id != null) {{ asset($reply->user->image ? 'storage/' . $reply->user->image : 'default.png') }}
-                                                @else
-                                                    {{ asset('default.png') }} @endif
-                                                "
-                                            alt="Image">
-                                    </div>
-                                    <div class="comment-author-wrap">
-                                        <div class="comment-author-info">
-                                            <div class="row align-items-start">
-                                                <div class="col-md-9 col-sm-12 col-12 order-md-1 order-sm-1 order-1">
-                                                    <div class="comment-author-name">
-                                                        @if ($reply->user != null)
-                                                            <h5>{{ $reply->user->name }}</h5>
-                                                        @else
-                                                            <h5>{{ $reply->name }}</h5>
-                                                        @endif
-                                                        <span
-                                                            class="comment-date">{{ $reply->created_at->diffForHumans() }}</span>
-                                                    </div>
-                                                </div>
-                                                <div
-                                                    class="col-md-3 col-sm-3 col-3 text-md-end order-md-1 order-sm-1 order-1">
-                                                    <a class="" href="javascript:void(0)" role="button"
-                                                        id="dropdownMenuLink1" data-bs-toggle="dropdown"
-                                                        aria-expanded="false">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="19"
-                                                            height="19" viewBox="0 0 24 24">
-                                                            <path fill="none" stroke="currentColor"
-                                                                stroke-linejoin="round" stroke-width="3"
-                                                                d="M12 12h.01v.01H12zm0-7h.01v.01H12zm0 14h.01v.01H12z" />
-                                                        </svg>
-                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                            @auth
-                                                                @if ($reply->user_id == auth()->user()->id && $reply->ip_address == $ipAddress)
-                                                                    <li>
-                                                                        <button class="btn btn-sm btn-edit-comment"
-                                                                            data-id="{{ $reply->id }}"
-                                                                            data-description="{{ $reply->description }}">
-                                                                            Edit
-                                                                        </button>
-                                                                    </li>
-                                                                    <li>
-                                                                        <button class="btn btn-sm btn-comment-delete"
-                                                                            data-id="{{ $reply->id }}">
-                                                                            Hapus
-                                                                        </button>
-                                                                    </li>
-                                                                @endif
-                                                                @if ($reply->user_id != auth()->user()->id)
-                                                                    <li>
-                                                                        <button class="btn btn-sm btn-comment-report"
-                                                                            data-id="{{ $reply->id }}">
-                                                                            Laporkan
-                                                                        </button>
-                                                                    </li>
-                                                                @endif
-                                                                @if ($news->user_id == auth()->user()->id)
-                                                                    <li>
-                                                                        <button class="btn btn-sm btn-comment-delete"
-                                                                            data-id="{{ $comment->id }}">
-                                                                            Hapus
-                                                                        </button>
-                                                                    </li>
-                                                                @endif
-                                                            @else
-                                                                @if ($reply->user_id == null && $reply->ip_address == $ipAddress)
-                                                                    <li>
-                                                                        <button class="btn btn-sm btn-edit-comment"
-                                                                            data-id="{{ $reply->id }}"
-                                                                            data-description="{{ $reply->description }}">
-                                                                            Edit
-                                                                        </button>
-                                                                    </li>
-                                                                    <li>
-                                                                        <button class="btn btn-sm btn-comment-delete"
-                                                                            data-id="{{ $reply->id }}">
-                                                                            Hapus
-                                                                        </button>
-                                                                    </li>
-                                                                @endif
-                                                                @if (!empty($reply->user_id))
-                                                                    <li>
-                                                                        <button class="btn btn-sm btn-comment-report"
-                                                                            data-id="{{ $reply->id }}">
-                                                                            Laporkan
-                                                                        </button>
-                                                                    </li>
-                                                                @endif
-                                                            @endauth
-                                                        </ul>
-                                                    </a>
-                                                </div>
-                                                <div class="col-md-12 col-sm-12 col-12 order-md-3 order-sm-3 order-3">
-                                                    <div class="comment-text">
-                                                        <p>{{ $reply->description }}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="edit-reply-{{ $reply->id }}" class="reply-form mt-3 mb-3"
-                                    style="display: none;">
-                                    <form id="reply-edit-{{ $reply->id }}" method="post">
-                                        @method('put')
-                                        @csrf
-                                        <div class="row">
-                                            <div class="col-lg-12 mt-2">
-                                                <textarea name="description" id="update-reply-description-{{ $reply->id }}" class="form-control mb-2"
-                                                    cols="100" rows="2" placeholder="Balas Komentar" style="resize: none"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex gap-2">
-                                            <button type="button" class="btn-two w-40 btn-cancel-reply-edit"
-                                                data-id="{{ $reply->id }}"
-                                                style="background-color: #0F4D8A;padding:10px !important">Batal</button>
-                                            <button type="submit" class="btn-two w-100 btn"
-                                                style="background-color: #0F4D8A;padding:10px !important">Edit
-                                                Komentar</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            @endforeach
+                    <p> Tag :
+                        @forelse ($newsTags as $tag)
+                            <a data-toggle="tooltip" data-placement="top" title="{{ $tag->tags->name }}"
+                                href="{{ route('news-tag-list.user', ['tag' => $tag->tags->slug]) }}"
+                                class="btn btn-rounded btn-outline-primary">{{ $tag->tags->name }}</a>
                         @empty
                         @endforelse
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="sidebar">
-                        <div class="sidebar-widget" id="popular-categories">
-                            <h3 class="sidebar-widget-title">Kategori Populer</h3>
-                            <ul class="category-widget list-style">
-                                @foreach ($CategoryPopulars as $category)
-                                    <li>
-                                        <a data-toggle="tooltip" data-placement="top" title="{{ $category->name }}"
-                                            href="{{ route('categories.show.user', ['category' => $category->slug]) }}">
-                                            <img src="{{ asset('assets/img/icons/arrow-right.svg') }}"
-                                                alt="Image">{{ $category->name }}
-                                            <span>({{ $category->news_categories_count }})</span>
-                                        </a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                        <div class="sidebar-widget" id="popular-tags">
-                            <h3 class="sidebar-widget-title">Tag Populer</h3>
-                            <ul class="tag-list list-style">
-                                @forelse ($popularTags as $popularTag)
-                                    <li><a
-                                            href="{{ route('news-tag-list.user', ['tag' => $popularTag->slug]) }}">{{ $popularTag->name }}</a>
-                                    </li>
-                                @empty
-                                @endforelse
-                            </ul>
-                        </div>
+                    </p>
+                </article>
 
-                    {{-- @if (isset($advertisement_rights))
-                    <a href="{{ $advertisement_rights->url }}">
-                        <div class="sidebar mt-3 mb-4" id="right-advertisement">
-                            <img src="{{ asset($advertisement_rights && $advertisement_rights->image != null ? 'storage/' . $advertisement_rights->image : 'CONTOHIKLAN.png') }}" alt="Advertisement">
+                <div id="cmt-form">
+                    @auth
+                        <div class="mb-30">
+                            <h3 class="comment-box-title">Tinggalkan Komentar</h3>
                         </div>
-                    </a>
+                        <form action="{{ route('comment.create', ['news' => $news->id]) }}" class="comment-form"
+                            method="POST">
+                            @method('post')
+                            @csrf
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <textarea name="description" id="messages" cols="30" rows="10" placeholder="Tinggalkan komentar"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 mt-1 d-flex justify-content-end">
+                                    <button type="submit" class="btn-two">Komentar</button>
+                                </div>
+                            </div>
+                        </form>
                     @else
-                    <div class="sidebar mt-3 mb-4 bg_gray" style="height: 603px;">
-                        <p class="text-center align-middle" style="line-height: 603px;">Iklan</p>
-                    </div>
-                    @endif --}}
+                        <div class="mb-30">
+                            <h3 class="comment-box-title">Tinggalkan Komentar</h3>
+                        </div>
+                        <form action="{{ route('comment.create', ['news' => $news->id]) }}" class="comment-form"
+                            method="POST">
+                            @method('post')
+                            @csrf
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" name="name" id="name" required placeholder="Nama">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="email" name="email" id="email" required
+                                            placeholder="Alamat Email*">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <textarea name="description" id="messages" cols="30" rows="10" placeholder="Tinggalkan komentar"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 mt-1 d-flex justify-content-end">
+                                    <button type="submit" class="btn-two">Komentar</button>
+                                </div>
+                            </div>
+                        </form>
+                    @endauth
                 </div>
+
+                <h3 class="comment-box-title mt-5">{{ $news->comments_count }} Komentar</h3>
+                <div class="comment-item-wrap mb-5">
+                    @php
+                        $groupedReplies = [];
+                        foreach ($comments as $comment) {
+                            if ($comment->parent_id) {
+                                $parentId = $comment->parent_id;
+                                if (!isset($groupedReplies[$parentId])) {
+                                    $groupedReplies[$parentId] = [];
+                                }
+                                $groupedReplies[$parentId][] = $comment;
+                            }
+                        }
+                    @endphp
+
+                    @forelse ($comments as $comment)
+                        @if ($comment->parent_id === null)
+                            <div class="comment-item">
+                                <div class="comment-author-img">
+                                    <img src="
+                                    @if ($comment->user_id != null) {{ asset($comment->user->image ? 'storage/' . $comment->user->image : 'default.png') }}
+                                    @else
+                                        {{ asset('default.png') }} @endif
+                                "
+                                        alt="Image">
+                                </div>
+                                <div class="comment-author-wrap">
+                                    <div class="comment-author-info">
+                                        <div class="row align-items-start">
+                                            <div class="col-md-9 col-sm-12 col-12 order-md-1 order-sm-1 order-1">
+                                                <div class="comment-author-name">
+                                                    @if ($comment->user != null)
+                                                        <h5>{{ $comment->user->name }}</h5>
+                                                    @else
+                                                        <h5>{{ $comment->name }}</h5>
+                                                    @endif
+                                                    <span
+                                                        class="comment-date">{{ $comment->created_at->diffForHumans() }}</span>
+                                                </div>
+                                            </div>
+
+                                            <div
+                                                class="col-md-3 col-sm-3 col-3 text-md-end order-md-1 order-sm-1 order-1">
+                                                <a class="" href="javascript:void(0)" role="button"
+                                                    id="dropdownMenuLink1" data-bs-toggle="dropdown"
+                                                    aria-expanded="false">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="19"
+                                                        height="19" viewBox="0 0 24 24">
+                                                        <path fill="none" stroke="currentColor"
+                                                            stroke-linejoin="round" stroke-width="3"
+                                                            d="M12 12h.01v.01H12zm0-7h.01v.01H12zm0 14h.01v.01H12z" />
+                                                    </svg>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                        @auth
+                                                            @if ($comment->user_id == auth()->user()->id && $comment->ip_address == $ipAddress)
+                                                                <li>
+                                                                    <button class="btn btn-sm btn-edit-comment"
+                                                                        data-id="{{ $comment->id }}"
+                                                                        data-description="{{ $comment->description }}">
+                                                                        Edit
+                                                                    </button>
+                                                                </li>
+                                                                <li>
+                                                                    <button class="btn btn-sm btn-comment-delete"
+                                                                        data-id="{{ $comment->id }}">
+                                                                        Hapus
+                                                                    </button>
+                                                                </li>
+                                                            @endif
+                                                            @if ($comment->user_id != auth()->user()->id)
+                                                                <li>
+                                                                    <button class="btn btn-sm btn-comment-report"
+                                                                        data-id="{{ $comment->id }}">
+                                                                        Laporkan
+                                                                    </button>
+                                                                </li>
+                                                            @endif
+                                                            @if ($news->user_id == auth()->user()->id)
+                                                                <li>
+                                                                    <button class="btn btn-sm btn-comment-delete"
+                                                                        data-id="{{ $comment->id }}">
+                                                                        Hapus
+                                                                    </button>
+                                                                </li>
+                                                            @endif
+                                                        @else
+                                                            @if ($comment->user_id == null && $comment->ip_address == $ipAddress)
+                                                                <li>
+                                                                    <button class="btn btn-sm btn-edit-comment"
+                                                                        data-id="{{ $comment->id }}"
+                                                                        data-description="{{ $comment->description }}">
+                                                                        Edit
+                                                                    </button>
+                                                                </li>
+                                                                <li>
+                                                                    <button class="btn btn-sm btn-comment-delete"
+                                                                        data-id="{{ $comment->id }}">
+                                                                        Hapus
+                                                                    </button>
+                                                                </li>
+                                                            @endif
+                                                            @if (!empty($comment->user_id))
+                                                                <li>
+                                                                    <button class="btn btn-sm btn-comment-report"
+                                                                        data-id="{{ $comment->id }}">
+                                                                        Laporkan
+                                                                    </button>
+                                                                </li>
+                                                            @endif
+                                                        @endauth
+                                                    </ul>
+                                                </a>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 col-12 order-md-3 order-sm-3 order-3">
+                                                <div class="comment-text">
+                                                    <p>{{ $comment->description }}</p>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="col-md-12 col-sm-12 col-12 text-md-start order-md-3 order-sm-3 order-3">
+                                                <a href="avascript:void(0)" class="reply-btn"
+                                                    onclick="showReplyForm({{ $comment->id }})">Balas</a>
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="edit-form-{{ $comment->id }}" class="reply-form mt-3 mb-3"
+                                style="display: none;">
+                                <form id="form-edit-{{ $comment->id }}" method="post">
+                                    @method('put')
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-lg-12 mt-2">
+                                            <textarea name="description" id="update-description-{{ $comment->id }}" class="form-control mb-2 edit-coment"
+                                                cols="100" rows="2" placeholder="Balas Komentar" style="resize: none; colo"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-2">
+                                        <button type="button" class="btn-two w-40 btn-cancel-edit"
+                                            data-id="{{ $comment->id }}"
+                                            style="background-color: #0F4D8A;padding:10px !important">Batal</button>
+                                        <button type="submit" class="btn-two w-100 btn"
+                                            style="background-color: #0F4D8A;padding:10px !important">Edit
+                                            Komentar</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div id="reply-form-{{ $comment->id }}" class="reply-form mt-3" style="display: none;">
+                                <form
+                                    action="{{ route('reply.create', ['news' => $news->id, 'comment' => $comment->id]) }}"
+                                    method="post">
+                                    @method('post')
+                                    @csrf
+                                    <div class="row">
+                                        @auth
+                                            <div class="col-lg-12 mt-2">
+                                                <textarea name="description" class="form-control mb-2" cols="100" rows="2" placeholder="Balas Komentar"
+                                                    style="resize: none"></textarea>
+                                            </div>
+                                        @else
+                                            <div class="col-md-6">
+                                                <input type="text" class="form-control" name="name" id="name"
+                                                    required placeholder="Nama">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="email" class="form-control" name="email" id="email"
+                                                    required placeholder="Alamat Email*">
+                                            </div>
+                                            <div class="col-lg-12 mt-2">
+                                                <textarea name="description" class="form-control mb-2" cols="100" rows="2" placeholder="Balas Komentar"
+                                                    style="resize: none"></textarea>
+                                            </div>
+                                        @endauth
+                                    </div>
+                                    <div>
+                                        <button type="submit" class="btn-two w-100 btn"
+                                            style="background-color: #0F4D8A;padding:10px !important">Kirim
+                                            Balasan</button>
+                                    </div>
+                                </form>
+                            </div>
+                        @endif
+
+                        @foreach ($groupedReplies[$comment->id] ?? [] as $index => $reply)
+                            <div class="comment-item reply">
+                                <div class="comment-author-img">
+                                    <img src="
+                                            @if ($reply->user_id != null) {{ asset($reply->user->image ? 'storage/' . $reply->user->image : 'default.png') }}
+                                            @else
+                                                {{ asset('default.png') }} @endif
+                                            "
+                                        alt="Image">
+                                </div>
+                                <div class="comment-author-wrap">
+                                    <div class="comment-author-info">
+                                        <div class="row align-items-start">
+                                            <div class="col-md-9 col-sm-12 col-12 order-md-1 order-sm-1 order-1">
+                                                <div class="comment-author-name">
+                                                    @if ($reply->user != null)
+                                                        <h5>{{ $reply->user->name }}</h5>
+                                                    @else
+                                                        <h5>{{ $reply->name }}</h5>
+                                                    @endif
+                                                    <span
+                                                        class="comment-date">{{ $reply->created_at->diffForHumans() }}</span>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="col-md-3 col-sm-3 col-3 text-md-end order-md-1 order-sm-1 order-1">
+                                                <a class="" href="javascript:void(0)" role="button"
+                                                    id="dropdownMenuLink1" data-bs-toggle="dropdown"
+                                                    aria-expanded="false">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="19"
+                                                        height="19" viewBox="0 0 24 24">
+                                                        <path fill="none" stroke="currentColor"
+                                                            stroke-linejoin="round" stroke-width="3"
+                                                            d="M12 12h.01v.01H12zm0-7h.01v.01H12zm0 14h.01v.01H12z" />
+                                                    </svg>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                        @auth
+                                                            @if ($reply->user_id == auth()->user()->id && $reply->ip_address == $ipAddress)
+                                                                <li>
+                                                                    <button class="btn btn-sm btn-edit-comment"
+                                                                        data-id="{{ $reply->id }}"
+                                                                        data-description="{{ $reply->description }}">
+                                                                        Edit
+                                                                    </button>
+                                                                </li>
+                                                                <li>
+                                                                    <button class="btn btn-sm btn-comment-delete"
+                                                                        data-id="{{ $reply->id }}">
+                                                                        Hapus
+                                                                    </button>
+                                                                </li>
+                                                            @endif
+                                                            @if ($reply->user_id != auth()->user()->id)
+                                                                <li>
+                                                                    <button class="btn btn-sm btn-comment-report"
+                                                                        data-id="{{ $reply->id }}">
+                                                                        Laporkan
+                                                                    </button>
+                                                                </li>
+                                                            @endif
+                                                            @if ($news->user_id == auth()->user()->id)
+                                                                <li>
+                                                                    <button class="btn btn-sm btn-comment-delete"
+                                                                        data-id="{{ $comment->id }}">
+                                                                        Hapus
+                                                                    </button>
+                                                                </li>
+                                                            @endif
+                                                        @else
+                                                            @if ($reply->user_id == null && $reply->ip_address == $ipAddress)
+                                                                <li>
+                                                                    <button class="btn btn-sm btn-edit-comment"
+                                                                        data-id="{{ $reply->id }}"
+                                                                        data-description="{{ $reply->description }}">
+                                                                        Edit
+                                                                    </button>
+                                                                </li>
+                                                                <li>
+                                                                    <button class="btn btn-sm btn-comment-delete"
+                                                                        data-id="{{ $reply->id }}">
+                                                                        Hapus
+                                                                    </button>
+                                                                </li>
+                                                            @endif
+                                                            @if (!empty($reply->user_id))
+                                                                <li>
+                                                                    <button class="btn btn-sm btn-comment-report"
+                                                                        data-id="{{ $reply->id }}">
+                                                                        Laporkan
+                                                                    </button>
+                                                                </li>
+                                                            @endif
+                                                        @endauth
+                                                    </ul>
+                                                </a>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 col-12 order-md-3 order-sm-3 order-3">
+                                                <div class="comment-text">
+                                                    <p>{{ $reply->description }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="edit-reply-{{ $reply->id }}" class="reply-form mt-3 mb-3"
+                                style="display: none;">
+                                <form id="reply-edit-{{ $reply->id }}" method="post">
+                                    @method('put')
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-lg-12 mt-2">
+                                            <textarea name="description" id="update-reply-description-{{ $reply->id }}" class="form-control mb-2"
+                                                cols="100" rows="2" placeholder="Balas Komentar" style="resize: none"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-2">
+                                        <button type="button" class="btn-two w-40 btn-cancel-reply-edit"
+                                            data-id="{{ $reply->id }}"
+                                            style="background-color: #0F4D8A;padding:10px !important">Batal</button>
+                                        <button type="submit" class="btn-two w-100 btn"
+                                            style="background-color: #0F4D8A;padding:10px !important">Edit
+                                            Komentar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        @endforeach
+                    @empty
+                    @endforelse
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="sidebar">
+                <div class="sidebar-widget" id="popular-categories">
+                    <h3 class="sidebar-widget-title">Kategori Populer</h3>
+                    <ul class="category-widget list-style">
+                        @foreach ($CategoryPopulars as $category)
+                            <li>
+                                <a data-toggle="tooltip" data-placement="top" title="{{ $category->name }}"
+                                    href="{{ route('categories.show.user', ['category' => $category->slug]) }}">
+                                    <img src="{{ asset('assets/img/icons/arrow-right.svg') }}"
+                                        alt="Image">{{ $category->name }}
+                                    <span>({{ $category->news_categories_count }})</span>
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+                <div class="sidebar-widget" id="popular-tags">
+                    <h3 class="sidebar-widget-title">Tag Populer</h3>
+                    <ul class="tag-list list-style">
+                        @forelse ($popularTags as $popularTag)
+                            <li><a
+                                    href="{{ route('news-tag-list.user', ['tag' => $popularTag->slug]) }}">{{ $popularTag->name }}</a>
+                            </li>
+                        @empty
+                        @endforelse
+                    </ul>
+                </div>
+                {{-- komentar2 --}}
             </div>
         </div>
     </div>
@@ -1012,6 +1014,7 @@
             </div>
         </div>
     </div>
+</div>
 @endsection
 
 @section('script')
