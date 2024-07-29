@@ -59,11 +59,16 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
             ->paginate(10);
     }
 
-    public function where($data): mixed
+    public function where($data, Request $request): mixed
     {
         return $this->model->query()
             ->when($data == 'accepted', function ($query) {
                 $query->where('status', AuthorEnum::ACCEPTED->value);
+            })
+            ->when($request->name, function ($query) use ($request) {
+                $query->whereHas('user', function ($q) use ($request) {
+                    $q->where('name', 'LIKE', '%' . $request->name . '%');
+                });
             })
             ->paginate(10);
     }

@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 
 interface AuthorInterface extends StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, ShowWithSlugInterface
 {
-    public function where($data) :mixed;
+    public function where($data, Request $request): mixed;
     public function accepted();
     public function updateByUser($user, array $data) : mixed;
     public function whereUserId();
