@@ -84,15 +84,13 @@
                     <div class="card-body">
                         <h3 for="" class="form-label">Thumbnail</h3>
 
-                        <div class="gambar-iklan mb-4 d-flex justify-content-center">
-                            <img id="preview" class="hide" style="object-fit: cover; border: transparent;" width="350" height="200" alt="">
+                        <div id="preview-container" class="gambar-iklan mb-4 d-flex justify-content-center">
                         </div>
                         <div class="d-flex justify-content-center mt-3">
                             <label for="image-upload" class="btn btn-primary">
                                 Unggah
                             </label>
-                            <input type="file" name="image" id="image-upload"
-                                class="hide @error('photo') is-invalid @enderror" onchange="previewImage(event)">
+                            <input type="file" name="image" id="image-upload" accept="image/*,video/*" class="hide @error('photo') is-invalid @enderror">
                         </div>
                         <div class="d-flex justify-content-center">
                             <p class="text-muted mt-3">File dengan format Jpg atau Png </p>
@@ -356,20 +354,49 @@
             tokenSeparators: [',', ' ']
         })
 
-        function previewImage(event) {
-            var input = event.target;
-            var previewImg = document.getElementById('preview');
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    previewImg.src = e.target.result;
-                    previewImg.classList.remove('hide');
+        $(document).ready(function () {
+            $('#image-upload').on('change', function (event) {
+                var file = event.target.files[0];
+                var fileType = file.type;
+                var previewContainer = $('#preview-container');
+
+                // Bersihkan pratinjau sebelumnya
+                previewContainer.empty();
+
+                // Cek apakah file adalah gambar
+                if (fileType.startsWith('image/')) {
+                    var imgPreview = $('<img>', {
+                        id: 'preview',
+                        style: 'object-fit: cover; border: transparent; width: 350px; height: 200px;',
+                        alt: 'Image Preview'
+                    });
+
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        imgPreview.attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(file);
+                    previewContainer.append(imgPreview);
                 }
-                reader.readAsDataURL(input.files[0]);
-            } else {
-                previewImg.src = '';
-                previewImg.classList.add('hide');
-            }
-        }
+                // Cek apakah file adalah video
+                else if (fileType.startsWith('video/')) {
+                    var videoPreview = $('<video>', {
+                        id: 'preview',
+                        style: 'object-fit: cover; border: transparent; width: 350px; height: 200px;',
+                        controls: true
+                    });
+
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        videoPreview.attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(file);
+                    previewContainer.append(videoPreview);
+                } else {
+                    alert('File tidak didukung!');
+                }
+            });
+        });
+
     </script>
 @endsection
