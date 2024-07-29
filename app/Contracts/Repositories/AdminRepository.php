@@ -29,10 +29,13 @@ class AdminRepository extends BaseRepository implements AdminInterface
             ->delete();
     }
 
-    public function AccountAdmin()
+    public function AccountAdmin(Request $request)
     {
         return $this->model->query()
             ->whereRelation('roles', 'name', 'admin')
+            ->when($request->name, function ($query) use ($request) {
+                $query->where('name', 'LIKE', '%' . $request->name . '%');
+            })
             ->get();
     }
 
@@ -52,8 +55,8 @@ class AdminRepository extends BaseRepository implements AdminInterface
     public function showWithSlug(string $slug): mixed
     {
         return $this->model->query()
-        ->where('slug', $slug)
-        ->firstOrFail();
+            ->where('slug', $slug)
+            ->firstOrFail();
     }
 
     /**

@@ -11,10 +11,11 @@ use App\Contracts\Interfaces\Eloquent\ShowInterface;
 use App\Contracts\Interfaces\Eloquent\ShowWithSlugInterface;
 use App\Contracts\Interfaces\Eloquent\StoreInterface;
 use App\Contracts\Interfaces\Eloquent\UpdateInterface;
+use Illuminate\Http\Request;
 
 interface NewsInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, ShowWithSlugInterface, ChartInterface, DraftInterface, FindDraftInterface
 {
-    public function where($data, $paginate) : mixed;
+    public function where($data, $paginate, Request $request): mixed;
     public function whereSubCategory($id, $query) : mixed;
     public function subcategoryLatest($subcategory_id, $id, $status) : mixed;
     public function whereCategory($id, $query) : mixed;
@@ -27,16 +28,16 @@ interface NewsInterface extends GetInterface, StoreInterface, UpdateInterface, S
     public function latest() : mixed;
     public function allPin() : mixed;
     public function whereUser($id);
-    public function whereUserLike($user_id, $ipAddress) : mixed;
+    public function whereUserLike($user_id, $ipAddress, Request $request) : mixed;
     public function countByUserAndStatus($id, $status);
     public function whereTag($tags, $query) : mixed;
     public function tagLatest($tag_id, $paginate, $id, $status) : mixed;
     public function newsPopular() : mixed;
     public function newsPopularAdmin(): mixed;
     public function newsStatus($user_id, $status) : mixed;
-    public function userStatus($user_id, $status): mixed;
+    public function userStatus($user_id, $status, Request $request): mixed;
     public function monthlyViews($news, int $year): array;
-    public function showWithTrash(mixed $id): mixed;
+    public function showWithTrash(mixed $id, Request $request): mixed;
     public function accepted();
     public function NewsChart(mixed $year, mixed $month): mixed;
     public function whereDetailAuthor($id) : mixed;

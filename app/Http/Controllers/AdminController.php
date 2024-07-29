@@ -66,9 +66,9 @@ class AdminController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $admins = $this->admins->AccountAdmin();
+        $admins = $this->admins->AccountAdmin($request);
         return view('pages.admin.account.admin', compact('admins'));
     }
 
@@ -141,7 +141,7 @@ class AdminController extends Controller
         //     return back()->with('success' , 'Data berhasil dihapus');
         // }
     }
-    
+
     public function inbox()
     {
         $articles = $this->newsReport->get();

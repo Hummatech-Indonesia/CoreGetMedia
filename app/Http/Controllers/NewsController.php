@@ -86,20 +86,20 @@ class NewsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $user_id = auth()->user()->id;
-        $news = $this->news->showWithTrash($user_id);
-        $pendings = $this->news->userStatus($user_id, NewsEnum::PENDING->value);
-        $rejecteds = $this->news->userStatus($user_id, NewsEnum::REJECT->value);
-        $accepteds = $this->news->userStatus($user_id, NewsEnum::ACCEPTED->value);
+        $news = $this->news->showWithTrash($user_id, $request);
+        $pendings = $this->news->userStatus($user_id, NewsEnum::PENDING->value, $request);
+        $rejecteds = $this->news->userStatus($user_id, NewsEnum::REJECT->value, $request);
+        $accepteds = $this->news->userStatus($user_id, NewsEnum::ACCEPTED->value, $request);
         $drafts = $this->news->draft();
         return view('pages.author.news.list-news', compact('news', 'pendings', 'rejecteds', 'accepteds', 'drafts'));
     }
 
-    public function confirm_news()
+    public function confirm_news(Request $request)
     {
-        $news = $this->news->where(NewsEnum::PENDING->value, 10);
+        $news = $this->news->where(NewsEnum::PENDING->value, 10, $request);
         return view('pages.admin.news.confirm-news', compact('news'));
     }
 
@@ -129,9 +129,9 @@ class NewsController extends Controller
         return back()->with('success', 'Berhasil membuka banned berita');
     }
 
-    public function news_list()
+    public function news_list(Request $request)
     {
-        $news = $this->news->where(NewsEnum::ACCEPTED->value, 10);
+        $news = $this->news->where(NewsEnum::ACCEPTED->value, 10, $request);
         return view('pages.admin.news.news-list', compact('news'));
     }
 
