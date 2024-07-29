@@ -545,7 +545,7 @@
                         </ul>
                     </div>
 
-                    <div class="news-para">
+                    <div class="">
                         <p>
                             {!! $processedContent !!}
                         </p>
