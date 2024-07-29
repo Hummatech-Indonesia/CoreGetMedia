@@ -8,6 +8,7 @@ use App\Models\Faq;
 use App\Enums\NewsEnum;
 use App\Models\News;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class NewsRepository extends BaseRepository implements NewsInterface
 {
@@ -44,12 +45,15 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->get();
     }
 
-    public function showWithTrash(mixed $id): mixed
+    public function showWithTrash(mixed $id, Request $request): mixed
     {
         return $this->model->query()
             ->withTrashed()
             ->where('user_id', $id)
             ->latest()
+            ->when($request->name, function ($query) use ($request) {
+                $query->where('name', 'LIKE', '%' .  $request->name . '%');
+            })
             ->get();
     }
 
@@ -338,11 +342,14 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->count();
     }
 
-    public function userStatus($user_id, $status): mixed
+    public function userStatus($user_id, $status, Request $request                          ): mixed
     {
         return $this->model->query()
             ->where('user_id', $user_id)
             ->where('status', $status)
+            ->when($request->name, function ($query) use ($request) {
+                $query->where('name', 'LIKE', '%' .  $request->name . '%');
+            })
             ->get();
     }
 
