@@ -4,6 +4,7 @@ namespace App\Contracts\Repositories;
 
 use App\Contracts\Interfaces\CategoryInterface;
 use App\Models\Category;
+use Illuminate\Http\Request;
 
 class CategoryRepository extends BaseRepository implements CategoryInterface
 {
@@ -22,8 +23,8 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
     public function delete(mixed $id): mixed
     {
         return $this->model->query()
-        ->findOrFail($id)
-        ->delete();
+            ->findOrFail($id)
+            ->delete();
     }
 
     public function category_id_1(): mixed
@@ -82,11 +83,14 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
             ->get();
     }
 
-    public function paginate(): mixed
+    public function paginate(Request $request): mixed
     {
         return $this->model->query()
             ->withCount('newsCategories')
             ->orderBy('news_categories_count')
+            ->when($request->name, function ($query) use ($request) {
+                $query->where('name', 'LIKE', '%' .  $request->name . '%');
+            })
             ->paginate(10);
     }
 

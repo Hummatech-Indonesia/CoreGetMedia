@@ -28,7 +28,7 @@
     <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
         <form class="d-flex gap-2">
             <div class="position-relative d-flex">
-                <input type="text" name="search" id="search-name" class="form-control search-chat py-2 px-5 ps-5" value="" placeholder="Search">
+                <input type="text" name="name" id="search-name" class="form-control search-chat py-2 px-5 ps-5" value="{{ old('name', request()->name) }}" placeholder="Search">
                 <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
             </div>
             <div>
@@ -103,6 +103,11 @@
                     </td>
                 </tr>
                 @empty
+                <tr>
+                    <td class="text-center align-middle" colspan="100%">
+                        Belum ada data
+                    </td>
+                </tr>
                 @endforelse
             </tbody>
         </table>
