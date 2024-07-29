@@ -436,7 +436,7 @@
                     <div class="news-para">
                         @php
                             $paragraphs = explode('</p>', $news->description);
-                            $insertAt = ceil(count($paragraphs) / 2);
+                            $insertAt = ceil(count($paragraphs) / 5);
                         @endphp
 
                         @foreach ($paragraphs as $index => $paragraph)
@@ -1043,17 +1043,13 @@
         function shareToTwitter() {
             var currentUrl = window.location.href;
             var name = document.querySelector('h1').innerText;
-
             var message = '*' + name + '*' + '\n\nKlik untuk baca:\n' + currentUrl;
             var twitterUrl = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(currentUrl) + '&text=' +
                 encodeURIComponent(message);
-
             var windowOptions =
                 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=600, height=400, top=' +
                 (screen.height / 2 - 200) + ', left=' + (screen.width / 2 - 300);
-
             window.open(twitterUrl, '_blank', windowOptions);
         }
-
     </script>
     @endsection
