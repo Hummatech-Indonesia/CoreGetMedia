@@ -250,7 +250,7 @@
                 <x-paginator :paginator="$news" />
             </div>
 
-            <div class="col-lg-4">
+            <div class="col-lg-4 mb-5">
                 <div class="sidebar">
 
                     @if($popularCategory->isNotEmpty())
@@ -354,7 +354,6 @@
                     @endif
                 </div>
             </div>
-
         </div>
     </div>
 </div>

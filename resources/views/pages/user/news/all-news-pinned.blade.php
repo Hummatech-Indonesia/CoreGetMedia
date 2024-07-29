@@ -70,7 +70,7 @@
 
 <div class="">
     <div class="sports-wrap">
-        <div class="container">
+        <div class="container mb-5">
             {{-- @if ($advertisement_tops)
             <a href="{{ $advertisement_tops->url }}">
                 <div class="mt-4 iklan-top" style="position: relative; width: 100%; height: 200px; overflow: hidden;">
@@ -165,7 +165,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 @endsection

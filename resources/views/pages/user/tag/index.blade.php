@@ -215,7 +215,7 @@
                 <x-paginator :paginator="$newsTags" />
             </div>
 
-            <div class="col-lg-4">
+            <div class="col-lg-4 mb-5">
                 <div class="">
                     <div class="sidebar">
                         @if ($CategoryPopulars->isNotEmpty())
