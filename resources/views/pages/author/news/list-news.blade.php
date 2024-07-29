@@ -106,7 +106,7 @@
                             @php
                                 $fileExtension = pathinfo($data->image, PATHINFO_EXTENSION);
                                 $videoExtensions = ['mp4', 'avi', 'mov'];
-                                $imageExtensions = ['png', 'jpg', 'jpeg', 'gif'];
+                                $imageExtensions = ['png', 'jpg', 'jpeg', 'gif', 'webp'];
                             @endphp
                             <div class="mb-2">
                                 @if ($data->image != null && Storage::disk('public')->exists($data->image))
@@ -116,8 +116,8 @@
                                         <img src="{{ asset('storage/' . $data->image) }}" alt="{{ $data->name }}" width="290px" height="180px" class="w-100" style="width: 100%; object-fit:cover;" />
                                     @endif
                                 @else
-                                <img src="{{ asset('assets/blank-img.jpg') }}" alt="{{ $data->name }}" width="290px"
-                                    height="180px" class="w-100" style="width: 100%; object-fit:cover;" />
+                                    <img src="{{ asset('assets/blank-img.jpg') }}" alt="{{ $data->name }}" width="290px"
+                                        height="180px" class="w-100" style="width: 100%; object-fit:cover;" />
                                 @endif
                             </div>
                         </div>
