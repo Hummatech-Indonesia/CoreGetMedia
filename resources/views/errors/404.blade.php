@@ -1,4 +1,9 @@
 @extends('layouts.user.app')
+
+@section('title')
+    Error 404
+@endsection
+
 @section('content')
 <div class="container-fluid mt-5">
     <div class="col-sm-12 text-center">

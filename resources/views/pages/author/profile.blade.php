@@ -21,9 +21,13 @@
     </style>
 @endsection
 
-<head>
-    <title> Author | Profile </title>
-</head>
+@section('role')
+    Author
+@endsection
+
+@section('title')
+    Profile
+@endsection
 
 @section('content')
     <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-sidebartype="full"
@@ -160,7 +164,7 @@
                                     </div>
                                 </form>
                             </div>
-                            
+
                             <!-- Row -->
                             <div class="row">
                                 @forelse ($newses as $news)
@@ -182,7 +186,7 @@
                                                             <img src="{{ asset('storage/' . $news->image) }}"
                                                                 style="width: 100%;height:150;object-fiit:cover;"
                                                                 class="img-fluid" height="160px">
-                                                        @endif   
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12 col-lg-7 align-items-center">
@@ -355,7 +359,7 @@
                                         @php
                                             $already = App\Models\Follower::where('author_id', $author->id)->where('user_id', $follower->user_id)->first();
                                             $userAuthor = App\Models\Author::where('user_id', $follower->user->id)->first();
-                                        @endphp 
+                                        @endphp
                                         @if ($already)
                                             <form action="{{ route('unfollow.author', $userAuthor->id) }}" method="POST">
                                                 @method('DELETE')
@@ -433,7 +437,7 @@
                                 <div class="d-flex justify-content-end">
                                     @php
                                         $already = App\Models\Follower::where('author_id', $following->author_id)->where('user_id', auth()->user()->id)->first()
-                                    @endphp 
+                                    @endphp
                                     @if ($already)
                                         <form action="{{ route('unfollow.author', $already->author_id) }}" method="POST">
                                             @method('DELETE')

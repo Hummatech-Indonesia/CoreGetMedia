@@ -1,5 +1,8 @@
 @extends('layouts.user.app')
 
+@section('title')
+    All Tag
+@endsection
 
 @section('style')
 <style>
@@ -76,7 +79,7 @@
             <p style="color: #22222278">Iklan</p>
         </div>
         @endif --}}
-        <div class="row gx-55 gx-5">
+        <div class="row gx-55 gx-5 mt-5 mb-5">
             <div class="col-lg-8">
                 <div>
                     @forelse ($newsTags as $item)

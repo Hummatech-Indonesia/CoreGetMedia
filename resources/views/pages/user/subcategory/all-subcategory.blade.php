@@ -1,5 +1,8 @@
 @extends('layouts.user.app')
 
+@section('title')
+    All SubCategory
+@endsection
 
 @section('style')
 <style>

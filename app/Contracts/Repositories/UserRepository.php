@@ -73,10 +73,13 @@ class UserRepository extends BaseRepository implements UserInterface
             ->fastPaginate($pagination);
     }
 
-    public function AccountUser()
+    public function AccountUser(Request $request)
     {
         return $this->model->query()
             ->whereRelation('roles', 'name', 'user')
+            ->when($request->name, function ($query) use ($request) {
+                $query->where('name', 'LIKE', '%' . $request->name . '%');
+            })
             ->paginate(10);
     }
 

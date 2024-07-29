@@ -8,10 +8,11 @@ use App\Contracts\Interfaces\Eloquent\ShowInterface;
 use App\Contracts\Interfaces\Eloquent\ShowWithSlugInterface;
 use App\Contracts\Interfaces\Eloquent\StoreInterface;
 use App\Contracts\Interfaces\Eloquent\UpdateInterface;
+use Illuminate\Http\Request;
 
 interface UserInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, ShowWithSlugInterface
 {
-    public function AccountUser();
+    public function AccountUser(Request $request);
     public function banned();
     public function countAuthor() : mixed;
 }
