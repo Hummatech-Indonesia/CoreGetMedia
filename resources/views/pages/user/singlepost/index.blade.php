@@ -429,7 +429,23 @@
                         </ul>
                     </div>
 
-                    <p>{!! $processedContent !!}</p>
+                    <div class="news-para">
+                        @php
+                            $paragraphs = explode('</p>', $news->description);
+                            $insertAt = ceil(count($paragraphs) / 2);
+                        @endphp
+
+                        @foreach ($paragraphs as $index => $paragraph)
+                            {!! $paragraph !!}
+                            @if ($index == $insertAt)
+                                <div class="related-news">
+                                    <blockquote class="quote-box">
+                                        <img src="{{ asset('CONTOHIKLAN.png') }}" alt="">
+                                    </blockquote>
+                                </div>
+                            @endif
+                        @endforeach
+                    </div>
 
                     <p> Tag :
                         @forelse ($newsTags as $tag)
