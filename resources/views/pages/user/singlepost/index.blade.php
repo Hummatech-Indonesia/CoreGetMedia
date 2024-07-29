@@ -545,7 +545,8 @@
                         </ul>
                     </div>
 
-                    <p>{!! $processedContent !!}</p>
+                    {{-- <p>{!! $processedContent !!}</p> --}}
+                    <p>{!! nl2br(e($processedContent)) !!}</p>
 
                     <p> Tag :
                         @forelse ($newsTags as $tag)
