@@ -546,7 +546,7 @@
                     </div>
 
                     {{-- <p>{!! $processedContent !!}</p> --}}
-                    <p>{!! nl2br(e($processedContent)) !!}</p>
+                    <div class="" style="text-align: justify">{!! nl2br(e($processedContent)) !!}</div>
 
                     <p> Tag :
                         @forelse ($newsTags as $tag)
