@@ -1,7 +1,7 @@
 @extends('layouts.user.app')
 
 @section('title')
-    {{ Str::limit($news->name, 20) }}
+    {{ Str::limit($news->name, 20, '...') }}
 @endsection
 
 @section('seo')
