@@ -7,6 +7,7 @@ use App\Models\Tags;
 use App\Http\Requests\StoreTagsRequest;
 use App\Http\Requests\UpdateTagsRequest;
 use App\Services\TagsService;
+use Illuminate\Http\Request;
 
 class TagsController extends Controller
 {
@@ -22,9 +23,9 @@ class TagsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tags = $this->tags->paginate();
+        $tags = $this->tags->paginate($request);
         return view('pages.admin.tag.index', compact('tags'));
     }
 
