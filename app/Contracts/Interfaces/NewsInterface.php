@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 
 interface NewsInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, ShowWithSlugInterface, ChartInterface, DraftInterface, FindDraftInterface
 {
-    public function where($data, $paginate) : mixed;
+    public function where($data, $paginate, Request $request): mixed;
     public function whereSubCategory($id, $query) : mixed;
     public function subcategoryLatest($subcategory_id, $id, $status) : mixed;
     public function whereCategory($id, $query) : mixed;
