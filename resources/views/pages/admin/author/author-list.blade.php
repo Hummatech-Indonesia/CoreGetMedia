@@ -25,7 +25,7 @@
 <div class="">
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12 mb-3 gap-2 ">
-            <form class="d-flex gap-2">
+            <form class="d-flex gap-2" action="/author-list">
                 <div class="position-relative">
                     <div class="">
                         <input type="text" name="name" value="{{ old('name', request()->name) }}" class="form-control search-chat py-2 px-5 ps-5" id="search-name" placeholder="Search">
