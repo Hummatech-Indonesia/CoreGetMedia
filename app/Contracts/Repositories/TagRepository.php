@@ -5,6 +5,7 @@ namespace App\Contracts\Repositories;
 use App\Contracts\Interfaces\TagInterface;
 use App\Enums\NewsEnum;
 use App\Models\Tags;
+use Illuminate\Http\Request;
 
 class TagRepository extends BaseRepository implements TagInterface
 {
@@ -23,8 +24,8 @@ class TagRepository extends BaseRepository implements TagInterface
     public function delete(mixed $id): mixed
     {
         return $this->model->query()
-        ->findOrFail($id)
-        ->delete();
+            ->findOrFail($id)
+            ->delete();
     }
 
     public function showWithCount(): mixed
@@ -66,14 +67,17 @@ class TagRepository extends BaseRepository implements TagInterface
             ->get();
     }
 
-        /**
+    /**
      * Handle the Get all data event from models.
      *
      * @return mixed
      */
-    public function paginate(): mixed
+    public function paginate(Request $request): mixed
     {
         return $this->model->query()
+            ->when($request->name, function ($query) use ($request) {
+                $query->where('name', 'LIKE', '%' .  $request->name . '%');
+            })
             ->latest()
             ->paginate(10);
     }

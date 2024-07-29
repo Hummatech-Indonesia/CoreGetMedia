@@ -5,6 +5,7 @@ namespace App\Contracts\Repositories;
 use App\Contracts\Interfaces\AuthorInterface;
 use App\Enums\AuthorEnum;
 use App\Models\Author;
+use Illuminate\Http\Request;
 
 class AuthorRepository extends BaseRepository implements AuthorInterface
 {
@@ -23,8 +24,8 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
     public function delete(mixed $id): mixed
     {
         return $this->model->query()
-        ->findOrFail($id)
-        ->delete();
+            ->findOrFail($id)
+            ->delete();
     }
 
     /**
@@ -46,17 +47,22 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
      *
      * @return mixed
      */
-    public function get(): mixed
+    public function get(Request $request): mixed
     {
         return $this->model->query()
             ->where('status', AuthorEnum::PENDING->value)
+            ->when($request->name, function ($query) use ($request) {
+                $query->whereHas('user', function ($q) use ($request) {
+                    $q->where('name', 'LIKE', '%' . $request->name . '%');
+                });
+            })
             ->paginate(10);
     }
 
-    public function where($data) : mixed
+    public function where($data): mixed
     {
         return $this->model->query()
-            ->when($data == 'accepted', function($query){
+            ->when($data == 'accepted', function ($query) {
                 $query->where('status', AuthorEnum::ACCEPTED->value);
             })
             ->paginate(10);
@@ -107,14 +113,14 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
     public function accepted()
     {
         return $this->model->query()
-        ->where('status', AuthorEnum::ACCEPTED->value)
-        ->get();
+            ->where('status', AuthorEnum::ACCEPTED->value)
+            ->get();
     }
 
     public function whereUserId()
     {
         return $this->model->query()
-        ->where('user_id', auth()->user()->id)->first();
+            ->where('user_id', auth()->user()->id)->first();
     }
 
     public function getAuthor($id): mixed

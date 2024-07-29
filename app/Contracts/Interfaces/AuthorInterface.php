@@ -9,12 +9,15 @@ use App\Contracts\Interfaces\Eloquent\ShowInterface;
 use App\Contracts\Interfaces\Eloquent\ShowWithSlugInterface;
 use App\Contracts\Interfaces\Eloquent\StoreInterface;
 use App\Contracts\Interfaces\Eloquent\UpdateInterface;
-interface AuthorInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, ShowWithSlugInterface
+use Illuminate\Http\Request;
+
+interface AuthorInterface extends StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, ShowWithSlugInterface
 {
     public function where($data) :mixed;
     public function accepted();
     public function updateByUser($user, array $data) : mixed;
     public function whereUserId();
     public function getAuthor($id): mixed;
+    public function get(Request $request): mixed;
 
 }
