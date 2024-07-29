@@ -155,9 +155,9 @@
     </style>
 
     <style>
-        .justified {
-            text-align: justify;
-            white-space: pre-line;
+         .preformatted {
+            white-space: pre-wrap; /* Menampilkan enter dan spasi tambahan */
+            text-align: justify;   /* Membuat teks rata kanan kiri */
         }
     </style>
 @endsection
@@ -553,8 +553,8 @@
                     </div>
 
                     {{-- <p>{!! $processedContent !!}</p> --}}
-                    <div class="justified" id="content">
-                        {!! $processedContent !!}
+                    <div class="preformatted">
+                        {{ $processedContent }}
                     </div>
 
                     <p> Tag :
@@ -1224,15 +1224,4 @@
             window.open(twitterUrl, '_blank', windowOptions);
         }
     </script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var contentDiv = document.getElementById('content');
-        var content = contentDiv.innerHTML;
-
-        // Menghapus karakter tidak diinginkan
-        var cleanedContent = content.replace(/·|&nbsp;/g, '');
-        contentDiv.innerHTML = cleanedContent;
-    });
-</script>
 @endsection
