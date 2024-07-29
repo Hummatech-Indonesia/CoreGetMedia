@@ -90,6 +90,11 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
             ->orderBy('news_categories_count')
             ->when($request->name, function ($query) use ($request) {
                 $query->where('name', 'LIKE', '%' .  $request->name . '%');
+            })->when($request->filter === "terbaru", function($query) {
+                $query->latest();
+            })
+            ->when($request->filter === "terlama", function($query) {
+                $query->oldest();
             })
             ->paginate(10);
     }
