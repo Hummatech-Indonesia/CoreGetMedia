@@ -33,13 +33,24 @@
                     </div>
                 </div>
 
-                <div class="d-flex gap-2">
-                    <select name="banned" class="form-select" id="search-status">
+                {{-- <div class="d-flex gap-2">
+                    <select name="status" class="form-select" id="search-status">
                         <option value="">Pilih status</option>
-                        <option value="approved">Aktif</option>
-                        <option value="reject">Blokir</option>
+                        <option value="active">Aktif</option>
+                        <option value="banned">Blokir</option>
                         <option value="">Tampilkan semua</option>
                     </select>
+                </div> --}}
+
+                <div class="input-group" style="width: 250px">
+                    <select class="form-select" name="status">
+                        <option value="active">Aktif</option>
+                        <option value="banned">Blokir</option>
+                        <option value="">Tampilkan Semua</option>
+                    </select>
+                    <button type="submit" class="btn btn-outline-primary">
+                        Pilih
+                    </button>
                 </div>
             </form>
         </div>
