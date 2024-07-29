@@ -1,5 +1,9 @@
 @extends('layouts.user.app')
 
+@section('title')
+    Tag
+@endsection
+
 @section('seo')
 <meta name="description" content="Berita dengan Tag {{ $news->name }} Terbaru, {{ $newsSeo ? $newsSeo->name : '' }}" />
 <meta name="title" content="Tag {{ $news->name }} Terkini - GetMedia" />

@@ -21,11 +21,13 @@
     </style>
 @endsection
 
-<head>
-    <title>
-        Author | Update News
-    </title>
-</head>
+@section('role')
+    Author
+@endsection
+
+@section('title')
+    Update News
+@endsection
 
 @section('content')
     <div class="card shadow-sm position-relative overflow-hidden" style="background-color: #175A95;">

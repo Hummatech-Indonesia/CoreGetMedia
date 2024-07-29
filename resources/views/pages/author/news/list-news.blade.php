@@ -1,5 +1,13 @@
 @extends('layouts.author.app')
 
+@section('role')
+    Author
+@endsection
+
+@section('title')
+    List News
+@endsection
+
 @section('style')
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <style>
@@ -30,11 +38,6 @@
 }
 </style>
 @endsection
-
-<head>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <title>Author | List News</title>
-</head>
 
 @section('content')
 <div>
@@ -185,7 +188,7 @@
                                     <a href="{{ route('edit.news', ['news' => $data->slug]) }}" class="btn m-1 mt-5 text-white" style="background-color: #175A95;">
                                         Lanjut Mengedit
                                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
-                                            <path fill="#ffffff"    
+                                            <path fill="#ffffff"
                                                 d="m13.292 12l-4.6-4.6l.708-.708L14.708 12L9.4 17.308l-.708-.708z" />
                                         </svg>
                                     </a>
@@ -599,7 +602,7 @@
                                     <a href="{{ route('edit.news', ['news' => $draft->slug]) }}" class="btn m-1 mt-5 text-white" style="background-color: #175A95;">
                                         Lanjut Mengedit
                                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
-                                            <path fill="#ffffff"    
+                                            <path fill="#ffffff"
                                                 d="m13.292 12l-4.6-4.6l.708-.708L14.708 12L9.4 17.308l-.708-.708z" />
                                         </svg>
                                     </a>

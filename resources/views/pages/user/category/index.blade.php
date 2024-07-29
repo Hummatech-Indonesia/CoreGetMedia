@@ -1,5 +1,9 @@
 @extends('layouts.user.app')
 
+@section('title')
+    Category
+@endsection
+
 @section('seo')
 <meta name="description" content="Berita Kategori {{ $category->name }} Terbaru, {{ $latestsTop ? $latestsTop->name : '' }}" />
 <meta name="title" content="Kategori {{ $category->name }} Terkini - GetMedia" />
