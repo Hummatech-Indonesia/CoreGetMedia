@@ -80,19 +80,17 @@
                     <div class="card-body">
                         <h3 for="" class="form-label">Thumbnail</h3>
                         @php
-                        $fileExtension = pathinfo($news->image, PATHINFO_EXTENSION);
-                        $videoExtensions = ['mp4', 'avi', 'mov'];
-                        $imageExtensions = ['png', 'jpg', 'jpeg', 'gif', 'webp'];
-                    @endphp
-                    
-                    <div id="preview-container" class="gambar-iklan mb-4 d-flex justify-content-center">
-                        @if (in_array($fileExtension, $videoExtensions))
-                            <video id="preview" src="{{ asset('storage/'. $news->image) }}" style="object-fit: cover; border: transparent;" width="350" height="200" controls></video>
-                        @elseif (in_array($fileExtension, $imageExtensions))
-                            <img id="preview" src="{{ asset('storage/'. $news->image) }}" style="object-fit: cover; border: transparent;" width="350" height="200" alt="">
-                        @endif
-                    </div>
-                    
+                            $fileExtension = pathinfo($news->image, PATHINFO_EXTENSION);
+                            $videoExtensions = ['mp4', 'avi', 'mov'];
+                            $imageExtensions = ['png', 'jpg', 'jpeg', 'gif', 'webp'];
+                        @endphp
+                        <div class="gambar-iklan mb-4 d-flex justify-content-center">
+                            @if (in_array($fileExtension, $videoExtensions))
+                                <video id="preview" src="{{ asset('storage/'. $news->image) }}" style="object-fit: cover; border: transparent;" width="350" height="200" controls></video>
+                            @elseif(in_array($fileExtension, $imageExtensions))
+                                <img id="preview" src="{{ asset('storage/'.$news->image) }}" style="object-fit: cover; border: transparent;" width="350" height="200" alt="">
+                            @endif
+                        </div>
                         <div class="d-flex justify-content-center mt-3">
                             <label for="image-upload" class="btn btn-primary">
                                 Unggah
@@ -365,49 +363,21 @@
         tokenSeparators: [',', ' ']
     })
 
-    $(document).ready(function () {
-        $('#image-upload').on('change', function (event) {
-            var file = event.target.files[0];
-            var fileType = file.type;
-            var previewContainer = $('#preview-container');
-
-            // Bersihkan pratinjau sebelumnya
-            previewContainer.empty();
-
-            // Cek apakah file adalah gambar
-            if (fileType.startsWith('image/')) {
-                var imgPreview = $('<img>', {
-                    id: 'preview',
-                    style: 'object-fit: cover; border: transparent; width: 350px; height: 200px;',
-                    alt: 'Image Preview'
-                });
-
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    imgPreview.attr('src', e.target.result);
-                };
-                reader.readAsDataURL(file);
-                previewContainer.append(imgPreview);
+    function previewImage(event) {
+        var input = event.target;
+        var previewImg = document.getElementById('preview');
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                previewImg.src = e.target.result;
+                previewImg.classList.remove('hide');
             }
-            // Cek apakah file adalah video
-            else if (fileType.startsWith('video/')) {
-                var videoPreview = $('<video>', {
-                    id: 'preview',
-                    style: 'object-fit: cover; border: transparent; width: 350px; height: 200px;',
-                    controls: true
-                });
-
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    videoPreview.attr('src', e.target.result);
-                };
-                reader.readAsDataURL(file);
-                previewContainer.append(videoPreview);
-            } else {
-                alert('File tidak didukung!');
-            }
-        });
-    });
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            previewImg.src = '';
+            previewImg.classList.add('hide');
+        }
+    }
     </script>
 
     <script>
