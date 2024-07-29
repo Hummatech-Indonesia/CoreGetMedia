@@ -30,9 +30,9 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = $this->users->AccountUser();
+        $users = $this->users->AccountUser($request);
         return view('pages.admin.account.user', compact('users'));
     }
 
