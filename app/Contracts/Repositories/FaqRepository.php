@@ -4,6 +4,7 @@ namespace App\Contracts\Repositories;
 
 use App\Contracts\Interfaces\FaqInterface;
 use App\Models\Faq;
+use Illuminate\Http\Request;
 
 class FaqRepository extends BaseRepository implements FaqInterface
 {
@@ -22,8 +23,8 @@ class FaqRepository extends BaseRepository implements FaqInterface
     public function delete(mixed $id): mixed
     {
         return $this->model->query()
-        ->findOrFail($id)
-        ->delete();
+            ->findOrFail($id)
+            ->delete();
     }
 
     /**
@@ -49,9 +50,12 @@ class FaqRepository extends BaseRepository implements FaqInterface
             ->get();
     }
 
-    public function paginate() : mixed
+    public function paginate(Request $request): mixed
     {
         return $this->model->query()
+            ->when($request->name, function ($query) use ($request) {
+                $query->where('question', 'LIKE', '%' .  $request->name . '%');
+            })
             ->latest()
             ->paginate(10);
     }
