@@ -69,6 +69,10 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
                 $query->whereHas('user', function ($q) use ($request) {
                     $q->where('name', 'LIKE', '%' . $request->name . '%');
                 });
+            })->when($request->status, function ($query) use ($request) {
+                $query->whereHas('user', function($q) use ($request) {
+                    $q->where('status', $request->status);
+                });
             })
             ->paginate(10);
     }
