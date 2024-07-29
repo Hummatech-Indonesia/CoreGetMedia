@@ -1,5 +1,9 @@
 @extends('layouts.user.app')
 
+@section('title')
+    About Us
+@endsection
+
 @section('seo')
 <meta name="description" content="{{ Str::limit(strip_tags(isset($about_get->description)), 100) }}" />
 <meta name="title" content="{{ isset($about_get->slogan) }} - GetMedia" />

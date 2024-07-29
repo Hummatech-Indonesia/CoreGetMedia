@@ -1,5 +1,9 @@
 @extends('layouts.user.app')
 
+@section('title')
+    List Author
+@endsection
+
 @section('style')
 <style>
     .border-primary {
@@ -198,7 +202,7 @@
                             @endif
                         </div>
                     </div>
-                    
+
                     <div class="col-lg-9">
                         <div>
                             <p><b>{{ $author->user->name }}</b></p>

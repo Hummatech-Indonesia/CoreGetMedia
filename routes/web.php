@@ -205,7 +205,7 @@ Route::get('history-coin', function () {
 Route::get('news-liked', [NewsLikeController::class, 'index'])->name('news-liked.user');
 
 Route::get('contact-us', function () {
-    return view('pages.user.contact-us.index');
+    return view('pages.user.cfontact-us.index');
 })->name('contact-us.index');
 
 Route::get('privacy-policy', function () {
