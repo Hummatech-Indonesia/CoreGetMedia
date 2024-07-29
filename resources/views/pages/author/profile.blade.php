@@ -169,9 +169,20 @@
                                             <div class="row">
                                                 <div class="col-md-12 col-lg-5">
                                                     <div>
-                                                        <img src="{{ asset('storage/' . $news->image) }}"
-                                                            style="width: 100%;height:150;object-fiit:cover;"
-                                                            class="img-fluid" height="160px">
+                                                        @php
+                                                            $fileExtension = pathinfo($news->image, PATHINFO_EXTENSION);
+                                                            $videoExtensions = ['mp4', 'avi', 'mov'];
+                                                            $imageExtensions = ['png', 'jpg', 'jpeg', 'gif', 'webp'];
+                                                        @endphp
+                                                        @if (in_array($fileExtension, $videoExtensions))
+                                                            <video src="{{ asset('storage/' . $news->image) }}"
+                                                                style="width: 100%;height:150;object-fiit:cover;"
+                                                                class="img-fluid" height="160px"></video>
+                                                        @elseif(in_array($fileExtension, $imageExtensions))
+                                                            <img src="{{ asset('storage/' . $news->image) }}"
+                                                                style="width: 100%;height:150;object-fiit:cover;"
+                                                                class="img-fluid" height="160px">
+                                                        @endif   
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12 col-lg-7 align-items-center">
