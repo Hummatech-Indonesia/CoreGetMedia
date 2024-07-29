@@ -127,7 +127,7 @@
                                     {!! Illuminate\Support\Str::limit(strip_tags($data->name), 150, '...') !!}
                                 </h4>
                                 <div class="fs-4 mt-2">
-                                    {!! Illuminate\Support\Str::limit(strip_tags($data->description), 600, '...') !!}
+                                    {!! Illuminate\Support\Str::limit(strip_tags($data->description), 300, '...') !!}
                                 </div>
                             </div>
                         </div>
@@ -155,7 +155,7 @@
                                         <div class="col gap-2">
                                             @if ($data->status == 'reject')
                                             <button type="button" class="btn me-2 btn-reason btn-primary"
-                                                data-id="{{ $data->id }}">
+                                                data-id="{{ $data->id }}" data-reason="{{ $data->reject_description }}">
                                                 <i class="ti ti-message-dots fs-6"></i>
                                             </button>
                                             @endif
@@ -258,7 +258,7 @@
                                     {!! Illuminate\Support\Str::limit(strip_tags($data->name), 150, '...') !!}
                                 </h4>
                                 <div class="fs-4 mt-2">
-                                    {!! Illuminate\Support\Str::limit(strip_tags($data->description), 600, '...') !!}
+                                    {!! Illuminate\Support\Str::limit(strip_tags($data->description), 300, '...') !!}
                                 </div>
                             </div>
                         </div>
@@ -359,7 +359,7 @@
                                     {!! Illuminate\Support\Str::limit(strip_tags($data->name), 150, '...') !!}
                                 </h4>
                                 <div class="fs-4 mt-2">
-                                    {!! Illuminate\Support\Str::limit(strip_tags($data->description), 600, '...') !!}
+                                    {!! Illuminate\Support\Str::limit(strip_tags($data->description), 300, '...') !!}
                                 </div>
                             </div>
                         </div>
@@ -468,7 +468,7 @@
                                     {!! Illuminate\Support\Str::limit(strip_tags($data->name), 150, '...') !!}
                                 </h4>
                                 <div class="fs-4 mt-2">
-                                    {!! Illuminate\Support\Str::limit(strip_tags($data->description), 600, '...') !!}
+                                    {!! Illuminate\Support\Str::limit(strip_tags($data->description), 300, '...') !!}
                                 </div>
                             </div>
                         </div>
@@ -565,7 +565,7 @@
                                        {{ $draft->name }}
                                     </h4>
                                     <div class="fs-4 mt-2">
-                                        {!! Illuminate\Support\Str::limit(strip_tags($data->description), 600, '...') !!}
+                                        {!! Illuminate\Support\Str::limit(strip_tags($data->description), 300, '...') !!}
                                     </div>
                                 </div>
                             </div>

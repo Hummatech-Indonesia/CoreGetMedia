@@ -153,6 +153,13 @@
             color: #ffffff !important;
         }
     </style>
+
+    <style>
+         .preformatted {
+            white-space: pre-wrap; /* Menampilkan enter dan spasi tambahan */
+            text-align: justify;   /* Membuat teks rata kanan kiri */
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -545,7 +552,10 @@
                         </ul>
                     </div>
 
-                    <p>{!! $processedContent !!}</p>
+                    {{-- <p>{!! $processedContent !!}</p> --}}
+                    <div class="preformatted">
+                        {{ $processedContent }}
+                    </div>
 
                     <p> Tag :
                         @forelse ($newsTags as $tag)
