@@ -209,7 +209,7 @@
                             </div>
                             <div class="col-lg-12 mb-4" style="height: auto;">
                                 <label class="form-label" for="content">Isi Berita</label>
-                                <textarea" name="content" placeholder="content" style="resize: none; height: 400;" class="form-control @error('content') is-invalid @enderror">{!! $news->description !!}</textarea>
+                                <textarea" name="content" placeholder="content" class="form-control @error('content') is-invalid @enderror">{!! $news->description !!}</textarea>
                                     @error('content')
                                     <span class="invalid-feedback" role="alert" style="color: red;">
                                         <strong>{{ $message }}</strong>
@@ -334,8 +334,8 @@
 
                         <div class="col-md-12 col-lg-12">
                             <div class="d-flex justify-content-end">
-                                <button data-bs-toggle="tooltip" title="Tolak" class="btn btn-danger me-2">Tolak</button>
                                 <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
+                                <button data-bs-toggle="tooltip" title="Tolak" class="btn btn-danger me-2">Tolak</button>
                             </div>
                         </div>
                     </div>

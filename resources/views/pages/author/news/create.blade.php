@@ -174,7 +174,7 @@
                         <div>
                             <div class="col-lg-12 mb-4">
                                 <label class="form-label" for="nomor">Judul Berita</label>
-                                <input type="text" id="name" name="name" placeholder="name"
+                                <input type="text" id="name" name="name" placeholder="Masukkan judul berita"
                                     value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
                                 @error('name')
                                     <span class="invalid-feedback" role="alert" style="color: red;">
