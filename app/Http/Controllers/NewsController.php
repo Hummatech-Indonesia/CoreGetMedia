@@ -129,9 +129,9 @@ class NewsController extends Controller
         return back()->with('success', 'Berhasil membuka banned berita');
     }
 
-    public function news_list()
+    public function news_list(Request $request)
     {
-        $news = $this->news->where(NewsEnum::ACCEPTED->value, 10);
+        $news = $this->news->where(NewsEnum::ACCEPTED->value, 10, $request);
         return view('pages.admin.news.news-list', compact('news'));
     }
 
