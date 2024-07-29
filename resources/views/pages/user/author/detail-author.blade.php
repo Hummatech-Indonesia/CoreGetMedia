@@ -1,5 +1,9 @@
 @extends('layouts.user.app')
 
+@section('title')
+    Detail Author
+@endsection
+
 @section('style')
 <style>
     .card-detail {

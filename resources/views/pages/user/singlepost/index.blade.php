@@ -1,5 +1,9 @@
 @extends('layouts.user.app')
 
+@section('title')
+    {{ Str::limit($news->name, 20, '...') }}
+@endsection
+
 @section('seo')
 <meta name="description" content="{{ Str::limit(strip_tags($news->description), 200) }}" />
 <meta name="title" content="{{ $news->name }} - Get Media" />

@@ -1,5 +1,9 @@
 @extends('layouts.user.app')
 
+@section('title')
+    Faq
+@endsection
+
 @section('style')
 <style>
     .theme-dark .accordion-item:first-of-type .accordion-button {
@@ -15,7 +19,7 @@
     .theme-dark .accordion-body {
       background-color: var(--codColor);
       color: #ffffff;
-    
+
     }
 
     .breadcrumb-wrap {
@@ -77,9 +81,9 @@
             </div>
           </div>
         @empty
-            
+
         @endforelse
-        
+
       </div>
     </div>
   </div>

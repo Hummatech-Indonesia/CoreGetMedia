@@ -13,6 +13,10 @@
 <link rel="canonical" href="{{ url('/') }}" />
 @endsection
 
+@section('title')
+    Contact Us
+@endsection
+
 @section('style')
 <style>
     .social-profile li a {
