@@ -368,11 +368,11 @@ $popular_down_id = $popular_down->pluck('id');
                     <img src="{{ asset('storage/' . $newsPin->image) }}" class="w-100" style="height: 200px; object-fit: cover;" alt="Image" />
                     <a href="{{ route('categories.show.user', $newsPin->newsCategories[0]->category->slug) }}" class="news-cat">{{ $newsPin->newsCategories[0]->category->name }}</a>
                 </div>
-                <div class="news-card-info text-start">
-                    <h3><a href="{{ route('news.singlepost', ['news' => $newsPin->slug]) }}">{{ Illuminate\Support\Str::limit($newsPin->name, 50, '...') }}</a></h3>
-                    <p>{!! Illuminate\Support\Str::limit($newsPin->description, 65, '...') !!}</p>
+                <div class="news-card-info">
+                    <h3><a href="{{ route('news.singlepost', ['news' => $newsPin->slug]) }}">{{ Str::limit($newsPin->name, 40, '...') }}</a></h3>
+                    <p>{!! Str::limit(strip_tags($newsPin->description), 60) !!}</p>
                     <ul class="news-metainfo d-flex">
-                        <li><i class="fi fi-rr-calendar-minus text-start"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($newsPin->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
+                        <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($newsPin->date)->locale('id_ID')->isoFormat('D MMMM Y') }}</a></li>
                         <li><i class="fi fi-rr-eye"></i>{{ $newsPin->news_views_count }}x dilihat</li>
                     </ul>
                 </div>
