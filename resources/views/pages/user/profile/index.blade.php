@@ -28,11 +28,9 @@
 </style>
 @endsection
 
-<head>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://unpkg.com/feather-icons"></script>
-    <title>User | Profile</title>
-</head>
+@section('title')
+    Profile
+@endsection
 
 @section('content')
 <div class="card">

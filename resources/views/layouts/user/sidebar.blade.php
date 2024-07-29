@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>{{ env('APP_NAME') }}</title>
+    <title>GetMedia | User - @yield('title')</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="handheldfriendly" content="true" />
@@ -16,6 +16,8 @@
     <!-- Owl Carousel  -->
     <link rel="stylesheet" href="{{ asset('user/assets/dist/libs/owl.carousel/dist/assets/owl.carousel.min.css') }}">
     <!-- Core Css -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
     <link rel="stylesheet" href="{{ asset('user/dist/libs/sweetalert2/dist/sweetalert2.min.css') }}">
     <link id="themeColors" rel="stylesheet" href="{{ asset('user/dist/css/style.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('user/dist/libs/prismjs/themes/prism-okaidia.min.css') }}">

@@ -1,5 +1,13 @@
 @extends(auth()->user()->hasRole('author') ? 'layouts.author.app' : 'layouts.user.sidebar')
 
+@section('role')
+    Author
+@endsection
+
+@section('title')
+    News Like
+@endsection
+
 @section('content')
 
 <div class="card shadow-sm position-relative overflow-hidden"  style="background-color: #175A95;">
@@ -21,11 +29,6 @@
 <div class="card">
     <div class="card-body">
         <div class="d-flex gap-2 mb-5">
-            {{-- <select class="form-select" id="opsi-latest" style="width: 200px">
-                <option value="">Tampilkan semua</option>
-                <option value="terbaru">Terbaru</option>
-                <option value="terlama">Terlama</option>
-            </select> --}}
             <form action="">
             <div class="input-group" style="width: 250px">
                 <select class="form-select" name="filter">

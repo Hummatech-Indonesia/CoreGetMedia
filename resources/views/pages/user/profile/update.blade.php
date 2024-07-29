@@ -1,5 +1,13 @@
 @extends(auth()->user()->hasRole('author') ? 'layouts.author.app' : 'layouts.user.sidebar')
 
+@section('role')
+    Author
+@endsection
+
+@section('title')
+    Update Profile
+@endsection
+
 @section('content')
     <div class="">
         <div class="">

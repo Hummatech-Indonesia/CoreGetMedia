@@ -1,5 +1,9 @@
 @extends('layouts.user.app')
 
+@section('title')
+    All Pinned
+@endsection
+
 @section('style')
 <style>
     .news-card-post {
@@ -70,7 +74,7 @@
 
 <div class="">
     <div class="sports-wrap">
-        <div class="container mb-5">
+        <div class="container mb-5 mt-5">
             {{-- @if ($advertisement_tops)
             <a href="{{ $advertisement_tops->url }}">
                 <div class="mt-4 iklan-top" style="position: relative; width: 100%; height: 200px; overflow: hidden;">

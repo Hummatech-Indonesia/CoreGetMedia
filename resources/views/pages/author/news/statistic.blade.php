@@ -47,9 +47,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
 @endsection
 
-<title>
-    Author | News Statistik
-</title>
+@section('role')
+    Author
+@endsection
+
+@section('title')
+    News Statistics
+@endsection
 
 @section('content')
 
@@ -242,7 +246,7 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var ctx = document.getElementById('barChart').getContext('2d');
-        
+
         var chartData = @json($chartData);
 
         var labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];

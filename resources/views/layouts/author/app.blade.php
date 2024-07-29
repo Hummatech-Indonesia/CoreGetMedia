@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>{{ env('APP_NAME') }}</title>
+    <title>GetMedia | @yield('role') - @yield('title')</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="handheldfriendly" content="true" />
@@ -12,9 +12,10 @@
     <meta name="keywords" content="Mordenize" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!--  Favicon -->
-    <link rel="shortcut icon" type="{{ asset('image/png') }}" href="{{ asset('assets/img/logo-get.png') }}" />
+    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/img/logo/logo-get.svg') }}" />
     <!-- Owl Carousel  -->
     <!-- Core Css -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="{{ asset('admin/dist/libs/sweetalert2/dist/sweetalert2.min.css') }}">
     <link id="themeColors" rel="stylesheet" href="{{ asset('admin/dist/css/style.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('admin/dist/libs/prismjs/themes/prism-okaidia.min.css') }}">
@@ -91,11 +92,11 @@
         .important {
             color: red;
         }
-        
+
         .bounce2 {
             animation: bounce2 3s ease infinite;
         }
-    
+
         @keyframes bounce2 {
             0%,
             20%,
@@ -111,7 +112,7 @@
                 transform: translateY(-15px);
             }
         }
-    
+
         .preloader {
             position: fixed;
             top: 0;
@@ -124,12 +125,12 @@
             align-items: center;
             z-index: 9999;
         }
-    
+
         .preloader img {
             width: 10pc;
         }
     </style>
-    
+
 </head>
 
 <body>
@@ -143,7 +144,7 @@
             <img src="{{ asset('assets/img/logo/preloader.gif') }}" class="lds-ripple img-fluid animate-bounce" alt="loader" />
         </div>
     </div> --}}
-    
+
 
     <!--  Body Wrapper -->
     <div class="page-wrapper" id="main-wrapper" data-theme="blue_theme" data-layout="vertical" data-sidebartype="full"
@@ -195,7 +196,7 @@
     <script src="{{ asset('admin/dist/js/forms/bootstrap-switch.js') }}"></script>
     <script src="{{ asset('admin/dist/libs/bootstrap-duallistbox/dist/jquery.bootstrap-duallistbox.min.js') }}"></script>
 
-    
+
     {{-- <script>
         $(window).on('load', function () {
             $('#get-preloader').addClass('loaded');
