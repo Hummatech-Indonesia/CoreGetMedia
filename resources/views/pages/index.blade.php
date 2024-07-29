@@ -199,6 +199,10 @@
 
     }
 
+    .theme-dark .trending-news-box .trending-news-slider li{
+        color: #ffffff;
+    }
+
 
 @media (min-width: 1024px) {
     .iklan-top {
