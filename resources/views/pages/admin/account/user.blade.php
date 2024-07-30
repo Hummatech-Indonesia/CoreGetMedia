@@ -1,5 +1,9 @@
 @extends('layouts.admin.app')
 
+@section('title')
+    User List
+@endsection
+
 @section('content')
     <div class="modal fade" id="modal-detail" tabindex="-1" aria-labelledby="modal-detail Label" aria-hidden="true">
         <div class="modal-dialog modal-lg">

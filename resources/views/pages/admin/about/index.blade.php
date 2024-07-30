@@ -1,5 +1,9 @@
 @extends('layouts.admin.app')
 
+@section('title')
+    About Get
+@endsection
+
 @section('style')
 <link rel="stylesheet" href="{{ asset('admin/dist/libs/summernote/dist/summernote-lite.min.css') }}">
 
