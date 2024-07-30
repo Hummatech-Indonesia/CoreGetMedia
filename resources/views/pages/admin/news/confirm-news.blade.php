@@ -17,7 +17,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div>
                     <div class="d-flex gap-2">
                         <select class="form-select" id="opsi-latest" name="opsilatest" style="width: 200px">
@@ -76,11 +75,12 @@
                         </td>
                     </tr>
                 @empty
-                    <tr>
-                        <td class="text-center align-middle" colspan="100%">
-                            Belum ada data
-                        </td>
-                    </tr>
+                <tr>
+                    <td colspan="100%" class="text-center mt-5">
+                        <img src="{{ asset('assets/Empty-cuate.png') }}" alt="" width="230px">
+                        <p>Tidak ada berita</p>
+                    </td>
+                </tr>
                 @endforelse
             </tbody>
         </table>
