@@ -19,24 +19,23 @@
                 </div>
 
                 <div>
-                    <div class="d-flex gap-2">
-                        <select class="form-select" id="opsi-latest" style="width: 200px">
-                            <option value="">Tampilkan semua</option>
-                            <option value="terbaru">Terbaru</option>
-                            <option value="terlama">Terlama</option>
-                        </select>
-                    </div>
+                    <select class="form-select" name="filter">
+                        <option value="terbaru">Terbaru</option>
+                        <option value="terlama">Terlama</option>
+                        <option value="">Tampilkan Semua</option>
+                    </select>
                 </div>
 
-                <div>
-                    <div class="d-flex gap-2">
-                        <select class="form-select" id="opsi-perpage" style="width: 200px">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                        </select>
-                    </div>
+                <div class="input-group" style="width: 250px">
+                    <select class="form-select" name="paginate">
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    <button type="submit" class="btn btn-outline-primary">
+                        Pilih
+                    </button>
                 </div>
             </form>
         </div>
@@ -74,11 +73,12 @@
                         </td>
                     </tr>
                 @empty
-                    <tr>
-                        <td class="text-center align-middle" colspan="100%">
-                            Belum ada data
-                        </td>
-                    </tr>
+                <tr>
+                    <td colspan="100%" class="text-center mt-5">
+                        <img src="{{ asset('assets/Empty-cuate.png') }}" alt="" width="230px">
+                        <p>Tidak ada berita</p>
+                    </td>
+                </tr>
                 @endforelse
             </tbody>
         </table>

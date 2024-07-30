@@ -85,6 +85,19 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->orderByDesc('pin', '1')
             ->when($request->name, function ($query) use ($request) {
                 $query->where('name', 'LIKE', '%' .  $request->name . '%');
+            })->when($request->filter === "terbaru", function($query) {
+                $query->latest();
+            })
+            ->when($request->filter === "terlama", function($query) {
+                $query->oldest();
+            })->when($request->paginate === "10", function($query) {
+                $query->paginate(1);
+            })->when($request->paginate === "20", function($query) {
+                $query->paginate(2);
+            })->when($request->paginate === "50", function($query) {
+                $query->paginate(50);
+            })->when($request->paginate === "100", function($query) {
+                $query->paginate(100);
             })
             ->paginate($paginate);
     }
