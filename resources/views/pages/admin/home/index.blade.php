@@ -39,11 +39,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 @endsection
 
-
-<head>
-    <title>Admin | Dashboard</title>
-</head>
-
+@section('title')
+    Dashboard
+@endsection
 
 @section('content')
 <div class="row">
@@ -225,7 +223,7 @@
                             </div>
                         </div>
                     @empty
-                        
+
                     @endforelse
                 </div>
             </div>
@@ -655,7 +653,7 @@
             },
             grid: {
                 row: {
-                    colors: ['#f3f3f3', 'transparent'], 
+                    colors: ['#f3f3f3', 'transparent'],
                     opacity: 0.5
                 }
             },
@@ -694,7 +692,7 @@
             },
             grid: {
                 row: {
-                    colors: ['#f3f3f3', 'transparent'], 
+                    colors: ['#f3f3f3', 'transparent'],
                     opacity: 0.5
                 }
             },
@@ -732,7 +730,7 @@
 
 <script>
 
-       
+
 var options = {
           series: [{
             name: "Desktops",

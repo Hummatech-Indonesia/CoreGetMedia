@@ -1,8 +1,8 @@
 @extends('layouts.admin.app')
 
-<head>
-    <title>Admin | News</title>
-</head>
+@section('title')
+    News
+@endsection
 
 @section('content')
     <div class="">
@@ -11,7 +11,7 @@
                 <div>
                     <div class="position-relative d-flex">
                         <div class="">
-                            <input type="text" name="name" value="{{ old('name', request()->name) }}" class="form-control search-chat py-2 px-5 ps-5"
+                            <input type="text" name="search" value="{{ old('search', request()->search) }}" class="form-control search-chat py-2 px-5 ps-5"
                                 id="search-name" placeholder="Search">
                             <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
                         </div>
@@ -20,24 +20,26 @@
 
                 <div>
                     <div class="d-flex gap-2">
-                        <select class="form-select" id="opsi-latest" style="width: 200px">
-                            <option value="">Tampilkan semua</option>
-                            <option value="terbaru">Terbaru</option>
-                            <option value="terlama">Terlama</option>
+                        <select class="form-select" id="opsi-latest" name="opsilatest" style="width: 200px">
+                            <option value="" {{ request()->opsilatest == '' ? 'selected' : '' }}>Tampilkan semua</option>
+                            <option value="terbaru" {{ request()->opsilatest == 'terbaru' ? 'selected' : '' }}>Terbaru</option>
+                            <option value="terlama" {{ request()->opsilatest == 'terlama' ? 'selected' : '' }}>Terlama</option>
                         </select>
                     </div>
                 </div>
 
                 <div>
                     <div class="d-flex gap-2">
-                        <select class="form-select" id="opsi-perpage" style="width: 200px">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
+                        <select class="form-select" id="opsi-perpage" name="opsiperpage" style="width: 200px">
+                            <option value="10" {{ request()->opsiperpage == '10' ? 'selected' : '' }}>10</option>
+                            <option value="20" {{ request()->opsiperpage == '20' ? 'selected' : '' }}>20</option>
+                            <option value="50" {{ request()->opsiperpage == '50' ? 'selected' : '' }}>50</option>
+                            <option value="100" {{ request()->opsiperpage == '100' ? 'selected' : '' }}>100</option>
                         </select>
                     </div>
                 </div>
+
+                <button type="submit" class="btn btn-primary">Cari</button>
             </form>
         </div>
     </div>

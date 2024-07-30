@@ -16,9 +16,9 @@
     </style>
 @endsection
 
-<head>
-    <title>Admin | Author</title>
-</head>
+@section('title')
+    Author
+@endsection
 
 @section('content')
     <div class="modal fade" id="modal-reject" tabindex="-1" aria-labelledby="modal-reject Label">

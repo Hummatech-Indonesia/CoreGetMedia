@@ -99,7 +99,7 @@ class NewsController extends Controller
 
     public function confirm_news(Request $request)
     {
-        $news = $this->news->where(NewsEnum::PENDING->value, 10, $request);
+        $news = $this->news->where(NewsEnum::PENDING->value, $request->opsiperpage, $request);
         return view('pages.admin.news.confirm-news', compact('news'));
     }
 

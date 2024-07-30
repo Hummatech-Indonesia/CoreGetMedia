@@ -17,9 +17,9 @@
 </style>
 @endsection
 
-<head>
-    <title>Admin | Author-List</title>
-</head>
+@section('title')
+    Author List
+@endsection
 
 @section('content')
 <div class="">
