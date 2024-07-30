@@ -18,9 +18,9 @@
 </style>
 @endsection
 
-<head>
-    <title>Admin | Notification-List</title>
-</head>
+@section('title')
+    Notification
+@endsection
 
 @section('content')
 <div>
@@ -114,16 +114,16 @@
                                     <button data-id="{{ $article->news->id }}" data-bs-toggle="tooltip" title="Buka Banned" class="btn btn-sm btn-success btn-unbanned text-white me-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
                                             <path fill="#fff" d="M6.615 9H15V7q0-1.25-.875-2.125T12 4q-1.25 0-2.125.875T9 7H8q0-1.671 1.164-2.836T12 3q1.671 0 2.836 1.164T16 7v2h1.385q.666 0 1.14.475q.475.474.475 1.14v8.77q0 .666-.475 1.14q-.474.475-1.14.475H6.615q-.666 0-1.14-.475Q5 20.051 5 19.385v-8.77q0-.666.475-1.14Q5.949 9 6.615 9M12 16.5q.633 0 1.066-.434q.434-.433.434-1.066t-.434-1.066Q12.633 13.5 12 13.5t-1.066.434Q10.5 14.367 10.5 15t.434 1.066q.433.434 1.066.434" />
-                                        </svg>  
+                                        </svg>
                                     </button>
                                 @else
                                     <button data-id="{{ $article->news->id }}" data-bs-toggle="tooltip" title="Banned" class="btn btn-sm btn-warning btn-banned text-white me-2">
                                         <svg width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M10.4724 0.442445C16.0303 0.430664 20.5873 4.96838 20.5991 10.5263C20.6109 16.0841 16.0732 20.6411 10.5153 20.6529C4.95739 20.6647 0.400391 16.127 0.388609 10.5691C0.376827 5.01123 4.91455 0.454227 10.4724 0.442445ZM10.4767 2.46349C8.55672 2.46756 6.84011 3.07752 5.52879 4.19188L16.8706 15.4858C17.8782 14.0689 18.5819 12.3495 18.578 10.5305C18.5686 6.08424 14.923 2.45407 10.4767 2.46349ZM15.4589 16.9035L4.11705 5.60961C3.00826 6.92565 2.40559 8.64483 2.40966 10.5648C2.41908 15.0111 6.06468 18.6413 10.511 18.6319C12.431 18.6278 14.1476 18.0179 15.4589 16.9035Z" fill="white"/>
-                                        </svg>    
+                                        </svg>
                                     </button>
                                 @endif
-            
+
                                 <button type="submit" style="background-color: #EF6E6E" class="btn btn-sm text-white btn-delete" data-id="{{ $article->id }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24">
                                         <path fill="#ffffff" d="M7 21q-.825 0-1.412-.587T5 19V6q-.425 0-.712-.288T4 5t.288-.712T5 4h4q0-.425.288-.712T10 3h4q.425 0 .713.288T15 4h4q.425 0 .713.288T20 5t-.288.713T19 6v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zm-7 11q.425 0 .713-.288T11 16V9q0-.425-.288-.712T10 8t-.712.288T9 9v7q0 .425.288.713T10 17m4 0q.425 0 .713-.288T15 16V9q0-.425-.288-.712T14 8t-.712.288T13 9v7q0 .425.288.713T14 17M7 6v13z" />
@@ -144,7 +144,7 @@
                 </tbody>
             </table>
             <div class="d-flex justify-content-end">
-                
+
             </div>
         </div>
     </div>
@@ -193,7 +193,7 @@
                                             <path fill="currentColor" d="M12 6.5a9.77 9.77 0 0 1 8.82 5.5c-1.65 3.37-5.02 5.5-8.82 5.5S4.83 15.37 3.18 12A9.77 9.77 0 0 1 12 6.5m0-2C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5m0 5a2.5 2.5 0 0 1 0 5a2.5 2.5 0 0 1 0-5m0-2c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5s4.5-2.02 4.5-4.5s-2.02-4.5-4.5-4.5" />
                                         </svg></i>
                                 </button>
-            
+
                                 <button type="submit" style="background-color: #EF6E6E" class="btn btn-sm text-white btn-delete-report-comment" data-id="{{ $comment->id }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24">
                                         <path fill="#ffffff" d="M7 21q-.825 0-1.412-.587T5 19V6q-.425 0-.712-.288T4 5t.288-.712T5 4h4q0-.425.288-.712T10 3h4q.425 0 .713.288T15 4h4q.425 0 .713.288T20 5t-.288.713T19 6v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zm-7 11q.425 0 .713-.288T11 16V9q0-.425-.288-.712T10 8t-.712.288T9 9v7q0 .425.288.713T10 17m4 0q.425 0 .713-.288T15 16V9q0-.425-.288-.712T14 8t-.712.288T13 9v7q0 .425.288.713T14 17M7 6v13z" />
@@ -214,7 +214,7 @@
                 </tbody>
             </table>
             <div class="d-flex justify-content-end">
-                
+
             </div>
         </div>
     </div>
@@ -475,7 +475,7 @@
             $('#unbanned-form').attr('action', '/news/unbanned/'+id);
             $('#confirm-unbanned-modal').modal('show');
         });
-    
+
         $('.btn-detail').click(function() {
             var id = $(this).data('id');
             var nameUser = $(this).data('name-user');
@@ -530,7 +530,7 @@
             $('#url-article').attr('href', newsUrl);
             $('#download-proof').attr('href', newsImage);
             $('#download-proof').attr('download', newsImageName);
-            
+
             $('#detail-modal-article').modal('show');
         });
     </script>

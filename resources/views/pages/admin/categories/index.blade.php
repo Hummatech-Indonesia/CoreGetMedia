@@ -19,9 +19,9 @@
 </style>
 @endsection
 
-<head>
-    <title>Admin | Category</title>
-</head>
+@section('title')
+    Category
+@endsection
 
 @section('content')
 <div class="row mb-3">

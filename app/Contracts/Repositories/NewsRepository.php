@@ -83,8 +83,11 @@ class NewsRepository extends BaseRepository implements NewsInterface
         return $this->model->query()
             ->where('status', $data)
             ->orderByDesc('pin', '1')
-            ->when($request->name, function ($query) use ($request) {
-                $query->where('name', 'LIKE', '%' .  $request->name . '%');
+            ->when($request->search, function ($query) use ($request) {
+                $query->where('name', 'LIKE', '%' .  $request->search . '%');
+            })
+            ->when($request->opsilatest, function ($query) use($request) {
+                $query->orderBy('created_at', $request->opsilatest == 'terlama' ? 'asc' : 'desc');
             })
             ->paginate($paginate);
     }
