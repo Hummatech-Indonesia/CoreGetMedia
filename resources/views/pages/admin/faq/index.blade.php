@@ -10,9 +10,9 @@
     </style>
 @endsection
 
-<head>
-    <title>Admin | Faq-List</title>
-</head>
+@section('title')
+    Faq List
+@endsection
 
 @section('content')
     <div class="mb-3">
@@ -21,8 +21,8 @@
                 <form class="d-flex">
                     <div class="position-relative d-flex">
                         <div class="">
-                            <input type="text" name="name" id="search-name"
-                                class="form-control search-chat py-2 px-5 ps-5" value="{{ old('name', request()->name) }}"
+                            <input type="text" name="search" id="search-name"
+                                class="form-control search-chat py-2 px-5 ps-5" value="{{ old('search', request()->search) }}"
                                 placeholder="Cari..">
                             <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
                         </div>
@@ -130,7 +130,8 @@
                 @empty
                     <tr>
                         <td class="text-center align-middle" colspan="100%">
-                            Belum ada data
+                            <img src="{{ asset('assets/img/no-data.svg') }}" width="200px" alt="">
+                            <p>Belum ada data</p>
                         </td>
                     </tr>
                 @endforelse

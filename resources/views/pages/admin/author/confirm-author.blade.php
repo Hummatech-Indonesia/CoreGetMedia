@@ -16,9 +16,9 @@
     </style>
 @endsection
 
-<head>
-    <title>Admin | Author</title>
-</head>
+@section('title')
+    Author
+@endsection
 
 @section('content')
     <div class="modal fade" id="modal-reject" tabindex="-1" aria-labelledby="modal-reject Label">
@@ -143,11 +143,12 @@
                             </td>
                         </tr>
                     @empty
-                        <tr>
-                            <td class="text-center align-middle" colspan="100%">
-                                Belum ada data
-                            </td>
-                        </tr>
+                    <tr>
+                        <td class="text-center align-middle" colspan="100%">
+                            <img src="{{ asset('assets/img/no-data.svg') }}" width="200px" alt="">
+                            <p>Belum ada data</p>
+                        </td>
+                    </tr>
                     @endforelse
                 </tbody>
             </table>

@@ -1,5 +1,9 @@
 @extends('layouts.admin.app')
 
+@section('title')
+    Admin List
+@endsection
+
 @section('content')
 {{-- <div class="mb-4 mt-2 d-flex justify-content-between"> --}}
 <div class="row">

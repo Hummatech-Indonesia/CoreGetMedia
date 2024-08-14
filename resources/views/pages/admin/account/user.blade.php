@@ -1,5 +1,9 @@
 @extends('layouts.admin.app')
 
+@section('title')
+    User List
+@endsection
+
 @section('content')
     <div class="modal fade" id="modal-detail" tabindex="-1" aria-labelledby="modal-detail Label" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -50,7 +54,7 @@
                 <div>
                     <div class="position-relative d-flex">
                         <div class="">
-                            <input type="text" name="name" value="{{ old('name', request()->name) }}" class="form-control search-chat py-2 px-5 ps-5"
+                            <input type="text" name="search" value="{{ old('search', request()->search) }}" class="form-control search-chat py-2 px-5 ps-5"
                                 id="search-name" placeholder="Search">
                             <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
                         </div>
@@ -58,12 +62,14 @@
                 </div>
                 <div>
                     <div class="d-flex gap-2">
-                        <select class="form-select" id="opsi">
+                        <select class="form-select" id="opsi" name="opsilatest">
+                            <option value="">Tampilkan semua</option>
                             <option value="terbaru">Terbaru</option>
                             <option value="terlama">Terlama</option>
                         </select>
                     </div>
                 </div>
+                <button type="submit" class="btn btn-primary">Cari</button>
             </form>
         </div>
     </div>

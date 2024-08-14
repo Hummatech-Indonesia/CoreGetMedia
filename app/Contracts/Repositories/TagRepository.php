@@ -75,8 +75,8 @@ class TagRepository extends BaseRepository implements TagInterface
     public function paginate(Request $request): mixed
     {
         return $this->model->query()
-            ->when($request->name, function ($query) use ($request) {
-                $query->where('name', 'LIKE', '%' .  $request->name . '%');
+            ->when($request->search, function ($query) use ($request) {
+                $query->where('name', 'LIKE', '%' .  $request->search . '%');
             })
             ->latest()
             ->paginate(10);

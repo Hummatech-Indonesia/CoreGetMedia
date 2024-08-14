@@ -17,9 +17,9 @@
 </style>
 @endsection
 
-<head>
-    <title>Admin | Author-List</title>
-</head>
+@section('title')
+    Author List
+@endsection
 
 @section('content')
 <div class="">
@@ -145,7 +145,8 @@
                 @empty
                 <tr>
                     <td class="text-center align-middle" colspan="100%">
-                        Belum ada data
+                        <img src="{{ asset('assets/img/no-data.svg') }}" width="200px" alt="">
+                        <p>Belum ada data</p>
                     </td>
                 </tr>
                 @endforelse

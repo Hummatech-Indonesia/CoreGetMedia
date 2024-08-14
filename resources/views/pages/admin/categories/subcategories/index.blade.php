@@ -77,6 +77,12 @@
                             </td>
                         </tr>
                     @empty
+                    <tr>
+                        <td class="text-center align-middle" colspan="100%">
+                            <img src="{{ asset('assets/img/no-data.svg') }}" width="200px" alt="">
+                            <p>Belum ada data</p>
+                        </td>
+                    </tr>
                     @endforelse
                 </tbody>
             </table>

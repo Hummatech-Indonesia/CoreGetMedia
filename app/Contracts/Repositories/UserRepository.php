@@ -77,8 +77,11 @@ class UserRepository extends BaseRepository implements UserInterface
     {
         return $this->model->query()
             ->whereRelation('roles', 'name', 'user')
-            ->when($request->name, function ($query) use ($request) {
-                $query->where('name', 'LIKE', '%' . $request->name . '%');
+            ->when($request->search, function ($query) use ($request) {
+                $query->where('name', 'LIKE', '%' . $request->search . '%');
+            })
+            ->when($request->opsilatest, function($query) use($request){
+                $query->orderBy('created_at', $request->opsilatest == 'terbaru' ? 'desc' : 'asc');
             })
             ->paginate(10);
     }
