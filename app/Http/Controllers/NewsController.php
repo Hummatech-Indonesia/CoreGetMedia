@@ -132,7 +132,7 @@ class NewsController extends Controller
     public function news_list(Request $request)
     {
         $news = $this->news->where(NewsEnum::ACCEPTED->value, 10, $request);
-        return view('pages.admin.news.news-list', compact('news'));
+        return view('pages.admin.ebnews.news-list', compact('news'));
     }
 
     public function draft_list()
