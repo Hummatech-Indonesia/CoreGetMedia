@@ -58,7 +58,7 @@ class NewsSubCategoryController extends Controller
         $subCategories = $this->subCategories->get();
         $newsTop = $this->news->whereSubCategory($subcategory_id, 'top');
         $idTop = $newsTop->pluck('id');
-        $newsPopulars = $this->news->whereSubCategory($subcategory_id, 'notop');
+        $newsPopulars = $this->news->getpopular();
         $idPop = $newsPopulars->pluck('id');
         $ids = $idTop->merge($idPop);
 

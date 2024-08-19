@@ -284,7 +284,7 @@
                     @if($trending_news->isNotEmpty())
                         <div class="sidebar-widget">
                             <h3 class="sidebar-widget-title">Berita Populer</h3>
-                            @forelse ($trending_news as $trending)
+                            @forelse ($trending_news->take(4) as $trending)
                                 <div class="news-card-three">
                                     <div class="news-card-img">
                                         <img src="{{ asset('storage/' . $trending->image) }}" class="img-popular" alt="Image" />
