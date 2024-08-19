@@ -8,6 +8,7 @@ use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\NewsCategoryInterface;
 use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\NewsSubCategoryInterface;
+use App\Contracts\Interfaces\PopularInterface;
 use App\Contracts\Interfaces\TagInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Enums\AdvertisementEnum;
@@ -24,6 +25,7 @@ class NewsSubCategoryController extends Controller
     private SubCategoryInterface $subCategories;
     private TagInterface $tags;
     private AdvertisementInterface $advertisements;
+    private PopularInterface $popular;
 
     public function __construct(
         NewsSubCategoryInterface $newsSubCategory,
@@ -32,7 +34,8 @@ class NewsSubCategoryController extends Controller
         NewsInterface $news,
         CategoryInterface $category,
         SubCategoryInterface $subCategories,
-        AdvertisementInterface $advertisements
+        AdvertisementInterface $advertisements,
+        PopularInterface $popular
     ) {
         $this->newsSubCategory = $newsSubCategory;
         $this->newsCategory = $newsCategory;
@@ -41,6 +44,7 @@ class NewsSubCategoryController extends Controller
         $this->news = $news;
         $this->tags = $tags;
         $this->advertisements = $advertisements;
+        $this->popular = $popular;
     }
 
     /**
@@ -58,7 +62,7 @@ class NewsSubCategoryController extends Controller
         $subCategories = $this->subCategories->get();
         $newsTop = $this->news->whereSubCategory($subcategory_id, 'top');
         $idTop = $newsTop->pluck('id');
-        $newsPopulars = $this->news->getpopular();
+        $newsPopulars = $this->popular->getpopular();
         $idPop = $newsPopulars->pluck('id');
         $ids = $idTop->merge($idPop);
 
