@@ -287,6 +287,10 @@ Route::get('subscribe-transaction', function(){
     return view('pages.user.subscribe.subscribe-transaction');
 }) -> name('subscribe-transaction');
 
+Route::get('detail-list-author', function(){
+    return view('pages.admin.author.detail-list');
+}) -> name('detail-list-author');
+
 require_once __DIR__ . '/jovita.php';
 require_once __DIR__ . '/ardi.php';
 require_once __DIR__ . '/farah.php';
