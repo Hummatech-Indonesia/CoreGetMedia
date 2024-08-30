@@ -1,22 +1,22 @@
 @extends('layouts.admin.app')
 @section('style')
-<style>
-    .table-get {
-        background-color: #175A95;
-    }
+    <style>
+        .table-get {
+            background-color: #175A95;
+        }
 
-    .card-table {
-        background-color: #fff;
-        padding: 25px;
-        border-radius: 10px;
-    }
+        .card-table {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 10px;
+        }
 
-    .table-border {
-        border: 1px solid #DADADA;
-        border-radius: 5px;
-        /* padding: 25px; */
-    }
-</style>
+        .table-border {
+            border: 1px solid #DADADA;
+            border-radius: 5px;
+            /* padding: 25px; */
+        }
+    </style>
 @endsection
 
 @section('title')
@@ -24,41 +24,106 @@
 @endsection
 
 @section('content')
-<div class="row mb-3">
-    <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
-        <form class="d-flex gap-2" action="/category-list">
-            <div class="position-relative d-flex">
-                <input type="text" name="name" id="search-name" class="form-control search-chat py-2 px-5 ps-5" value="{{ old('name', request()->name) }}" placeholder="Search">
-                <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
-            </div>
-            <div class="input-group" style="width: 250px">
-                <select class="form-select" name="filter">
-                    <option value="terbaru">Terbaru</option>
-                    <option value="terlama">Terlama</option>
-                    <option value="">Tampilkan Semua</option>
-                </select>
-                <button type="submit" class="btn btn-outline-primary">
-                    Pilih
+    <div class="row mb-3">
+        <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+            <form class="d-flex gap-2" action="/category-list">
+                <div class="position-relative d-flex">
+                    <input type="text" name="name" id="search-name" class="form-control search-chat py-2 px-5 ps-5"
+                        value="{{ old('name', request()->name) }}" placeholder="Search">
+                    <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+                </div>
+                <div class="input-group" style="width: 250px">
+                    <select class="form-select" name="filter">
+                        <option value="terbaru">Terbaru</option>
+                        <option value="terlama">Terlama</option>
+                        <option value="">Tampilkan Semua</option>
+                    </select>
+                    <button type="submit" class="btn btn-outline-primary">
+                        Pilih
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-6 col-lg-6 col-sm-12">
+            <div class="d-flex justify-content-end">
+                <button type="button" class="btn text-white px-5" style="background-color: #175A95" data-bs-toggle="modal"
+                    data-bs-target="#modal-create"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                        viewBox="0 2 30 24">
+                        <path fill="currentColor"
+                            d="M18 12.998h-5v5a1 1 0 0 1-2 0v-5H6a1 1 0 0 1 0-2h5v-5a1 1 0 0 1 2 0v5h5a1 1 0 0 1 0 2" />
+                    </svg>
+                    Tambah
                 </button>
             </div>
-        </form>
-    </div>
-
-    <div class="col-md-6 col-lg-6 col-sm-12">
-        <div class="d-flex justify-content-end">
-            <button type="button" class="btn text-white px-5" style="background-color: #175A95" data-bs-toggle="modal" data-bs-target="#modal-create"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 2 30 24">
-                    <path fill="currentColor" d="M18 12.998h-5v5a1 1 0 0 1-2 0v-5H6a1 1 0 0 1 0-2h5v-5a1 1 0 0 1 2 0v5h5a1 1 0 0 1 0 2" />
-                </svg>
-                Tambah
-            </button>
         </div>
+
+
     </div>
 
+    <div class="row">
+        @forelse ($categories as $category)
+            <div class="col-lg-3">
+                <div class="card card-body">
+                    <div class="d-flex justify-content-between">
+                        <p class="fs-3">Kategori</p>
+                        <div>
+                            {{-- <svg xmlns="http://www.w3.org/2000/svg" class="text-warning" width="18" height="18"
+                                viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                    d="m7 17.013l4.413-.015l9.632-9.54c.378-.378.586-.88.586-1.414s-.208-1.036-.586-1.414l-1.586-1.586c-.756-.756-2.075-.752-2.825-.003L7 12.583zM18.045 4.458l1.589 1.583l-1.597 1.582l-1.586-1.585zM9 13.417l6.03-5.973l1.586 1.586l-6.029 5.971L9 15.006z" />
+                                <path fill="currentColor"
+                                    d="M5 21h14c1.103 0 2-.897 2-2v-8.668l-2 2V19H8.158c-.026 0-.053.01-.079.01c-.033 0-.066-.009-.1-.01H5V5h6.847l2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2" />
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="text-danger ms-1" width="18" height="18"
+                                viewBox="0 0 256 256">
+                                <path fill="currentColor"
+                                    d="M216 48h-36V36a28 28 0 0 0-28-28h-48a28 28 0 0 0-28 28v12H40a12 12 0 0 0 0 24h4v136a20 20 0 0 0 20 20h128a20 20 0 0 0 20-20V72h4a12 12 0 0 0 0-24M100 36a4 4 0 0 1 4-4h48a4 4 0 0 1 4 4v12h-56Zm88 168H68V72h120Zm-72-100v64a12 12 0 0 1-24 0v-64a12 12 0 0 1 24 0m48 0v64a12 12 0 0 1-24 0v-64a12 12 0 0 1 24 0" />
+                            </svg> --}}
+                            <button id="btn-edit-{{ $category->id }}" data-name="{{ $category->name }}"
+                                data-id="{{ $category->id }}"
+                                class="btn btn-sm bg-transparent btn-edit text-white" data-bs-toggle="modal"
+                                data-bs-target="#modal-update">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="text-warning" width="18" height="18"
+                                    viewBox="0 0 24 24">
+                                    <path fill="currentColor"
+                                        d="m7 17.013l4.413-.015l9.632-9.54c.378-.378.586-.88.586-1.414s-.208-1.036-.586-1.414l-1.586-1.586c-.756-.756-2.075-.752-2.825-.003L7 12.583zM18.045 4.458l1.589 1.583l-1.597 1.582l-1.586-1.585zM9 13.417l6.03-5.973l1.586 1.586l-6.029 5.971L9 15.006z" />
+                                    <path fill="currentColor"
+                                        d="M5 21h14c1.103 0 2-.897 2-2v-8.668l-2 2V19H8.158c-.026 0-.053.01-.079.01c-.033 0-.066-.009-.1-.01H5V5h6.847l2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2" />
+                                </svg>
+                            </button>
 
-</div>
+                            <button id="btn-delete-{{ $category->id }}" data-id="{{ $category->id }}"
+                                class="btn btn-sm bg-transparent btn-delete text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="text-danger ms-1" width="18" height="18"
+                                viewBox="0 0 256 256">
+                                <path fill="currentColor"
+                                    d="M216 48h-36V36a28 28 0 0 0-28-28h-48a28 28 0 0 0-28 28v12H40a12 12 0 0 0 0 24h4v136a20 20 0 0 0 20 20h128a20 20 0 0 0 20-20V72h4a12 12 0 0 0 0-24M100 36a4 4 0 0 1 4-4h48a4 4 0 0 1 4 4v12h-56Zm88 168H68V72h120Zm-72-100v64a12 12 0 0 1-24 0v-64a12 12 0 0 1 24 0m48 0v64a12 12 0 0 1-24 0v-64a12 12 0 0 1 24 0" />
+                            </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <h4 class="fw-semibold">{{ $category->name }}</h4>
+                    <div class="d-flex justify-content-between mt-2">
+                        <h6>Jumlah digunakan:</h6>
+                        <h6>{{ $category->newsCategories->count() }}x digunakan</h6>
+                    </div>
+                    <div class="w-100 mt-1">
+                        <a href="{{ route('subcategory.list.admin', ['category' => $category->id]) }}"
+                            data-bs-toggle="tooltip" title="Sub Category" class="btn text-white w-100"
+                            style="background-color: #175A95; border-radius: 10px;">Lihat
+                            Sub Kategori</a>
+                    </div>
+                </div>
+            </div>
+        @empty
+            <div class="text-center align-middle" colspan="100%">
+                <img src="{{ asset('assets/img/no-data.svg') }}" width="200px" alt="">
+                <p>Belum ada data</p>
+            </div>
+        @endforelse
 
-<div>
-    <div class="table-responsive rounded-2 mb-3">
+        {{-- <div class="table-responsive rounded-2 mb-3">
         <table id="category-table" class="table border text-nowrap customize-table mb-0 align-middle">
             <thead>
                 <th style="background-color: #D9D9D9;">No</th>
@@ -107,102 +172,106 @@
         <div class="d-flex justify-content-end">
             <x-paginatoradmin :paginator="$categories" />
         </div>
+    </div> --}}
     </div>
-</div>
 
-<div class="modal fade" id="modal-create" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="modal fade" id="modal-create" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('category.store') }}" method="POST">
+                    @method('post')
+                    @csrf
+                    <div class="modal-body">
+                        <div>
+                            <label class="form-label mt-2">Kategori</label>
+                            <input id="create-name" class="form-control" type="text" name="name">
+                            <ul class="error-text"></ul>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-rounded btn-light-danger text-danger"
+                                data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-rounded btn-light-success text-success">Tambah</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <form action="{{ route('category.store') }}" method="POST">
-                @method('post')
-                @csrf
-                <div class="modal-body">
-                    <div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-update" tabindex="-1" aria-labelledby="modal-update Label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="editModalLabel">Edit Kategori</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="form-update" method="POST">
+                    @method('put')
+                    @csrf
+                    <div class="modal-body text-start">
                         <label class="form-label mt-2">Kategori</label>
-                        <input id="create-name" class="form-control" type="text" name="name">
+                        <input id="update-name" class="form-control" type="text" name="name">
                         <ul class="error-text"></ul>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-rounded btn-light-danger text-danger" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-rounded btn-light-success text-success">Tambah</button>
+                        <button type="button" class="btn btn-rounded btn-light-danger text-danger"
+                            data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-rounded btn-light-success text-success">Simpan</button>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="modal fade" id="modal-update" tabindex="-1" aria-labelledby="modal-update Label" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="editModalLabel">Edit Kategori</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form id="form-update" method="POST">
-                @method('put')
+    <div class="modal fade" id="modal-delete" tabindex="-1" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <form id="form-delete" method="POST" class="modal-content">
                 @csrf
-                <div class="modal-body text-start">
-                    <label class="form-label mt-2">Kategori</label>
-                    <input id="update-name" class="form-control" type="text" name="name">
-                    <ul class="error-text"></ul>
+                @method('DELETE')
+                <div class="modal-header d-flex align-items-center">
+                    <h4 class="modal-title" id="myModalLabel">
+                        Hapus data
+                    </h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <p>Apakah anda yakin akan menghapus data ini? </p>
+
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-rounded btn-light-danger text-danger" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-rounded btn-light-success text-success">Simpan</button>
+                    <button type="button" class="btn btn-light-danger text-danger font-medium waves-effect"
+                        data-bs-dismiss="modal">
+                        Batal
+                    </button>
+                    <button type="submit" class="btn btn-light-danger text-secondery font-medium waves-effect"
+                        data-bs-dismiss="modal">
+                        Hapus
+                    </button>
                 </div>
             </form>
         </div>
     </div>
-</div>
-
-<div class="modal fade" id="modal-delete" tabindex="-1" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-        <form id="form-delete" method="POST" class="modal-content">
-            @csrf
-            @method('DELETE')
-            <div class="modal-header d-flex align-items-center">
-                <h4 class="modal-title" id="myModalLabel">
-                    Hapus data
-                </h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-
-                <p>Apakah anda yakin akan menghapus data ini? </p>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-light-danger text-danger font-medium waves-effect" data-bs-dismiss="modal">
-                    Batal
-                </button>
-                <button type="submit" class="btn btn-light-danger text-secondery font-medium waves-effect" data-bs-dismiss="modal">
-                    Hapus
-                </button>
-            </div>
-        </form>
-    </div>
-</div>
 @endsection
 
 @section('script')
-<script>
-    $('.btn-edit').click(function() {
-        var id = $(this).data('id');
-        var name = $(this).data('name');
-        $('#update-name').val(name);
-        $('#form-update').attr('action', '/category-update/' + id);
-        $('#modal-update').modal('show');
-    })
+    <script>
+        $('.btn-edit').click(function() {
+            var id = $(this).data('id');
+            var name = $(this).data('name');
+            $('#update-name').val(name);
+            $('#form-update').attr('action', '/category-update/' + id);
+            $('#modal-update').modal('show');
+        })
 
-    $('.btn-delete').click(function() {
-        var id = $(this).data('id');
-        $('#form-delete').attr('action', '/category-delete/' + id);
-        $('#modal-delete').modal('show');
-    })
-</script>
+        $('.btn-delete').click(function() {
+            var id = $(this).data('id');
+            $('#form-delete').attr('action', '/category-delete/' + id);
+            $('#modal-delete').modal('show');
+        })
+    </script>
 @endsection
