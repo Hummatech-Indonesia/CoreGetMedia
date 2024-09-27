@@ -209,13 +209,13 @@
                                                 </div>
                                             </div>
                                             <div>
-                                                <p style="line-height: 1.2;">{!! Illuminate\Support\Str::limit(strip_tags($news->description), 100, '...') !!}</p>
+                                                <p style="line-height: 1.2;">{!! Illuminate\Support\Str::limit(strip_tags($news->description), 200, '...') !!}</p>
                                                 {{-- <p>Apollo 11 was the spaceflight that landed the first humans, Americans Neil Armstrong and Buzz Aldrin, on the Moon on July 20, 1969, at 20:18 UTC. Armstrong became the first to step onto the....</p> --}}
                                             </div>
                                             <div>
-                                                <button class="btn btn-primary w-100">
+                                                <a href="{{ route('news.singlepost', $news->slug) }}" class="btn btn-primary w-100">
                                                     Lihat Detail
-                                                </button>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
