@@ -185,7 +185,7 @@
                                             @endif
                                             {{-- <img src="{{ asset('admin/dist/images/blog/blog-img1.jpg') }}" alt="" class="card-img-top" height=200px" width="100%" style="object-fit: cover"> --}}
                                             <span class="badge bg-warning position-absolute top-0 start-0 m-3 py-2">
-                                                <a href="{{ route('categories.show.user', $news->newsCategories[0]->category->slug) }}">{{ $news->newsCategories[0]->category->name }}</a>
+                                                <a href="{{ route('categories.show.user', $news->newsCategories[0]->category->slug) }}" class="text-white">{{ $news->newsCategories[0]->category->name }}</a>
                                             </span>
                                         </div>
                                         <div class="card-body p-3">
