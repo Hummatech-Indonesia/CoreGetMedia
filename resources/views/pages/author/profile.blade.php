@@ -168,7 +168,7 @@
                             <!-- Row -->
                             <div class="row">
                                 @forelse ($newses as $news)
-                                <div class="col-lg-4 col-md-12 mb-5">
+                                <div class="col-lg-4 col-md-12 mb-3">
                                     <div class="card" style="border-radius: 10px">
                                         <div class="position-relative">
                                             @php
@@ -184,7 +184,8 @@
                                                 class="card-img-top" height=200px" width="100%" style="object-fit: cover">
                                             @endif
                                             {{-- <img src="{{ asset('admin/dist/images/blog/blog-img1.jpg') }}" alt="" class="card-img-top" height=200px" width="100%" style="object-fit: cover"> --}}
-                                            <span class="badge bg-warning position-absolute top-0 start-0 m-3 py-2">Category</span>
+                                            {{-- <span class="badge bg-warning position-absolute top-0 start-0 m-3 py-2">Category</span> --}}
+                                            <a href="{{ route('categories.show.user', $news->newsCategories[0]->category->slug) }}" class="news-cat">{{ $news->newsCategories[0]->category->name }}</a>
                                         </div>
                                         <div class="card-body p-3">
                                             <h5>{!! Illuminate\Support\Str::limit(strip_tags($news->name), 60, '...') !!}</h5>
@@ -209,7 +210,7 @@
                                                 </div>
                                             </div>
                                             <div>
-                                                <p style="line-height: 1.2;">{!! Illuminate\Support\Str::limit(strip_tags($news->description), 200, '...') !!}</p>
+                                                <p style="line-height: 1.2;">{!! Illuminate\Support\Str::limit(strip_tags($news->description), 150, '...') !!}</p>
                                                 {{-- <p>Apollo 11 was the spaceflight that landed the first humans, Americans Neil Armstrong and Buzz Aldrin, on the Moon on July 20, 1969, at 20:18 UTC. Armstrong became the first to step onto the....</p> --}}
                                             </div>
                                             <div>
