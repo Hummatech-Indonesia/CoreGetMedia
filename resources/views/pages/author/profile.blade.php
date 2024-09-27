@@ -150,7 +150,7 @@
                     <div class="tab-pane fade show active" id="pills-berita" role="tabpanel" aria-labelledby="pills-berita-tab" tabindex="0">
                         <div class="row p-2">
                             <div class="d-flex justify-content-between align-items-center mb-4">
-                                <h4 class="mb-0">Berita Penulis</h4>
+                                <h4 class="mb-0">Daftar Artikel</h4>
                                 <form class="text-end">
                                     <div class="input-group">
                                         <select class="form-select" name="filter">
@@ -168,7 +168,59 @@
                             <!-- Row -->
                             <div class="row">
                                 @forelse ($newses as $news)
-                                    <div class="col-lg-6 col-md-12 mb-5">
+                                <div class="col-lg-4 col-md-12 mb-5">
+                                    <div class="card" style="border-radius: 10px">
+                                        <div class="position-relative">
+                                            @php
+                                                $fileExtension = pathinfo($news->image, PATHINFO_EXTENSION);
+                                                $videoExtensions = ['mp4', 'avi', 'mov'];
+                                                $imageExtensions = ['png', 'jpg', 'jpeg', 'gif', 'webp'];
+                                            @endphp
+                                            @if (in_array($fileExtension, $videoExtensions))
+                                                <video src="{{ asset('storage/' . $news->image) }}"
+                                                    class="card-img-top" height=200px" width="100%" style="object-fit: cover"></video>
+                                            @elseif(in_array($fileExtension, $imageExtensions))
+                                                <img src="{{ asset('storage/' . $news->image) }}"
+                                                class="card-img-top" height=200px" width="100%" style="object-fit: cover">
+                                            @endif
+                                            {{-- <img src="{{ asset('admin/dist/images/blog/blog-img1.jpg') }}" alt="" class="card-img-top" height=200px" width="100%" style="object-fit: cover"> --}}
+                                            <span class="badge bg-warning position-absolute top-0 start-0 m-3 py-2">Category</span>
+                                        </div>
+                                        <div class="card-body p-3">
+                                            <h5>{!! Illuminate\Support\Str::limit(strip_tags($news->name), 60, '...') !!}</h5>
+                                            <div class="d-flex">
+                                                <div class="d-flex">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                                        height="20" viewBox="0 0 24 24" class="mt-1">
+                                                        <path fill="none" stroke="#e93314"
+                                                            stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="1.5"
+                                                            d="M16.5 5V3m-9 2V3M3.25 8h17.5M10 14h4M3 10.044c0-2.115 0-3.173.436-3.981a3.896 3.896 0 0 1 1.748-1.651C6.04 4 7.16 4 9.4 4h5.2c2.24 0 3.36 0 4.216.412c.753.362 1.364.94 1.748 1.65c.436.81.436 1.868.436 3.983v4.912c0 2.115 0 3.173-.436 3.981a3.896 3.896 0 0 1-1.748 1.651C17.96 21 16.84 21 14.6 21H9.4c-2.24 0-3.36 0-4.216-.412a3.896 3.896 0 0 1-1.748-1.65C3 18.128 3 17.07 3 14.955z" />
+                                                    </svg>
+                                                    <p class="ms-2">
+                                                        {{ \Carbon\Carbon::parse($news->upload_date)->format('M d, Y') }}
+                                                    </p>
+                                                </div>
+                                                <div class="d-flex ms-4">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="mt-1" width="21" height="21" viewBox="0 0 24 24">
+                                                        <path fill="#e93314" d="M12 6.5a9.77 9.77 0 0 1 8.82 5.5c-1.65 3.37-5.02 5.5-8.82 5.5S4.83 15.37 3.18 12A9.77 9.77 0 0 1 12 6.5m0-2C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5m0 5a2.5 2.5 0 0 1 0 5a2.5 2.5 0 0 1 0-5m0-2c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5s4.5-2.02 4.5-4.5s-2.02-4.5-4.5-4.5"></path>
+                                                    </svg>
+                                                    <p class="ms-2">{{ $news->news_views_count }} x dilihat</p>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <p style="line-height: 1.2;">{!! Illuminate\Support\Str::limit(strip_tags($news->content), 100, '...') !!}</p>
+                                                {{-- <p>Apollo 11 was the spaceflight that landed the first humans, Americans Neil Armstrong and Buzz Aldrin, on the Moon on July 20, 1969, at 20:18 UTC. Armstrong became the first to step onto the....</p> --}}
+                                            </div>
+                                            <div>
+                                                <button class="btn btn-primary w-100">
+                                                    Lihat Detail
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    {{-- <div class="col-lg-6 col-md-12 mb-5">
                                         <div class="">
                                             <div class="row">
                                                 <div class="col-md-12 col-lg-5">
@@ -226,7 +278,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 @empty
                                     <div class="col-md-12 col-lg-12">
                                         <div class="d-flex justify-content-center">
