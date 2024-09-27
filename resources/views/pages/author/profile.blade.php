@@ -184,8 +184,9 @@
                                                 class="card-img-top" height=200px" width="100%" style="object-fit: cover">
                                             @endif
                                             {{-- <img src="{{ asset('admin/dist/images/blog/blog-img1.jpg') }}" alt="" class="card-img-top" height=200px" width="100%" style="object-fit: cover"> --}}
-                                            {{-- <span class="badge bg-warning position-absolute top-0 start-0 m-3 py-2">Category</span> --}}
-                                            <a href="{{ route('categories.show.user', $news->newsCategories[0]->category->slug) }}" class="news-cat">{{ $news->newsCategories[0]->category->name }}</a>
+                                            <span class="badge bg-warning position-absolute top-0 start-0 m-3 py-2">
+                                                <a href="{{ route('categories.show.user', $news->newsCategories[0]->category->slug) }}">{{ $news->newsCategories[0]->category->name }}</a>
+                                            </span>
                                         </div>
                                         <div class="card-body p-3">
                                             <h5>{!! Illuminate\Support\Str::limit(strip_tags($news->name), 60, '...') !!}</h5>
